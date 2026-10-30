@@ -203,6 +203,10 @@ def valid_throw(engine, x, y):
     if (not engine.player.inventory.contains(pending['item'])
             or type(pending['item'].count) is not int or pending['item'].count < 1):
         return False
+    from entities.item import use_capability
+    expected = {'flint': 'throw_flint_shard', 'musk': 'throw_musk_pellet'}.get(pending.get('kind', 'musk'))
+    if expected is None or use_capability(pending['item']) != expected:
+        return False
     m, p = engine.local_map, engine.player
     reach = pending['item_def'].get('throw_range',6)
     if (not m.in_bounds(x,y) or not m.walkable[x,y] or not m.visible[x,y]
@@ -248,7 +252,8 @@ def throw_key(engine, key):
         m.disruption_zones = list(getattr(m,'disruption_zones',[])) + [zone]
         for actor in engine.get_active_entities():
             if (actor is not engine.player and getattr(actor, 'ai', None) is not None
-                    and getattr(actor, 'is_alive', True) and m.visible[actor.x, actor.y]
+                    and getattr(actor, 'is_alive', True) and m.in_bounds(actor.x, actor.y)
+                    and m.visible[actor.x, actor.y]
                     and zone_covers(m, zone, actor.x, actor.y)):
                 engine.log.add(f"The {actor.name} falters in the musk.", UI_TEXT_DIM)
     from engine.sound import emit
@@ -256,6 +261,8 @@ def throw_key(engine, key):
     engine._pending_throw = None
     engine._placement_mode = 'campfire'
     engine.mode = GameMode.LOCAL
-    engine.log.add(definition.get('use_message', f"The {pending['item'].name} shatters."), MSG_DEFAULT)
+    message = ('The flint shatters with a sharp clatter.' if kind == 'flint'
+               else f"The {pending['item'].name} shatters.")
+    engine.log.add(definition.get('use_message', message), MSG_DEFAULT)
     engine._emit_placement_burst(x,y)
     engine._advance_turn()

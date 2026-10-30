@@ -22,6 +22,15 @@ canonical `water_skin`. `resonant_tincture` stays inspect-only because its
 `on_use_effects` list is not executed by the current factory/use path. Use binding
 explains the inactive metadata.
 
+G20's exact `flint_shard` identity is a narrow runtime exception: a null declared
+or saved `on_use` still offers a six-tile, one-unit clatter throw through owned
+capability dispatch. The shard retains cutting tier 1 and is lost on confirmation.
+Inventory supplies that use guidance without rewriting the stored description or
+handler. Its shipped source bytes/definition remain historical so old pending
+workshop dependencies still agree. **Use binding** reports this exact-ID
+capability; explicit nonempty instance handlers win, and a new-ID material variant
+does not inherit it. This does not enable general material throwing or effect editing.
+
 ## Controls and source fidelity
 
 Common controls edit name, multiline description, existing tile, nonnegative

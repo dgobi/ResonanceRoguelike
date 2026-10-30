@@ -1,0 +1,9 @@
+{
+  "id": "workshop_c_travel",
+  "roll_count": [3, 3],
+  "items": [
+    {"item_id": "tallow_torch", "weight": 1},
+    {"item_id": "crow_jerky", "weight": 1},
+    {"item_id": "water_flask", "weight": 1}
+  ]
+}

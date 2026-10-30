@@ -3,6 +3,7 @@
 Ordinary acquisition/expedition evidence is recorded separately by verify_g20.
 """
 import copy
+import hashlib
 import json
 import os
 import pickle
@@ -216,6 +217,19 @@ class AudibleEncounterTests(unittest.TestCase):
             e.world_time.turn=a.ai.sound_interest['deadline']+1
             self.decision(a); self.assertIsNone(a.ai.sound_interest)
 
+    def test_actual_fast_and_slow_schedulers_share_the_same_world_deadline(self):
+        for speed in (.5,2):
+            e=make_engine(self.data);e.debug=None;e.player.x,e.player.y=40,40
+            e.data=copy.copy(self.data);e.data.entities=copy.deepcopy(self.data.entities)
+            e.data.entities['hollow_revenant']['speed']=speed
+            a=e.creature_factory.spawn('hollow_revenant',12,12);a.ai.wander_radius=0;e.entities.append(a)
+            emit(e,17,12,'flint');deadline=a.ai.sound_interest['deadline']
+            for dx,dy in ((1,0),(-1,0),(0,1),(0,-1)):e.local_map.set_tile(12+dx,12+dy,'wall',False,False)
+            for _ in range(INTEREST_TURNS):e._advance_turn()
+            self.assertEqual(deadline,e.world_time.turn);self.assertIsNotNone(a.ai.sound_interest)
+            self.assertEqual((12,12),(a.x,a.y));e._advance_turn()
+            self.assertIsNone(a.ai.sound_interest);self.assertEqual(AIState.WANDERING,a.ai.state)
+
     def test_special_ambush_fleeing_dormant_and_self_sound_keep_their_rules(self):
         e=self.e; a=self.actor('stone_lurker'); b=self.actor('heath_stalker',13,12)
         from components.ai import FleeingAI
@@ -263,6 +277,8 @@ class AudibleEncounterTests(unittest.TestCase):
             with self.assertRaises(ValueError): validate_actor_runtime(invalid)
         invalid=copy.deepcopy(row); del invalid['component_state']['ai']['sound_interest']['y']
         with self.assertRaises(ValueError): _deserialize_entities([invalid],e)
+        with self.assertRaisesRegex(ValueError,'owning scene'):
+            validate_actor_runtime(row,LocalMap(8,8))
 
     def test_validly_published_malformed_sound_rejects_transactionally(self):
         e=self.e; a=self.actor(); emit(e,16,12,'flint')
@@ -334,6 +350,9 @@ class AudibleEncounterTests(unittest.TestCase):
             e.local_map.set_tile(42,40,'flagstone',True,True)
             e._pending_throw['map']=LocalMap(); throw_key(e,pygame.K_RETURN)
             e._pending_throw['map']=e.local_map
+            item.on_use='read';throw_key(e,pygame.K_RETURN)
+            item.on_use=None  # exact-ID null capability remains available
+            item.count=0;throw_key(e,pygame.K_RETURN);item.count=1
             e.player.inventory.remove(item); throw_key(e,pygame.K_RETURN)
             pulse.assert_not_called(); self.assertEqual(before,timing(e))
             e.player.inventory.add(item); throw_key(e,pygame.K_RETURN)
@@ -471,6 +490,82 @@ class AudibleEncounterTests(unittest.TestCase):
         self.assertNotIn(a,e.entities);self.assertEqual(1,len(e._live_pursuers))
         self.assertIs(a,e._live_pursuers[0][0]);self.assertEqual((13,12),(a.x,a.y))
         e._advance_turn();self.assertNotIn(a,e.entities);self.assertEqual((13,12),(a.x,a.y))
+
+    def test_canonical_room_and_finite_workshop_variant_use_existing_contracts(self):
+        from engine.room_authoring import authoring_validate,authorize_candidate
+        from generation.structure_preview import preview
+        from engine.loot_roller import roll_pool
+        from test_effect_persistence import GAME_ROOT
+        data=self.data;path='roguelike/data/layouts/barrow_ward_store_a.json'
+        template=json.loads((GAME_ROOT/'docs/examples/g17_authored_creature_room.json').read_text())
+        room=data.layouts['barrow_ward_store_a']
+        errors=authorize_candidate(template,room,'roguelike/docs/examples/g17_authored_creature_room.json',path,data=data)
+        errors+=authoring_validate(room,data,path,data.root)
+        self.assertFalse([d for d in errors if d['severity']=='error'])
+        report,m,actors=preview(room,'authored_submap',data,path=path,derive_access=True)
+        self.assertTrue(report['passed']);self.assertEqual(['hollow_revenant'],[a._creature_id for a in actors])
+        self.assertEqual(1,sum(i.item_id=='faceted_ward' for rows in m.floor_objects.values() for i in rows))
+        old=json.loads((data.root/'buildings/commercial/workshop_b.json').read_text())
+        new=json.loads((data.root/'buildings/commercial/workshop_c.json').read_text())
+        for k in set(old)-{'id','description','special_tiles','placement'}:self.assertEqual(old[k],new[k],k)
+        self.assertEqual(old['special_tiles'],new['special_tiles'][:-1])
+        self.assertEqual(old['placement']['targets'],new['placement']['targets'][:-1])
+        for k in set(old['placement'])-{'targets'}:self.assertEqual(old['placement'][k],new['placement'][k])
+        for seed in (0,1,29417):
+            items=roll_pool(data.loot_pools['workshop_c_travel'],self.e.item_factory,random.Random(seed))
+            self.assertEqual(['crow_jerky','tallow_torch','water_flask'],sorted(i.item_id for i in items))
+        rows=[r for p in data.settlement_profiles['profiles'].values() for records in p['roles'].values() for r in records if r['asset']=='workshop_c']
+        self.assertEqual(2,len(rows));self.assertTrue(all(r['weight']==1 and r['max_per_settlement']==5 for r in rows))
+
+    def test_old_pending_procedural_and_authored_assignments_keep_their_meaning(self):
+        from engine.save_manager import _serialize_world,_deserialize_world
+        from engine.scene_generation import create_submap
+        from world.world_map import WorldMap
+        from test_effect_persistence import GAME_ROOT
+        e=self.e;old_id='g17_authored_creature_room'
+        e.world_map.get(0,0).submaps=[SubMap('old-procedural','barrow','Old procedural',117),SubMap('old-authored','barrow','Old authored',118,layout_id=old_id)]
+        record=_serialize_world(e.world_map);world=WorldMap(1,1)
+        with patch('generation.authored_submap_selection.resolve',side_effect=AssertionError('No selector on restore')):_deserialize_world(record,world)
+        self.assertEqual(['',old_id],[s.layout_id for s in world.get(0,0).submaps])
+        data=copy.copy(self.data);data.layouts=dict(data.layouts)
+        data.layouts[old_id]=json.loads((GAME_ROOT/'docs/examples/g17_authored_creature_room.json').read_text())
+        result=create_submap(world,0,0,world.get(0,0).submaps[1],data,e.item_factory,e.creature_factory,80,43)
+        self.assertEqual(['hollow_revenant'],[a._creature_id for a in result.actors])
+        self.assertFalse(any(i.item_id=='faceted_ward' for rows in result.local_map.floor_objects.values() for i in rows))
+        self.assertEqual('',world.get(0,0).submaps[0].layout_id)
+
+    def test_second_authored_geometry_reuses_sound_around_corner_and_finite_burst(self):
+        from test_effect_persistence import GAME_ROOT
+        from engine.scene_generation import create_submap
+        from engine.item_transfers import take_floor
+        fixture=GAME_ROOT.parent/'tools/critical_fix_regressions/fixtures/g20/corner_store.json'
+        raw=json.loads(fixture.read_text());observations=[]
+        for iid in ('flint_shard','musk_pellet'):
+            e=make_engine(self.data);e.debug=None;e.rng=random.Random(29417)
+            data=copy.copy(self.data);data.layouts=dict(data.layouts,**{raw['id']:raw});e.data=data
+            sub=SubMap('g20-reuse','barrow','Controlled corner store',333,layout_id=raw['id'])
+            result=create_submap(e.world_map,0,0,sub,data,e.item_factory,e.creature_factory,80,43)
+            e.world_map.get(0,0).submaps=[result.metadata];e.current_submap_id=sub.submap_id
+            e.local_map=result.local_map;e.entities=[e.player]+result.actors;e.player.x,e.player.y=result.spawn
+            a=result.actors[0];a.ai.wander_radius=0  # explicitly controlled idle, normal investigation/speed
+            ox,oy=e.player.x-4,e.player.y-6
+            for item in list(e.local_map.floor_objects[e.player.x,e.player.y]):self.assertTrue(take_floor(e,item))
+            e.reality_bubble.update(0,0,e.world_map);use(e,e.player.inventory.get_by_id('tallow_torch'));e._update_fov()
+            impact=ox+6,oy+8;zone=dict(x=impact[0],y=impact[1],radius=3,turns_remaining=6)
+            self.assertFalse(zone_covers(e.local_map,zone,a.x,a.y))
+            self.assertEqual(4,propagation(e.local_map,*impact,6)[a.x,a.y])
+            item=e.player.inventory.get_by_id(iid);use(e,item)
+            e._placement_cursor_x,e._placement_cursor_y=impact;e._handle_key(pygame.K_RETURN)
+            self.assertFalse(e.player.inventory.contains(item));self.assertEqual([ox+8,oy+9],[a.x,a.y])
+            self.assertIsNotNone(a.ai.sound_interest);self.assertIsNone(getattr(a,'_last_known_px',None))
+            e._advance_turn();self.assertEqual([ox+7,oy+9],[a.x,a.y])
+            pos=(a.x,a.y);e._advance_turn()
+            if iid=='musk_pellet':self.assertEqual(pos,(a.x,a.y));self.assertTrue(in_disruption_zone(a,e.local_map))
+            else:self.assertNotEqual(pos,(a.x,a.y));self.assertFalse(in_disruption_zone(a,e.local_map))
+            observations.append(dict(item=iid,impact=list(impact),sound_cost=4,initial_burst_covered=False,after_corner=[a.x,a.y],paused=in_disruption_zone(a,e.local_map),zone=copy.deepcopy(e.local_map.disruption_zones)))
+        if os.environ.get('RESONANCE_TEST_EVIDENCE_DIR'):
+            p=Path(os.environ['RESONANCE_TEST_EVIDENCE_DIR'])/'g20-reuse.json'
+            p.write_text(json.dumps(dict(passed=True,fixture_sha256=hashlib.sha256(fixture.read_bytes()).hexdigest(),controls='Controlled production-authored arrangement, authored test supplies transferred through owned helpers, stationary idle radius zero, normal runtime investigation/speed/FOV/action/zone rules. No ordinary acquisition, selected second destination or balance claim.',observations=observations),indent=2)+'\n')
 
 
 if __name__ == '__main__':

@@ -11,8 +11,8 @@ matches current source exactly; 44 G18/G19 focused tests pass again. Its full
 readback and authority hashes: `evidence/gameplay-g20/preflight.json`.
 Unrelated untracked Workbench proposal is preserved. No campaign is opened.
 
-Current phase: B focused acceptance complete; commit this checkpoint before C.
-Last accepted release: G19 SHA above. A is an implementation checkpoint only.
+Current phase: C focused acceptance complete; freeze source and run final release.
+Last accepted release: G19 SHA above. A/B/C remain implementation checkpoints.
 Pre-change tag: `checkpoint/gameplay-g20-start-20261030-a`.
 
 Completed A: bounded sound, source-owned investigation, all four committed
@@ -30,12 +30,48 @@ overlaps/statuses, paused sound expiry and paused stair source ownership pass.
 pass. Evidence: `evidence/gameplay-g20/development-b/`. These remain focused
 implementation acceptance, with the final unfiltered gates still pending.
 
-Next: C authored destination/ordinary connected journeys. Predeclare sample
-seeds 20261023, 29417, 20261030 before generating/inspecting their assignment
-outcomes. Use modest 0.35 barrow chance and existing saved selector; preserve
-procedural share. Conserve light ordinarily on the actual preparation route;
-measure supplies before considering the authorized single-workshop fallback.
-Do not enable incomplete C.
+B checkpoint: `c35a0cea91ced1be7b6aa122240da5580e7253e1`.
+C uses `barrow_ward_store_a`, one ordinary Revenant, two wall openings, one Ward,
+a plain readable clue and 0.35 authored barrow chance. The predeclared three seeds
+were inspected. A bounded 0.5 trial did not improve the nearest destination and
+was reverted. Exact failures/corrections are in `evidence/gameplay-g20/`.
+The measured longer route justified the authorized `workshop_c` variant: one
+finite torch/food/water crate; predecessor and its material chain remain exact;
+only two commercial memberships change. No starter/stat/needs/fuel changes.
+
+Successful development chain (all original loop, real ordinary resources):
+`development-c/journey-b/preparation/prepared-return.zip` (turn 1011, HP60),
+`development-c/route-a.json` (separate bounded static preview; 44 scenes, same
+single world, no preview scenes installed into campaign),
+`development-c/outbound-c/destination_entry/common-entry.zip` (turn1433, HP60).
+Both branches start from this exact common entry:
+`lure-c/lure/altered-exit.zip` (turn1485, HP60, flint spent, musk kept),
+`musk-b/musk/altered-exit.zip` (turn1525, HP60, musk spent, flint kept).
+Separate cold ordinary revisit + homeward continuations:
+`lure-return-a/homeward/returned-ward.zip` (turn1907, HP60, thirst .85975),
+`musk-return-a/homeward/returned-ward.zip` (turn1967, HP60, thirst .93975).
+Both own Ward, demonstrate paid torch displacement/relighting and a later light
+choice. Normal AI, pursuit, survival, carrying and costs remained active. Route
+assistance is disclosed; this is not unaided discovery or all-seed balance.
+
+Further acceptance: actual acquired Ward positively blocks through the real
+resolver in an isolated cold continuation; a different authored corner/door room
+reuses sound and disruption. All 103 affected G13–G20 tests pass, including genuine
+historical comparisons and old pending assignments. The first broad check exposed
+a historical dependency mismatch caused by changing the flint definition; that
+definition is restored exactly to G19. Capability and use guidance are runtime
+only, retaining stored item fields and historical source fingerprints. A further
+stale-cursor check preserves an explicit handler override. Native hearing now
+also proves stale-source rejection. The true four workshop orientations pass
+(`sample-d35`); the previous harness wrote an ignored root rotation field, so its
+orientation repetitions are not certification. No runtime rotation defect.
+
+Next commands: commit C implementation checkpoint, commit final gate inputs, then
+`python -X utf8 -B tools/verify_g20.py --evidence evidence/gameplay-g20/final-a`.
+Do not edit any covered input while gates run. Review receipts, complete
+`GAMEPLAY_G20.md`, commit evidence and report, create final verified tag, then push
+main and all G20 checkpoints and read back origin. Source-bound final gates and
+demonstrations remain required; passing development checks are not a delivery.
 Final obligations: unfiltered focused discovery and production D, negative
 controls, genuine historical comparison, original-loop and cold continuations;
 applicable Workbench contract/worker/frontend/build/native checks; report,

@@ -78,9 +78,12 @@ revalidated on return/F9 without movement. Saved actor hearing remains owned by
 the saved instance.
 
 `flint_shard` keeps cutting tier 1. Its six-tile owned throw consumes one unit for
-a clatter with no weapon damage. Historical null-handler shards gain that use
-through a narrow dispatch/affordance fallback without rewriting their stored
-fields. Explicit nonempty instance overrides remain authoritative.
+a clatter with no weapon damage. New and historical null-handler shards gain
+that use through a narrow dispatch/affordance fallback. Inventory adds its use
+guidance at display time; neither carried fields nor the shipped definition is
+rewritten. This deliberately preserves old pending workshop dependencies that
+include flint. Workbench's item-use inspection reports the exact-ID capability.
+Explicit nonempty instance overrides remain authoritative.
 
 Keep the creature’s `id`. Saved actors, knowledge, corpses, and other references depend on it, even when the visible `tile` changes during play.
 

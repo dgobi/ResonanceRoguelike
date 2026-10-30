@@ -7,8 +7,15 @@ without rewriting source. A genuine post-load source edit still requires reloadi
 
 The fixed `data/generation/authored_submap_selection.json` profile uses contract
 `authored-submap-selection-1`, identity `authored_submap_selection`, integer
-version 1. The shipped profile is disabled, with zero chance and no candidates.
-An absent profile also disables assignment. A corrupt explicit file is an error
+version 1. G20 enables the shipped profile for `barrow` at chance `0.35`, with
+one weight-1 candidate, `barrow_ward_store_a`. Procedural barrows retain the
+remaining share. This room has one ordinary Hollow Revenant, a Faceted Ward,
+two openings through a dividing wall, and an ordinary readable clue. The
+predeclared three-seed feasibility sample and route-assisted connected journeys
+are recorded in `docs/owner/GAMEPLAY_G20.md`; selection does not guarantee nearby
+access or supplies in every seed. Previously saved blank/authored assignments
+retain their identities. An absent profile disables assignment, as the older
+shipped disabled/empty profile did. A corrupt explicit file is an error
 for new-world creation, including when its intended policy was inactive.
 
 Save/reopen an ordinary room and its linked contents first. From that room's

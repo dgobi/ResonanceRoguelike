@@ -231,7 +231,7 @@ class ChunkCache:
             cached = pickle.loads(raw)
             if not isinstance(cached, CachedChunk) or not isinstance(cached.local_map, LocalMap):
                 raise SaveFormatError(f'Invalid scene: {name}')
-            _validate_entities(cached.entities, data)
+            _validate_entities(cached.entities, data, cached.local_map)
         return payloads
 
 
@@ -339,7 +339,7 @@ class SaveManager:
         # before installing any player/world/cache reference.
         for scene in sorted((path / 'chunks').glob('*.pkl')):
             cached = cold_cache._read(scene)
-            _validate_entities(cached.entities, engine.data)
+            _validate_entities(cached.entities, engine.data, cached.local_map)
             _deserialize_entities(cached.entities, engine)
         cached = address.load(cold_cache)
         if cached is None:
@@ -1098,7 +1098,7 @@ def _is_player(entity: "Actor") -> bool:
     return entity.name == "Player"
 
 
-def _validate_entities(rows, data) -> None:
+def _validate_entities(rows, data, local_map=None) -> None:
     if not isinstance(rows, list):
         raise SaveFormatError("Scene entities must be an array (possibly empty)")
     for index, row in enumerate(rows):
@@ -1109,7 +1109,7 @@ def _validate_entities(rows, data) -> None:
         identity = row.get("id")
         if not isinstance(identity, str) or identity not in data.entities:
             raise SaveFormatError(f"Actor row {index}: invalid stable creature identity {identity!r}")
-        validate_actor_runtime(row)
+        validate_actor_runtime(row, local_map)
         if identity == "stone_lurker":
             state = row.get("lurker")
             if (not isinstance(state, dict) or "hibernating" not in state

@@ -1,0 +1,9 @@
+{
+  "declared_before_inspection": true,
+  "declaration_anchor": "c35a0cea91ced1be7b6aa122240da5580e7253e1 (G20_PROGRESS.md declares this exact sample and initial chance)",
+  "seeds": [20261023, 29417, 20261030],
+  "world_dimensions": [128, 128],
+  "initial_authored_chance": 0.35,
+  "selection_rule": "Inspect actual saved-policy assignments in all three worlds; prefer the existing G16 preparation world if its selected destination is feasibly connected. No seed expansion without a recorded concrete access/supply issue.",
+  "claim": "A small feasibility sample, not universal access, unaided discovery, balance or natural frequency."
+}

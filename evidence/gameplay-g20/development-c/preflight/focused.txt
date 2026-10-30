@@ -1,0 +1,55 @@
+G:\GameDev\RoguelikeProject\roguelike\engine\engine.py:5016: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.
+Add 'from tcod import libtcodpy' if you haven't already.
+Replace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'
+  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,
+======================================================================
+ERROR: test_genuine_g15_visited_and_pending_old_workshop_match_preedit (test_gameplay_g16.WorkshopPreparation.test_genuine_g15_visited_and_pending_old_workshop_match_preedit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\GameDev\RoguelikeProject\tools\critical_fix_regressions\tests\test_gameplay_g16.py", line 141, in test_genuine_g15_visited_and_pending_old_workshop_match_preedit
+    self.assertEqual(json.loads((GAME_ROOT.parent/'evidence/gameplay-g16/pre-edit-historical.json').read_text())['observed'],inspect())
+                                                                                                                             ^^^^^^^^^
+  File "G:\GameDev\RoguelikeProject\tools\g16_historical.py", line 34, in inspect
+    check_dependencies(p, e.world_map.plan, e.data)
+  File "G:\GameDev\RoguelikeProject\roguelike\generation\placement.py", line 200, in check_dependencies
+    raise GenerationError(f"{placement['id']}: changed dependency {changed}; restore matching definitions or start a fresh world for edited generation content")
+generation.context.GenerationError: settlement-0-cross-market-lot-81-3-S-0-building: changed dependency items:flint_shard; restore matching definitions or start a fresh world for edited generation content
+
+======================================================================
+ERROR: test_genuine_g16_pending_bsp_and_visited_state (test_gameplay_g17.AuthoredCreatures.test_genuine_g16_pending_bsp_and_visited_state)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\GameDev\RoguelikeProject\tools\critical_fix_regressions\tests\test_gameplay_g17.py", line 193, in test_genuine_g16_pending_bsp_and_visited_state
+    self.assertEqual(json.loads((ROOT/'evidence/gameplay-g17/pre-edit-historical.json').read_text())['observed'],inspect())
+                                                                                                                 ^^^^^^^^^
+  File "G:\GameDev\RoguelikeProject\tools\g17_historical.py", line 35, in inspect
+    check_dependencies(p, e.world_map.plan, e.data)
+  File "G:\GameDev\RoguelikeProject\roguelike\generation\placement.py", line 200, in check_dependencies
+    raise GenerationError(f"{placement['id']}: changed dependency {changed}; restore matching definitions or start a fresh world for edited generation content")
+generation.context.GenerationError: settlement-0-cross-market-lot-81-3-S-0-building: changed dependency items:flint_shard; restore matching definitions or start a fresh world for edited generation content
+
+======================================================================
+FAIL: test_direct_factory_actor_translation_preview_and_mixed_ownership (test_gameplay_g17.AuthoredCreatures.test_direct_factory_actor_translation_preview_and_mixed_ownership)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\GameDev\RoguelikeProject\tools\critical_fix_regressions\tests\test_gameplay_g17.py", line 75, in test_direct_factory_actor_translation_preview_and_mixed_ownership
+    self.assertEqual(len(self.data.structure_catalog.entries), 67)
+AssertionError: 69 != 67
+
+----------------------------------------------------------------------
+Ran 94 tests in 40.069s
+
+FAILED (failures=1, errors=2)
+[harvest] tile=(13,12) terrain=grass harvestable=False decor=bone_dust decor_harvestable=False
+[LP-STORED] 0 live pursuers: []
+[CHUNK] E player=(79,12) dest=(80,12) -> entry=(0,12) world (0,0)->(1,0)
+[LP-STORED] 0 live pursuers: []
+[CHUNK] E player=(79,12) dest=(80,12) -> entry=(0,12) world (0,0)->(1,0)
+[LP-STORED] 0 live pursuers: []
+[CHUNK] W player=(0,12) dest=(-1,12) -> entry=(79,12) world (1,0)->(0,0)
+[LIVE-EXTRACT-STAIR-DOWN] Hollow Revenant from (0,0) lk=(12,12)
+[harvest] tile=(12,12) terrain=flint_rock harvestable=False decor=None decor_harvestable=False
+[LP-STORED] 0 live pursuers: []
+[CHUNK] E player=(79,12) dest=(80,12) -> entry=(0,12) world (0,0)->(1,0)
+[LP-STORED] 0 live pursuers: []
+[CHUNK] W player=(0,12) dest=(-1,12) -> entry=(79,12) world (1,0)->(0,0)

@@ -16,7 +16,7 @@ def repair_selected_equipment_use(item) -> None:
 
 
 def use_capability(item):
-    """One historical flint fallback; never rewrite saved instance fields."""
+    """Exact-ID flint use, new or historical; never rewrite instance fields."""
     declared = getattr(item, 'on_use', None)
     if declared is None and getattr(item, 'item_id', '') == 'flint_shard':
         return 'throw_flint_shard'

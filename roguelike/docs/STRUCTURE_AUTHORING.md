@@ -1686,3 +1686,23 @@ Generated caches retain physical state. Consumed same-ID building/pool/item
 changes still face the pending-surface dependency gate. The full operating rules,
 weights/caps, exact recovery, stale-result behavior and limits are documented in
 `workbench/README.md` under W5Q. No new gameplay or save migration is introduced.
+
+## G20 canonical workshop and barrow
+
+`workshop_c` is the finite travel-supply successor to `workshop_b`. Its 12×9
+geometry, all four rotations, entrance, weights/caps and preparation chain remain.
+The added crate at native `(9,6)` uses `workshop_c_travel`: exactly three positive
+entries sampled three times without replacement, yielding one `tallow_torch`, one
+`crow_jerky` and one `water_flask`. Only the two grid/roadside commercial memberships
+change from B to C. B, its existing pools, and old saved plans stay intact.
+The fallback followed measured supply/access problems on the connected journey;
+it is a finite physical source, not a refill or start-kit change.
+
+The direct room `barrow_ward_store_a` uses the ordinary authored-submap contract.
+It contains one unchanged Hollow Revenant, one Faceted Ward and a plain letter
+bound to `barrow_ward_store_note_a`. The two openings through its wall support a
+remote clatter/far passage and prepared direct passage/withdrawal. No trigger or
+room AI selects a solution. New-world selection is documented in
+`AUTHORED_SUBMAP_SELECTION.md`; existing assignments/scenes are not regenerated.
+G20's source-bound evidence and disclosed route assistance belong in
+`docs/owner/GAMEPLAY_G20.md`. This is not a second editor family or H1 completion.

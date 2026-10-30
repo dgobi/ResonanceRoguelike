@@ -1,0 +1,53 @@
+{
+  "branch": "lure",
+  "pid": 39588,
+  "checkpoint_sha256": "8f6b02655b23c948667dd793a1a2e9f9ae58d0e27efabdee30cc1ba68b116d66",
+  "scope": "Cold exact checkpoint/owned scene audit; optional block is a separate controlled fixture, not natural encounter balance.",
+  "cold_snapshot": {
+    "player": "34a6c64d41adb1476033e7127c3176113ac08a4c5e96effc3ec6c9bb74690dc6",
+    "world": "55c40476661323fbac9b8fd08b09593e3ef16deaef0eedb4d0a6b3d415201218",
+    "scene": "120ab3a88cf56b54cd3a7c6460303c705db3665f65b8710cfb0b52209ffa1829",
+    "processing": [],
+    "zones": [],
+    "load": 8.889999999999999,
+    "knowledge": {},
+    "words": [],
+    "read": [],
+    "recovered": {}
+  },
+  "altered_room": {
+    "actors": [],
+    "zones": [],
+    "containers": [
+      {
+        "position": [
+          36,
+          25
+        ],
+        "state": "closed",
+        "items": []
+      }
+    ],
+    "reward_absent": true,
+    "clue_absent": true
+  },
+  "workshop": {
+    "travel_crate_empty": true,
+    "material_crate_dismantled": true
+  },
+  "controlled_block": {
+    "controls": "Acquired owned Ward through paid equip. Isolated clear laboratory patch and one factory adjacent Revenant. Actual two normal speed-budget world phases and real attack resolver. RNG.random fixed at 0.1 to select a positive block, ordinary dice RNG retained. No balance claim.",
+    "results": [
+      {
+        "blocked": true,
+        "reduction": 2,
+        "damage": 12,
+        "hit": true
+      }
+    ],
+    "hp_before": 60,
+    "hp_after": 48,
+    "phases": 2
+  },
+  "passed": true
+}

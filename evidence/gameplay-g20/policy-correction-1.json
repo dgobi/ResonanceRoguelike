@@ -1,0 +1,8 @@
+{
+  "reason": "The declared initial 0.35 sample put the nearest selected Ward stores six chunks from the G16 laboratory. A genuine preparation return took 527 phases, spent its starter water, and retained 575 torch phases through ordinary conservation. The actual eastbound destination attempt then reached (77,99) at turn 1366 with 46 HP, thirst 0.637875 and no water/food; its arrival component had no reachable east exit. This is a concrete access/supply failure, not a successful connected journey.",
+  "evidence": ["development-c/sample-a/sample.json", "development-c/journey-a/preparation/result.json", "development-c/outbound-a/destination_entry/result.json"],
+  "bounded_correction_declared_before_new_outcomes": "Raise the same saved selector chance once to 0.5, retaining a substantial procedural half and the same candidate/geometry/type/geography/seeds. Rerun exactly the same three seeds and choose a feasible selected route. No extra seed search or campaign backfill. If supplies still demonstrably fail, evaluate the separately authorized single finite workshop variant.",
+  "old_chance": 0.35,
+  "new_chance": 0.5,
+  "seeds": [20261023, 29417, 20261030]
+}

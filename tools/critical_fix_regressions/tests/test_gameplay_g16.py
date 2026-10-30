@@ -79,7 +79,7 @@ class WorkshopPreparation(unittest.TestCase):
                 for row in rows:
                     if row['asset'] in ('tool_shed_a','apothecary_a','workshop_a'):
                         if row['asset']=='workshop_a':self.assertEqual(dict(asset='workshop_a',weight=1.0,max_per_settlement=5),row)
-                        row['asset']=row['asset'][:-1]+'b'
+                        row['asset']='workshop_c' if row['asset']=='workshop_a' else row['asset'][:-1]+'b'
         self.assertEqual(expected,self.data.settlement_profiles)
         for form in ('grid','roadside'):
             selected=copy.deepcopy(self.data.settlement_profiles)
@@ -92,7 +92,7 @@ class WorkshopPreparation(unittest.TestCase):
         with contextlib.redirect_stdout(io.StringIO()):generate_world(w,self.data,random.Random(w.seed))
         self.assertEqual((73,99),(w.start_wx,w.start_wy))
         p=next(p for p in w.plan['placements'] if p['id']=='settlement-0-cross-market-lot-1-44-S-0-building')
-        self.assertEqual('workshop_b',p['asset']);self.assertEqual((75,100),(p['origin'][0]//80,p['origin'][1]//43))
+        self.assertEqual('workshop_c',p['asset']);self.assertEqual((75,100),(p['origin'][0]//80,p['origin'][1]//43))
         self.assertFalse(any(p['asset']=='workshop_a' and p['context'] in ('grid','roadside') for p in w.plan['placements']))
         scene=create_surface(w,w.get(75,100),self.data,ItemFactory(self.data),CreatureFactory(self.data),80,43)
         xy=next((t['x']%80,t['y']%43) for t in p['targets'] if t['kind']=='container')

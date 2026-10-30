@@ -1,8 +1,10 @@
 {
   "id": "authored_submap_selection",
   "version": 1,
-  "enabled": false,
+  "enabled": true,
   "target_type": "barrow",
-  "authored_chance": 0.0,
-  "candidates": []
+  "authored_chance": 0.35,
+  "candidates": [
+    {"layout_id": "barrow_ward_store_a", "weight": 1.0}
+  ]
 }

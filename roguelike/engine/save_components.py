@@ -224,7 +224,7 @@ def serialize_actor_runtime(actor):
     return result
 
 
-def validate_actor_runtime(row):
+def validate_actor_runtime(row, local_map=None):
     if "component_state" in row:
         schemas = {"actor": ACTOR_STATE}
         if row.get("ai_type"):
@@ -235,6 +235,10 @@ def validate_actor_runtime(row):
         if row.get("ai_type"):
             validate_fields(row["component_state"]["ai"], AI_OPTIONAL_STATE,
                             "actor.component_state.ai", complete=False)
+            interest = row["component_state"]["ai"].get('sound_interest')
+            if (interest is not None and local_map is not None
+                    and not local_map.in_bounds(interest['x'], interest['y'])):
+                raise ValueError('actor.component_state.ai.sound_interest: source outside owning scene')
         actor_state = row["component_state"]["actor"]
         for x_key, y_key in (("_surface_exit_x", "_surface_exit_y"),
                              ("_surface_exit_wx", "_surface_exit_wy")):

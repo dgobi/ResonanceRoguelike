@@ -165,15 +165,16 @@ def effective_use(raw, data):
 def use_binding(raw):
     declared = raw.get("on_use")
     legacy = declared is None and isinstance(raw.get('id'),str) and raw['id'] in equipment.LEGACY_BINDINGS
-    effective = 'equip_toggle' if legacy else declared
+    flint = declared is None and raw.get('id') == 'flint_shard'
+    effective = 'throw_flint_shard' if flint else 'equip_toggle' if legacy else declared
     handler = getattr(ItemSystem, f"_use_{effective}", None) if isinstance(effective, str) else None
     found = callable(handler)
-    return {"declared": declared, "present": 'on_use' in raw, "effective":effective,"legacy":legacy,"status": "Legacy exact-ID binding" if legacy else "Not applicable" if not declared else "Handler found" if found else "Unknown handler",
+    return {"declared": declared, "present": 'on_use' in raw, "effective":effective,"legacy":legacy,"status": "Exact-ID flint capability" if flint else "Legacy exact-ID binding" if legacy else "Not applicable" if not declared else "Handler found" if found else "Unknown handler",
             "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
             "handler": f"ItemSystem._use_{effective}" if found else None,
             "line": inspect.getsourcelines(handler)[1] if found else None,
             "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
-            "notes": (["Exact shipped ID receives equip_toggle only on ordinary owned use. Same-ID edits preserve the absent/null declaration; new-ID variants must explicitly insert equip_toggle."] if legacy else []) + (["on_use_effects is declared JSON; ItemFactory and ItemSystem do not consume that list."] if "on_use_effects" in raw else []) +
+            "notes": (["Owned flint_shard with a null handler can throw one unit for a clatter. Runtime capability dispatch and inventory guidance leave saved fields and historical generation dependencies unchanged; nonempty instance overrides win. This exact-ID fallback does not follow a new-ID variant."] if flint else []) + (["Exact shipped ID receives equip_toggle only on ordinary owned use. Same-ID edits preserve the absent/null declaration; new-ID variants must explicitly insert equip_toggle."] if legacy else []) + (["on_use_effects is declared JSON; ItemFactory and ItemSystem do not consume that list."] if "on_use_effects" in raw else []) +
                      (["consumed_on_use controls automatic crafting-material eligibility; use-handler return values govern ordinary use consumption."] if "consumed_on_use" in raw else [])}
 
 

@@ -1,0 +1,472 @@
+{
+  "declaration": {
+    "declared_before_inspection": true,
+    "declaration_anchor": "c35a0cea91ced1be7b6aa122240da5580e7253e1 (G20_PROGRESS.md declares this exact sample and initial chance)",
+    "seeds": [
+      20261023,
+      29417,
+      20261030
+    ],
+    "world_dimensions": [
+      128,
+      128
+    ],
+    "initial_authored_chance": 0.35,
+    "selection_rule": "Inspect actual saved-policy assignments in all three worlds; prefer the existing G16 preparation world if its selected destination is feasibly connected. No seed expansion without a recorded concrete access/supply issue.",
+    "claim": "A small feasibility sample, not universal access, unaided discovery, balance or natural frequency."
+  },
+  "policy": {
+    "enabled": true,
+    "chance": 0.35,
+    "candidates": [
+      [
+        "barrow_ward_store_a",
+        1.0
+      ]
+    ]
+  },
+  "diagnostics": [],
+  "workshop_publication_diagnostics": [
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "roguelike/data/buildings/commercial/workshop_c.json",
+      "asset": "workshop_c",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "roguelike/data/buildings/commercial/workshop_c.json",
+      "asset": "workshop_c",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "roguelike/data/buildings/commercial/workshop_c.json",
+      "asset": "workshop_c",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    }
+  ],
+  "workshop_previews": [
+    {
+      "rotation": 0,
+      "mirror": false,
+      "passed": true,
+      "access_verified": true,
+      "candidate": "80e49ba944bf3259e94bf9a296591fd3e9413e7b18c5b5b85b62a5f575889a09"
+    },
+    {
+      "rotation": 90,
+      "mirror": false,
+      "passed": true,
+      "access_verified": true,
+      "candidate": "a5397ecb8d70cbfa7079b08a9e6f4409856d0c2359d413853a43ddaba85a5919"
+    },
+    {
+      "rotation": 180,
+      "mirror": false,
+      "passed": true,
+      "access_verified": true,
+      "candidate": "e1f74d6a7947186f0549d2a455bbb445dd59a3a5424d2183e5008b9aa48078b9"
+    },
+    {
+      "rotation": 270,
+      "mirror": false,
+      "passed": true,
+      "access_verified": true,
+      "candidate": "5e1b0420185a12c8621d2f7f1b309c520d277789dedc0a6734d0c7ab9ec16ee9"
+    }
+  ],
+  "scope": "Saved-policy ordinary worlds and native construction/access; revealed initial sample, no travel, FOV, acquisition or balance claim.",
+  "worlds": [
+    {
+      "seed": 20261023,
+      "start": [
+        73,
+        99
+      ],
+      "plan_identity": "33bfaed1c01719ca657a10a8117d8ab3bf15e51b746f543df0ce05cd22562d2c",
+      "barrows": 731,
+      "authored": 259,
+      "procedural": 472,
+      "nearest": [
+        {
+          "chunk": [
+            68,
+            98
+          ],
+          "submap": "submap_68_98_0",
+          "seed": 103000,
+          "layout": "barrow_ward_store_a",
+          "distance": 6
+        },
+        {
+          "chunk": [
+            78,
+            100
+          ],
+          "submap": "submap_78_100_0",
+          "seed": 358687,
+          "layout": "barrow_ward_store_a",
+          "distance": 6
+        },
+        {
+          "chunk": [
+            66,
+            99
+          ],
+          "submap": "submap_66_99_0",
+          "seed": 628163,
+          "layout": "barrow_ward_store_a",
+          "distance": 7
+        },
+        {
+          "chunk": [
+            73,
+            91
+          ],
+          "submap": "submap_73_91_0",
+          "seed": 943982,
+          "layout": "barrow_ward_store_a",
+          "distance": 8
+        },
+        {
+          "chunk": [
+            75,
+            92
+          ],
+          "submap": "submap_75_92_0",
+          "seed": 785781,
+          "layout": "barrow_ward_store_a",
+          "distance": 9
+        },
+        {
+          "chunk": [
+            77,
+            106
+          ],
+          "submap": "submap_77_106_0",
+          "seed": 390038,
+          "layout": "barrow_ward_store_a",
+          "distance": 11
+        },
+        {
+          "chunk": [
+            83,
+            102
+          ],
+          "submap": "submap_83_102_0",
+          "seed": 368306,
+          "layout": "barrow_ward_store_a",
+          "distance": 13
+        },
+        {
+          "chunk": [
+            65,
+            105
+          ],
+          "submap": "submap_65_105_0",
+          "seed": 344431,
+          "layout": "barrow_ward_store_a",
+          "distance": 14
+        }
+      ],
+      "constructed": {
+        "chunk": [
+          68,
+          98
+        ],
+        "submap": "submap_68_98_0",
+        "surface_entrance": [
+          50,
+          10
+        ],
+        "arrival": [
+          31,
+          26
+        ],
+        "entry": [
+          31,
+          26
+        ],
+        "actors": [
+          {
+            "id": "hollow_revenant",
+            "x": 41,
+            "y": 20
+          }
+        ],
+        "floor": [
+          "faceted_ward",
+          "letter"
+        ]
+      },
+      "seconds": 4.434158000047319
+    },
+    {
+      "seed": 29417,
+      "start": [
+        106,
+        46
+      ],
+      "plan_identity": "f73d1cdd94ed5ba63c0f8d63038cc327cdb4ffa81428987d324d2d84b1ab3828",
+      "barrows": 792,
+      "authored": 278,
+      "procedural": 514,
+      "nearest": [
+        {
+          "chunk": [
+            108,
+            50
+          ],
+          "submap": "submap_108_50_0",
+          "seed": 647192,
+          "layout": "barrow_ward_store_a",
+          "distance": 6
+        },
+        {
+          "chunk": [
+            99,
+            43
+          ],
+          "submap": "submap_99_43_0",
+          "seed": 860451,
+          "layout": "barrow_ward_store_a",
+          "distance": 10
+        },
+        {
+          "chunk": [
+            108,
+            38
+          ],
+          "submap": "submap_108_38_0",
+          "seed": 634019,
+          "layout": "barrow_ward_store_a",
+          "distance": 10
+        },
+        {
+          "chunk": [
+            102,
+            53
+          ],
+          "submap": "submap_102_53_0",
+          "seed": 556788,
+          "layout": "barrow_ward_store_a",
+          "distance": 11
+        },
+        {
+          "chunk": [
+            105,
+            56
+          ],
+          "submap": "submap_105_56_0",
+          "seed": 424409,
+          "layout": "barrow_ward_store_a",
+          "distance": 11
+        },
+        {
+          "chunk": [
+            100,
+            39
+          ],
+          "submap": "submap_100_39_0",
+          "seed": 381007,
+          "layout": "barrow_ward_store_a",
+          "distance": 13
+        },
+        {
+          "chunk": [
+            114,
+            41
+          ],
+          "submap": "submap_114_41_0",
+          "seed": 519802,
+          "layout": "barrow_ward_store_a",
+          "distance": 13
+        },
+        {
+          "chunk": [
+            97,
+            41
+          ],
+          "submap": "submap_97_41_0",
+          "seed": 604348,
+          "layout": "barrow_ward_store_a",
+          "distance": 14
+        }
+      ],
+      "constructed": {
+        "chunk": [
+          108,
+          50
+        ],
+        "submap": "submap_108_50_0",
+        "surface_entrance": [
+          36,
+          32
+        ],
+        "arrival": [
+          31,
+          26
+        ],
+        "entry": [
+          31,
+          26
+        ],
+        "actors": [
+          {
+            "id": "hollow_revenant",
+            "x": 41,
+            "y": 20
+          }
+        ],
+        "floor": [
+          "faceted_ward",
+          "letter"
+        ]
+      },
+      "seconds": 3.0480887000449
+    },
+    {
+      "seed": 20261030,
+      "start": [
+        63,
+        117
+      ],
+      "plan_identity": "8c874813a6c3a3942b7f77daf668e2697fb3efa352e7a581085444f8ef95d563",
+      "barrows": 726,
+      "authored": 265,
+      "procedural": 461,
+      "nearest": [
+        {
+          "chunk": [
+            61,
+            114
+          ],
+          "submap": "submap_61_114_0",
+          "seed": 71539,
+          "layout": "barrow_ward_store_a",
+          "distance": 5
+        },
+        {
+          "chunk": [
+            57,
+            117
+          ],
+          "submap": "submap_57_117_0",
+          "seed": 945130,
+          "layout": "barrow_ward_store_a",
+          "distance": 6
+        },
+        {
+          "chunk": [
+            67,
+            113
+          ],
+          "submap": "submap_67_113_0",
+          "seed": 681664,
+          "layout": "barrow_ward_store_a",
+          "distance": 8
+        },
+        {
+          "chunk": [
+            62,
+            109
+          ],
+          "submap": "submap_62_109_0",
+          "seed": 360651,
+          "layout": "barrow_ward_store_a",
+          "distance": 9
+        },
+        {
+          "chunk": [
+            64,
+            108
+          ],
+          "submap": "submap_64_108_0",
+          "seed": 852176,
+          "layout": "barrow_ward_store_a",
+          "distance": 10
+        },
+        {
+          "chunk": [
+            72,
+            115
+          ],
+          "submap": "submap_72_115_0",
+          "seed": 245021,
+          "layout": "barrow_ward_store_a",
+          "distance": 11
+        },
+        {
+          "chunk": [
+            73,
+            114
+          ],
+          "submap": "submap_73_114_0",
+          "seed": 936723,
+          "layout": "barrow_ward_store_a",
+          "distance": 13
+        },
+        {
+          "chunk": [
+            73,
+            120
+          ],
+          "submap": "submap_73_120_0",
+          "seed": 576534,
+          "layout": "barrow_ward_store_a",
+          "distance": 13
+        }
+      ],
+      "constructed": {
+        "chunk": [
+          61,
+          114
+        ],
+        "submap": "submap_61_114_0",
+        "surface_entrance": [
+          27,
+          19
+        ],
+        "arrival": [
+          31,
+          26
+        ],
+        "entry": [
+          31,
+          26
+        ],
+        "actors": [
+          {
+            "id": "hollow_revenant",
+            "x": 41,
+            "y": 20
+          }
+        ],
+        "floor": [
+          "faceted_ward",
+          "letter"
+        ]
+      },
+      "seconds": 2.2256243000738323
+    }
+  ],
+  "source": {
+    "roguelike/data/layouts/barrow_ward_store_a.json": "ae196c3ba45ab244ab472557c4cd1692a92bb8b5d4f5b4d1a1d5ec9623f7d553",
+    "roguelike/data/texts/world/notes/barrow_ward_store_note_a.json": "f7562267792d4c625a01918851e12d721140e3b7cfd5453d7d2093bbb2560f80",
+    "roguelike/data/generation/authored_submap_selection.json": "f6b960bbb831c7ae3f09400a62d036ea87ca82b747adabb77d60d39d3677ed50",
+    "roguelike/data/buildings/commercial/workshop_c.json": "ab0ffb5e6a7490a6254a2169e03701f89bb2f8db6c4c2952bdfb70ff3e8c8fce",
+    "roguelike/data/loot_pools/workshop_c_travel.json": "ea10aad3fb665be348c8475bd275ca94af4d18c5165eef84e52f0670fa5f539b",
+    "roguelike/data/generation/settlement_profiles.json": "3f1004081419917ff24dc21f07a97742185a2ae5c1a307c48525119bdfabc879"
+  },
+  "passed": true
+}

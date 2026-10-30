@@ -11,6 +11,15 @@ ITEM = "roguelike/data/items/components/wood_bundle.json"
 POOL = "roguelike/data/loot_pools/workshop_b_fuel.json"
 
 class ItemTests(unittest.TestCase):
+    def test_flint_exact_id_capability_preserves_pending_definition_and_saved_fields(self):
+        path='roguelike/data/items/components/flint_shard.json'
+        raw=(ROOT/path).read_bytes()
+        r=invoke('inspect',asset=path)['result']
+        self.assertTrue(r['valid'],r['diagnostics'])
+        binding=r['family']['context']['records'][0]['use']
+        self.assertIsNone(binding['declared']);self.assertEqual('throw_flint_shard',binding['effective'])
+        self.assertEqual('Exact-ID flint capability',binding['status'])
+        self.assertEqual(raw,(ROOT/path).read_bytes())
     def test_recursive_catalogue_noop_complex_sources_and_truthful_binding(self):
         assets = invoke("describe")["result"]["assets"]
         rows = [a for a in assets if a["route"] == "item_definition"]

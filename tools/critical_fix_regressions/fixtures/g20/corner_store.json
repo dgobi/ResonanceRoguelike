@@ -1,0 +1,26 @@
+{
+  "id": "g20_corner_store_fixture",
+  "width": 15,
+  "height": 11,
+  "layers": [
+    "###############",
+    "#......#......#",
+    "#......#......#",
+    "#......#......#",
+    "#......+......#",
+    "#......#......#",
+    "#...<..#......#",
+    "#......#......#",
+    "#......#......#",
+    "#.............#",
+    "###############"
+  ],
+  "legend": {"#": "wall", ".": "floor", "+": "door_closed", "<": "stairs_up"},
+  "player_start": {"x": 4, "y": 6},
+  "special_tiles": [
+    {"type": "creature", "x": 8, "y": 8, "creature_id": "hollow_revenant"},
+    {"type": "item", "x": 4, "y": 6, "item_id": "flint_shard"},
+    {"type": "item", "x": 4, "y": 6, "item_id": "musk_pellet"},
+    {"type": "item", "x": 4, "y": 6, "item_id": "tallow_torch"}
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "barrow_ward_store_note_a",
+  "title": "At the Ward Store",
+  "type": "note",
+  "condition": "stained",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [
+    {
+      "text": "The bronze ward is kept beyond the dividing wall. Its old keeper still walks there.\n\nThere are two openings. A chip of flint cast through the nearer one may turn it aside while you take the far passage. It follows the clatter until it finds nothing.\n\nDried stalker musk buys only a few breaths. Stone and a shut door contain the burst. Keep a way back.\n\nThe ward fills the hand that carries a torch. Choose your light before you take it up.",
+      "damaged": false
+    }
+  ]
+}

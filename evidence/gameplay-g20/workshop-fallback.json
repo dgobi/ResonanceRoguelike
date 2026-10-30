@@ -1,0 +1,6 @@
+{
+  "predecessor_sha256": "d7d8d1169be1a766342a8ee36db6d3898f0481d72a7c9efb7d64ac3c2eb6ba1b",
+  "variant": "workshop_c",
+  "membership_changes": 2,
+  "preserved": "All predecessor bytes, geometry, entrances, weights/caps, source material pools, text and scene. New crate at native (9,6) uses a three-roll weighted sample without replacement of exactly three positive entries, so supplies are exactly one of each."
+}

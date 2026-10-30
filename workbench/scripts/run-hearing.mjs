@@ -22,14 +22,23 @@ const idle=()=>page.waitForFunction(()=>!document.querySelector('.status-dot.wor
 const b=name=>page.getByRole('button',{name,exact:true}),editor=()=>page.locator('[data-testid="authoring"]:visible'),eb=name=>editor().getByRole('button',{name,exact:true});
 const editIdle=()=>page.waitForFunction(()=>![...document.querySelectorAll('[data-testid="authoring"]')].some(e=>e.dataset.editPending==='true'));
 async function open(){await idle();await page.getByLabel('Category / route').selectOption('');await page.getByLabel('Search ID, name or path').fill(asset);await page.locator(`[data-asset="${asset}"]`).click();await idle();}
-async function validate(){await editIdle();await idle();await eb('Validate draft').click();await idle();return JSON.parse(await editor().getByTestId('draft-receipt').textContent());}
+async function validate(){await editIdle();for(let i=0;i<5;i++){await idle();await eb('Validate draft').click();await idle();if(await editor().getByTestId('draft-receipt').count())return JSON.parse(await editor().getByTestId('draft-receipt').textContent());assert.match(await page.locator('footer').innerText(),/BUSY/);}throw Error('Validation remained busy');}
 async function save(hearing){
   if(await eb('Begin edit').count())await eb('Begin edit').click();
   await page.getByLabel('Hearing radius',{exact:true}).filter({visible:true}).fill(String(hearing));await editIdle();
-  const checked=await validate();assert(checked.valid,JSON.stringify(checked));
+  let checked=await validate();assert(checked.valid,JSON.stringify(checked));
+  if(hearing===0){
+    const doc=(await ipc('open_document',{asset})).result;assert(doc);
+    const sound=resolve(root,'roguelike/engine/sound.py'),bytes=await readFile(sound),before=await readFile(resolve(root,asset));
+    await writeFile(sound,Buffer.concat([bytes,Buffer.from('\n')]));
+    const stale=await ipc('apply_document',{token:doc.document_token,reviewToken:checked.review_token,confirmed:true});
+    assert(['SOURCE_CHANGED','REVIEW_REQUIRED'].includes(stale.error?.code),JSON.stringify(stale));assert.deepEqual(await readFile(resolve(root,asset)),before);
+    await writeFile(sound,bytes);checked=await validate();assert(checked.valid,JSON.stringify(checked));receipt.stale_source_rejected=true;
+  }
   await eb('Review & apply').click();await b('Confirm apply one file').click();await idle();
   await page.getByText(/Saved and byte-checked reopen:/).waitFor({timeout:30000});
   const doc=(await ipc('open_document',{asset})).result;assert(doc);assert.equal(JSON.parse(doc.raw).perception.hearing_radius,hearing);
+  await writeFile(resolve(output,`hearing-${hearing}.json`),doc.raw);
   assert.equal(await page.getByLabel('Hearing radius',{exact:true}).filter({visible:true}).inputValue(),String(hearing));
   const run=spawnSync(python,['-X','utf8','-B',resolve('scripts/hearing-runtime-probe.py'),root,String(hearing)],{windowsHide:true,encoding:'utf8'});
   assert.equal(run.status,0,run.stdout+run.stderr);receipt.saved.push({hearing,sha256:doc.sha256,runtime:JSON.parse(run.stdout.trim().split('\n').at(-1))});
