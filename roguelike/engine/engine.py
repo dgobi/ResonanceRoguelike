@@ -1535,8 +1535,8 @@ class Engine:
             equip = getattr(self.player, "equipment", None)
             if equip and equip.slots.get("weapon") is None:
                 continue  # bare-handed — no free strike in grass
-            self.log.add("It steps into your reach through the grass.", MSG_DEFAULT)
-            self._player_attack(_ce)
+            if self._player_attack(_ce):
+                self.log.add("It steps into your reach through the grass.", MSG_DEFAULT)
 
         if getattr(self.player, "took_damage_this_turn", False):
             if hasattr(self, "ui"):
@@ -1796,7 +1796,6 @@ class Engine:
             self.lexicon_screen.toggle()
             return
 
-        self.player._in_concealment = False
         acted = False
         _was_move = False
         _press_step = False
@@ -5147,40 +5146,9 @@ class Engine:
     def _has_line_of_sight_adjacent(
         local_map, x1: int, y1: int, x2: int, y2: int
     ) -> bool:
-        """
-        Return True if (x1,y1) and (x2,y2) share an open face — i.e. the
-        shared edge is not blocked by a wall on either side.
-
-        For adjacent tiles (Chebyshev distance 1) this reduces to:
-        - Both tiles are walkable (non-wall), OR
-        - At least one of the two cells on the shared face is walkable.
-
-        In practice: block the attack only when a solid wall (non-walkable,
-        non-transparent tile) sits between attacker and target.
-        We check walkability as the wall proxy (matches what the rest of the
-        code uses for movement blocking).
-        """
-        import math as _math
-        if _math.fabs(x2 - x1) > 1 or _math.fabs(y2 - y1) > 1:
-            # Not adjacent — not handled here; allow by default
-            return True
-        # Both in-bounds check
-        if not local_map.in_bounds(x1, y1) or not local_map.in_bounds(x2, y2):
-            return False
-        # If either tile is a solid wall, no LOS (one is the attacker's tile
-        # so this would be unusual, but guard it)
-        if not local_map.walkable[x1, y1] or not local_map.walkable[x2, y2]:
-            return False
-        # Diagonal attacks: also check that at least one of the two orthogonal
-        # corner tiles is open (wall-corner blocking)
-        dx = x2 - x1
-        dy = y2 - y1
-        if dx != 0 and dy != 0:
-            corner_a = local_map.walkable[x1 + dx, y1]
-            corner_b = local_map.walkable[x1, y1 + dy]
-            if not corner_a and not corner_b:
-                return False
-        return True
+        """Compatibility entry point for strict one-tile physical contact."""
+        from engine.spatial import melee_contact
+        return melee_contact(local_map, x1, y1, x2, y2)
 
     def _player_attack(self, target: "Actor") -> bool:
         from engine.combat import resolve_attack
@@ -5191,7 +5159,7 @@ class Engine:
         if (not player_fighter or not target_fighter
                 or self._player_is_dead or not self.player.is_alive
                 or player_fighter.is_dead or player_fighter.hp <= 0 or not target.is_alive
-                or target_fighter.is_dead):
+                or target_fighter.is_dead or target_fighter.hp <= 0):
             return False
 
         # Check impairment
@@ -5392,6 +5360,7 @@ class Engine:
         from engine.movesets import get_moveset_action, execute_moveset, apply_damage_mult
         from engine.combat import resolve_attack, get_body_def, roll_dice
         from engine.effect_lifecycle import creature_id, coated_weapon, coating_contact, knight_disruption
+        from engine.spatial import melee_attack_legal
 
         player_fighter = getattr(self.player, "fighter", None)
         if (self._player_is_dead or not self.player.is_alive
@@ -5429,7 +5398,7 @@ class Engine:
             import math
             d = math.sqrt((e.x - self.player.x) ** 2 + (e.y - self.player.y) ** 2)
             if (d <= action_range + 0.5 and d < best_dist
-                    and self._has_line_of_sight_adjacent(self.local_map, self.player.x, self.player.y, e.x, e.y)):
+                    and melee_attack_legal(self.local_map, self.player, e)):
                 best_dist = d
                 target = e
 

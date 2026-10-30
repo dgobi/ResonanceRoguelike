@@ -121,20 +121,9 @@ class AI:
             # Pursuit timeout — increment when chasing without LOS
             if self.state in (AIState.HUNTING, AIState.ALERTED, AIState.ATTACKING):
                 _increment = 1
-                if engine is not None:
-                    _lm = getattr(engine, "local_map", None)
-                    if _lm is not None:
-                        try:
-                            _ptile = str(_lm.tiles["terrain"][player.x, player.y])
-                            _tdef = engine.data.terrain.get(_ptile, {})
-                            if _tdef.get("secondary_effect") == "concealment":
-                                _increment = int(
-                                    engine.data.ai_config.get(
-                                        "concealment_timeout_multiplier", 2.0
-                                    )
-                                )
-                        except Exception:
-                            pass
+                if engine is not None and _player_concealed(player, local_map, engine):
+                    _increment = int(engine.data.ai_config.get(
+                        "concealment_timeout_multiplier", 2.0))
                 self.pursuit_turns_without_contact += _increment
                 _timeout = 20
                 if engine is not None:
@@ -564,6 +553,16 @@ class CirclingAI(AI):
 #  Helpers
 # ------------------------------------------------------------------ #
 
+def _player_concealed(player, local_map, engine):
+    if engine is None:
+        return bool(getattr(player, "_in_concealment", False))
+    # A pursuer's phantom is a remembered coordinate, not the physical player.
+    if player is not engine.player:
+        return False
+    from engine.spatial import terrain_conceals
+    return terrain_conceals(player, local_map, engine.data.terrain)
+
+
 def _creature_can_see_player(entity, player, local_map, ambient_light: float = 1.0, engine=None) -> bool:
     """
     True if the creature can see the player.
@@ -593,7 +592,7 @@ def _creature_can_see_player(entity, player, local_map, ambient_light: float = 1
             return False
 
     # Concealment: tall grass reduces effective sight by 2 tiles
-    if getattr(player, "_in_concealment", False):
+    if _player_concealed(player, local_map, engine):
         if dist > max(1, sight - 2):
             return False
 
@@ -673,33 +672,39 @@ def rng_chance(p: float) -> bool:
 #  Full combat resolution for monster → player (or entity) attacks
 # ------------------------------------------------------------------ #
 
-def _monster_attack_entity(monster, target, engine) -> None:
+def _monster_attack_entity(monster, target, engine) -> bool:
     """
     Resolve a monster attack using the full combat system.
-    Called from AI._attack() when engine is available.
+    Called from AI._attack() when engine is available. True means a committed
+    attempt (including a miss/dodge/invincibility), never merely a callback.
     """
     from engine.combat import resolve_attack
     import random as _random
 
-    monster_fighter = getattr(monster, "fighter", None)
     target_fighter  = getattr(target,  "fighter", None)
-    if not monster_fighter or not target_fighter:
-        return
+    from engine.spatial import combat_ready, melee_contact, terrain_line
+    from engine.effect_lifecycle import disrupted
+    if (not combat_ready(monster, target) or disrupted(monster, engine.local_map)
+            or (target is engine.player and getattr(engine, "_player_is_dead", False))):
+        return False
 
     is_player = (target is engine.player)
-
-    # Line-of-sight check — don't attack through walls
-    from engine.engine import Engine as _Engine
-    if not _Engine._has_line_of_sight_adjacent(
-        engine.local_map, monster.x, monster.y, target.x, target.y
-    ):
-        return
 
     from engine.effect_lifecycle import creature_id, armor_contact, ability_enabled
 
     # Build synthetic weapon from monster JSON
     monster_def = engine.data.entities.get(creature_id(monster), {})
     attack_verb = monster_def.get("attack_verb", "strikes at thee")
+
+    contact = melee_contact(engine.local_map, monster.x, monster.y, target.x, target.y)
+    distance_sq = (target.x - monster.x)**2 + (target.y - monster.y)**2
+    # Only the shipped Crow has a nonadjacent attack. Match its AI selection
+    # envelope here too, even for stale/direct calls without a renderer.
+    if not contact:
+        if (creature_id(monster) != "plague_crow" or distance_sq <= 2
+                or distance_sq > CirclingAI.PREFERRED_DIST**2
+                or not terrain_line(engine.local_map, monster.x, monster.y, target.x, target.y)):
+            return False
 
     # Check ranged attack conditions once — used on both the invincible path
     # and the normal path so the tween fires unconditionally.
@@ -734,7 +739,7 @@ def _monster_attack_entity(monster, target, engine) -> None:
                 _ranged_def.get("duration", 0.45),
                 on_hit=False,
             )
-        return
+        return True
 
     # Pre-attack announcement
     engine.log.add(f"The {monster.name} {attack_verb}.", WORN_STONE)
@@ -893,6 +898,7 @@ def _monster_attack_entity(monster, target, engine) -> None:
             on_hit=result.damage_dealt > 0,
             blood_type="red",   # target (player) blood
         )
+    return True
 
 
 # ------------------------------------------------------------------ #

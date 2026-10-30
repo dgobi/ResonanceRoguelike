@@ -19,7 +19,9 @@ Use plain `NdM` dice, such as `1d6` or `2d4`. Put additions in `damage_bonus`; t
 
 The same file contains `movesets`. To strengthen Severing Cut and shorten its cooldown, change that existing entry’s `damage_mult` from `1.2` to `1.3` and `cooldown` from `10` to `8`. The multiplier applies to the dice roll before flat bonuses. Both ordinary attacks and movesets use corruption bonuses and active coatings.
 
-Keep each action’s `id` stable: cooldowns are keyed by that ID. Use one action per `key`, `Q` or `R`; the first matching entry wins. Keep `range: 1` for these melee actions. Increasing it does not implement a complete ranged targeting system. Keep `turn_cost: 1.0` when you want ordinary action timing.
+Keep each action’s `id` stable: cooldowns are keyed by that ID. Use one action per `key`, `Q` or `R`; the first matching entry wins. Keep `range: 1` for these melee actions. All shipped movesets require physical one-tile contact even if this number is increased; a range edit cannot enable ranged attacks. Keep `turn_cost: 1.0` when you want ordinary action timing.
+
+Ordinary melee, movesets, monster melee and grass-entry free strikes require living, eligible fighters on distinct walkable neighboring cells. Cardinal and diagonal contact work; a diagonal needs at least one walkable orthogonal side. Closed doors, solid endpoints and sealed corners block contact independently of player FOV. Rejected contact preserves time, cooldowns, coatings, weapon balance and pending Press; a legal miss or dodge commits normally.
 
 Fractional weapon costs accumulate separately from movement/work debt and sprint credit. Starting neutral, five accepted `0.8` actions pay four world phases (the fifth skips); five `1.2` actions pay six (the fifth adds one). The first fast action still pays one. A `0.8` followed by `1.2` returns to neutral in two phases. `1.0` actions and ordinary intervening actions preserve the balance; rejected movesets spend nothing. Misses and dodges are committed attacks. Costs resolve to millionths of a phase before accumulating, so authored decimal boundaries do not drift. Cooldown waits retain their own normal costs, and skipped phases do not tick cooldowns or other turn systems. The balance survives saves.
 
@@ -48,6 +50,14 @@ Use `base_hp` for health: `engine/creature_factory.py` gives it precedence over 
 `perception.sight_radius` and `perception.hearing_radius` tune detection. Existing `ai_type` values are `wandering`, `ambush`, `fleeing`, and `circling`. A new word here does not create a new AI. Likewise, special abilities such as briar retaliation and wraith sight drain have creature-specific code; copying their descriptive fields onto another creature does not give it the ability.
 
 Keep the creature’s `id`. Saved actors, knowledge, corpses, and other references depend on it, even when the visible `tile` changes during play.
+
+Stone Lurker wakes within three tiles and changes from rock to Lurker. Its separate AmbushAI trigger remains half its sight radius (currently 2.5), and speed remains `0.5`. Waking arms one bonus melee attempt: distance, barriers, impairment, ability suppression and disruption retain it. One legal attempt consumes it, including misses, dodges and zero damage, separately from its normal speed budget. Existing save fields retain hibernation, pending/consumed state and the one-time AI trigger; load does not wake or attack.
+
+Plague Crow retains its adjacent melee and existing nonadjacent circling envelope of at most three Euclidean tiles. `ranged_attack.min_range: 2` selects projectile presentation; it is not a new maximum-range control. A nonadjacent attack requires walkable endpoints, a transparent Bresenham interior and at least one transparent orthogonal side for each diagonal ray step. Opaque terrain and closed doors block the line; actors do not. Damage eligibility is independent of projectile rendering. Throwing keeps its existing visibility, ownership, map, range and stricter walkable-segment flight checks.
+
+## Terrain cover while stationary
+
+Terrain with `secondary_effect: "concealment"` reduces creature sight range by two tiles, with a minimum of one, under the existing light/darkvision rules. Perception queries the occupied tile on the supplied scene map; the saved `_in_concealment` flag remains a compatibility field and cannot override physical terrain. Cover persists through waiting, stationary attacks, menus, saves and rejected inputs. Leaving cover clears its effective benefit immediately, including a Press step with no world phase. Arrival, restoration and terrain changes need no replayed step effects or turn. Close creatures can still see the player, and existing pursuers retain their trail until the existing memory/timeout rules lose it.
 
 ## Change how long a preparation lasts
 

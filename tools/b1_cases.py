@@ -280,15 +280,28 @@ def lurker_case(e, ev):
         return original(*args, **kwargs)
     ai_module._monster_attack_entity = observed
     try:
-        if variant == "dormant":
-            e.player.x, e.player.y = a.x - 3, a.y
+        # G19: proximity wakes/arms; it is not three-tile melee reach. Keep
+        # identity/owner/restore checks above, then stage explicit geometry.
+        e.player.x, e.player.y = a.x - 3, a.y
         def tick():
             e.ai_system.process(e.entities, e.player, e.local_map, e.world_map,
                                 e.world_x, e.world_y, e.log, e.world_time, e.data, engine=e)
         e.reality_bubble.update(e.world_x, e.world_y, e.world_map)
         tick()
-        ev.check("K03", "one pending ambush or none if consumed", 0 if variant == "awake" else 1, calls.count("process"))
+        ev.check("K03", "distant wake does not dispatch a bonus strike", 0, calls.count("process"))
         ev.check("K03", "awake after actual AI action", False, a._hibernating)
+        ev.check("K03", "distant wake retains pending unless already consumed", variant != "awake", a._ambush_ready)
+        e.player.x, e.player.y = a.x - 1, a.y - 1
+        for x, y in ((a.x, a.y), (e.player.x, e.player.y)):
+            e.local_map.set_tile(x, y, "flagstone", True, True)
+        e.local_map.set_tile(a.x - 1, a.y, "wall", False, False)
+        e.local_map.set_tile(a.x, a.y - 1, "wall", False, False)
+        tick()
+        ev.check("K03", "sealed corner retains pending unless consumed", variant != "awake", a._ambush_ready)
+        ev.check("K03", "blocked corner dispatches no bonus", 0, calls.count("process"))
+        e.local_map.set_tile(a.x - 1, a.y, "flagstone", True, True)
+        tick()
+        ev.check("K03", "one legal pending ambush or none if consumed", 0 if variant == "awake" else 1, calls.count("process"))
         ev.check("K03", "ambush consumed", False, a._ambush_ready)
         tick()
         ev.check("K03", "second AI tick never repeats free ambush", 0 if variant == "awake" else 1, calls.count("process"))

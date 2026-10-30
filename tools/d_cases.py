@@ -260,9 +260,14 @@ def roundtrip(e,ev):
     ev.check('D-10','restored instance effects, zones, clocks, credit',expected,state(e))
     ev.check('D-10','unfinished commands cleared',[None,None,'local'],[e._pending_consume,e._pending_throw,e.mode.value])
     a=next(a for a in e.entities if a is not e.player);armor=e.player.equipment.slots['armor_torso']
-    e.player.dodge_chance=0;_monster_attack_entity(a,e.player,e)
-    ev.check('D-10','restored armor charge actually consumed',1,armor._temp_av_hits)
+    # G19 validates direct resolver eligibility too: a disrupted creature
+    # cannot spend contact charges. Retain restored timer expiry, then strike.
+    e.player.dodge_chance=0
+    ev.check('D-10','disrupted direct attack rejected',False,_monster_attack_entity(a,e.player,e))
+    ev.check('D-10','rejected contact retains armor charge',2,armor._temp_av_hits)
     for _ in range(2):e._advance_turn()
     ev.check('D-10','restored timers actually expire',[0,False,0,0,1,0],[e.true_sight_turns,e.player.true_sight,e.player_speed_bonus_turns,e.player_speed_bonus,a._ability_suppressed_turns,a._disrupted_turns])
+    _monster_attack_entity(a,e.player,e)
+    ev.check('D-10','restored armor charge actually consumed',1,armor._temp_av_hits)
     ev.check('D-10','restored zone ages once',1,e.local_map.disruption_zones[0]['turns_remaining'])
     drop(e,armor);ev.check('D-10','restored item still obeys transfer ownership',0,e.player.fighter.effective_av)

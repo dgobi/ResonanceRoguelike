@@ -192,9 +192,10 @@ def valid_throw(engine, x, y):
             or (x-p.x)**2+(y-p.y)**2 > reach**2):
         return False
     from tcod.los import bresenham
+    from engine.spatial import melee_contact
     ray = bresenham((p.x,p.y),(x,y)).tolist()
     return all(m.transparent[tx,ty] for tx,ty in ray[1:]) and all(
-        engine._has_line_of_sight_adjacent(m,*a,*b) for a,b in zip(ray,ray[1:]))
+        melee_contact(m,*a,*b) for a,b in zip(ray,ray[1:]))
 
 
 def throw_key(engine, key):

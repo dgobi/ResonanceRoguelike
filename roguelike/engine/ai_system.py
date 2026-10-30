@@ -86,12 +86,15 @@ class AISystem:
                 from engine.creature_abilities import process_abilities
                 process_abilities(entity, engine)
 
-            # Ambush attack — fires immediately on wake, before normal turn
+            # One bonus opportunity, before the unchanged normal speed budget.
+            # Waking arms it; only a legal committed melee attempt consumes it.
             if getattr(entity, "_ambush_ready", False) and ability_enabled(entity, local_map):
-                entity._ambush_ready = False
                 if engine is not None:
+                    from engine.spatial import melee_attack_legal
                     from components.ai import _monster_attack_entity
-                    _monster_attack_entity(entity, player, engine)
+                    if (melee_attack_legal(local_map, entity, player)
+                            and _monster_attack_entity(entity, player, engine)):
+                        entity._ambush_ready = False
 
             # Speed accumulator — creatures with speed < 1.0 skip turns,
             # creatures with speed > 1.0 occasionally get a second step.

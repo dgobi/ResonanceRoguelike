@@ -125,7 +125,7 @@ def _ability_stone_lurker(entity: "Actor", engine: "Engine") -> None:
     """
     Hibernates as a rock formation until player is within 3 tiles.
     While hibernating: renders as rock tile, stays motionless.
-    First attack after waking is free (ambush).
+    Waking arms one free ambush attempt, pending until legal melee contact.
     """
     # Ensure hibernation is set up on first call regardless of AI default state
     if not hasattr(entity, "_hibernating"):
