@@ -1,0 +1,7 @@
+{
+  "end_utc": "2026-10-30T05:23:49.1803751Z",
+  "seconds": 2.3822338,
+  "start_utc": "2026-10-30T05:23:46.7941691Z",
+  "command": "tools/g15_historical.py --output evidence/gameplay-g19/final-a/historical.json --baseline evidence/gameplay-g19/pre-edit-historical.json",
+  "exit_code": 0
+}

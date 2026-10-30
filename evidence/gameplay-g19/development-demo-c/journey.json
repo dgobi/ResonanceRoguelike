@@ -1,0 +1,2131 @@
+{
+  "run_id": "g19-local-demo",
+  "scenario": "journey",
+  "phase": "loop",
+  "flavor": "candidate",
+  "pid": 39664,
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "argv": [
+    "tools/verify_g19.py",
+    "--evidence",
+    "evidence/gameplay-g19/development-demo-c"
+  ],
+  "seed": 20261020,
+  "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+  "os": "Windows-10-10.0.26200-SP0",
+  "environment": {
+    "SDL_VIDEODRIVER": "dummy",
+    "SDL_AUDIODRIVER": "dummy",
+    "PYTHONHASHSEED": "20261020",
+    "PYTHONIOENCODING": "utf-8",
+    "PYTHONUTF8": "1",
+    "PYGAME_HIDE_SUPPORT_PROMPT": "1"
+  },
+  "versions": {
+    "pygame": "2.6.1",
+    "tcod": "19.3.0",
+    "numpy": "2.4.6"
+  },
+  "checks": [
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "G19",
+      "property": "enter cover applies real terrain surcharge",
+      "expected": 2,
+      "observed": 2,
+      "passed": true
+    },
+    {
+      "case": "G19",
+      "property": "cover hides at fixed distance",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "G19",
+      "property": "wake at three retains pending without remote damage",
+      "expected": [
+        false,
+        true,
+        false,
+        60
+      ],
+      "observed": [
+        false,
+        true,
+        false,
+        60
+      ],
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "G19",
+      "property": "two waits pay while cover persists",
+      "expected": [
+        484,
+        false,
+        60
+      ],
+      "observed": [
+        484,
+        false,
+        60
+      ],
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "G19",
+      "property": "inspect inventory rejection save stay free in cover",
+      "expected": [
+        484,
+        false
+      ],
+      "observed": [
+        484,
+        false
+      ],
+      "passed": true
+    },
+    {
+      "case": "G19",
+      "property": "covered-pending cold snapshot without replay",
+      "expected": {
+        "timing": [
+          484,
+          0,
+          0.5,
+          false,
+          0.0
+        ],
+        "position": [
+          12,
+          12
+        ],
+        "hp": 60,
+        "cover": true,
+        "actors": [
+          {
+            "type": "actor",
+            "id": "hollow_revenant",
+            "x": 19,
+            "y": 12,
+            "tile": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "is_alive": true,
+            "blocks_movement": true,
+            "fighter": {
+              "hp": 14,
+              "max_hp": 14,
+              "power": 3,
+              "defense": 1,
+              "body_id": "body_human",
+              "effective_av": 1
+            },
+            "component_state": {
+              "version": 1,
+              "actor": {
+                "chilled_turns": 0,
+                "_sickness_turns": 0,
+                "_last_known_px": null,
+                "_last_known_py": null,
+                "_arrival_cooldown": 0,
+                "_just_arrived": false,
+                "_pending_stair_use": null,
+                "_ability_suppressed_turns": 0,
+                "_disrupted_turns": 0,
+                "_wraith_exposure_turns": 0,
+                "_surface_exit_x": null,
+                "_surface_exit_y": null,
+                "_surface_exit_wx": null,
+                "_surface_exit_wy": null
+              },
+              "ai": {
+                "target_x": null,
+                "target_y": null,
+                "memory_turns": 0,
+                "alert_memory": 10
+              }
+            },
+            "ai_type": "WanderingAI",
+            "ai_state": "wandering",
+            "home_x": 19,
+            "home_y": 12,
+            "pursuit_turns_without_contact": 0,
+            "move_accumulator": 0.20000000000000018,
+            "faction": "hollow",
+            "hostile_to": [
+              "player"
+            ],
+            "sight_radius": 7,
+            "hearing_radius": 6,
+            "sees_in_dark": true,
+            "wander_radius": 0,
+            "lurker": null
+          },
+          {
+            "type": "actor",
+            "id": "stone_lurker",
+            "x": 12,
+            "y": 15,
+            "tile": "stone_lurker",
+            "name": "Stone Lurker",
+            "is_alive": true,
+            "blocks_movement": true,
+            "fighter": {
+              "hp": 28,
+              "max_hp": 28,
+              "power": 6,
+              "defense": 3,
+              "body_id": "body_human",
+              "effective_av": 6
+            },
+            "component_state": {
+              "version": 1,
+              "actor": {
+                "chilled_turns": 0,
+                "_sickness_turns": 0,
+                "_last_known_px": null,
+                "_last_known_py": null,
+                "_arrival_cooldown": 0,
+                "_just_arrived": false,
+                "_pending_stair_use": null,
+                "_ability_suppressed_turns": 0,
+                "_disrupted_turns": 0,
+                "_wraith_exposure_turns": 0,
+                "_surface_exit_x": null,
+                "_surface_exit_y": null,
+                "_surface_exit_wx": null,
+                "_surface_exit_wy": null
+              },
+              "ai": {
+                "target_x": null,
+                "target_y": null,
+                "memory_turns": 0,
+                "alert_memory": 10
+              }
+            },
+            "ai_type": "AmbushAI",
+            "ai_state": "waiting",
+            "home_x": 12,
+            "home_y": 15,
+            "pursuit_turns_without_contact": 0,
+            "move_accumulator": 0.0,
+            "faction": "predator",
+            "hostile_to": [
+              "player"
+            ],
+            "sight_radius": 5,
+            "hearing_radius": 4,
+            "sees_in_dark": true,
+            "wander_radius": 4,
+            "lurker": {
+              "hibernating": false,
+              "ambush_ready": true,
+              "ai_triggered": false
+            }
+          }
+        ]
+      },
+      "observed": {
+        "timing": [
+          484,
+          0,
+          0.5,
+          false,
+          0.0
+        ],
+        "position": [
+          12,
+          12
+        ],
+        "hp": 60,
+        "cover": true,
+        "actors": [
+          {
+            "type": "actor",
+            "id": "hollow_revenant",
+            "x": 19,
+            "y": 12,
+            "tile": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "is_alive": true,
+            "blocks_movement": true,
+            "fighter": {
+              "hp": 14,
+              "max_hp": 14,
+              "power": 3,
+              "defense": 1,
+              "body_id": "body_human",
+              "effective_av": 1
+            },
+            "component_state": {
+              "version": 1,
+              "actor": {
+                "chilled_turns": 0,
+                "_sickness_turns": 0,
+                "_last_known_px": null,
+                "_last_known_py": null,
+                "_arrival_cooldown": 0,
+                "_just_arrived": false,
+                "_pending_stair_use": null,
+                "_ability_suppressed_turns": 0,
+                "_disrupted_turns": 0,
+                "_wraith_exposure_turns": 0,
+                "_surface_exit_x": null,
+                "_surface_exit_y": null,
+                "_surface_exit_wx": null,
+                "_surface_exit_wy": null
+              },
+              "ai": {
+                "target_x": null,
+                "target_y": null,
+                "memory_turns": 0,
+                "alert_memory": 10
+              }
+            },
+            "ai_type": "WanderingAI",
+            "ai_state": "wandering",
+            "home_x": 19,
+            "home_y": 12,
+            "pursuit_turns_without_contact": 0,
+            "move_accumulator": 0.20000000000000018,
+            "faction": "hollow",
+            "hostile_to": [
+              "player"
+            ],
+            "sight_radius": 7,
+            "hearing_radius": 6,
+            "sees_in_dark": true,
+            "wander_radius": 0,
+            "lurker": null
+          },
+          {
+            "type": "actor",
+            "id": "stone_lurker",
+            "x": 12,
+            "y": 15,
+            "tile": "stone_lurker",
+            "name": "Stone Lurker",
+            "is_alive": true,
+            "blocks_movement": true,
+            "fighter": {
+              "hp": 28,
+              "max_hp": 28,
+              "power": 6,
+              "defense": 3,
+              "body_id": "body_human",
+              "effective_av": 6
+            },
+            "component_state": {
+              "version": 1,
+              "actor": {
+                "chilled_turns": 0,
+                "_sickness_turns": 0,
+                "_last_known_px": null,
+                "_last_known_py": null,
+                "_arrival_cooldown": 0,
+                "_just_arrived": false,
+                "_pending_stair_use": null,
+                "_ability_suppressed_turns": 0,
+                "_disrupted_turns": 0,
+                "_wraith_exposure_turns": 0,
+                "_surface_exit_x": null,
+                "_surface_exit_y": null,
+                "_surface_exit_wx": null,
+                "_surface_exit_wy": null
+              },
+              "ai": {
+                "target_x": null,
+                "target_y": null,
+                "memory_turns": 0,
+                "alert_memory": 10
+              }
+            },
+            "ai_type": "AmbushAI",
+            "ai_state": "waiting",
+            "home_x": 12,
+            "home_y": 15,
+            "pursuit_turns_without_contact": 0,
+            "move_accumulator": 0.0,
+            "faction": "predator",
+            "hostile_to": [
+              "player"
+            ],
+            "sight_radius": 5,
+            "hearing_radius": 4,
+            "sees_in_dark": true,
+            "wander_radius": 4,
+            "lurker": {
+              "hibernating": false,
+              "ambush_ready": true,
+              "ai_triggered": false
+            }
+          }
+        ]
+      },
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "G19",
+      "property": "free Press step exits cover immediately",
+      "expected": [
+        484,
+        false,
+        true
+      ],
+      "observed": [
+        484,
+        false,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "G19",
+      "property": "F9 after divergent movement restores physical checkpoint",
+      "expected": {
+        "timing": [
+          484,
+          0,
+          0.5,
+          false,
+          0.0
+        ],
+        "position": [
+          12,
+          12
+        ],
+        "hp": 60,
+        "cover": true,
+        "actors": [
+          {
+            "type": "actor",
+            "id": "hollow_revenant",
+            "x": 19,
+            "y": 12,
+            "tile": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "is_alive": true,
+            "blocks_movement": true,
+            "fighter": {
+              "hp": 14,
+              "max_hp": 14,
+              "power": 3,
+              "defense": 1,
+              "body_id": "body_human",
+              "effective_av": 1
+            },
+            "component_state": {
+              "version": 1,
+              "actor": {
+                "chilled_turns": 0,
+                "_sickness_turns": 0,
+                "_last_known_px": null,
+                "_last_known_py": null,
+                "_arrival_cooldown": 0,
+                "_just_arrived": false,
+                "_pending_stair_use": null,
+                "_ability_suppressed_turns": 0,
+                "_disrupted_turns": 0,
+                "_wraith_exposure_turns": 0,
+                "_surface_exit_x": null,
+                "_surface_exit_y": null,
+                "_surface_exit_wx": null,
+                "_surface_exit_wy": null
+              },
+              "ai": {
+                "target_x": null,
+                "target_y": null,
+                "memory_turns": 0,
+                "alert_memory": 10
+              }
+            },
+            "ai_type": "WanderingAI",
+            "ai_state": "wandering",
+            "home_x": 19,
+            "home_y": 12,
+            "pursuit_turns_without_contact": 0,
+            "move_accumulator": 0.20000000000000018,
+            "faction": "hollow",
+            "hostile_to": [
+              "player"
+            ],
+            "sight_radius": 7,
+            "hearing_radius": 6,
+            "sees_in_dark": true,
+            "wander_radius": 0,
+            "lurker": null
+          },
+          {
+            "type": "actor",
+            "id": "stone_lurker",
+            "x": 12,
+            "y": 15,
+            "tile": "stone_lurker",
+            "name": "Stone Lurker",
+            "is_alive": true,
+            "blocks_movement": true,
+            "fighter": {
+              "hp": 28,
+              "max_hp": 28,
+              "power": 6,
+              "defense": 3,
+              "body_id": "body_human",
+              "effective_av": 6
+            },
+            "component_state": {
+              "version": 1,
+              "actor": {
+                "chilled_turns": 0,
+                "_sickness_turns": 0,
+                "_last_known_px": null,
+                "_last_known_py": null,
+                "_arrival_cooldown": 0,
+                "_just_arrived": false,
+                "_pending_stair_use": null,
+                "_ability_suppressed_turns": 0,
+                "_disrupted_turns": 0,
+                "_wraith_exposure_turns": 0,
+                "_surface_exit_x": null,
+                "_surface_exit_y": null,
+                "_surface_exit_wx": null,
+                "_surface_exit_wy": null
+              },
+              "ai": {
+                "target_x": null,
+                "target_y": null,
+                "memory_turns": 0,
+                "alert_memory": 10
+              }
+            },
+            "ai_type": "AmbushAI",
+            "ai_state": "waiting",
+            "home_x": 12,
+            "home_y": 15,
+            "pursuit_turns_without_contact": 0,
+            "move_accumulator": 0.0,
+            "faction": "predator",
+            "hostile_to": [
+              "player"
+            ],
+            "sight_radius": 5,
+            "hearing_radius": 4,
+            "sees_in_dark": true,
+            "wander_radius": 4,
+            "lurker": {
+              "hibernating": false,
+              "ambush_ready": true,
+              "ai_triggered": false
+            }
+          }
+        ]
+      },
+      "observed": {
+        "timing": [
+          484,
+          0,
+          0.5,
+          false,
+          0.0
+        ],
+        "position": [
+          12,
+          12
+        ],
+        "hp": 60,
+        "cover": true,
+        "actors": [
+          {
+            "type": "actor",
+            "id": "hollow_revenant",
+            "x": 19,
+            "y": 12,
+            "tile": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "is_alive": true,
+            "blocks_movement": true,
+            "fighter": {
+              "hp": 14,
+              "max_hp": 14,
+              "power": 3,
+              "defense": 1,
+              "body_id": "body_human",
+              "effective_av": 1
+            },
+            "component_state": {
+              "version": 1,
+              "actor": {
+                "chilled_turns": 0,
+                "_sickness_turns": 0,
+                "_last_known_px": null,
+                "_last_known_py": null,
+                "_arrival_cooldown": 0,
+                "_just_arrived": false,
+                "_pending_stair_use": null,
+                "_ability_suppressed_turns": 0,
+                "_disrupted_turns": 0,
+                "_wraith_exposure_turns": 0,
+                "_surface_exit_x": null,
+                "_surface_exit_y": null,
+                "_surface_exit_wx": null,
+                "_surface_exit_wy": null
+              },
+              "ai": {
+                "target_x": null,
+                "target_y": null,
+                "memory_turns": 0,
+                "alert_memory": 10
+              }
+            },
+            "ai_type": "WanderingAI",
+            "ai_state": "wandering",
+            "home_x": 19,
+            "home_y": 12,
+            "pursuit_turns_without_contact": 0,
+            "move_accumulator": 0.20000000000000018,
+            "faction": "hollow",
+            "hostile_to": [
+              "player"
+            ],
+            "sight_radius": 7,
+            "hearing_radius": 6,
+            "sees_in_dark": true,
+            "wander_radius": 0,
+            "lurker": null
+          },
+          {
+            "type": "actor",
+            "id": "stone_lurker",
+            "x": 12,
+            "y": 15,
+            "tile": "stone_lurker",
+            "name": "Stone Lurker",
+            "is_alive": true,
+            "blocks_movement": true,
+            "fighter": {
+              "hp": 28,
+              "max_hp": 28,
+              "power": 6,
+              "defense": 3,
+              "body_id": "body_human",
+              "effective_av": 6
+            },
+            "component_state": {
+              "version": 1,
+              "actor": {
+                "chilled_turns": 0,
+                "_sickness_turns": 0,
+                "_last_known_px": null,
+                "_last_known_py": null,
+                "_arrival_cooldown": 0,
+                "_just_arrived": false,
+                "_pending_stair_use": null,
+                "_ability_suppressed_turns": 0,
+                "_disrupted_turns": 0,
+                "_wraith_exposure_turns": 0,
+                "_surface_exit_x": null,
+                "_surface_exit_y": null,
+                "_surface_exit_wx": null,
+                "_surface_exit_wy": null
+              },
+              "ai": {
+                "target_x": null,
+                "target_y": null,
+                "memory_turns": 0,
+                "alert_memory": 10
+              }
+            },
+            "ai_type": "AmbushAI",
+            "ai_state": "waiting",
+            "home_x": 12,
+            "home_y": 15,
+            "pursuit_turns_without_contact": 0,
+            "move_accumulator": 0.0,
+            "faction": "predator",
+            "hostile_to": [
+              "player"
+            ],
+            "sight_radius": 5,
+            "hearing_radius": 4,
+            "sees_in_dark": true,
+            "wander_radius": 4,
+            "lurker": {
+              "hibernating": false,
+              "ambush_ready": true,
+              "ai_triggered": false
+            }
+          }
+        ]
+      },
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "G19",
+      "property": "legal bonus consumed",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "G19",
+      "property": "single bonus separately from one normal action",
+      "expected": [
+        "process",
+        "_attack"
+      ],
+      "observed": [
+        "_execute_mock_call",
+        "_execute_mock_call"
+      ],
+      "passed": false
+    }
+  ],
+  "trace": [
+    {
+      "frame": 0,
+      "position": [
+        15,
+        20
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 480,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741905,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 1,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 482,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 122,
+        "unicode": "z",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 2,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 483,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 122,
+        "unicode": "z",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 3,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 484,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 120,
+        "unicode": "x",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 4,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 484,
+      "mode": "look",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 27,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 5,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 484,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 105,
+        "unicode": "i",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 6,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 484,
+      "mode": "local",
+      "inventory": true,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 105,
+        "unicode": "i",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 7,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 484,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 113,
+        "unicode": "q",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 8,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 484,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741886,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 9,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 484,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 1,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741903,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 10,
+      "position": [
+        13,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 484,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 1,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741890,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 11,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 484,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 1,
+        "load": 1,
+        "configure": 2,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 122,
+        "unicode": "z",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 12,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 485,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 1,
+        "load": 1,
+        "configure": 2,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 122,
+        "unicode": "z",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 13,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 486,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 1,
+        "load": 1,
+        "configure": 2,
+        "teleport": 0,
+        "dump": 0
+      }
+    }
+  ],
+  "defects": [],
+  "completed": false,
+  "controls": "Stage a clear laboratory patch, cover and wall, a Revenant seven tiles away with wander_radius=0/home fixed (perception and pursuit remain active), and a factory Lurker at distance three behind the wall. Use fixed combat RNG, ordinary keys and real AI/combat/turns/save/load/renderer. Later stage one pending Press step and move the already-awake Lurker into legal contact to isolate its bonus from its normal budget. Cold pending continuation isolates Lurker normal AI while proving blocked retention then one legal miss consumes the bonus. No acquisition, frequency, balance or expedition claim.",
+  "states": [
+    {
+      "label": "entered cover and waited twice",
+      "timing": [
+        484,
+        0,
+        0.5,
+        false,
+        0.0
+      ],
+      "position": [
+        12,
+        12
+      ],
+      "hp": 60,
+      "cover": true,
+      "actors": [
+        {
+          "type": "actor",
+          "id": "hollow_revenant",
+          "x": 19,
+          "y": 12,
+          "tile": "hollow_revenant",
+          "name": "Hollow Revenant",
+          "is_alive": true,
+          "blocks_movement": true,
+          "fighter": {
+            "hp": 14,
+            "max_hp": 14,
+            "power": 3,
+            "defense": 1,
+            "body_id": "body_human",
+            "effective_av": 1
+          },
+          "component_state": {
+            "version": 1,
+            "actor": {
+              "chilled_turns": 0,
+              "_sickness_turns": 0,
+              "_last_known_px": null,
+              "_last_known_py": null,
+              "_arrival_cooldown": 0,
+              "_just_arrived": false,
+              "_pending_stair_use": null,
+              "_ability_suppressed_turns": 0,
+              "_disrupted_turns": 0,
+              "_wraith_exposure_turns": 0,
+              "_surface_exit_x": null,
+              "_surface_exit_y": null,
+              "_surface_exit_wx": null,
+              "_surface_exit_wy": null
+            },
+            "ai": {
+              "target_x": null,
+              "target_y": null,
+              "memory_turns": 0,
+              "alert_memory": 10
+            }
+          },
+          "ai_type": "WanderingAI",
+          "ai_state": "wandering",
+          "home_x": 19,
+          "home_y": 12,
+          "pursuit_turns_without_contact": 0,
+          "move_accumulator": 0.20000000000000018,
+          "faction": "hollow",
+          "hostile_to": [
+            "player"
+          ],
+          "sight_radius": 7,
+          "hearing_radius": 6,
+          "sees_in_dark": true,
+          "wander_radius": 0,
+          "lurker": null
+        },
+        {
+          "type": "actor",
+          "id": "stone_lurker",
+          "x": 12,
+          "y": 15,
+          "tile": "stone_lurker",
+          "name": "Stone Lurker",
+          "is_alive": true,
+          "blocks_movement": true,
+          "fighter": {
+            "hp": 28,
+            "max_hp": 28,
+            "power": 6,
+            "defense": 3,
+            "body_id": "body_human",
+            "effective_av": 6
+          },
+          "component_state": {
+            "version": 1,
+            "actor": {
+              "chilled_turns": 0,
+              "_sickness_turns": 0,
+              "_last_known_px": null,
+              "_last_known_py": null,
+              "_arrival_cooldown": 0,
+              "_just_arrived": false,
+              "_pending_stair_use": null,
+              "_ability_suppressed_turns": 0,
+              "_disrupted_turns": 0,
+              "_wraith_exposure_turns": 0,
+              "_surface_exit_x": null,
+              "_surface_exit_y": null,
+              "_surface_exit_wx": null,
+              "_surface_exit_wy": null
+            },
+            "ai": {
+              "target_x": null,
+              "target_y": null,
+              "memory_turns": 0,
+              "alert_memory": 10
+            }
+          },
+          "ai_type": "AmbushAI",
+          "ai_state": "waiting",
+          "home_x": 12,
+          "home_y": 15,
+          "pursuit_turns_without_contact": 0,
+          "move_accumulator": 0.0,
+          "faction": "predator",
+          "hostile_to": [
+            "player"
+          ],
+          "sight_radius": 5,
+          "hearing_radius": 4,
+          "sees_in_dark": true,
+          "wander_radius": 4,
+          "lurker": {
+            "hibernating": false,
+            "ambush_ready": true,
+            "ai_triggered": false
+          }
+        }
+      ]
+    },
+    {
+      "label": "free step exposed without AI phase",
+      "timing": [
+        484,
+        0,
+        0.5,
+        false,
+        0.0
+      ],
+      "position": [
+        13,
+        12
+      ],
+      "hp": 60,
+      "cover": false,
+      "actors": [
+        {
+          "type": "actor",
+          "id": "hollow_revenant",
+          "x": 19,
+          "y": 12,
+          "tile": "hollow_revenant",
+          "name": "Hollow Revenant",
+          "is_alive": true,
+          "blocks_movement": true,
+          "fighter": {
+            "hp": 14,
+            "max_hp": 14,
+            "power": 3,
+            "defense": 1,
+            "body_id": "body_human",
+            "effective_av": 1
+          },
+          "component_state": {
+            "version": 1,
+            "actor": {
+              "chilled_turns": 0,
+              "_sickness_turns": 0,
+              "_last_known_px": null,
+              "_last_known_py": null,
+              "_arrival_cooldown": 0,
+              "_just_arrived": false,
+              "_pending_stair_use": null,
+              "_ability_suppressed_turns": 0,
+              "_disrupted_turns": 0,
+              "_wraith_exposure_turns": 0,
+              "_surface_exit_x": null,
+              "_surface_exit_y": null,
+              "_surface_exit_wx": null,
+              "_surface_exit_wy": null
+            },
+            "ai": {
+              "target_x": null,
+              "target_y": null,
+              "memory_turns": 0,
+              "alert_memory": 10
+            }
+          },
+          "ai_type": "WanderingAI",
+          "ai_state": "wandering",
+          "home_x": 19,
+          "home_y": 12,
+          "pursuit_turns_without_contact": 0,
+          "move_accumulator": 0.20000000000000018,
+          "faction": "hollow",
+          "hostile_to": [
+            "player"
+          ],
+          "sight_radius": 7,
+          "hearing_radius": 6,
+          "sees_in_dark": true,
+          "wander_radius": 0,
+          "lurker": null
+        },
+        {
+          "type": "actor",
+          "id": "stone_lurker",
+          "x": 12,
+          "y": 15,
+          "tile": "stone_lurker",
+          "name": "Stone Lurker",
+          "is_alive": true,
+          "blocks_movement": true,
+          "fighter": {
+            "hp": 28,
+            "max_hp": 28,
+            "power": 6,
+            "defense": 3,
+            "body_id": "body_human",
+            "effective_av": 6
+          },
+          "component_state": {
+            "version": 1,
+            "actor": {
+              "chilled_turns": 0,
+              "_sickness_turns": 0,
+              "_last_known_px": null,
+              "_last_known_py": null,
+              "_arrival_cooldown": 0,
+              "_just_arrived": false,
+              "_pending_stair_use": null,
+              "_ability_suppressed_turns": 0,
+              "_disrupted_turns": 0,
+              "_wraith_exposure_turns": 0,
+              "_surface_exit_x": null,
+              "_surface_exit_y": null,
+              "_surface_exit_wx": null,
+              "_surface_exit_wy": null
+            },
+            "ai": {
+              "target_x": null,
+              "target_y": null,
+              "memory_turns": 0,
+              "alert_memory": 10
+            }
+          },
+          "ai_type": "AmbushAI",
+          "ai_state": "waiting",
+          "home_x": 12,
+          "home_y": 15,
+          "pursuit_turns_without_contact": 0,
+          "move_accumulator": 0.0,
+          "faction": "predator",
+          "hostile_to": [
+            "player"
+          ],
+          "sight_radius": 5,
+          "hearing_radius": 4,
+          "sees_in_dark": true,
+          "wander_radius": 4,
+          "lurker": {
+            "hibernating": false,
+            "ambush_ready": true,
+            "ai_triggered": false
+          }
+        }
+      ]
+    }
+  ],
+  "captures": [
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g19\\development-demo-c\\cover-waits-pending-lurker.png",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g19\\development-demo-c\\free-step-exposed.png"
+  ],
+  "checkpoint": {
+    ".sessions/4100e3d5b69a49ec9c127c2371c5cfe6/chunks/73_99.pkl": {
+      "bytes": 506175,
+      "sha256": "ff9f45b9a50026162bedf907488655fef616973cb4e2ed559d50885ea3bd8cb3"
+    },
+    ".sessions/4100e3d5b69a49ec9c127c2371c5cfe6/chunks/sub_73_99_0.pkl": {
+      "bytes": 501799,
+      "sha256": "cb32b50e593164b286a12a3217922276261cd64b2584c2fe984eaa8baef9b04c"
+    },
+    "generations/g-c1366a4cbd1f4da79a326151f92a01b7/chunks/73_99.pkl": {
+      "bytes": 506175,
+      "sha256": "ff9f45b9a50026162bedf907488655fef616973cb4e2ed559d50885ea3bd8cb3"
+    },
+    "generations/g-c1366a4cbd1f4da79a326151f92a01b7/chunks/sub_73_99_0.pkl": {
+      "bytes": 503117,
+      "sha256": "c3b8171c86b7de9f358b28664b7c915337dc3539a99a9f1cb1c1155f69c02dcd"
+    },
+    "generations/g-c1366a4cbd1f4da79a326151f92a01b7/manifest.json": {
+      "bytes": 781,
+      "sha256": "90375b7eb1904fe571a2fe0011f9ece8469b06db316ee2c64cae12ddaf5a999a"
+    },
+    "generations/g-c1366a4cbd1f4da79a326151f92a01b7/meta.json": {
+      "bytes": 150,
+      "sha256": "42d810b5b8eeb62fe9e70e4cc30ebaa3887c2f5821f21a396331b411fe8df7c0"
+    },
+    "generations/g-c1366a4cbd1f4da79a326151f92a01b7/player.json": {
+      "bytes": 8859,
+      "sha256": "97d86fcdb7987cf5b7625ad9671d8499a4f10b4138ea4808063a66bcfbf1695f"
+    },
+    "generations/g-c1366a4cbd1f4da79a326151f92a01b7/world.json": {
+      "bytes": 18016143,
+      "sha256": "2d9c24b6b32540f751063b7a4f32a829ff0c9a63538226f1725aa2b9b501c1ea"
+    },
+    "HEAD.json": {
+      "bytes": 101,
+      "sha256": "76f4851d246158dbe2356d72439eb607794cf0ac3ab19ce729e2baa1861119b6"
+    },
+    "world.json": {
+      "bytes": 17,
+      "sha256": "906af684c3429b80935e6bc9f507600e16c1945edf0fa35c187b2d951be5305b"
+    }
+  },
+  "expected": {
+    "gear": {
+      "capacity": 20.0,
+      "items": [
+        {
+          "id": "tallow_torch",
+          "fuel": 4,
+          "liquid": null,
+          "volume": 0.0,
+          "equipped": true
+        },
+        {
+          "id": "crow_jerky",
+          "fuel": 0,
+          "liquid": null,
+          "volume": 0.0,
+          "equipped": false
+        },
+        {
+          "id": "water_flask",
+          "fuel": 0,
+          "liquid": "water",
+          "volume": 0.5,
+          "equipped": false
+        },
+        {
+          "id": "crude_blade",
+          "fuel": 0,
+          "liquid": null,
+          "volume": 0.0,
+          "equipped": false
+        },
+        {
+          "id": "leather_jack",
+          "fuel": 0,
+          "liquid": null,
+          "volume": 0.0,
+          "equipped": false
+        },
+        {
+          "id": "moist_pebble",
+          "fuel": 0,
+          "liquid": null,
+          "volume": 0.0,
+          "equipped": false
+        }
+      ],
+      "slots": {
+        "weapon": null,
+        "offhand": 0,
+        "armor_head": null,
+        "armor_torso": null,
+        "armor_arms": null,
+        "armor_legs": null,
+        "belt_1": null,
+        "belt_2": null,
+        "belt_3": null,
+        "light": null,
+        "talisman_1": null,
+        "talisman_2": null,
+        "talisman_3": null,
+        "satchel": null
+      },
+      "armor": 0,
+      "light": {
+        "active": true,
+        "item_index": 0,
+        "radius": 8
+      }
+    },
+    "address": [
+      73,
+      99,
+      "sub_73_99_0"
+    ],
+    "scene": {
+      "marker": "wall",
+      "actors": [
+        {
+          "id": "hollow_revenant",
+          "tile": "hollow_revenant",
+          "position": [
+            19,
+            12
+          ],
+          "hp": 14,
+          "hibernating": null,
+          "ambush_ready": false,
+          "triggered": null
+        },
+        {
+          "id": "stone_lurker",
+          "tile": "stone_lurker",
+          "position": [
+            12,
+            15
+          ],
+          "hp": 28,
+          "hibernating": false,
+          "ambush_ready": true,
+          "triggered": false
+        }
+      ],
+      "floor": [],
+      "container": null,
+      "decor": null,
+      "explored": false,
+      "links": {}
+    },
+    "turn": 484
+  },
+  "cold": {
+    "covered-pending": {
+      "timing": [
+        484,
+        0,
+        0.5,
+        false,
+        0.0
+      ],
+      "position": [
+        12,
+        12
+      ],
+      "hp": 60,
+      "cover": true,
+      "actors": [
+        {
+          "type": "actor",
+          "id": "hollow_revenant",
+          "x": 19,
+          "y": 12,
+          "tile": "hollow_revenant",
+          "name": "Hollow Revenant",
+          "is_alive": true,
+          "blocks_movement": true,
+          "fighter": {
+            "hp": 14,
+            "max_hp": 14,
+            "power": 3,
+            "defense": 1,
+            "body_id": "body_human",
+            "effective_av": 1
+          },
+          "component_state": {
+            "version": 1,
+            "actor": {
+              "chilled_turns": 0,
+              "_sickness_turns": 0,
+              "_last_known_px": null,
+              "_last_known_py": null,
+              "_arrival_cooldown": 0,
+              "_just_arrived": false,
+              "_pending_stair_use": null,
+              "_ability_suppressed_turns": 0,
+              "_disrupted_turns": 0,
+              "_wraith_exposure_turns": 0,
+              "_surface_exit_x": null,
+              "_surface_exit_y": null,
+              "_surface_exit_wx": null,
+              "_surface_exit_wy": null
+            },
+            "ai": {
+              "target_x": null,
+              "target_y": null,
+              "memory_turns": 0,
+              "alert_memory": 10
+            }
+          },
+          "ai_type": "WanderingAI",
+          "ai_state": "wandering",
+          "home_x": 19,
+          "home_y": 12,
+          "pursuit_turns_without_contact": 0,
+          "move_accumulator": 0.20000000000000018,
+          "faction": "hollow",
+          "hostile_to": [
+            "player"
+          ],
+          "sight_radius": 7,
+          "hearing_radius": 6,
+          "sees_in_dark": true,
+          "wander_radius": 0,
+          "lurker": null
+        },
+        {
+          "type": "actor",
+          "id": "stone_lurker",
+          "x": 12,
+          "y": 15,
+          "tile": "stone_lurker",
+          "name": "Stone Lurker",
+          "is_alive": true,
+          "blocks_movement": true,
+          "fighter": {
+            "hp": 28,
+            "max_hp": 28,
+            "power": 6,
+            "defense": 3,
+            "body_id": "body_human",
+            "effective_av": 6
+          },
+          "component_state": {
+            "version": 1,
+            "actor": {
+              "chilled_turns": 0,
+              "_sickness_turns": 0,
+              "_last_known_px": null,
+              "_last_known_py": null,
+              "_arrival_cooldown": 0,
+              "_just_arrived": false,
+              "_pending_stair_use": null,
+              "_ability_suppressed_turns": 0,
+              "_disrupted_turns": 0,
+              "_wraith_exposure_turns": 0,
+              "_surface_exit_x": null,
+              "_surface_exit_y": null,
+              "_surface_exit_wx": null,
+              "_surface_exit_wy": null
+            },
+            "ai": {
+              "target_x": null,
+              "target_y": null,
+              "memory_turns": 0,
+              "alert_memory": 10
+            }
+          },
+          "ai_type": "AmbushAI",
+          "ai_state": "waiting",
+          "home_x": 12,
+          "home_y": 15,
+          "pursuit_turns_without_contact": 0,
+          "move_accumulator": 0.0,
+          "faction": "predator",
+          "hostile_to": [
+            "player"
+          ],
+          "sight_radius": 5,
+          "hearing_radius": 4,
+          "sees_in_dark": true,
+          "wander_radius": 4,
+          "lurker": {
+            "hibernating": false,
+            "ambush_ready": true,
+            "ai_triggered": false
+          }
+        }
+      ]
+    }
+  }
+}

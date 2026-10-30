@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "input_commit": "97e68fd2127b7acd7581e1e8cbe435d53757aabf",
+  "totals": {
+    "checks": 3704,
+    "passed": 3704,
+    "failed": 0,
+    "workers": 159
+  },
+  "source_inputs": 825,
+  "source_stable": true,
+  "imported_bindings": 14624,
+  "runner_negative_controls": 7,
+  "ordinary_workers": 146,
+  "intentional_crash_workers": 13,
+  "command": [
+    "tools/verify_d.py",
+    "--evidence",
+    ".baseline/gameplay-g19-final-a"
+  ],
+  "process": {
+    "seconds": 597.3441036,
+    "command": "tools/verify_d.py --evidence .baseline/gameplay-g19-final-a",
+    "start_utc": "2026-10-30T05:23:46.7941416Z",
+    "end_utc": "2026-10-30T05:33:44.1426621Z",
+    "exit_code": 0
+  }
+}

@@ -1,0 +1,82 @@
+test_bonus_consumed_once_for_miss_dodge_zero_damage_and_normal_budget_distinct (test_gameplay_g19.ContactAndCoverTests.test_bonus_consumed_once_for_miss_dodge_zero_damage_and_normal_budget_distinct) ... FAIL
+test_both_player_routes_accept_cardinal_diagonal_and_one_open_corner (test_gameplay_g19.ContactAndCoverTests.test_both_player_routes_accept_cardinal_diagonal_and_one_open_corner) ... ok
+test_chunk_arrival_return_and_stairs_query_destination_without_entry_replay (test_gameplay_g19.ContactAndCoverTests.test_chunk_arrival_return_and_stairs_query_destination_without_entry_replay) ... ok
+test_close_observer_darkness_and_existing_pursuit_memory (test_gameplay_g19.ContactAndCoverTests.test_close_observer_darkness_and_existing_pursuit_memory) ... ok
+test_contact_geometry_all_neighbors_bounds_coincidence_and_distance (test_gameplay_g19.ContactAndCoverTests.test_contact_geometry_all_neighbors_bounds_coincidence_and_distance) ... ok
+test_cover_and_pending_consumed_uninitialized_lurker_cold_and_f9 (test_gameplay_g19.ContactAndCoverTests.test_cover_and_pending_consumed_uninitialized_lurker_cold_and_f9) ... ok
+test_crow_ai_selection_keeps_three_tile_envelope (test_gameplay_g19.ContactAndCoverTests.test_crow_ai_selection_keeps_three_tile_envelope) ... ok
+test_crow_open_envelope_and_projectile_survive_independently_of_visibility (test_gameplay_g19.ContactAndCoverTests.test_crow_open_envelope_and_projectile_survive_independently_of_visibility) ... ok
+test_crow_rejects_blocked_corner_closed_door_and_outside_envelope (test_gameplay_g19.ContactAndCoverTests.test_crow_rejects_blocked_corner_closed_door_and_outside_envelope) ... ok
+test_enter_wait_leave_and_changed_terrain_query_current_position (test_gameplay_g19.ContactAndCoverTests.test_enter_wait_leave_and_changed_terrain_query_current_position) ... ok
+test_free_press_step_reconciles_cover_without_a_phase (test_gameplay_g19.ContactAndCoverTests.test_free_press_step_reconciles_cover_without_a_phase) ... ok
+test_grass_entry_automatic_strike_rejects_corner_without_success_or_contact (test_gameplay_g19.ContactAndCoverTests.test_grass_entry_automatic_strike_rejects_corner_without_success_or_contact) ... ok
+test_grass_entry_legal_strike_preserves_its_free_time_policy (test_gameplay_g19.ContactAndCoverTests.test_grass_entry_legal_strike_preserves_its_free_time_policy) ... ok
+test_lurker_wake_at_three_arms_but_does_not_trigger_or_attack (test_gameplay_g19.ContactAndCoverTests.test_lurker_wake_at_three_arms_but_does_not_trigger_or_attack) ... FAIL
+test_monster_direct_calls_validate_life_impairment_distance_and_barriers (test_gameplay_g19.ContactAndCoverTests.test_monster_direct_calls_validate_life_impairment_distance_and_barriers) ... ok
+test_pending_bonus_survives_corner_suppression_disruption_and_impairment (test_gameplay_g19.ContactAndCoverTests.test_pending_bonus_survives_corner_suppression_disruption_and_impairment) ... ok
+test_perception_uses_supplied_map_and_phantom_is_not_physical_player (test_gameplay_g19.ContactAndCoverTests.test_perception_uses_supplied_map_and_phantom_is_not_physical_player) ... ok
+test_player_routes_reject_geometry_without_time_contact_or_press_side_effects (test_gameplay_g19.ContactAndCoverTests.test_player_routes_reject_geometry_without_time_contact_or_press_side_effects) ... ok
+test_stationary_cover_wait_ui_rejection_and_committed_attack (test_gameplay_g19.ContactAndCoverTests.test_stationary_cover_wait_ui_rejection_and_committed_attack) ... ok
+test_before_pending_consumed_expired_checkpoints_same_session_and_cold (test_gameplay_g18.WeaponTimingTests.test_before_pending_consumed_expired_checkpoints_same_session_and_cold) ... ok
+test_committed_and_rejected_bump_attacks_resolve_press_differently (test_gameplay_g18.WeaponTimingTests.test_committed_and_rejected_bump_attacks_resolve_press_differently) ... ok
+test_cost_table_and_exact_fifth_boundaries_without_duplicate_attacks (test_gameplay_g18.WeaponTimingTests.test_cost_table_and_exact_fifth_boundaries_without_duplicate_attacks) ... ok
+test_direct_craft_commit_expires_press_but_missing_materials_preserve_it (test_gameplay_g18.WeaponTimingTests.test_direct_craft_commit_expires_press_but_missing_materials_preserve_it) ... ok
+test_dodged_or_missed_commit_still_spends_cost_once (test_gameplay_g18.WeaponTimingTests.test_dodged_or_missed_commit_still_spends_cost_once) ... ok
+test_fast_skip_and_slow_extra_run_complete_pipeline_without_repeating_contact (test_gameplay_g18.WeaponTimingTests.test_fast_skip_and_slow_extra_run_complete_pipeline_without_repeating_contact) ... ok
+test_intervening_waits_and_steps_preserve_weapon_balance (test_gameplay_g18.WeaponTimingTests.test_intervening_waits_and_steps_preserve_weapon_balance) ... ok
+test_inventory_inspection_and_failed_use_preserve_press (test_gameplay_g18.WeaponTimingTests.test_inventory_inspection_and_failed_use_preserve_press) ... ok
+test_missing_fields_reset_and_existing_positive_work_debt_survives (test_gameplay_g18.WeaponTimingTests.test_missing_fields_reset_and_existing_positive_work_debt_survives) ... ok
+test_new_press_is_granted_after_all_own_debt_phases (test_gameplay_g18.WeaponTimingTests.test_new_press_is_granted_after_all_own_debt_phases) ... ok
+test_optional_domains_and_malformed_real_publication_fail_transactionally (test_gameplay_g18.WeaponTimingTests.test_optional_domains_and_malformed_real_publication_fail_transactionally) ... ok
+test_perk_cancel_and_rejection_preserve_press_but_purchase_expires_it (test_gameplay_g18.WeaponTimingTests.test_perk_cancel_and_rejection_preserve_press_but_purchase_expires_it) ... ok
+test_press_expires_for_wait_door_inventory_equipment_read_and_free_sprint (test_gameplay_g18.WeaponTimingTests.test_press_expires_for_wait_door_inventory_equipment_read_and_free_sprint) ... ok
+test_press_plain_step_preserves_speed_credit_and_world_phase_durations (test_gameplay_g18.WeaponTimingTests.test_press_plain_step_preserves_speed_credit_and_world_phase_durations) ... ok
+test_press_preserved_by_ui_save_rejected_moves_and_rejected_travel (test_gameplay_g18.WeaponTimingTests.test_press_preserved_by_ui_save_rejected_moves_and_rejected_travel) ... ok
+test_press_slow_hazard_step_keeps_debt_entry_effects_and_speed_credit (test_gameplay_g18.WeaponTimingTests.test_press_slow_hazard_step_keeps_debt_entry_effects_and_speed_credit) ... ok
+test_real_desperate_slash_save_cold_load_and_continued_fifth_skip (test_gameplay_g18.WeaponTimingTests.test_real_desperate_slash_save_cold_load_and_continued_fifth_skip) ... ok
+test_real_harvest_completion_expires_press_and_settles_work_debt (test_gameplay_g18.WeaponTimingTests.test_real_harvest_completion_expires_press_and_settles_work_debt) ... ok
+test_real_press_one_step_then_paid_step_and_nonstacking_regrant (test_gameplay_g18.WeaponTimingTests.test_real_press_one_step_then_paid_step_and_nonstacking_regrant) ... ok
+test_rejected_movesets_preserve_time_press_cooldown_coating_and_target (test_gameplay_g18.WeaponTimingTests.test_rejected_movesets_preserve_time_press_cooldown_coating_and_target) ... ok
+test_settlement_stops_on_death_and_cannot_grant_press_after_death (test_gameplay_g18.WeaponTimingTests.test_settlement_stops_on_death_and_cannot_grant_press_after_death) ... ok
+test_successful_chunk_and_stair_travel_expires_press_without_free_travel (test_gameplay_g18.WeaponTimingTests.test_successful_chunk_and_stair_travel_expires_press_without_free_travel) ... ok
+test_writer_rejects_malformed_timing_including_false_like_values (test_gameplay_g18.WeaponTimingTests.test_writer_rejects_malformed_timing_including_false_like_values) ... ok
+test_both_routes_apply_modifiers_and_damage_critical_hooks_once (test_combat_routes.CombatRouteTests.test_both_routes_apply_modifiers_and_damage_critical_hooks_once) ... ok
+test_briar_retaliates_once_in_both_routes_and_respects_suppression (test_combat_routes.CombatRouteTests.test_briar_retaliates_once_in_both_routes_and_respects_suppression) ... ok
+test_critical_blood_marks_this_contact_not_previous_queued_hit (test_combat_routes.CombatRouteTests.test_critical_blood_marks_this_contact_not_previous_queued_hit) ... ok
+test_dead_fighter_target_is_rejected_before_any_attack_spend (test_combat_routes.CombatRouteTests.test_dead_fighter_target_is_rejected_before_any_attack_spend) ... ok
+test_deflected_contact_spends_one_charge_but_no_damage_hooks (test_combat_routes.CombatRouteTests.test_deflected_contact_spends_one_charge_but_no_damage_hooks) ... ok
+test_disconnect_suppresses_retaliation_and_disrupts_same_stable_type (test_combat_routes.CombatRouteTests.test_disconnect_suppresses_retaliation_and_disrupts_same_stable_type) ... ok
+test_disguised_death_rewards_and_corpse_finalize_once_in_both_routes (test_combat_routes.CombatRouteTests.test_disguised_death_rewards_and_corpse_finalize_once_in_both_routes) ... ok
+test_disguised_ephemeral_death_clears_aura_and_creates_no_corpse (test_combat_routes.CombatRouteTests.test_disguised_ephemeral_death_clears_aura_and_creates_no_corpse) ... ok
+test_miss_or_dodge_never_fires_damage_hooks_or_spends_coating (test_combat_routes.CombatRouteTests.test_miss_or_dodge_never_fires_damage_hooks_or_spends_coating) ... ok
+test_real_resolver_integration_delivers_one_damage_hook_and_one_charge (test_combat_routes.CombatRouteTests.test_real_resolver_integration_delivers_one_damage_hook_and_one_charge) ... ok
+test_rejected_impairment_spends_no_turn_cooldown_or_coating (test_combat_routes.CombatRouteTests.test_rejected_impairment_spends_no_turn_cooldown_or_coating) ... ok
+test_reveal_uses_disguised_creature_identity_and_persists_knowledge_key (test_combat_routes.CombatRouteTests.test_reveal_uses_disguised_creature_identity_and_persists_knowledge_key) ... ok
+
+======================================================================
+FAIL: test_bonus_consumed_once_for_miss_dodge_zero_damage_and_normal_budget_distinct (test_gameplay_g19.ContactAndCoverTests.test_bonus_consumed_once_for_miss_dodge_zero_damage_and_normal_budget_distinct)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\GameDev\RoguelikeProject\tools\critical_fix_regressions\tests\test_gameplay_g19.py", line 277, in test_bonus_consumed_once_for_miss_dodge_zero_damage_and_normal_budget_distinct
+    self.assertAlmostEqual(.9,a.ai.move_accumulator)
+AssertionError: 0.9 != 0.0 within 7 places (0.9 difference)
+
+======================================================================
+FAIL: test_lurker_wake_at_three_arms_but_does_not_trigger_or_attack (test_gameplay_g19.ContactAndCoverTests.test_lurker_wake_at_three_arms_but_does_not_trigger_or_attack)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\GameDev\RoguelikeProject\tools\critical_fix_regressions\tests\test_gameplay_g19.py", line 245, in test_lurker_wake_at_three_arms_but_does_not_trigger_or_attack
+    self.assertEqual(.8,a.ai.move_accumulator)
+AssertionError: 0.8 != 0.5
+
+----------------------------------------------------------------------
+Ran 54 tests in 9.916s
+
+FAILED (failures=2)
+[LP-STORED] 0 live pursuers: []
+[CHUNK] E player=(79,12) dest=(80,12) -> entry=(0,12) world (0,0)->(1,0)
+[LP-STORED] 0 live pursuers: []
+[CHUNK] W player=(0,12) dest=(-1,12) -> entry=(79,12) world (1,0)->(0,0)
+[harvest] tile=(13,12) terrain=grass harvestable=False decor=bone_dust decor_harvestable=False
+[LP-STORED] 0 live pursuers: []
+[CHUNK] E player=(79,12) dest=(80,12) -> entry=(0,12) world (0,0)->(1,0)

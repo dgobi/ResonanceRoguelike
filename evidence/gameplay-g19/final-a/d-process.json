@@ -1,0 +1,7 @@
+{
+  "seconds": 597.3441036,
+  "command": "tools/verify_d.py --evidence .baseline/gameplay-g19-final-a",
+  "start_utc": "2026-10-30T05:23:46.7941416Z",
+  "end_utc": "2026-10-30T05:33:44.1426621Z",
+  "exit_code": 0
+}

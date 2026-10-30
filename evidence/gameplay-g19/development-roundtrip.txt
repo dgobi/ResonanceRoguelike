@@ -1,0 +1,4 @@
+d-roundtrip-effects-write PASS 
+d-roundtrip-effects-read PASS 
+d-roundtrip-effects-same PASS 
+{"result": "G:\\GameDev\\RoguelikeProject\\.baseline\\gameplay-g19-development-roundtrip\\d-20261029-232206-ad5ed836\\results.json", "passed": false, "selected_tests_passed": true, "totals": {"checks": 33, "passed": 33, "failed": 0, "workers": 3}}

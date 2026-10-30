@@ -1,0 +1,85 @@
+{
+  "passed": true,
+  "starting_revision": "596279d8ebab17634dc74df2a60d8f9f56628b5c",
+  "tested_revision": "97e68fd2127b7acd7581e1e8cbe435d53757aabf",
+  "delivery_tag": "checkpoint/gameplay-g19-verified-20261029-a",
+  "source_stable": true,
+  "source_inputs": 825,
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+  "dependencies": {
+    "pygame": "2.6.1",
+    "tcod": "19.3.0",
+    "numpy": "2.4.6"
+  },
+  "processes": {
+    "focused": {
+      "end_utc": "2026-10-30T05:46:30.3198146Z",
+      "seconds": 1363.5620965,
+      "exit_code": 0,
+      "command": "tools/critical_fix_regressions/verify_fixes.py --timeout 3600 --evidence evidence/gameplay-g19/final-a/focused",
+      "start_utc": "2026-10-30T05:23:46.7532491Z"
+    },
+    "d": {
+      "seconds": 597.3441036,
+      "command": "tools/verify_d.py --evidence .baseline/gameplay-g19-final-a",
+      "start_utc": "2026-10-30T05:23:46.7941416Z",
+      "end_utc": "2026-10-30T05:33:44.1426621Z",
+      "exit_code": 0
+    },
+    "demo": {
+      "command": "tools/verify_g19.py --evidence evidence/gameplay-g19/final-a/demo",
+      "start_utc": "2026-10-30T05:23:46.7531123Z",
+      "end_utc": "2026-10-30T05:23:58.0361729Z",
+      "seconds": 11.278845,
+      "exit_code": 0
+    },
+    "historical": {
+      "end_utc": "2026-10-30T05:23:49.1803751Z",
+      "seconds": 2.3822338,
+      "start_utc": "2026-10-30T05:23:46.7941691Z",
+      "command": "tools/g15_historical.py --output evidence/gameplay-g19/final-a/historical.json --baseline evidence/gameplay-g19/pre-edit-historical.json",
+      "exit_code": 0
+    }
+  },
+  "focused_tests": 378,
+  "focused_unittest_seconds": 1360.385,
+  "production_totals": {
+    "checks": 3704,
+    "passed": 3704,
+    "failed": 0,
+    "workers": 159
+  },
+  "production_audit": {
+    "passed": true,
+    "input_commit": "97e68fd2127b7acd7581e1e8cbe435d53757aabf",
+    "totals": {
+      "checks": 3704,
+      "passed": 3704,
+      "failed": 0,
+      "workers": 159
+    },
+    "source_inputs": 825,
+    "source_stable": true,
+    "imported_bindings": 14624,
+    "runner_negative_controls": 7,
+    "ordinary_workers": 146,
+    "intentional_crash_workers": 13,
+    "command": [
+      "tools/verify_d.py",
+      "--evidence",
+      ".baseline/gameplay-g19-final-a"
+    ],
+    "process": {
+      "seconds": 597.3441036,
+      "command": "tools/verify_d.py --evidence .baseline/gameplay-g19-final-a",
+      "start_utc": "2026-10-30T05:23:46.7941416Z",
+      "end_utc": "2026-10-30T05:33:44.1426621Z",
+      "exit_code": 0
+    }
+  },
+  "demo_checks": 86,
+  "historical_comparison": "exact agreement with pre-edit genuine G14 checkpoint observation",
+  "final_verification_wall_seconds": 1363.566702,
+  "note": "Process intervals overlap; wall time is not additive. Delivery commit adds only report and evidence after tested source input."
+}

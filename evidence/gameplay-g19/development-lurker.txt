@@ -1,0 +1,13 @@
+b1-lurker-dormant-write PASS 
+b1-lurker-dormant-read PASS 
+b1-lurker-dormant-same PASS 
+b1-lurker-awake-write PASS 
+b1-lurker-awake-read PASS 
+b1-lurker-awake-same PASS 
+b1-lurker-pending-write PASS 
+b1-lurker-pending-read PASS 
+b1-lurker-pending-same PASS 
+b1-lurker-owners-write PASS 
+b1-lurker-owners-read PASS 
+b1-lurker-owners-same PASS 
+{"result": "G:\\GameDev\\RoguelikeProject\\.baseline\\gameplay-g19-development-lurker\\d-20261029-232206-97c28cab\\results.json", "passed": false, "selected_tests_passed": true, "totals": {"checks": 137, "passed": 137, "failed": 0, "workers": 12}}

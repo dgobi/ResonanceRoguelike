@@ -1,0 +1,55 @@
+{
+  "python": "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe",
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "environment": {
+    "SDL_VIDEODRIVER": "dummy",
+    "SDL_AUDIODRIVER": "dummy",
+    "PYGAME_HIDE_SUPPORT_PROMPT": "1"
+  },
+  "classification": "Development failures/affected checks. Only final-a unfiltered gates certify release.",
+  "records": [
+    {
+      "command": "python -X utf8 -m unittest test_gameplay_g19 test_gameplay_g18 test_combat_routes -v",
+      "logs": [
+        "development-focused.txt",
+        "development-focused-b.txt"
+      ],
+      "source": "uncommitted working drafts before 97e68fd",
+      "result": "Fixture failures: inactive reality bubble, then incorrect assumed Lurker speed; original G18 and shared combat tests passed."
+    },
+    {
+      "command": "python -X utf8 tools/verify_g19.py --evidence evidence/gameplay-g19/development-demo",
+      "logs": [
+        "development-demo.txt",
+        "development-demo-b.txt",
+        "development-demo-c.txt"
+      ],
+      "source": "uncommitted demonstration drafts",
+      "result": "Failed controls corrected: observer blocked by wall, exposed control outside sight radius, mock wrapper obscured caller."
+    },
+    {
+      "command": "python -X utf8 -m unittest test_gameplay_g19 test_gameplay_g18 test_combat_routes -v",
+      "logs": [
+        "development-focused-final.txt"
+      ],
+      "source": "same ten Python inputs bound to 97e68fd2127b7acd7581e1e8cbe435d53757aabf",
+      "result": "56 tests pass, including all 23 G18 tests."
+    },
+    {
+      "command": "python -X utf8 tools/verify_d.py --only b1 --case lurker --evidence .baseline/gameplay-g19-development-lurker",
+      "logs": [
+        "development-lurker.txt"
+      ],
+      "source": "pre-input draft; subsequently covered by full final D",
+      "result": "12 selected workers, 137 assertions pass; not full-gate completion."
+    },
+    {
+      "command": "python -X utf8 tools/verify_d.py --only d --case roundtrip --evidence .baseline/gameplay-g19-development-roundtrip",
+      "logs": [
+        "development-roundtrip.txt"
+      ],
+      "source": "pre-input draft; subsequently covered by full final D",
+      "result": "3 selected workers, 33 assertions pass; not full-gate completion."
+    }
+  ]
+}

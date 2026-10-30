@@ -1,0 +1,7 @@
+{
+  "command": "tools/verify_g19.py --evidence evidence/gameplay-g19/final-a/demo",
+  "start_utc": "2026-10-30T05:23:46.7531123Z",
+  "end_utc": "2026-10-30T05:23:58.0361729Z",
+  "seconds": 11.278845,
+  "exit_code": 0
+}

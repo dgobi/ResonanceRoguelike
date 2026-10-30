@@ -1,0 +1,777 @@
+{
+  "tested_revision": "97e68fd2127b7acd7581e1e8cbe435d53757aabf",
+  "delivery_tag": "checkpoint/gameplay-g19-verified-20261029-a",
+  "excludes": "This self-referential index only",
+  "files": {
+    "docs/owner/GAMEPLAY_G19.md": {
+      "bytes": 10976,
+      "sha256": "e3da017f85e663711fda8f7afc5885963f1ca4d9a0fa26afa1288e1c3f8eb07c",
+      "git_sha256": "e3da017f85e663711fda8f7afc5885963f1ca4d9a0fa26afa1288e1c3f8eb07c",
+      "raw_git_equal": true,
+      "lf_equal": true
+    },
+    "docs/owner/TUNING_EXISTING_FEATURES.md": {
+      "bytes": 16741,
+      "sha256": "5184e79d6253fc02c00a6480275c1fc8110af58fceb7f7c3a1fb72e79b777ddb",
+      "git_sha256": "2e5656ef442afd1f0502f91f6780db5d0a11351275b9e0e180218f52c58e0024",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/authority.json": {
+      "bytes": 1459,
+      "sha256": "1a1d1ad13eac92133600ac066db3c7ca87573a03428178d42b9146a7e539a7a7",
+      "git_sha256": "d3cdc7bdbc760c31232ecbda5185be0182e9c93725207ac870ad95616df1b3f7",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/before.json": {
+      "bytes": 251,
+      "sha256": "e74902efcbdb0b656a3aa96988025d9713b7d0fa44753f0dede1d35d7eeb3b50",
+      "git_sha256": "30926815774adf136c2d702fdc733aae1963753556c5ab52a9cf79fcd5288948",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development-demo-b.txt": {
+      "bytes": 2190,
+      "sha256": "d96fb3d05188ae95920e6df15b038658ada76b0075b3f46c463e3abf8f4532f2",
+      "git_sha256": "63e242e9b66075500379007b7a9925ca74991a179db5c9970f92777c5b29c11e",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development-demo-b/cover-waits-pending-lurker.png": {
+      "bytes": 35808,
+      "sha256": "d9e00f4f5d1d8090f7866b849eb49fa2acefa94f52673f66325f3860a448ddcc",
+      "git_sha256": "d9e00f4f5d1d8090f7866b849eb49fa2acefa94f52673f66325f3860a448ddcc",
+      "raw_git_equal": true,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development-demo-b/journey.json": {
+      "bytes": 37188,
+      "sha256": "702ccdc0316179db7db4e373c907464ae4a73cd419da0699bd84423c8c499999",
+      "git_sha256": "f93adcf80980e392c090af071bc474278fbf8ae3ce47a6c9e3de1efd22121346",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development-demo-c.txt": {
+      "bytes": 2214,
+      "sha256": "456d54f41c506235a7a8b2bf8665d05e6f82dbc2151d5568948c413d291be012",
+      "git_sha256": "244a31ab32715fc63a888dbd9febb0578a6abe24dae7bf867376c9113d11ef0f",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development-demo-c/cover-waits-pending-lurker.png": {
+      "bytes": 35808,
+      "sha256": "d9e00f4f5d1d8090f7866b849eb49fa2acefa94f52673f66325f3860a448ddcc",
+      "git_sha256": "d9e00f4f5d1d8090f7866b849eb49fa2acefa94f52673f66325f3860a448ddcc",
+      "raw_git_equal": true,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development-demo-c/free-step-exposed.png": {
+      "bytes": 37861,
+      "sha256": "bebcc8ca21c52158407e34d43c50d8aa6e1b3072d92999f33cb9ecaabafa1cd9",
+      "git_sha256": "bebcc8ca21c52158407e34d43c50d8aa6e1b3072d92999f33cb9ecaabafa1cd9",
+      "raw_git_equal": true,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development-demo-c/journey.json": {
+      "bytes": 54065,
+      "sha256": "3c13b06219e2e10b26b602cc8b87a488e7815c597889d029e4bc37bfe8b5114e",
+      "git_sha256": "751f3cf12d3251261c2cf158ec58ea0a13693f71e6869b02c415166ee1c21f3e",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development-demo-d.txt": {
+      "bytes": 546,
+      "sha256": "9ef38b5b5191a2fda310a757b4edbe0180ee2f14d3b5b864f0e3a21c0c7472f6",
+      "git_sha256": "0d76b999ac1eea3ccaff48ccd1e8609a0ed36275571c5590f795f5988cab81cf",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development-demo-d/cover-waits-pending-lurker.png": {
+      "bytes": 35808,
+      "sha256": "d9e00f4f5d1d8090f7866b849eb49fa2acefa94f52673f66325f3860a448ddcc",
+      "git_sha256": "d9e00f4f5d1d8090f7866b849eb49fa2acefa94f52673f66325f3860a448ddcc",
+      "raw_git_equal": true,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development-demo-d/free-step-exposed.png": {
+      "bytes": 37861,
+      "sha256": "bebcc8ca21c52158407e34d43c50d8aa6e1b3072d92999f33cb9ecaabafa1cd9",
+      "git_sha256": "bebcc8ca21c52158407e34d43c50d8aa6e1b3072d92999f33cb9ecaabafa1cd9",
+      "raw_git_equal": true,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development-demo-d/journey.json": {
+      "bytes": 100714,
+      "sha256": "999ac00f08748c0647312a7c3da611c8d53b5857d766136a0f36356658df2990",
+      "git_sha256": "8f6cea5437a28f3603b58f0aa2a572c585cc9e65e591ae5456e2ec627972da9e",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development-demo-d/legal-ambush-consumed.png": {
+      "bytes": 54400,
+      "sha256": "aca2fcd432a514ba61949896f45e51fc59ecd77933699a3f7af35fb5981405e9",
+      "git_sha256": "aca2fcd432a514ba61949896f45e51fc59ecd77933699a3f7af35fb5981405e9",
+      "raw_git_equal": true,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development-demo.txt": {
+      "bytes": 2190,
+      "sha256": "06699744a908b82ce992a08f6fcc8e48358ca29908aed6241c11a1c89db9ba5c",
+      "git_sha256": "7b13b3ebcfd5f33999382c3293cfb1071fff23de1da396ffd748d15d53dcb669",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development-demo/cover-waits-pending-lurker.png": {
+      "bytes": 35831,
+      "sha256": "ef83d3c89ce8cd8b8bafb91baa5184bf1d416147a37e98912d0a7aa09465aa95",
+      "git_sha256": "ef83d3c89ce8cd8b8bafb91baa5184bf1d416147a37e98912d0a7aa09465aa95",
+      "raw_git_equal": true,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development-demo/journey.json": {
+      "bytes": 37184,
+      "sha256": "1cb29e5d25adde5380c9f7fe2440f6cb7af604467a6325b738a6dad6433b2952",
+      "git_sha256": "0cc6b92aa6c5822bf4037c1b104c25e484844159def6a8e3fe64458f7bd184a2",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development-focused-b.txt": {
+      "bytes": 11573,
+      "sha256": "0f2ab7bf16bbe60501c2c62c1477151b843b4fefe098aef96ae8cbdbb1436339",
+      "git_sha256": "d5a5b3ed5bf997b0e04633ee2a53f1484e71d217c6d9ff266db6c3a36f552a32",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development-focused-c.txt": {
+      "bytes": 10258,
+      "sha256": "44550797b366266b4dd99e8f718e6dec2140c96240d8bfd0450c58e2cb1bbea6",
+      "git_sha256": "431b044d957f5905dba32c08eafd20c7c305f63876e7c4fd85e532390c590589",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development-focused-d.txt": {
+      "bytes": 10652,
+      "sha256": "afb56b842ef32de07a4e92d34dd42b4ca987875b10c7bed62e5fba8bcc547a54",
+      "git_sha256": "d4f54544473c8dc0d7d4801793b7fb77910227bd939c79163ee8f462358b0764",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development-focused-final.txt": {
+      "bytes": 10652,
+      "sha256": "bbc6ce77e728a6d71c179a1bac11a0f37d9a019fc9fc0e3689145f7e808fae18",
+      "git_sha256": "7890eec67d66fa1dc8ef14d45a050aa1a041bfc3fc610c79e0b192b866c9874f",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development-focused.txt": {
+      "bytes": 15362,
+      "sha256": "dde6054131e09324d964f17f27250d8079b1f914e30b5892633ef46d9c2a3bf2",
+      "git_sha256": "a0e0da03661dc355a3c8e78efd6335ac15ac525a53965890849424368ba71e84",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development-lurker.txt": {
+      "bytes": 604,
+      "sha256": "3b8023f1a3ea81da714dd687db760ed003d8810c62afd2ae42c7ee6f5108a6fb",
+      "git_sha256": "980ab1ec9c03514b780eee495d594b6e2975ea0d62290afa08a6be7baee7e81e",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development-roundtrip.txt": {
+      "bytes": 346,
+      "sha256": "82a364455d69a63d8c03164da487cd1af672e957df502f0d96676a3e5f2f4924",
+      "git_sha256": "a8e77aaff3afb15c769dfe0b7e54feb883b70465d7208c3098a802b2524938da",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/development.json": {
+      "bytes": 2352,
+      "sha256": "bd73690700b9296df2ca28c6d97a29c99add01243906d63cc2afa594b5bb6b02",
+      "git_sha256": "65c120d52135e0ed8daf5b9397edb4b537545107c2a4b85555b7027a6d838e95",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/d-audit.json": {
+      "bytes": 721,
+      "sha256": "4dba52d87968202ddb17a69482cf0606e01a294140cb3fc845ff9cc6ad56657d",
+      "git_sha256": "724c5eee598c993ce7c5bd31ec0ee0352612635f6a06af781ca71332ddcdc876",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/d-output.txt": {
+      "bytes": 5391,
+      "sha256": "cd82a05926842ec1685881aab6c3b8e1570bcf915b5cd4317f2ec27a8f07c31c",
+      "git_sha256": "f35cd9968d86a723fb4b152a1607534526a82896c47bbe337f4c898a368dfe2b",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/d-process.json": {
+      "bytes": 222,
+      "sha256": "487af193d5693731c977836310baf99b4ea6719b86bfb116916b4b77b2727ce2",
+      "git_sha256": "a12ad7547dc9251a967a4f649b52c37b458792e3c4a567578353073cd959454d",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/demo-output.txt": {
+      "bytes": 533,
+      "sha256": "54601cdd2842fe2305b865c50720323e343a4bfc312332b8529f3e9e4216da2c",
+      "git_sha256": "369898bd9ccbc3f71a6f89362d8a844c1bd7c843eaf86fb23f4781697722b121",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/demo-process.json": {
+      "bytes": 226,
+      "sha256": "9d40a7046ceb967c52d4179b25733bef6197ffadd67f8f092a7ad5fe9cf26738",
+      "git_sha256": "57b5adf8b33a6c572c863035bbb186942af8fcc4b00333ae4d98bfaeb1484074",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/demo/cover-waits-pending-lurker.png": {
+      "bytes": 35808,
+      "sha256": "d9e00f4f5d1d8090f7866b849eb49fa2acefa94f52673f66325f3860a448ddcc",
+      "git_sha256": "d9e00f4f5d1d8090f7866b849eb49fa2acefa94f52673f66325f3860a448ddcc",
+      "raw_git_equal": true,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/demo/free-step-exposed.png": {
+      "bytes": 37861,
+      "sha256": "bebcc8ca21c52158407e34d43c50d8aa6e1b3072d92999f33cb9ecaabafa1cd9",
+      "git_sha256": "bebcc8ca21c52158407e34d43c50d8aa6e1b3072d92999f33cb9ecaabafa1cd9",
+      "raw_git_equal": true,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/demo/journey.json": {
+      "bytes": 100680,
+      "sha256": "9de61654a0e2181a394d5005d2a1a32ec3811d1a2a30f029c862468fe1741ad6",
+      "git_sha256": "93badab7e5bd982ac42388ea1d29c9b9d2c4bed2d98b36c59aa14d9d7e902570",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/demo/legal-ambush-consumed.png": {
+      "bytes": 54501,
+      "sha256": "6246ed5901f9b3b9769d48b3c3049e2757a0604df4a3d7f9824c162b1e181e08",
+      "git_sha256": "6246ed5901f9b3b9769d48b3c3049e2757a0604df4a3d7f9824c162b1e181e08",
+      "raw_git_equal": true,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused-output.txt": {
+      "bytes": 68461,
+      "sha256": "1060fe500828190708174a3de86c61751d0f28b84b54276b4f3400d23daed2cc",
+      "git_sha256": "746faed27112cf3e166dbece553a2560b49cee4949c70b468f87e848abfb4e95",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused-process.json": {
+      "bytes": 274,
+      "sha256": "17ea93146bfefdfdd9a20f866aa32dd52dd39d082e6cb9706331376a7a5b9aca",
+      "git_sha256": "9559521a17b53d74ce2c448a45655d58c3f964a1c9d0bd36ad6ec82a94f9a33e",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/action_routes_stairs.json": {
+      "bytes": 52073,
+      "sha256": "3ce13e90393c280059239843ac9ddfc3648a0a3d323dd570836dadda47b37866",
+      "git_sha256": "897bbf552cfcc1d47c0a8730f3a6c78ffffee7ec808489b54264de12bb738dd2",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/cohort-certification.json": {
+      "bytes": 108999,
+      "sha256": "8725e9b6242324b90c185bd7184612a99317718987923bcaf095b2ba2158bfdf",
+      "git_sha256": "111b5256fa4b505cf2969927d59c31e9a105ed9e3a6f39b2df174cbe997f5e85",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/focused-tests.txt": {
+      "bytes": 68189,
+      "sha256": "1dd34075bf56906fae6bf65a5421ed8d54b6069d448ed0bb756e8fa64526452a",
+      "git_sha256": "aade755bd5c8a9476bfd5287ce70688a24a072ead2c79654778a4477ab20e21d",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g10-atomic-recovery.json": {
+      "bytes": 546,
+      "sha256": "4791f79818bfc4135b95946843e5573e516df3a531e1e61d52468831dd8808ff",
+      "git_sha256": "35505c50125b07cd8a37e97e3006ef4f39b674e7cad79e3332570b9f665abe23",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g10-frozen-policy.json": {
+      "bytes": 281,
+      "sha256": "37b2f08044cf0b31b2cec85be7a8649295df7c7ec8c48b00278c59822f1845e7",
+      "git_sha256": "372ae1c11bfb434d20d4e85266917bdd56c820d5b06ec1462ef6c7c41c97c894",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g10-genuine-g9.json": {
+      "bytes": 2780,
+      "sha256": "75fd70792b0e778c2299f1f68820c787f0b65402c1e24b9acd80abfbc75bda03",
+      "git_sha256": "67e440d10d7301986c61122f11e5873055d9dcd92956609ee4e5cb4efce9caf5",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g10-policy-negatives.json": {
+      "bytes": 1107,
+      "sha256": "87d0095302cf6374347719600c983f893c2275e1cb1f7ba2a7204fe9e896ab61",
+      "git_sha256": "a826774792074b7c87aef3be89323003bab26c664a16aadbdfb06d177451798d",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g11-atomic.json": {
+      "bytes": 592,
+      "sha256": "43a67442ee7a474c9c02081db4a94229f8bab4497ec460100c3ed69e65134153",
+      "git_sha256": "4e89362da7e00ac00abd8ed46cd55ea5828beba489ab94279c092fb05aaaa999",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g11-contract.json": {
+      "bytes": 1114,
+      "sha256": "b498f099b32c6f7608819731a009e59a6cb2ccd5dd6f9688572fb3f9fd815387",
+      "git_sha256": "6642bb13c524a71122712157858d207799fd488cfcb3121f328cdba0707a9d5c",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g11-exact.json": {
+      "bytes": 861,
+      "sha256": "e2620b047f5322efec443387f7d9298ddfc88e9ed9c69b6a816a751cefcdc1c7",
+      "git_sha256": "b1bbe451769729b17c02052335f1c87e25f3ff5e7c4d03214435b812b32b98b3",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g11-genuine-g10.json": {
+      "bytes": 1046,
+      "sha256": "d99498e56c76c2a834c2d0938cadc302716894733cb77c83b83185e25da856fd",
+      "git_sha256": "2eabb0a788086ef85c09b61b18443bf352359c9e4637f83e926f6b97da4ebd8f",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g11-late-cut-fallback.json": {
+      "bytes": 789,
+      "sha256": "f5b3a6790a7580c3304cc6fdddefe0260f3a7271e3d64f27a675d76915594464",
+      "git_sha256": "0db68c2d7f61eb5161f28185d4b120c60b5b2556fc635d208fc5b83c7da42a0a",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g11-macro.json": {
+      "bytes": 512,
+      "sha256": "447172274c52b593bfde2dd90e560cc1c346b51b60f48ee7a4d30fdf509c2694",
+      "git_sha256": "1cc2f01cfdd78b2337f424f00c6c5d1dc063020066d6be389b521e9e519c2581",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g11-sample.json": {
+      "bytes": 34511,
+      "sha256": "517dae9db575b7dde99966e6f1dd5ef8be1fbb19c38d59c7d47e1be9cb26b493",
+      "git_sha256": "ceafb8bc995d18c8d265b894dd87a68b758b5ac0a6654ec73143df6d50fc3ce6",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g11-water-projection.json": {
+      "bytes": 204,
+      "sha256": "3a2c527ac0621c2f0f14cf77fde1f3bd9e7b5e09da73ca6c4a4837b815a2339c",
+      "git_sha256": "431e2d9a3845c389098d9b01a0589d31c19f38b2723d2d2b978ebb04e3bf4f8c",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g4-interactions.json": {
+      "bytes": 485,
+      "sha256": "f32d783fd8f440dff3aa396deb006a0142a8f785b60645063e47e9a0edcb9a55",
+      "git_sha256": "9deb6dd4eeb297ba1728f5c6a76ec5bb1cf4557eea1f30976a4cb146abeb26ce",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g4-native-members.json": {
+      "bytes": 2117,
+      "sha256": "b64b26c0f2dc0a3d043a753533a1306a111317fc18b3e8c1d2923fec82dda344",
+      "git_sha256": "9f4104025349982aed4ac8c53b2d3779e1fc33f7bbc084217e3310d8f5f36c27",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g4-native-production.png": {
+      "bytes": 18886,
+      "sha256": "34ab96f9c9f21b19acb0c1ca4736ff01d0feca51f8560ae9ae9ead7bbb51a7dc",
+      "git_sha256": "34ab96f9c9f21b19acb0c1ca4736ff01d0feca51f8560ae9ae9ead7bbb51a7dc",
+      "raw_git_equal": true,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g5-apothecary-production.png": {
+      "bytes": 11527,
+      "sha256": "622237f3a924ec7492cdd888eee9addf84e8a7cae68b3424eae7e1d0ddf6d4c6",
+      "git_sha256": "622237f3a924ec7492cdd888eee9addf84e8a7cae68b3424eae7e1d0ddf6d4c6",
+      "raw_git_equal": true,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g5-interactions.json": {
+      "bytes": 494,
+      "sha256": "f5041078ddbf83bbe3f0a89c1e71678c0cbad6448ff14998585982135e7ed0b2",
+      "git_sha256": "ad30ac9715e7d5394e9026fb56ba91aa9fd1a547687a4ce67ec9faac40205185",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g5-waymarker-production.png": {
+      "bytes": 11362,
+      "sha256": "280514fa8689229cbe25ceb968593e8d99e5a4e44a1228feb2e4a83d1257be90",
+      "git_sha256": "280514fa8689229cbe25ceb968593e8d99e5a4e44a1228feb2e4a83d1257be90",
+      "raw_git_equal": true,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g6-cohort.json": {
+      "bytes": 13720,
+      "sha256": "7661b6370966274b5163192424449f8be138f2664ad1f137c6694296f6967850",
+      "git_sha256": "b89749c5849a0d80bed36ed543d5c8e6f76046f9b6cfa67b5c82746f54bd8cbf",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g6-independent-owners.json": {
+      "bytes": 653,
+      "sha256": "32ff8cf0ce958bb91ea2607473adf6b34e5eb7e396f414808172ed29a3f8e76e",
+      "git_sha256": "96ec2cbec917e1af17a56a047a47416b41a40028c3024f0159ce421765442fb9",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g6-site-0-production.png": {
+      "bytes": 15115,
+      "sha256": "6db3fe48f645c8b317de461d44910e48e1a5946d2f15230c7a7456d8a4f24f99",
+      "git_sha256": "6db3fe48f645c8b317de461d44910e48e1a5946d2f15230c7a7456d8a4f24f99",
+      "raw_git_equal": true,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g6-site-1-production.png": {
+      "bytes": 11711,
+      "sha256": "9bc670ff567961c808661927d17866d0d3d5a9c67a167d3be74b885bceeb256b",
+      "git_sha256": "9bc670ff567961c808661927d17866d0d3d5a9c67a167d3be74b885bceeb256b",
+      "raw_git_equal": true,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g7-atomic-fit.json": {
+      "bytes": 617,
+      "sha256": "d35f58b93f6b3d8b29268638499a2b60579fd4ee4a2670cb3dcdbc4c45fe478e",
+      "git_sha256": "627af9fc5a969f6efb5b22730ec456a06ba2aab7b61b3c7441e0613dfd36b594",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g7-authentic-g6-restore.json": {
+      "bytes": 218,
+      "sha256": "a262c1981b8f35a6675cb792e6baead2d322d907bf89c5f672b14e2d9ab02235",
+      "git_sha256": "055b3ed3dc335b8aece0c2350f47b8af57e7ba90d42ed24fb9fe8d3bd6837f52",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g7-hash-seeds.json": {
+      "bytes": 298,
+      "sha256": "e4d385242c6ed8fff13ebfb5b82b085c8a7aea1947ae5dd1c154caf298707f57",
+      "git_sha256": "d29c2c3bb51e6a586e27ebaba32874de5ca3c7cdb8c2795da9e44c03c5b13da6",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g7-homestead_workyard-production.png": {
+      "bytes": 63536,
+      "sha256": "af561b347a2529a43a22b15096be54dd7d91f43aa18720c76e76388dec6aa8c7",
+      "git_sha256": "af561b347a2529a43a22b15096be54dd7d91f43aa18720c76e76388dec6aa8c7",
+      "raw_git_equal": true,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g7-independent-children.json": {
+      "bytes": 1318,
+      "sha256": "143586e8abec64f83864707036da284db190adc9c87fadb3142420b47e95056b",
+      "git_sha256": "f9ff4e355bd4a19ccfb704406b365380b94213b2bc2b29fe2a92584c929865ca",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g7-invalid-recipes.json": {
+      "bytes": 1673,
+      "sha256": "fad64ab8928b7a9b8031646082d4f7602e0ddc5197a9c93a95240494620dea19",
+      "git_sha256": "6e2708564701b492f564398d3a5b6c1cfe268a720082f07fd66fda174a405b8d",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g7-late-child-rollback.json": {
+      "bytes": 291,
+      "sha256": "c19b6991737987d7a4de8764ce94f35742a038765dd3eacf16ebdca5f9d89e5d",
+      "git_sha256": "81dbedcf813f67280eaae5ae733e5b5a5d309aca2b4d9e1232fc76794e5ce004",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g7-native-views.json": {
+      "bytes": 631,
+      "sha256": "6bcfcebe1cd30c79ba15836b32a826eaee7f5cc32261bf6f33fbe7568273ca0f",
+      "git_sha256": "2e468009bbb227ce41edffe2143e4464d107b4875be14741cf34321cf6dd2eda",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g7-real-preparation-negatives.json": {
+      "bytes": 1650,
+      "sha256": "1cdc51e60cd6c7c555643aca6c5c0ce0eb9420f561879b2cfb5abe51597fc73d",
+      "git_sha256": "442ae8c6f0e716db3c4dce0e42533293ccc9bf98a129918468318b217e54db73",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g7-recipe-transforms.json": {
+      "bytes": 170834,
+      "sha256": "5d4e23ef2dcf70cd888e38bda4db01b05f1af680e4ffe5293fc1dbd0416bb0f3",
+      "git_sha256": "96466af5f0f3917167621464efd2ca29d3180c2876a41b9b37f4e80581dc01c5",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g7-wayside_shrine_court-production.png": {
+      "bytes": 62169,
+      "sha256": "eb4481fd86137e1f18b998652bee0a16bccca445d27471e3d2cb3d472ca5be69",
+      "git_sha256": "eb4481fd86137e1f18b998652bee0a16bccca445d27471e3d2cb3d472ca5be69",
+      "raw_git_equal": true,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g8-cardinal-layouts.json": {
+      "bytes": 542,
+      "sha256": "1b58e9622d002562a9ea8e466955261e57436213175a2266ffd25728efa0b116",
+      "git_sha256": "7254830cddd6cbe5663eb5fda860afbc294bc69bbe47c26c6053822a5962ce86",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g8-checksum-corruptions.json": {
+      "bytes": 1290,
+      "sha256": "b9914c5b7a8054026e3c1a9f80fa58ccf2de78abca8dd525a9ac3e6b261bcde8",
+      "git_sha256": "8aa77cac9f47e4990b3cf51b27e2a05c84ab385559f41ca5b3d532c9857de7f7",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g8-explored-checkpoint.json": {
+      "bytes": 1115,
+      "sha256": "d3cf4c91af8e2c76767387e87bd80f7f2d11ae474138e9c533ce2eb3a6929b9f",
+      "git_sha256": "e2b721ac2499bb6f362c6f493c33c973bc67276f150df30e45ad337dc479c65d",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g8-frontage-fixtures.json": {
+      "bytes": 3585,
+      "sha256": "31fbdad55b966d101a8c1193a84a73140479b39951715930a3977a4dfaa01989",
+      "git_sha256": "b878b4ea405035e088b0bd36dfd25c0364ea0b68de70b87a3fc00e908fd46bf3",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g8-genuine-g7-restore.json": {
+      "bytes": 1317,
+      "sha256": "8dde8aa62d2b68cf9d2797ebfd587eabbe0d8f15bf84cd0ba8ddbcee7d25746d",
+      "git_sha256": "4e7b4820bed92ef58aa91ab89d6c65a9c05b357042c64c5e0a9a1cb2ca324e60",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g8-late-rollback.json": {
+      "bytes": 339,
+      "sha256": "2bac6f2676b991c42e4c8b44bbf2d09a4fde50eadef693634913f3be357b9266",
+      "git_sha256": "6d93483a32c564aa0f14d5d0308db58faa48f03b0dbb2b1be0d78fd561235beb",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g8-ordinary.json": {
+      "bytes": 5492,
+      "sha256": "52d664b74c9eb8b91f2c5c666e6c94a6f654ae142a6b4ddf6cadf87c97fecc31",
+      "git_sha256": "1e04ff2873512c75fcc589cde15524c39444083b188f6031f1aa9bc788ca7c35",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g8-policy-combinations.json": {
+      "bytes": 509,
+      "sha256": "6a975d2a914bec76c6d23b1c6c2c19624ad992aea8a42ebb80d3903648c60061",
+      "git_sha256": "5535459cbc9d51d16b47e0602f75c0477cf63d1b98fe6f0b73f617a30893e70f",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g9-checksum-corruptions.json": {
+      "bytes": 2020,
+      "sha256": "b8933c9718ab65a1853dfaed501cb842ddb964d0a4cdb508b31e247ab5781252",
+      "git_sha256": "6cbb00418d8f17a62ce7ca62eaad61308a14137f435b2e07e5e5ec3b86e8ba2e",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g9-genuine-g8-restore.json": {
+      "bytes": 854,
+      "sha256": "d58950eb74a5bef26970bc2a01020328ca7fb437e9f6ec2ebaef174feb33cca3",
+      "git_sha256": "47b2622a7bdf607df538fe5885152b28a1e267f2a2fa7cb7e12a0e401d62028d",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g9-late-rollback.json": {
+      "bytes": 276,
+      "sha256": "e1d626e73fa0f999e4062133b7e4cc68875f3155520e596c7b41ea9fd403e1be",
+      "git_sha256": "4916709f672f2d79ad5c96e167396733bd883f6f7efbf686506e8939b395764b",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g9-optional-outcomes.json": {
+      "bytes": 15429,
+      "sha256": "bf76ed6d4a088918cb2785f3f9eac53a16c518793c52fc50eb2330e500f7afec",
+      "git_sha256": "c698fe269c61482cb2b47171095bd4734823f6deb839d0100fd34645f7aa1ef6",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g9-ordinary-touched.json": {
+      "bytes": 54855,
+      "sha256": "6ae762f0ebf156613c4fc052d1bd357b9249fb900bc1a8d4cf82d30ed2ac26bc",
+      "git_sha256": "5b53d0982c6767674594c4d74e71228b85f92ec103193f9da137cade5743dc46",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g9-policy-combinations.json": {
+      "bytes": 301,
+      "sha256": "66cbb0065128f8e81838030128e28ce3c624139932ad9be7e4daccfa5658f3d3",
+      "git_sha256": "df9a21f248ad2027e7ac2718c8ccad5196f53719ebe91ad8005436cac98fc88f",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g9-real-deck-replay.json": {
+      "bytes": 217,
+      "sha256": "cc74fed308372b09178667827f927bae47917d39644d368b45fa484a0b5a19da",
+      "git_sha256": "bfa94726a5d91ebd08259c2f070f44ec15eaed0d6bf45af6e23cf1cffbab6efa",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/g9-two-link-marginal-budget.json": {
+      "bytes": 1081,
+      "sha256": "823c52204b468668589fda3a01d01695aceb828fc1270cbf09acb32e8deea627",
+      "git_sha256": "fd4f76c203b8cdcf1adfcdee220557c2da934723738f70e006877b7885e24b46",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/held_stairs.json": {
+      "bytes": 793,
+      "sha256": "e1f53877ab7b0f909f0b101707ae7364aad43a42e74c3c07c8828b76bfe94545",
+      "git_sha256": "e2ff2d87b7c2bf00cd00d4cd0b1b13113d9cffb36834f3da265edc89450b0eef",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/run.json": {
+      "bytes": 104326,
+      "sha256": "36f7c2b9f13515981da02aa41cd756818fd55328099a86dee08cfc89382f7320",
+      "git_sha256": "c50a3a289182afabd83f32fe581392bb198b67dc8863989a26da1b7b4a18a35b",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/focused/wfc-outskirts.json": {
+      "bytes": 803,
+      "sha256": "5c54ddcb2f5fce207e0f9bb68e27e61cd2f020fa479a6be4a6658e6b74bcb83b",
+      "git_sha256": "5ab774b9097a691645c823aa18e1ac59d32cc9df7139ee680884d280c21439c2",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/historical-output.txt": {
+      "bytes": 2252,
+      "sha256": "f3f0cc28dc59ada9d8cee2bcc173636c880c0c0930af973034d5ea6340d1a402",
+      "git_sha256": "9dc449932b9569fa12887107cbcb261ca481e4e3fed5170560ed0b568acf02ef",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/historical-process.json": {
+      "bytes": 297,
+      "sha256": "fcb3bba8d24b55486a2d9784b19b138697360f53aec6c49f5b0a2e9efc550ed6",
+      "git_sha256": "1edfe7d4e13e6234445fe6bbc819d78ffe914ff8e587dc4ecb4f912c33977d02",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/historical.json": {
+      "bytes": 3234,
+      "sha256": "365cf0490ba08ba897bb6ecb6b77d67c6df5e4ad2e21fba06ca427082a6bf1e2",
+      "git_sha256": "18925db297b413cac7ca5db2d257f6d1e932d4172802c5ba28709e383003fd25",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/production-d.json": {
+      "bytes": 7762283,
+      "sha256": "9a348c4606aa705e187e8477f36563f2668fa9cb2a4e0337c222cc93c8de1a45",
+      "git_sha256": "eb53b556a42e87e9be042327669e4b9fdf17a6ebe66b745029792bcc93614781",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/final-a/release.json": {
+      "bytes": 2977,
+      "sha256": "59a987dd4cad86becbc7aeba9a21c41874eda5bea398c7cdc0fb3f25ca04c35c",
+      "git_sha256": "cb852bcab61f9ef085a5a96a8fb201b323e58a3d3dfdcbc41842a4eb6dbbd46d",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/pre-edit-historical.json": {
+      "bytes": 3241,
+      "sha256": "2dc00b2b3600cdf2e659ee878c812c95105dedeca0d6ac3d8f5bdc927bf54298",
+      "git_sha256": "8fa1b06cbdebe20a68e0b78e5774575d04c0e0da3fef43965963c6f51f738f58",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "evidence/gameplay-g19/source-binding.json": {
+      "bytes": 3062,
+      "sha256": "c718886b09dd972095814347623d70e0805b4ff887f1627c08a651f96cfc8cc9",
+      "git_sha256": "77d841a906ee2a50aa4118dd692b4c0e0944cd08486ad4e5f3f842c89a670034",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "roguelike/components/ai.py": {
+      "bytes": 36786,
+      "sha256": "480a6cf2e4d1d2fe109973be11aa18ebace7bbb8b7a7d650e903ba97f8a31914",
+      "git_sha256": "004c8cc4f2028b43f6b89f467f600a1cbd5aa712a9870249f7a2d39d8143eedf",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "roguelike/engine/ai_system.py": {
+      "bytes": 6685,
+      "sha256": "697e021939b26f08b5162e240a3d3ff162ba8e7033abda8aeb25c1da55905821",
+      "git_sha256": "eed54b8794c161f28bc45c49cd0ec5a90f0d352b259d9173a9d68179010072d9",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "roguelike/engine/creature_abilities.py": {
+      "bytes": 5977,
+      "sha256": "b9273111770c41881831937b1f45d773529c4e5445a406178f495eeb7a28d36b",
+      "git_sha256": "b7f5d6f34fccf6e659e2308960d75eef343db5047dfe5165eef8b9f163cc75a1",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "roguelike/engine/effect_lifecycle.py": {
+      "bytes": 10036,
+      "sha256": "2d1704e2d02360611a9c5f014ec3eecf4a71c8d6ffb1aa4d1af65061cd5a67d5",
+      "git_sha256": "363b37a725a9c670760566cbebc1dcfd389896cf50804e557f5858d90c4ce21a",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "roguelike/engine/engine.py": {
+      "bytes": 277578,
+      "sha256": "65e59a65ed0cb7c520447d6309d1e2ce41281a672897e8a2a0c976451cd9f6fa",
+      "git_sha256": "65e59a65ed0cb7c520447d6309d1e2ce41281a672897e8a2a0c976451cd9f6fa",
+      "raw_git_equal": true,
+      "lf_equal": true
+    },
+    "roguelike/engine/spatial.py": {
+      "bytes": 2665,
+      "sha256": "16cb14f518747b2402563845494b8db75e49f05a42bc98512a0901d749c54f20",
+      "git_sha256": "16cb14f518747b2402563845494b8db75e49f05a42bc98512a0901d749c54f20",
+      "raw_git_equal": true,
+      "lf_equal": true
+    },
+    "tools/b1_cases.py": {
+      "bytes": 17232,
+      "sha256": "b01fac5146d924dcb1d46eb1e764aaa7de9b0d63fec519dd5a548f8af5de44c6",
+      "git_sha256": "d863a188af1e6c0c5737e610ff516f84ecc206a1b6210d2225324e191a90d6fb",
+      "raw_git_equal": false,
+      "lf_equal": true
+    },
+    "tools/critical_fix_regressions/tests/test_gameplay_g19.py": {
+      "bytes": 26772,
+      "sha256": "5d3cdb6e13b2ef287c9c4b47024bcef1fbb088400246a1341776ef8dd6bee243",
+      "git_sha256": "5d3cdb6e13b2ef287c9c4b47024bcef1fbb088400246a1341776ef8dd6bee243",
+      "raw_git_equal": true,
+      "lf_equal": true
+    },
+    "tools/d_cases.py": {
+      "bytes": 18733,
+      "sha256": "39f538b431d1831b3ba78ba6719a00663aa65092f0030541a6621abd12e3d988",
+      "git_sha256": "39f538b431d1831b3ba78ba6719a00663aa65092f0030541a6621abd12e3d988",
+      "raw_git_equal": true,
+      "lf_equal": true
+    },
+    "tools/verify_g19.py": {
+      "bytes": 7471,
+      "sha256": "19751ddc0553da53a44925a7452c9cd267cf545de57cce18bfcacb287ba3b395",
+      "git_sha256": "19751ddc0553da53a44925a7452c9cd267cf545de57cce18bfcacb287ba3b395",
+      "raw_git_equal": true,
+      "lf_equal": true
+    }
+  }
+}

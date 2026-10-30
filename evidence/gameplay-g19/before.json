@@ -1,0 +1,12 @@
+{
+  "remote_contact": true,
+  "lurker": {
+    "distance": 3,
+    "pending": true,
+    "hp_before": 60,
+    "hp_after": 53
+  },
+  "cover_before": false,
+  "cover_after_wait": true,
+  "revision": "596279d8ebab17634dc74df2a60d8f9f56628b5c"
+}

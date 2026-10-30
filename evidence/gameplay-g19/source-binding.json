@@ -1,0 +1,76 @@
+{
+  "input_commit": "97e68fd2127b7acd7581e1e8cbe435d53757aabf",
+  "passed": true,
+  "files": [
+    {
+      "path": "roguelike/components/ai.py",
+      "working_sha256": "480a6cf2e4d1d2fe109973be11aa18ebace7bbb8b7a7d650e903ba97f8a31914",
+      "git_sha256": "004c8cc4f2028b43f6b89f467f600a1cbd5aa712a9870249f7a2d39d8143eedf",
+      "raw_equal": false,
+      "lf_equal": true
+    },
+    {
+      "path": "roguelike/engine/ai_system.py",
+      "working_sha256": "697e021939b26f08b5162e240a3d3ff162ba8e7033abda8aeb25c1da55905821",
+      "git_sha256": "eed54b8794c161f28bc45c49cd0ec5a90f0d352b259d9173a9d68179010072d9",
+      "raw_equal": false,
+      "lf_equal": true
+    },
+    {
+      "path": "roguelike/engine/creature_abilities.py",
+      "working_sha256": "b9273111770c41881831937b1f45d773529c4e5445a406178f495eeb7a28d36b",
+      "git_sha256": "b7f5d6f34fccf6e659e2308960d75eef343db5047dfe5165eef8b9f163cc75a1",
+      "raw_equal": false,
+      "lf_equal": true
+    },
+    {
+      "path": "roguelike/engine/effect_lifecycle.py",
+      "working_sha256": "2d1704e2d02360611a9c5f014ec3eecf4a71c8d6ffb1aa4d1af65061cd5a67d5",
+      "git_sha256": "363b37a725a9c670760566cbebc1dcfd389896cf50804e557f5858d90c4ce21a",
+      "raw_equal": false,
+      "lf_equal": true
+    },
+    {
+      "path": "roguelike/engine/engine.py",
+      "working_sha256": "65e59a65ed0cb7c520447d6309d1e2ce41281a672897e8a2a0c976451cd9f6fa",
+      "git_sha256": "65e59a65ed0cb7c520447d6309d1e2ce41281a672897e8a2a0c976451cd9f6fa",
+      "raw_equal": true,
+      "lf_equal": true
+    },
+    {
+      "path": "roguelike/engine/spatial.py",
+      "working_sha256": "16cb14f518747b2402563845494b8db75e49f05a42bc98512a0901d749c54f20",
+      "git_sha256": "16cb14f518747b2402563845494b8db75e49f05a42bc98512a0901d749c54f20",
+      "raw_equal": true,
+      "lf_equal": true
+    },
+    {
+      "path": "tools/b1_cases.py",
+      "working_sha256": "b01fac5146d924dcb1d46eb1e764aaa7de9b0d63fec519dd5a548f8af5de44c6",
+      "git_sha256": "d863a188af1e6c0c5737e610ff516f84ecc206a1b6210d2225324e191a90d6fb",
+      "raw_equal": false,
+      "lf_equal": true
+    },
+    {
+      "path": "tools/critical_fix_regressions/tests/test_gameplay_g19.py",
+      "working_sha256": "5d3cdb6e13b2ef287c9c4b47024bcef1fbb088400246a1341776ef8dd6bee243",
+      "git_sha256": "5d3cdb6e13b2ef287c9c4b47024bcef1fbb088400246a1341776ef8dd6bee243",
+      "raw_equal": true,
+      "lf_equal": true
+    },
+    {
+      "path": "tools/d_cases.py",
+      "working_sha256": "39f538b431d1831b3ba78ba6719a00663aa65092f0030541a6621abd12e3d988",
+      "git_sha256": "39f538b431d1831b3ba78ba6719a00663aa65092f0030541a6621abd12e3d988",
+      "raw_equal": true,
+      "lf_equal": true
+    },
+    {
+      "path": "tools/verify_g19.py",
+      "working_sha256": "19751ddc0553da53a44925a7452c9cd267cf545de57cce18bfcacb287ba3b395",
+      "git_sha256": "19751ddc0553da53a44925a7452c9cd267cf545de57cce18bfcacb287ba3b395",
+      "raw_equal": true,
+      "lf_equal": true
+    }
+  ]
+}

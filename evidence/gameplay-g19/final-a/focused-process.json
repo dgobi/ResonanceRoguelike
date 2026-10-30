@@ -1,0 +1,7 @@
+{
+  "end_utc": "2026-10-30T05:46:30.3198146Z",
+  "seconds": 1363.5620965,
+  "exit_code": 0,
+  "command": "tools/critical_fix_regressions/verify_fixes.py --timeout 3600 --evidence evidence/gameplay-g19/final-a/focused",
+  "start_utc": "2026-10-30T05:23:46.7532491Z"
+}

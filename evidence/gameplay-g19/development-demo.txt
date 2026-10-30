@@ -1,0 +1,38 @@
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 17
+  Loaded sheet 'urizen': assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png
+  Loaded sheet 'pixel': assets/sprites/PixelAsciiSpritesheet.png
+  Loaded sheet 'hexany_creatures': assets/sprites/HexanyCreatures.png
+  Loaded sheet 'terrain': assets/sprites/terrain.png
+  Loaded sheet 'objects': assets/sprites/objects.png
+  Loaded sheet 'creatures': assets/sprites/creatures.png
+SpriteRegistry: 263 tiles across 6 sheets
+Traceback (most recent call last):
+  File "G:\GameDev\RoguelikeProject\tools\verify_g19.py", line 134, in <module>
+    if __name__=='__main__': main()
+                             ^^^^^^
+  File "G:\GameDev\RoguelikeProject\tools\verify_g19.py", line 130, in main
+    result=journey(out)
+           ^^^^^^^^^^^^
+  File "G:\GameDev\RoguelikeProject\tools\verify_g19.py", line 112, in journey
+    run_journey(ev,actions,max_frames=60,max_seconds=90,max_turns=30)
+  File "G:\GameDev\RoguelikeProject\tools\b1_journey.py", line 317, in run_journey
+    main.main()
+  File "G:\GameDev\RoguelikeProject\roguelike\main.py", line 115, in main
+    engine.run()
+  File "G:\GameDev\RoguelikeProject\tools\b1_journey.py", line 286, in run
+    return original_run(e)
+           ^^^^^^^^^^^^^^^
+  File "G:\GameDev\RoguelikeProject\roguelike\engine\engine.py", line 661, in run
+    for event in pygame.event.get():
+                 ^^^^^^^^^^^^^^^^^^
+  File "G:\GameDev\RoguelikeProject\tools\b1_journey.py", line 300, in events
+    action = next(current["actions"])
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\GameDev\RoguelikeProject\tools\b1_journey.py", line 76, in actions
+    yield from custom_actions(e, key, capture, choose_inventory)
+  File "G:\GameDev\RoguelikeProject\tools\verify_g19.py", line 84, in actions
+    ev.check('G19','free Press step exits cover immediately',[before,False,True],
+  File "G:\GameDev\RoguelikeProject\tools\b1_support.py", line 48, in check
+    raise AssertionError(json.dumps(row))
+AssertionError: {"case": "G19", "property": "free Press step exits cover immediately", "expected": [484, false, true], "observed": [484, false, false], "passed": false}
