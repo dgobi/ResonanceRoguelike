@@ -1,0 +1,17 @@
+{
+  "name": "workbench-native-hearing",
+  "command": [
+    "node",
+    "scripts/run-hearing.mjs"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+  "start_utc": "2026-10-30T20:53:01.121823+00:00",
+  "end_utc": "2026-10-30T20:53:38.485801+00:00",
+  "seconds": 37.3636317999335,
+  "exit_code": 0,
+  "error": null,
+  "log": "workbench-native-hearing-output.txt",
+  "log_sha256": "53736c9b916403ad8e2fda97dccfe5232272354fe17a365378a1f8cca4d6330d",
+  "source_stable": true,
+  "passed": true
+}

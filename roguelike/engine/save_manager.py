@@ -1141,6 +1141,10 @@ def _validate_entities(rows, data, local_map=None) -> None:
         if not isinstance(row, dict):
             raise SaveFormatError(f"Actor row {index} must be an object")
         validate_row(row, local_map)
+        hostility = row.get('hostile_to')
+        if hostility is not None and (not isinstance(hostility, list)
+                or any(not isinstance(label, str) for label in hostility)):
+            raise SaveFormatError('Saved hostile_to must be a list of faction labels or None')
         individual = row.get('individual_id')
         if individual is not None:
             if individual in identities:

@@ -1,0 +1,37 @@
+
+> resonance-workbench@0.9.0 bundle
+> tauri build --config src-tauri/tauri.bundle.conf.json --bundles nsis -- --locked
+
+        Info Looking up installed tauri packages to check mismatched versions...
+     Running beforeBuildCommand `powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify-runtime.ps1 && npm run build:web`
+Complete pinned bundled runtime verified
+
+> resonance-workbench@0.9.0 build:web
+> tsc --noEmit && vite build
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 825 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                               0.41 kB │ gzip:   0.28 kB
+dist/assets/index-CRH2VJxf.css               16.62 kB │ gzip:   4.63 kB
+dist/assets/Filter-CXK2Bk4z.js                0.90 kB │ gzip:   0.48 kB
+dist/assets/getTexelRangeRects-yeMsHTfe.js    3.58 kB │ gzip:   1.22 kB
+dist/assets/webworkerAll-kJUnfrFG.js         15.02 kB │ gzip:   4.70 kB
+dist/assets/CanvasRenderer-DWf3GW6F.js       17.85 kB │ gzip:   5.98 kB
+dist/assets/browserAll-AHDqjZU2.js           43.93 kB │ gzip:  11.39 kB
+dist/assets/RenderTargetSystem-C_mteBVu.js   53.48 kB │ gzip:  14.64 kB
+dist/assets/WebGPURenderer-B2mm5BB0.js       53.74 kB │ gzip:  15.37 kB
+dist/assets/WebGLRenderer-Dy116Fcr.js        56.78 kB │ gzip:  15.68 kB
+dist/assets/index-DWoN9mIw.js               820.43 kB │ gzip: 245.80 kB
+✓ built in 4.88s
+   Compiling resonance-workbench v0.9.0 (G:\GameDev\RoguelikeProject\workbench\src-tauri)
+    Finished `release` profile [optimized] target(s) in 28.02s
+       Built application at: G:\GameDev\RoguelikeProject\workbench\src-tauri\target\release\resonance-workbench.exe
+        Info Patching G:\GameDev\RoguelikeProject\workbench\src-tauri\target\release\resonance-workbench.exe with bundle type information: nsis
+        Info Target: x64
+     Running makensis to produce G:\GameDev\RoguelikeProject\workbench\src-tauri\target\release\bundle\nsis\Resonance Workbench_0.9.0_x64-setup.exe
+    Finished 1 bundle at:
+        G:\GameDev\RoguelikeProject\workbench\src-tauri\target\release\bundle\nsis\Resonance Workbench_0.9.0_x64-setup.exe (27.17 MiB)
+

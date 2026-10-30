@@ -35,6 +35,8 @@ class LocalRivalTests(unittest.TestCase):
     def test_defaults_empty_and_fresh_exact_directional_definitions(self):
         source=[];p=Perception(hostile_to=source);source.append('player')
         self.assertEqual([],p.hostile_to);self.assertEqual(['player'],Perception().hostile_to)
+        for invalid in ('outlaw',False,{},[1],['outlaw',None]):
+            with self.assertRaises(ValueError):Perception(hostile_to=invalid)
         a,b=self.pair();self.assertEqual(['player','stalker'],a.perception.hostile_to)
         self.assertEqual(('stalker',['player','outlaw']),(b.perception.faction,b.perception.hostile_to))
         a.perception.hostile_to=[];self.decision(a)
@@ -211,6 +213,9 @@ class LocalRivalTests(unittest.TestCase):
         bad=copy.deepcopy(row);bad['component_state']['actor']['_last_known_px']=0
         with self.assertRaises(ValueError):_validate_entities([bad],e.data,e.local_map)
         with self.assertRaises(ValueError):_validate_entities([row,row],e.data,e.local_map)
+        for invalid in ('stalker',False,{},[1]):
+            bad=copy.deepcopy(row);bad['hostile_to']=invalid
+            with self.assertRaises(ValueError):_validate_entities([bad],e.data,e.local_map)
         row['local_target'].update(x=0,y=0);_validate_entities([row],e.data,e.local_map)
 
     def test_rival_edge_and_stairs_stay_local_hot_then_cold_revisit_expires(self):

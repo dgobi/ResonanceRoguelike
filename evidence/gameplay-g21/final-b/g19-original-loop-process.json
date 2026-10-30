@@ -1,0 +1,22 @@
+{
+  "name": "g19-original-loop",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\verify_g19.py",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g21\\final-b\\g19-loop"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-30T20:54:46.797113+00:00",
+  "end_utc": "2026-10-30T20:55:00.600865+00:00",
+  "seconds": 13.803217399981804,
+  "exit_code": 0,
+  "error": null,
+  "log": "g19-original-loop-output.txt",
+  "log_sha256": "a77e04cb47f9f7b0d65a3a243a0ad22b2fd7172267fa8f909f16a865e3d90d39",
+  "source_stable": true,
+  "passed": true
+}

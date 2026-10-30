@@ -20,7 +20,10 @@ class Perception:
         self.hearing_radius = hearing_radius
         self.sees_in_dark   = sees_in_dark
         self.faction        = faction
-        self.hostile_to     = ["player"] if hostile_to is None else list(hostile_to)
+        if hostile_to is not None and (not isinstance(hostile_to, list)
+                or any(not isinstance(label, str) for label in hostile_to)):
+            raise ValueError('hostile_to must be a list of faction labels or None')
+        self.hostile_to     = ["player"] if hostile_to is None else hostile_to.copy()
 
     def is_hostile_to(self, other_faction: str) -> bool:
         return other_faction in self.hostile_to

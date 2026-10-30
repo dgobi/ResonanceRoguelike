@@ -1,0 +1,26 @@
+{
+  "name": "g21-lethal",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\verify_g21_play.py",
+    "--stage",
+    "lethal",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g21\\final-b\\play",
+    "--resume",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g21\\final-b\\play\\common\\common.zip"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-30T20:55:50.629423+00:00",
+  "end_utc": "2026-10-30T20:55:58.329782+00:00",
+  "seconds": 7.700534799951129,
+  "exit_code": 0,
+  "error": null,
+  "log": "g21-lethal-output.txt",
+  "log_sha256": "3420a09e8d9b6a17c1db4335aa5efadaced7224422c7d8ff91f8e7107fc20ff7",
+  "source_stable": true,
+  "passed": true
+}

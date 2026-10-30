@@ -58,7 +58,7 @@ unknown killers and repeated finalization grant no player kill rewards.
 Saved faction/list snapshots remain authoritative, including old player-only
 Stalkers with `predator` and explicit `[]`. Fresh definitions do not migrate them.
 Construction copies a supplied list; omission/null defaults to player. IDs are
-optional/lazy map-owned monotonic numbers namespaced by their original scene.
+optional/lazy map-owned monotonic numbers namespaced by the scene of first allocation.
 Canonical first allocation sorts by definition/home/position, independent of game
 RNG; later order/movement cannot alter an allocated ID. `_creature_id` remains the
 definition identity. Map counters and individual IDs persist through ownership
@@ -100,7 +100,9 @@ Prepared comparisons use the exact genuine G20 prepared-return archive (seed
 fresh G21 factory participants. Owned inventory, quantities, fuel, needs, equipment
 and HP are retained. Independent cold continuations let conflict develop and take
 the far flank, spend the real finite musk for direct passage and recovery, or
-take the unprepared direct route. No winner or injury is forced. Full phase/item/
+take the unprepared direct route. No winner or injury is forced. The established original-loop driver seeds gameplay RNGs to 20261020 at
+bootstrap; this is disclosed deterministic test assistance, not spawn-roll
+manipulation. Native population still uses the declared world seed. Full phase/item/
 HP/target/death/remains ledgers distinguish this fixture from native selection.
 
 A separate controlled lethal continuation discloses Stalker HP=1, staged positions
@@ -123,7 +125,11 @@ Visual inspection of final-a also found second-person resolver body prose in
 rival hit results. That incomplete release run is retained as failed: its
 unfinished owned gate processes were stopped. Rival results now use generic
 target-correct feedback, with an explicit second-person regression assertion;
-all required gates rerun from the corrected frozen input.
+all required gates rerun from the corrected frozen input. Construction review
+also caught string-to-character-list coercion in the initial copy operation.
+Construction and saved-row preflight now reject invalid list types, retaining
+valid saved lists exactly. The incomplete final-b run is retained; final-c
+reruns every required gate after this validation correction.
 The development package lock failure came from overlapping NSIS and a test launch;
 final packaging and native launch are sequential. Historical archives are immutable.
 

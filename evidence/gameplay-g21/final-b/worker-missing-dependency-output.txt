@@ -1,0 +1,6 @@
+test_dependency_absence_structured (test_bridge.BridgeTests.test_dependency_absence_structured) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.844s
+
+OK

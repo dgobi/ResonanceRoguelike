@@ -1,0 +1,13 @@
+
+> resonance-workbench@0.9.0 test
+> vitest run
+
+
+ RUN  v4.1.12 G:/GameDev/RoguelikeProject/workbench
+
+
+ Test Files  21 passed (21)
+      Tests  90 passed (90)
+   Start at  14:50:56
+   Duration  1.06s (transform 3.59s, setup 0ms, import 6.55s, tests 507ms, environment 3ms)
+

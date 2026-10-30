@@ -1,0 +1,17 @@
+{
+  "name": "workbench-frontend",
+  "command": [
+    "npm.cmd",
+    "test"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+  "start_utc": "2026-10-30T20:50:54.083058+00:00",
+  "end_utc": "2026-10-30T20:50:57.675888+00:00",
+  "seconds": 3.5936098000966012,
+  "exit_code": 0,
+  "error": null,
+  "log": "workbench-frontend-output.txt",
+  "log_sha256": "0fbc731dcab2bf763a17e8ceaa36a501334734868f158a37e08a9ca15863a834",
+  "source_stable": true,
+  "passed": true
+}
