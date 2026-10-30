@@ -253,16 +253,10 @@ class WeaponTimingTests(unittest.TestCase):
             self.assertEqual(before,timing(e)); self.assertTrue(e.player.inventory.contains(item))
 
     def test_real_harvest_completion_expires_press_and_settles_work_debt(self):
-        e = self.e; equip(e,'heavy_blade')
-        actor = e.creature_factory.spawn('sewer_thing',13,12); actor.fighter.hp = 1
-        e.entities.append(actor)
-        with patch('engine.combat.resolve_attack',side_effect=combat_routes.CombatRouteTests.contact(damage=2)):
-            e._handle_key(e.display.MOVESET_KEY_1)
-        self.assertTrue(e._free_move_pending)
+        e = self.press()  # real Revenant definition includes an authored harvest profile
         corpse = next(i for i in e.local_map.floor_objects[13,12] if i.source_creature)
         before = e.world_time.turn; e._move_debt = 1.25
-        e._handle_key(pygame.K_COMMA)  # choose the adjacent actual corpse through cursor
-        # Direct cursor entry uses the same ordinary interact route as E selection.
+        # Cursor entry stages selection; Enter uses the ordinary interact route.
         from engine.engine import GameMode
         e.mode = GameMode.INTERACTION_CURSOR
         e.interaction_cursor.enter([(13,12)],12,12)
