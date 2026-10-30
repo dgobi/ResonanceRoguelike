@@ -29,6 +29,17 @@ def consume(engine, item):
     return True
 
 
+def consume_throw_unit(engine, item):
+    """Throw one owned unit, retaining any historical stack and its identity."""
+    if (not engine.player.inventory.contains(item)
+            or type(item.count) is not int or item.count < 1):
+        return False
+    if item.count > 1:
+        item.count -= 1
+        return True
+    return consume(engine, item)
+
+
 def exchange(engine, consumed, outputs=()):
     """Commit a checked recipe/replacement as one inventory list update."""
     inv = engine.player.inventory

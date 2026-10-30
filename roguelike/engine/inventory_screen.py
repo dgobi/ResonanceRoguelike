@@ -711,6 +711,9 @@ class InventoryScreen:
 
         # Description
         desc = getattr(item, "description", "") or item_def.get("description", "")
+        from entities.item import use_capability
+        if item.on_use is None and use_capability(item) == 'throw_flint_shard':
+            desc += " Use: throw one for a clatter; the shard is lost."
         if desc:
             for ln in _wrap_text(self._font_small, desc, max_w - 8):
                 if y > oy + h - pad * 3:

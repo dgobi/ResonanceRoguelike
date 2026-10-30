@@ -46,4 +46,11 @@ describe("ordinary creature exact draft", () => {
     a.record(source,one,"attack");b.record(wight,two,"hp");
     expect(a.undo(one)).toBe(source);expect(b.undo(two)).toBe(wight);expect(a.redo(source)).toBe(one);
   });
+  it("edits hearing through one exact span and undo without changing source siblings",()=>{
+    const text='\uFEFF'+source.replace(/\r?\n/g,'\r\n');
+    const changed=creatureValue(text,'perception.hearing_radius',0),history=new CanvasHistory();
+    expect(changed).toBe(text.replace('"hearing_radius": 6','"hearing_radius": 0'));
+    history.record(text,changed,'Hearing radius');
+    expect(history.undo(changed)).toBe(text);expect(history.redo(text)).toBe(changed);
+  });
 });

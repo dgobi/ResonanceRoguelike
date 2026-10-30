@@ -23,7 +23,6 @@ def trigger_discharge(
     Cracked discharge: partial event.
     """
     from engine.resonance_system import _check_corruption_thresholds
-    from components.ai import AIState
 
     if bell_type == "intact":
         radius           = 18
@@ -59,23 +58,9 @@ def trigger_discharge(
         from rendering.particles import make_discharge_ring
         ps.emit(make_discharge_ring(bx, by, bell_type))
 
-    # Creature disturbance — alert all entities within radius of bell
-    px, py = engine.player.x, engine.player.y
-    for entity in engine.get_active_entities():
-        if entity is engine.player:
-            continue
-        dist = math.sqrt(
-            (entity.x - bx) ** 2 + (entity.y - by) ** 2)
-        if dist > radius:
-            continue
-        ai = getattr(entity, "ai", None)
-        if ai is None:
-            continue
-        state_val = ai.state.value if hasattr(ai.state, "value") else str(ai.state)
-        if state_val not in ("hunting", "attacking"):
-            ai.state          = AIState.ALERTED
-            ai.last_known_x   = px
-            ai.last_known_y   = py
+    # Hearing carries the actual bell position, with no player identity/trail.
+    from engine.sound import emit
+    emit(engine, bx, by, 'bell_' + bell_type)
 
     # Vine spawn — resonance pulse may seed vine growth in valid biomes
     vine_cfg = engine.data.entities.get("vine_network", {})

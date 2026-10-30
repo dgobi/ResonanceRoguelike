@@ -16,6 +16,7 @@ class AIState(enum.Enum):
     DORMANT    = "dormant"
     WANDERING  = "wandering"
     ALERTED    = "alerted"
+    INVESTIGATING = "investigating"
     HUNTING    = "hunting"
     FLEEING    = "fleeing"
     ATTACKING  = "attacking"
@@ -30,7 +31,8 @@ class AI:
     The state machine is simple and data-driven:
       DORMANT    → not yet aware
       WANDERING  → moving randomly in territory
-      ALERTED    → heard something, investigating last known position
+      ALERTED    → pursuing a genuinely remembered player position
+      INVESTIGATING → unidentified local sound, never player pursuit
       HUNTING    → pursuing target
       ATTACKING  → adjacent to target, striking
       FLEEING    → running from threat
@@ -54,6 +56,7 @@ class AI:
         self.memory_turns:   int        = 0
         self.pursuit_turns_without_contact: int = 0
         self.move_accumulator: float = 0.0
+        self.sound_interest: dict | None = None
 
     def set_home(self, x: int, y: int) -> None:
         self.home_x = x
@@ -76,7 +79,21 @@ class AI:
         """
         _prev_state = self.state
         self._update_state(actor, local_map, player, ambient_light, engine=engine)
+        from engine.sound import current_interest, clear_interest, eligible
+        turn = engine.world_time.turn if engine is not None else 0
+        interest = current_interest(self, turn)
+        if (getattr(actor, "_last_known_px", None) is not None
+                or self.state in (AIState.HUNTING, AIState.ALERTED, AIState.ATTACKING)):
+            clear_interest(self)
+        elif interest is not None and eligible(actor):
+            self.state = AIState.INVESTIGATING
+        elif self.state == AIState.INVESTIGATING:
+            clear_interest(self)
         if engine is not None:
+            if (self.state == AIState.INVESTIGATING and _prev_state != self.state
+                    and local_map.in_bounds(actor.x, actor.y)
+                    and local_map.visible[actor.x, actor.y]):
+                engine.log.add(f"The {actor.name} turns toward a sound.", UI_TEXT_DIM)
             _fire_creature_callout(actor, engine, _prev_state, self.state)
         self._act(actor, local_map, entities, player, log, rng, engine=engine)
 
@@ -228,6 +245,10 @@ class AI:
         elif self.state == AIState.WANDERING:
             self._wander(actor, local_map, entities, rng)
 
+        elif self.state == AIState.INVESTIGATING:
+            from engine.sound import investigate
+            investigate(self, actor, local_map, entities)
+
         elif self.state == AIState.ALERTED:
             dist_to_player = _distance(actor, player)
             if dist_to_player <= 1.5:
@@ -237,8 +258,8 @@ class AI:
                 terrain_data = getattr(terrain_data, "terrain", None) if terrain_data else None
                 self._move_toward(
                     actor, local_map, entities,
-                    self.target_x or actor.x,
-                    self.target_y or actor.y,
+                    self.target_x if self.target_x is not None else actor.x,
+                    self.target_y if self.target_y is not None else actor.y,
                     player=player,
                     terrain_data=terrain_data,
                     engine=engine,
@@ -705,6 +726,9 @@ def _monster_attack_entity(monster, target, engine) -> bool:
                 or distance_sq > CirclingAI.PREFERRED_DIST**2
                 or not terrain_line(engine.local_map, monster.x, monster.y, target.x, target.y)):
             return False
+
+    from engine.sound import emit
+    emit(engine, monster.x, monster.y, 'combat', maker=monster)
 
     # Check ranged attack conditions once — used on both the invincible path
     # and the normal path so the tween fires unconditionally.

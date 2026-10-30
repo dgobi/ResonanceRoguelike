@@ -47,7 +47,40 @@ Use `base_hp` for health: `engine/creature_factory.py` gives it precedence over 
 
 `essence_modifiers` describes the creature’s response to each named essence: values above `1.0` are weaknesses, below `1.0` are resistances, and `1.0` is neutral. Weapon strength scales that response. Change one relationship at a time so the resulting damage remains easy to understand.
 
-`perception.sight_radius` and `perception.hearing_radius` tune detection. Existing `ai_type` values are `wandering`, `ambush`, `fleeing`, and `circling`. A new word here does not create a new AI. Likewise, special abilities such as briar retaliation and wraith sight drain have creature-specific code; copying their descriptive fields onto another creature does not give it the ability.
+`perception.sight_radius` tunes sight. `perception.hearing_radius` is now an active
+integer control (0–1,000) in Workbench: zero disables hearing. Wandering/circling
+mobile creatures investigate unidentified sounds after genuine sight and player
+memory; ambush/fleeing archetypes keep their special rules, including Lurker
+hibernation. Existing `ai_type` values are `wandering`, `ambush`, `fleeing`, and
+`circling`. A new word here does not create a new AI. Special abilities still
+dispatch through their stable creature identities.
+
+G20 sound tuning is centralized in `engine/sound.py`: cardinal open travel costs
+1, closed doors 4, solid walls block; there is no diagonal or scene-boundary
+propagation. Per-event flood cost is capped at 48. A listener's cost allowance is
+`strength + hearing_radius - 6` (with zero hearing always deaf). Initial strengths:
+flint/musk impacts 6, committed combat/empty-crate dismantling 8, cracked bell 10,
+intact bell 18. Only a bell terrain source can seed a nonwalkable origin. Combat
+uses the attacker's tile, dismantling the crate, and throws their impact tile.
+Misses/dodges still emit once; rejections and extra settlement phases do not.
+No gathering, footsteps, doors or crafting emit gameplay sound.
+
+Interest stores only source, kind, received strength and an inclusive absolute
+deadline at emission world turn + 12. A player action at turn T can provoke the
+normal AI in charged phases T+1 through T+12; T+13 expires it. An event emitted
+during AI may affect later actors in that same phase; earlier actors wait for
+their next ordinary budget. Higher received strength replaces an event; equal
+strength prefers later delivery; weaker events do not renew it. Reaching the
+empty source or a reachable cardinal approach to an occupied/bell source ends
+interest. No attack, speed credit, pursuit transfer or last-seen-player memory
+comes from hearing. Deadline expiry continues during disruption/absence and is
+revalidated on return/F9 without movement. Saved actor hearing remains owned by
+the saved instance.
+
+`flint_shard` keeps cutting tier 1. Its six-tile owned throw consumes one unit for
+a clatter with no weapon damage. Historical null-handler shards gain that use
+through a narrow dispatch/affordance fallback without rewriting their stored
+fields. Explicit nonempty instance overrides remain authoritative.
 
 Keep the creature’s `id`. Saved actors, knowledge, corpses, and other references depend on it, even when the visible `tile` changes during play.
 

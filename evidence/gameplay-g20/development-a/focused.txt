@@ -1,0 +1,22 @@
+----------------------------------------------------------------------
+Ran 72 tests in 10.732s
+
+OK
+pygame 2.6.1 (SDL 2.28.4, Python 3.11.0)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+[harvest] tile=(12,12) terrain=flint_rock harvestable=False decor=None decor_harvestable=False
+[LP-STORED] 0 live pursuers: []
+[CHUNK] E player=(79,12) dest=(80,12) -> entry=(0,12) world (0,0)->(1,0)
+[LP-STORED] 0 live pursuers: []
+[CHUNK] W player=(0,12) dest=(-1,12) -> entry=(79,12) world (1,0)->(0,0)
+[LP-STORED] 0 live pursuers: []
+[CHUNK] E player=(79,12) dest=(80,12) -> entry=(0,12) world (0,0)->(1,0)
+[LP-STORED] 0 live pursuers: []
+[CHUNK] W player=(0,12) dest=(-1,12) -> entry=(79,12) world (1,0)->(0,0)
+[harvest] tile=(13,12) terrain=grass harvestable=False decor=bone_dust decor_harvestable=False
+[LP-STORED] 0 live pursuers: []
+[CHUNK] E player=(79,12) dest=(80,12) -> entry=(0,12) world (0,0)->(1,0)
+[harvest] tile=(13,12) terrain=grass harvestable=False decor=crate decor_harvestable=False
+[harvest] tile=(13,12) terrain=grass harvestable=False decor=crate decor_harvestable=False
+[harvest] tile=(13,12) terrain=grass harvestable=False decor=None decor_harvestable=False
+[harvest] tile=(13,12) terrain=grass harvestable=False decor=None decor_harvestable=False

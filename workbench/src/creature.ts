@@ -10,7 +10,7 @@ export function creatureModel(text: string): {model: Record<string, unknown> | n
 export function creatureValue(text: string, field: string, value: string | number | boolean): string {
   const {model, reason} = creatureModel(text);
   if (!model) throw new Error(reason);
-  const allowed = ["name","description","armour_value","damage_dice","damage_bonus","attack_verb","perception.sight_radius","perception.sees_in_dark","wander_radius","pursuit_timeout","speed","ai_type"];
+  const allowed = ["name","description","armour_value","damage_dice","damage_bonus","attack_verb","perception.sight_radius","perception.hearing_radius","perception.sees_in_dark","wander_radius","pursuit_timeout","speed","ai_type"];
   if (field !== "hp") {
     if (!allowed.includes(field)) throw new Error("Read-only creature field");
     const path=field.split(".");

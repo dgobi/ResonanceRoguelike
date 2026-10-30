@@ -234,6 +234,8 @@ class InteractionCursor:
             engine.log.add("The crate could not be dismantled.", MSG_DEFAULT)
             return
         wood.description = "A bundle of wood recovered from an empty crate. Dry enough to burn."
+        from engine.sound import emit
+        emit(engine, x, y, 'dismantle', maker=engine.player)
         engine.log.add("You dismantle the empty crate. One wood bundle lies on the floor.", MSG_DEFAULT)
         self._finish_action(engine)
 

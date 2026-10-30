@@ -50,6 +50,7 @@ AI_STATE = {
     "target_x": (None, "coordinate?"), "target_y": (None, "coordinate?"),
     "memory_turns": (0, "count"), "alert_memory": (10, "count"),
 }
+AI_OPTIONAL_STATE = {"sound_interest": (None, "sound?")}
 ITEM_STATE = {
     "name": ("", "string"), "tile": ("generic_item", "string"),
     "weight": (0.0, "number"), "stackable": (False, "bool"), "count": (1, "count"),
@@ -72,6 +73,16 @@ def _valid(value, kind):
         return value is None or _valid(value, kind[:-1])
     if kind == "bool":
         return type(value) is bool
+    if kind == "sound":
+        from config import MAP_WIDTH, MAP_HEIGHT
+        from engine.sound import STRENGTH
+        return (isinstance(value, dict)
+                and set(value) == {'x', 'y', 'deadline', 'strength', 'kind'}
+                and type(value['x']) is int and 0 <= value['x'] < MAP_WIDTH
+                and type(value['y']) is int and 0 <= value['y'] < MAP_HEIGHT
+                and type(value['deadline']) is int and value['deadline'] >= 0
+                and type(value['strength']) is int and value['strength'] > 0
+                and isinstance(value['kind'], str) and value['kind'] in STRENGTH)
     if kind == "count":
         return type(value) is int and value >= 0
     if kind == "coordinate":
@@ -208,6 +219,8 @@ def serialize_actor_runtime(actor):
     result["actor"].update(snapshot(actor, ACTOR_OPTIONAL_STATE))
     if getattr(actor, "ai", None) is not None:
         result["ai"] = snapshot(actor.ai, AI_STATE)
+        result["ai"].update({k: v for k, v in snapshot(actor.ai, AI_OPTIONAL_STATE).items()
+                             if v is not None})
     return result
 
 
@@ -219,6 +232,9 @@ def validate_actor_runtime(row):
         validate_block(row["component_state"], schemas, "actor.component_state")
         validate_fields(row["component_state"]["actor"], ACTOR_OPTIONAL_STATE,
                         "actor.component_state.actor", complete=False)
+        if row.get("ai_type"):
+            validate_fields(row["component_state"]["ai"], AI_OPTIONAL_STATE,
+                            "actor.component_state.ai", complete=False)
         actor_state = row["component_state"]["actor"]
         for x_key, y_key in (("_surface_exit_x", "_surface_exit_y"),
                              ("_surface_exit_wx", "_surface_exit_wy")):
@@ -230,5 +246,6 @@ def restore_actor_runtime(actor, row):
     record = row.get("component_state", {})
     restore(actor, record.get("actor", {}), ACTOR_STATE)
     restore(actor, record.get("actor", {}), ACTOR_OPTIONAL_STATE)
-    if actor.ai is not None and "ai" in record:
-        restore(actor.ai, record["ai"], AI_STATE)
+    if actor.ai is not None:
+        restore(actor.ai, record.get("ai", {}), AI_STATE)
+        restore(actor.ai, record.get("ai", {}), AI_OPTIONAL_STATE)

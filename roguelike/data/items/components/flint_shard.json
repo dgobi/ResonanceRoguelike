@@ -2,7 +2,10 @@
   "id": "flint_shard",
   "name": "flint shard",
   "category": "component",
-  "description": "A sharp-edged chip knocked from a larger piece of flint.",
+  "description": "A sharp cutting chip. Throw one for a distracting clatter; it shatters and is lost.",
+  "on_use": "throw_flint_shard",
+  "throw_range": 6,
+  "use_message": "The flint shatters with a sharp clatter.",
   "gather_from": "rock",
   "weight": 0.2,
   "keywords": [

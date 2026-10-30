@@ -15,6 +15,14 @@ def repair_selected_equipment_use(item) -> None:
         item.on_use = "equip_toggle"
 
 
+def use_capability(item):
+    """One historical flint fallback; never rewrite saved instance fields."""
+    declared = getattr(item, 'on_use', None)
+    if declared is None and getattr(item, 'item_id', '') == 'flint_shard':
+        return 'throw_flint_shard'
+    return declared
+
+
 class Item(Entity):
     """
     An entity that can be picked up, carried, and used.

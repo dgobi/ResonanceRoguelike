@@ -35,6 +35,7 @@ new game balance rules. Raw Source and restored drafts receive the same checks.
 | `damage_bonus` | Integer −1,000–1,000; separate attack addition |
 | `attack_verb` | 1–256 literal characters; monster attack prose |
 | `perception.sight_radius` | Integer 0–1,000; actual perception radius |
+| `perception.hearing_radius` | Integer 0–1,000; zero is deaf. Consumed by bounded local sound propagation; see `engine/sound.py` |
 | `perception.sees_in_dark` | Boolean |
 | `wander_radius` | Integer 0–1,000 |
 | `pursuit_timeout` | Integer 0–10,000; active and off-map pursuit use this ID's definition |
@@ -47,7 +48,11 @@ HP is a deliberate two-field edit. Invalid JSON remains recoverable and freezes
 typed controls until corrected.
 
 `fighter.power` and `fighter.defense` remain visible legacy/fallback values.
-Hearing is constructed/saved but has no active AI consumer. Current AI does not
+Wandering/circling mobile creatures investigate heard local disturbances after
+genuine sight/trail priority. Interest lasts twelve charged world increments;
+walls block, closed doors attenuate, and larger positive hearing never reduces
+audibility. Ambush/fleeing archetypes retain their special rules; sound never
+wakes a Stone Lurker. Saved actors retain their stored hearing. Current AI does not
 call `Perception.is_hostile_to`; membership labels do not promise targeting, and
 an empty hostility list defaults in the constructor. Bodies/limbs,
 corpse data, essence, effects, ranged blocks, spawn declarations, transition

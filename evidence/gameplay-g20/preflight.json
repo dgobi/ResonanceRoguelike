@@ -1,0 +1,43 @@
+{
+  "start_utc": "2026-10-30T06:02:24Z",
+  "head": "27b032d37fed553b1acfc049e2d083f0f3c1ecab",
+  "branch": "main",
+  "owner_work": [
+    "RESONANCE_WORKBENCH_PLAN_PROPOSED_2026-10-25.md (untracked, untouched)"
+  ],
+  "g19_frozen_inputs_match": true,
+  "g19_source_inputs": 825,
+  "g19_focused_preflight": "44 G18/G19 tests passed in 9.155 seconds",
+  "remote_readback": "27b032d37fed553b1acfc049e2d083f0f3c1ecab\trefs/heads/main\n27b032d37fed553b1acfc049e2d083f0f3c1ecab\trefs/tags/checkpoint/gameplay-g19-verified-20261029-a\n",
+  "authority": [
+    {
+      "path": "G:\\GameDev\\RoguelikeProject\\AGENTS.md",
+      "sha256": "d9e084c1b2305077ee5c8ed39d25005d3758158587645b4eabbac9d23dc0602c"
+    },
+    {
+      "path": "C:\\Users\\dango\\Downloads\\CODEX_G20_AUDIBLE_ENCOUNTERS_UNATTENDED.md",
+      "sha256": "3a9d6d90c5539abaae995f3ff7eac00dae53de97aaaed447825d53331126fa64"
+    },
+    {
+      "path": "C:\\Users\\dango\\Downloads\\CODEX_G19_CONTACT_AND_CONCEALMENT_FAIRNESS.md",
+      "sha256": "0f33f87f3580d451f60de535d62eb3a9e240b670c59f432f9a71f3d0ef54b34c"
+    },
+    {
+      "path": "G:\\GameDev\\RoguelikeProject\\.codex-review\\g14-package-20261025\\contents\\references\\RESONANCE_PROJECT_COMPASS.md",
+      "sha256": "66c2e37870591317aee376bd3a5529cc1537ac0edd429b7c47378aae2cb42c91"
+    },
+    {
+      "path": "G:\\GameDev\\RoguelikeProject\\.codex-review\\g14-package-20261025\\contents\\references\\RESONANCE_WORKFLOW.md",
+      "sha256": "3cc36f2de9e198b19e3e50ff2db3104e583e93e92c4bad2661a8e38c1d6b7aef"
+    },
+    {
+      "path": "C:\\Users\\dango\\Downloads\\RESONANCE_EMERGENT_EXPEDITIONS_ARC_COMPASS.md",
+      "sha256": "fc8760bae6ed3145e1e253b55066a383f7931f00153536d04b74df4791dda5d9"
+    },
+    {
+      "path": "C:\\Users\\dango\\Downloads\\RESONANCE_IMPLEMENTATION_PROPOSAL.md",
+      "sha256": "26093f38fb1a479d91819601395df184068de07ab52a25730d6089c95492dcd0"
+    }
+  ],
+  "workflow_note": "Retained local Workflow 1.0 read; arc references 1.1, not locally supplied. Present task authorization governs."
+}

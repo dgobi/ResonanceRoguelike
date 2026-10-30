@@ -78,6 +78,8 @@ class AISystem:
                 if abs(entity.x - player.x) + abs(entity.y - player.y) > ACTIVE_RADIUS:
                     continue
 
+            from engine.sound import current_interest
+            current_interest(ai, world_time.turn)
             if disrupted(entity, local_map):
                 continue
 

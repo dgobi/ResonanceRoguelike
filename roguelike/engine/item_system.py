@@ -25,9 +25,9 @@ class ItemSystem:
             if item.on_use == "heal_minor":
                 engine.log.add("That treatment is no longer in your pack.", WORN_STONE)
             return False  # stale modal selection cannot apply effects or equip
-        from entities.item import repair_selected_equipment_use
+        from entities.item import repair_selected_equipment_use, use_capability
         repair_selected_equipment_use(item)
-        effect = item.on_use
+        effect = use_capability(item)
         if not effect:
             engine.log.add(
                 f"You hold the {item.name}. Nothing happens.",
@@ -434,11 +434,18 @@ class ItemSystem:
         return True  # consumed
 
     def _use_throw_musk_pellet(self, item: "Item", engine: "Engine") -> bool:
-        """Throw musk pellet — creates disruption zone. Uses placement cursor."""
+        return self._begin_throw(item, engine, 'musk')
+
+    def _use_throw_flint_shard(self, item: "Item", engine: "Engine") -> bool:
+        return self._begin_throw(item, engine, 'flint')
+
+    def _begin_throw(self, item: "Item", engine: "Engine", kind: str) -> bool:
+        """Owned map-bound cursor; only confirmation commits item/time/effects."""
         item_def = engine.data.items.get(getattr(item, "item_id", ""), {})
         engine._pending_throw = {
             "item": item,
             "item_def": item_def,
+            "kind": kind,
         }
         from engine.engine import GameMode
         engine._pending_throw['map'] = engine.local_map
@@ -448,7 +455,7 @@ class ItemSystem:
         engine._placement_cursor_x = engine.player.x
         engine._placement_cursor_y = max(0, engine.player.y - 1)
         # Activate placement cursor for throw targeting
-        engine.log.add("Choose a target tile.", UI_TEXT_MID)
+        engine.log.add(f"Throw one {item.name}: choose a target tile. ESC keeps it.", UI_TEXT_MID)
         return False  # not consumed yet — awaiting target selection
 
 

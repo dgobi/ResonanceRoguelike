@@ -16,6 +16,20 @@ CREATURE = "roguelike/data/entities/creatures/hollow_revenant.json"
 
 
 class CreatureTests(unittest.TestCase):
+    def test_hearing_edit_bounds_and_protected_special_source(self):
+        for creature in ('hollow_revenant','stone_lurker'):
+            path=CREATURE.replace('hollow_revenant',creature)
+            original=(ROOT/path).read_bytes().decode()
+            for hearing in (0,3,1000):
+                raw=json.loads(original);raw['perception']['hearing_radius']=hearing
+                r=invoke('preview_draft',asset=path,source_asset=path,draft=json.dumps(raw))['result']
+                self.assertTrue(r['valid'],r['diagnostics'])
+                self.assertEqual(hearing,r['family']['context']['records'][0]['factory']['instance']['perception']['hearing_radius'])
+            for hearing in (-1,1001,True,1.5,'6'):
+                raw=json.loads(original);raw['perception']['hearing_radius']=hearing
+                self.assertFalse(invoke('preview_draft',asset=path,source_asset=path,draft=json.dumps(raw))['result']['valid'])
+            self.assertEqual(original,(ROOT/path).read_bytes().decode())
+
     def test_loaded_catalog_noop_player_and_advanced_read_only(self):
         described = invoke("describe")["result"]["assets"]
         rows = [r for r in described if r["route"] == "creature_definition"]

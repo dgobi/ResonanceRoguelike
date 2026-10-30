@@ -184,7 +184,8 @@ def valid_throw(engine, x, y):
     pending = engine._pending_throw
     if not pending or pending['map'] is not engine.local_map:
         return False
-    if not engine.player.inventory.contains(pending['item']):
+    if (not engine.player.inventory.contains(pending['item'])
+            or type(pending['item'].count) is not int or pending['item'].count < 1):
         return False
     m, p = engine.local_map, engine.player
     reach = pending['item_def'].get('throw_range',6)
@@ -212,7 +213,7 @@ def throw_key(engine, key):
         engine._pending_throw = None
         engine._placement_mode = 'campfire'
         engine.mode = GameMode.LOCAL
-        engine.log.add('You keep the pellet.', MSG_DEFAULT)
+        engine.log.add(f"You keep the {pending['item'].name}.", MSG_DEFAULT)
         return
     if key not in (pygame.K_RETURN, pygame.K_KP_ENTER):
         return
@@ -220,16 +221,20 @@ def throw_key(engine, key):
     if not valid_throw(engine,x,y):
         engine.log.add('You cannot throw there.', MSG_DEFAULT)
         return
-    from engine.item_transfers import consume
-    if not consume(engine,pending['item']):
+    from engine.item_transfers import consume_throw_unit
+    if not consume_throw_unit(engine,pending['item']):
         return
     definition=pending['item_def']
     m=engine.local_map
-    m.disruption_zones = list(getattr(m,'disruption_zones',[])) + [dict(
-        x=x,y=y,radius=definition.get('zone_radius',3),turns_remaining=definition.get('zone_turns',6))]
+    kind = pending.get('kind', 'musk')
+    if kind == 'musk':
+        m.disruption_zones = list(getattr(m,'disruption_zones',[])) + [dict(
+            x=x,y=y,radius=definition.get('zone_radius',3),turns_remaining=definition.get('zone_turns',6))]
+    from engine.sound import emit
+    emit(engine, x, y, kind, maker=engine.player)
     engine._pending_throw = None
     engine._placement_mode = 'campfire'
     engine.mode = GameMode.LOCAL
-    engine.log.add(definition.get('use_message','The pellet shatters.'), MSG_DEFAULT)
+    engine.log.add(definition.get('use_message', f"The {pending['item'].name} shatters."), MSG_DEFAULT)
     engine._emit_placement_burst(x,y)
     engine._advance_turn()

@@ -23,17 +23,17 @@ OBSERVE_INSPECTION = True
 READONLY_CONSTRUCTION = True
 HP_MAX = 1_000_000
 FIELDS = ["name", "description", "base_hp", "fighter.max_hp", "armour_value", "damage_dice",
-          "damage_bonus", "attack_verb", "perception.sight_radius", "perception.sees_in_dark",
+          "damage_bonus", "attack_verb", "perception.sight_radius", "perception.hearing_radius", "perception.sees_in_dark",
           "wander_radius", "pursuit_timeout", "speed"]
 BOUNDS = {"base_hp": (1, HP_MAX), "fighter.max_hp": (1, HP_MAX), "armour_value": (0, HP_MAX),
-          "damage_bonus": (-1000, 1000), "perception.sight_radius": (0, 1000),
+          "damage_bonus": (-1000, 1000), "perception.sight_radius": (0, 1000), "perception.hearing_radius": (0, 1000),
           "wander_radius": (0, 1000), "pursuit_timeout": (0, 10000), "speed": (0.01, 2)}
 SCOPE = "Factory construction only; no AI/combat turns, balance, natural encounter, campaign or saved instance was exercised."
 LIMITATIONS = SCOPE
 SELECTION = ("spawn_zones is retained inactive metadata. Zone creature lists and saved authored-submap placements "
              "are separate inbound declarations, not observed encounters or proof of natural world selection. Saving a variant enrolls it nowhere.")
 PUBLICATION_NOTE = ("Changes load at the next game launch/catalogue initialization. Saved actors retain stored name, HP, "
-                    "armour, sight/darkvision and wander radius. Description, attack, speed and pursuit use the current "
+                    "armour, sight/hearing/darkvision and wander radius. Description, attack, speed and pursuit use the current "
                     "definition. HP edits do not rescale injured saves. New actors receive current constructor values; variants require explicit placement.")
 VIEWS = ["creature-properties", "creature-references", "creature-factory"]
 # This registered specialist uses exact-source paths and shared document commands.

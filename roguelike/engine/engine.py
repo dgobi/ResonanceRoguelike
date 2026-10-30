@@ -4855,6 +4855,11 @@ class Engine:
         return 0
 
     def _update_fov(self) -> None:
+        # Revalidate absolute interest on scene return/F9 without a move or turn.
+        from engine.sound import current_interest
+        for actor in self.entities:
+            if getattr(actor, 'ai', None) is not None:
+                current_interest(actor.ai, self.world_time.turn)
         from engine.engine import GameMode
         
         if getattr(self, "mode", None) == GameMode.OVERMAP:
@@ -5177,6 +5182,8 @@ class Engine:
         self._free_move_pending = False
 
         weapon = self._get_equipped_weapon() or _UNARMED_PROFILE
+        from engine.sound import emit
+        emit(self, self.player.x, self.player.y, 'combat', maker=self.player)
 
         # Get body def for target
         from engine.combat import get_body_def
@@ -5412,6 +5419,8 @@ class Engine:
             # Blocked by positioning or HP gate — messages already posted
             return False
 
+        from engine.sound import emit
+        emit(self, self.player.x, self.player.y, 'combat', maker=self.player)
         self._free_move_pending = False
 
         # Set cooldown
