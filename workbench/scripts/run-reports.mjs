@@ -43,6 +43,9 @@ async function construct(sourceAsset,target,draft){
 }
 try{
  await launch();
+ await open('roguelike/data/texts/lab/lab_note_primary_b.json');await b('Binding and metadata').click();
+ assert.equal(await b('Attach location reports').count(),1);assert(!(await page.getByTestId('text-editor').filter({visible:true}).innerText()).includes('Repair location_reports'));
+ receipt.checks.push('Absent attachment is a valid explicit state, without a false repair warning.');
  await construct('roguelike/data/loot_pools/apothecary_b_treatment.json',pool,selected.get(pool));
  await construct('roguelike/data/buildings/commercial/workshop_c.json',building,selected.get(building));
  await construct(policy,policy,selected.get(policy));

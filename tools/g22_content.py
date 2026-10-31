@@ -48,7 +48,7 @@ def main():
         current = generate(data)
         def comparable(w):
             row = copy.deepcopy(_serialize_world(w))
-            for k in ('report_owner', 'location_reports', 'learned_reports'): row.pop(k)
+            for k in ('report_owner', 'location_reports', 'learned_reports'): row.pop(k, None)
             # Changed content dependencies are commissioned. Geometry, random
             # choices, placements, assignments and selection settings are exact.
             row['plan'].pop('dependencies')

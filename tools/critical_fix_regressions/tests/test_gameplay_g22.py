@@ -169,6 +169,7 @@ class LocationReportsTests(unittest.TestCase):
         import tempfile
         with tempfile.TemporaryDirectory() as root,patch('engine.save_manager.SAVE_DIR',root):
             e=make_engine(self.data);e.debug=None
+            self.assertTrue({'report_owner','location_reports','learned_reports'}.isdisjoint(_serialize_world(e.world_map)))
             self.assertTrue(e.save_manager.save(e))
             divergent=world();reports.bind(divergent,'Divergent record');divergent.learned_reports=list(reports.ROLES)
             e.world_map=divergent

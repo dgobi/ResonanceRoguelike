@@ -588,9 +588,10 @@ def _serialize_world(world_map: "WorldMap") -> dict:
         "generation_revision": getattr(world_map, "generation_revision", "legacy-unversioned"),
         "plan_mode": getattr(world_map, "plan_mode", "legacy"),
         "plan": getattr(world_map, "plan", None),
-        "report_owner": getattr(world_map, "report_owner", None),
-        "location_reports": getattr(world_map, "location_reports", []),
-        "learned_reports": getattr(world_map, "learned_reports", []),
+        **({"report_owner": world_map.report_owner,
+            "location_reports": world_map.location_reports,
+            "learned_reports": world_map.learned_reports}
+           if getattr(world_map, "report_owner", None) is not None else {}),
         "surface_schema": getattr(world_map, "surface_schema", 0),
         "surface_policy": getattr(world_map, "surface_policy", None),
         "vukh_x":         world_map.vukh_x,
