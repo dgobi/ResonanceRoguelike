@@ -1,0 +1,161 @@
+{
+  "passed": true,
+  "exact_snapshot": true,
+  "hp": 37,
+  "turn": 2384,
+  "report_owner": "557e3cad34b74c09bf185caa8daf9362",
+  "reports": [
+    {
+      "role": "workshop",
+      "owner": "557e3cad34b74c09bf185caa8daf9362",
+      "origin": [
+        73,
+        99
+      ],
+      "laboratory": "sub_73_99_0",
+      "source": "Old Road Preparations",
+      "description": "A workshop once used for road preparations: fuel, musk work and a traveller's emergency wrap. Present stock and safety are unknown.",
+      "target": {
+        "x": 75,
+        "y": 100,
+        "id": "settlement-0-cross-market-lot-1-44-S-0-building",
+        "asset": "workshop_d"
+      }
+    },
+    {
+      "role": "ward_store",
+      "owner": "557e3cad34b74c09bf185caa8daf9362",
+      "origin": [
+        73,
+        99
+      ],
+      "laboratory": "sub_73_99_0",
+      "source": "Old Road Preparations",
+      "description": "A barrow store where a bronze ward was kept. Its present contents, inhabitants and safety are unknown.",
+      "target": {
+        "x": 68,
+        "y": 98,
+        "id": "submap_68_98_0",
+        "asset": "barrow_ward_store_a"
+      }
+    }
+  ],
+  "inventory": {
+    "crude_blade": 1,
+    "leather_jack": 1,
+    "moist_pebble": 1,
+    "research_note": 1,
+    "flint_shard": 1,
+    "letter": 2,
+    "tallow_torch": 1,
+    "faceted_ward": 1,
+    "water_skin": 1,
+    "empty_water_skin": 1
+  },
+  "assistance": "Post-success full-state cached-scene inspection only; no gameplay continuation or route assistance.",
+  "ward_store": {
+    "ward_on_floor": false,
+    "actors": [
+      {
+        "type": "actor",
+        "id": "hollow_revenant",
+        "x": 45,
+        "y": 26,
+        "tile": "hollow_revenant",
+        "name": "Hollow Revenant",
+        "is_alive": true,
+        "blocks_movement": true,
+        "fighter": {
+          "hp": 14,
+          "max_hp": 14,
+          "power": 3,
+          "defense": 1,
+          "body_id": "body_human",
+          "effective_av": 1
+        },
+        "component_state": {
+          "version": 1,
+          "actor": {
+            "chilled_turns": 0,
+            "_sickness_turns": 0,
+            "_last_known_px": null,
+            "_last_known_py": null,
+            "_arrival_cooldown": 0,
+            "_just_arrived": false,
+            "_pending_stair_use": null,
+            "_ability_suppressed_turns": 0,
+            "_disrupted_turns": 0,
+            "_wraith_exposure_turns": 0,
+            "_surface_exit_x": null,
+            "_surface_exit_y": null,
+            "_surface_exit_wx": null,
+            "_surface_exit_wy": null
+          },
+          "ai": {
+            "target_x": 47,
+            "target_y": 23,
+            "memory_turns": 10,
+            "alert_memory": 10
+          }
+        },
+        "ai_type": "WanderingAI",
+        "ai_state": "wandering",
+        "home_x": 41,
+        "home_y": 20,
+        "pursuit_turns_without_contact": 0,
+        "move_accumulator": 0.8000000000000018,
+        "faction": "hollow",
+        "hostile_to": [
+          "player"
+        ],
+        "sight_radius": 7,
+        "hearing_radius": 6,
+        "sees_in_dark": true,
+        "wander_radius": 8,
+        "lurker": null
+      }
+    ],
+    "zones": []
+  },
+  "workshop_containers": [
+    {
+      "position": [
+        18,
+        11
+      ],
+      "remaining": [],
+      "dismantled": true
+    },
+    {
+      "position": [
+        25,
+        15
+      ],
+      "remaining": [],
+      "dismantled": false
+    }
+  ],
+  "harvested_animal": {
+    "square": [
+      68,
+      99
+    ],
+    "remains": [
+      58,
+      1
+    ],
+    "corpse_still_absent": true,
+    "retained_outputs": [
+      "animal_sinew",
+      "animal_sinew",
+      "animal_bone",
+      "animal_bone",
+      "crude_viscera"
+    ]
+  },
+  "assisted_revisit": {
+    "exact_store_fingerprint": true,
+    "no_regeneration": true,
+    "assistance": "Only after exact successful save cold-load: debug relocation to its reported square and positioning on its actual saved entrance, then production descent handler. No continued-survival claim."
+  }
+}

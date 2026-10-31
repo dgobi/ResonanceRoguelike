@@ -16,6 +16,7 @@ STEPS={(-1,0):1073741904,(1,0):1073741903,(0,-1):1073741906,(0,1):1073741905,
        (-1,-1):1073741919,(1,-1):1073741921,(-1,1):1073741913,(1,1):1073741915}
 EXHAUSTED={}
 LEDGER=None
+POLICY=None  # Optional bounded G22A expedition decisions; ordinary input only.
 
 
 def observed(e):
@@ -28,6 +29,9 @@ def observed(e):
 
 
 def record(e,label):
+    if POLICY is not None:
+        POLICY.record(e,label)
+        return
     from g20_journey import state
     row=dict(label=label,state=state(e),observed=observed(e))
     LEDGER.append(row)
@@ -67,7 +71,9 @@ def walk(e,goals,key,*,aim=None,avoid=True,strict=False,stop_on_harm=False,limit
     goals=set(goals);aim=aim or min(goals)
     hp=e.player.fighter.hp
     for _ in range(limit):
+        if POLICY is not None:yield from POLICY.check(e,key)
         if (e.player.x,e.player.y) in goals:return True
+        if POLICY is not None:strict=True
         path=route(e,goals,aim,avoid,strict);a,b=path[:2]
         before=int(e.local_map.explored.sum());at=(e.player.x,e.player.y)
         yield key(STEPS[b[0]-a[0],b[1]-a[1]])
@@ -92,9 +98,10 @@ def visible_tiles(e,predicate):
 
 def discover(e,predicate,key,*,aim=(40,21),limit=350):
     for _ in range(limit):
+        if POLICY is not None:yield from POLICY.check(e,key)
         found=visible_tiles(e,predicate)
         if found:return min(found,key=lambda p:(max(abs(p[0]-e.player.x),abs(p[1]-e.player.y)),p))
-        path=route(e,set(),aim);a,b=path[:2];before=int(e.local_map.explored.sum())
+        path=route(e,set(),aim,strict=POLICY is not None);a,b=path[:2];before=int(e.local_map.explored.sum())
         yield key(STEPS[b[0]-a[0],b[1]-a[1]])
         assert e.player.fighter.hp>0,'Ordinary journey died during scouting'
         if len(path)==2 and int(e.local_map.explored.sum())==before:EXHAUSTED.setdefault(id(e.local_map),set()).add(b)
@@ -321,7 +328,9 @@ def ward(e,key,capture,choose,ev,out):
     record(e,'setback measurement before withdrawal');capture('actual-setback')
     if e.player.fighter.hp==hp:
         ev.record['local_revision']='Original direct pickup caused no injury. One predeclared local revision: equip the actual Ward while adjacent to the observed keeper, then withdraw. No waits or HP/RNG changes.'
-        assert (e.world_time.turn,e.player.fighter.hp,e.player.x,e.player.y)==(1793,57,48,18),'Original no-injury path must reproduce before its single local revision'
+        from g22a_journey import validate_situation
+        validate_situation(e,dict(owner=e.world_map.report_owner,home=home,target=target,
+                                 submap=e.current_submap_id),keeper_delay=True)
         yield key(pygame.K_F5)
         ev.record['no_injury_checkpoint']=str(archive_checkpoint(e,out,'direct-pickup-no-injury'))
         yield from inventory(e,e.player.inventory.get_by_id('faceted_ward'),key,choose)

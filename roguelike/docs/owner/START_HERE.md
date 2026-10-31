@@ -1,5 +1,15 @@
 # Start here — production main, B3
 
+Expedition provisions: beside observed surface shallows, use `E`, select the
+water tile and press Enter. Each action fills one carried empty skin; with no
+empty skin it drinks directly. Select a filled skin or flask in `I` and press
+Enter to drink and retain its empty vessel. These actions spend normal time;
+filled vessels weigh more. A lit torch occupies the offhand and burns finite
+fuel. Equipping the Ward displaces and extinguishes it; relighting a carried
+usable torch displaces the Ward. Consider night visibility and nearby threats.
+The [G22A witness](../../../docs/owner/GAMEPLAY_G22A.md) records a bounded connected
+expedition using these existing controls, including finite roadside cooking.
+
 G16 preparation: use `E` beside a newly selected workshop's crate and Enter to
 search/take its one musk gland and one wood bundle (search again for the other).
 Read its preparation note by taking it, selecting it in `I` and pressing Enter.

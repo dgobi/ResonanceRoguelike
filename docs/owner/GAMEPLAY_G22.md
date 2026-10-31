@@ -5,6 +5,10 @@ alive return with the Ward has not been established. This delivery retains the
 verified implementation and honest unsuccessful journey evidence under the brief's
 explicit partial-publication provision. No verified-complete checkpoint is issued.
 
+Continuation: [G22A — Complete the connected return](GAMEPLAY_G22A.md) repairs the
+test player's assumptions and records its separate source-bound outcome. The
+original G22 failures and partial release history below remain historical evidence.
+
 The production checkout started exactly at reviewed G21
 `98a5af7dd2653b1b9b9a34a57880a98f2d3599d7`; all 2,864 frozen final-e inputs matched.
 Local/remote main and the reviewed checkpoint matched. Start and implementation

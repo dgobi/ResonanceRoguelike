@@ -1,0 +1,433 @@
+{
+  "sources": {
+    "evidence/gameplay-g22/development/journey-e/ward/result.json": "3650c5d1e5dc58de97bb75cafe412469e9fea913a03fd64f404d4f336be1925e",
+    "evidence/gameplay-g22/final-b/play/ward/result.json": "065e748ba19e3f5df47dd75efa1284bbbc2cec765bc61f853789e55320afe57a"
+  },
+  "comparison": [
+    {
+      "source": "evidence/gameplay-g22/development/journey-e/ward/result.json",
+      "moves": [
+        {
+          "turn": 1781,
+          "position": [
+            37,
+            23
+          ],
+          "event": {
+            "key": 1073741921,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1782,
+          "position": [
+            38,
+            22
+          ],
+          "event": {
+            "key": 1073741921,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1783,
+          "position": [
+            39,
+            21
+          ],
+          "event": {
+            "key": 1073741921,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1784,
+          "position": [
+            40,
+            20
+          ],
+          "event": {
+            "key": 1073741921,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1785,
+          "position": [
+            41,
+            19
+          ],
+          "event": {
+            "key": 1073741921,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1786,
+          "position": [
+            42,
+            18
+          ],
+          "event": {
+            "key": 1073741921,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1787,
+          "position": [
+            43,
+            17
+          ],
+          "event": {
+            "key": 1073741921,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1788,
+          "position": [
+            44,
+            16
+          ],
+          "event": {
+            "key": 1073741921,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1789,
+          "position": [
+            45,
+            15
+          ],
+          "event": {
+            "key": 1073741915,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1790,
+          "position": [
+            46,
+            16
+          ],
+          "event": {
+            "key": 1073741915,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1791,
+          "position": [
+            47,
+            17
+          ],
+          "event": {
+            "key": 1073741915,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1792,
+          "position": [
+            48,
+            18
+          ],
+          "event": {
+            "key": 101,
+            "unicode": "e",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1792,
+          "position": [
+            48,
+            18
+          ],
+          "event": {
+            "key": 13,
+            "unicode": "\r",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1793,
+          "position": [
+            48,
+            18
+          ],
+          "event": null
+        }
+      ],
+      "pickup_observed_actors": [
+        {
+          "name": "Hollow Revenant",
+          "x": 47,
+          "y": 17
+        }
+      ]
+    },
+    {
+      "source": "evidence/gameplay-g22/final-b/play/ward/result.json",
+      "moves": [
+        {
+          "turn": 1781,
+          "position": [
+            37,
+            23
+          ],
+          "event": {
+            "key": 1073741921,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1782,
+          "position": [
+            38,
+            22
+          ],
+          "event": {
+            "key": 1073741915,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1783,
+          "position": [
+            39,
+            23
+          ],
+          "event": {
+            "key": 1073741903,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1784,
+          "position": [
+            40,
+            23
+          ],
+          "event": {
+            "key": 1073741903,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1785,
+          "position": [
+            41,
+            23
+          ],
+          "event": {
+            "key": 1073741903,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1786,
+          "position": [
+            42,
+            23
+          ],
+          "event": {
+            "key": 1073741903,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1787,
+          "position": [
+            43,
+            23
+          ],
+          "event": {
+            "key": 1073741903,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1788,
+          "position": [
+            44,
+            23
+          ],
+          "event": {
+            "key": 1073741903,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1789,
+          "position": [
+            45,
+            23
+          ],
+          "event": {
+            "key": 1073741903,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1790,
+          "position": [
+            46,
+            23
+          ],
+          "event": {
+            "key": 1073741903,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1791,
+          "position": [
+            47,
+            23
+          ],
+          "event": {
+            "key": 1073741921,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1792,
+          "position": [
+            48,
+            22
+          ],
+          "event": {
+            "key": 1073741919,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1793,
+          "position": [
+            47,
+            21
+          ],
+          "event": {
+            "key": 1073741919,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1794,
+          "position": [
+            46,
+            20
+          ],
+          "event": {
+            "key": 1073741921,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1795,
+          "position": [
+            47,
+            19
+          ],
+          "event": {
+            "key": 1073741921,
+            "unicode": "",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1796,
+          "position": [
+            48,
+            18
+          ],
+          "event": {
+            "key": 101,
+            "unicode": "e",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1796,
+          "position": [
+            48,
+            18
+          ],
+          "event": {
+            "key": 13,
+            "unicode": "\r",
+            "mod": 0,
+            "actual_mods": 0
+          }
+        },
+        {
+          "turn": 1797,
+          "position": [
+            48,
+            18
+          ],
+          "event": null
+        }
+      ],
+      "pickup_observed_actors": []
+    }
+  ],
+  "conclusion": "Same state and northeast action at turn 1781. First different action at 1782 from (38,22): development NE, final-b SE. Development reaches (48,18) at 1792 and completes pickup at 1793, with visible Hollow Revenant at (47,17); final-b reaches it at 1796 and completes pickup at 1797 with no observed actor. The traces record input/positions but not per-action FOV or actor state at the split. No established cause for the differing observed occupancy/exploration or future AI RNG after their separate cold bootstraps. No timestamp adjustment can establish keeper contact."
+}

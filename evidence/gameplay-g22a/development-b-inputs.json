@@ -1,0 +1,6 @@
+{
+  "tools/g22a_journey.py": "81bb440f603beace73b67d05eea6df96565f42559a2b10d7c335e293362ca1e4",
+  "tools/g22_journey.py": "ec77217d5f37d8d4dfe764a230771bb737b8cb5a4219be0b8903522f65c340f0",
+  "tools/critical_fix_regressions/tests/test_gameplay_g22a.py": "fa992cee5e999d0750112d0fdf0e2165208cfc108635119cb8158cc5d8ff4cc0",
+  "evidence/gameplay-g22a/declaration.json": "b4b06cbd2e8139bb9740c49561cd572f8f7b07770c715096660c5dbf0b8888c9"
+}
