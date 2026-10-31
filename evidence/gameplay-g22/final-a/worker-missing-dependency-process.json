@@ -1,0 +1,29 @@
+{
+  "name": "worker-missing-dependency",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "worker",
+    "-p",
+    "test_bridge.py",
+    "-k",
+    "dependency_absence_structured",
+    "-v"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+  "start_utc": "2026-10-31T06:00:55.086392+00:00",
+  "end_utc": "2026-10-31T06:00:55.900174+00:00",
+  "seconds": 0.8141684000147507,
+  "exit_code": 0,
+  "error": null,
+  "log": "worker-missing-dependency-output.txt",
+  "log_sha256": "72702bdb6929411653be2da9ab16adc7339322267363c2818cd1b58c995dcc9e",
+  "source_stable": true,
+  "passed": true
+}

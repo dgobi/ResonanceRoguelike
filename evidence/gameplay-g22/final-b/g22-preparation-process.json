@@ -1,0 +1,26 @@
+{
+  "name": "g22-preparation",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\g22_journey.py",
+    "--stage",
+    "preparation",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22\\final-b\\play",
+    "--resume",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22\\final-b\\play\\read\\read-lab.zip"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-31T06:13:20.652533+00:00",
+  "end_utc": "2026-10-31T06:14:17.649480+00:00",
+  "seconds": 56.99634349998087,
+  "exit_code": 0,
+  "error": null,
+  "log": "g22-preparation-output.txt",
+  "log_sha256": "cc5b9e5d61a0152fff4914ab87c83e9dd316881dd718bae64d5d5428898bcb0e",
+  "source_stable": true,
+  "passed": true
+}

@@ -1,0 +1,24 @@
+{
+  "name": "g22-read",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\g22_journey.py",
+    "--stage",
+    "read",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22\\final-b\\play"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-31T06:13:08.580677+00:00",
+  "end_utc": "2026-10-31T06:13:19.752726+00:00",
+  "seconds": 11.172964600031264,
+  "exit_code": 0,
+  "error": null,
+  "log": "g22-read-output.txt",
+  "log_sha256": "7bfae726e8e0827054dc23e752573e8cea13372e6a28f696d63eaef8e5cbddaa",
+  "source_stable": true,
+  "passed": true
+}

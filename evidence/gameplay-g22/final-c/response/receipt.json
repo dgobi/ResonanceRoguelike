@@ -1,0 +1,40 @@
+{
+  "tested_revision": "22322cb98d0453a48e66625408e0772b03e80598",
+  "driver_sha256": "c47077fa4e30bb4095e16ed463f90338f9d5f5c85a8f2abf2d67b02d15901b9e",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\g22_journey.py",
+    "--stage",
+    "recover",
+    "--resume",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22\\response-input\\first-injury.zip",
+    "--context",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22\\response-input\\continuation-context.json",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22\\final-c\\response"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "seconds": 15.2046154999407,
+  "process_exit_code": 1,
+  "original_journey_process_passed": false,
+  "finite_paid_treatment_passed": true,
+  "treatment": {
+    "before_hp": 55,
+    "after_hp": 60,
+    "turns": 1,
+    "owned_after": false,
+    "remaining": false
+  },
+  "meaningful_followup": true,
+  "source_stable": true,
+  "source_manifest": "../inputs.json",
+  "provenance": "../response-input/provenance.json",
+  "g22_acceptance": "partial/blocked",
+  "integrated_journey_passed": false,
+  "result_sha256": "d910e903ed2c9226ad09832c7c17a410cc8cc663708ff0ae97749c6bd9405fc2",
+  "log_sha256": "92e2bf5d5c562e7a56ba6fc692b65ff50101df5c18f642ce76375d756cca073d",
+  "limit": "This branch verifies finite treatment and further ordinary action. Its failed full return remains failed, and no evidence is stitched to the separately generated final-b world."
+}

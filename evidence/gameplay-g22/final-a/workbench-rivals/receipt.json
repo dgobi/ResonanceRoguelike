@@ -1,0 +1,127 @@
+{
+  "started_utc": "2026-10-31T06:01:32.964Z",
+  "package_sha256": "e34433e0d47a9d67b30121dbd1c656e26c6a403ffb25508decc8a42d87b6a18c",
+  "root": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\g22\\final-rivals-final-a\\runtime-inputs",
+  "checks": [
+    "Typed faction/list edits, Source, Undo/Redo, reviewed publication and byte-checked reopen",
+    "Real charged AI from saved reciprocal, directional, unmatched and [] definitions",
+    "Unrelated source fields preserved, stale-source publication rejected, minimum width no horizontal overflow; no desktop input"
+  ],
+  "saved": [
+    {
+      "faction": "outlaw",
+      "hostile": [
+        "stalker"
+      ],
+      "sha256": "fc2bf729070e20f0495af0de5443451a9d7b9e6453a94baf899697b8f7e6b807",
+      "runtime": {
+        "faction": "outlaw",
+        "hostile_to": [
+          "stalker"
+        ],
+        "selected_rival": [
+          true,
+          true
+        ],
+        "turn": 481,
+        "positions": [
+          [
+            13,
+            12
+          ],
+          [
+            15,
+            12
+          ]
+        ],
+        "scope": "Native saved/reopened source -> real factory -> charged ordinary AI phase; controlled grass, not a natural encounter."
+      }
+    },
+    {
+      "faction": "local_watch",
+      "hostile": [
+        "stalker"
+      ],
+      "sha256": "0e83388ad904f5f193e7ca68492cc2dd7574a87e824057f8eb0487d90c641427",
+      "runtime": {
+        "faction": "local_watch",
+        "hostile_to": [
+          "stalker"
+        ],
+        "selected_rival": [
+          true,
+          false
+        ],
+        "turn": 481,
+        "positions": [
+          [
+            13,
+            12
+          ],
+          [
+            16,
+            12
+          ]
+        ],
+        "scope": "Native saved/reopened source -> real factory -> charged ordinary AI phase; controlled grass, not a natural encounter."
+      }
+    },
+    {
+      "faction": "local_watch",
+      "hostile": [
+        "unmatched"
+      ],
+      "sha256": "38e6f74bae37de5dad7c6b8acfa92ff5518d22e596c1d3f48ff0e3394f45e7a2",
+      "runtime": {
+        "faction": "local_watch",
+        "hostile_to": [
+          "unmatched"
+        ],
+        "selected_rival": [
+          false,
+          false
+        ],
+        "turn": 481,
+        "positions": [
+          [
+            11,
+            13
+          ],
+          [
+            17,
+            11
+          ]
+        ],
+        "scope": "Native saved/reopened source -> real factory -> charged ordinary AI phase; controlled grass, not a natural encounter."
+      }
+    },
+    {
+      "faction": "outlaw",
+      "hostile": [],
+      "sha256": "6d4f9ef819b3a06da50cecb2b9aed8d8cef240108d87f81763c3372781a2ed93",
+      "runtime": {
+        "faction": "outlaw",
+        "hostile_to": [],
+        "selected_rival": [
+          false,
+          true
+        ],
+        "turn": 481,
+        "positions": [
+          [
+            12,
+            13
+          ],
+          [
+            15,
+            12
+          ]
+        ],
+        "scope": "Native saved/reopened source -> real factory -> charged ordinary AI phase; controlled grass, not a natural encounter."
+      }
+    }
+  ],
+  "errors": [],
+  "stale_source_rejected": true,
+  "passed": true
+}

@@ -1,0 +1,26 @@
+{
+  "name": "g21-passive",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\verify_g21_play.py",
+    "--stage",
+    "passive",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22\\final-b\\g21-play",
+    "--resume",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22\\final-b\\g21-play\\common\\common.zip"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-31T06:12:19.954609+00:00",
+  "end_utc": "2026-10-31T06:12:27.081024+00:00",
+  "seconds": 7.126986599992961,
+  "exit_code": 0,
+  "error": null,
+  "log": "g21-passive-output.txt",
+  "log_sha256": "c6ee57aa34ff8e84ab8070daa4a41b8e3840fc994b20b453d044650787a48b56",
+  "source_stable": true,
+  "passed": true
+}

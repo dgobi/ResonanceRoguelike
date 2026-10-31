@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "fixture": "Published physical letter staged on ordinary fixture floor; native pickup/inventory/read keys. Fresh real world metadata supplies binding; no unaided acquisition/journey claim.",
+  "pages": [
+    {
+      "text": "Road clerk's copy, kept beside the waking chamber.\n\nThe workshop was our stop for road preparations: fuel, musk work, and an emergency wrap. Its work note explains the preparation. The barrow store kept a bronze ward, worth the burden of bringing home. They are separate opportunities; neither binds you to the other.\n\nThe following entries give coarse map squares and displacement from this laboratory. Use M to inspect the map; travel on foot and find an approach. Square distance is not walking time.\n\nThis is an old record of former use, not a promise of present stock or safety. Roads, inhabitants and the way inside must still be discovered."
+    },
+    {
+      "text": "Workshop \u2014 square (75, 100); 2 east, 1 south from the recorded laboratory (73, 99). 3 coarse squares, not walking time.\nA workshop once used for road preparations: fuel, musk work and a traveller's emergency wrap. Present stock and safety are unknown."
+    },
+    {
+      "text": "Ward store \u2014 square (68, 98); 5 west, 1 north from the recorded laboratory (73, 99). 6 coarse squares, not walking time.\nA barrow store where a bronze ward was kept. Its present contents, inhabitants and safety are unknown."
+    }
+  ],
+  "learned": [
+    "workshop",
+    "ward_store"
+  ],
+  "read_cost": 1,
+  "pickup_cost": 1
+}

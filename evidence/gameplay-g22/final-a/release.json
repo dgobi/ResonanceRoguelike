@@ -1,0 +1,279 @@
+{
+  "passed": false,
+  "tested_revision": "62c049a2cb8a1d024b6320c70edea89396f4f1eb",
+  "started_utc": "2026-10-31T05:58:46.460343+00:00",
+  "source_manifest": "inputs.json",
+  "scope": "G22 completed implementation; journey acceptance explicitly partial/blocked",
+  "processes": [
+    {
+      "name": "workbench-frontend",
+      "command": [
+        "npm.cmd",
+        "test"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "start_utc": "2026-10-31T05:58:46.461034+00:00",
+      "end_utc": "2026-10-31T05:58:52.986828+00:00",
+      "seconds": 6.5250566999893636,
+      "exit_code": 0,
+      "error": null,
+      "log": "workbench-frontend-output.txt",
+      "log_sha256": "bcbc7ec3b593443fc5c0c25961667c94d9f99b50879801aaa1e838965df716c0",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "workbench-typecheck",
+      "command": [
+        "npm.cmd",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "start_utc": "2026-10-31T05:58:54.195396+00:00",
+      "end_utc": "2026-10-31T05:58:57.775315+00:00",
+      "seconds": 3.5797296999953687,
+      "exit_code": 0,
+      "error": null,
+      "log": "workbench-typecheck-output.txt",
+      "log_sha256": "77783bf2ca9523ff1e6aa3f5a098f779a50fd8cade5fb2774a4da5c450761c89",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "workbench-host",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--manifest-path",
+        "src-tauri/Cargo.toml"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "start_utc": "2026-10-31T05:58:58.638393+00:00",
+      "end_utc": "2026-10-31T05:59:37.981082+00:00",
+      "seconds": 39.34310579998419,
+      "exit_code": 0,
+      "error": null,
+      "log": "workbench-host-output.txt",
+      "log_sha256": "87b53e5086abb662ba3bef28b7fcee3efe8079df410ccc09cb047ac049f0f62f",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "workbench-clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "--manifest-path",
+        "src-tauri/Cargo.toml",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "start_utc": "2026-10-31T05:59:38.812799+00:00",
+      "end_utc": "2026-10-31T05:59:44.166165+00:00",
+      "seconds": 5.353977199993096,
+      "exit_code": 0,
+      "error": null,
+      "log": "workbench-clippy-output.txt",
+      "log_sha256": "733c38e7edec370df2c89b697929ca5a12b38a7dba77f5700998026f298acbbe",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "workbench-bundle",
+      "command": [
+        "npm.cmd",
+        "run",
+        "bundle",
+        "--",
+        "--",
+        "--locked"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "start_utc": "2026-10-31T05:59:45.015779+00:00",
+      "end_utc": "2026-10-31T06:00:54.248676+00:00",
+      "seconds": 69.23462889995426,
+      "exit_code": 0,
+      "error": null,
+      "log": "workbench-bundle-output.txt",
+      "log_sha256": "877dcb6ac8112a15902c5d5732332c2511d83021d2574720ccaf1cb38eaf2515",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "worker-missing-dependency",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "worker",
+        "-p",
+        "test_bridge.py",
+        "-k",
+        "dependency_absence_structured",
+        "-v"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "start_utc": "2026-10-31T06:00:55.086392+00:00",
+      "end_utc": "2026-10-31T06:00:55.900174+00:00",
+      "seconds": 0.8141684000147507,
+      "exit_code": 0,
+      "error": null,
+      "log": "worker-missing-dependency-output.txt",
+      "log_sha256": "72702bdb6929411653be2da9ab16adc7339322267363c2818cd1b58c995dcc9e",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "workbench-native-hearing",
+      "command": [
+        "node",
+        "scripts/run-hearing.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "start_utc": "2026-10-31T06:00:56.671383+00:00",
+      "end_utc": "2026-10-31T06:01:31.098620+00:00",
+      "seconds": 34.424535500002094,
+      "exit_code": 0,
+      "error": null,
+      "log": "workbench-native-hearing-output.txt",
+      "log_sha256": "781df3fc6e75190b2f92a612dffcf8d8228b99a19973fa243e1fe5373029a1cf",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "workbench-native-rivals",
+      "command": [
+        "node",
+        "scripts/run-rivals.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "start_utc": "2026-10-31T06:01:32.076419+00:00",
+      "end_utc": "2026-10-31T06:02:25.868729+00:00",
+      "seconds": 53.79145039990544,
+      "exit_code": 0,
+      "error": null,
+      "log": "workbench-native-rivals-output.txt",
+      "log_sha256": "f67ce67b6c5d8655810e2a9500745f4208353221a0e529c065456957234faf3c",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "workbench-native-reports",
+      "command": [
+        "node",
+        "scripts/run-reports.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "start_utc": "2026-10-31T06:02:26.840763+00:00",
+      "end_utc": "2026-10-31T06:03:51.555928+00:00",
+      "seconds": 84.71520169998985,
+      "exit_code": 0,
+      "error": null,
+      "log": "workbench-native-reports-output.txt",
+      "log_sha256": "9cb2ec383f47d90947c2adf8e3b6245796fc49f5ecf720e5ee7251ec2258d557",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "historical-g14",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\g15_historical.py",
+        "--baseline",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g19\\pre-edit-historical.json",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22\\final-a\\historical-g14.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "start_utc": "2026-10-31T06:03:53.288580+00:00",
+      "end_utc": "2026-10-31T06:03:55.690735+00:00",
+      "seconds": 2.401923199999146,
+      "exit_code": 1,
+      "error": null,
+      "log": "historical-g14-output.txt",
+      "log_sha256": "b02e86a3b877b01388f385f719f4ee895b1b36410e5e525d8f59203e80c531b2",
+      "source_stable": true,
+      "passed": false
+    }
+  ],
+  "environment": {
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+    "executable": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "dependencies": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6"
+    },
+    "tools": {
+      "node": "v24.15.0",
+      "rustc": "rustc 1.95.0 (59807616e 2026-04-14)",
+      "cargo": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)"
+    }
+  },
+  "isolation": "Production checkout in place. Independent gates and native/runtime fixtures own separate disposable save/output roots. No desktop input, campaign or source mutation.",
+  "package": {
+    "executable": {
+      "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+      "sha256": "e34433e0d47a9d67b30121dbd1c656e26c6a403ffb25508decc8a42d87b6a18c"
+    },
+    "installers": [
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.1.0_x64-setup.exe",
+        "sha256": "e3ba7d562db3df0b9f04e26f024b2f3c7d732dfc94366aeb89d8c8776811540a"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.2.0_x64-setup.exe",
+        "sha256": "9e87da9a4efda8781557e28dd5b49e0d0243e97315c65ea676e375f3babbdaeb"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.3.0_x64-setup.exe",
+        "sha256": "ab49e110dd368aa069d81556ca4aca00f66c6bf0f28778f49fe46602b12529c8"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.4.0_x64-setup.exe",
+        "sha256": "877ce34f8cf1d086047c9ca99d41cb1aa94586408a9fcadd7ca8df8a98897bbb"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.5.0_x64-setup.exe",
+        "sha256": "2f620c05945b82e695b5bcb96f075c760e39b6c61bde3425d2749488def8165c"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.6.0_x64-setup.exe",
+        "sha256": "2d5faf3e1e1c97684bc3d1c0f7448c1cddfdf2e926746cd4db3fc44d784730c9"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.7.0_x64-setup.exe",
+        "sha256": "9edef905e6e5de88d4fa738e76a76b7b7634aa9d8f4086ca6e9ed42a40307675"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.7.1_x64-setup.exe",
+        "sha256": "70273646bee5d2ae3737916455abe936846df2f8bb573504250344844f9eaffb"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.8.0_x64-setup.exe",
+        "sha256": "f548ba9b1a747c04105f8c445a0aeb27c2b5214569a236fc15ed7963f94f24fb"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+        "sha256": "21d359360ad4b3bda7bf99ef2fcea408ec4100197367a3642ef7e107997dc151"
+      }
+    ]
+  },
+  "demonstration_failure": "AssertionError('historical-g14')",
+  "scoped_verification_passed": false,
+  "status": "failed/incomplete",
+  "interruption": "Historical G14 exact snapshot rejected empty optional report keys. Remaining owned gate tree stopped before source correction; incomplete gates are not certified. Archives and equality assertions unchanged. Final-b reruns corrected inputs."
+}

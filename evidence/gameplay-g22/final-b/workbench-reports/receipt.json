@@ -1,0 +1,53 @@
+{
+  "started_utc": "2026-10-31T06:09:51.302Z",
+  "package_sha256": "104d975f4625595d02db26d7e777d84f1d8d3f5f91bcf527346d9c472369c3f0",
+  "runner_sha256": "198ae2831e66a24faa079f874ad642d27389229fb71e5e5cc1f6e0b41aa5b64a",
+  "root": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\g22\\final-reports-final-b\\runtime-inputs",
+  "checks": [
+    "Absent attachment is a valid explicit state, without a false repair warning.",
+    "Selected single-dose pool, exact workshop D and two existing membership substitutions constructed, validated, reviewed, published and reopened through supported Source routes.",
+    "Unique text: typed report attachment, prose edit, Undo/Redo, Source, disk recovery after process restart, unsupported-role rejection, unbound production preview, stale-source rejection, reviewed variant publication, exact reopen and paid actual-game read."
+  ],
+  "saved": [
+    {
+      "path": "roguelike/data/loot_pools/workshop_d_treatment.json",
+      "sha256": "82b23ca9485dfebadae7ccbb6eb135f97d7eef951b73a22113b2fbb699226f31"
+    },
+    {
+      "path": "roguelike/data/buildings/commercial/workshop_d.json",
+      "sha256": "0f63db2f32c1c51cf0e8f4e254eda34e0c35440ac70ab26f7e586e6a1f67fc64"
+    },
+    {
+      "path": "roguelike/data/generation/settlement_profiles.json",
+      "sha256": "22c231e3ff3ddb5f1fe428ee513d4cdcaf4c184b315c033e6a994b280e095c53"
+    },
+    {
+      "path": "roguelike/data/texts/lab/g22_report_variant.json",
+      "sha256": "797d1e7f7e879f2b02092304940eb6c1ff5151842d5207588fd0f853af2c93c7"
+    }
+  ],
+  "errors": [],
+  "runtime": {
+    "passed": true,
+    "fixture": "Published physical letter staged on ordinary fixture floor; native pickup/inventory/read keys. Fresh real world metadata supplies binding; no unaided acquisition/journey claim.",
+    "pages": [
+      {
+        "text": "Road clerk's copy, kept beside the waking chamber.\n\nThe workshop was our stop for road preparations: fuel, musk work, and an emergency wrap. Its work note explains the preparation. The barrow store kept a bronze ward, worth the burden of bringing home. They are separate opportunities; neither binds you to the other.\n\nThe following entries give coarse map squares and displacement from this laboratory. Use M to inspect the map; travel on foot and find an approach. Square distance is not walking time.\n\nThis is an old record of former use, not a promise of present stock or safety. Roads, inhabitants and the way inside must still be discovered."
+      },
+      {
+        "text": "Workshop — square (75, 100); 2 east, 1 south from the recorded laboratory (73, 99). 3 coarse squares, not walking time.\nA workshop once used for road preparations: fuel, musk work and a traveller's emergency wrap. Present stock and safety are unknown."
+      },
+      {
+        "text": "Ward store — square (68, 98); 5 west, 1 north from the recorded laboratory (73, 99). 6 coarse squares, not walking time.\nA barrow store where a bronze ward was kept. Its present contents, inhabitants and safety are unknown."
+      }
+    ],
+    "learned": [
+      "workshop",
+      "ward_store"
+    ],
+    "read_cost": 1,
+    "pickup_cost": 1
+  },
+  "passed": true,
+  "finished_utc": "2026-10-31T06:11:19.497Z"
+}

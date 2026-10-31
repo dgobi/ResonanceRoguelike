@@ -1,0 +1,22 @@
+{
+  "name": "production-d",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\verify_d.py",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\.baseline\\gameplay-g22-final-b"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-31T06:06:33.890463+00:00",
+  "end_utc": "2026-10-31T06:16:59.227009+00:00",
+  "seconds": 625.3360355999321,
+  "exit_code": 0,
+  "error": null,
+  "log": "production-d-output.txt",
+  "log_sha256": "4ea6c6dbe38e5af2311132a23054c9fb39e1d56e6b3b2686159f32100596b482",
+  "source_stable": true,
+  "passed": true
+}

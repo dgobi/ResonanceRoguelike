@@ -1,0 +1,219 @@
+{
+  "passed": false,
+  "g22_acceptance": "partial/blocked",
+  "tested_revision": "22322cb98d0453a48e66625408e0772b03e80598",
+  "started_utc": "2026-10-31T06:35:43.684196+00:00",
+  "source_manifest": "inputs.json",
+  "retained_gates": [
+    "workbench-frontend",
+    "workbench-typecheck",
+    "workbench-host",
+    "workbench-clippy",
+    "workbench-bundle",
+    "worker-missing-dependency",
+    "workbench-native-hearing",
+    "workbench-native-rivals",
+    "workbench-native-reports",
+    "historical-g14",
+    "historical-g16",
+    "g19-original-loop",
+    "g20-sound-original-loop",
+    "g21-native",
+    "g21-common",
+    "g21-conflict",
+    "g21-musk",
+    "g21-passive",
+    "g21-lethal",
+    "g21-revisit",
+    "g22-metadata",
+    "g22-read",
+    "g22-preparation",
+    "production-d"
+  ],
+  "retained_boundary": "Only historical factory fixture bindings and explicit catalogue counts changed, in the ten listed test inputs. Full unfiltered focused and worker suites rerun. Retained production-D, genuine historical/G19-G21 loops, metadata, frontend/typecheck, host/clippy, bundle and native proofs do not execute the changed unittest fixture/count bodies. The G22 journey driver is byte-identical, and its final-b timing-guard failure remains failed. The package contains bridge.py and pinned runtime, not worker tests. All runtime/data/other driver/package hashes are exact. Separate genuine G22 checkpoint branches certify treatment/report persistence and retain the failed last return strategy; they are not stitched to the final-b fresh journey.",
+  "processes": [
+    {
+      "name": "g22-revisit",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\g22_journey.py",
+        "--stage",
+        "revisit",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22\\final-c\\play",
+        "--resume",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22\\recovery-input\\treated.zip"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "start_utc": "2026-10-31T06:35:43.685200+00:00",
+      "end_utc": "2026-10-31T06:35:48.636154+00:00",
+      "seconds": 4.951081500039436,
+      "exit_code": 0,
+      "error": null,
+      "log": "g22-revisit-output.txt",
+      "log_sha256": "e6b31befc79502ebc21d7073f59079ef1d560d792a6a6b2484adf6e4523cbb5c",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "g22-return-certification",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\g22_journey.py",
+        "--stage",
+        "return",
+        "--resume",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22\\recovery-input\\treated.zip",
+        "--context",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22\\recovery-input\\continuation-context.json",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22\\final-c\\play"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "start_utc": "2026-10-31T06:35:49.208425+00:00",
+      "end_utc": "2026-10-31T06:36:01.037958+00:00",
+      "seconds": 11.829201099928468,
+      "exit_code": 1,
+      "error": null,
+      "log": "g22-return-certification-output.txt",
+      "log_sha256": "e07b6c73f7b890f99dbc0155fadd9cdd5af4eee2bbaceb499b5ea77d62695cb7",
+      "source_stable": true,
+      "passed": false
+    },
+    {
+      "name": "focused",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\critical_fix_regressions\\verify_fixes.py",
+        "--timeout",
+        "3600",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22\\final-c\\focused"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "start_utc": "2026-10-31T06:35:43.685200+00:00",
+      "end_utc": "2026-10-31T06:52:51.882694+00:00",
+      "seconds": 1028.1981466000434,
+      "exit_code": 0,
+      "error": null,
+      "log": "focused-output.txt",
+      "log_sha256": "f5773449c1f10652cd0c36f1aafdd2436f4b3e56b5b4c5f18f24d1105e00efa2",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "workbench-worker",
+      "command": [
+        "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "worker",
+        "-v"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "start_utc": "2026-10-31T06:35:43.685200+00:00",
+      "end_utc": "2026-10-31T06:55:56.521225+00:00",
+      "seconds": 1212.8361698000226,
+      "exit_code": 0,
+      "error": null,
+      "log": "workbench-worker-output.txt",
+      "log_sha256": "e84489146756344aa0afdebb6978f2e5c38ae2c9da339cd4456263199cfc5cb0",
+      "source_stable": true,
+      "passed": true
+    }
+  ],
+  "package": {
+    "executable": {
+      "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+      "sha256": "104d975f4625595d02db26d7e777d84f1d8d3f5f91bcf527346d9c472369c3f0"
+    },
+    "installers": [
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.1.0_x64-setup.exe",
+        "sha256": "e3ba7d562db3df0b9f04e26f024b2f3c7d732dfc94366aeb89d8c8776811540a"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.2.0_x64-setup.exe",
+        "sha256": "9e87da9a4efda8781557e28dd5b49e0d0243e97315c65ea676e375f3babbdaeb"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.3.0_x64-setup.exe",
+        "sha256": "ab49e110dd368aa069d81556ca4aca00f66c6bf0f28778f49fe46602b12529c8"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.4.0_x64-setup.exe",
+        "sha256": "877ce34f8cf1d086047c9ca99d41cb1aa94586408a9fcadd7ca8df8a98897bbb"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.5.0_x64-setup.exe",
+        "sha256": "2f620c05945b82e695b5bcb96f075c760e39b6c61bde3425d2749488def8165c"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.6.0_x64-setup.exe",
+        "sha256": "2d5faf3e1e1c97684bc3d1c0f7448c1cddfdf2e926746cd4db3fc44d784730c9"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.7.0_x64-setup.exe",
+        "sha256": "9edef905e6e5de88d4fa738e76a76b7b7634aa9d8f4086ca6e9ed42a40307675"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.7.1_x64-setup.exe",
+        "sha256": "70273646bee5d2ae3737916455abe936846df2f8bb573504250344844f9eaffb"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.8.0_x64-setup.exe",
+        "sha256": "f548ba9b1a747c04105f8c445a0aeb27c2b5214569a236fc15ed7963f94f24fb"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+        "sha256": "b03a168df913875a930ed69c2b90d1e3a542816107f857e18426461b027ef7f2"
+      }
+    ]
+  },
+  "production": {
+    "totals": {
+      "checks": 3704,
+      "passed": 3704,
+      "failed": 0,
+      "workers": 159
+    },
+    "runner_negative_controls": 7,
+    "unfiltered": true,
+    "passed": true
+  },
+  "environment": {
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+    "executable": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "dependencies": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6"
+    },
+    "tools": {
+      "node": "v24.15.0",
+      "rustc": "rustc 1.95.0 (59807616e 2026-04-14)",
+      "cargo": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)"
+    }
+  },
+  "independent_return_passed": false,
+  "journey_passed": false,
+  "fresh_journey_failure": "final-b/play/ward: same position/HP, four-phase timing drift before local revision; no completed integrated return. Original death branches remain separately disclosed.",
+  "finished_utc": "2026-10-31T06:55:57.096537+00:00",
+  "final_wall_seconds": 1213.4126458000392,
+  "source_stable": true,
+  "scoped_verification_passed": true
+}

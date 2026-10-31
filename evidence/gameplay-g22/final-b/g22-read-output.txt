@@ -1,0 +1,11 @@
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 19
+  Loaded sheet 'urizen': assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png
+  Loaded sheet 'pixel': assets/sprites/PixelAsciiSpritesheet.png
+  Loaded sheet 'hexany_creatures': assets/sprites/HexanyCreatures.png
+  Loaded sheet 'terrain': assets/sprites/terrain.png
+  Loaded sheet 'objects': assets/sprites/objects.png
+  Loaded sheet 'creatures': assets/sprites/creatures.png
+SpriteRegistry: 263 tiles across 6 sheets
+{"label": "real fresh start", "turn": 480, "hp": 60, "square": [73, 99], "position": [15, 20]}
+{"label": "read recovered original report after divergent F9", "turn": 484, "hp": 60, "square": [73, 99], "position": [15, 20]}

@@ -1,0 +1,51 @@
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 19
+  Loaded sheet 'urizen': assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png
+  Loaded sheet 'pixel': assets/sprites/PixelAsciiSpritesheet.png
+  Loaded sheet 'hexany_creatures': assets/sprites/HexanyCreatures.png
+  Loaded sheet 'terrain': assets/sprites/terrain.png
+  Loaded sheet 'objects': assets/sprites/objects.png
+  Loaded sheet 'creatures': assets/sprites/creatures.png
+SpriteRegistry: 263 tiles across 6 sheets
+{"label": "cold prepared laboratory; second outing", "turn": 1124, "hp": 57, "square": [73, 99], "position": [15, 20]}
+G:\GameDev\RoguelikeProject\roguelike\engine\engine.py:5024: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.
+Add 'from tcod import libtcodpy' if you haven't already.
+Replace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'
+  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,
+[gen] waystones placed in chunk (72,99): 1
+{"label": "ordinary crossing", "turn": 1147, "hp": 57, "square": [72, 99], "position": [79, 19]}
+{"label": "ordinary crossing", "turn": 1227, "hp": 57, "square": [71, 99], "position": [79, 4]}
+{"label": "ordinary crossing", "turn": 1386, "hp": 57, "square": [70, 99], "position": [79, 20]}
+{"label": "ordinary crossing", "turn": 1468, "hp": 57, "square": [69, 99], "position": [79, 14]}
+{"label": "ordinary crossing", "turn": 1548, "hp": 57, "square": [68, 99], "position": [79, 8]}
+{"label": "ordinary crossing", "turn": 1557, "hp": 57, "square": [68, 98], "position": [73, 42]}
+{"label": "arrived reported Ward square", "turn": 1557, "hp": 57, "square": [68, 98], "position": [73, 42]}
+{"label": "ordinary store entry", "turn": 1773, "hp": 57, "square": [68, 98], "position": [31, 26]}
+{"label": "direct approach before spending musk; declared mistake begins", "turn": 1775, "hp": 57, "square": [68, 98], "position": [31, 26]}
+{"label": "setback measurement before withdrawal", "turn": 1797, "hp": 57, "square": [68, 98], "position": [48, 18]}
+Traceback (most recent call last):
+  File "G:\GameDev\RoguelikeProject\tools\g22_journey.py", line 480, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "G:\GameDev\RoguelikeProject\tools\g22_journey.py", line 477, in main
+    run_stage(a.evidence,a.stage,{'read':read_start,'preparation':preparation,'ward':ward,'return':cold_return,'recover':cold_recover,'revisit':store_revisit}[a.stage],a.resume,max_frames=6500,max_seconds=900,max_turns=4000)
+  File "G:\GameDev\RoguelikeProject\tools\g12_journey.py", line 83, in run_stage
+    run_journey(ev,lambda e,key,capture,choose:actions(e,key,capture,choose,ev,stage),**loop_limits)
+  File "G:\GameDev\RoguelikeProject\tools\b1_journey.py", line 317, in run_journey
+    main.main()
+  File "G:\GameDev\RoguelikeProject\roguelike\main.py", line 115, in main
+    engine.run()
+  File "G:\GameDev\RoguelikeProject\tools\b1_journey.py", line 286, in run
+    return original_run(e)
+           ^^^^^^^^^^^^^^^
+  File "G:\GameDev\RoguelikeProject\roguelike\engine\engine.py", line 661, in run
+    for event in pygame.event.get():
+                 ^^^^^^^^^^^^^^^^^^
+  File "G:\GameDev\RoguelikeProject\tools\b1_journey.py", line 300, in events
+    action = next(current["actions"])
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\GameDev\RoguelikeProject\tools\b1_journey.py", line 76, in actions
+    yield from custom_actions(e, key, capture, choose_inventory)
+  File "G:\GameDev\RoguelikeProject\tools\g22_journey.py", line 324, in ward
+    assert (e.world_time.turn,e.player.fighter.hp,e.player.x,e.player.y)==(1793,57,48,18),'Original no-injury path must reproduce before its single local revision'
+AssertionError: Original no-injury path must reproduce before its single local revision

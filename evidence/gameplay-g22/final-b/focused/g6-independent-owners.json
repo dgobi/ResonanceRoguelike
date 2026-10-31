@@ -1,0 +1,28 @@
+{
+  "controls": "two-shrine policy, fixture teleport/positioning, stationary AI; real content transfer, travel, F5/F9 and cold load",
+  "sites": [
+    {
+      "site": "site-74-34-16-21-N",
+      "chunk": [
+        74,
+        34
+      ],
+      "before": 2,
+      "remaining": 1
+    },
+    {
+      "site": "site-81-34-48-21-N",
+      "chunk": [
+        81,
+        34
+      ],
+      "before": 3,
+      "remaining": 2
+    }
+  ],
+  "checkpoint_scope": "explored two-site controlled campaign",
+  "scene_count": 4,
+  "checkpoint_seconds": 0.7753621999872848,
+  "cold_seconds": 1.246867600013502,
+  "checkpoint_bytes": 20041296
+}

@@ -1,0 +1,26 @@
+{
+  "name": "g22-ward",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\g22_journey.py",
+    "--stage",
+    "ward",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22\\final-b\\play",
+    "--resume",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22\\final-b\\play\\preparation\\prepared-return.zip"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-31T06:14:18.609581+00:00",
+  "end_utc": "2026-10-31T06:14:42.550130+00:00",
+  "seconds": 23.940104000037536,
+  "exit_code": 1,
+  "error": null,
+  "log": "g22-ward-output.txt",
+  "log_sha256": "e0a943567e26be9ba73cc56728422af27779ab1354f13d4ca3a069511808443f",
+  "source_stable": true,
+  "passed": false
+}

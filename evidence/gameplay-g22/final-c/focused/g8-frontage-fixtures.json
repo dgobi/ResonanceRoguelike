@@ -1,0 +1,182 @@
+[
+  {
+    "normal": "N",
+    "width": 1,
+    "full_width": 4,
+    "positive": true,
+    "narrow_span": false,
+    "private_buffer": false,
+    "public_overlap": false
+  },
+  {
+    "normal": "E",
+    "width": 1,
+    "full_width": 4,
+    "positive": true,
+    "narrow_span": false,
+    "private_buffer": false,
+    "public_overlap": false
+  },
+  {
+    "normal": "S",
+    "width": 1,
+    "full_width": 4,
+    "positive": true,
+    "narrow_span": false,
+    "private_buffer": false,
+    "public_overlap": false
+  },
+  {
+    "normal": "W",
+    "width": 1,
+    "full_width": 4,
+    "positive": true,
+    "narrow_span": false,
+    "private_buffer": false,
+    "public_overlap": false
+  },
+  {
+    "normal": "N",
+    "width": 2,
+    "full_width": 4,
+    "positive": true,
+    "narrow_span": false,
+    "private_buffer": false,
+    "public_overlap": false
+  },
+  {
+    "normal": "E",
+    "width": 2,
+    "full_width": 4,
+    "positive": true,
+    "narrow_span": false,
+    "private_buffer": false,
+    "public_overlap": false
+  },
+  {
+    "normal": "S",
+    "width": 2,
+    "full_width": 4,
+    "positive": true,
+    "narrow_span": false,
+    "private_buffer": false,
+    "public_overlap": false
+  },
+  {
+    "normal": "W",
+    "width": 2,
+    "full_width": 4,
+    "positive": true,
+    "narrow_span": false,
+    "private_buffer": false,
+    "public_overlap": false
+  },
+  {
+    "normal": "N",
+    "width": 3,
+    "full_width": 4,
+    "positive": true,
+    "narrow_span": false,
+    "private_buffer": false,
+    "public_overlap": false
+  },
+  {
+    "normal": "E",
+    "width": 3,
+    "full_width": 4,
+    "positive": true,
+    "narrow_span": false,
+    "private_buffer": false,
+    "public_overlap": false
+  },
+  {
+    "normal": "S",
+    "width": 3,
+    "full_width": 4,
+    "positive": true,
+    "narrow_span": false,
+    "private_buffer": false,
+    "public_overlap": false
+  },
+  {
+    "normal": "W",
+    "width": 3,
+    "full_width": 4,
+    "positive": true,
+    "narrow_span": false,
+    "private_buffer": false,
+    "public_overlap": false
+  },
+  {
+    "normal": "N",
+    "width": 4,
+    "full_width": 4,
+    "positive": true,
+    "narrow_span": false,
+    "private_buffer": false,
+    "public_overlap": false
+  },
+  {
+    "normal": "E",
+    "width": 4,
+    "full_width": 4,
+    "positive": true,
+    "narrow_span": false,
+    "private_buffer": false,
+    "public_overlap": false
+  },
+  {
+    "normal": "S",
+    "width": 4,
+    "full_width": 4,
+    "positive": true,
+    "narrow_span": false,
+    "private_buffer": false,
+    "public_overlap": false
+  },
+  {
+    "normal": "W",
+    "width": 4,
+    "full_width": 4,
+    "positive": true,
+    "narrow_span": false,
+    "private_buffer": false,
+    "public_overlap": false
+  },
+  {
+    "normal": "N",
+    "width": 5,
+    "full_width": 4,
+    "positive": true,
+    "narrow_span": false,
+    "private_buffer": false,
+    "public_overlap": false
+  },
+  {
+    "normal": "E",
+    "width": 5,
+    "full_width": 4,
+    "positive": true,
+    "narrow_span": false,
+    "private_buffer": false,
+    "public_overlap": false
+  },
+  {
+    "normal": "S",
+    "width": 5,
+    "full_width": 4,
+    "positive": true,
+    "narrow_span": false,
+    "private_buffer": false,
+    "public_overlap": false
+  },
+  {
+    "normal": "W",
+    "width": 5,
+    "full_width": 4,
+    "positive": true,
+    "narrow_span": false,
+    "private_buffer": false,
+    "public_overlap": false
+  }
+]

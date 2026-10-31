@@ -1,0 +1,25 @@
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 19
+  Loaded sheet 'urizen': assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png
+  Loaded sheet 'pixel': assets/sprites/PixelAsciiSpritesheet.png
+  Loaded sheet 'hexany_creatures': assets/sprites/HexanyCreatures.png
+  Loaded sheet 'terrain': assets/sprites/terrain.png
+  Loaded sheet 'objects': assets/sprites/objects.png
+  Loaded sheet 'creatures': assets/sprites/creatures.png
+SpriteRegistry: 263 tiles across 6 sheets
+{"label": "cold read laboratory", "turn": 484, "hp": 60, "square": [73, 99], "position": [15, 20]}
+{"label": "observed flint gathered", "turn": 523, "hp": 60, "square": [73, 99], "position": [21, 5]}
+{"label": "ordinary crossing", "turn": 591, "hp": 60, "square": [74, 99], "position": [0, 3]}
+{"label": "ordinary crossing", "turn": 673, "hp": 60, "square": [75, 99], "position": [0, 0]}
+{"label": "ordinary crossing", "turn": 716, "hp": 60, "square": [75, 100], "position": [0, 1]}
+{"label": "observed workshop note", "turn": 880, "hp": 57, "square": [75, 100], "position": [23, 18]}
+{"label": "finite supplies acquired", "turn": 904, "hp": 57, "square": [75, 100], "position": [24, 15]}
+G:\GameDev\RoguelikeProject\roguelike\engine\engine.py:5024: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.
+Add 'from tcod import libtcodpy' if you haven't already.
+Replace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'
+  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,
+{"label": "prepared musk from actual gland and fire", "turn": 919, "hp": 57, "square": [75, 100], "position": [24, 16]}
+{"label": "ordinary crossing", "turn": 946, "hp": 57, "square": [74, 100], "position": [79, 4]}
+{"label": "ordinary crossing", "turn": 1026, "hp": 57, "square": [73, 100], "position": [79, 0]}
+{"label": "ordinary crossing", "turn": 1028, "hp": 57, "square": [73, 99], "position": [79, 42]}
+{"label": "returned alive to laboratory with preparation and treatment", "turn": 1124, "hp": 57, "square": [73, 99], "position": [15, 20]}

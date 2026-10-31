@@ -1,0 +1,17 @@
+{
+  "name": "workbench-native-reports",
+  "command": [
+    "node",
+    "scripts/run-reports.mjs"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+  "start_utc": "2026-10-31T06:02:26.840763+00:00",
+  "end_utc": "2026-10-31T06:03:51.555928+00:00",
+  "seconds": 84.71520169998985,
+  "exit_code": 0,
+  "error": null,
+  "log": "workbench-native-reports-output.txt",
+  "log_sha256": "9cb2ec383f47d90947c2adf8e3b6245796fc49f5ecf720e5ee7251ec2258d557",
+  "source_stable": true,
+  "passed": true
+}

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "G:\GameDev\RoguelikeProject\tools\g15_historical.py", line 65, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "G:\GameDev\RoguelikeProject\tools\g15_historical.py", line 54, in main
+    observed=inspect()
+             ^^^^^^^^^
+  File "G:\GameDev\RoguelikeProject\tools\g15_historical.py", line 29, in inspect
+    assert snapshot(e) == expected
+AssertionError

@@ -1,0 +1,22 @@
+{
+  "name": "g22-metadata",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\g22_content.py",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22\\final-b\\metadata"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-31T06:12:41.840178+00:00",
+  "end_utc": "2026-10-31T06:13:07.732059+00:00",
+  "seconds": 25.89166630001273,
+  "exit_code": 0,
+  "error": null,
+  "log": "g22-metadata-output.txt",
+  "log_sha256": "5daec524365eee3549d98ec4a27e6e915e91464fbf700b124970ddb0dfe86152",
+  "source_stable": true,
+  "passed": true
+}

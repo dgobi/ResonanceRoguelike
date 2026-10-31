@@ -1,0 +1,186 @@
+{
+  "kind": "reader-frame",
+  "image_sha256": "f68ec2f1b4648f3026d55ab393ffc31e4586cc39b892eb0ee829e3a9d8905fdb",
+  "width": 960,
+  "height": 640,
+  "inputs": {
+    "page": 1,
+    "scroll": 0
+  },
+  "page": 1,
+  "scroll": 0,
+  "max_scroll": 0,
+  "viewport_height": 28,
+  "visible_rows": [
+    0
+  ],
+  "total_rows": 1,
+  "marker_types": [],
+  "setup": "Saved letter definition; weathered_temple panel; isolated Language with 0 known words and no recovery; saved lexicon/UI. Saved typography profile and font dependencies. Disposable reader context; no personal save, time or world generation.",
+  "consumer": "ItemFactory.create \u2192 ItemSystem._use_read \u2192 TextReader.render",
+  "dependencies": "saved files",
+  "typography": {
+    "roles": [
+      {
+        "role": "font_ui_large",
+        "label": "Headings",
+        "requested": "Junicode.ttf",
+        "resolved": "roguelike/assets/Fonts/Junicode.ttf",
+        "sha256": "d0fa7754c23dbef8443829b5d49cd790ad8b34c931413b600ed6ffd4911a286d",
+        "size": 22,
+        "fallback": false
+      },
+      {
+        "role": "font_ui_normal",
+        "label": "Ordinary prose",
+        "requested": "Junicode.ttf",
+        "resolved": "roguelike/assets/Fonts/Junicode.ttf",
+        "sha256": "d0fa7754c23dbef8443829b5d49cd790ad8b34c931413b600ed6ffd4911a286d",
+        "size": 18,
+        "fallback": false
+      },
+      {
+        "role": "font_ui_small",
+        "label": "Small details",
+        "requested": "Junicode.ttf",
+        "resolved": "roguelike/assets/Fonts/Junicode.ttf",
+        "sha256": "d0fa7754c23dbef8443829b5d49cd790ad8b34c931413b600ed6ffd4911a286d",
+        "size": 16,
+        "fallback": false
+      },
+      {
+        "role": "font_ui_tiny",
+        "label": "Message log",
+        "requested": "Junicode.ttf",
+        "resolved": "roguelike/assets/Fonts/Junicode.ttf",
+        "sha256": "d0fa7754c23dbef8443829b5d49cd790ad8b34c931413b600ed6ffd4911a286d",
+        "size": 14,
+        "fallback": false
+      },
+      {
+        "role": "font_ui_italic",
+        "label": "Italic role",
+        "requested": "Junicode-Italic.ttf",
+        "resolved": "roguelike/assets/Fonts/Junicode-Italic.ttf",
+        "sha256": "28a45fd8a6192ed21312fdb63a29581edfcdf6a488b5bc07ed4b62d7de78941b",
+        "size": 18,
+        "fallback": false
+      },
+      {
+        "role": "font_ui_bold",
+        "label": "Bold role",
+        "requested": "Junicode-Bold.ttf",
+        "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+        "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+        "size": 18,
+        "fallback": false
+      },
+      {
+        "role": "font_ui_bold_large",
+        "label": "Large bold role",
+        "requested": "Junicode-Bold.ttf",
+        "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+        "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+        "size": 22,
+        "fallback": false
+      },
+      {
+        "role": "font_deep",
+        "label": "Known Deep Tongue",
+        "requested": "Junicode-Italic.ttf",
+        "resolved": "roguelike/assets/Fonts/Junicode-Italic.ttf",
+        "sha256": "28a45fd8a6192ed21312fdb63a29581edfcdf6a488b5bc07ed4b62d7de78941b",
+        "size": 18,
+        "fallback": false
+      },
+      {
+        "role": "font_callout_damage",
+        "label": "Damage callout",
+        "requested": "Junicode-Bold.ttf",
+        "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+        "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+        "size": 13,
+        "fallback": false
+      },
+      {
+        "role": "font_callout_status",
+        "label": "Status callout",
+        "requested": "Junicode-Bold.ttf",
+        "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+        "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+        "size": 12,
+        "fallback": false
+      },
+      {
+        "role": "font_callout_creature",
+        "label": "Creature callout",
+        "requested": "Junicode-Bold.ttf",
+        "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+        "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+        "size": 11,
+        "fallback": false
+      },
+      {
+        "role": "font_callout_crit",
+        "label": "Critical callout",
+        "requested": "Junicode-Bold.ttf",
+        "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+        "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+        "size": 18,
+        "fallback": false
+      },
+      {
+        "role": "font_callout_levelup",
+        "label": "Level-up callout",
+        "requested": "Junicode-Bold.ttf",
+        "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+        "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+        "size": 21,
+        "fallback": false
+      }
+    ],
+    "diagnostics": [
+      {
+        "severity": "warning",
+        "code": "FONT_OPTIONAL_GLYPHS",
+        "field": "font_ui_normal",
+        "path": "roguelike/data/display/typography.json",
+        "asset": "game_typography",
+        "message": "Bounded optional/decorative glyph gaps: \u2713. These are pre-existing default limitations, not a universal Unicode guarantee.",
+        "correction": "Choose a usable project TTF for this role; saved changes apply at next game initialization."
+      },
+      {
+        "severity": "warning",
+        "code": "FONT_OPTIONAL_GLYPHS",
+        "field": "font_ui_small",
+        "path": "roguelike/data/display/typography.json",
+        "asset": "game_typography",
+        "message": "Bounded optional/decorative glyph gaps: \u2601\u03df. These are pre-existing default limitations, not a universal Unicode guarantee.",
+        "correction": "Choose a usable project TTF for this role; saved changes apply at next game initialization."
+      },
+      {
+        "severity": "warning",
+        "code": "FONT_OPTIONAL_GLYPHS",
+        "field": "font_ui_tiny",
+        "path": "roguelike/data/display/typography.json",
+        "asset": "game_typography",
+        "message": "Bounded optional/decorative glyph gaps: \u25cb\u25cf. These are pre-existing default limitations, not a universal Unicode guarantee.",
+        "correction": "Choose a usable project TTF for this role; saved changes apply at next game initialization."
+      }
+    ],
+    "fallback": false,
+    "basis": "saved profile",
+    "profile_sha256": "bf91b067f1788fb5047d25e63a5ba31c3557ac85d311b62b0389f3abf1f73204"
+  },
+  "passed": true,
+  "fixture": "Exact final-b native-published variant in disposable reader context; no world or campaign, no learning. Native viewport screenshot truncates the frame; this standalone production frame permits visual inspection.",
+  "driver_sha256": "5e2c469e0a2e1426430373f82cee8edf3a83e0b733599b93afb69b36dec46c3a",
+  "tested_revision": "22322cb98d0453a48e66625408e0772b03e80598",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\.baseline\\g22-preview-audit.py"
+  ]
+}

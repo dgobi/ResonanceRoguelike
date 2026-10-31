@@ -1,0 +1,219 @@
+{
+  "status": "partial/blocked",
+  "g22_accepted": false,
+  "arc_exit_complete": false,
+  "implementation_contracts_verified": true,
+  "tested_revision": "22322cb98d0453a48e66625408e0772b03e80598",
+  "closed_utc": "2026-10-31T06:57:02.352118+00:00",
+  "baseline": "98a5af7dd2653b1b9b9a34a57880a98f2d3599d7",
+  "baseline_frozen_matches": 2864,
+  "source_input_count": 2881,
+  "source_manifest": "final-c/inputs.json",
+  "source_manifest_sha256": "57ce3463302af2fe141dde6ffb35d57690581174070be87582e53609988f2bb0",
+  "additional_input_bindings": {
+    "evidence/gameplay-g22/final-c/followup-driver.py": {
+      "working_sha256": "f98d1d0b3d2bdc61da75e10c05331abab29cb86294aed313c4f679e74b8ef547",
+      "git_blob": "89bffbb127d755559324d7f23fb2d58869b93a40",
+      "committed_sha256": "f3f6f6daec638e861e9b9beea7885061fc2e312ff8c2a951bf3513fea05ea3e3",
+      "match": "CRLF/LF only"
+    },
+    "evidence/gameplay-g22/final-c/visual-audit-driver.py": {
+      "working_sha256": "5e2c469e0a2e1426430373f82cee8edf3a83e0b733599b93afb69b36dec46c3a",
+      "git_blob": "bbb7ae7c58da2aad47c2f51c25cbe8172aa69850",
+      "committed_sha256": "5e2c469e0a2e1426430373f82cee8edf3a83e0b733599b93afb69b36dec46c3a",
+      "match": "exact"
+    },
+    "evidence/gameplay-g22/final-c/response-conformance-driver.py": {
+      "working_sha256": "c47077fa4e30bb4095e16ed463f90338f9d5f5c85a8f2abf2d67b02d15901b9e",
+      "git_blob": "a7740c71c5460e9f87501c01a22514dd7edd9f99",
+      "committed_sha256": "c47077fa4e30bb4095e16ed463f90338f9d5f5c85a8f2abf2d67b02d15901b9e",
+      "match": "exact"
+    },
+    "evidence/gameplay-g22/final-c/closure-driver.py": {
+      "working_sha256": "046883ac42ebcd51d20b36bcd9323c0be0d7ec8d421e3a9f6deb0b62be328623",
+      "git_blob": "2e70f2e62816eb3d0ef0321ec1e4cea4d2bd438c",
+      "committed_sha256": "046883ac42ebcd51d20b36bcd9323c0be0d7ec8d421e3a9f6deb0b62be328623",
+      "match": "exact"
+    },
+    "evidence/gameplay-g22/final-c/published-report-variant.json": {
+      "working_sha256": "797d1e7f7e879f2b02092304940eb6c1ff5151842d5207588fd0f853af2c93c7",
+      "git_blob": "7ff3b26b8cd5f622d7cf09681847775d98b02819",
+      "committed_sha256": "c8f042054560d02599d168852becdf8b347d8371017616438fe7d053817ea553",
+      "match": "CRLF/LF only"
+    },
+    "evidence/gameplay-g22/recovery-input/treated.zip": {
+      "working_sha256": "486c15bf8f401c062acfaa5681ce63f1a17d94f111c70b2ca38c6598dcd86133",
+      "git_blob": "d8fd0327919dfd03bcf471b8eb6884ba8367f752",
+      "committed_sha256": "486c15bf8f401c062acfaa5681ce63f1a17d94f111c70b2ca38c6598dcd86133",
+      "match": "exact"
+    },
+    "evidence/gameplay-g22/recovery-input/continuation-context.json": {
+      "working_sha256": "c7a10391b54370ef70ddb86f8dd3feb9a8434f8f5e24d9c88b172792b14cc7b1",
+      "git_blob": "41e34f115fb84e753374963f9c4c4ec5672686f9",
+      "committed_sha256": "c7a10391b54370ef70ddb86f8dd3feb9a8434f8f5e24d9c88b172792b14cc7b1",
+      "match": "exact"
+    },
+    "evidence/gameplay-g22/recovery-input/provenance.json": {
+      "working_sha256": "43dec574a174a4a2a7012bbb31a4b3d4ccfe4cf7b48a449ac16ea3378c25e369",
+      "git_blob": "0cbad60a58f6c3a4fbde05ebcfb471afd346cf5f",
+      "committed_sha256": "dd107e16a0c02dce5a5f36fb986bc9b0e1585f4ab31c9c2375467f8afdba2828",
+      "match": "CRLF/LF only"
+    },
+    "evidence/gameplay-g22/response-input/first-injury.zip": {
+      "working_sha256": "08d4e7d0a39649d51e1e401e83fa1803ea112897065f3925cedebbd2b36f2795",
+      "git_blob": "9470308e221f32ba96890ea608e3a2db4f2037d0",
+      "committed_sha256": "08d4e7d0a39649d51e1e401e83fa1803ea112897065f3925cedebbd2b36f2795",
+      "match": "exact"
+    },
+    "evidence/gameplay-g22/response-input/continuation-context.json": {
+      "working_sha256": "c7a10391b54370ef70ddb86f8dd3feb9a8434f8f5e24d9c88b172792b14cc7b1",
+      "git_blob": "41e34f115fb84e753374963f9c4c4ec5672686f9",
+      "committed_sha256": "c7a10391b54370ef70ddb86f8dd3feb9a8434f8f5e24d9c88b172792b14cc7b1",
+      "match": "exact"
+    },
+    "evidence/gameplay-g22/response-input/provenance.json": {
+      "working_sha256": "7adb6e2412421071121e9f9f2b7068bd2bc1fad97179b69422dba9cd93aecb8e",
+      "git_blob": "4fab7411395ee061caa15aaaa3e5086f87663e3f",
+      "committed_sha256": "dfc8d16ac42a5ec68b76322a5b4ac67d12f92da6cd8366d1e7147f9ff4986f1d",
+      "match": "CRLF/LF only"
+    }
+  },
+  "verification": {
+    "focused": {
+      "run": 439,
+      "passed": 439,
+      "unfiltered": true,
+      "receipt": "final-c/focused/run.json"
+    },
+    "production": {
+      "totals": {
+        "checks": 3704,
+        "passed": 3704,
+        "failed": 0,
+        "workers": 159
+      },
+      "runner_negative_controls": 7,
+      "unfiltered": true,
+      "passed": true
+    },
+    "worker": {
+      "run": 118,
+      "passed": 117,
+      "skipped": 1,
+      "skip": "Dependency-absence negative control uses development interpreter and passes separately in final-b.",
+      "unfiltered": true
+    },
+    "frontend": 90,
+    "host": 71,
+    "typecheck": true,
+    "clippy": true,
+    "windows_nsis": true,
+    "native": [
+      "hearing",
+      "rivals",
+      "reports"
+    ],
+    "historical": [
+      "g14",
+      "g16"
+    ],
+    "retained_original_loops": [
+      "g19",
+      "g20-sound",
+      "g21-native",
+      "g21-common",
+      "g21-conflict",
+      "g21-musk",
+      "g21-passive",
+      "g21-lethal",
+      "g21-revisit"
+    ],
+    "metadata_seeds": [
+      20261023,
+      29417,
+      20261030
+    ],
+    "source_stable": true
+  },
+  "exact_retention_boundary": "Only historical factory fixture bindings and explicit catalogue counts changed, in the ten listed test inputs. Full unfiltered focused and worker suites rerun. Retained production-D, genuine historical/G19-G21 loops, metadata, frontend/typecheck, host/clippy, bundle and native proofs do not execute the changed unittest fixture/count bodies. The G22 journey driver is byte-identical, and its final-b timing-guard failure remains failed. The package contains bridge.py and pinned runtime, not worker tests. All runtime/data/other driver/package hashes are exact. Separate genuine G22 checkpoint branches certify treatment/report persistence and retain the failed last return strategy; they are not stitched to the final-b fresh journey.",
+  "wall_seconds": {
+    "final_b": 1370.5085324000102,
+    "final_c": 1213.4126458000392,
+    "note": "Each release records elapsed wall time; concurrent durations are not summed. Response/visual probes occurred during the final-c suite interval."
+  },
+  "journey": {
+    "acceptance": false,
+    "fresh_read": true,
+    "ordinary_preparation_return": true,
+    "fresh_ward": "Failed replay guard: turn1797 versus required1793, same HP57 and position48,18. No manufactured treatment save.",
+    "separate_current_response": {
+      "before_hp": 55,
+      "after_hp": 60,
+      "turns": 1,
+      "owned_after": false,
+      "remaining": false
+    },
+    "current_response_receipt": "final-c/response/receipt.json",
+    "continued_exit": true,
+    "alive_home_return": false,
+    "spent_checkpoint_return_death": {
+      "turn": 1966,
+      "hp": 0,
+      "square": [
+        69,
+        99
+      ],
+      "home": [
+        73,
+        99
+      ]
+    },
+    "first_injury_response_return_death": {
+      "turn": 1945,
+      "hp": 0,
+      "square": [
+        69,
+        99
+      ]
+    },
+    "cold_revisit": true,
+    "assistance": "Observation-limited local paths and declared geometric coarse policy, original Engine.run and app-local controls; no unaided human discovery claim. Independent whole-world checkpoint probes are not stitched to final-b."
+  },
+  "material_failures": [
+    {
+      "attempt": "final-a",
+      "status": "failed/incomplete",
+      "failure": "Genuine G14 exact fingerprint caught empty optional save keys. Corrected omission, original archive/assertion unchanged."
+    },
+    {
+      "attempt": "final-b",
+      "status": "failed",
+      "failure": "Focused9failures/4errors and worker2count failures, corrected only historical factory inputs/catalogue counts; full suites rerun in C. Fresh Ward guard and secondary missing-treatment evidence remain failed."
+    },
+    {
+      "attempt": "final-c",
+      "status": "partial/blocked",
+      "failure": "Both genuine continuation branches fail the alive home return. Paid treatment/meaningful exit and persistence pass separately; no complete acceptance."
+    },
+    {
+      "attempt": "development",
+      "status": "diagnostic only",
+      "catalogue": "development-summary.json",
+      "source_frozen": false
+    }
+  ],
+  "metadata_note": "The original response/receipt.json provenance field is one relative level short. Its authoritative provenance is evidence/gameplay-g22/response-input/provenance.json, bound above. Execution results are retained unchanged.",
+  "publication": {
+    "required": true,
+    "branch": "main",
+    "force": false,
+    "final_checkpoint": "checkpoint/gameplay-g22-partial-blocked-20261031-a",
+    "verified_complete_checkpoint": false,
+    "full_delivery_sha_and_remote_readback": ".baseline/g22-publication.json (outside self-referencing commit)"
+  },
+  "unrelated_owner_work": {
+    "path": "RESONANCE_WORKBENCH_PLAN_PROPOSED_2026-10-25.md",
+    "sha256": "bcf41ab230fea7aa43a2a2f26b2826bd6d0d53ec814c788903badc642910f49a",
+    "disposition": "Preserved untracked; excluded from task commits."
+  }
+}

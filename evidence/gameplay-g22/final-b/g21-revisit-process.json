@@ -1,0 +1,26 @@
+{
+  "name": "g21-revisit",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\verify_g21_play.py",
+    "--stage",
+    "revisit",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22\\final-b\\g21-play",
+    "--resume",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22\\final-b\\g21-play\\lethal\\depleted.zip"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-31T06:12:36.033878+00:00",
+  "end_utc": "2026-10-31T06:12:40.961055+00:00",
+  "seconds": 4.9271562999347225,
+  "exit_code": 0,
+  "error": null,
+  "log": "g21-revisit-output.txt",
+  "log_sha256": "cc1644747b3abb2c069ce73610606e96cdc7d2ca1efb58febbe92ddf42af87ff",
+  "source_stable": true,
+  "passed": true
+}

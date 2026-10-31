@@ -1,0 +1,162 @@
+{
+  "baseline": "98a5af7dd2653b1b9b9a34a57880a98f2d3599d7",
+  "seeds": [
+    20261023,
+    29417,
+    20261030
+  ],
+  "scope": "Metadata only; fixed sample, no scenes, hazards, contents, routes or survival evaluation.",
+  "worlds": [
+    {
+      "seed": 20261023,
+      "laboratory": [
+        73,
+        99
+      ],
+      "geometry_assignments_unchanged": true,
+      "comparison_sha256": "2e2ac068a0f20950bbe1e0bab5d718c9ab5fb56e583025d45aec5d2ec2e55e75",
+      "reports": [
+        {
+          "role": "workshop",
+          "owner": "9360a8dd74274a37bda9bb4cfacbe7fa",
+          "origin": [
+            73,
+            99
+          ],
+          "laboratory": "sub_73_99_0",
+          "source": "Old Road Preparations",
+          "description": "A workshop once used for road preparations: fuel, musk work and a traveller's emergency wrap. Present stock and safety are unknown.",
+          "target": {
+            "x": 75,
+            "y": 100,
+            "id": "settlement-0-cross-market-lot-1-44-S-0-building",
+            "asset": "workshop_d"
+          }
+        },
+        {
+          "role": "ward_store",
+          "owner": "9360a8dd74274a37bda9bb4cfacbe7fa",
+          "origin": [
+            73,
+            99
+          ],
+          "laboratory": "sub_73_99_0",
+          "source": "Old Road Preparations",
+          "description": "A barrow store where a bronze ward was kept. Its present contents, inhabitants and safety are unknown.",
+          "target": {
+            "x": 68,
+            "y": 98,
+            "id": "submap_68_98_0",
+            "asset": "barrow_ward_store_a"
+          }
+        }
+      ],
+      "rendered_pages": [
+        "Road clerk's copy, kept beside the waking chamber.\n\nThe workshop was our stop for road preparations: fuel, musk work, and an emergency wrap. Its work note explains the preparation. The barrow store kept a bronze ward, worth the burden of bringing home. They are separate opportunities; neither binds you to the other.\n\nThe following entries give coarse map squares and displacement from this laboratory. Use M to inspect the map; travel on foot and find an approach. Square distance is not walking time.\n\nThis is an old record of former use, not a promise of present stock or safety. Roads, inhabitants and the way inside must still be discovered.",
+        "Workshop \u2014 square (75, 100); 2 east, 1 south from the recorded laboratory (73, 99). 3 coarse squares, not walking time.\nA workshop once used for road preparations: fuel, musk work and a traveller's emergency wrap. Present stock and safety are unknown.",
+        "Ward store \u2014 square (68, 98); 5 west, 1 north from the recorded laboratory (73, 99). 6 coarse squares, not walking time.\nA barrow store where a bronze ward was kept. Its present contents, inhabitants and safety are unknown."
+      ]
+    },
+    {
+      "seed": 29417,
+      "laboratory": [
+        106,
+        46
+      ],
+      "geometry_assignments_unchanged": true,
+      "comparison_sha256": "ce929c0c3a10e6a29e196d9524df0ca206cbc149ce4133df169354595c3d4974",
+      "reports": [
+        {
+          "role": "workshop",
+          "owner": "f023b862f231407cb008b6567fcb564e",
+          "origin": [
+            106,
+            46
+          ],
+          "laboratory": "sub_106_46_0",
+          "source": "Old Road Preparations",
+          "description": "A workshop once used for road preparations: fuel, musk work and a traveller's emergency wrap. Present stock and safety are unknown.",
+          "target": {
+            "x": 104,
+            "y": 46,
+            "id": "settlement-0-cross-market-lot-1-1-S-0-building",
+            "asset": "workshop_d"
+          }
+        },
+        {
+          "role": "ward_store",
+          "owner": "f023b862f231407cb008b6567fcb564e",
+          "origin": [
+            106,
+            46
+          ],
+          "laboratory": "sub_106_46_0",
+          "source": "Old Road Preparations",
+          "description": "A barrow store where a bronze ward was kept. Its present contents, inhabitants and safety are unknown.",
+          "target": {
+            "x": 108,
+            "y": 50,
+            "id": "submap_108_50_0",
+            "asset": "barrow_ward_store_a"
+          }
+        }
+      ],
+      "rendered_pages": [
+        "Road clerk's copy, kept beside the waking chamber.\n\nThe workshop was our stop for road preparations: fuel, musk work, and an emergency wrap. Its work note explains the preparation. The barrow store kept a bronze ward, worth the burden of bringing home. They are separate opportunities; neither binds you to the other.\n\nThe following entries give coarse map squares and displacement from this laboratory. Use M to inspect the map; travel on foot and find an approach. Square distance is not walking time.\n\nThis is an old record of former use, not a promise of present stock or safety. Roads, inhabitants and the way inside must still be discovered.",
+        "Workshop \u2014 square (104, 46); 2 west from the recorded laboratory (106, 46). 2 coarse squares, not walking time.\nA workshop once used for road preparations: fuel, musk work and a traveller's emergency wrap. Present stock and safety are unknown.",
+        "Ward store \u2014 square (108, 50); 2 east, 4 south from the recorded laboratory (106, 46). 6 coarse squares, not walking time.\nA barrow store where a bronze ward was kept. Its present contents, inhabitants and safety are unknown."
+      ]
+    },
+    {
+      "seed": 20261030,
+      "laboratory": [
+        63,
+        117
+      ],
+      "geometry_assignments_unchanged": true,
+      "comparison_sha256": "acd9b58f30126986bfc1d754b697d6ea7bbd522cf612367ff7e6a5ef27e8d53b",
+      "reports": [
+        {
+          "role": "workshop",
+          "owner": "84b03892cba945868dcbfedfc535b929",
+          "origin": [
+            63,
+            117
+          ],
+          "laboratory": "sub_63_117_0",
+          "source": "Old Road Preparations",
+          "description": "A workshop once used for road preparations: fuel, musk work and a traveller's emergency wrap. Present stock and safety are unknown.",
+          "target": {
+            "x": 61,
+            "y": 117,
+            "id": "settlement-0-linked-courts-lot-26-3-S-1-building",
+            "asset": "workshop_d"
+          }
+        },
+        {
+          "role": "ward_store",
+          "owner": "84b03892cba945868dcbfedfc535b929",
+          "origin": [
+            63,
+            117
+          ],
+          "laboratory": "sub_63_117_0",
+          "source": "Old Road Preparations",
+          "description": "A barrow store where a bronze ward was kept. Its present contents, inhabitants and safety are unknown.",
+          "target": {
+            "x": 61,
+            "y": 114,
+            "id": "submap_61_114_0",
+            "asset": "barrow_ward_store_a"
+          }
+        }
+      ],
+      "rendered_pages": [
+        "Road clerk's copy, kept beside the waking chamber.\n\nThe workshop was our stop for road preparations: fuel, musk work, and an emergency wrap. Its work note explains the preparation. The barrow store kept a bronze ward, worth the burden of bringing home. They are separate opportunities; neither binds you to the other.\n\nThe following entries give coarse map squares and displacement from this laboratory. Use M to inspect the map; travel on foot and find an approach. Square distance is not walking time.\n\nThis is an old record of former use, not a promise of present stock or safety. Roads, inhabitants and the way inside must still be discovered.",
+        "Workshop \u2014 square (61, 117); 2 west from the recorded laboratory (63, 117). 2 coarse squares, not walking time.\nA workshop once used for road preparations: fuel, musk work and a traveller's emergency wrap. Present stock and safety are unknown.",
+        "Ward store \u2014 square (61, 114); 2 west, 3 north from the recorded laboratory (63, 117). 5 coarse squares, not walking time.\nA barrow store where a bronze ward was kept. Its present contents, inhabitants and safety are unknown."
+      ]
+    }
+  ],
+  "passed": true
+}

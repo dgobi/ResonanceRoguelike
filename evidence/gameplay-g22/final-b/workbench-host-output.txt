@@ -1,0 +1,81 @@
+   Compiling resonance-workbench v0.9.0 (G:\GameDev\RoguelikeProject\workbench\src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.76s
+     Running unittests src\main.rs (src-tauri\target\debug\deps\resonance_workbench-d8cf6f63f557338a.exe)
+
+running 71 tests
+test authoring::tests::creature_readonly_construction_requires_exact_opened_bytes ... ok
+test authoring::tests::item_capability_paths_and_three_document_reviews ... ok
+test authoring::tests::registered_policy_binds_identity_descriptor_source_and_operations ... ok
+test authoring::tests::pool_and_building_tokens_are_independent_and_paths_stay_confined ... ok
+test authoring::tests::replacement_validation_revokes_the_previous_review ... ok
+test authoring::tests::paths_and_identity_are_not_renderer_authority ... ok
+test authoring::tests::supplies_routes_are_independent_of_worker_permissions_and_recovery ... ok
+test authoring::tests::registered_replacement_cannot_address_new_document_with_old_token ... ok
+test authoring::tests::readonly_target_rejected_and_original_reopens ... ok
+test authoring::tests::draft_revision_and_sidecar_changes_revoke_evidence ... ok
+test authoring::tests::completed_handoff_rejects_newer_drafts_and_reacquires_only_its_successor ... ok
+test authoring::tests::accepted_recovery_state_rejects_busy_old_sequences_and_retains_exact_intent ... ok
+test authoring::tests::recovery_fresh_source_authority_rejects_changed_missing_unsupported_and_other_project ... ok
+test authoring::tests::room_launch_admission_binds_saved_host_intent_and_completed_handoff ... ok
+test authoring::tests::registered_text_confinement_cancellation_and_resource_freshness ... ok
+test authoring::tests::w4d_cancel_after_worker_before_install_rejects_result ... ok
+test authoring::tests::w4d_failed_accepted_replacement_and_edit_revoke_attempt ... ok
+test authoring::tests::w4d_failed_replacement_cannot_restore_old_completion ... ok
+test authoring::tests::edit_between_compare_and_replace_is_recovered_from_actual_backup ... ok
+test authoring::tests::w4d_late_completion_and_cleanup_cannot_touch_new_owner ... ok
+test recovery::tests::checkpoint_child_process ... ok
+test authoring::tests::w4d_invalidation_before_reservation_rejects_snapshot ... ok
+test authoring::tests::saved_variant_reconciliation_preserves_live_source_owner_and_next_checkpoint ... ok
+test authoring::tests::assignment_fixed_file_recovery_identity_and_freshness_are_host_enforced ... ok
+test authoring::tests::submap_example_variant_only_and_interrupted_publication ... ok
+test authoring::tests::workspace_close_reopen_rejects_old_results_without_touching_other_owners ... ok
+test authoring::tests::creature_original_operations_bind_review_recovery_and_publication ... ok
+test authoring::tests::recipe_entitlement_four_documents_and_atomic_variant ... ok
+test authoring::tests::publication_before_fact_checkpoint_is_reconciled_as_read_only_evidence ... ok
+test authoring::tests::reconcile_claimed_rechecks_inspected_generation_and_accepts_exact_unrecorded_write ... ok
+test authoring::tests::recovery_acquisition_refuses_deleted_or_advanced_inspection_and_cleans_failed_claim ... ok
+test room_test::tests::job_owner_child ... ok
+test authoring::tests::workspace_old_sweep_cannot_revoke_newer_validation_or_replaced_instance ... ok
+test room_test::tests::readiness_requires_current_session_snapshot_process_and_contract ... ok
+test authoring::tests::workspace_six_file_owners_aliases_and_cross_document_authority ... ok
+test recovery::tests::exact_bytes_survive_real_child_exit ... ok
+
+running 1 test
+test room_test::tests::abandoned_cleanup_preserves_live_and_foreign_owners ... ok
+test authoring::tests::w4d_reserved_apply_consumes_once_and_refuses_conflicts ... ok
+test recovery::tests::windows_locked_replacement_keeps_previous_complete_checkpoint ... ok
+test authoring::tests::typography_singleton_policy_recovery_and_freshness_are_host_enforced ... ok
+test recovery::tests::failed_checkpoint_releases_new_claim_but_preserves_existing_owner ... ok
+test tests::rejects_traversal_and_unknown_operations ... ok
+test authoring::tests::w5g_room_operation_freeze_recovery_mapping_and_host_destinations ... ok
+test tests::strict_envelopes ... ok
+test tests::rejects_unrelated_roots ... ok
+test authoring::tests::item_transaction_noclobber_conflict_and_rollback ... ok
+test recovery::tests::independent_records_survive_reopen_and_malformed_neighbors ... ok
+test startup::tests::bundled_raw_external_missing_and_bridge_identity ... ok
+test authoring::tests::windows_replace_metadata_locks_and_variant_noclobber ... ok
+test authoring::tests::workspace_failed_or_cancelled_project_change_restores_connection_and_owners ... ok
+test recovery::tests::ordered_atomic_checkpoint_retirement_and_instance_isolation ... ok
+test tests::handshake_requires_selected_imports_matching_bridge_and_capabilities ... ok
+test tests::cancellation_reaps_child ... ok
+test room_test::tests::abrupt_owner_death_closes_job_and_kills_game ... ok
+test recovery::tests::terminated_child_at_replace_boundary_preserves_previous_complete_record ... ok
+test authoring::tests::replacement_conflict_and_failure_recovery ... ok
+test authoring::tests::workspace_sweep_shares_stamp_refuses_overlap_and_includes_buildings ... ok
+test authoring::tests::w4d_failed_transaction_releases_owner_without_reusing_review ... ok
+test room_test::tests::junctions_are_refused_before_copying ... ok
+test authoring::tests::pool_publication_conflicts_rollback_and_unique_variant ... ok
+test room_test::tests::bounded_inputs_include_sprites_exclude_saves_and_detect_mutations ... ok
+test startup::tests::missing_corrupt_stale_and_wrong_version_settings_validate_fallback ... ok
+test tests::cleanup_retries_a_transient_windows_file_lock ... ok
+test authoring::tests::w4d_live_admission_rejects_edit_replacement_and_project_switch ... ok
+test startup::tests::saved_choice_precedes_checkout_and_default_and_survives_restart ... ok
+test authoring::tests::selection_no_root_id_fixed_policy_exact_recovery_and_three_independent_owners ... ok
+test room_test::tests::actual_noncooperating_stop_reaps_only_owned_child ... ok
+test authoring::tests::two_pool_owners_and_unrelated_draft_share_recovery_without_alias_owners ... ok
+test authoring::tests::two_building_owners_and_unrelated_draft_share_recovery_without_alias_owners ... ok
+test authoring::tests::registered_text_and_recipe_restore_unfinished_intent ... ok
+test room_test::tests::startup_failure_is_not_readiness_and_retains_captured_version ... ok
+
+test result: ok. 71 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 19.46s
+

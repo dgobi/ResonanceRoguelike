@@ -1,0 +1,33 @@
+{
+  "sources": [
+    {
+      "path": "C:\\Users\\dango\\Downloads\\CODEX_G22_READABLE_EXPEDITIONS_AND_FINITE_RECOVERY.md",
+      "sha256": "610c372d60cf34fde080f9e3a805096060ff6b7c51f7cd96ac957a43fc1c4864"
+    },
+    {
+      "path": "C:\\Users\\dango\\Downloads\\RESONANCE_EMERGENT_EXPEDITIONS_ARC_COMPASS.md",
+      "sha256": "fc8760bae6ed3145e1e253b55066a383f7931f00153536d04b74df4791dda5d9"
+    },
+    {
+      "path": "C:\\Users\\dango\\Downloads\\RESONANCE_IMPLEMENTATION_PROPOSAL.md",
+      "sha256": "26093f38fb1a479d91819601395df184068de07ab52a25730d6089c95492dcd0"
+    },
+    {
+      "path": "G:\\GameDev\\RoguelikeProject\\.baseline\\g13-package\\references\\RESONANCE_PROJECT_COMPASS.md",
+      "sha256": "66c2e37870591317aee376bd3a5529cc1537ac0edd429b7c47378aae2cb42c91"
+    },
+    {
+      "path": "G:\\GameDev\\RoguelikeProject\\.baseline\\g13-package\\references\\RESONANCE_WORKFLOW.md",
+      "sha256": "3cc36f2de9e198b19e3e50ff2db3104e583e93e92c4bad2661a8e38c1d6b7aef"
+    },
+    {
+      "path": "G:\\GameDev\\RoguelikeProject\\AGENTS.md",
+      "sha256": "d9e084c1b2305077ee5c8ed39d25005d3758158587645b4eabbac9d23dc0602c"
+    }
+  ],
+  "workflow_boundary": "Available retained Workflow v1.0 read with current repository AGENTS and explicit current commit/push authorization. Arc references a later v1.1; no claim to have inspected an unavailable copy.",
+  "baseline": "98a5af7dd2653b1b9b9a34a57880a98f2d3599d7",
+  "pre_edit_frozen_source_matches": 2864,
+  "pre_edit_git_and_remote_exact": true,
+  "unrelated_owner_file_preserved": "RESONANCE_WORKBENCH_PLAN_PROPOSED_2026-10-25.md"
+}

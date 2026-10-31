@@ -1,0 +1,49 @@
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 19
+  Loaded sheet 'urizen': assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png
+  Loaded sheet 'pixel': assets/sprites/PixelAsciiSpritesheet.png
+  Loaded sheet 'hexany_creatures': assets/sprites/HexanyCreatures.png
+  Loaded sheet 'terrain': assets/sprites/terrain.png
+  Loaded sheet 'objects': assets/sprites/objects.png
+  Loaded sheet 'creatures': assets/sprites/creatures.png
+SpriteRegistry: 263 tiles across 6 sheets
+{"label": "cold used-treatment continuation; no refunded dressing", "turn": 1814, "hp": 60, "square": [68, 98], "position": [31, 26]}
+{"label": "owned musk spent for revised approach", "turn": 1815, "hp": 60, "square": [68, 98], "position": [31, 26]}
+{"label": "actual bronze Ward retained after treatment and revised plan", "turn": 1815, "hp": 60, "square": [68, 98], "position": [31, 26]}
+{"label": "withdrew from store alive", "turn": 1815, "hp": 60, "square": [68, 98], "position": [50, 10]}
+{"label": "actual Ward equipped in freed hand for exposed return", "turn": 1817, "hp": 60, "square": [68, 98], "position": [50, 10]}
+{"label": "ordinary crossing", "turn": 1850, "hp": 60, "square": [68, 99], "position": [39, 0]}
+{"label": "ordinary crossing", "turn": 1912, "hp": 42, "square": [69, 99], "position": [0, 0]}
+{"label": "fatal ordinary journey failure", "turn": 1966, "hp": 0, "square": [69, 99], "position": [25, 17]}
+Traceback (most recent call last):
+  File "G:\GameDev\RoguelikeProject\tools\g22_journey.py", line 480, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "G:\GameDev\RoguelikeProject\tools\g22_journey.py", line 477, in main
+    run_stage(a.evidence,a.stage,{'read':read_start,'preparation':preparation,'ward':ward,'return':cold_return,'recover':cold_recover,'revisit':store_revisit}[a.stage],a.resume,max_frames=6500,max_seconds=900,max_turns=4000)
+  File "G:\GameDev\RoguelikeProject\tools\g12_journey.py", line 83, in run_stage
+    run_journey(ev,lambda e,key,capture,choose:actions(e,key,capture,choose,ev,stage),**loop_limits)
+  File "G:\GameDev\RoguelikeProject\tools\b1_journey.py", line 317, in run_journey
+    main.main()
+  File "G:\GameDev\RoguelikeProject\roguelike\main.py", line 115, in main
+    engine.run()
+  File "G:\GameDev\RoguelikeProject\tools\b1_journey.py", line 286, in run
+    return original_run(e)
+           ^^^^^^^^^^^^^^^
+  File "G:\GameDev\RoguelikeProject\roguelike\engine\engine.py", line 661, in run
+    for event in pygame.event.get():
+                 ^^^^^^^^^^^^^^^^^^
+  File "G:\GameDev\RoguelikeProject\tools\b1_journey.py", line 300, in events
+    action = next(current["actions"])
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\GameDev\RoguelikeProject\tools\b1_journey.py", line 76, in actions
+    yield from custom_actions(e, key, capture, choose_inventory)
+  File "G:\GameDev\RoguelikeProject\tools\g22_journey.py", line 435, in cold_return
+    yield from finish_ward(e,key,capture,choose,ev,out,**context)
+  File "G:\GameDev\RoguelikeProject\tools\g22_journey.py", line 411, in finish_ward
+    yield from cross(e,1 if home[0]>e.world_x else -1,0,key,strict=True)
+  File "G:\GameDev\RoguelikeProject\tools\g22_journey.py", line 108, in cross
+    yield from walk(e,edge,key,aim=aim,strict=strict)
+  File "G:\GameDev\RoguelikeProject\tools\g22_journey.py", line 77, in walk
+    assert e.player.fighter.hp>0 and not e.player_invincible,'Ordinary journey died'
+AssertionError: Ordinary journey died
