@@ -1,5 +1,38 @@
 # Ordinary found-text authoring
 
+G22 adds optional `location_reports` on ordinary text definitions:
+
+```json
+"location_reports": [{"role":"workshop"}, {"role":"ward_store"}]
+```
+
+Only those two distinct roles are supported, with no other record fields. Absent
+or `[]` attaches nothing. Workbench **Binding and metadata** supports this payload
+through controls, Source, history, recovery, validation and unique variants.
+Language and teaching restrictions still apply. Preview appends explicitly
+**unbound** report pages, with no campaign or invented coordinates.
+
+Fresh worlds bind the nearest actual `workshop_d` placement and assigned
+`barrow_ward_store_a` submap within eight Manhattan coarse squares of the lab,
+ordered by distance, coordinates and stable identity. Completed metadata is read
+once; no target scene, container, hazard or gameplay RNG is consulted. Absence is
+frozen too. Prose changes, rereading, visits and depletion never refresh a record.
+Old worlds gain neither bindings nor new stock.
+
+Only a committed owned-item read learns the frozen roles. Reading retains its
+one-phase cost and the sheet; reader navigation stays free. Identity display,
+rendering and stale selections cannot learn reports. Markers survive dropping
+the sheet and reveal location/past purpose, never terrain, present stock or safety.
+Unknown unreported overmap squares hide generated attributes; explored coarse
+information remains. Normal Enter closes inspection; teleport is labeled only
+when the actual runtime debug input handler is enabled.
+
+Optional saved `report_owner`, `location_reports` and `learned_reports` belong only
+to this world. Load validates roles, identities, counts, strings, exact integer
+coordinates (including zero), laboratory and saved placement/submap membership
+before installation. Missing legacy fields mean empty knowledge, including F9
+over divergent unsaved reading. This is not a campaign registry or live query.
+
 `DataLoader` recursively loads text definitions from `data/texts/*.json` and
 subdirectories. Each Workbench-authored file contains one object with a unique
 nonempty `id` and at least one page object containing a string `text` body.

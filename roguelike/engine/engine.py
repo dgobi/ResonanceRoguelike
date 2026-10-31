@@ -1523,6 +1523,9 @@ class Engine:
         for _ce in self.entities:
             if _ce is self.player or not getattr(_ce, "is_alive", True):
                 continue
+            from engine.local_rivals import supported
+            if supported(_ce) and not _ce.perception.is_hostile_to("player"):
+                continue
             _old_pos = _pre_ai_pos.get(id(_ce))
             if _old_pos is None or (_ce.x, _ce.y) == _old_pos:
                 continue  # didn't move
@@ -1961,7 +1964,7 @@ class Engine:
                 self._teleport_to_overmap_cursor()
             else:
                 self.log.add(
-                    "Travel planning is not yet implemented.",
+                    "Map inspection closed. Travel on foot from your present location.",
                     STONE_BLUE,
                 )
                 self.mode = GameMode.LOCAL

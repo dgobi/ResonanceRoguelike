@@ -9,7 +9,8 @@ export function TextEditor(p:ContentProps) {
   const parsed=useMemo(()=>itemModel(p.draft),[p.draft]);
   if(p.family.id!=="text") return null;
   const context=p.family.context, record=context?.records[0], cap=record?.capability;
-  const values=parsed.model || record?.definition || {}, pages=Array.isArray(values.pages) ? values.pages : [];
+  const values=parsed.model || record?.definition || {}, authoredPages=Array.isArray(values.pages) ? values.pages : [];
+  const pages=[...authoredPages,...(Array.isArray(values.location_reports) ? values.location_reports : [])];
   const reason=p.disabled || (parsed.reason ? "Repair JSON in Source to resume page controls." : "") || (!cap?.editable ? cap?.reason || "Capability unavailable." : "");
   const frame=p.preview?.kind==="reader-frame" ? p.preview : null, problem=frame ? previewProblem(frame) : "";
   const selectedPage=Math.min(page,Math.max(0,pages.length-1));
@@ -26,6 +27,9 @@ export function TextEditor(p:ContentProps) {
       <OrderedRecords family={p.family} values={values} disabled={!!reason} onEdit={p.onEdit}/>
     </>}
     {view==="text-references" && <><p>{context?.inspection_note}</p><p>{context?.binding_note}</p><p className="muted">{context?.reference_coverage}</p>
+      <p>Location reports are absent or empty unless attached below. A fresh world freezes these two roles within eight coarse squares of its laboratory. Preview has no owning world and shows unbound reports.</p>
+      {values.location_reports===undefined && <button disabled={!!reason} onClick={()=>p.onEdit(text=>itemValue(text,["location_reports"],[]),"Attach empty location reports")}>Attach location reports</button>}
+      <OrderedRecords family={p.family} values={values} disabled={!!reason} allowEmpty view="text-references" onEdit={p.onEdit}/>
       {p.evidenceStale || p.dirty && !p.validated ? <p>Saved reference evidence is stale. Validate to refresh.</p> : record?.references.map((r,i)=><p key={i}>{r.kind} · <code>{r.path}{r.pointer}</code></p>)}
       <h3>Preserved root metadata</h3><pre className="raw">{JSON.stringify(Object.fromEntries(Object.entries(values).filter(([key])=>!Object.keys(p.family.descriptor.schema.properties || {}).includes(key))),null,2)}</pre>
     </>}

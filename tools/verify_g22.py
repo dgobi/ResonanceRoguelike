@@ -1,0 +1,157 @@
+"""Frozen G22 release: unfiltered production gates, companion and ordinary loop.
+
+Every worker owns disposable data/output. This script never changes source, Git,
+campaigns or the desktop. Publication follows review of its source-bound receipt.
+"""
+import argparse
+from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime, timezone
+import hashlib
+import importlib.metadata
+import io
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import threading
+import time
+
+ROOT=Path(__file__).resolve().parents[1]
+WB=ROOT/'workbench'
+
+
+def digest(path):return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def inputs():
+    from verify_g21 import inputs as previous_inputs
+    result=previous_inputs()
+    for name in ('workbench/docs/CONTENT_CONTRACTS.md','evidence/gameplay-g22/declaration.json','evidence/gameplay-g22/local-revision.json','roguelike/docs/TEXT_AUTHORING.md'):
+        result[name]=digest(ROOT/name)
+    return result
+
+
+def git_binding(head,source):
+    paths=[p for p in sorted(source) if not p.startswith('workbench/worker/runtime/')]
+    stream=io.BytesIO(subprocess.check_output(['git','cat-file','--batch'],input=''.join(f'{head}:{p}\n' for p in paths).encode(),cwd=ROOT))
+    result={}
+    for path in paths:
+        header=stream.readline().decode().strip().split();assert len(header)==3 and header[1]=='blob',(path,header)
+        raw=stream.read(int(header[2]));assert stream.read(1)==b'\n'
+        working=(ROOT/path).read_bytes();mode='exact'
+        if raw!=working:
+            assert raw.replace(b'\r\n',b'\n')==working.replace(b'\r\n',b'\n'),path
+            mode='CRLF/LF only'
+        result[path]=dict(blob=header[0],committed_sha256=hashlib.sha256(raw).hexdigest(),working_sha256=source[path],match=mode)
+    return result
+
+
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('--evidence',type=Path,required=True);args=parser.parse_args()
+    assert sys.platform=='win32' and sys.version_info[:3]==(3,11,0),'Use tested Windows CPython 3.11.0'
+    expected={'pygame':'2.6.1','tcod':'19.3.0','numpy':'2.4.6'}
+    assert {k:importlib.metadata.version(k) for k in expected}==expected
+    assert subprocess.check_output(['git','branch','--show-current'],cwd=ROOT,text=True).strip()=='main'
+    out=args.evidence.resolve();out.mkdir(parents=True,exist_ok=True)
+    assert not (out/'release.json').exists(),'Use a fresh release evidence directory'
+    head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
+    frozen=inputs();bindings=git_binding(head,frozen)
+    (out/'inputs.json').write_text(json.dumps(dict(head=head,source=frozen,git_binding=bindings),indent=2)+'\n')
+    env=dict(os.environ,SDL_VIDEODRIVER='dummy',SDL_AUDIODRIVER='dummy',PYGAME_HIDE_SUPPORT_PROMPT='1',PYTHONHASHSEED='20261020',PYTHONIOENCODING='utf-8',PYTHONDONTWRITEBYTECODE='1')
+    env.pop('RESONANCE_PYTHON',None)
+    started=time.perf_counter();records=[];lock=threading.Lock()
+    versions={name:subprocess.check_output([name,'--version'],text=True).strip() for name in ('node','rustc','cargo')}
+    report=dict(passed=False,tested_revision=head,started_utc=datetime.now(timezone.utc).isoformat(),source_manifest='inputs.json',scope='G22 completed implementation; journey acceptance explicitly partial/blocked',processes=records,environment=dict(python=sys.version,executable=sys.executable,dependencies=expected,tools=versions),isolation='Production checkout in place. Independent gates and native/runtime fixtures own separate disposable save/output roots. No desktop input, campaign or source mutation.')
+    def write():
+        (out/'release.json').write_text(json.dumps(report,indent=2)+'\n')
+    write()
+    def execute(name,command,*,cwd=ROOT,timeout=3600,extra_env=None):
+        begin=time.perf_counter();start_utc=datetime.now(timezone.utc).isoformat()
+        command=[str(x) for x in command];log=out/(name+'-output.txt')
+        print('G22 '+name,flush=True)
+        with log.open('w',encoding='utf-8') as output:
+            try:
+                completed=subprocess.run(command,cwd=cwd,env=dict(env,**(extra_env or {})),stdout=output,stderr=subprocess.STDOUT,timeout=timeout,creationflags=0x08000000)
+                code=completed.returncode;error=None
+            except subprocess.TimeoutExpired:
+                code=2;error='finite timeout'
+        row=dict(name=name,command=command,cwd=str(cwd),start_utc=start_utc,end_utc=datetime.now(timezone.utc).isoformat(),seconds=time.perf_counter()-begin,exit_code=code,error=error,log=log.name,log_sha256=digest(log),source_stable=inputs()==frozen)
+        row['passed']=code==0 and row['source_stable']
+        with lock:records.append(row);write()
+        (out/(name+'-process.json')).write_text(json.dumps(row,indent=2)+'\n')
+        return row
+    py=[sys.executable,'-X','utf8','-B']
+    production=ROOT/'.baseline'/('gameplay-g22-'+out.name)
+    worker_python=WB/'worker/runtime/python.exe'
+    failures=[]
+    with ThreadPoolExecutor(max_workers=3) as pool:
+        gates=[pool.submit(execute,'focused',py+[ROOT/'tools/critical_fix_regressions/verify_fixes.py','--timeout','3600','--evidence',out/'focused']),
+               pool.submit(execute,'production-d',py+[ROOT/'tools/verify_d.py','--evidence',production]),
+               pool.submit(execute,'workbench-worker',[worker_python,'-X','utf8','-B','-m','unittest','discover','-s','worker','-v'],cwd=WB)]
+        try:
+            checks=[('workbench-frontend',['npm.cmd','test']),('workbench-typecheck',['npm.cmd','run','typecheck']),
+                    ('workbench-host',['cargo','test','--locked','--manifest-path','src-tauri/Cargo.toml']),
+                    ('workbench-clippy',['cargo','clippy','--locked','--manifest-path','src-tauri/Cargo.toml','--','-D','warnings']),
+                    ('workbench-bundle',['npm.cmd','run','bundle','--','--','--locked'])]
+            for name,command in checks:assert execute(name,command,cwd=WB)['passed'],name
+            # The separate missing-dependency control uses the production venv with -S.
+            assert execute('worker-missing-dependency',py+['-m','unittest','discover','-s','worker','-p','test_bridge.py','-k','dependency_absence_structured','-v'],cwd=WB,extra_env={'RESONANCE_PYTHON':sys.executable})['passed']
+            for script,env_name,name in [('run-hearing.mjs','G20_HEARING_OUTPUT','hearing'),('run-rivals.mjs','G21_RIVALS_OUTPUT','rivals'),('run-reports.mjs','G22_REPORTS_OUTPUT','reports')]:
+                native=WB/'.artifacts/g22'/('final-'+name+'-'+out.name)
+                assert execute('workbench-native-'+name,['node','scripts/'+script],cwd=WB,extra_env={env_name:str(native)})['passed']
+                retained=out/('workbench-'+name);retained.mkdir(exist_ok=True)
+                for item in native.iterdir():
+                    if item.is_file() and item.suffix in ('.json','.png'):shutil.copy2(item,retained/item.name)
+            report['package']=dict(executable=dict(path='workbench/src-tauri/target/release/resonance-workbench.exe',sha256=digest(WB/'src-tauri/target/release/resonance-workbench.exe')),installers=[dict(path=p.relative_to(ROOT).as_posix(),sha256=digest(p)) for p in (WB/'src-tauri/target/release/bundle/nsis').glob('*.exe')])
+            for name,command in (
+                ('historical-g14',py+[ROOT/'tools/g15_historical.py','--baseline',ROOT/'evidence/gameplay-g19/pre-edit-historical.json','--output',out/'historical-g14.json']),
+                ('historical-g16',py+[ROOT/'tools/g17_historical.py','--baseline',ROOT/'evidence/gameplay-g17/pre-edit-historical.json','--output',out/'historical-g16.json']),
+                ('g19-original-loop',py+[ROOT/'tools/verify_g19.py','--evidence',out/'g19-loop']),
+                ('g20-sound-original-loop',py+[ROOT/'tools/verify_g20_sound.py','--evidence',out/'sound-loop'])):
+                assert execute(name,command,timeout=180)['passed'],name
+            # Retain the G21 native and prepared contract witnesses unchanged.
+            oldplay=out/'g21-play'
+            def oldstage(name,checkpoint=None):
+                command=py+[ROOT/'tools/verify_g21_play.py','--stage',name,'--evidence',oldplay]
+                if checkpoint:command+=['--resume',checkpoint]
+                assert execute('g21-'+name,command,timeout=360)['passed'],name
+            oldstage('native');oldstage('common')
+            for name in ('conflict','musk','passive','lethal'):oldstage(name,oldplay/'common/common.zip')
+            oldstage('revisit',oldplay/'lethal/depleted.zip')
+            assert execute('g22-metadata',py+[ROOT/'tools/g22_content.py','--evidence',out/'metadata'],timeout=180)['passed']
+            play=out/'play'
+            def stage(name,checkpoint=None):
+                command=py+[ROOT/'tools/g22_journey.py','--stage',name,'--evidence',play]
+                if checkpoint:command+=['--resume',checkpoint]
+                return execute('g22-'+name,command,timeout=1000)
+            assert stage('read')['passed']
+            assert stage('preparation',play/'read/read-lab.zip')['passed']
+            journey=stage('ward',play/'preparation/prepared-return.zip')
+            report['g22_acceptance']='partial/blocked: required alive return not established'
+            report['journey_passed']=journey['passed']
+            # A failed journey is retained as a failed process, never renamed a
+            # passing gate. Scoped contract certification is reported separately.
+            if not journey['passed']:
+                assert (play/'ward/treated.zip').is_file(),'Failure must preserve real treatment evidence'
+                assert stage('revisit',play/'ward/treated.zip')['passed']
+        except Exception as error:
+            failures.append(str(error));report['demonstration_failure']=repr(error);write()
+        for future in gates:
+            row=future.result()
+            if not row['passed']:failures.append(row['name'])
+    if (production/'latest.json').exists():
+        latest=json.loads((production/'latest.json').read_text());shutil.copy2(latest['result'],out/'production-d.json')
+        d=json.loads((out/'production-d.json').read_text())
+        report['production']=dict(totals=d['totals'],runner_negative_controls=len(d.get('runner_negative_controls',[])),unfiltered=d['only'] is None and d['case'] is None,passed=d['passed'])
+        assert report['production']['unfiltered'] and report['production']['runner_negative_controls']==7
+    report.update(source_stable=inputs()==frozen,finished_utc=datetime.now(timezone.utc).isoformat(),final_wall_seconds=time.perf_counter()-started,failures=failures)
+    report['scoped_verification_passed']=not failures and report['source_stable'] and all(r['passed'] for r in records if r['name']!='g22-ward') and report.get('production',{}).get('passed',False)
+    report['passed']=report['scoped_verification_passed'] and report.get('journey_passed',False)
+    report['g22_acceptance']='partial/blocked' if not report['passed'] else 'complete'
+    write();print(json.dumps(dict(passed=report['passed'],tested_revision=head,wall_seconds=report['final_wall_seconds'],failures=failures,evidence=str(out))))
+    return 0 if report['scoped_verification_passed'] else 1
+
+
+if __name__=='__main__':raise SystemExit(main())

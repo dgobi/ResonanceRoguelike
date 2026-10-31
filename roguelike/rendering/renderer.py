@@ -1614,6 +1614,14 @@ class Renderer:
                     (_vsx * tw, _vsy * th, tw * 2, th * 2), 1,
                 )
 
+        # Acquired reports mark locations without disclosing terrain beneath.
+        from engine.location_reports import known
+        for report in known(world_map):
+            target = report["target"]
+            rx, ry = target["x"] - offset_x, target["y"] - offset_y
+            if 0 <= rx < tiles_x and 0 <= ry < tiles_y:
+                pygame.draw.rect(surf, OLD_GOLD, (rx * tw + 2, ry * th + 2, 3, 3))
+
         # Player tile — drawn over all overlays
         psx = player_wx - offset_x
         psy = player_wy - offset_y
@@ -1706,7 +1714,7 @@ class Renderer:
         engine,
     ) -> None:
         from rendering.biome_icons import get_biome_icon
-        from config import DEBUG_MODE
+        debug = bool(engine.debug)
 
         if hasattr(engine, "ui_registry") and engine.ui_registry._loaded:
             engine.ui_registry.draw_panel(
@@ -1728,6 +1736,11 @@ class Renderer:
         slh = fs.get_linesize()
 
         chunk = world_map.get(cursor_wx, cursor_wy)
+        from engine.location_reports import known, describe
+        reports = known(world_map, cursor_wx, cursor_wy)
+        # A report is its frozen public account, never a generated-place query.
+        if chunk and not chunk.explored and not debug:
+            chunk = None
 
         if chunk and chunk.name:
             name_surf = fb.render(chunk.name, True, WORN_STONE)
@@ -1789,6 +1802,18 @@ class Renderer:
             surface.blit(unknown, (sx, y))
             y += lh + 4
 
+        for report in reports:
+            for paragraph in ("Reported: " + report["source"], describe(report)):
+                line = ""
+                for word in paragraph.replace("\n", " ").split():
+                    if line and fs.size(line + " " + word)[0] > sw:
+                        surface.blit(fs.render(line, True, OLD_GOLD), (sx, y))
+                        y += slh
+                        line = ""
+                    line = (line + " " + word).strip()
+                surface.blit(fs.render(line, True, OLD_GOLD), (sx, y))
+                y += slh
+
         pygame.draw.line(surface, DEEP_STONE_BLUE, (sx, y), (sx + sw, y), 1)
         y += 8
 
@@ -1845,7 +1870,7 @@ class Renderer:
                 )
                 surface.blit(ent_surf, (sx, y))
                 y += lh
-                if DEBUG_MODE:
+                if debug:
                     name_surf = fs.render(
                         f"  {sub.name or sub.submap_type}", True, BLOOD_STONE
                     )
@@ -1895,12 +1920,12 @@ class Renderer:
         y += 8
 
         footer_y = sidebar_rect.bottom - UI_PANEL_INSET - fs.get_height()
-        if DEBUG_MODE:
+        if debug:
             dbg_surf = fs.render("[DEBUG] Enter — teleport", True, OLD_GOLD)
             surface.blit(dbg_surf, (sx, footer_y - slh - 2))
-        enter_surf = fs.render("Enter — travel here", True, VERDANT_MID)
-        surface.blit(enter_surf,
-                     (sx, footer_y - slh - 2 - (slh + 2 if DEBUG_MODE else 0)))
+        else:
+            enter_surf = fs.render("Enter — close inspection", True, VERDANT_MID)
+            surface.blit(enter_surf, (sx, footer_y - slh - 2))
         close_surf = fs.render("M / ESC — close", True, MOSS_DARK)
         surface.blit(close_surf, (sx, footer_y))
 

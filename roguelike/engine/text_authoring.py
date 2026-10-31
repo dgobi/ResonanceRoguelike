@@ -13,7 +13,7 @@ CONTRACT = "ordinary-found-text-1"
 RESERVED_BASENAMES = ("text_item_map.json",)
 PUBLICATION_NOTE = ("Creates a unique text ID/file. New game data loads discover it; saving does not bind it to an object or place. "
                     "Reopened texts can be inspected or copied to another variant. Same-ID revisions are deferred because saved recovery knowledge uses page/span positions.")
-LIMITATIONS = "Ordinary prose only; no teaching, active deep tongue or special rendering authoring. No placement or natural acquisition proof."
+LIMITATIONS = "Ordinary prose and two fixed location-report roles only; no teaching, active deep tongue, special rendering or arbitrary destination queries. Preview reports are unbound. No placement or natural acquisition proof."
 VIEWS = ["text-pages", "text-references", "reader-preview"]
 SCHEMA = {
     "$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object",
@@ -23,6 +23,10 @@ SCHEMA = {
         "condition": {"type": "string", "title": "Document condition", "default": "worn",
                       "x-suggestions": ["worn", "pristine", "damaged", "fragmentary", "stained", "weathered", "burned"],
                       "description": "Changes the panel tint and displayed condition. Pristine, worn, damaged, fragmentary and burned have tints; other strings use the worn tint. Without UI art, pristine/worn/damaged/fragmentary have borders; others use the brown fallback. Existing strings remain valid."},
+        "location_reports": {"type": "array", "title": "Location reports", "x-control": "ordered-records", "x-view": "text-references",
+            "description": "Absent or empty means no reports. Only workshop and ward_store are supported. Fresh worlds bind once within eight coarse squares; previews are unbound. Reading never explores terrain or checks present stock/safety.",
+            "items": {"type": "object", "required": ["role"], "properties": {
+                "role": {"type": "string", "title": "Report role", "x-initial": "workshop", "x-suggestions": ["workshop", "ward_store"]}}}},
         "pages": {"type": "array", "title": "Pages", "x-control": "ordered-records", "items": {
             "type": "object", "required": ["text"], "properties": {
                 "text": {"type": "string", "title": "Page text", "x-control": "multiline", "x-initial": "",
@@ -166,9 +170,11 @@ def render_reader(raw, data, root, inputs, *, typography_candidate=None, known_w
     if not isinstance(inputs, dict) or set(inputs) != {"page", "scroll"} or any(type(inputs[k]) is not int for k in inputs):
         raise ValueError("Reader preview expects integer page and scroll inputs only.")
     page, scroll = inputs["page"], inputs["scroll"]
-    if not 0 <= page < len(raw["pages"]) or not 0 <= scroll <= 10000000:
+    from engine.location_reports import reader_payload
+    preview_raw = reader_payload(raw)
+    if not 0 <= page < len(preview_raw["pages"]) or not 0 <= scroll <= 10000000:
         raise ValueError("Reader page or scroll outside bounded range.")
-    if len(raw["pages"][page]["text"]) > 65536 or len(raw.get("title", "")) > 2048:
+    if len(preview_raw["pages"][page]["text"]) > 65536 or len(raw.get("title", "")) > 2048:
         raise ValueError("Reader preview is bounded to 65,536 characters per page and 2,048 title characters.")
     os.environ.update(SDL_VIDEODRIVER="dummy", SDL_AUDIODRIVER="dummy")
     import pygame
@@ -200,7 +206,7 @@ def render_reader(raw, data, root, inputs, *, typography_candidate=None, known_w
         return dict(kind="reader-frame", image="data:image/png;base64,"+base64.b64encode(png).decode(), image_sha256=hashlib.sha256(png).hexdigest(),
                     width=960, height=640, inputs=inputs, page=reader._page, scroll=reader._scroll, max_scroll=reader._max_scroll,
                     viewport_height=reader._viewport_height, visible_rows=reader._visible_rows, total_rows=len(reader._layout_rows),
-                    marker_types=[span["type"] for span in parse_page(raw["pages"][page]["text"]) if span["type"] != "normal"],
+                    marker_types=[span["type"] for span in parse_page(preview_raw["pages"][page]["text"]) if span["type"] != "normal"],
                     setup=("Saved letter definition; weathered_temple panel; isolated Language with " + str(len(known_words)) + " known words and no recovery; saved lexicon/UI. " + ("Candidate typography." if typography_candidate is not None else "Saved typography profile and font dependencies.") + " Disposable reader context; no personal save, time or world generation."),
                     consumer="ItemFactory.create → ItemSystem._use_read → TextReader.render", dependencies="candidate typography / saved reader files" if typography_candidate is not None else "saved files", typography=display.typography)
     finally:

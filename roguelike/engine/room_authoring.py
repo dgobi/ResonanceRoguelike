@@ -38,7 +38,7 @@ def authorize_candidate(original,candidate,source,target,*,data=None):
     errors=[]
     if source==target and candidate.get("id")!=original.get("id"): errors.append(issue(target,"IDENTITY_CHANGE","id","Same-ID editing retains the exact original identity."))
     if source!=target and (candidate.get("id")!=Path(target).stem or str(candidate.get("id","")).casefold()==str(original.get("id","")).casefold()): errors.append(issue(target,"VARIANT_ID","id","A variant requires a distinct case-insensitively unique ID matching its new basename."))
-    if str(candidate.get("id","")).casefold()=="starting_lab" or Path(target).name.casefold()=="starting_lab.json": errors.append(issue(target,"ROOM_PROTECTED","id","The starting laboratory identity and source are protected."))
+    if str(candidate.get("id","")).casefold() in ("starting_lab", "starting_lab_b") or Path(target).name.casefold() in ("starting_lab.json", "starting_lab_b.json"): errors.append(issue(target,"ROOM_PROTECTED","id","The starting laboratory identity and source are protected."))
     if not same({k:v for k,v in original.items() if k not in FIELDS},{k:v for k,v in candidate.items() if k not in FIELDS}): errors.append(issue(source,"ROOM_FIELD","","Inactive and unknown metadata must remain unchanged."))
     old,new=original.get("special_tiles",[]),candidate.get("special_tiles",[])
     if not isinstance(old,list) or not isinstance(new,list): return errors+[issue(source,"ROOM_FIELD","special_tiles","Requires ordered direct records.")]

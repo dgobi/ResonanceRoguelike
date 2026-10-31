@@ -43,7 +43,7 @@ class ItemSystem:
             )
             return False
 
-        consumed = handler(item, engine)
+        consumed = handler(item, engine, committed=True) if effect == "read" else handler(item, engine)
         self.last_use_committed = self.last_use_committed or bool(consumed)
         return consumed
 
@@ -51,7 +51,9 @@ class ItemSystem:
     #  Effect handlers
     # ------------------------------------------------------------------ #
 
-    def _use_read(self, item: "Item", engine: "Engine") -> bool:
+    def _use_read(self, item: "Item", engine: "Engine", *, committed=False) -> bool:
+        if committed and not engine.player.inventory.contains(item):
+            return False
         text_id = getattr(item, "text_id", "")
         if not text_id:
             engine.log.add(
@@ -63,6 +65,8 @@ class ItemSystem:
         if not text_def:
             engine.log.add(f"[DEBUG] text '{text_id}' not found.", AGED_WOOD)
             return False
+        from engine.location_reports import reader_payload
+        text_def = reader_payload(text_def, getattr(engine, "world_map", None) if committed else None, learn=committed)
         # Check item definition for render_mode — deep_tongue items use ziggurat panel
         self.last_use_committed = True
         item_def = engine.data.items.get(getattr(item, "item_id", ""), {})

@@ -6,6 +6,9 @@ def validate_payload(raw, data, path):
                                 message=message,correction='Correct the saved text definition.'))
     if not isinstance(raw,dict):
         error('TEXT_SHAPE','','Expected one text object.'); return diagnostics
+    from engine.location_reports import attachment
+    try: attachment(raw)
+    except ValueError as exc: error('TEXT_REPORTS','location_reports',str(exc))
     for field in ('title','condition','type','reads_as'):
         if field in raw and not isinstance(raw[field],str): error('TEXT_STRING',field,'Expected a string.')
     if 'lacunae' in raw and type(raw['lacunae']) is not bool: error('TEXT_BOOLEAN','lacunae','Expected a boolean.')

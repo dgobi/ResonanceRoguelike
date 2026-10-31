@@ -1,0 +1,7 @@
+{
+ "original_result": "evidence/gameplay-g22/development/journey-e/ward/result.json",
+ "original_mistake": "Direct approach and pickup; turn1775 HP57 to1793 HP57. Ward acquired, keeper observed at47,17, player48,18. No injury; explicitly not a recovery result.",
+ "one_local_revision": "Take up the actual Ward while the observed keeper is adjacent, then withdraw. This paid hand/equipment decision delays movement; no attack waits. At actual injury reposition, spend the owned dressing and use retained finite musk before continuing the return.",
+ "reproduction_boundary": "The failed diagnostic asserted before saving. Replay the identical deterministic path from the genuine prepared-return checkpoint, require exact original pickup turn/HP/position, then execute this one declared revision. No alternate RNG or target is selected.",
+ "limit": "No further local revisions to manufacture a setback. Preserve an unsuccessful result honestly."
+}

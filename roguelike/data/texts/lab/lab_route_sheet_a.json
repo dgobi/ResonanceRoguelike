@@ -1,0 +1,21 @@
+{
+  "id": "lab_route_sheet_a",
+  "title": "Old Road Preparations",
+  "type": "note",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "location_reports": [
+    {
+      "role": "workshop"
+    },
+    {
+      "role": "ward_store"
+    }
+  ],
+  "pages": [
+    {
+      "text": "Road clerk's copy, kept beside the waking chamber.\n\nThe workshop was our stop for road preparations: fuel, musk work, and an emergency wrap. Its work note explains the preparation. The barrow store kept a bronze ward, worth the burden of bringing home. They are separate opportunities; neither binds you to the other.\n\nThe following entries give coarse map squares and displacement from this laboratory. Use M to inspect the map; travel on foot and find an approach. Square distance is not walking time.\n\nThis is an old record of former use, not a promise of present stock or safety. Roads, inhabitants and the way inside must still be discovered."
+    }
+  ]
+}

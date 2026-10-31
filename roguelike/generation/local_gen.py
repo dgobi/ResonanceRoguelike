@@ -208,7 +208,7 @@ def _generate_submap_from_layout(
     entry_y = origin_y + ps["y"]
 
     # Place a candle near the player start in the starting lab
-    if getattr(submap, "layout_id", None) == "starting_lab":
+    if getattr(submap, "layout_id", None) in ("starting_lab", "starting_lab_b"):
         from generation.decor_utils import place_decor
         for dx, dy in ((1, 0), (0, 1), (-1, 0), (0, -1)):
             cx, cy = entry_x + dx, entry_y + dy

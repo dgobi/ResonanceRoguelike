@@ -525,6 +525,8 @@ def _serialize_town_data(td) -> dict | None:
 
 
 def _serialize_world(world_map: "WorldMap") -> dict:
+    from engine.location_reports import validate
+    validate(world_map)
     chunks = {}
     for (wx, wy), chunk in world_map.chunks.items():
         chunks[f"{wx},{wy}"] = {
@@ -586,6 +588,9 @@ def _serialize_world(world_map: "WorldMap") -> dict:
         "generation_revision": getattr(world_map, "generation_revision", "legacy-unversioned"),
         "plan_mode": getattr(world_map, "plan_mode", "legacy"),
         "plan": getattr(world_map, "plan", None),
+        "report_owner": getattr(world_map, "report_owner", None),
+        "location_reports": getattr(world_map, "location_reports", []),
+        "learned_reports": getattr(world_map, "learned_reports", []),
         "surface_schema": getattr(world_map, "surface_schema", 0),
         "surface_policy": getattr(world_map, "surface_policy", None),
         "vukh_x":         world_map.vukh_x,
@@ -722,6 +727,11 @@ def _deserialize_world(data: dict, world_map: "WorldMap") -> None:
     myth_data = data.get("myth")
     if myth_data:
         world_map.myth = WorldMyth.from_dict(myth_data)
+    from engine.location_reports import validate
+    world_map.report_owner = data.get("report_owner")
+    world_map.location_reports = data.get("location_reports", [])
+    world_map.learned_reports = data.get("learned_reports", [])
+    validate(world_map)
 
 
 def _serialize_player(engine: "Engine") -> dict:

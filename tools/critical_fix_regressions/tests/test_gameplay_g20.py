@@ -514,7 +514,7 @@ class AudibleEncounterTests(unittest.TestCase):
         for seed in (0,1,29417):
             items=roll_pool(data.loot_pools['workshop_c_travel'],self.e.item_factory,random.Random(seed))
             self.assertEqual(['crow_jerky','tallow_torch','water_flask'],sorted(i.item_id for i in items))
-        rows=[r for p in data.settlement_profiles['profiles'].values() for records in p['roles'].values() for r in records if r['asset']=='workshop_c']
+        rows=[r for p in data.settlement_profiles['profiles'].values() for records in p['roles'].values() for r in records if r['asset']=='workshop_d']
         self.assertEqual(2,len(rows));self.assertTrue(all(r['weight']==1 and r['max_per_settlement']==5 for r in rows))
 
     def test_old_pending_procedural_and_authored_assignments_keep_their_meaning(self):

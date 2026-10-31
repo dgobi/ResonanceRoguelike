@@ -1,5 +1,13 @@
 # Assign saved rooms to new worlds
 
+G22 fresh starts select protected `starting_lab_b`; old `starting_lab` identities
+and generated scenes remain unchanged. Both identities and source paths are
+excluded from ordinary assignment and author publication. B adds only the route
+sheet beside the waking position, retaining candle, stairs, starter equipment,
+research text identities and random supply cache. Frozen reports refer to actual
+selected Ward-store assignments; reading never assigns or generates a room.
+See `TEXT_AUTHORING.md` for the separate knowledge contract.
+
 Freshness compares saved raw rooms with their catalogue raw entries, compiled
 rooms with loaded compiled definitions, exact source paths and original byte
 hashes. Implicit container `decor_id: crate` / `loot_pools: []` defaults stay valid

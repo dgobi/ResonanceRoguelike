@@ -193,6 +193,9 @@ class WorldMap:
         self.town_groups:    dict[int, list[tuple[int,int]]] = {}
         # (wx,wy) → town_id
         self.town_chunk_ids: dict[tuple[int,int], int] = {}
+        self.report_owner = None
+        self.location_reports = []
+        self.learned_reports = []
 
     def get(self, wx: int, wy: int) -> Chunk | None:
         return self.chunks.get((wx, wy))

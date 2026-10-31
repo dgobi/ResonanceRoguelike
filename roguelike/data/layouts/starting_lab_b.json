@@ -1,0 +1,201 @@
+{
+  "id": "starting_lab_b",
+  "type": "submap_layout",
+  "description": "The underground laboratory where the player wakes. West: sarcophagus chamber. Centre: research area with benches. East: equipment store and exit corridor. South: lower corridor connecting all zones.",
+  "width": 60,
+  "height": 16,
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "f": "flagstone",
+    "w": "worn_stone",
+    "+": "door_closed",
+    "D": "door_open",
+    "^": "stairs_up",
+    "Z": "old_wall",
+    "S": "stele",
+    " ": null
+  },
+  "layers": [
+    "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ",
+    "Z..........Z....................Z..........................Z",
+    "Z.S........Z....................Z..........................Z",
+    "Z..........Z....................Z........................D.Z",
+    "Z..........+....................+..........................Z",
+    "Z....ww....Z....................Z..........................Z",
+    "Z....ww....Z....................Z..........................Z",
+    "Z....^.....Z....................Z..........................Z",
+    "Z..........Z....................Z..........................Z",
+    "ZZZZZ+ZZZZZZZZZZZZZZZZ+ZZZZZZZZZZZZZZZZZZZZZZZ+ZZZZZZZZZZZZZ",
+    "Z..........Z....................Z..........................Z",
+    "Z.w......w.Z....................Z..........................Z",
+    "Z....w.....+...................w+.....w....................Z",
+    "Z.w......w.Z....................Z..........................Z",
+    "Z..........Z....................Z..........................Z",
+    "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
+  ],
+  "special_tiles": [
+    {
+      "x": 2,
+      "y": 2,
+      "type": "stele",
+      "text_id": "lab_stele_inscription",
+      "note": "Standing stone in sarcophagus chamber — teaches deep tongue words on examine"
+    },
+    {
+      "x": 4,
+      "y": 5,
+      "type": "item",
+      "item_id": "inscription",
+      "text_id": "lab_inscription_entry",
+      "note": "Inscription on west wall of sarcophagus chamber"
+    },
+    {
+      "x": 5,
+      "y": 4,
+      "type": "item",
+      "item_id": "research_note",
+      "text_id": "lab_label_sarcophagus",
+      "note": "Label on sarcophagus exterior"
+    },
+    {
+      "x": 15,
+      "y": 2,
+      "type": "item",
+      "item_id": "research_note",
+      "text_id": "lab_note_primary_a",
+      "note": "Research notes, north bench"
+    },
+    {
+      "x": 17,
+      "y": 2,
+      "type": "item",
+      "item_id": "research_note",
+      "text_id": "lab_note_primary_b",
+      "note": "Research notes, north bench"
+    },
+    {
+      "x": 19,
+      "y": 2,
+      "type": "item",
+      "item_id": "research_note",
+      "text_id": "deep_tongue_alphabet",
+      "note": "Phoneme reference chart on research bench"
+    },
+    {
+      "x": 20,
+      "y": 4,
+      "type": "item",
+      "item_id": "binding_knife",
+      "note": "Research area -- the notched knife used in resonance experiments"
+    },
+    {
+      "x": 22,
+      "y": 4,
+      "type": "item",
+      "item_id": "dissolution_blade",
+      "note": "Research area -- the pitted blade from the stone sample work"
+    },
+    {
+      "x": 25,
+      "y": 12,
+      "type": "item",
+      "item_id": "research_note",
+      "text_id": "lab_note_secondary_a",
+      "note": "Secondary researcher notes, south wing"
+    },
+    {
+      "x": 27,
+      "y": 12,
+      "type": "item",
+      "item_id": "research_note",
+      "text_id": "lab_note_secondary_b",
+      "note": "Secondary researcher notes, south wing"
+    },
+    {
+      "x": 42,
+      "y": 5,
+      "type": "item",
+      "item_id": "research_note",
+      "text_id": "lab_note_final",
+      "note": "Final note, east equipment area"
+    },
+    {
+      "x": 38,
+      "y": 2,
+      "type": "item",
+      "item_id": "research_note",
+      "text_id": "lab_label_equipment",
+      "note": "Equipment rack label"
+    },
+    {
+      "x": 45,
+      "y": 4,
+      "type": "item",
+      "item_id": "severance_blade",
+      "note": "East equipment store -- the narrow grey blade"
+    },
+    {
+      "x": 47,
+      "y": 12,
+      "type": "item",
+      "item_id": "revelation_lens",
+      "note": "South wing -- the glass fragment for resonance examination"
+    },
+    {
+      "x": 55,
+      "y": 4,
+      "type": "body",
+      "name": "remains of R.",
+      "note": "R.'s body near forced exit door"
+    },
+    {
+      "x": 16,
+      "y": 4,
+      "type": "container",
+      "decor_id": "crate",
+      "loot_pools": [
+        "storage_tools"
+      ],
+      "note": "Research supplies — guaranteed crate for testing container interaction"
+    },
+    {
+      "x": 14,
+      "y": 12,
+      "type": "weighted",
+      "spawn_table": [
+        {
+          "item_id": "dried_provisions",
+          "type": "item",
+          "weight": 40
+        },
+        {
+          "item_id": "water_skin",
+          "type": "item",
+          "weight": 30
+        },
+        {
+          "type": "empty",
+          "weight": 30
+        }
+      ],
+      "note": "Probabilistic supply cache — south corridor"
+    },
+    {
+      "x": 4,
+      "y": 7,
+      "type": "item",
+      "item_id": "research_note",
+      "text_id": "lab_route_sheet_a",
+      "note": "Old road record beside the waking place"
+    }
+  ],
+  "player_start": {
+    "x": 5,
+    "y": 7
+  },
+  "stairs_up": {
+    "x": 5,
+    "y": 7
+  }
+}

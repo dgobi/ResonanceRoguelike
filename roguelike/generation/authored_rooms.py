@@ -47,7 +47,7 @@ def capability(raw, path, pointer=""):
     reason = ""
     if not matches(path) or pointer: reason = "Requires one object directly in layouts/ or the exact G17 template."
     elif not isinstance(raw,dict): reason = "Requires a single room object."
-    elif str(raw.get("id", "")).casefold()=="starting_lab" or Path(path).name.casefold()=="starting_lab.json": reason = "The starting laboratory is protected by identity and source path."
+    elif str(raw.get("id", "")).casefold() in ("starting_lab", "starting_lab_b") or Path(path).name.casefold() in ("starting_lab.json", "starting_lab_b.json"): reason = "The starting laboratory is protected by identity and source path."
     elif not isinstance(raw.get("layers"),list) or not raw["layers"] or any(not isinstance(r,str) for r in raw["layers"]): reason = "Requires rectangular terrain string layers."
     elif not isinstance(raw.get("player_start"),dict): reason = "Requires an explicit player_start."
     elif not isinstance(raw.get("special_tiles",[]),list) or any(not isinstance(s,dict) or s.get("type",s.get("kind")) not in RECORD_FIELDS for s in raw.get("special_tiles",[])): reason = "Only direct item, container, decor and creature records are supported. Weighted, scene and deferred specials remain inspect-only."

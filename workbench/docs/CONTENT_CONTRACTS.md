@@ -301,3 +301,10 @@ original-source entitlement and reviewed single-file publication. Labels are exa
 Unsupported AI/special bindings remain read-only for relationship changes. Current
 factory inspection remains construction evidence; G21's native saved runtime probe
 separately exercises a charged AI phase after publication and reopen.
+
+
+## G22 bounded location reports
+
+Ordinary texts may attach an optional location_reports ordered list with distinct workshop and ward_store roles only (at most two records, each containing only role). Absent and explicit empty states attach nothing. Binding and metadata, Source validation, history, recovery and the unique-variant writer share this exact payload. Production preview appends explicitly unbound pages with no campaign. Existing language restrictions, source entitlement, stale rejection and reviewed publication remain active.
+
+The selected content uses the existing pool/building/membership routes: one workshop_d_treatment dose, workshop_d as a narrow C successor, and only the two grid/roadside commercial substitutions, retaining weights/caps/order. Old C/B definitions and dependencies remain unchanged. starting_lab_b is protected by identity and source path alongside starting_lab.

@@ -119,6 +119,9 @@ def _generate_world(world_map, data, rng, name_gen, plan_mode, planning_settings
     _assign_names(world_map)
     _generate_world_myth(world_map, rng)
 
+    from engine.location_reports import bind
+    bind(world_map, data.texts["lab_route_sheet_a"]["title"])
+
     return world_map
 
 
@@ -760,7 +763,7 @@ def _place_starting_location(world_map: WorldMap, rng: random.Random) -> None:
             submap_type = "laboratory",
             name        = "Vrath Sketh",
             seed        = world_map.seed ^ 0x0AB1,
-            layout_id   = "starting_lab",
+            layout_id   = "starting_lab_b",
         )
         chunk.submaps = [lab_sub]
 
