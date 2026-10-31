@@ -1,0 +1,28 @@
+{
+  "failed_work": {
+    "child_trials": 1,
+    "budget_exhausted": false,
+    "rejections": [
+      {
+        "parent": "parent",
+        "slot": "shrine",
+        "asset": "roadside_shrine_a",
+        "rotation": 0,
+        "failures": [
+          {
+            "asset": "roadside_shrine_a",
+            "rotation": 0,
+            "mirror": false,
+            "reason": "late dependency rejection"
+          }
+        ]
+      },
+      {
+        "parent": "parent",
+        "rotation": 0,
+        "reason": "required-child alternatives exhausted"
+      }
+    ]
+  },
+  "unchanged": true
+}

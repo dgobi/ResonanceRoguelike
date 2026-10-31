@@ -1,0 +1,197 @@
+{
+  "passed": true,
+  "tested_revision": "5a5b6f5d2ec09897d40063a81b1df36cd0f10f5f",
+  "started_utc": "2026-10-31T16:41:48.811256+00:00",
+  "environment": {
+    "platform": "win32",
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+    "executable": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "dependencies": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6"
+    }
+  },
+  "source_manifest": "inputs.json",
+  "changed_previous_inputs": [
+    "tools/g22_journey.py"
+  ],
+  "added_inputs": [
+    "evidence/gameplay-g22a/declaration.json",
+    "tools/critical_fix_regressions/tests/test_gameplay_g22a.py",
+    "tools/g22a_journey.py",
+    "tools/verify_g22a.py"
+  ],
+  "retained_gates": [
+    "workbench-frontend",
+    "workbench-typecheck",
+    "workbench-host",
+    "workbench-clippy",
+    "workbench-bundle",
+    "worker-missing-dependency",
+    "workbench-native-hearing",
+    "workbench-native-rivals",
+    "workbench-native-reports",
+    "historical-g14",
+    "historical-g16",
+    "g19-original-loop",
+    "g20-sound-original-loop",
+    "g21-native",
+    "g21-common",
+    "g21-conflict",
+    "g21-musk",
+    "g21-passive",
+    "g21-lethal",
+    "g21-revisit",
+    "g22-metadata",
+    "workbench-worker (final-c full suite)"
+  ],
+  "retained_package": {
+    "executable": {
+      "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+      "sha256": "104d975f4625595d02db26d7e777d84f1d8d3f5f91bcf527346d9c472369c3f0"
+    },
+    "installers": [
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.1.0_x64-setup.exe",
+        "sha256": "e3ba7d562db3df0b9f04e26f024b2f3c7d732dfc94366aeb89d8c8776811540a"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.2.0_x64-setup.exe",
+        "sha256": "9e87da9a4efda8781557e28dd5b49e0d0243e97315c65ea676e375f3babbdaeb"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.3.0_x64-setup.exe",
+        "sha256": "ab49e110dd368aa069d81556ca4aca00f66c6bf0f28778f49fe46602b12529c8"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.4.0_x64-setup.exe",
+        "sha256": "877ce34f8cf1d086047c9ca99d41cb1aa94586408a9fcadd7ca8df8a98897bbb"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.5.0_x64-setup.exe",
+        "sha256": "2f620c05945b82e695b5bcb96f075c760e39b6c61bde3425d2749488def8165c"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.6.0_x64-setup.exe",
+        "sha256": "2d5faf3e1e1c97684bc3d1c0f7448c1cddfdf2e926746cd4db3fc44d784730c9"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.7.0_x64-setup.exe",
+        "sha256": "9edef905e6e5de88d4fa738e76a76b7b7634aa9d8f4086ca6e9ed42a40307675"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.7.1_x64-setup.exe",
+        "sha256": "70273646bee5d2ae3737916455abe936846df2f8bb573504250344844f9eaffb"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.8.0_x64-setup.exe",
+        "sha256": "f548ba9b1a747c04105f8c445a0aeb27c2b5214569a236fc15ed7963f94f24fb"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+        "sha256": "b03a168df913875a930ed69c2b90d1e3a542816107f857e18426461b027ef7f2"
+      }
+    ]
+  },
+  "retained_boundary": "All prior 2,881 inputs (1,072 committed-source bindings plus pinned worker runtime) except tools/g22_journey.py are byte-identical. New inputs are G22A test-player, release driver, focused tests and declaration. No runtime, data, Workbench worker/frontend/host/native/package input changed. Retained commands do not execute either G22 journey driver or the new focused test. Thus final-b frontend/typecheck/host/clippy/Windows NSIS/native/hearing/rivals/reports and historical G14/G16/G19-G21/metadata plus final-c full worker are retained only for their unchanged coverage. Current unfiltered focused/production-D and connected/cold checks run below. Retained Windows package hashes are checked, not called a rebuild.",
+  "processes": [
+    {
+      "name": "connected",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\g22a_journey.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22a\\final-a\\play"
+      ],
+      "exit_code": 0,
+      "error": null,
+      "seconds": 190.52970870002173,
+      "log": "connected-output.txt",
+      "log_sha256": "1f445d8a58b24128f761c4efbc9787d86b678c16834d2ab04b46a8438a120dfc",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "cold-audit",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\g22a_journey.py",
+        "--cold",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22a\\final-a\\play\\connected\\returned-ward.zip",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22a\\final-a"
+      ],
+      "exit_code": 0,
+      "error": null,
+      "seconds": 2.2543135000159964,
+      "log": "cold-audit-output.txt",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "production-d",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_d.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\gameplay-g22a-final-a"
+      ],
+      "exit_code": 0,
+      "error": null,
+      "seconds": 595.0088772999588,
+      "log": "production-d-output.txt",
+      "log_sha256": "110a26e7e26fcb100250e0a78708a1b4e7cd3e8c9ebb4b4454defaa086e70998",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "focused",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\critical_fix_regressions\\verify_fixes.py",
+        "--timeout",
+        "3600",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22a\\final-a\\focused"
+      ],
+      "exit_code": 0,
+      "error": null,
+      "seconds": 1661.7201870999997,
+      "log": "focused-output.txt",
+      "log_sha256": "04ebe26c5a39da46eb8ecd33d47662ae9f9e595183987eb02a99c7b6d9c90d31",
+      "source_stable": true,
+      "passed": true
+    }
+  ],
+  "isolation": "Original production checkout; disposable saves and headless app-local events. No desktop or owner campaign access.",
+  "production": {
+    "passed": true,
+    "totals": {
+      "checks": 3704,
+      "passed": 3704,
+      "failed": 0,
+      "workers": 159
+    },
+    "runner_negative_controls": 7,
+    "unfiltered": true
+  },
+  "source_stable": true,
+  "finished_utc": "2026-10-31T17:09:32.461874+00:00",
+  "seconds": 1663.6532989999978,
+  "journey_passed": true,
+  "status": "complete bounded G22A witness"
+}

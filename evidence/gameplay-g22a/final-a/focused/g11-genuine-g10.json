@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "creator": "7e48d4059a8c68bb98bb5c7f6d2fa49aa0a01a9b",
+  "visited": [
+    {
+      "chunk": [
+        73,
+        99
+      ],
+      "fingerprint": "9fc61cd1ad4d6973005bbbaf91be7ae9c369468f6096ce2ae89bcc3cd4395ba6"
+    }
+  ],
+  "pending": [
+    {
+      "chunk": [
+        44,
+        8
+      ],
+      "fingerprint": "c269948cb4711f77d80c8ba6019ac74c04af850d66a3583fe97bc7ca82828122",
+      "links": [
+        [
+          [
+            14,
+            5
+          ],
+          "submap_44_8_0"
+        ]
+      ]
+    },
+    {
+      "chunk": [
+        73,
+        100
+      ],
+      "fingerprint": "3ed90262cd1bbaf370c13ea15ab38a8313efdd257b4938aeab92ddcb2338326c",
+      "links": []
+    },
+    {
+      "chunk": [
+        72,
+        103
+      ],
+      "fingerprint": "7931ac9c00c6106e8dc5d832b95be38fd1b72a35cb4f09dc8b7178f1304db69e",
+      "links": []
+    }
+  ],
+  "mutable_waystone_preserved": true,
+  "ordinary_load_and_F9": true,
+  "known_old_access_defect_retained": true
+}

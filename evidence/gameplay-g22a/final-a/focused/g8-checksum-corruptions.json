@@ -1,0 +1,42 @@
+[
+  {
+    "case": "wrong frontage road",
+    "error": "settlement layout: settlement-0-cross-market-lot-civic: wrong frontage owner/route"
+  },
+  {
+    "case": "wrong segment",
+    "error": "settlement layout: settlement-0-cross-market-lot-civic: wrong frontage segment"
+  },
+  {
+    "case": "foreign lot",
+    "error": "settlement layout: settlement-0-block-civic: foreign/missing lot"
+  },
+  {
+    "case": "duplicate lot",
+    "error": "settlement layout: settlement-0-block-civic: duplicate lot membership"
+  },
+  {
+    "case": "overlap private bounds",
+    "error": "settlement layout: settlement-0-block-1-1: overlapping private block bounds"
+  },
+  {
+    "case": "missing public geometry",
+    "error": "settlement layout: settlement-2: foreign/missing public geometry"
+  },
+  {
+    "case": "foreign common civic",
+    "error": "settlement layout: settlement-0: conflicting common/civic references"
+  },
+  {
+    "case": "missing common association",
+    "error": "settlement layout: settlement-0: conflicting common/civic references"
+  },
+  {
+    "case": "bad reservation",
+    "error": "G3 reservation geometry does not match owner"
+  },
+  {
+    "case": "unsupported origin",
+    "error": "missing/corrupt required shared plan header"
+  }
+]

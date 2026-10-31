@@ -1,0 +1,44 @@
+{
+  "passed": true,
+  "fixture_sha256": "d1f8197c27169753c498bbcfa34f9dc804c33ac1d58b46bbdfa70bcb84a3f7ea",
+  "controls": "Controlled production-authored arrangement, authored test supplies transferred through owned helpers, stationary idle radius zero, normal runtime investigation/speed/FOV/action/zone rules. No ordinary acquisition, selected second destination or balance claim.",
+  "observations": [
+    {
+      "item": "flint_shard",
+      "impact": [
+        39,
+        24
+      ],
+      "sound_cost": 4,
+      "initial_burst_covered": false,
+      "after_corner": [
+        39,
+        24
+      ],
+      "paused": false,
+      "zone": []
+    },
+    {
+      "item": "musk_pellet",
+      "impact": [
+        39,
+        24
+      ],
+      "sound_cost": 4,
+      "initial_burst_covered": false,
+      "after_corner": [
+        40,
+        25
+      ],
+      "paused": true,
+      "zone": [
+        {
+          "x": 39,
+          "y": 24,
+          "radius": 3,
+          "turns_remaining": 3
+        }
+      ]
+    }
+  ]
+}

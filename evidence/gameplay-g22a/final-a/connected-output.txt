@@ -1,0 +1,142 @@
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 19
+  Loaded sheet 'urizen': assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png
+  Loaded sheet 'pixel': assets/sprites/PixelAsciiSpritesheet.png
+  Loaded sheet 'hexany_creatures': assets/sprites/HexanyCreatures.png
+  Loaded sheet 'terrain': assets/sprites/terrain.png
+  Loaded sheet 'objects': assets/sprites/objects.png
+  Loaded sheet 'creatures': assets/sprites/creatures.png
+SpriteRegistry: 263 tiles across 6 sheets
+{"turn": 480, "hp": 60, "reason": "real fresh start"}
+{"turn": 482, "hp": 60, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 484, "hp": 60, "reason": "read recovered original report after divergent F9"}
+{"turn": 484, "hp": 60, "reason": "same-process laboratory; first outing begins"}
+{"turn": 486, "hp": 60, "reason": "ordinary light choice"}
+{"turn": 520, "hp": 60, "reason": "observed flint gathered"}
+{"turn": 562, "hp": 60, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 588, "hp": 60, "reason": "ordinary crossing"}
+{"turn": 642, "hp": 60, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 670, "hp": 60, "reason": "ordinary crossing"}
+{"turn": 713, "hp": 60, "reason": "ordinary crossing"}
+{"turn": 722, "hp": 60, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 767, "hp": 60, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 768, "hp": 60, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 769, "hp": 59, "reason": "actual damage during ordinary action"}
+{"turn": 769, "hp": 59, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 770, "hp": 58, "reason": "actual damage during ordinary action"}
+{"turn": 770, "hp": 58, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 771, "hp": 58, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 772, "hp": 58, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 773, "hp": 58, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 774, "hp": 58, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 775, "hp": 58, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 776, "hp": 57, "reason": "actual damage during ordinary action"}
+{"turn": 776, "hp": 57, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 802, "hp": 57, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 873, "hp": 57, "reason": "ordinary carried provision"}
+{"turn": 882, "hp": 57, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 905, "hp": 57, "reason": "observed workshop note"}
+{"turn": 929, "hp": 57, "reason": "finite supplies acquired"}
+{"turn": 930, "hp": 57, "reason": "ordinary light choice"}
+G:\GameDev\RoguelikeProject\roguelike\engine\engine.py:5024: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.
+Add 'from tcod import libtcodpy' if you haven't already.
+Replace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'
+  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,
+{"turn": 943, "hp": 57, "reason": "ordinary light choice"}
+{"turn": 945, "hp": 57, "reason": "prepared musk from actual gland and fire"}
+{"turn": 962, "hp": 57, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 970, "hp": 57, "reason": "ordinary crossing"}
+{"turn": 981, "hp": 57, "reason": "ordinary carried provision"}
+{"turn": 982, "hp": 57, "reason": "prudent water detour from remembered shallows"}
+{"turn": 997, "hp": 57, "reason": "owned empty vessel refilled before long exposure"}
+{"turn": 1042, "hp": 57, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 1056, "hp": 57, "reason": "ordinary crossing"}
+{"turn": 1057, "hp": 57, "reason": "ordinary crossing"}
+{"turn": 1122, "hp": 57, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 1152, "hp": 57, "reason": "ordinary light choice"}
+{"turn": 1152, "hp": 57, "reason": "returned alive to laboratory with preparation and treatment"}
+{"turn": 1153, "hp": 57, "reason": "second outing begins with real first-return budget"}
+{"turn": 1154, "hp": 57, "reason": "ordinary light choice"}
+[gen] waystones placed in chunk (72,99): 1
+{"turn": 1175, "hp": 57, "reason": "ordinary crossing"}
+{"turn": 1192, "hp": 57, "reason": "prudent water detour from remembered shallows"}
+{"turn": 1198, "hp": 57, "reason": "ordinary direct surface drink; filled vessels retained"}
+{"turn": 1202, "hp": 57, "reason": "ordinary light choice"}
+{"turn": 1202, "hp": 57, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 1215, "hp": 57, "reason": "observed fallen fuel for finite roadside cooking budget"}
+{"turn": 1228, "hp": 57, "reason": "observed fallen fuel for finite roadside cooking budget"}
+{"turn": 1261, "hp": 57, "reason": "ordinary crossing"}
+{"turn": 1283, "hp": 57, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 1331, "hp": 57, "reason": "ordinary carried provision"}
+{"turn": 1363, "hp": 57, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 1418, "hp": 57, "reason": "ordinary crossing"}
+{"turn": 1443, "hp": 57, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 1498, "hp": 57, "reason": "ordinary crossing"}
+{"turn": 1523, "hp": 57, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 1599, "hp": 57, "reason": "ordinary carried provision"}
+{"turn": 1603, "hp": 57, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 1618, "hp": 57, "reason": "ordinary crossing"}
+{"turn": 1619, "hp": 57, "reason": "ordinary crossing"}
+{"turn": 1619, "hp": 57, "reason": "arrived at reported Ward square; light and water checked before search"}
+{"turn": 1683, "hp": 57, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 1763, "hp": 57, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 1782, "hp": 57, "reason": "ordinary light choice"}
+{"turn": 1789, "hp": 57, "reason": "ordinary store entry"}
+{"turn": 1799, "hp": 57, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 1800, "hp": 57, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 1801, "hp": 55, "reason": "actual damage during ordinary action"}
+{"turn": 1801, "hp": 55, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 1802, "hp": 53, "reason": "actual damage during ordinary action"}
+{"turn": 1802, "hp": 53, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 1803, "hp": 45, "reason": "actual damage during ordinary action"}
+{"turn": 1803, "hp": 45, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 1804, "hp": 43, "reason": "actual damage during ordinary action"}
+{"turn": 1804, "hp": 43, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 1805, "hp": 43, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 1820, "hp": 43, "reason": "actual Ward acquired through ordinary pickup"}
+{"turn": 1820, "hp": 43, "reason": "preferred equipment-delay premise absent; natural surface contingency remains"}
+{"turn": 1837, "hp": 43, "reason": "living meaningful exit with acquired Ward"}
+{"turn": 1838, "hp": 43, "reason": "ordinary light choice"}
+{"turn": 1843, "hp": 43, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 1871, "hp": 43, "reason": "ordinary crossing"}
+{"turn": 1875, "hp": 43, "reason": "Ward protection chosen for observed close threat"}
+{"turn": 1876, "hp": 43, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 1877, "hp": 43, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 1878, "hp": 43, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 1879, "hp": 42, "reason": "actual damage during ordinary action"}
+{"turn": 1880, "hp": 42, "reason": "finite workshop musk covers response to observed threat"}
+{"turn": 1883, "hp": 42, "reason": "repositioned during finite disruption before treatment"}
+{"turn": 1884, "hp": 54, "reason": "actual HP gain during ordinary action"}
+{"turn": 1884, "hp": 54, "reason": "one real paid dressing after actual injury"}
+{"turn": 1896, "hp": 54, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 1897, "hp": 54, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 1898, "hp": 54, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 1899, "hp": 58, "reason": "actual HP gain during ordinary action"}
+{"turn": 1899, "hp": 58, "reason": "observed defeated animal supplies an ordinary food opportunity"}
+{"turn": 1902, "hp": 58, "reason": "observed defeated animal supplies an ordinary food opportunity"}
+{"turn": 1911, "hp": 58, "reason": "ordinary light choice"}
+{"turn": 1923, "hp": 58, "reason": "ordinary carried provision"}
+{"turn": 1933, "hp": 58, "reason": "ordinary carried provision"}
+{"turn": 1933, "hp": 58, "reason": "finite observed meat cooked over actual gathered-fuel fire"}
+{"turn": 1933, "hp": 58, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 1935, "hp": 58, "reason": "ordinary light choice"}
+{"turn": 1956, "hp": 58, "reason": "ordinary carried provision"}
+{"turn": 1971, "hp": 58, "reason": "ordinary crossing"}
+{"turn": 1980, "hp": 58, "reason": "close observed diving crow instead of repeated exposed escape steps"}
+{"turn": 1981, "hp": 58, "reason": "close observed diving crow instead of repeated exposed escape steps"}
+{"turn": 1982, "hp": 58, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 1983, "hp": 58, "reason": "defensive blade strike against observed contacting pursuer"}
+{"turn": 2013, "hp": 58, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 2059, "hp": 58, "reason": "ordinary crossing"}
+{"turn": 2059, "hp": 58, "reason": "prudent water detour from remembered shallows"}
+{"turn": 2066, "hp": 58, "reason": "owned empty vessel refilled before long exposure"}
+{"turn": 2067, "hp": 58, "reason": "owned empty vessel refilled before long exposure"}
+{"turn": 2093, "hp": 58, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 2142, "hp": 58, "reason": "ordinary crossing"}
+{"turn": 2173, "hp": 58, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 2222, "hp": 58, "reason": "ordinary crossing"}
+{"turn": 2253, "hp": 58, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 2302, "hp": 58, "reason": "ordinary crossing"}
+{"turn": 2333, "hp": 58, "reason": "travel/search budget reconsidered from public conditions"}
+{"turn": 2340, "hp": 58, "reason": "ordinary light choice"}
+{"turn": 2340, "hp": 58, "reason": "alive return through original laboratory entrance with actual Ward"}

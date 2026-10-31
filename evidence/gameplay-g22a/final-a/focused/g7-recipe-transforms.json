@@ -1,0 +1,5496 @@
+[
+  {
+    "recipe": "homestead_workyard",
+    "rotation": 0,
+    "normal": "S",
+    "site": {
+      "id": "site-90-102-32-21-S",
+      "kind": "compound",
+      "profile": "rural-places-v2",
+      "recipe": "homestead_workyard",
+      "recipe_version": 1,
+      "chunk": [
+        90,
+        102
+      ],
+      "node": "site-90-102-32-21-S",
+      "origin": [
+        7211,
+        4388
+      ],
+      "size": [
+        44,
+        16
+      ],
+      "rotation": 0,
+      "envelope": [
+        7211,
+        4388,
+        7255,
+        4404
+      ],
+      "gate": {
+        "id": "yard_gate",
+        "x": 7232,
+        "y": 4403,
+        "normal": "S",
+        "width": 3,
+        "path": "site-90-102-32-21-S-path-yard"
+      },
+      "approach": [
+        7232,
+        4403,
+        7235,
+        4408
+      ],
+      "paths": [
+        "site-90-102-32-21-S-path-yard"
+      ],
+      "slots": [
+        {
+          "id": "home",
+          "role": "dwelling",
+          "required": true,
+          "buildable": [
+            7212,
+            4388,
+            7226,
+            4400
+          ],
+          "path": "site-90-102-32-21-S-path-yard",
+          "normal": "S",
+          "assets": [
+            {
+              "asset": "house_hearth_a",
+              "weight": 1
+            }
+          ],
+          "effective_rotations": [
+            0
+          ],
+          "placement": "site-90-102-32-21-S-slot-home-building",
+          "plot": "site-90-102-32-21-S-slot-home",
+          "omission": null,
+          "join": [
+            7218,
+            4400
+          ],
+          "goals": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "id": "workshop",
+          "role": "tools",
+          "required": true,
+          "buildable": [
+            7227,
+            4388,
+            7237,
+            4400
+          ],
+          "path": "site-90-102-32-21-S-path-yard",
+          "normal": "S",
+          "assets": [
+            {
+              "asset": "tool_shed_a",
+              "weight": 1
+            }
+          ],
+          "effective_rotations": [
+            0
+          ],
+          "placement": "site-90-102-32-21-S-slot-workshop-building",
+          "plot": "site-90-102-32-21-S-slot-workshop",
+          "omission": null,
+          "join": [
+            7231,
+            4400
+          ],
+          "goals": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "stores",
+          "role": "supplies",
+          "required": false,
+          "buildable": [
+            7238,
+            4388,
+            7255,
+            4400
+          ],
+          "path": "site-90-102-32-21-S-path-yard",
+          "normal": "S",
+          "assets": [
+            {
+              "asset": "storehouse_a",
+              "weight": 1
+            }
+          ],
+          "effective_rotations": [
+            0
+          ],
+          "placement": "site-90-102-32-21-S-slot-stores-building",
+          "plot": "site-90-102-32-21-S-slot-stores",
+          "omission": null,
+          "join": [
+            7244,
+            4400
+          ],
+          "goals": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        }
+      ],
+      "attachment": {
+        "join": [
+          7232,
+          4407
+        ],
+        "normal": "S",
+        "road": "road-4",
+        "segment": 196,
+        "tangent": [
+          1,
+          0
+        ],
+        "side": "north",
+        "frontage": "yard_gate"
+      },
+      "fit": {
+        "budget": 24,
+        "trials": 3
+      }
+    },
+    "receipts": [
+      {
+        "record_id": "site-90-102-32-21-S-slot-home-building:house_hearth_a@13,3,0:special[0]",
+        "source": "house_hearth_a special[0]",
+        "kind": "container",
+        "source_xy": [
+          14,
+          5
+        ],
+        "selected_branch": null,
+        "source_index": 0,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "wooden_shelf",
+        "loot_pools": [
+          "commoner_bedroom"
+        ],
+        "xy": [
+          14,
+          5
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "wooden_shelf",
+            "items": [
+              {
+                "item_id": "tallow_torch",
+                "item_state_version": 1,
+                "name": "Tallow Torch",
+                "tile": "tallow_torch",
+                "weight": 0.3,
+                "stackable": false,
+                "count": 1,
+                "on_use": "equip_light",
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": 600,
+                "turns_lit": 0,
+                "light_data": {
+                  "radius": 8,
+                  "color": [
+                    255,
+                    180,
+                    60
+                  ],
+                  "falloff": 1.8,
+                  "flicker": true
+                },
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "waxy",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fibrous",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fuel",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": false,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "record_id": "site-90-102-32-21-S-slot-home-building:house_hearth_a@13,3,0:special[1]",
+        "source": "house_hearth_a special[1]",
+        "kind": "container",
+        "source_xy": [
+          23,
+          9
+        ],
+        "selected_branch": null,
+        "source_index": 1,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "clay_pot_cluster",
+        "loot_pools": [
+          "commoner_kitchen"
+        ],
+        "xy": [
+          23,
+          9
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "clay_pot_cluster",
+            "items": [
+              {
+                "item_id": "water_skin",
+                "item_state_version": 1,
+                "name": "water skin",
+                "tile": "generic_item",
+                "weight": 0.5,
+                "stackable": false,
+                "count": 1,
+                "on_use": "drink",
+                "text_id": "",
+                "nutrition": null,
+                "hydration": 400,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": "Cold and flat. The thirst retreats.",
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A leather skin, filled with water. The hide is old but the stitching holds. Something alive is in it still.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "drinkable",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "vessel",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "dried_provisions",
+                "item_state_version": 1,
+                "name": "dried provisions",
+                "tile": "generic_item",
+                "weight": 0.3,
+                "stackable": false,
+                "count": 1,
+                "on_use": "eat",
+                "text_id": "",
+                "nutrition": 300,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": "Dry and tasteless. It does what it needs to.",
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A cloth parcel of preserved travel rations. Salt-stiff, dense, neutral. Someone prepared this for a journey they did not finish.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "edible",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "binding",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "record_id": "site-90-102-32-21-S-slot-workshop-building:tool_shed_a@28,6,0:special[0]",
+        "source": "tool_shed_a special[0]",
+        "kind": "container",
+        "source_xy": [
+          29,
+          7
+        ],
+        "selected_branch": null,
+        "source_index": 2,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "tool_rack",
+        "loot_pools": [
+          "storage_tools"
+        ],
+        "xy": [
+          29,
+          7
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "tool_rack",
+            "items": [
+              {
+                "item_id": "tallow_torch",
+                "item_state_version": 1,
+                "name": "Tallow Torch",
+                "tile": "tallow_torch",
+                "weight": 0.3,
+                "stackable": false,
+                "count": 1,
+                "on_use": "equip_light",
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": 600,
+                "turns_lit": 0,
+                "light_data": {
+                  "radius": 8,
+                  "color": [
+                    255,
+                    180,
+                    60
+                  ],
+                  "falloff": 1.8,
+                  "flicker": true
+                },
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "waxy",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fibrous",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fuel",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": false,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "record_id": "site-90-102-32-21-S-slot-workshop-building:tool_shed_a@28,6,0:special[1]",
+        "source": "tool_shed_a special[1]",
+        "kind": "container",
+        "source_xy": [
+          34,
+          7
+        ],
+        "selected_branch": null,
+        "source_index": 3,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "iron_chest",
+        "loot_pools": [
+          "storage_general"
+        ],
+        "xy": [
+          34,
+          7
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "iron_chest",
+            "items": [
+              {
+                "item_id": "wood_bundle",
+                "item_state_version": 1,
+                "name": "bundle of wood",
+                "tile": "generic_item",
+                "weight": 1.0,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A loose bundle of dry branches. Snapped from dead fall.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "fuel",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fibrous",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "dried_provisions",
+                "item_state_version": 1,
+                "name": "dried provisions",
+                "tile": "generic_item",
+                "weight": 0.3,
+                "stackable": false,
+                "count": 1,
+                "on_use": "eat",
+                "text_id": "",
+                "nutrition": 300,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": "Dry and tasteless. It does what it needs to.",
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A cloth parcel of preserved travel rations. Salt-stiff, dense, neutral. Someone prepared this for a journey they did not finish.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "edible",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "binding",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "animal_sinew",
+                "item_state_version": 1,
+                "name": "Sinew",
+                "tile": "generic_item",
+                "weight": 0.1,
+                "stackable": true,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "Stripped carefully and dried it becomes cord. Stripped carelessly it becomes rope. Either way it is strong.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "fibrous",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "binding",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "leather_satchel",
+                "item_state_version": 1,
+                "name": "Leather Satchel",
+                "tile": "leather_satchel",
+                "weight": 0.8,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "Worn leather, stitched at the seams. Carries more than it looks.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "vessel",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fibrous",
+                    "tier": 2
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": false,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "record_id": "site-90-102-32-21-S-slot-workshop-building:tool_shed_a@28,6,0:special[2]",
+        "source": "tool_shed_a special[2]",
+        "kind": "container",
+        "source_xy": [
+          34,
+          9
+        ],
+        "selected_branch": null,
+        "source_index": 4,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "sack",
+        "loot_pools": [
+          "storage_general"
+        ],
+        "xy": [
+          34,
+          9
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "sack",
+            "items": [
+              {
+                "item_id": "dried_provisions",
+                "item_state_version": 1,
+                "name": "dried provisions",
+                "tile": "generic_item",
+                "weight": 0.3,
+                "stackable": false,
+                "count": 1,
+                "on_use": "eat",
+                "text_id": "",
+                "nutrition": 300,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": "Dry and tasteless. It does what it needs to.",
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A cloth parcel of preserved travel rations. Salt-stiff, dense, neutral. Someone prepared this for a journey they did not finish.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "edible",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "binding",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "flint_shard",
+                "item_state_version": 1,
+                "name": "flint shard",
+                "tile": "generic_item",
+                "weight": 0.2,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A sharp-edged chip knocked from a larger piece of flint.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "cutting",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "clay_lump",
+                "item_state_version": 1,
+                "name": "clay lump",
+                "tile": "generic_item",
+                "weight": 0.5,
+                "stackable": true,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A handful of river clay, dense and slightly damp. Takes any shape pressed into it. Dries hard near heat.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "malleable",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "wood_bundle",
+                "item_state_version": 1,
+                "name": "bundle of wood",
+                "tile": "generic_item",
+                "weight": 1.0,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A loose bundle of dry branches. Snapped from dead fall.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "fuel",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fibrous",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "leather_satchel",
+                "item_state_version": 1,
+                "name": "Leather Satchel",
+                "tile": "leather_satchel",
+                "weight": 0.8,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "Worn leather, stitched at the seams. Carries more than it looks.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "vessel",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fibrous",
+                    "tier": 2
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": false,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "record_id": "site-90-102-32-21-S-slot-stores-building:storehouse_a@39,5,0:special[0]",
+        "source": "storehouse_a special[0]",
+        "kind": "container",
+        "source_xy": [
+          40,
+          6
+        ],
+        "selected_branch": null,
+        "source_index": 5,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "barrel",
+        "loot_pools": [
+          "storage_general"
+        ],
+        "xy": [
+          40,
+          6
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "barrel",
+            "items": [
+              {
+                "item_id": "wood_bundle",
+                "item_state_version": 1,
+                "name": "bundle of wood",
+                "tile": "generic_item",
+                "weight": 1.0,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A loose bundle of dry branches. Snapped from dead fall.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "fuel",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fibrous",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "animal_bone",
+                "item_state_version": 1,
+                "name": "Bone",
+                "tile": "generic_item",
+                "weight": 0.2,
+                "stackable": true,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "Clean or close to it. The resonance content varies by source. A craftsman would weigh it before deciding what to do with it.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "bony",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "flint_shard",
+                "item_state_version": 1,
+                "name": "flint shard",
+                "tile": "generic_item",
+                "weight": 0.2,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A sharp-edged chip knocked from a larger piece of flint.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "cutting",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "water_skin",
+                "item_state_version": 1,
+                "name": "water skin",
+                "tile": "generic_item",
+                "weight": 0.5,
+                "stackable": false,
+                "count": 1,
+                "on_use": "drink",
+                "text_id": "",
+                "nutrition": null,
+                "hydration": 400,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": "Cold and flat. The thirst retreats.",
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A leather skin, filled with water. The hide is old but the stitching holds. Something alive is in it still.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "drinkable",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "vessel",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "animal_sinew",
+                "item_state_version": 1,
+                "name": "Sinew",
+                "tile": "generic_item",
+                "weight": 0.1,
+                "stackable": true,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "Stripped carefully and dried it becomes cord. Stripped carelessly it becomes rope. Either way it is strong.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "fibrous",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "binding",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "record_id": "site-90-102-32-21-S-slot-stores-building:storehouse_a@39,5,0:special[1]",
+        "source": "storehouse_a special[1]",
+        "kind": "container",
+        "source_xy": [
+          51,
+          6
+        ],
+        "selected_branch": null,
+        "source_index": 6,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "crate",
+        "loot_pools": [
+          "storage_tools"
+        ],
+        "xy": [
+          51,
+          6
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "crate",
+            "items": [
+              {
+                "item_id": "clay_pot",
+                "item_state_version": 1,
+                "name": "clay pot",
+                "tile": "generic_item",
+                "weight": 0.6,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "vessel",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "heatproof",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": false,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "oil_lantern",
+                "item_state_version": 1,
+                "name": "Oil Lantern",
+                "tile": "oil_lantern",
+                "weight": 0.6,
+                "stackable": false,
+                "count": 1,
+                "on_use": "equip_light",
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": 1800,
+                "turns_lit": 0,
+                "light_data": {
+                  "radius": 10,
+                  "color": [
+                    220,
+                    200,
+                    120
+                  ],
+                  "falloff": 1.5,
+                  "flicker": false
+                },
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A small iron vessel with a wick. Burns cleaner than a torch and longer. The light it produces is steadier and somehow less reassuring.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "waxy",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fuel",
+                    "tier": 2
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": false,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "flint_shard",
+                "item_state_version": 1,
+                "name": "flint shard",
+                "tile": "generic_item",
+                "weight": 0.2,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A sharp-edged chip knocked from a larger piece of flint.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "cutting",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "record_id": "site-90-102-32-21-S-slot-stores-building:storehouse_a@39,5,0:special[2]",
+        "source": "storehouse_a special[2]",
+        "kind": "container",
+        "source_xy": [
+          41,
+          7
+        ],
+        "selected_branch": null,
+        "source_index": 7,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "barrel",
+        "loot_pools": [
+          "storage_general"
+        ],
+        "xy": [
+          41,
+          7
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "barrel",
+            "items": [
+              {
+                "item_id": "water_skin",
+                "item_state_version": 1,
+                "name": "water skin",
+                "tile": "generic_item",
+                "weight": 0.5,
+                "stackable": false,
+                "count": 1,
+                "on_use": "drink",
+                "text_id": "",
+                "nutrition": null,
+                "hydration": 400,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": "Cold and flat. The thirst retreats.",
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A leather skin, filled with water. The hide is old but the stitching holds. Something alive is in it still.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "drinkable",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "vessel",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "clay_lump",
+                "item_state_version": 1,
+                "name": "clay lump",
+                "tile": "generic_item",
+                "weight": 0.5,
+                "stackable": true,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A handful of river clay, dense and slightly damp. Takes any shape pressed into it. Dries hard near heat.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "malleable",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "wood_bundle",
+                "item_state_version": 1,
+                "name": "bundle of wood",
+                "tile": "generic_item",
+                "weight": 1.0,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A loose bundle of dry branches. Snapped from dead fall.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "fuel",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fibrous",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "flint_shard",
+                "item_state_version": 1,
+                "name": "flint shard",
+                "tile": "generic_item",
+                "weight": 0.2,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A sharp-edged chip knocked from a larger piece of flint.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "cutting",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "record_id": "site-90-102-32-21-S-slot-stores-building:storehouse_a@39,5,0:special[3]",
+        "source": "storehouse_a special[3]",
+        "kind": "container",
+        "source_xy": [
+          50,
+          7
+        ],
+        "selected_branch": null,
+        "source_index": 8,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "barrel",
+        "loot_pools": [
+          "storage_general"
+        ],
+        "xy": [
+          50,
+          7
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "barrel",
+            "items": [
+              {
+                "item_id": "wood_bundle",
+                "item_state_version": 1,
+                "name": "bundle of wood",
+                "tile": "generic_item",
+                "weight": 1.0,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A loose bundle of dry branches. Snapped from dead fall.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "fuel",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fibrous",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "dried_provisions",
+                "item_state_version": 1,
+                "name": "dried provisions",
+                "tile": "generic_item",
+                "weight": 0.3,
+                "stackable": false,
+                "count": 1,
+                "on_use": "eat",
+                "text_id": "",
+                "nutrition": 300,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": "Dry and tasteless. It does what it needs to.",
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A cloth parcel of preserved travel rations. Salt-stiff, dense, neutral. Someone prepared this for a journey they did not finish.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "edible",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "binding",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "animal_bone",
+                "item_state_version": 1,
+                "name": "Bone",
+                "tile": "generic_item",
+                "weight": 0.2,
+                "stackable": true,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "Clean or close to it. The resonance content varies by source. A craftsman would weigh it before deciding what to do with it.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "bony",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "water_skin",
+                "item_state_version": 1,
+                "name": "water skin",
+                "tile": "generic_item",
+                "weight": 0.5,
+                "stackable": false,
+                "count": 1,
+                "on_use": "drink",
+                "text_id": "",
+                "nutrition": null,
+                "hydration": 400,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": "Cold and flat. The thirst retreats.",
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A leather skin, filled with water. The hide is old but the stitching holds. Something alive is in it still.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "drinkable",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "vessel",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "clay_lump",
+                "item_state_version": 1,
+                "name": "clay lump",
+                "tile": "generic_item",
+                "weight": 0.5,
+                "stackable": true,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A handful of river clay, dense and slightly damp. Takes any shape pressed into it. Dries hard near heat.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "malleable",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "record_id": "site-90-102-32-21-S-slot-stores-building:storehouse_a@39,5,0:special[4]",
+        "source": "storehouse_a special[4]",
+        "kind": "item",
+        "source_xy": [
+          45,
+          8
+        ],
+        "selected_branch": null,
+        "source_index": 9,
+        "item_id": "research_note",
+        "text_id": "text_storehouse_manifest",
+        "text_override_present": true,
+        "decor_id": null,
+        "loot_pools": null,
+        "xy": [
+          45,
+          8
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "item_id": "book",
+            "item_state_version": 1,
+            "name": "a book",
+            "tile": "document",
+            "weight": 0.3,
+            "stackable": false,
+            "count": 1,
+            "on_use": "read",
+            "text_id": "text_storehouse_manifest",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Bound pages. Still legible in places.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "recipe": "homestead_workyard",
+    "rotation": 180,
+    "normal": "N",
+    "site": {
+      "id": "site-81-34-48-21-N",
+      "kind": "compound",
+      "profile": "rural-places-v2",
+      "recipe": "homestead_workyard",
+      "recipe_version": 1,
+      "chunk": [
+        81,
+        34
+      ],
+      "node": "site-81-34-48-21-N",
+      "origin": [
+        6508,
+        1487
+      ],
+      "size": [
+        44,
+        16
+      ],
+      "rotation": 180,
+      "envelope": [
+        6508,
+        1487,
+        6552,
+        1503
+      ],
+      "gate": {
+        "id": "yard_gate",
+        "x": 6528,
+        "y": 1487,
+        "normal": "N",
+        "width": 3,
+        "path": "site-81-34-48-21-N-path-yard"
+      },
+      "approach": [
+        6528,
+        1483,
+        6531,
+        1488
+      ],
+      "paths": [
+        "site-81-34-48-21-N-path-yard"
+      ],
+      "slots": [
+        {
+          "id": "home",
+          "role": "dwelling",
+          "required": true,
+          "buildable": [
+            6537,
+            1491,
+            6551,
+            1503
+          ],
+          "path": "site-81-34-48-21-N-path-yard",
+          "normal": "N",
+          "assets": [
+            {
+              "asset": "house_hearth_a",
+              "weight": 1
+            }
+          ],
+          "effective_rotations": [
+            180
+          ],
+          "placement": "site-81-34-48-21-N-slot-home-building",
+          "plot": "site-81-34-48-21-N-slot-home",
+          "omission": null,
+          "join": [
+            6544,
+            1490
+          ],
+          "goals": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "id": "workshop",
+          "role": "tools",
+          "required": true,
+          "buildable": [
+            6526,
+            1491,
+            6536,
+            1503
+          ],
+          "path": "site-81-34-48-21-N-path-yard",
+          "normal": "N",
+          "assets": [
+            {
+              "asset": "tool_shed_a",
+              "weight": 1
+            }
+          ],
+          "effective_rotations": [
+            180
+          ],
+          "placement": "site-81-34-48-21-N-slot-workshop-building",
+          "plot": "site-81-34-48-21-N-slot-workshop",
+          "omission": null,
+          "join": [
+            6531,
+            1490
+          ],
+          "goals": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "stores",
+          "role": "supplies",
+          "required": false,
+          "buildable": [
+            6508,
+            1491,
+            6525,
+            1503
+          ],
+          "path": "site-81-34-48-21-N-path-yard",
+          "normal": "N",
+          "assets": [
+            {
+              "asset": "storehouse_a",
+              "weight": 1
+            }
+          ],
+          "effective_rotations": [
+            180
+          ],
+          "placement": "site-81-34-48-21-N-slot-stores-building",
+          "plot": "site-81-34-48-21-N-slot-stores",
+          "omission": null,
+          "join": [
+            6516,
+            1490
+          ],
+          "goals": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        }
+      ],
+      "attachment": {
+        "join": [
+          6528,
+          1483
+        ],
+        "normal": "N",
+        "road": "road-6",
+        "segment": 8,
+        "tangent": [
+          1,
+          0
+        ],
+        "side": "south",
+        "frontage": "yard_gate"
+      },
+      "fit": {
+        "budget": 24,
+        "trials": 3
+      }
+    },
+    "receipts": [
+      {
+        "record_id": "site-81-34-48-21-N-slot-home-building:house_hearth_a@58,31,0:special[0]",
+        "source": "house_hearth_a special[0]",
+        "kind": "container",
+        "source_xy": [
+          68,
+          37
+        ],
+        "selected_branch": null,
+        "source_index": 0,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "wooden_shelf",
+        "loot_pools": [
+          "commoner_bedroom"
+        ],
+        "xy": [
+          68,
+          37
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "wooden_shelf",
+            "items": [
+              {
+                "item_id": "tallow_torch",
+                "item_state_version": 1,
+                "name": "Tallow Torch",
+                "tile": "tallow_torch",
+                "weight": 0.3,
+                "stackable": false,
+                "count": 1,
+                "on_use": "equip_light",
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": 600,
+                "turns_lit": 0,
+                "light_data": {
+                  "radius": 8,
+                  "color": [
+                    255,
+                    180,
+                    60
+                  ],
+                  "falloff": 1.8,
+                  "flicker": true
+                },
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "waxy",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fibrous",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fuel",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": false,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "record_id": "site-81-34-48-21-N-slot-home-building:house_hearth_a@58,31,0:special[1]",
+        "source": "house_hearth_a special[1]",
+        "kind": "container",
+        "source_xy": [
+          59,
+          33
+        ],
+        "selected_branch": null,
+        "source_index": 1,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "clay_pot_cluster",
+        "loot_pools": [
+          "commoner_kitchen"
+        ],
+        "xy": [
+          59,
+          33
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "clay_pot_cluster",
+            "items": [
+              {
+                "item_id": "empty_water_skin",
+                "item_state_version": 1,
+                "name": "empty water skin",
+                "tile": "generic_item",
+                "weight": 0.2,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A leather skin, empty. The seams are still sound. Could be refilled from clean water.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "vessel",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": false,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "water_skin",
+                "item_state_version": 1,
+                "name": "water skin",
+                "tile": "generic_item",
+                "weight": 0.5,
+                "stackable": false,
+                "count": 1,
+                "on_use": "drink",
+                "text_id": "",
+                "nutrition": null,
+                "hydration": 400,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": "Cold and flat. The thirst retreats.",
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A leather skin, filled with water. The hide is old but the stitching holds. Something alive is in it still.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "drinkable",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "vessel",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "crow_jerky",
+                "item_state_version": 1,
+                "name": "Crow Jerky",
+                "tile": "food_item",
+                "weight": 0.2,
+                "stackable": true,
+                "count": 1,
+                "on_use": "eat",
+                "text_id": "",
+                "nutrition": 0.35,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "Strips of dried crow meat. It tastes exactly as you would expect. It sustains you regardless.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "edible",
+                    "tier": 2
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "wood_bundle",
+                "item_state_version": 1,
+                "name": "bundle of wood",
+                "tile": "generic_item",
+                "weight": 1.0,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A loose bundle of dry branches. Snapped from dead fall.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "fuel",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fibrous",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "record_id": "site-81-34-48-21-N-slot-workshop-building:tool_shed_a@47,31,0:special[0]",
+        "source": "tool_shed_a special[0]",
+        "kind": "container",
+        "source_xy": [
+          53,
+          35
+        ],
+        "selected_branch": null,
+        "source_index": 2,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "tool_rack",
+        "loot_pools": [
+          "storage_tools"
+        ],
+        "xy": [
+          53,
+          35
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "tool_rack",
+            "items": [
+              {
+                "item_id": "flint_shard",
+                "item_state_version": 1,
+                "name": "flint shard",
+                "tile": "generic_item",
+                "weight": 0.2,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A sharp-edged chip knocked from a larger piece of flint.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "cutting",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "record_id": "site-81-34-48-21-N-slot-workshop-building:tool_shed_a@47,31,0:special[1]",
+        "source": "tool_shed_a special[1]",
+        "kind": "container",
+        "source_xy": [
+          48,
+          35
+        ],
+        "selected_branch": null,
+        "source_index": 3,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "iron_chest",
+        "loot_pools": [
+          "storage_general"
+        ],
+        "xy": [
+          48,
+          35
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "iron_chest",
+            "items": [
+              {
+                "item_id": "dried_provisions",
+                "item_state_version": 1,
+                "name": "dried provisions",
+                "tile": "generic_item",
+                "weight": 0.3,
+                "stackable": false,
+                "count": 1,
+                "on_use": "eat",
+                "text_id": "",
+                "nutrition": 300,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": "Dry and tasteless. It does what it needs to.",
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A cloth parcel of preserved travel rations. Salt-stiff, dense, neutral. Someone prepared this for a journey they did not finish.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "edible",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "binding",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "wood_bundle",
+                "item_state_version": 1,
+                "name": "bundle of wood",
+                "tile": "generic_item",
+                "weight": 1.0,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A loose bundle of dry branches. Snapped from dead fall.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "fuel",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fibrous",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "water_skin",
+                "item_state_version": 1,
+                "name": "water skin",
+                "tile": "generic_item",
+                "weight": 0.5,
+                "stackable": false,
+                "count": 1,
+                "on_use": "drink",
+                "text_id": "",
+                "nutrition": null,
+                "hydration": 400,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": "Cold and flat. The thirst retreats.",
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A leather skin, filled with water. The hide is old but the stitching holds. Something alive is in it still.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "drinkable",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "vessel",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "record_id": "site-81-34-48-21-N-slot-workshop-building:tool_shed_a@47,31,0:special[2]",
+        "source": "tool_shed_a special[2]",
+        "kind": "container",
+        "source_xy": [
+          48,
+          33
+        ],
+        "selected_branch": null,
+        "source_index": 4,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "sack",
+        "loot_pools": [
+          "storage_general"
+        ],
+        "xy": [
+          48,
+          33
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "sack",
+            "items": [
+              {
+                "item_id": "wood_bundle",
+                "item_state_version": 1,
+                "name": "bundle of wood",
+                "tile": "generic_item",
+                "weight": 1.0,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A loose bundle of dry branches. Snapped from dead fall.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "fuel",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fibrous",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "animal_bone",
+                "item_state_version": 1,
+                "name": "Bone",
+                "tile": "generic_item",
+                "weight": 0.2,
+                "stackable": true,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "Clean or close to it. The resonance content varies by source. A craftsman would weigh it before deciding what to do with it.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "bony",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "clay_lump",
+                "item_state_version": 1,
+                "name": "clay lump",
+                "tile": "generic_item",
+                "weight": 0.5,
+                "stackable": true,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A handful of river clay, dense and slightly damp. Takes any shape pressed into it. Dries hard near heat.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "malleable",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "dried_provisions",
+                "item_state_version": 1,
+                "name": "dried provisions",
+                "tile": "generic_item",
+                "weight": 0.3,
+                "stackable": false,
+                "count": 1,
+                "on_use": "eat",
+                "text_id": "",
+                "nutrition": 300,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": "Dry and tasteless. It does what it needs to.",
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A cloth parcel of preserved travel rations. Salt-stiff, dense, neutral. Someone prepared this for a journey they did not finish.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "edible",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "binding",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "water_skin",
+                "item_state_version": 1,
+                "name": "water skin",
+                "tile": "generic_item",
+                "weight": 0.5,
+                "stackable": false,
+                "count": 1,
+                "on_use": "drink",
+                "text_id": "",
+                "nutrition": null,
+                "hydration": 400,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": "Cold and flat. The thirst retreats.",
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A leather skin, filled with water. The hide is old but the stitching holds. Something alive is in it still.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "drinkable",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "vessel",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "record_id": "site-81-34-48-21-N-slot-stores-building:storehouse_a@30,31,0:special[0]",
+        "source": "storehouse_a special[0]",
+        "kind": "container",
+        "source_xy": [
+          42,
+          36
+        ],
+        "selected_branch": null,
+        "source_index": 5,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "barrel",
+        "loot_pools": [
+          "storage_general"
+        ],
+        "xy": [
+          42,
+          36
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "barrel",
+            "items": [
+              {
+                "item_id": "flint_shard",
+                "item_state_version": 1,
+                "name": "flint shard",
+                "tile": "generic_item",
+                "weight": 0.2,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A sharp-edged chip knocked from a larger piece of flint.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "cutting",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "animal_bone",
+                "item_state_version": 1,
+                "name": "Bone",
+                "tile": "generic_item",
+                "weight": 0.2,
+                "stackable": true,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "Clean or close to it. The resonance content varies by source. A craftsman would weigh it before deciding what to do with it.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "bony",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "wood_bundle",
+                "item_state_version": 1,
+                "name": "bundle of wood",
+                "tile": "generic_item",
+                "weight": 1.0,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A loose bundle of dry branches. Snapped from dead fall.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "fuel",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fibrous",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "record_id": "site-81-34-48-21-N-slot-stores-building:storehouse_a@30,31,0:special[1]",
+        "source": "storehouse_a special[1]",
+        "kind": "container",
+        "source_xy": [
+          31,
+          36
+        ],
+        "selected_branch": null,
+        "source_index": 6,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "crate",
+        "loot_pools": [
+          "storage_tools"
+        ],
+        "xy": [
+          31,
+          36
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "crate",
+            "items": [
+              {
+                "item_id": "tallow_torch",
+                "item_state_version": 1,
+                "name": "Tallow Torch",
+                "tile": "tallow_torch",
+                "weight": 0.3,
+                "stackable": false,
+                "count": 1,
+                "on_use": "equip_light",
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": 600,
+                "turns_lit": 0,
+                "light_data": {
+                  "radius": 8,
+                  "color": [
+                    255,
+                    180,
+                    60
+                  ],
+                  "falloff": 1.8,
+                  "flicker": true
+                },
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "waxy",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fibrous",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fuel",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": false,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "oil_lantern",
+                "item_state_version": 1,
+                "name": "Oil Lantern",
+                "tile": "oil_lantern",
+                "weight": 0.6,
+                "stackable": false,
+                "count": 1,
+                "on_use": "equip_light",
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": 1800,
+                "turns_lit": 0,
+                "light_data": {
+                  "radius": 10,
+                  "color": [
+                    220,
+                    200,
+                    120
+                  ],
+                  "falloff": 1.5,
+                  "flicker": false
+                },
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A small iron vessel with a wick. Burns cleaner than a torch and longer. The light it produces is steadier and somehow less reassuring.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "waxy",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fuel",
+                    "tier": 2
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": false,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "record_id": "site-81-34-48-21-N-slot-stores-building:storehouse_a@30,31,0:special[2]",
+        "source": "storehouse_a special[2]",
+        "kind": "container",
+        "source_xy": [
+          41,
+          35
+        ],
+        "selected_branch": null,
+        "source_index": 7,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "barrel",
+        "loot_pools": [
+          "storage_general"
+        ],
+        "xy": [
+          41,
+          35
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "barrel",
+            "items": [
+              {
+                "item_id": "wood_bundle",
+                "item_state_version": 1,
+                "name": "bundle of wood",
+                "tile": "generic_item",
+                "weight": 1.0,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A loose bundle of dry branches. Snapped from dead fall.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "fuel",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fibrous",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "water_skin",
+                "item_state_version": 1,
+                "name": "water skin",
+                "tile": "generic_item",
+                "weight": 0.5,
+                "stackable": false,
+                "count": 1,
+                "on_use": "drink",
+                "text_id": "",
+                "nutrition": null,
+                "hydration": 400,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": "Cold and flat. The thirst retreats.",
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A leather skin, filled with water. The hide is old but the stitching holds. Something alive is in it still.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "drinkable",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "vessel",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "animal_bone",
+                "item_state_version": 1,
+                "name": "Bone",
+                "tile": "generic_item",
+                "weight": 0.2,
+                "stackable": true,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "Clean or close to it. The resonance content varies by source. A craftsman would weigh it before deciding what to do with it.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "bony",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "flint_shard",
+                "item_state_version": 1,
+                "name": "flint shard",
+                "tile": "generic_item",
+                "weight": 0.2,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A sharp-edged chip knocked from a larger piece of flint.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "cutting",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "record_id": "site-81-34-48-21-N-slot-stores-building:storehouse_a@30,31,0:special[3]",
+        "source": "storehouse_a special[3]",
+        "kind": "container",
+        "source_xy": [
+          32,
+          35
+        ],
+        "selected_branch": null,
+        "source_index": 8,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "barrel",
+        "loot_pools": [
+          "storage_general"
+        ],
+        "xy": [
+          32,
+          35
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "barrel",
+            "items": [
+              {
+                "item_id": "wood_bundle",
+                "item_state_version": 1,
+                "name": "bundle of wood",
+                "tile": "generic_item",
+                "weight": 1.0,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A loose bundle of dry branches. Snapped from dead fall.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "fuel",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fibrous",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "leather_satchel",
+                "item_state_version": 1,
+                "name": "Leather Satchel",
+                "tile": "leather_satchel",
+                "weight": 0.8,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "Worn leather, stitched at the seams. Carries more than it looks.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "vessel",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fibrous",
+                    "tier": 2
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": false,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "flint_shard",
+                "item_state_version": 1,
+                "name": "flint shard",
+                "tile": "generic_item",
+                "weight": 0.2,
+                "stackable": false,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A sharp-edged chip knocked from a larger piece of flint.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "cutting",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "record_id": "site-81-34-48-21-N-slot-stores-building:storehouse_a@30,31,0:special[4]",
+        "source": "storehouse_a special[4]",
+        "kind": "item",
+        "source_xy": [
+          37,
+          34
+        ],
+        "selected_branch": null,
+        "source_index": 9,
+        "item_id": "research_note",
+        "text_id": "text_storehouse_manifest",
+        "text_override_present": true,
+        "decor_id": null,
+        "loot_pools": null,
+        "xy": [
+          37,
+          34
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "item_id": "book",
+            "item_state_version": 1,
+            "name": "a book",
+            "tile": "document",
+            "weight": 0.3,
+            "stackable": false,
+            "count": 1,
+            "on_use": "read",
+            "text_id": "text_storehouse_manifest",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Bound pages. Still legible in places.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "recipe": "wayside_shrine_court",
+    "rotation": 0,
+    "normal": "S",
+    "site": {
+      "id": "site-86-33-16-21-S",
+      "kind": "compound",
+      "profile": "rural-places-v2",
+      "recipe": "wayside_shrine_court",
+      "recipe_version": 1,
+      "chunk": [
+        86,
+        33
+      ],
+      "node": "site-86-33-16-21-S",
+      "origin": [
+        6888,
+        1423
+      ],
+      "size": [
+        18,
+        14
+      ],
+      "rotation": 0,
+      "envelope": [
+        6888,
+        1423,
+        6906,
+        1437
+      ],
+      "gate": {
+        "id": "court_gate",
+        "x": 6896,
+        "y": 1436,
+        "normal": "S",
+        "width": 2,
+        "path": "site-86-33-16-21-S-path-court"
+      },
+      "approach": [
+        6896,
+        1436,
+        6898,
+        1441
+      ],
+      "paths": [
+        "site-86-33-16-21-S-path-court"
+      ],
+      "slots": [
+        {
+          "id": "shrine",
+          "role": "offering",
+          "required": true,
+          "buildable": [
+            6888,
+            1423,
+            6896,
+            1431
+          ],
+          "path": "site-86-33-16-21-S-path-court",
+          "normal": "S",
+          "assets": [
+            {
+              "asset": "roadside_shrine_a",
+              "weight": 1
+            }
+          ],
+          "effective_rotations": [
+            0
+          ],
+          "placement": "site-86-33-16-21-S-slot-shrine-building",
+          "plot": "site-86-33-16-21-S-slot-shrine",
+          "omission": null,
+          "join": [
+            6891,
+            1431
+          ],
+          "goals": [
+            0
+          ]
+        },
+        {
+          "id": "shelter",
+          "role": "rest",
+          "required": true,
+          "buildable": [
+            6898,
+            1423,
+            6906,
+            1431
+          ],
+          "path": "site-86-33-16-21-S-path-court",
+          "normal": "S",
+          "assets": [
+            {
+              "asset": "waymarker_shelter_a",
+              "weight": 1
+            }
+          ],
+          "effective_rotations": [
+            0
+          ],
+          "placement": "site-86-33-16-21-S-slot-shelter-building",
+          "plot": "site-86-33-16-21-S-slot-shelter",
+          "omission": null,
+          "join": [
+            6901,
+            1431
+          ],
+          "goals": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "attachment": {
+        "join": [
+          6896,
+          1440
+        ],
+        "normal": "S",
+        "road": "road-6",
+        "segment": 3,
+        "tangent": [
+          1,
+          0
+        ],
+        "side": "north",
+        "frontage": "court_gate"
+      },
+      "fit": {
+        "budget": 24,
+        "trials": 2
+      }
+    },
+    "receipts": [
+      {
+        "record_id": "site-86-33-16-21-S-slot-shrine-building:roadside_shrine_a@9,5,0:special[0]",
+        "source": "roadside_shrine_a special[0]",
+        "kind": "container",
+        "source_xy": [
+          11,
+          6
+        ],
+        "selected_branch": null,
+        "source_index": 0,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "offering_bowl",
+        "loot_pools": [
+          "shrine_offering"
+        ],
+        "xy": [
+          11,
+          6
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "offering_bowl",
+            "items": [
+              {
+                "item_id": "coldbell_cutting",
+                "item_state_version": 1,
+                "name": "coldbell cutting",
+                "tile": "generic_item",
+                "weight": 0.05,
+                "stackable": true,
+                "count": 1,
+                "on_use": "eat",
+                "text_id": "",
+                "nutrition": 40,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": "Faintly metallic. A small resonance moves through the teeth.",
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A stem of coldbell flower, harvested near grey stone. The petals have gone. The stem is pale, faintly waxy, and cold to the touch in ways the temperature does not explain.",
+                "harvest_from": "coldbell_flower",
+                "keywords": [
+                  {
+                    "tag": "edible",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "resonant",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "binding",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "aromatic",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "resonant_bone_fragment",
+                "item_state_version": 1,
+                "name": "Resonant Bone Fragment",
+                "tile": "generic_item",
+                "weight": 0.1,
+                "stackable": true,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A splinter of something old. The tone in it is audible if you press it against your skull and hold still. Do not hold it near bells.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "resonant",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "bony",
+                    "tier": 2
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "record_id": "site-86-33-16-21-S-slot-shelter-building:waymarker_shelter_a@19,5,0:special[0]",
+        "source": "waymarker_shelter_a special[0]",
+        "kind": "item",
+        "source_xy": [
+          23,
+          6
+        ],
+        "selected_branch": null,
+        "source_index": 1,
+        "item_id": "stone_marker",
+        "text_id": "road_marker_a",
+        "text_override_present": true,
+        "decor_id": null,
+        "loot_pools": null,
+        "xy": [
+          23,
+          6
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "item_id": "stone_marker",
+            "item_state_version": 1,
+            "name": "stone marker",
+            "tile": "document",
+            "weight": 0.8,
+            "stackable": false,
+            "count": 1,
+            "on_use": "read",
+            "text_id": "road_marker_a",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A flat stone, inscribed. Portable.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "bony",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ]
+      },
+      {
+        "record_id": "site-86-33-16-21-S-slot-shelter-building:waymarker_shelter_a@19,5,0:special[1]",
+        "source": "waymarker_shelter_a special[1]",
+        "kind": "container",
+        "source_xy": [
+          20,
+          6
+        ],
+        "selected_branch": null,
+        "source_index": 2,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "coffer",
+        "loot_pools": [
+          "shrine_offering"
+        ],
+        "xy": [
+          20,
+          6
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "coffer",
+            "items": [
+              {
+                "item_id": "moist_pebble",
+                "item_state_version": 1,
+                "name": "moist pebble",
+                "tile": "pebble",
+                "weight": 0.1,
+                "stackable": false,
+                "count": 1,
+                "on_use": "equip_toggle",
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "Perpetually damp. Woven round with twine by hands that knew what they were doing. Certain stones feel different when this is on thy person.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "resonant",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "crow_bile",
+                "item_state_version": 1,
+                "name": "Crow Bile",
+                "tile": "generic_item",
+                "weight": 0.1,
+                "stackable": true,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A small dark sac. What the crow has processed through it is unclear. The fluid inside is extremely bitter and faintly luminous.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "corrosive",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "bitter",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "caustic",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "viscous",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "coldbell_cutting",
+                "item_state_version": 1,
+                "name": "coldbell cutting",
+                "tile": "generic_item",
+                "weight": 0.05,
+                "stackable": true,
+                "count": 1,
+                "on_use": "eat",
+                "text_id": "",
+                "nutrition": 40,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": "Faintly metallic. A small resonance moves through the teeth.",
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A stem of coldbell flower, harvested near grey stone. The petals have gone. The stem is pale, faintly waxy, and cold to the touch in ways the temperature does not explain.",
+                "harvest_from": "coldbell_flower",
+                "keywords": [
+                  {
+                    "tag": "edible",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "resonant",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "binding",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "aromatic",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "recipe": "wayside_shrine_court",
+    "rotation": 90,
+    "normal": "W",
+    "site": {
+      "id": "site-118-65-40-21-W",
+      "kind": "compound",
+      "profile": "rural-places-v2",
+      "recipe": "wayside_shrine_court",
+      "recipe_version": 1,
+      "chunk": [
+        118,
+        65
+      ],
+      "node": "site-118-65-40-21-W",
+      "origin": [
+        9484,
+        2808
+      ],
+      "size": [
+        14,
+        18
+      ],
+      "rotation": 90,
+      "envelope": [
+        9484,
+        2808,
+        9498,
+        2826
+      ],
+      "gate": {
+        "id": "court_gate",
+        "x": 9484,
+        "y": 2816,
+        "normal": "W",
+        "width": 2,
+        "path": "site-118-65-40-21-W-path-court"
+      },
+      "approach": [
+        9480,
+        2816,
+        9485,
+        2818
+      ],
+      "paths": [
+        "site-118-65-40-21-W-path-court"
+      ],
+      "slots": [
+        {
+          "id": "shrine",
+          "role": "offering",
+          "required": true,
+          "buildable": [
+            9490,
+            2808,
+            9498,
+            2816
+          ],
+          "path": "site-118-65-40-21-W-path-court",
+          "normal": "W",
+          "assets": [
+            {
+              "asset": "roadside_shrine_a",
+              "weight": 1
+            }
+          ],
+          "effective_rotations": [
+            90
+          ],
+          "placement": "site-118-65-40-21-W-slot-shrine-building",
+          "plot": "site-118-65-40-21-W-slot-shrine",
+          "omission": null,
+          "join": [
+            9489,
+            2811
+          ],
+          "goals": [
+            0
+          ]
+        },
+        {
+          "id": "shelter",
+          "role": "rest",
+          "required": true,
+          "buildable": [
+            9490,
+            2818,
+            9498,
+            2826
+          ],
+          "path": "site-118-65-40-21-W-path-court",
+          "normal": "W",
+          "assets": [
+            {
+              "asset": "waymarker_shelter_a",
+              "weight": 1
+            }
+          ],
+          "effective_rotations": [
+            90
+          ],
+          "placement": "site-118-65-40-21-W-slot-shelter-building",
+          "plot": "site-118-65-40-21-W-slot-shelter",
+          "omission": null,
+          "join": [
+            9489,
+            2821
+          ],
+          "goals": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "attachment": {
+        "join": [
+          9480,
+          2816
+        ],
+        "normal": "W",
+        "road": "road-5",
+        "segment": 52,
+        "tangent": [
+          0,
+          1
+        ],
+        "side": "east",
+        "frontage": "court_gate"
+      },
+      "fit": {
+        "budget": 24,
+        "trials": 2
+      }
+    },
+    "receipts": [
+      {
+        "record_id": "site-118-65-40-21-W-slot-shrine-building:roadside_shrine_a@52,14,0:special[0]",
+        "source": "roadside_shrine_a special[0]",
+        "kind": "container",
+        "source_xy": [
+          55,
+          16
+        ],
+        "selected_branch": null,
+        "source_index": 0,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "offering_bowl",
+        "loot_pools": [
+          "shrine_offering"
+        ],
+        "xy": [
+          55,
+          16
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "offering_bowl",
+            "items": [
+              {
+                "item_id": "coldbell_cutting",
+                "item_state_version": 1,
+                "name": "coldbell cutting",
+                "tile": "generic_item",
+                "weight": 0.05,
+                "stackable": true,
+                "count": 1,
+                "on_use": "eat",
+                "text_id": "",
+                "nutrition": 40,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": "Faintly metallic. A small resonance moves through the teeth.",
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A stem of coldbell flower, harvested near grey stone. The petals have gone. The stem is pale, faintly waxy, and cold to the touch in ways the temperature does not explain.",
+                "harvest_from": "coldbell_flower",
+                "keywords": [
+                  {
+                    "tag": "edible",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "resonant",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "binding",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "aromatic",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "crow_bile",
+                "item_state_version": 1,
+                "name": "Crow Bile",
+                "tile": "generic_item",
+                "weight": 0.1,
+                "stackable": true,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A small dark sac. What the crow has processed through it is unclear. The fluid inside is extremely bitter and faintly luminous.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "corrosive",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "bitter",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "caustic",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "viscous",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "resonant_bone_fragment",
+                "item_state_version": 1,
+                "name": "Resonant Bone Fragment",
+                "tile": "generic_item",
+                "weight": 0.1,
+                "stackable": true,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A splinter of something old. The tone in it is audible if you press it against your skull and hold still. Do not hold it near bells.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "resonant",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "bony",
+                    "tier": 2
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "record_id": "site-118-65-40-21-W-slot-shelter-building:waymarker_shelter_a@52,24,0:special[0]",
+        "source": "waymarker_shelter_a special[0]",
+        "kind": "item",
+        "source_xy": [
+          55,
+          28
+        ],
+        "selected_branch": null,
+        "source_index": 1,
+        "item_id": "stone_marker",
+        "text_id": "road_marker_a",
+        "text_override_present": true,
+        "decor_id": null,
+        "loot_pools": null,
+        "xy": [
+          55,
+          28
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "item_id": "stone_marker",
+            "item_state_version": 1,
+            "name": "stone marker",
+            "tile": "document",
+            "weight": 0.8,
+            "stackable": false,
+            "count": 1,
+            "on_use": "read",
+            "text_id": "road_marker_a",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A flat stone, inscribed. Portable.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "bony",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ]
+      },
+      {
+        "record_id": "site-118-65-40-21-W-slot-shelter-building:waymarker_shelter_a@52,24,0:special[1]",
+        "source": "waymarker_shelter_a special[1]",
+        "kind": "container",
+        "source_xy": [
+          55,
+          25
+        ],
+        "selected_branch": null,
+        "source_index": 2,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "coffer",
+        "loot_pools": [
+          "shrine_offering"
+        ],
+        "xy": [
+          55,
+          25
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "coffer",
+            "items": [
+              {
+                "item_id": "coldbell_cutting",
+                "item_state_version": 1,
+                "name": "coldbell cutting",
+                "tile": "generic_item",
+                "weight": 0.05,
+                "stackable": true,
+                "count": 1,
+                "on_use": "eat",
+                "text_id": "",
+                "nutrition": 40,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": "Faintly metallic. A small resonance moves through the teeth.",
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A stem of coldbell flower, harvested near grey stone. The petals have gone. The stem is pale, faintly waxy, and cold to the touch in ways the temperature does not explain.",
+                "harvest_from": "coldbell_flower",
+                "keywords": [
+                  {
+                    "tag": "edible",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "resonant",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "binding",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "aromatic",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "moist_pebble",
+                "item_state_version": 1,
+                "name": "moist pebble",
+                "tile": "pebble",
+                "weight": 0.1,
+                "stackable": false,
+                "count": 1,
+                "on_use": "equip_toggle",
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "Perpetually damp. Woven round with twine by hands that knew what they were doing. Certain stones feel different when this is on thy person.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "resonant",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "recipe": "wayside_shrine_court",
+    "rotation": 180,
+    "normal": "N",
+    "site": {
+      "id": "site-81-34-48-21-N",
+      "kind": "compound",
+      "profile": "rural-places-v2",
+      "recipe": "wayside_shrine_court",
+      "recipe_version": 1,
+      "chunk": [
+        81,
+        34
+      ],
+      "node": "site-81-34-48-21-N",
+      "origin": [
+        6520,
+        1487
+      ],
+      "size": [
+        18,
+        14
+      ],
+      "rotation": 180,
+      "envelope": [
+        6520,
+        1487,
+        6538,
+        1501
+      ],
+      "gate": {
+        "id": "court_gate",
+        "x": 6528,
+        "y": 1487,
+        "normal": "N",
+        "width": 2,
+        "path": "site-81-34-48-21-N-path-court"
+      },
+      "approach": [
+        6528,
+        1483,
+        6530,
+        1488
+      ],
+      "paths": [
+        "site-81-34-48-21-N-path-court"
+      ],
+      "slots": [
+        {
+          "id": "shrine",
+          "role": "offering",
+          "required": true,
+          "buildable": [
+            6530,
+            1493,
+            6538,
+            1501
+          ],
+          "path": "site-81-34-48-21-N-path-court",
+          "normal": "N",
+          "assets": [
+            {
+              "asset": "roadside_shrine_a",
+              "weight": 1
+            }
+          ],
+          "effective_rotations": [
+            180
+          ],
+          "placement": "site-81-34-48-21-N-slot-shrine-building",
+          "plot": "site-81-34-48-21-N-slot-shrine",
+          "omission": null,
+          "join": [
+            6533,
+            1492
+          ],
+          "goals": [
+            0
+          ]
+        },
+        {
+          "id": "shelter",
+          "role": "rest",
+          "required": true,
+          "buildable": [
+            6520,
+            1493,
+            6528,
+            1501
+          ],
+          "path": "site-81-34-48-21-N-path-court",
+          "normal": "N",
+          "assets": [
+            {
+              "asset": "waymarker_shelter_a",
+              "weight": 1
+            }
+          ],
+          "effective_rotations": [
+            180
+          ],
+          "placement": "site-81-34-48-21-N-slot-shelter-building",
+          "plot": "site-81-34-48-21-N-slot-shelter",
+          "omission": null,
+          "join": [
+            6524,
+            1492
+          ],
+          "goals": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "attachment": {
+        "join": [
+          6528,
+          1483
+        ],
+        "normal": "N",
+        "road": "road-6",
+        "segment": 8,
+        "tangent": [
+          1,
+          0
+        ],
+        "side": "south",
+        "frontage": "court_gate"
+      },
+      "fit": {
+        "budget": 24,
+        "trials": 2
+      }
+    },
+    "receipts": [
+      {
+        "record_id": "site-81-34-48-21-N-slot-shrine-building:roadside_shrine_a@51,33,0:special[0]",
+        "source": "roadside_shrine_a special[0]",
+        "kind": "container",
+        "source_xy": [
+          54,
+          36
+        ],
+        "selected_branch": null,
+        "source_index": 0,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "offering_bowl",
+        "loot_pools": [
+          "shrine_offering"
+        ],
+        "xy": [
+          54,
+          36
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "offering_bowl",
+            "items": [
+              {
+                "item_id": "crow_bile",
+                "item_state_version": 1,
+                "name": "Crow Bile",
+                "tile": "generic_item",
+                "weight": 0.1,
+                "stackable": true,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A small dark sac. What the crow has processed through it is unclear. The fluid inside is extremely bitter and faintly luminous.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "corrosive",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "bitter",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "caustic",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "viscous",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "resonant_bone_fragment",
+                "item_state_version": 1,
+                "name": "Resonant Bone Fragment",
+                "tile": "generic_item",
+                "weight": 0.1,
+                "stackable": true,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A splinter of something old. The tone in it is audible if you press it against your skull and hold still. Do not hold it near bells.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "resonant",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "bony",
+                    "tier": 2
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "coldbell_cutting",
+                "item_state_version": 1,
+                "name": "coldbell cutting",
+                "tile": "generic_item",
+                "weight": 0.05,
+                "stackable": true,
+                "count": 1,
+                "on_use": "eat",
+                "text_id": "",
+                "nutrition": 40,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": "Faintly metallic. A small resonance moves through the teeth.",
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A stem of coldbell flower, harvested near grey stone. The petals have gone. The stem is pale, faintly waxy, and cold to the touch in ways the temperature does not explain.",
+                "harvest_from": "coldbell_flower",
+                "keywords": [
+                  {
+                    "tag": "edible",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "resonant",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "binding",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "aromatic",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "record_id": "site-81-34-48-21-N-slot-shelter-building:waymarker_shelter_a@41,33,0:special[0]",
+        "source": "waymarker_shelter_a special[0]",
+        "kind": "item",
+        "source_xy": [
+          42,
+          36
+        ],
+        "selected_branch": null,
+        "source_index": 1,
+        "item_id": "stone_marker",
+        "text_id": "road_marker_a",
+        "text_override_present": true,
+        "decor_id": null,
+        "loot_pools": null,
+        "xy": [
+          42,
+          36
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "item_id": "stone_marker",
+            "item_state_version": 1,
+            "name": "stone marker",
+            "tile": "document",
+            "weight": 0.8,
+            "stackable": false,
+            "count": 1,
+            "on_use": "read",
+            "text_id": "road_marker_a",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A flat stone, inscribed. Portable.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "bony",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ]
+      },
+      {
+        "record_id": "site-81-34-48-21-N-slot-shelter-building:waymarker_shelter_a@41,33,0:special[1]",
+        "source": "waymarker_shelter_a special[1]",
+        "kind": "container",
+        "source_xy": [
+          45,
+          36
+        ],
+        "selected_branch": null,
+        "source_index": 2,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "coffer",
+        "loot_pools": [
+          "shrine_offering"
+        ],
+        "xy": [
+          45,
+          36
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "coffer",
+            "items": [
+              {
+                "item_id": "coldbell_cutting",
+                "item_state_version": 1,
+                "name": "coldbell cutting",
+                "tile": "generic_item",
+                "weight": 0.05,
+                "stackable": true,
+                "count": 1,
+                "on_use": "eat",
+                "text_id": "",
+                "nutrition": 40,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": "Faintly metallic. A small resonance moves through the teeth.",
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A stem of coldbell flower, harvested near grey stone. The petals have gone. The stem is pale, faintly waxy, and cold to the touch in ways the temperature does not explain.",
+                "harvest_from": "coldbell_flower",
+                "keywords": [
+                  {
+                    "tag": "edible",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "resonant",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "binding",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "aromatic",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "resonant_bone_fragment",
+                "item_state_version": 1,
+                "name": "Resonant Bone Fragment",
+                "tile": "generic_item",
+                "weight": 0.1,
+                "stackable": true,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A splinter of something old. The tone in it is audible if you press it against your skull and hold still. Do not hold it near bells.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "resonant",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "bony",
+                    "tier": 2
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "moist_pebble",
+                "item_state_version": 1,
+                "name": "moist pebble",
+                "tile": "pebble",
+                "weight": 0.1,
+                "stackable": false,
+                "count": 1,
+                "on_use": "equip_toggle",
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "Perpetually damp. Woven round with twine by hands that knew what they were doing. Certain stones feel different when this is on thy person.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "resonant",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "recipe": "wayside_shrine_court",
+    "rotation": 270,
+    "normal": "E",
+    "site": {
+      "id": "site-117-51-40-31-E",
+      "kind": "compound",
+      "profile": "rural-places-v2",
+      "recipe": "wayside_shrine_court",
+      "recipe_version": 1,
+      "chunk": [
+        117,
+        51
+      ],
+      "node": "site-117-51-40-31-E",
+      "origin": [
+        9383,
+        2216
+      ],
+      "size": [
+        14,
+        18
+      ],
+      "rotation": 270,
+      "envelope": [
+        9383,
+        2216,
+        9397,
+        2234
+      ],
+      "gate": {
+        "id": "court_gate",
+        "x": 9396,
+        "y": 2224,
+        "normal": "E",
+        "width": 2,
+        "path": "site-117-51-40-31-E-path-court"
+      },
+      "approach": [
+        9396,
+        2224,
+        9401,
+        2226
+      ],
+      "paths": [
+        "site-117-51-40-31-E-path-court"
+      ],
+      "slots": [
+        {
+          "id": "shrine",
+          "role": "offering",
+          "required": true,
+          "buildable": [
+            9383,
+            2226,
+            9391,
+            2234
+          ],
+          "path": "site-117-51-40-31-E-path-court",
+          "normal": "E",
+          "assets": [
+            {
+              "asset": "roadside_shrine_a",
+              "weight": 1
+            }
+          ],
+          "effective_rotations": [
+            270
+          ],
+          "placement": "site-117-51-40-31-E-slot-shrine-building",
+          "plot": "site-117-51-40-31-E-slot-shrine",
+          "omission": null,
+          "join": [
+            9391,
+            2229
+          ],
+          "goals": [
+            0
+          ]
+        },
+        {
+          "id": "shelter",
+          "role": "rest",
+          "required": true,
+          "buildable": [
+            9383,
+            2216,
+            9391,
+            2224
+          ],
+          "path": "site-117-51-40-31-E-path-court",
+          "normal": "E",
+          "assets": [
+            {
+              "asset": "waymarker_shelter_a",
+              "weight": 1
+            }
+          ],
+          "effective_rotations": [
+            270
+          ],
+          "placement": "site-117-51-40-31-E-slot-shelter-building",
+          "plot": "site-117-51-40-31-E-slot-shelter",
+          "omission": null,
+          "join": [
+            9391,
+            2220
+          ],
+          "goals": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "attachment": {
+        "join": [
+          9400,
+          2224
+        ],
+        "normal": "E",
+        "road": "road-5",
+        "segment": 67,
+        "tangent": [
+          0,
+          1
+        ],
+        "side": "west",
+        "frontage": "court_gate"
+      },
+      "fit": {
+        "budget": 24,
+        "trials": 2
+      }
+    },
+    "receipts": [
+      {
+        "record_id": "site-117-51-40-31-E-slot-shrine-building:roadside_shrine_a@24,34,0:special[0]",
+        "source": "roadside_shrine_a special[0]",
+        "kind": "container",
+        "source_xy": [
+          25,
+          37
+        ],
+        "selected_branch": null,
+        "source_index": 0,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "offering_bowl",
+        "loot_pools": [
+          "shrine_offering"
+        ],
+        "xy": [
+          25,
+          37
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "offering_bowl",
+            "items": [
+              {
+                "item_id": "coldbell_cutting",
+                "item_state_version": 1,
+                "name": "coldbell cutting",
+                "tile": "generic_item",
+                "weight": 0.05,
+                "stackable": true,
+                "count": 1,
+                "on_use": "eat",
+                "text_id": "",
+                "nutrition": 40,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": "Faintly metallic. A small resonance moves through the teeth.",
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A stem of coldbell flower, harvested near grey stone. The petals have gone. The stem is pale, faintly waxy, and cold to the touch in ways the temperature does not explain.",
+                "harvest_from": "coldbell_flower",
+                "keywords": [
+                  {
+                    "tag": "edible",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "resonant",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "binding",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "aromatic",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "resonant_bone_fragment",
+                "item_state_version": 1,
+                "name": "Resonant Bone Fragment",
+                "tile": "generic_item",
+                "weight": 0.1,
+                "stackable": true,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A splinter of something old. The tone in it is audible if you press it against your skull and hold still. Do not hold it near bells.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "resonant",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "bony",
+                    "tier": 2
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "record_id": "site-117-51-40-31-E-slot-shelter-building:waymarker_shelter_a@24,24,0:special[0]",
+        "source": "waymarker_shelter_a special[0]",
+        "kind": "item",
+        "source_xy": [
+          25,
+          25
+        ],
+        "selected_branch": null,
+        "source_index": 1,
+        "item_id": "stone_marker",
+        "text_id": "road_marker_a",
+        "text_override_present": true,
+        "decor_id": null,
+        "loot_pools": null,
+        "xy": [
+          25,
+          25
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "item_id": "stone_marker",
+            "item_state_version": 1,
+            "name": "stone marker",
+            "tile": "document",
+            "weight": 0.8,
+            "stackable": false,
+            "count": 1,
+            "on_use": "read",
+            "text_id": "road_marker_a",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A flat stone, inscribed. Portable.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "bony",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ]
+      },
+      {
+        "record_id": "site-117-51-40-31-E-slot-shelter-building:waymarker_shelter_a@24,24,0:special[1]",
+        "source": "waymarker_shelter_a special[1]",
+        "kind": "container",
+        "source_xy": [
+          25,
+          28
+        ],
+        "selected_branch": null,
+        "source_index": 2,
+        "item_id": null,
+        "text_id": null,
+        "text_override_present": false,
+        "decor_id": "coffer",
+        "loot_pools": [
+          "shrine_offering"
+        ],
+        "xy": [
+          25,
+          28
+        ],
+        "relocated": false,
+        "objects": [
+          {
+            "decor_id": "coffer",
+            "items": [
+              {
+                "item_id": "crow_bile",
+                "item_state_version": 1,
+                "name": "Crow Bile",
+                "tile": "generic_item",
+                "weight": 0.1,
+                "stackable": true,
+                "count": 1,
+                "on_use": null,
+                "text_id": "",
+                "nutrition": null,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": null,
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A small dark sac. What the crow has processed through it is unclear. The fluid inside is extremely bitter and faintly luminous.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "corrosive",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "bitter",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "caustic",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "viscous",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              },
+              {
+                "item_id": "coldbell_cutting",
+                "item_state_version": 1,
+                "name": "coldbell cutting",
+                "tile": "generic_item",
+                "weight": 0.05,
+                "stackable": true,
+                "count": 1,
+                "on_use": "eat",
+                "text_id": "",
+                "nutrition": 40,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": "Faintly metallic. A small resonance moves through the teeth.",
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0.0,
+                "qualities": {},
+                "description": "A stem of coldbell flower, harvested near grey stone. The petals have gone. The stem is pale, faintly waxy, and cold to the touch in ways the temperature does not explain.",
+                "harvest_from": "coldbell_flower",
+                "keywords": [
+                  {
+                    "tag": "edible",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "resonant",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "binding",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "aromatic",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "optional_omission": "capacity",
+    "site": {
+      "id": "site-90-102-32-21-S",
+      "kind": "compound",
+      "profile": "rural-places-v2",
+      "recipe": "homestead_workyard",
+      "recipe_version": 1,
+      "chunk": [
+        90,
+        102
+      ],
+      "node": "site-90-102-32-21-S",
+      "origin": [
+        7211,
+        4388
+      ],
+      "size": [
+        44,
+        16
+      ],
+      "rotation": 0,
+      "envelope": [
+        7211,
+        4388,
+        7255,
+        4404
+      ],
+      "gate": {
+        "id": "yard_gate",
+        "x": 7232,
+        "y": 4403,
+        "normal": "S",
+        "width": 3,
+        "path": "site-90-102-32-21-S-path-yard"
+      },
+      "approach": [
+        7232,
+        4403,
+        7235,
+        4408
+      ],
+      "paths": [
+        "site-90-102-32-21-S-path-yard"
+      ],
+      "slots": [
+        {
+          "id": "home",
+          "role": "dwelling",
+          "required": true,
+          "buildable": [
+            7212,
+            4388,
+            7226,
+            4400
+          ],
+          "path": "site-90-102-32-21-S-path-yard",
+          "normal": "S",
+          "assets": [
+            {
+              "asset": "house_hearth_a",
+              "weight": 1
+            }
+          ],
+          "effective_rotations": [
+            0
+          ],
+          "placement": "site-90-102-32-21-S-slot-home-building",
+          "plot": "site-90-102-32-21-S-slot-home",
+          "omission": null,
+          "join": [
+            7218,
+            4400
+          ],
+          "goals": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "id": "workshop",
+          "role": "tools",
+          "required": true,
+          "buildable": [
+            7227,
+            4388,
+            7237,
+            4400
+          ],
+          "path": "site-90-102-32-21-S-path-yard",
+          "normal": "S",
+          "assets": [
+            {
+              "asset": "tool_shed_a",
+              "weight": 1
+            }
+          ],
+          "effective_rotations": [
+            0
+          ],
+          "placement": "site-90-102-32-21-S-slot-workshop-building",
+          "plot": "site-90-102-32-21-S-slot-workshop",
+          "omission": null,
+          "join": [
+            7231,
+            4400
+          ],
+          "goals": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "stores",
+          "role": "supplies",
+          "required": false,
+          "buildable": [
+            7238,
+            4388,
+            7255,
+            4390
+          ],
+          "path": "site-90-102-32-21-S-path-yard",
+          "normal": "S",
+          "assets": [
+            {
+              "asset": "storehouse_a",
+              "weight": 1
+            }
+          ],
+          "effective_rotations": [
+            0
+          ],
+          "placement": null,
+          "plot": null,
+          "omission": "all enumerated child alternatives exhausted",
+          "join": [
+            7244,
+            4400
+          ],
+          "goals": []
+        }
+      ],
+      "attachment": {
+        "join": [
+          7232,
+          4407
+        ],
+        "normal": "S",
+        "road": "road-4",
+        "segment": 196,
+        "tangent": [
+          1,
+          0
+        ],
+        "side": "north",
+        "frontage": "yard_gate"
+      },
+      "fit": {
+        "budget": 24,
+        "trials": 3
+      }
+    }
+  },
+  {
+    "optional_omission": "budget",
+    "site": {
+      "id": "site-90-102-32-21-S",
+      "kind": "compound",
+      "profile": "rural-places-v2",
+      "recipe": "homestead_workyard",
+      "recipe_version": 1,
+      "chunk": [
+        90,
+        102
+      ],
+      "node": "site-90-102-32-21-S",
+      "origin": [
+        7211,
+        4388
+      ],
+      "size": [
+        44,
+        16
+      ],
+      "rotation": 0,
+      "envelope": [
+        7211,
+        4388,
+        7255,
+        4404
+      ],
+      "gate": {
+        "id": "yard_gate",
+        "x": 7232,
+        "y": 4403,
+        "normal": "S",
+        "width": 3,
+        "path": "site-90-102-32-21-S-path-yard"
+      },
+      "approach": [
+        7232,
+        4403,
+        7235,
+        4408
+      ],
+      "paths": [
+        "site-90-102-32-21-S-path-yard"
+      ],
+      "slots": [
+        {
+          "id": "home",
+          "role": "dwelling",
+          "required": true,
+          "buildable": [
+            7212,
+            4388,
+            7226,
+            4400
+          ],
+          "path": "site-90-102-32-21-S-path-yard",
+          "normal": "S",
+          "assets": [
+            {
+              "asset": "house_hearth_a",
+              "weight": 1
+            }
+          ],
+          "effective_rotations": [
+            0
+          ],
+          "placement": "site-90-102-32-21-S-slot-home-building",
+          "plot": "site-90-102-32-21-S-slot-home",
+          "omission": null,
+          "join": [
+            7218,
+            4400
+          ],
+          "goals": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "id": "workshop",
+          "role": "tools",
+          "required": true,
+          "buildable": [
+            7227,
+            4388,
+            7237,
+            4400
+          ],
+          "path": "site-90-102-32-21-S-path-yard",
+          "normal": "S",
+          "assets": [
+            {
+              "asset": "tool_shed_a",
+              "weight": 1
+            }
+          ],
+          "effective_rotations": [
+            0
+          ],
+          "placement": "site-90-102-32-21-S-slot-workshop-building",
+          "plot": "site-90-102-32-21-S-slot-workshop",
+          "omission": null,
+          "join": [
+            7231,
+            4400
+          ],
+          "goals": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "stores",
+          "role": "supplies",
+          "required": false,
+          "buildable": [
+            7238,
+            4388,
+            7255,
+            4400
+          ],
+          "path": "site-90-102-32-21-S-path-yard",
+          "normal": "S",
+          "assets": [
+            {
+              "asset": "storehouse_a",
+              "weight": 1
+            }
+          ],
+          "effective_rotations": [
+            0
+          ],
+          "placement": null,
+          "plot": null,
+          "omission": "child fit budget exhausted",
+          "join": [
+            7244,
+            4400
+          ],
+          "goals": []
+        }
+      ],
+      "attachment": {
+        "join": [
+          7232,
+          4407
+        ],
+        "normal": "S",
+        "road": "road-4",
+        "segment": 196,
+        "tangent": [
+          1,
+          0
+        ],
+        "side": "north",
+        "frontage": "yard_gate"
+      },
+      "fit": {
+        "budget": 2,
+        "trials": 2
+      }
+    }
+  }
+]

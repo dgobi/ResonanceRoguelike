@@ -1,0 +1,103 @@
+{
+  "passed": true,
+  "creator": "f9fe901417b360bc1fda84835e0a793eaac2f6df",
+  "visited": [
+    {
+      "chunk": [
+        73,
+        99
+      ],
+      "fingerprint": "fd9c36fc00b19b125b09cbeeefc17a119dee4a6c5330b3c47f38f9ef143e5cdb",
+      "provenance": {
+        "mode": "shared-v1",
+        "routes": [
+          "road-0",
+          "road-2",
+          "road-3",
+          "road-4"
+        ],
+        "crossings": [],
+        "placements": [],
+        "plan_revision": "wg9",
+        "plan_version": 7,
+        "plan_identity": "a2846cdf4d89f99660cc43222862183f436a34242f27a0c07bd43871fe1a001c",
+        "dependency_projection": "structure-v1",
+        "adapter": "g9-v1",
+        "paths": [],
+        "compounds": [],
+        "public_spaces": []
+      }
+    },
+    {
+      "chunk": [
+        74,
+        99
+      ],
+      "fingerprint": "78108e80044051febefae98793c0d0a283440aa5fa0f011ff5c9b776e13bb48f",
+      "provenance": {
+        "mode": "shared-v1",
+        "routes": [
+          "road-2",
+          "road-3",
+          "road-4"
+        ],
+        "crossings": [],
+        "placements": [],
+        "plan_revision": "wg9",
+        "plan_version": 7,
+        "plan_identity": "a2846cdf4d89f99660cc43222862183f436a34242f27a0c07bd43871fe1a001c",
+        "dependency_projection": "structure-v1",
+        "adapter": "g9-v1",
+        "paths": [],
+        "compounds": [],
+        "public_spaces": []
+      }
+    }
+  ],
+  "pending": [
+    {
+      "chunk": [
+        74,
+        100
+      ],
+      "fingerprint": "0306916172056eec1d250f029cbe59c611ab629f60e604ee4936340dd041d6d5",
+      "provenance": {
+        "mode": "shared-v1",
+        "routes": [],
+        "crossings": [],
+        "placements": [],
+        "plan_revision": "wg9",
+        "plan_version": 7,
+        "plan_identity": "a2846cdf4d89f99660cc43222862183f436a34242f27a0c07bd43871fe1a001c",
+        "dependency_projection": "structure-v1",
+        "adapter": "g9-v1",
+        "paths": [],
+        "compounds": [],
+        "public_spaces": []
+      }
+    },
+    {
+      "chunk": [
+        72,
+        103
+      ],
+      "fingerprint": "991a8573b060d596f12e5a42e7e95603667669262084cd7030736a56f3a27c28",
+      "provenance": {
+        "mode": "shared-v1",
+        "routes": [],
+        "crossings": [],
+        "placements": [],
+        "plan_revision": "wg9",
+        "plan_version": 7,
+        "plan_identity": "a2846cdf4d89f99660cc43222862183f436a34242f27a0c07bd43871fe1a001c",
+        "dependency_projection": "structure-v1",
+        "adapter": "g9-v1",
+        "paths": [],
+        "compounds": [],
+        "public_spaces": []
+      }
+    }
+  ],
+  "actual_waystone_mutation": true,
+  "cold_and_f9": true
+}

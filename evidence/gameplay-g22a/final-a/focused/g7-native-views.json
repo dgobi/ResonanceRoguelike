@@ -1,0 +1,14 @@
+[
+  {
+    "recipe": "homestead_workyard",
+    "site": "site-81-34-48-21-N",
+    "native_turns": 8,
+    "controls": "controlled recipe selection; fixture travel; ordinary AI/survival enabled, player invincible; actual production renderer at full-chunk review zoom, visibility revealed for overview only"
+  },
+  {
+    "recipe": "wayside_shrine_court",
+    "site": "site-81-34-48-21-N",
+    "native_turns": 8,
+    "controls": "controlled recipe selection; fixture travel; ordinary AI/survival enabled, player invincible; actual production renderer at full-chunk review zoom, visibility revealed for overview only"
+  }
+]

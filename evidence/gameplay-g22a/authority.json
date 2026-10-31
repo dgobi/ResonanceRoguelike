@@ -1,0 +1,32 @@
+{
+  "invoked_brief": "C:\\Users\\dango\\Downloads\\CODEX_G22A_COMPLETE_THE_CONNECTED_RETURN.md",
+  "basis": "Actual production main 277c2c98cb61d7e97756224a12080a97b3a03628; historical baseline statements in reference copies do not override it. Read the complete invoked brief, local enduring Compass/Decisions/Workflow copies, the approved arc and relevant proposal H1/survival/architecture/verification sections, current AGENTS.md and G22 implementation/evidence. The available enduring reference copies are the repository 24 October edition; no reference-pack refresh was made a prerequisite.",
+  "sources": [
+    {
+      "path": "C:\\Users\\dango\\Downloads\\CODEX_G22A_COMPLETE_THE_CONNECTED_RETURN.md",
+      "sha256": "ab2d2f219ad81fdfde72aff5b195e1161a6247b52613a3f0a35a34b79bc48cd4"
+    },
+    {
+      "path": "C:\\Users\\dango\\Downloads\\RESONANCE_EMERGENT_EXPEDITIONS_ARC_COMPASS.md",
+      "sha256": "fc8760bae6ed3145e1e253b55066a383f7931f00153536d04b74df4791dda5d9"
+    },
+    {
+      "path": "C:\\Users\\dango\\Downloads\\RESONANCE_IMPLEMENTATION_PROPOSAL.md",
+      "sha256": "26093f38fb1a479d91819601395df184068de07ab52a25730d6089c95492dcd0"
+    },
+    {
+      "path": "evidence\\worldgen-g11\\before\\review-package\\references\\RESONANCE_PROJECT_COMPASS.md",
+      "sha256": "66c2e37870591317aee376bd3a5529cc1537ac0edd429b7c47378aae2cb42c91"
+    },
+    {
+      "path": "evidence\\worldgen-g11\\before\\review-package\\references\\RESONANCE_DECISIONS_AND_STATE.md",
+      "sha256": "413d3012c6479ebf75cb9aa14c925d8c5a52cd06b7d44f9521e6b390ecbe7212"
+    },
+    {
+      "path": "evidence\\worldgen-g11\\before\\review-package\\references\\RESONANCE_WORKFLOW.md",
+      "sha256": "3cc36f2de9e198b19e3e50ff2db3104e583e93e92c4bad2661a8e38c1d6b7aef"
+    }
+  ],
+  "checkout": "Production main, no additional branches/worktrees/development copies; only existing interpreter reused. Disposable saves and headless app-local events. Unrelated untracked Workbench proposal untouched.",
+  "publication_authorization": "Execute the attached brief in full; brief sections 8/publication explicitly require commits, push and exact remote readback."
+}

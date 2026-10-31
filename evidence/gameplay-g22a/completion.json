@@ -1,0 +1,321 @@
+{
+  "status": "bounded G22A implementation and verification complete; publication receipt is written after delivery commit",
+  "tested_revision": "5a5b6f5d2ec09897d40063a81b1df36cd0f10f5f",
+  "world_seed": 20261023,
+  "gameplay_bootstrap_seed": 20261020,
+  "fresh_campaigns": "Failed development-a, specifically corrected development-b, one final-source acceptance witness. Same seeds throughout; no outcome reroll or pre-death resume. Final acceptance is one fresh same-process lineage. Initial inherited F5/F9 reader regression precedes both outings.",
+  "first_return": {
+    "reason": "returned alive to laboratory with preparation and treatment",
+    "turn": 1152,
+    "time": "19:11",
+    "hp": 57,
+    "square": [
+      73,
+      99
+    ],
+    "submap": "sub_73_99_0",
+    "position": [
+      15,
+      20
+    ],
+    "hunger": 0.3220000000000005,
+    "thirst": 0.3502499999999918,
+    "needs_feedback": [
+      "Peckish",
+      "Dry"
+    ],
+    "movement_penalty": [
+      0.0,
+      0.0
+    ],
+    "direct_needs_hp_drain": [
+      0.0,
+      0.0
+    ],
+    "inventory": {
+      "tallow_torch": 2,
+      "crude_blade": 1,
+      "leather_jack": 1,
+      "moist_pebble": 1,
+      "research_note": 1,
+      "flint_shard": 1,
+      "letter": 1,
+      "water_flask": 1,
+      "crow_jerky": 1,
+      "herbal_dressing": 1,
+      "musk_pellet": 1,
+      "water_skin": 1
+    },
+    "load": 6.8199999999999985,
+    "capacity": 20.0,
+    "torch": [
+      {
+        "used": 19,
+        "remaining": 581,
+        "burning": true
+      },
+      {
+        "used": 0,
+        "remaining": 600,
+        "burning": false
+      }
+    ],
+    "offhand": "tallow_torch",
+    "observed_threats": []
+  },
+  "ward_acquisition_turn": 1820,
+  "setback": {
+    "case": "surface pursuit caught continued travel commitment",
+    "turn": 1879,
+    "injury": {
+      "before_hp": 43,
+      "after_hp": 42,
+      "event": {
+        "key": 1073741903,
+        "unicode": "",
+        "mod": 0
+      },
+      "observed_before": [
+        {
+          "name": "Heath Stalker",
+          "position": [
+            37,
+            3
+          ]
+        }
+      ],
+      "messages": [
+        "The Heath Stalker lunges at thee.",
+        "\u203a The blow is turned aside.",
+        "\u203a The strike finds the body.",
+        "  3 damage.",
+        "The Heath Stalker lunges at thee.",
+        "\u203a The blow glances off the shield.",
+        "\u203a The blow is turned aside.",
+        "The Heath Stalker lunges at thee.",
+        "\u203a The strike finds thy right leg.",
+        "  1 damage."
+      ]
+    },
+    "ward_already_owned": true
+  },
+  "treatment": {
+    "before_hp": 42,
+    "after_hp": 54,
+    "paid_phases": 1,
+    "maximum_effect": 12,
+    "ward_already_owned": true
+  },
+  "living_return": {
+    "reason": "alive return through original laboratory entrance with actual Ward",
+    "turn": 2340,
+    "time": "15:00",
+    "hp": 58,
+    "square": [
+      73,
+      99
+    ],
+    "submap": "sub_73_99_0",
+    "position": [
+      15,
+      20
+    ],
+    "hunger": 0.7301000000000005,
+    "thirst": 0.48549999999999044,
+    "needs_feedback": [
+      "Hungry",
+      "Dry"
+    ],
+    "movement_penalty": [
+      0.0,
+      0.0
+    ],
+    "direct_needs_hp_drain": [
+      0.0,
+      0.0
+    ],
+    "inventory": {
+      "crude_blade": 1,
+      "leather_jack": 1,
+      "moist_pebble": 1,
+      "research_note": 1,
+      "flint_shard": 2,
+      "letter": 2,
+      "tallow_torch": 1,
+      "faceted_ward": 1,
+      "water_skin": 2
+    },
+    "load": 9.589999999999998,
+    "capacity": 20.0,
+    "torch": [
+      {
+        "used": 81,
+        "remaining": 519,
+        "burning": true
+      }
+    ],
+    "offhand": "tallow_torch",
+    "observed_threats": []
+  },
+  "cold_audit_passed": true,
+  "revisit_assistance": "Only after exact successful save cold-load: debug relocation to its reported square and positioning on its actual saved entrance, then production descent handler. No continued-survival claim.",
+  "input_checks": {
+    "total": 11267,
+    "passed": 11267,
+    "failures": []
+  },
+  "verification": {
+    "focused": {
+      "tests": 444,
+      "passed": 444,
+      "skips": 0
+    },
+    "production": {
+      "passed": true,
+      "totals": {
+        "checks": 3704,
+        "passed": 3704,
+        "failed": 0,
+        "workers": 159
+      },
+      "runner_negative_controls": 7,
+      "unfiltered": true
+    },
+    "processes": [
+      {
+        "name": "connected",
+        "command": [
+          "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "G:\\GameDev\\RoguelikeProject\\tools\\g22a_journey.py",
+          "--evidence",
+          "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22a\\final-a\\play"
+        ],
+        "exit_code": 0,
+        "error": null,
+        "seconds": 190.52970870002173,
+        "log": "connected-output.txt",
+        "log_sha256": "1f445d8a58b24128f761c4efbc9787d86b678c16834d2ab04b46a8438a120dfc",
+        "source_stable": true,
+        "passed": true
+      },
+      {
+        "name": "cold-audit",
+        "command": [
+          "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "G:\\GameDev\\RoguelikeProject\\tools\\g22a_journey.py",
+          "--cold",
+          "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22a\\final-a\\play\\connected\\returned-ward.zip",
+          "--evidence",
+          "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22a\\final-a"
+        ],
+        "exit_code": 0,
+        "error": null,
+        "seconds": 2.2543135000159964,
+        "log": "cold-audit-output.txt",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "source_stable": true,
+        "passed": true
+      },
+      {
+        "name": "production-d",
+        "command": [
+          "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "G:\\GameDev\\RoguelikeProject\\tools\\verify_d.py",
+          "--evidence",
+          "G:\\GameDev\\RoguelikeProject\\.baseline\\gameplay-g22a-final-a"
+        ],
+        "exit_code": 0,
+        "error": null,
+        "seconds": 595.0088772999588,
+        "log": "production-d-output.txt",
+        "log_sha256": "110a26e7e26fcb100250e0a78708a1b4e7cd3e8c9ebb4b4454defaa086e70998",
+        "source_stable": true,
+        "passed": true
+      },
+      {
+        "name": "focused",
+        "command": [
+          "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "G:\\GameDev\\RoguelikeProject\\tools\\critical_fix_regressions\\verify_fixes.py",
+          "--timeout",
+          "3600",
+          "--evidence",
+          "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g22a\\final-a\\focused"
+        ],
+        "exit_code": 0,
+        "error": null,
+        "seconds": 1661.7201870999997,
+        "log": "focused-output.txt",
+        "log_sha256": "04ebe26c5a39da46eb8ecd33d47662ae9f9e595183987eb02a99c7b6d9c90d31",
+        "source_stable": true,
+        "passed": true
+      }
+    ],
+    "concurrent_wall_seconds": 1663.6532989999978,
+    "retained_boundary": "All prior 2,881 inputs (1,072 committed-source bindings plus pinned worker runtime) except tools/g22_journey.py are byte-identical. New inputs are G22A test-player, release driver, focused tests and declaration. No runtime, data, Workbench worker/frontend/host/native/package input changed. Retained commands do not execute either G22 journey driver or the new focused test. Thus final-b frontend/typecheck/host/clippy/Windows NSIS/native/hearing/rivals/reports and historical G14/G16/G19-G21/metadata plus final-c full worker are retained only for their unchanged coverage. Current unfiltered focused/production-D and connected/cold checks run below. Retained Windows package hashes are checked, not called a rebuild.",
+    "retained_gates": [
+      "workbench-frontend",
+      "workbench-typecheck",
+      "workbench-host",
+      "workbench-clippy",
+      "workbench-bundle",
+      "worker-missing-dependency",
+      "workbench-native-hearing",
+      "workbench-native-rivals",
+      "workbench-native-reports",
+      "historical-g14",
+      "historical-g16",
+      "g19-original-loop",
+      "g20-sound-original-loop",
+      "g21-native",
+      "g21-common",
+      "g21-conflict",
+      "g21-musk",
+      "g21-passive",
+      "g21-lethal",
+      "g21-revisit",
+      "g22-metadata",
+      "workbench-worker (final-c full suite)"
+    ]
+  },
+  "files": {
+    "final-a/release.json": "476126ff070e3f9d43e7307de4ffd488543784ec900590fcda15c74dd14e4abb",
+    "final-a/inputs.json": "dc125240dbbbf2501cf2eeaae28a6b40d6a1f6647f4d048d1d240bb4e705ed6e",
+    "final-a/play/connected/result.json": "8e81df2253b105d063c7764f60e1f623bcde161444143928a6cf898fdebebdc2",
+    "final-a/play/connected/returned-ward.zip": "ca89cbbacf8f5dfc98633934ca8ecfa095af7bdaf1adb88e084dee4dc897750c",
+    "final-a/play/connected/returned-ward.json": "c6f6d719286cb294125a138eacc5a212dcda455e4dae42a31cd7a029b6e11564",
+    "final-a/cold-audit.json": "bb7199b4cba47d3c1080cf95465a69bbbe87c980bef5309130a2715b890ac548",
+    "final-a/production-d.json": "6d4cf7f7f6ea11b1413a40e50a708079ad8f3052a97fb2295fe8f9a7c2ba82ac",
+    "final-a/focused/run.json": "685dcfcc8e7ce50669548997cf64831bf52e59eced81b988ae3a86730f06ff0e",
+    "declaration.json": "b4b06cbd2e8139bb9740c49561cd572f8f7b07770c715096660c5dbf0b8888c9",
+    "trace-comparison.json": "b1252e7ea16006e4d1a58a289de8a87c573c669795af3d3102fe9eabb971d8e4",
+    "authority.json": "056be0b791fd6bacc67ebfccc23be884e3014bfe8972cf9ab42a265809ead108"
+  },
+  "publication": {
+    "remote": "origin",
+    "main": "refs/heads/main",
+    "start": "refs/tags/checkpoint/gameplay-g22a-start-20261031-a",
+    "implementation": "refs/tags/checkpoint/gameplay-g22a-implementation-20261031-a",
+    "final": "refs/tags/checkpoint/gameplay-g22a-complete-20261031-a",
+    "readback_receipt": ".baseline/g22a-publication.json",
+    "full_delivered_sha": "Resolved by final reference and reported after commit/push/readback; not embedded self-referentially here."
+  },
+  "limits": [
+    "Scripted feasibility, not unaided discovery or universal seed/food-yield balance/enjoyment.",
+    "No game-runtime, data or balance changes. Workbench/package results are explicitly retained on identical inputs, not a new build.",
+    "Cold audit matches the successful state; subsequent assisted revisit is persistence verification, not ordinary survival or saved future RNG.",
+    "G22 original failed history retained; broader H1/arc outcome review is separate."
+  ]
+}

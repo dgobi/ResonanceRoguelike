@@ -1,0 +1,99 @@
+{
+  "passed": true,
+  "exact_snapshot": true,
+  "hp": 58,
+  "turn": 2340,
+  "report_owner": "039edc7e045f441d9e0fc233b75e2fb2",
+  "reports": [
+    {
+      "role": "workshop",
+      "owner": "039edc7e045f441d9e0fc233b75e2fb2",
+      "origin": [
+        73,
+        99
+      ],
+      "laboratory": "sub_73_99_0",
+      "source": "Old Road Preparations",
+      "description": "A workshop once used for road preparations: fuel, musk work and a traveller's emergency wrap. Present stock and safety are unknown.",
+      "target": {
+        "x": 75,
+        "y": 100,
+        "id": "settlement-0-cross-market-lot-1-44-S-0-building",
+        "asset": "workshop_d"
+      }
+    },
+    {
+      "role": "ward_store",
+      "owner": "039edc7e045f441d9e0fc233b75e2fb2",
+      "origin": [
+        73,
+        99
+      ],
+      "laboratory": "sub_73_99_0",
+      "source": "Old Road Preparations",
+      "description": "A barrow store where a bronze ward was kept. Its present contents, inhabitants and safety are unknown.",
+      "target": {
+        "x": 68,
+        "y": 98,
+        "id": "submap_68_98_0",
+        "asset": "barrow_ward_store_a"
+      }
+    }
+  ],
+  "inventory": {
+    "crude_blade": 1,
+    "leather_jack": 1,
+    "moist_pebble": 1,
+    "research_note": 1,
+    "flint_shard": 2,
+    "letter": 2,
+    "tallow_torch": 1,
+    "faceted_ward": 1,
+    "water_skin": 2
+  },
+  "assistance": "Post-success full-state cached-scene inspection only; no gameplay continuation or route assistance.",
+  "ward_store": {
+    "ward_on_floor": false,
+    "actors": [],
+    "zones": []
+  },
+  "workshop_containers": [
+    {
+      "position": [
+        18,
+        11
+      ],
+      "remaining": [],
+      "dismantled": true
+    },
+    {
+      "position": [
+        25,
+        15
+      ],
+      "remaining": [],
+      "dismantled": false
+    }
+  ],
+  "harvested_animal": {
+    "square": [
+      68,
+      99
+    ],
+    "remains": [
+      44,
+      9
+    ],
+    "corpse_still_absent": true,
+    "retained_outputs": [
+      "animal_sinew",
+      "animal_bone",
+      "animal_bone"
+    ]
+  },
+  "assisted_revisit": {
+    "exact_store_fingerprint": true,
+    "no_regeneration": true,
+    "assistance": "Only after exact successful save cold-load: debug relocation to its reported square and positioning on its actual saved entrance, then production descent handler. No continued-survival claim."
+  }
+}

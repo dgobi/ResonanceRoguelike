@@ -1,0 +1,5 @@
+{
+  "passed": true,
+  "overlapping_later_bank_cannot_admit_water": true,
+  "controls": "Synthetic overlapping water rectangles and blocking river definition; shipped river water remains walkable."
+}
