@@ -23,6 +23,7 @@ from generation.wilderness import make_policy, sample
 from world.world_map import WorldMap
 from g1_support import fingerprint
 from historical_selection import historical_data
+from historical_start import historical_start
 
 ROOT = Path(__file__).resolve().parents[3]
 BEFORE = ROOT/'evidence/worldgen-g10/before'
@@ -155,7 +156,7 @@ class G11Access(unittest.TestCase):
             # This is an exact pre-G11 world comparison, before G17 assignment
             # existed. Bind its disabled historical input explicitly; current
             # selected assignments are exercised by G17/G20's separate checks.
-            with contextlib.redirect_stdout(io.StringIO()), patch(
+            with contextlib.redirect_stdout(io.StringIO()), historical_start(), patch(
                     'generation.authored_submap_selection.resolve',return_value=Policy()):
                 generate_world(w,data,random.Random(seed))
             current=_serialize_world(w);current.pop('surface_schema');current.pop('surface_policy')

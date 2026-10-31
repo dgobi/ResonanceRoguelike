@@ -31,7 +31,8 @@ class Buildings(unittest.TestCase):
         return invoke('preview_draft',root=self.root,source_asset=SOURCE,asset=SOURCE,draft=json.dumps(raw))['result']
     def test_inventory_original_authority_and_invalid_value_repair(self):
         rows=invoke('describe')['result']['assets'];ordinary=[r for r in rows if r.get('family_id')=='building']
-        self.assertEqual(len(ordinary),59);self.assertTrue(all(r['editable'] for r in ordinary));self.assertEqual(len([r for r in rows if r['route']=='plaza']),2)
+        self.assertEqual(len(ordinary),60);self.assertTrue(all(r['editable'] for r in ordinary));self.assertEqual(len([r for r in rows if r['route']=='plaza']),2)
+        self.assertIn('roguelike/data/buildings/commercial/workshop_d.json',[r['path'] for r in ordinary])
         raw=example();raw['width']=99;self.save(SOURCE,raw)
         inspected=invoke('inspect',root=self.root,asset=SOURCE)['result'];self.assertTrue(inspected['editable']);self.assertFalse(inspected['valid'])
         raw.pop('width');self.assertTrue(self.check(raw)['valid'])

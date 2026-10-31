@@ -9,6 +9,7 @@ from engine.save_manager import _serialize_world, _deserialize_world
 from generation.authored_submap_selection import DEFAULT, RELATIVE, AssignmentError, Policy, resolve, validate
 from generation.world_gen import generate_world, _assign_submaps
 from world.world_map import WorldMap, Chunk, RegionType
+from historical_start import historical_start
 ROOT=Path(__file__).resolve().parents[3]
 ROOM=dict(id='assignment_a',width=9,height=7,layers=['#########','#.......#','#.......#','#.......#','#.......#','#.<.....#','#########'],
           legend={'#':'wall','.':'floor','<':'stairs_up'},player_start={'x':3,'y':5},special_tiles=[dict(type='item',x=3,y=5,item_id='letter',text_id='lab_note_primary_b')])
@@ -31,7 +32,7 @@ class AssignmentTests(unittest.TestCase):
     def save(self,raw): (self.root/RELATIVE).write_text(json.dumps(raw),encoding='utf-8')
     def world(self,seed=7):
         w=WorldMap(32,32);w.seed=seed
-        with contextlib.redirect_stdout(io.StringIO()): generate_world(w,self.data,random.Random(99),plan_mode='legacy')
+        with contextlib.redirect_stdout(io.StringIO()), historical_start(): generate_world(w,self.data,random.Random(99),plan_mode='legacy')
         return w
     def test_disabled_missing_zero_preserve_complete_baseline_and_enabled_changes_only_layouts(self):
         for seed in (7,164,20261028):
@@ -62,7 +63,7 @@ class AssignmentTests(unittest.TestCase):
     def test_shared_plan_generation_preserves_all_unrelated_state_and_stays_lazy(self):
         def generate(raw):
             self.save(raw);w=WorldMap(128,128);w.seed=20261028
-            with contextlib.redirect_stdout(io.StringIO()),patch('engine.scene_generation.create_submap',side_effect=AssertionError('eager room construction')):
+            with contextlib.redirect_stdout(io.StringIO()),historical_start(),patch('engine.scene_generation.create_submap',side_effect=AssertionError('eager room construction')):
                 generate_world(w,self.data,random.Random(0))
             return _serialize_world(w)
         baseline=generate(DEFAULT);assigned=generate(dict(self.profile,authored_chance=.65));selected=procedural=0

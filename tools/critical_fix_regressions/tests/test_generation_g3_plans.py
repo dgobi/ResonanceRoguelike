@@ -21,13 +21,14 @@ from engine.item_factory import ItemFactory
 from engine.creature_factory import CreatureFactory
 from engine.save_manager import _serialize_world,_deserialize_world
 from world.world_map import WorldMap
+from historical_start import historical_start
 
 
 class G3Plans(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.data=load_data(); cls.world=WorldMap(128,128); cls.world.seed=20261023
-        with contextlib.redirect_stdout(io.StringIO()): generate_world(cls.world,cls.data,random.Random(7))
+        with contextlib.redirect_stdout(io.StringIO()), historical_start(): generate_world(cls.world,cls.data,random.Random(7))
 
     def setUp(self):
         tmp=tempfile.TemporaryDirectory(); self.addCleanup(tmp.cleanup)

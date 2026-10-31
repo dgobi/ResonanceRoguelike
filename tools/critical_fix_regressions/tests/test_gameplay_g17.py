@@ -72,7 +72,7 @@ class AuthoredCreatures(unittest.TestCase):
         self.assertTrue(receipt['record_id'].endswith('special[0]'))
         self.assertEqual('wood_bundle', m.floor_objects[(42, 20)][0].item_id)
         self.assertEqual('crate', m.container_state[(43, 22)]['decor_id'])
-        self.assertEqual(len(self.data.structure_catalog.entries), 69)  # G20 room + workshop variant.
+        self.assertEqual(len(self.data.structure_catalog.entries), 71)  # G22 adds lab B and workshop D.
         self.assertNotIn(self.raw['id'], self.data.layouts)
         ordinary = copy.deepcopy(self.raw); ordinary['special_tiles'] = ordinary['special_tiles'][1:]
         self.assertTrue(preview(ordinary, 'authored_submap', self.data)[0]['passed'])
