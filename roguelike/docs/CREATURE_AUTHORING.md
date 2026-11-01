@@ -63,7 +63,7 @@ explicit new-composite-variant local transfer flag operation below.
 
 ## Local relationships
 
-The six ordinary WanderingAI sources above expose `perception.faction` and
+The six legacy WanderingAI sources and two composite examples above expose `perception.faction` and
 `perception.hostile_to`. Both the original source and effective candidate must
 support this contract. An ordinary variant changed to another AI has read-only
 relationship fields and cannot publish relationship edits against its source.
@@ -165,13 +165,13 @@ for source-bound verification and the controlled encounter/restore evidence.
 ## Remains and complete harvest tables
 
 The **Harvest** tab uses the same exact Source, Undo/Redo, recovery and reviewed
-single-file publication as common fields. Eleven original non-ephemeral Actors
-admit harvest edits: nine existing tables plus Sewer Thing and Hollow Knight,
+single-file publication as common fields. Thirteen original non-ephemeral Actors
+admit harvest edits: eleven existing tables plus Sewer Thing and Hollow Knight,
 which can deliberately gain a table. Bog Wraith remains common-field editable
 but cannot gain harvest authority; Vine Network is not an Actor. Admission is
 structural, never an ID whitelist. Original `ephemeral` must be absent or exactly
 false and the original profile absent or supported. Raw edits/recovery cannot
-promote an unsupported original by deleting fields. Six ordinary sources retain
+promote an unsupported original by deleting fields. Eight ordinary sources retain
 variants; special creatures retain same-ID edits only. Body/limbs, corpse sprites,
 abilities, effects, spawn declarations and nested unknown metadata stay protected.
 

@@ -137,6 +137,23 @@ class StrikeWithdrawTests(unittest.TestCase):
             for _ in range(5):self.tick()
             self.assertEqual(state,a.ai.snapshot());self.assertEqual(acc,a.ai.move_accumulator)
 
+    def test_world_phase_sight_and_expiry_without_slow_or_disrupted_opportunity(self):
+        for disrupted in (False, True):
+            self.e.entities=[self.e.player];self.e.player.x,self.e.player.y=12,12
+            a=self.actor(hold_opportunities=12);a.ai.profile['pursuit_timeout']=0
+            self.strike(a);self.e.data.entities[a._creature_id]['speed']=.01
+            if disrupted:a._disrupted_turns=10
+            opportunities=a.ai.opportunities;budget=a.ai.withdraw_left
+            self.e.world_time.turn+=1;self.tick()
+            self.assertEqual(opportunities,a.ai.opportunities);self.assertEqual(budget,a.ai.withdraw_left)
+            self.assertEqual(self.e.world_time.turn,a.ai.target['seen'])
+            self.e.player.x=40;self.e.world_time.turn+=1
+            # An expired trail cannot suppress a new anonymous pulse.
+            self.assertEqual(1,emit(self.e,16,12,'flint'))
+            self.tick();self.assertIsNone(a.ai.target);self.assertEqual('idle',a.ai.phase)
+            self.assertIsNotNone(a.ai.sound_interest)
+            self.assertEqual(opportunities,a.ai.opportunities)
+
     def test_non_greedy_escape_replans_occupied_step_and_rejects_terrain(self):
         a=self.actor(retreat_distance=4,withdrawal_budget=8)
         m=self.e.local_map;m.tiles[:]=make_tile('wall',False,False)

@@ -79,6 +79,10 @@ class AISystem:
                     continue
 
             from engine.sound import current_interest
+            if engine is not None:
+                from engine.ai_profiles import local_only
+                if local_only(entity):
+                    ai.refresh_evidence(engine, entity, intensity)
             current_interest(ai, world_time.turn)
             if engine is not None:
                 from engine.local_rivals import revalidate

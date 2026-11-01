@@ -27,9 +27,10 @@ class CompositeAI(AI):
                 'no_progress', 'best_distance', 'suppressed', 'route_blocked', 'opportunities')
         return dict(profile=copy.deepcopy(self.profile), state={k: copy.deepcopy(getattr(self, k)) for k in keys})
 
-    def cancel(self, actor, reason):
+    def cancel(self, actor, reason, *, keep_sound=False):
         from engine.local_rivals import retire_player
         from engine.sound import clear_interest
+        interest = self.sound_interest if keep_sound else None
         self.phase, self.target = 'idle', None
         self.withdraw_left = self.hold_left = self.approach_left = self.no_progress = 0
         self.best_distance = None
@@ -38,6 +39,7 @@ class CompositeAI(AI):
         retire_player(actor)
         clear_interest(self)
         self.state = AIState.WANDERING
+        self.sound_interest = interest
         self.last_cancellation = reason
         for field in ('_surface_exit_x', '_surface_exit_y', '_surface_exit_wx', '_surface_exit_wy'):
             setattr(actor, field, None)
@@ -86,6 +88,23 @@ class CompositeAI(AI):
                            id=None if target is engine.player else target._individual_id,
                            owner=owner(engine), x=target.x, y=target.y, seen=now,
                            deadline=now+self.profile['pursuit_timeout'], provenance='sight')
+
+    def refresh_evidence(self, engine, actor, ambient_light):
+        """Charged-phase observation/expiry, even without a granted decision.
+
+        This never acquires prey, selects an action or spends tactical counters.
+        Current sight may refresh a retained trail; recovery/holding alone cannot.
+        """
+        target = self.resolve_target(engine, actor)
+        if target is None:
+            return
+        if target in self._observed(engine, actor, ambient_light):
+            self._remember(engine, target)
+        elif engine.world_time.turn > self.target['deadline']:
+            self.cancel(actor, 'evidence_expired', keep_sound=True)
+        if self.target is not None:
+            from engine.sound import clear_interest
+            clear_interest(self)
 
     def _route(self, engine, actor, goal):
         """At most 512 cells and 16 steps. BFS permits initially nearer/lateral steps.
@@ -151,7 +170,7 @@ class CompositeAI(AI):
             self._remember(engine, target)
         if self.target is not None and engine.world_time.turn > self.target['deadline']:
             self.suppressed = self._key(engine, target) if target else None
-            self.cancel(actor, 'evidence_expired')
+            self.cancel(actor, 'evidence_expired', keep_sound=True)
             target = None
             reason = 'evidence_expired'
         if self.suppressed and all(self._key(engine, a) != self.suppressed for a in observed):
