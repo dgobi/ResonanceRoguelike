@@ -44,7 +44,7 @@ class StructureContractTests(unittest.TestCase):
         entries=self.data.structure_catalog.entries
         self.assertEqual(len(entries),80)
         self.assertEqual({r:sum(e.route==r for e in entries) for r in self.data.structure_catalog.by_route},
-                         {'ordinary_building':60,'plaza':2,'interior_entrance':6,'authored_submap':9})
+                         {'ordinary_building':60,'plaza':2,'interior_entrance':6,'authored_submap':12})
         self.assertTrue({'ai1_skirmisher_room','ai1_harrier_room'} <= set(self.data.layouts))
         self.assertTrue({'ai3_nettle_opening','ai3_drowsing_opening','ai3_rival_ground'} <= set(self.data.layouts))
         self.assertTrue({'ai2_shadow_opening','ai2_defensive_ground','ai2_cowering_ground','ai2_mixed_opening'} <= set(self.data.layouts))
