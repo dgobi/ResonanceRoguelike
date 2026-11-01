@@ -173,6 +173,7 @@ def take_turn(ai, actor, engine, ambient):
     from engine.sound import clear_interest, current_interest, investigate
     from components.ai import AIState, _monster_attack_result
     from engine.spatial import melee_contact, melee_attack_legal
+    from engine.venom import movement_denial
     if not active(engine, actor) or not actor.is_alive or disrupted(actor, engine.local_map):
         return
     ai.opportunities += 1
@@ -232,6 +233,8 @@ def take_turn(ai, actor, engine, ambient):
             if goal == (actor.x, actor.y):
                 ai.phase, ai.covered_phase = 'covered', now
                 reason = 'cover_reached'
+            elif movement_denial(actor):
+                action, reason = 'wait', movement_denial(actor)
             else:
                 ai.conceal_left -= 1
                 outcome = step(ai, engine, actor, nxt)
@@ -253,6 +256,8 @@ def take_turn(ai, actor, engine, ambient):
         elif (actor.x, actor.y) == (tx, ty):
             retire_prey(ai, actor, 'empty_trail')
             reason = 'empty_trail'
+        elif movement_denial(actor):
+            action, reason = 'wait', movement_denial(actor)
         else:
             exhausted = ai.pursuit_left == 0
             ai.pursuit_left = max(0, ai.pursuit_left-1)

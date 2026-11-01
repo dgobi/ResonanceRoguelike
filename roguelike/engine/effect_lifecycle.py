@@ -107,6 +107,8 @@ def age_actor(engine, actor):
     if aged is None or id(actor) in aged:
         return
     aged.add(id(actor))
+    from engine.venom import age
+    age(engine, actor)
     for field in ('_ability_suppressed_turns', '_disrupted_turns'):
         count = getattr(actor, field, 0)
         if count > 0:
@@ -115,6 +117,7 @@ def age_actor(engine, actor):
 
 def finish_turn(engine, actors):
     # Include departed owners, newly promoted owners and aliases exactly once.
+    age_actor(engine, engine.player)
     for a in {id(a):a for a in actors + live_actors(engine)}.values():
         age_actor(engine, a)
     engine._effect_aged_ids = None

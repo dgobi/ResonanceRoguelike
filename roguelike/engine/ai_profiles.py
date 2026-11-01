@@ -15,7 +15,12 @@ OBSERVATION_DEFAULTS = dict(version=2, recipe='observation_averse', capability='
     scene_scope='active_scene')
 OBSERVATION_BOUNDS = {'concealment_budget': (1, 32), 'unseen_extra_step': (0, 1),
                       'pursuit_budget': (1, 64), 'pursuit_timeout': (0, 10000)}
-RECIPES = {'strike_and_withdraw': DEFAULTS, 'observation_averse': OBSERVATION_DEFAULTS}
+from engine.venom import DEFAULTS as VENOM_TIMINGS, BOUNDS as VENOM_BOUNDS
+VENOM_DEFAULTS = dict(DEFAULTS, version=3, recipe='venom_strike_and_withdraw',
+                      capability='numbing_melee', trigger='accepted_application',
+                      effect='numbing_venom', **VENOM_TIMINGS)
+RECIPES = {'strike_and_withdraw': DEFAULTS, 'observation_averse': OBSERVATION_DEFAULTS,
+           'venom_strike_and_withdraw': VENOM_DEFAULTS}
 
 
 def profile_defaults(profile):
@@ -50,13 +55,14 @@ def effective_profile(raw):
     if not isinstance(p, dict):
         raise ValueError('ai_profile: composite requires an embedded registered profile')
     defaults = profile_defaults(p)
-    bounds = OBSERVATION_BOUNDS if defaults is OBSERVATION_DEFAULTS else BOUNDS
+    bounds = (OBSERVATION_BOUNDS if defaults is OBSERVATION_DEFAULTS else
+              {**BOUNDS, **VENOM_BOUNDS} if defaults is VENOM_DEFAULTS else BOUNDS)
     unknown = set(p) - set(defaults)
     if unknown:
         raise ValueError('ai_profile: unsupported fields: ' + ', '.join(sorted(unknown)))
     result = {**defaults, **copy.deepcopy(p), 'pursuit_timeout': raw.get('pursuit_timeout', 20)}
     for key, expected in defaults.items():
-        if key in ('trigger', 'no_cover', *bounds):
+        if key in ('no_cover', *bounds) or (key == 'trigger' and defaults is DEFAULTS):
             continue
         if type(result[key]) is not type(expected) or result[key] != expected:
             raise ValueError(f'ai_profile.{key}: supported value is {expected!r}')
@@ -119,7 +125,7 @@ def validate_saved(row, local_map=None):
         validate_state(s, p, local_map)
     keys = {'phase', 'target', 'withdraw_left', 'hold_left', 'approach_left',
             'no_progress', 'best_distance', 'suppressed', 'route_blocked', 'opportunities'}
-    if p['recipe'] == 'strike_and_withdraw' and (not isinstance(s, dict) or set(s) != keys):
+    if p['recipe'] != 'observation_averse' and (not isinstance(s, dict) or set(s) != keys):
         raise ValueError('composite.state: incomplete or unsupported tactical state')
     if p['recipe'] == 'observation_averse':
         validate_target_and_intent(row, s, p, local_map, optional_target=True)

@@ -1818,7 +1818,8 @@ class Engine:
         if (key == _sprint_key
                 and pygame.key.get_mods() & pygame.KMOD_SHIFT
                 and self.sprint_turns_remaining == 0
-                and self.sprint_cooldown_remaining == 0):
+                and self.sprint_cooldown_remaining == 0
+                and not self._movement_denied()):
             self.sprint_turns_remaining = self.display.SPRINT_DURATION
             self.sprint_cooldown_remaining = self.display.SPRINT_COOLDOWN
             self.player_move_accumulator = 0.0
@@ -1849,6 +1850,8 @@ class Engine:
                     acted = self._player_attack(blocker)
                 elif self._decor_blocks_movement(dest_x, dest_y):
                     pass  # blocked by decor object (campfire, barrel, etc.)
+                elif self._movement_denied():
+                    pass
                 else:
                     _press_step = self._free_move_pending
                     _prev_x, _prev_y = self.player.x, self.player.y
@@ -2131,7 +2134,16 @@ class Engine:
     #  Chunk transitions
     # ------------------------------------------------------------------ #
 
+    def _movement_denied(self) -> bool:
+        from engine.venom import movement_denial
+        if movement_denial(self.player):
+            self.log.add('Your legs are locked. Wait or use venom treatment.', STONE_BLUE)
+            return True
+        return False
+
     def _transition_chunk(self, dx: int, dy: int) -> bool:
+        if self._movement_denied():
+            return False
         if self.bounded_room_test:
             self.log.add("Disposable room test: travel is limited to the room and its foyer.", STONE_BLUE)
             return False
@@ -2367,13 +2379,13 @@ class Engine:
                         self.local_map, _lpe.x, _lpe.y, max_radius=50
                     )
                 # Nudge one step inward from boundary to prevent immediate re-crossing
-                if _lpe.x <= 0:
+                if _lpe.fighter.can_move() and _lpe.x <= 0:
                     _lpe.x = 1
-                elif _lpe.x >= MAP_WIDTH - 1:
+                elif _lpe.fighter.can_move() and _lpe.x >= MAP_WIDTH - 1:
                     _lpe.x = MAP_WIDTH - 2
-                if _lpe.y <= 0:
+                if _lpe.fighter.can_move() and _lpe.y <= 0:
                     _lpe.y = 1
-                elif _lpe.y >= MAP_HEIGHT - 1:
+                elif _lpe.fighter.can_move() and _lpe.y >= MAP_HEIGHT - 1:
                     _lpe.y = MAP_HEIGHT - 2
                 _lpe._just_arrived     = True
                 _lpe._arrival_cooldown = 3
@@ -2477,6 +2489,8 @@ class Engine:
 
     def _can_use_stairs(self) -> bool:
         """Stairs are physical actions and share the normal input guards."""
+        if self._movement_denied():
+            return False
         fighter = getattr(self.player, "fighter", None)
         return (not self._player_is_dead and self.player.is_alive
                 and (fighter is None or not fighter.is_dead)
@@ -2528,6 +2542,8 @@ class Engine:
 
     def _descend_to_submap(self, submap_id: str) -> None:
         """Cache surface, generate/load submap, place player at entry."""
+        if self._movement_denied():
+            return
         chunk = self.world_map.get(self.world_x, self.world_y)
         if not chunk:
             return
@@ -2689,6 +2705,8 @@ class Engine:
 
     def _ascend_from_submap(self) -> None:
         """Cache submap, restore surface, place player at return coords."""
+        if self._movement_denied():
+            return
         prepared = self._prepare_destination(self.world_x, self.world_y)
         if prepared is None:
             return
@@ -2863,7 +2881,7 @@ class Engine:
                     print(f"[ENTITY-CROSS] SKIP {_e.name} — _just_arrived")
                 continue
             from engine.effect_lifecycle import disrupted
-            if disrupted(_e, self.local_map):
+            if disrupted(_e, self.local_map) or not _e.fighter.can_move():
                 continue
             _eai = getattr(_e, "ai", None)
             if local_only(_e) or _eai is None or _eai.state not in _pursuing:
@@ -3139,6 +3157,9 @@ class Engine:
                       f"state={_eai.state.name} lkx={getattr(_entity,'_last_known_px',None)}")
 
             # --- Stair detection ---
+            if not _entity.fighter.can_move():
+                _remaining.append((_entity, _wx, _wy, _sub_id))
+                continue
             _t_raw = _map.tiles[_entity.x, _entity.y]["terrain"]
             if isinstance(_t_raw, bytes):
                 _t_raw = _t_raw.decode()
@@ -3294,7 +3315,8 @@ class Engine:
             destination = (_pa["destination_wx"], _pa["destination_wy"],
                            _pa["destination_submap_id"])
             _pa["delay"] = max(0, _pa["delay"] - 1)
-            if _pa["delay"] > 0 or destination != active_scene:
+            if (_pa["delay"] > 0 or destination != active_scene
+                    or (fighter is not None and not fighter.can_move())):
                 _still_pending.append(_pa)
                 continue
             # Delay expired in the intended scene — materialise once.
@@ -3312,6 +3334,8 @@ class Engine:
         edge are tried first (lateral expansion, then inward), so the creature
         materialises at the map boundary, not near the player.
         """
+        if entity.fighter is not None and not entity.fighter.can_move():
+            return
         # Clean up from tracking lists — entity becomes a normal entity
         self._live_pursuers = [
             lp for lp in self._live_pursuers if id(lp[0]) != id(entity)
@@ -3398,6 +3422,8 @@ class Engine:
 
         Returns True if the transfer was handled (entity removed from live pursuers).
         """
+        if entity.fighter is not None and not entity.fighter.can_move():
+            return False
         from config import DEBUG_MODE as _DM_st2
         _linked_id = surface_map.submap_links.get((entity.x, entity.y))
         if _linked_id is None:
@@ -3468,6 +3494,8 @@ class Engine:
 
         Returns True if the transfer was handled (entity removed from live pursuers).
         """
+        if entity.fighter is not None and not entity.fighter.can_move():
+            return False
         from config import DEBUG_MODE as _DM_su
         # Surface exit coords were stamped on entity at extraction time
         _exit_x  = getattr(entity, "_surface_exit_x",  None)
@@ -3557,7 +3585,7 @@ class Engine:
                 _e._pending_stair_use = None
                 continue
             from engine.effect_lifecycle import disrupted
-            if disrupted(_e, self.local_map):
+            if disrupted(_e, self.local_map) or not _e.fighter.can_move():
                 continue
             _e._pending_stair_use = None
 

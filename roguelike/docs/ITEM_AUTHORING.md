@@ -1,19 +1,29 @@
 # Expedition item authoring (W5M)
 
-The registered item family uses `expedition-items-2`. Begin edit changes the same
+The registered item family uses `expedition-items-3`. Begin edit changes the same
 ID; **Save as new variant** creates a distinct ID beside a verified source.
 IDs are machine identities. Display-name edits never redirect references.
+
+AI-3 adds one supported **venom treatment** class using `cure_numbing_venom`.
+Open `venom_treatment`, duplicate into a new ID, tune ordinary fields, validate,
+review/apply and reopen before placing it in a saved room. The control-created
+`measured_venom_remedy` is a usable example. Its fixed binding cures player warning
+or mobility paralysis at any HP without healing, consumes one owned unit and
+pays one charged phase; that phase spends recovery's first count. Rejected use
+costs no item/time and never refreshes protection. It cannot be made by deleting
+healing fields from an HP treatment. See [Numbing venom](NUMBING_VENOM_AI.md) for
+stages, recipients, reapplication, actual room inputs and persistence policies.
 
 One unique single-object source under `data/items/components`, `butchery` or
 `consumables` may author common properties when its category matches its route
 and it is an ordinary inert material, `eat` food, `drink` drink or `heal_minor`
-treatment. The original category and use identity stay fixed for both operations.
+HP treatment, plus the registered `cure_numbing_venom` remedy seed class. The original category and use identity stay fixed for both operations.
 Raw Source, recovery and descriptor flags cannot promote unsupported originals.
 Arrays, ambiguous/case-colliding IDs, corpses, lights,
 readable items, effects and special preparations remain inspect-only. Rules admit
-42 shipped sources: 30 materials, nine foods, two drinks and one treatment.
+44 shipped supplies: 30 materials, nine foods, two drinks, one HP treatment and two venom remedies.
 Equipment adds six ordinary weapons, two armour definitions, one shield and three
-satchels: 54 of 79 total sources. Run `workbench/scripts/equipment-inventory.py`
+satchels: 56 of 81 total sources. Run `workbench/scripts/equipment-inventory.py`
 with an output JSON path for operation/class eligibility and exclusion reasons.
 This is an executable inventory, not an ID allowlist.
 

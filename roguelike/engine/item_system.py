@@ -22,7 +22,7 @@ class ItemSystem:
         self.last_use_committed = False
         inv = getattr(engine.player, "inventory", None)
         if inv is None or not inv.contains(item):
-            if item.on_use == "heal_minor":
+            if item.on_use in ("heal_minor", "cure_numbing_venom"):
                 engine.log.add("That treatment is no longer in your pack.", WORN_STONE)
             return False  # stale modal selection cannot apply effects or equip
         from entities.item import repair_selected_equipment_use, use_capability
@@ -50,6 +50,13 @@ class ItemSystem:
     # ------------------------------------------------------------------ #
     #  Effect handlers
     # ------------------------------------------------------------------ #
+
+    def _use_cure_numbing_venom(self, item, engine) -> bool:
+        from engine.venom import cure
+        if type(item.count) is not int or item.count < 1:
+            engine.log.add('That treatment is no longer usable.', WORN_STONE)
+            return False
+        return cure(engine)
 
     def _use_read(self, item: "Item", engine: "Engine", *, committed=False) -> bool:
         if committed and not engine.player.inventory.contains(item):

@@ -169,8 +169,10 @@ def serialize_runtime(engine):
     state.update({key: value for key, value in snapshot(engine, ENGINE_OPTIONAL_STATE).items()
                   if type(value) is not type(ENGINE_OPTIONAL_STATE[key][0])
                   or value != ENGINE_OPTIONAL_STATE[key][0]})
+    from engine.venom import snapshot as venom_snapshot
+    venom = venom_snapshot(engine.player)
     return {"version": 1, "engine": state,
-            "player": snapshot(engine.player, PLAYER_STATE)}
+            "player": snapshot(engine.player, PLAYER_STATE), **({'venom': venom} if venom else {})}
 
 
 def restore_runtime(engine, data):
@@ -178,11 +180,17 @@ def restore_runtime(engine, data):
     restore(engine, record.get("engine", {}), ENGINE_STATE)
     restore(engine, record.get("engine", {}), ENGINE_OPTIONAL_STATE)
     restore(engine.player, record.get("player", {}), PLAYER_STATE)
+    from engine.venom import restore as restore_venom
+    restore_venom(engine.player, record.get('venom'))
 
 
 def validate_components(data):
+    from engine.venom import validate as validate_venom
     if "component_state" in data:
         validate_block(data["component_state"], {"engine": ENGINE_STATE, "player": PLAYER_STATE}, "component_state")
+        if 'venom' in data['component_state'] and data['component_state']['venom'] is None:
+            raise ValueError('venom: omit absent state rather than null')
+        validate_venom(data['component_state'].get('venom'), phase=data.get('turn'))
         validate_fields(data["component_state"]["engine"], ENGINE_OPTIONAL_STATE,
                         "component_state.engine", complete=False)
     fighter = data.get("fighter")
@@ -216,6 +224,10 @@ def validate_components(data):
 
 def serialize_actor_runtime(actor):
     result = {"version": 1, "actor": snapshot(actor, ACTOR_STATE)}
+    from engine.venom import snapshot as venom_snapshot
+    venom = venom_snapshot(actor)
+    if venom:
+        result['venom'] = venom
     result["actor"].update(snapshot(actor, ACTOR_OPTIONAL_STATE))
     if getattr(actor, "ai", None) is not None:
         result["ai"] = snapshot(actor.ai, AI_STATE)
@@ -225,11 +237,19 @@ def serialize_actor_runtime(actor):
 
 
 def validate_actor_runtime(row, local_map=None):
+    from engine.venom import validate as validate_venom
     if "component_state" in row:
         schemas = {"actor": ACTOR_STATE}
         if row.get("ai_type"):
             schemas["ai"] = AI_STATE
         validate_block(row["component_state"], schemas, "actor.component_state")
+        extension = row['component_state'].get('venom')
+        if 'venom' in row['component_state']:
+            from engine.creature_abilities import ABILITY_REGISTRY
+            if (extension is None or row.get('ai_type') not in ('WanderingAI', 'CompositeAI')
+                    or row.get('id') in ABILITY_REGISTRY):
+                raise ValueError('venom: saved recipient must be an ordinary supported actor')
+        validate_venom(extension)
         validate_fields(row["component_state"]["actor"], ACTOR_OPTIONAL_STATE,
                         "actor.component_state.actor", complete=False)
         if row.get("ai_type"):
@@ -249,6 +269,8 @@ def validate_actor_runtime(row, local_map=None):
 def restore_actor_runtime(actor, row):
     actor._individual_id = row.get('individual_id')
     record = row.get("component_state", {})
+    from engine.venom import restore as restore_venom
+    restore_venom(actor, record.get('venom'))
     restore(actor, record.get("actor", {}), ACTOR_STATE)
     restore(actor, record.get("actor", {}), ACTOR_OPTIONAL_STATE)
     if actor.ai is not None:

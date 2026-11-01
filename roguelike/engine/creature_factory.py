@@ -103,6 +103,9 @@ class CreatureFactory:
             actor.ai = ai_class(wander_radius=wander_r)
         actor.ai.set_home(x, y)
 
+        from engine.venom import trait
+        actor._numbing_venom_trait = trait(defn.get('numbing_venom_trait', 'susceptible'))
+
         return actor
 
     def spawn_for_zone(

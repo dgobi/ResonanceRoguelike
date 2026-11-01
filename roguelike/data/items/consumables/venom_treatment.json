@@ -1,0 +1,10 @@
+{
+  "id": "venom_treatment",
+  "name": "Numbing Venom Remedy",
+  "description": "A bitter measured draught for numbing venom. Clears spreading numbness or locked legs without healing wounds; its protection lasts only through recovery.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.1,
+  "stackable": true,
+  "on_use": "cure_numbing_venom"
+}

@@ -204,6 +204,15 @@ class HealthScreen:
         """Returns list of (name, description, colour) for each active condition."""
         player = engine.player
         out: list[tuple[str, str, tuple]] = []
+        from engine.venom import dose
+        venom = dose(player)
+        if venom:
+            descriptions = {
+                'warning': 'Numbness is spreading. Movement and attacks remain available. Treat now or prepare to hold still.',
+                'paralysis': 'Voluntary movement is blocked. Wait, attack in place, or use venom treatment.',
+                'recovery': 'Movement is restored. Fresh numbing venom cannot take hold during recovery.',
+            }
+            out.append(('Numbing venom: '+venom['stage'], descriptions[venom['stage']], DUSTY_ROSE))
 
         needs = getattr(player, "needs", None)
         if needs:

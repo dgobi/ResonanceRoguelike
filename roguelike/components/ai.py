@@ -4,6 +4,7 @@ from engine.effect_lifecycle import creature_id
 import random
 import enum
 from dataclasses import dataclass
+from engine.venom import ApplicationResult
 from typing import TYPE_CHECKING
 from engine.palette import *
 
@@ -319,6 +320,8 @@ class AI:
         rng:       random.Random,
     ) -> None:
         """Move randomly, staying within wander_radius of home."""
+        if not actor.fighter or not actor.fighter.can_move():
+            return
         if rng_chance(0.5):
             return   # creatures don't move every turn while wandering
 
@@ -358,6 +361,8 @@ class AI:
         engine=None,
     ) -> None:
         """Step one tile toward (tx, ty) using tcod pathfinding."""
+        if not actor.fighter or not actor.fighter.can_move():
+            return
         import tcod.path
 
         if actor.x == tx and actor.y == ty:
@@ -420,6 +425,8 @@ class AI:
         rng:       random.Random,
     ) -> None:
         """Move away from player."""
+        if not actor.fighter or not actor.fighter.can_move():
+            return
         import math
         best      = None
         best_dist = -1.0
@@ -708,6 +715,7 @@ class MonsterAttackResult:
     damage: int | None = None
     target_dead: bool = False
     reason: str = 'rejected'
+    application: ApplicationResult | None = None
 
 
 def _monster_attack_entity(monster, target, engine) -> bool:
@@ -716,6 +724,15 @@ def _monster_attack_entity(monster, target, engine) -> bool:
 
 
 def _monster_attack_result(monster, target, engine, *, defensive=False) -> MonsterAttackResult:
+    from dataclasses import replace
+    from engine.venom import deliver
+    result = _resolve_monster_attack(monster, target, engine, defensive=defensive)
+    if getattr(getattr(monster, 'ai', None), 'profile', {}).get('recipe') == 'venom_strike_and_withdraw':
+        result = replace(result, application=deliver(engine, monster, target, result))
+    return result
+
+
+def _resolve_monster_attack(monster, target, engine, *, defensive=False) -> MonsterAttackResult:
     """
     Resolve a monster attack using the full combat system.
     Reports commitment separately from authoritative contact. The legacy wrapper

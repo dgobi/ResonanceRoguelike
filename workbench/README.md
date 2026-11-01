@@ -796,9 +796,9 @@ CPython runtime without the game dependency wheels.
 ## Contract and limits
 
 The protocol is **8**, worker/app **0.9.0**, game structure contract **g2-3**,
-item contract **expedition-items-2**, recipe contract **item-preparation-1**,
+item contract **expedition-items-3**, recipe contract **item-preparation-1**,
 found-text contract **ordinary-found-text-1**, and
-creature contract **creature-composite-5**, with Workbench layout capability
+creature contract **creature-composite-6**, with Workbench layout capability
 **authored-room-2** on the existing `authored_submap` route (game structure contract g2-3).
 W0 identify/describe/inspect/preview requests remain read-only. Draft validation
 is available only through the host's document boundary. Discovery grants an
@@ -882,7 +882,7 @@ saves retain their actual changed decor and removed objects.
 ### W5M expedition equipment
 
 The registered item family now includes ordinary weapons, armour, shields and
-satchels under `expedition-items-2`, alongside all existing supplies. Class controls
+satchels under `expedition-items-3`, alongside all existing supplies. Class controls
 share exact Source, history, recovery and one-file publication. Legacy new-ID
 variants show their required explicit equip handler in the diff. Armour layers
 retain coverage/metadata; bag reductions remain a keyed JSON object with category
@@ -1023,3 +1023,8 @@ useful escape fails. Same-ID recipe conversion is rejected. See the game-owned
 vision, prey information, phase clocks, saved-instance policy and the two saved
 examples. Save/reopen before placement; Test room/Reset/latest saved retain their
 captured-input and dirty-draft boundaries. Natural populations are not enrolled.
+
+AI-3 adds **Venom strike and withdraw** beside both existing recipes and a narrow
+**venom treatment** item seed/variant route. See [Numbing venom authoring](../roguelike/docs/NUMBING_VENOM_AI.md)
+for stage clocks, effective values, susceptibility, consumed treatment, saved-instance
+policy, explicit rooms and the distinction between timed return and a future hunter.

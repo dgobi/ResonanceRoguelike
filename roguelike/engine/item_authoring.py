@@ -15,7 +15,7 @@ from engine.save_components import ITEM_STATE, snapshot, validate_fields
 from engine.crafting import _item_has_tag, _item_has_all_tags
 from rendering.tile_registry import TileRegistry
 
-CONTRACT = "expedition-items-2"
+CONTRACT = "expedition-items-3"
 SCHEMA = {
     "$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object", "required": ["id"],
     "properties": {
@@ -66,7 +66,7 @@ def authoring_evidence(context):
 LIMITATIONS = "Exact staged bytes loaded and an unowned item instantiated by the actual factory. No use action, pool sampling, world selection or saved instance changed."
 FIELDS = ["name", "description", "tile", "weight", "stackable", "keywords", "consumed_on_use"]
 CLASS_FIELDS = {"material": [], "food": ["nutrition", "eat_message"],
-                "drink": ["hydration", "drink_message", "empty_form"], "treatment": ["heal_amount"]}
+                "drink": ["hydration", "drink_message", "empty_form"], "treatment": ["heal_amount"], "venom treatment": []}
 # Known runtime-bearing fields outside an ordinary inert component. Unknown
 # metadata is retained; none is promoted to a supported mechanical control.
 ADVANCED = (set(ITEM_STATE) - set(FIELDS) - {
@@ -81,7 +81,7 @@ ADVANCED = (set(ITEM_STATE) - set(FIELDS) - {
 
 def capability(raw, path, pointer=""):
     parts = PurePosixPath(path).parts
-    kind = {None: "material", "eat": "food", "drink": "drink", "heal_minor": "treatment"}.get(raw.get("on_use")) if isinstance(raw,dict) and isinstance(raw.get("on_use"), (str,type(None))) else None
+    kind = {None: "material", "eat": "food", "drink": "drink", "heal_minor": "treatment", "cure_numbing_venom": "venom treatment"}.get(raw.get("on_use")) if isinstance(raw,dict) and isinstance(raw.get("on_use"), (str,type(None))) else None
     route = parts[3] if len(parts)>=5 else ""
     protected = isinstance(raw,dict) and (str(raw.get("id", "")).casefold()=="empty_water_skin" or PurePosixPath(path).stem.casefold()=="empty_water_skin")
     supported = (not pointer and isinstance(raw, dict) and len(parts) >= 5
@@ -148,6 +148,8 @@ def return_definition(identifier, data, sources, *, owner=None):
 
 def effective_use(raw, data):
     handler=raw.get('on_use')
+    if handler == 'cure_numbing_venom':
+        return dict(explanation='Clears player numbing venom during warning or paralysis at any HP; no healing. One owned unit and one charged phase. Recovery uses the accepted dose snapshot and the paid phase counts first. No active impairment, existing recovery, death or stale ownership rejects without item/time cost. Duplicate this seed to author a new ID; use identity is protected.')
     if handler not in ('eat','drink','heal_minor'): return None
     if handler=='heal_minor':
         value=raw.get('heal_amount'); amount=value or 3
@@ -228,6 +230,8 @@ def validate_definition(raw, data, path, sources, *, writable=False):
         if raw.get(field) and (not isinstance(raw[field], str) or raw[field] not in table):
             issue("ITEM_REFERENCE", field, f"Unknown declared {field} {raw[field]!r}.")
     binding = use_binding(raw)
+    if raw.get('on_use') == 'cure_numbing_venom' and not capability(raw, path)['editable']:
+        issue('VENOM_TREATMENT_SHAPE', 'on_use', 'Venom treatment requires the ordinary consumable seed shape without healing, food, drink, equipment or arbitrary effects.')
     if binding["status"] == "Unknown handler":
         issue("UNKNOWN_HANDLER", "on_use", f"No actual dispatch handler for {raw['on_use']!r}.")
     if raw.get('on_use')=='drink' and 'empty_form' in raw:

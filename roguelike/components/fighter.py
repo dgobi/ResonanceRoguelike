@@ -38,6 +38,8 @@ class Fighter:
         self.hp = max(0, self.hp - amount)
         if self.hp <= 0:
             self._dead = True
+            if hasattr(self, '_numbing_venom'):
+                self._numbing_venom = None
         return actual
 
     def heal(self, amount: int) -> int:
@@ -50,4 +52,5 @@ class Fighter:
         return not self._dead
 
     def can_move(self) -> bool:
-        return not self._dead
+        from engine.venom import movement_denial
+        return not self._dead and movement_denial(self) is None

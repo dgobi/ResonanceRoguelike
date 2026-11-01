@@ -310,8 +310,12 @@ class InventoryScreen:
                     if engine._pending_consume or engine._pending_throw:
                         return True  # Opening a confirmation/target command costs no turn.
                     if consumed:
-                        from engine.item_transfers import consume
-                        consume(engine, row_item)
+                        from engine.item_transfers import consume, consume_throw_unit
+                        from entities.item import use_capability
+                        if use_capability(row_item) == 'cure_numbing_venom':
+                            consume_throw_unit(engine, row_item)
+                        else:
+                            consume(engine, row_item)
                         self._flat = []
                         self.selected = max(0, self.selected - 1)
                     engine._advance_turn()

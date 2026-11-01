@@ -335,7 +335,7 @@ paralysis, observation sensitivity or a final balance/fun claim.
 
 ## AI-2: observation-averse pursuit
 
-Contract `creature-composite-5` also supports the separate version-2
+Contract `creature-composite-6` also supports the separate version-2
 `observation_averse` recipe. New-ID variants deliberately select it through
 **Behaviour recipe: Observation-averse pursuit**; same-ID tuning retains the
 recipe. [Observation-averse AI authoring](OBSERVATION_AVERSE_AI.md) is the
@@ -343,3 +343,14 @@ authoritative companion for its defaults, supernatural observation versus prey
 knowledge, finite cover/rearm clocks, movement-only bonus, saved-instance policy,
 privileged diagnostics and explicit-placement demonstration workflow. AI-1
 version-1 definitions and saved profiles retain their existing meaning.
+
+## AI-3: progressive numbing venom
+
+Contract `creature-composite-6` adds version-3 **Venom strike and withdraw** and
+ordinary recipient susceptibility controls. [Numbing venom](NUMBING_VENOM_AI.md)
+defines the accepted-application trigger, charged warning/paralysis/recovery
+clocks, consumed treatment, movement-only denial, provenance and saved-instance
+policy. Nettle Stalker and Drowsing Stalker demonstrate warning 3 versus 6 through
+one consumer. Their finite timed return does not confirm actual paralysis.
+The three `ai3_*` saved rooms provide explicit placement, real remedy pickup and
+an ordinary rival victim. No natural population enrollment is included.

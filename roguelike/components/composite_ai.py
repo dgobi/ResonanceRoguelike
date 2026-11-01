@@ -177,6 +177,7 @@ class CompositeAI(AI):
         from engine.local_rivals import active
         from engine.sound import current_interest, clear_interest, investigate
         from engine.effect_lifecycle import disrupted
+        from engine.venom import movement_denial
         if (engine is None or player is not engine.player or local_map is not engine.local_map
                 or not active(engine, actor) or disrupted(actor, local_map)):
             return
@@ -214,7 +215,7 @@ class CompositeAI(AI):
                 self.phase = 'hold' if self.hold_left else 'return'
             if self.phase == 'cornered':
                 step, _ = self._route(engine, actor, far)
-                usable = bool(step and actor.fighter.can_move())
+                usable = bool(step)  # temporary paralysis is never route failure
                 if usable and self.route_blocked:
                     # A newly useful route is the only same-encounter rearm.
                     self.phase = 'withdraw'
@@ -227,14 +228,16 @@ class CompositeAI(AI):
                 hold = self.phase == 'hold'
                 if hold:
                     self.hold_left -= 1
-                if not far(actor.x, actor.y):
+                if not far(actor.x, actor.y) and movement_denial(actor):
+                    action, reason = 'wait', movement_denial(actor)
+                elif not far(actor.x, actor.y):
                     self.withdraw_left = max(0, self.withdraw_left-1)
                     step, _ = self._route(engine, actor, far)
                     moved = self._move(engine, actor, step)
                     action, reason = ('move' if moved else 'wait'), 'holding_reposition' if hold else 'withdrawal'
                     if not far(actor.x, actor.y) and self.withdraw_left == 0:
                         self.phase, reason = 'cornered', 'withdrawal_exhausted'
-                        self.route_blocked = not bool(step and actor.fighter.can_move())
+                        self.route_blocked = not bool(step)
                     elif not hold and far(actor.x, actor.y):
                         self.phase = 'hold' if self.hold_left else 'return'
                 else:
@@ -257,7 +260,9 @@ class CompositeAI(AI):
                 action, reason = 'melee', 'engage'
                 if result.target_dead:
                     self.cancel(actor, 'target_dead')
-                elif result.committed and (self.profile['trigger'] == 'committed_attack' or result.hit):
+                elif result.committed and (bool(result.application and result.application.accepted)
+                        if self.profile['trigger'] == 'accepted_application' else
+                        (self.profile['trigger'] == 'committed_attack' or result.hit)):
                     self.phase = 'withdraw'
                     self.withdraw_left = self.profile['withdrawal_budget']
                     self.hold_left = self.profile['hold_opportunities']
@@ -267,6 +272,8 @@ class CompositeAI(AI):
                 if not seen and (actor.x, actor.y) == (tx, ty):
                     self.cancel(actor, 'empty_trail')
                     reason = 'empty_trail'
+                elif movement_denial(actor):
+                    action, reason = 'wait', movement_denial(actor)
                 else:
                     self.approach_left = max(0, self.approach_left-1)
                     goal = (lambda x,y: melee_contact(local_map,x,y,tx,ty)) if seen else (lambda x,y: (x,y)==(tx,ty))

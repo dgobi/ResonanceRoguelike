@@ -19,7 +19,7 @@ class EquipmentTests(unittest.TestCase):
             path='roguelike/data/items/'+suffix+'.json'
             raw=json.loads((ROOT/path).read_bytes())
             result=invoke('inspect',asset=path)['result'];r=result['family']['context']['records'][0]
-            self.assertEqual(result['family']['contract'],'expedition-items-2')
+            self.assertEqual(result['family']['contract'],'expedition-items-3')
             self.assertTrue(result['editable'],r['diagnostics']);self.assertEqual(r['capability']['equipment_class'],kind)
             self.assertIsNotNone(r['equipment']);self.assertIsNotNone(r['factory'])
             for field in r['equipment']['current_definition_fields']:self.assertNotIn(field,r['factory']['instance'])

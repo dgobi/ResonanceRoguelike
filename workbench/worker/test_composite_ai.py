@@ -21,7 +21,7 @@ class CompositeAuthoringTests(unittest.TestCase):
     def test_defaults_construct_same_contract_without_turns(self):
         r=self.validate(self.draft());self.assertTrue(r['valid'],r['diagnostics'])
         record=r['family']['context']['records'][0]
-        self.assertEqual('creature-composite-5',record['capability']['contract'])
+        self.assertEqual('creature-composite-6',record['capability']['contract'])
         self.assertEqual('CompositeAI',record['factory']['instance']['ai_class'])
         p=record['factory']['instance']['effective_ai_profile']
         self.assertEqual((2,1,6,12),(p['retreat_distance'],p['hold_opportunities'],p['withdrawal_budget'],p['pursuit_timeout']))
@@ -57,6 +57,22 @@ class CompositeAuthoringTests(unittest.TestCase):
             for key,value in [('can_cross_chunks',True),('tile','plague_crow'),('ai_type','wandering')]:
                 changed=copy.deepcopy(original);changed[key]=value
                 self.assertFalse(invoke('preview_draft',asset=path,source_asset=path,draft=json.dumps(changed))['result']['valid'])
+
+    def test_venom_recipe_trait_bounds_and_same_id_family_protection(self):
+        raw=self.draft();raw['id']='ai3_contract_variant'
+        raw['ai_profile']={'version':3,'recipe':'venom_strike_and_withdraw'}
+        raw['numbing_venom_trait']='immune'
+        r=self.validate(raw);self.assertTrue(r['valid'],r['diagnostics'])
+        p=r['family']['context']['records'][0]['factory']['instance']['effective_ai_profile']
+        self.assertEqual(('numbing_melee','accepted_application','numbing_venom',3,2,4),
+            tuple(p[k] for k in ('capability','trigger','effect','warning_phases','paralysis_phases','recovery_phases')))
+        for field,value in [('warning_phases',1),('paralysis_phases',4),('recovery_phases',3),('trigger','hit'),('effect','other')]:
+            bad=copy.deepcopy(raw);bad['ai_profile'][field]=value
+            self.assertFalse(self.validate(bad)['valid'],(field,value))
+        bad=copy.deepcopy(raw);bad['numbing_venom_trait']='resistant'
+        self.assertFalse(self.validate(bad)['valid'])
+        path=BASE+'grave_skirmisher.json';same=json.loads((ROOT/path).read_bytes());same['ai_profile']=raw['ai_profile']
+        self.assertFalse(invoke('preview_draft',asset=path,source_asset=path,draft=json.dumps(same))['result']['valid'])
 
     def test_observation_recipe_defaults_and_strict_discriminator(self):
         raw=self.draft();raw['id']='ai2_contract_variant'

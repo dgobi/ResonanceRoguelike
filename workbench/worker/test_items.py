@@ -23,11 +23,11 @@ class ItemTests(unittest.TestCase):
     def test_recursive_catalogue_noop_complex_sources_and_truthful_binding(self):
         assets = invoke("describe")["result"]["assets"]
         rows = [a for a in assets if a["route"] == "item_definition"]
-        self.assertEqual(len(rows), 79)
+        self.assertEqual(len(rows), 81)
         self.assertEqual([r["path"] for r in rows], sorted(r["path"] for r in rows))
         from collections import Counter
-        self.assertEqual(len([r for r in rows if r["editable"]]),54)
-        self.assertEqual(Counter(r['category'] for r in rows if r['editable']),dict(component=4,butchery=18,consumable=20,weapon=6,armor=2,shield=1,equipment=3))
+        self.assertEqual(len([r for r in rows if r["editable"]]),56)
+        self.assertEqual(Counter(r['category'] for r in rows if r['editable']),dict(component=4,butchery=18,consumable=22,weapon=6,armor=2,shield=1,equipment=3))
         for asset in (ITEM, "roguelike/data/items/tools/tallow_torch.json", "roguelike/data/items/weapons/binding_knife.json",
                       "roguelike/data/items/consumables/resonant_tincture.json"):
             path = ROOT / asset; before = path.read_bytes(); meta = path.stat()
