@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "classification": "Newly executed development actual-control authoring; final native/package certification is separate.",
+  "source_start": "721c71e0769a575968d414393552458dce3c74aa",
+  "receipt": "authoring-receipt.json.gz",
+  "new_seed_draft_defaults": "W3/P3/R4 validated through registered recipe controls, without publishing an extra catalogue asset",
+  "published": [
+    {
+      "path": "roguelike/data/entities/creatures/patient_amber_hunter.json",
+      "sha256": "2c97abf1a305d98da9f7ba89508fa8d9b7efd2e728155c65e477f3be54a8ce6d"
+    },
+    {
+      "path": "roguelike/data/entities/creatures/timed_amber_hunter.json",
+      "sha256": "91b12cb9592c6606971b3c1a094ff79eeabe02320ff0b840cd6ca8b1bdf19832"
+    }
+  ],
+  "all_published_bytes_match_final": true,
+  "checks": [
+    "duplicate ordinary seed in a disposable draft; registered fresh profile defaults are W3/P3/R4",
+    "create, configure, validate, review/apply and reopen both policy variants through actual controls",
+    "place saved insect policies, accessible remedy, door and ordinary rival through room controls",
+    "packaged saved-room lifecycle and real sting, withdrawal, monitoring, save/load and predatory return",
+    "source preserved; reset, stop, latest-saved capture and dirty dependency exclusion established"
+  ],
+  "seed_and_template_preserved": true,
+  "notes": "Only the two commissioned insects were temporarily restored to exact previous bytes before these controls republished corrected content. Saved rooms were reopened without content changes. All transient state and snapshots are disposable."
+}

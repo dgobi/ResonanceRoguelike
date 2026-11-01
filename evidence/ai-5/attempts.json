@@ -1,0 +1,45 @@
+{
+  "attempts": [
+    {
+      "attempt": "Legacy capture root preflight",
+      "result": "Rejected absent/in-payload state roots before any runtime edit",
+      "repair": "Created disposable root outside production payload, then captured genuine P2 save at 721c71e before changing runtime."
+    },
+    {
+      "attempt": "Old-contract test expectations",
+      "result": "Severe attack, door and cure success expectations intentionally failed after correction",
+      "repair": "Retained explicit P2 fixtures and ownership/timing assertions, replaced old severe action permissions with free rejection/ordinary expiry. Prior AI-3/AI-4 reports remain historical evidence of the former approved contract."
+    },
+    {
+      "attempt": "Focused fixture preparation",
+      "result": "Missing cutting tool/wrong fixture ID and absent temporary save directory",
+      "repair": "Used the existing crude_blade and created only the disposable fixture directory; valid craft planning now precedes rejection checks."
+    },
+    {
+      "attempt": "Development verification with moving inputs",
+      "result": "Native capture explicitly rejected changed source/data; early worker run recorded errors and was interrupted",
+      "repair": "Retained incomplete logs without treating them as passes; all applicable gates were freshly executed after final input freeze."
+    },
+    {
+      "attempt": "Perk presentation review",
+      "result": "Commit guard worked, but existing prompt still offered confirmation",
+      "repair": "Made full-stage perk browsing explicitly view only, hid stale confirmation and prevented allocation. Restarted verification."
+    },
+    {
+      "attempt": "Native visual inspection",
+      "result": "Initial early movement-key guard also blocked H/L Health and Lexicon inspection",
+      "repair": "Moved physical dispatch guard after free inspection handling, cancelled stale directional pickup, asserted actual panel opening, and reran final gates on 6f60444. Final native screenshot now shows the real Paralysed panel and Wait binding."
+    },
+    {
+      "attempt": "Portable build after interrupted startup",
+      "result": "Windows denied replacing executable held by orphaned owned startup-test process",
+      "repair": "Identified PID2980 by the interrupted test parent/timestamp, closed that owned tree, rebuilt successfully from unchanged source inputs."
+    },
+    {
+      "attempt": "Transient source encoding/line endings",
+      "result": "Development diff exposed Windows default-codepage/newline churn",
+      "repair": "Restored original Unicode and unchanged line endings before implementation checkpoints; retained original guide encoding and exact control-published JSON bytes. Final diff checks pass."
+    }
+  ],
+  "policy": "Interrupted, rejected and failed attempts do not certify final acceptance."
+}

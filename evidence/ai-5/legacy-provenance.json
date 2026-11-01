@@ -1,0 +1,22 @@
+{
+  "captured_before_runtime_change_at": "721c71e0769a575968d414393552458dce3c74aa",
+  "capture_command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    ".baseline/ai-5/capture_legacy.py"
+  ],
+  "actual_prechange_result": {
+    "turn": 488,
+    "paralysis_phases": 2,
+    "severe_remaining": 1,
+    "can_attack": true,
+    "hunter_phase": "return",
+    "last_useful_phase": 489
+  },
+  "archive_sha256": "778de0e668472f67243a89b1569919c999e8aab6e0e498171ca20a6cbe82706e",
+  "snapshot_sha256": "f853d5bff4a8613e38be20e2ec618a7cead8b71d71d27b7274e2f44f8c668b2f",
+  "brief_sha256": "e12f72528cf8fca361b71a0a222bcf6652e73b8814f3ea9a989cee82696e193f",
+  "policy": "Real accepted sting, normal loadout/ownership and ordinary inputs at seed 20261027/combat 17/AI 19; isolated state outside the frozen payload. Original archive never loaded in place. New runtime loads disposable extractions without aging or retuning."
+}

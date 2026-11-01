@@ -1,0 +1,289 @@
+{
+  "passed": true,
+  "revision": "6f6044485bce5dbd052c23fc44fcdf38ccab4872",
+  "ordinary": {
+    "room_seed": 20261027,
+    "combat_seed": 17,
+    "ai_seed": 19,
+    "loadout": "ordinary-player-v1",
+    "injected_effects_items_results": false,
+    "scenarios": [
+      {
+        "room": "ai4_patient_opening",
+        "response": "untreated",
+        "passed": true
+      },
+      {
+        "room": "ai4_patient_opening",
+        "response": "hidden_treatment",
+        "passed": true
+      },
+      {
+        "room": "ai4_timed_opening",
+        "response": "hidden_treatment",
+        "passed": true
+      },
+      {
+        "room": "ai4_patient_opening",
+        "response": "escape",
+        "passed": true
+      },
+      {
+        "room": "ai4_patient_opening",
+        "response": "cure_after_close",
+        "passed": true
+      },
+      {
+        "room": "ai4_rival_ground",
+        "response": "rival",
+        "passed": true
+      }
+    ],
+    "cold_comparisons": 4,
+    "sting_phase": 484,
+    "timeline": [
+      {
+        "turn": 484,
+        "input": ".",
+        "stage": "warning",
+        "remaining": 3,
+        "hp": 57,
+        "player": [
+          39,
+          21
+        ]
+      },
+      {
+        "turn": 485,
+        "input": ".",
+        "stage": "warning",
+        "remaining": 2,
+        "hp": 57,
+        "player": [
+          39,
+          21
+        ]
+      },
+      {
+        "turn": 485,
+        "input": "f5",
+        "stage": "warning",
+        "remaining": 2,
+        "hp": 57,
+        "player": [
+          39,
+          21
+        ]
+      },
+      {
+        "turn": 485,
+        "input": "f9",
+        "stage": "warning",
+        "remaining": 2,
+        "hp": 57,
+        "player": [
+          39,
+          21
+        ]
+      },
+      {
+        "turn": 486,
+        "input": ".",
+        "stage": "warning",
+        "remaining": 1,
+        "hp": 57,
+        "player": [
+          39,
+          21
+        ]
+      },
+      {
+        "turn": 487,
+        "input": ".",
+        "stage": "paralysis",
+        "remaining": 3,
+        "hp": 57,
+        "player": [
+          39,
+          21
+        ]
+      },
+      {
+        "turn": 487,
+        "input": "right",
+        "stage": "paralysis",
+        "remaining": 3,
+        "hp": 57,
+        "player": [
+          39,
+          21
+        ]
+      },
+      {
+        "turn": 487,
+        "input": "up",
+        "stage": "paralysis",
+        "remaining": 3,
+        "hp": 57,
+        "player": [
+          39,
+          21
+        ]
+      },
+      {
+        "turn": 487,
+        "input": "q",
+        "stage": "paralysis",
+        "remaining": 3,
+        "hp": 57,
+        "player": [
+          39,
+          21
+        ]
+      },
+      {
+        "turn": 488,
+        "input": ".",
+        "stage": "paralysis",
+        "remaining": 2,
+        "hp": 57,
+        "player": [
+          39,
+          21
+        ]
+      },
+      {
+        "turn": 488,
+        "input": "f5",
+        "stage": "paralysis",
+        "remaining": 2,
+        "hp": 57,
+        "player": [
+          39,
+          21
+        ]
+      },
+      {
+        "turn": 488,
+        "input": "f9",
+        "stage": "paralysis",
+        "remaining": 2,
+        "hp": 57,
+        "player": [
+          39,
+          21
+        ]
+      },
+      {
+        "turn": 489,
+        "input": ".",
+        "stage": "paralysis",
+        "remaining": 1,
+        "hp": 54,
+        "player": [
+          39,
+          21
+        ]
+      },
+      {
+        "turn": 490,
+        "input": ".",
+        "stage": "recovery",
+        "remaining": 4,
+        "hp": 50,
+        "player": [
+          39,
+          21
+        ]
+      },
+      {
+        "turn": 491,
+        "input": ".",
+        "stage": "recovery",
+        "remaining": 3,
+        "hp": 50,
+        "player": [
+          39,
+          21
+        ]
+      }
+    ],
+    "return_attacks": [
+      {
+        "opportunity": 9,
+        "turn": 489,
+        "phase_before": "return",
+        "phase": "return",
+        "action": "melee",
+        "reason": "engage",
+        "result": {
+          "committed": true,
+          "hit": true,
+          "damage": 3,
+          "target_dead": false,
+          "reason": "hit",
+          "application": {
+            "accepted": false,
+            "reason": "active_venom",
+            "application_id": null,
+            "source_id": null
+          }
+        }
+      },
+      {
+        "opportunity": 10,
+        "turn": 490,
+        "phase_before": "return",
+        "phase": "return",
+        "action": "melee",
+        "reason": "engage",
+        "result": {
+          "committed": true,
+          "hit": true,
+          "damage": 4,
+          "target_dead": false,
+          "reason": "hit",
+          "application": {
+            "accepted": false,
+            "reason": "active_venom",
+            "application_id": null,
+            "source_id": null
+          }
+        }
+      }
+    ]
+  },
+  "legacy": {
+    "passed": true,
+    "prechange_revision": "721c71e0769a575968d414393552458dce3c74aa",
+    "unchanged_original_remaining": 1,
+    "f5_f9_equal": true,
+    "cold_equal": true
+  },
+  "focused": {
+    "new_ai5_risk_cases": 11,
+    "controlled_setup": "Controlled accepted-hit/dose, defence and valid-owned-resource fixtures; actual input/committer paths and clocks run normally. Full-HP warning treatment is an actual owned inventory use fixture; the ordinary hidden-treatment witness uses real sting damage.",
+    "coverage": [
+      "P1/P2/P3 and saved semantics",
+      "movement/door/attack/movesets/reactions",
+      "owned use/equip/drop/floor/container/craft",
+      "stale consume/throw/dismantle/selection/placement",
+      "one Wait, passive fuel/needs, no rain/Press",
+      "player and rival active defences with passive AV",
+      "perks view only and actual Health/Lexicon opening",
+      "known stock/custom prose and strict validation",
+      "blocked retreat, real first movement, durable tell",
+      "explicit diagnostic override"
+    ]
+  },
+  "rival_resume": "rival-resume.json",
+  "authoring": "authoring.json",
+  "retained_native_verifier": {
+    "passed": true,
+    "revision": "29a356123334336ae57dfdfd673b3c049044b64e",
+    "receipt": "legacy-native-receipt.json.gz",
+    "normal_warning_treatment": true,
+    "severe_rejection_free": true,
+    "original_p2_expiry_through_wait": true
+  }
+}

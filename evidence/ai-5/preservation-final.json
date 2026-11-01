@@ -1,0 +1,7 @@
+{
+  "owner_proposal_sha256_before": "bcf41ab230fea7aa43a2a2f26b2826bd6d0d53ec814c788903badc642910f49a",
+  "owner_proposal_sha256_after": "bcf41ab230fea7aa43a2a2f26b2826bd6d0d53ec814c788903badc642910f49a",
+  "unchanged": true,
+  "wiki_changed_paths": [],
+  "policy": "Production main throughout; no task branches/worktrees/development copies. Test saves/captures only; personal campaigns never opened. Owner proposal remains untracked and outside task commits."
+}

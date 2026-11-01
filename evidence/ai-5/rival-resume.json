@@ -1,0 +1,552 @@
+{
+  "passed": true,
+  "setup": "Additional real ordinary-rival resume witness; no injected effects/results/items.",
+  "rows": [
+    {
+      "before": {
+        "turn": 481,
+        "condition": {
+          "version": 1,
+          "effect": "numbing_venom",
+          "parameters": {
+            "warning_phases": 3,
+            "paralysis_phases": 3,
+            "recovery_phases": 4
+          },
+          "stage": "warning",
+          "remaining": 3,
+          "application_id": "f4ae8ac477d64432af717e80392acee0",
+          "source": {
+            "creature": "patient_amber_hunter",
+            "individual": "0,0/room-test-instance:00000002",
+            "owner": "0,0/room-test-instance"
+          },
+          "applied_phase": 481,
+          "aged_phase": 481
+        },
+        "position": [
+          43,
+          21
+        ],
+        "source_hp": 14
+      },
+      "after": {
+        "turn": 482,
+        "condition": {
+          "version": 1,
+          "effect": "numbing_venom",
+          "parameters": {
+            "warning_phases": 3,
+            "paralysis_phases": 3,
+            "recovery_phases": 4
+          },
+          "stage": "warning",
+          "remaining": 2,
+          "application_id": "f4ae8ac477d64432af717e80392acee0",
+          "source": {
+            "creature": "patient_amber_hunter",
+            "individual": "0,0/room-test-instance:00000002",
+            "owner": "0,0/room-test-instance"
+          },
+          "applied_phase": 481,
+          "aged_phase": 482
+        },
+        "position": [
+          42,
+          21
+        ],
+        "source_hp": 14,
+        "accumulator": 0.0
+      }
+    },
+    {
+      "before": {
+        "turn": 482,
+        "condition": {
+          "version": 1,
+          "effect": "numbing_venom",
+          "parameters": {
+            "warning_phases": 3,
+            "paralysis_phases": 3,
+            "recovery_phases": 4
+          },
+          "stage": "warning",
+          "remaining": 2,
+          "application_id": "f4ae8ac477d64432af717e80392acee0",
+          "source": {
+            "creature": "patient_amber_hunter",
+            "individual": "0,0/room-test-instance:00000002",
+            "owner": "0,0/room-test-instance"
+          },
+          "applied_phase": 481,
+          "aged_phase": 482
+        },
+        "position": [
+          42,
+          21
+        ],
+        "source_hp": 14
+      },
+      "after": {
+        "turn": 483,
+        "condition": {
+          "version": 1,
+          "effect": "numbing_venom",
+          "parameters": {
+            "warning_phases": 3,
+            "paralysis_phases": 3,
+            "recovery_phases": 4
+          },
+          "stage": "warning",
+          "remaining": 1,
+          "application_id": "f4ae8ac477d64432af717e80392acee0",
+          "source": {
+            "creature": "patient_amber_hunter",
+            "individual": "0,0/room-test-instance:00000002",
+            "owner": "0,0/room-test-instance"
+          },
+          "applied_phase": 481,
+          "aged_phase": 483
+        },
+        "position": [
+          41,
+          21
+        ],
+        "source_hp": 14,
+        "accumulator": 0.0
+      }
+    },
+    {
+      "before": {
+        "turn": 483,
+        "condition": {
+          "version": 1,
+          "effect": "numbing_venom",
+          "parameters": {
+            "warning_phases": 3,
+            "paralysis_phases": 3,
+            "recovery_phases": 4
+          },
+          "stage": "warning",
+          "remaining": 1,
+          "application_id": "f4ae8ac477d64432af717e80392acee0",
+          "source": {
+            "creature": "patient_amber_hunter",
+            "individual": "0,0/room-test-instance:00000002",
+            "owner": "0,0/room-test-instance"
+          },
+          "applied_phase": 481,
+          "aged_phase": 483
+        },
+        "position": [
+          41,
+          21
+        ],
+        "source_hp": 14
+      },
+      "after": {
+        "turn": 484,
+        "condition": {
+          "version": 1,
+          "effect": "numbing_venom",
+          "parameters": {
+            "warning_phases": 3,
+            "paralysis_phases": 3,
+            "recovery_phases": 4
+          },
+          "stage": "paralysis",
+          "remaining": 3,
+          "application_id": "f4ae8ac477d64432af717e80392acee0",
+          "source": {
+            "creature": "patient_amber_hunter",
+            "individual": "0,0/room-test-instance:00000002",
+            "owner": "0,0/room-test-instance"
+          },
+          "applied_phase": 481,
+          "aged_phase": 484
+        },
+        "position": [
+          41,
+          21
+        ],
+        "source_hp": 10,
+        "accumulator": 0.0
+      }
+    },
+    {
+      "before": {
+        "turn": 484,
+        "condition": {
+          "version": 1,
+          "effect": "numbing_venom",
+          "parameters": {
+            "warning_phases": 3,
+            "paralysis_phases": 3,
+            "recovery_phases": 4
+          },
+          "stage": "paralysis",
+          "remaining": 3,
+          "application_id": "f4ae8ac477d64432af717e80392acee0",
+          "source": {
+            "creature": "patient_amber_hunter",
+            "individual": "0,0/room-test-instance:00000002",
+            "owner": "0,0/room-test-instance"
+          },
+          "applied_phase": 481,
+          "aged_phase": 484
+        },
+        "position": [
+          41,
+          21
+        ],
+        "source_hp": 10
+      },
+      "after": {
+        "turn": 485,
+        "condition": {
+          "version": 1,
+          "effect": "numbing_venom",
+          "parameters": {
+            "warning_phases": 3,
+            "paralysis_phases": 3,
+            "recovery_phases": 4
+          },
+          "stage": "paralysis",
+          "remaining": 2,
+          "application_id": "f4ae8ac477d64432af717e80392acee0",
+          "source": {
+            "creature": "patient_amber_hunter",
+            "individual": "0,0/room-test-instance:00000002",
+            "owner": "0,0/room-test-instance"
+          },
+          "applied_phase": 481,
+          "aged_phase": 485
+        },
+        "position": [
+          41,
+          21
+        ],
+        "source_hp": 10,
+        "accumulator": 0.0
+      }
+    },
+    {
+      "before": {
+        "turn": 485,
+        "condition": {
+          "version": 1,
+          "effect": "numbing_venom",
+          "parameters": {
+            "warning_phases": 3,
+            "paralysis_phases": 3,
+            "recovery_phases": 4
+          },
+          "stage": "paralysis",
+          "remaining": 2,
+          "application_id": "f4ae8ac477d64432af717e80392acee0",
+          "source": {
+            "creature": "patient_amber_hunter",
+            "individual": "0,0/room-test-instance:00000002",
+            "owner": "0,0/room-test-instance"
+          },
+          "applied_phase": 481,
+          "aged_phase": 485
+        },
+        "position": [
+          41,
+          21
+        ],
+        "source_hp": 10
+      },
+      "after": {
+        "turn": 486,
+        "condition": {
+          "version": 1,
+          "effect": "numbing_venom",
+          "parameters": {
+            "warning_phases": 3,
+            "paralysis_phases": 3,
+            "recovery_phases": 4
+          },
+          "stage": "paralysis",
+          "remaining": 1,
+          "application_id": "f4ae8ac477d64432af717e80392acee0",
+          "source": {
+            "creature": "patient_amber_hunter",
+            "individual": "0,0/room-test-instance:00000002",
+            "owner": "0,0/room-test-instance"
+          },
+          "applied_phase": 481,
+          "aged_phase": 486
+        },
+        "position": [
+          41,
+          21
+        ],
+        "source_hp": 10,
+        "accumulator": 0.0
+      }
+    },
+    {
+      "before": {
+        "turn": 486,
+        "condition": {
+          "version": 1,
+          "effect": "numbing_venom",
+          "parameters": {
+            "warning_phases": 3,
+            "paralysis_phases": 3,
+            "recovery_phases": 4
+          },
+          "stage": "paralysis",
+          "remaining": 1,
+          "application_id": "f4ae8ac477d64432af717e80392acee0",
+          "source": {
+            "creature": "patient_amber_hunter",
+            "individual": "0,0/room-test-instance:00000002",
+            "owner": "0,0/room-test-instance"
+          },
+          "applied_phase": 481,
+          "aged_phase": 486
+        },
+        "position": [
+          41,
+          21
+        ],
+        "source_hp": 10
+      },
+      "after": {
+        "turn": 487,
+        "condition": {
+          "version": 1,
+          "effect": "numbing_venom",
+          "parameters": {
+            "warning_phases": 3,
+            "paralysis_phases": 3,
+            "recovery_phases": 4
+          },
+          "stage": "recovery",
+          "remaining": 4,
+          "application_id": "f4ae8ac477d64432af717e80392acee0",
+          "source": {
+            "creature": "patient_amber_hunter",
+            "individual": "0,0/room-test-instance:00000002",
+            "owner": "0,0/room-test-instance"
+          },
+          "applied_phase": 481,
+          "aged_phase": 487
+        },
+        "position": [
+          41,
+          21
+        ],
+        "source_hp": 10,
+        "accumulator": 0.0
+      }
+    },
+    {
+      "before": {
+        "turn": 487,
+        "condition": {
+          "version": 1,
+          "effect": "numbing_venom",
+          "parameters": {
+            "warning_phases": 3,
+            "paralysis_phases": 3,
+            "recovery_phases": 4
+          },
+          "stage": "recovery",
+          "remaining": 4,
+          "application_id": "f4ae8ac477d64432af717e80392acee0",
+          "source": {
+            "creature": "patient_amber_hunter",
+            "individual": "0,0/room-test-instance:00000002",
+            "owner": "0,0/room-test-instance"
+          },
+          "applied_phase": 481,
+          "aged_phase": 487
+        },
+        "position": [
+          41,
+          21
+        ],
+        "source_hp": 10
+      },
+      "after": {
+        "turn": 488,
+        "condition": {
+          "version": 1,
+          "effect": "numbing_venom",
+          "parameters": {
+            "warning_phases": 3,
+            "paralysis_phases": 3,
+            "recovery_phases": 4
+          },
+          "stage": "recovery",
+          "remaining": 3,
+          "application_id": "f4ae8ac477d64432af717e80392acee0",
+          "source": {
+            "creature": "patient_amber_hunter",
+            "individual": "0,0/room-test-instance:00000002",
+            "owner": "0,0/room-test-instance"
+          },
+          "applied_phase": 481,
+          "aged_phase": 488
+        },
+        "position": [
+          41,
+          21
+        ],
+        "source_hp": 10,
+        "accumulator": 0.0
+      }
+    },
+    {
+      "before": {
+        "turn": 488,
+        "condition": {
+          "version": 1,
+          "effect": "numbing_venom",
+          "parameters": {
+            "warning_phases": 3,
+            "paralysis_phases": 3,
+            "recovery_phases": 4
+          },
+          "stage": "recovery",
+          "remaining": 3,
+          "application_id": "f4ae8ac477d64432af717e80392acee0",
+          "source": {
+            "creature": "patient_amber_hunter",
+            "individual": "0,0/room-test-instance:00000002",
+            "owner": "0,0/room-test-instance"
+          },
+          "applied_phase": 481,
+          "aged_phase": 488
+        },
+        "position": [
+          41,
+          21
+        ],
+        "source_hp": 10
+      },
+      "after": {
+        "turn": 489,
+        "condition": {
+          "version": 1,
+          "effect": "numbing_venom",
+          "parameters": {
+            "warning_phases": 3,
+            "paralysis_phases": 3,
+            "recovery_phases": 4
+          },
+          "stage": "recovery",
+          "remaining": 2,
+          "application_id": "f4ae8ac477d64432af717e80392acee0",
+          "source": {
+            "creature": "patient_amber_hunter",
+            "individual": "0,0/room-test-instance:00000002",
+            "owner": "0,0/room-test-instance"
+          },
+          "applied_phase": 481,
+          "aged_phase": 489
+        },
+        "position": [
+          41,
+          20
+        ],
+        "source_hp": 10,
+        "accumulator": 0.0
+      }
+    }
+  ],
+  "resumed": [
+    {
+      "before": {
+        "turn": 488,
+        "condition": {
+          "version": 1,
+          "effect": "numbing_venom",
+          "parameters": {
+            "warning_phases": 3,
+            "paralysis_phases": 3,
+            "recovery_phases": 4
+          },
+          "stage": "recovery",
+          "remaining": 3,
+          "application_id": "f4ae8ac477d64432af717e80392acee0",
+          "source": {
+            "creature": "patient_amber_hunter",
+            "individual": "0,0/room-test-instance:00000002",
+            "owner": "0,0/room-test-instance"
+          },
+          "applied_phase": 481,
+          "aged_phase": 488
+        },
+        "position": [
+          41,
+          21
+        ],
+        "source_hp": 10
+      },
+      "after": {
+        "turn": 489,
+        "condition": {
+          "version": 1,
+          "effect": "numbing_venom",
+          "parameters": {
+            "warning_phases": 3,
+            "paralysis_phases": 3,
+            "recovery_phases": 4
+          },
+          "stage": "recovery",
+          "remaining": 2,
+          "application_id": "f4ae8ac477d64432af717e80392acee0",
+          "source": {
+            "creature": "patient_amber_hunter",
+            "individual": "0,0/room-test-instance:00000002",
+            "owner": "0,0/room-test-instance"
+          },
+          "applied_phase": 481,
+          "aged_phase": 489
+        },
+        "position": [
+          41,
+          20
+        ],
+        "source_hp": 10,
+        "accumulator": 0.0
+      }
+    }
+  ],
+  "logs": [
+    "You light the Tallow Torch.",
+    "You descend into Disposable Workbench room.",
+    "Thou takest the Measured Venom Remedy.",
+    "The Amber Shell Hunter strikes at the Highland Bandit.",
+    "The Highland Bandit takes 4 damage.",
+    "The Highland Bandit trembles.",
+    "The Highland Bandit turns on the Amber Shell Hunter.",
+    "The Highland Bandit strikes at the Amber Shell Hunter.",
+    "The Amber Shell Hunter takes 2 damage.",
+    "The Amber Shell Hunter skitters away with a chittering whine.",
+    "The Highland Bandit shivers.",
+    "The Highland Bandit strikes at the Amber Shell Hunter.",
+    "The Amber Shell Hunter takes 4 damage.",
+    "The Highland Bandit locks in place, limbs rigid.",
+    "The Amber Shell Hunter strikes at the Highland Bandit.",
+    "The Highland Bandit takes 2 damage.",
+    "The Amber Shell Hunter strikes at the Highland Bandit.",
+    "The Highland Bandit takes 5 damage.",
+    "The Amber Shell Hunter strikes at the Highland Bandit.",
+    "The Highland Bandit takes 3 damage.",
+    "The Highland Bandit loosens its rigid limbs.",
+    "The Amber Shell Hunter stings at thee.",
+    "\u203a The strike finds thy right leg.",
+    "  4 damage.",
+    "A strange numbness spreads from the bite. Your limbs feel heavy.",
+    "The Highland Bandit strikes at the Amber Shell Hunter.",
+    "The Amber Shell Hunter avoids harm.",
+    "The Amber Shell Hunter skitters away with a chittering whine."
+  ],
+  "revision": "6f6044485bce5dbd052c23fc44fcdf38ccab4872"
+}
