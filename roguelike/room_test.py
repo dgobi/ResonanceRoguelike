@@ -241,6 +241,14 @@ def main():
             pygame.event.post(pygame.event.Event(pygame.QUIT))
         if diagnostic is not None:
             diagnostic.frame(e,screen)
+        # Author-facing observation shares the owned session/captured boundary.
+        # Reading it never calls AI, allocates identities or advances time.
+        from engine.composite_diagnostics import inspect
+        try:
+            write_json(Path(config['state_root'])/'tactics.json',
+                       dict(inspect(e), snapshot_id=config['snapshot_id'], session_id=config['session_id']))
+        except PermissionError:
+            pass  # The native reader may briefly hold the file on Windows.
     try:
         engine.run(on_frame=frame)
     except SystemExit as error:

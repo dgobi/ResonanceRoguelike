@@ -3,6 +3,7 @@ from __future__ import annotations
 from engine.effect_lifecycle import creature_id
 import random
 import enum
+from dataclasses import dataclass
 from typing import TYPE_CHECKING
 from engine.palette import *
 
@@ -700,7 +701,21 @@ def rng_chance(p: float) -> bool:
 #  Full combat resolution for monster → player (or entity) attacks
 # ------------------------------------------------------------------ #
 
+@dataclass(frozen=True)
+class MonsterAttackResult:
+    committed: bool = False
+    hit: bool = False
+    damage: int | None = None
+    target_dead: bool = False
+    reason: str = 'rejected'
+
+
 def _monster_attack_entity(monster, target, engine) -> bool:
+    """Legacy boolean contract, including the separately pending Lurker attack."""
+    return _monster_attack_result(monster, target, engine).committed
+
+
+def _monster_attack_result(monster, target, engine, *, defensive=False) -> MonsterAttackResult:
     """
     Resolve a monster attack using the full combat system.
     Called from AI._attack() when engine is available. True means a committed
@@ -714,14 +729,18 @@ def _monster_attack_entity(monster, target, engine) -> bool:
     from engine.effect_lifecycle import disrupted
     if (not combat_ready(monster, target) or disrupted(monster, engine.local_map)
             or (target is engine.player and getattr(engine, "_player_is_dead", False))):
-        return False
+        return MonsterAttackResult(reason='not_combat_ready')
 
     is_player = (target is engine.player)
     from engine.local_rivals import eligible, active, revalidate, visible
+    from engine.ai_profiles import local_only
+    composite = local_only(monster)
+    if composite and (not active(engine, monster) or not eligible(engine, monster, target)):
+        return MonsterAttackResult(reason='invalid_hostility_or_scene')
     if not is_player and (not active(engine, monster)
                           or not eligible(engine, monster, target)
-                          or revalidate(engine, monster) is not target):
-        return False
+                          or (not (composite and defensive) and revalidate(engine, monster) is not target)):
+        return MonsterAttackResult(reason='invalid_retained_target')
     observed = is_player or visible(engine, monster, target)
 
     from engine.effect_lifecycle import creature_id, armor_contact, ability_enabled
@@ -735,10 +754,10 @@ def _monster_attack_entity(monster, target, engine) -> bool:
     # Only the shipped Crow has a nonadjacent attack. Match its AI selection
     # envelope here too, even for stale/direct calls without a renderer.
     if not contact:
-        if (creature_id(monster) != "plague_crow" or distance_sq <= 2
+        if (composite or creature_id(monster) != "plague_crow" or distance_sq <= 2
                 or distance_sq > CirclingAI.PREFERRED_DIST**2
                 or not terrain_line(engine.local_map, monster.x, monster.y, target.x, target.y)):
-            return False
+            return MonsterAttackResult(reason='no_legal_contact')
 
     from engine.sound import emit
     emit(engine, monster.x, monster.y, 'combat', maker=monster)
@@ -776,7 +795,7 @@ def _monster_attack_entity(monster, target, engine) -> bool:
                 _ranged_def.get("duration", 0.45),
                 on_hit=False,
             )
-        return True
+        return MonsterAttackResult(committed=True, reason='invincible_without_hit_result')
 
     # Pre-attack announcement
     if observed:
@@ -948,7 +967,9 @@ def _monster_attack_entity(monster, target, engine) -> bool:
             on_hit=result.damage_dealt > 0,
             blood_type="red",   # target (player) blood
         )
-    return True
+    return MonsterAttackResult(committed=True, hit=result.hit, damage=result.damage_dealt,
+                               target_dead=result.defender_dead,
+                               reason='hit' if result.hit else 'miss')
 
 
 # ------------------------------------------------------------------ #

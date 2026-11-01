@@ -13,9 +13,10 @@ OWNER = re.compile(r'\d{1,10},\d{1,10}/[A-Za-z0-9_-]{0,100}\Z')
 
 def supported(actor):
     from components.ai import WanderingAI
+    from components.composite_ai import CompositeAI
     from engine.creature_abilities import ABILITY_REGISTRY
     from engine.effect_lifecycle import creature_id
-    return (type(getattr(actor, 'ai', None)) is WanderingAI
+    return (type(getattr(actor, 'ai', None)) in (WanderingAI, CompositeAI)
             and getattr(actor, 'perception', None) is not None
             and getattr(actor, 'fighter', None) is not None
             and creature_id(actor) not in ABILITY_REGISTRY)
@@ -90,6 +91,9 @@ def eligible(engine, observer, candidate):
 
 def revalidate(engine, actor):
     """Lifecycle only; safe on F9/return/disrupted skips, never acquires or acts."""
+    from engine.ai_profiles import local_only
+    if local_only(actor):
+        return actor.ai.resolve_target(engine, actor)
     target = getattr(actor.ai, 'local_target', None)
     if target is None:
         return None

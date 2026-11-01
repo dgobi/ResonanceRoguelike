@@ -1082,6 +1082,7 @@ def _serialize_entity(entity: "Actor") -> dict:
 
     return {
         "type":            "actor",
+        **({"composite": ai.snapshot()} if type(ai).__name__ == 'CompositeAI' else {}),
         **({"individual_id": entity._individual_id} if getattr(entity, '_individual_id', None) is not None else {}),
         **({"local_target": copy.deepcopy(ai.local_target)} if getattr(ai, 'local_target', None) is not None else {}),
         "id":              creature_id,
@@ -1126,6 +1127,8 @@ def _is_player(entity: "Actor") -> bool:
 
 
 def _validate_transfer_actor(row):
+    if row.get('ai_type') == 'CompositeAI' or 'composite' in row:
+        raise SaveFormatError('Composite v1 cannot own a player-pursuer transfer')
     if row.get('local_target') is not None:
         raise SaveFormatError('Local rival intent cannot own a player-pursuer transfer')
 
@@ -1152,6 +1155,8 @@ def _validate_entities(rows, data, local_map=None) -> None:
         if not isinstance(row, dict):
             raise SaveFormatError(f"Actor row {index} must be an object")
         validate_row(row, local_map)
+        from engine.ai_profiles import validate_saved
+        validate_saved(row, local_map)
         hostility = row.get('hostile_to')
         if hostility is not None and (not isinstance(hostility, list)
                 or any(not isinstance(label, str) for label in hostility)):
@@ -1166,6 +1171,8 @@ def _validate_entities(rows, data, local_map=None) -> None:
         identity = row.get("id")
         if not isinstance(identity, str) or identity not in data.entities:
             raise SaveFormatError(f"Actor row {index}: invalid stable creature identity {identity!r}")
+        if row.get('ai_type') != 'CompositeAI' and data.entities[identity].get('ai_type') == 'composite':
+            raise SaveFormatError(f"Actor row {index} ({identity}): legacy instance cannot bind a composite definition; use a new creature ID")
         validate_actor_runtime(row, local_map)
         if identity == "stone_lurker":
             state = row.get("lurker")
@@ -1201,7 +1208,8 @@ def _deserialize_entities(
 
         # Try to spawn from creature definition
         creature_id = d["id"]
-        actor = factory.spawn(creature_id, d["x"], d["y"])
+        actor = factory.spawn(creature_id, d["x"], d["y"],
+                              saved_composite_profile=d['composite']['profile'] if d.get('ai_type') == 'CompositeAI' else None)
 
         if actor is None:
             raise SaveFormatError(f"Cannot reconstruct creature {creature_id!r}")
@@ -1251,6 +1259,9 @@ def _deserialize_entities(
         if ai is not None:
             ai.wander_radius = d.get("wander_radius", ai.wander_radius)
         restore_actor_runtime(actor, d)
+        if d.get('ai_type') == 'CompositeAI':
+            for key, value in d['composite']['state'].items():
+                setattr(actor.ai, key, copy.deepcopy(value))
         restored.append(actor)
 
     return restored

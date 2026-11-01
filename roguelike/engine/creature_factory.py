@@ -8,6 +8,8 @@ from components.ai import (
     WanderingAI, AmbushAI, FleeingAI, CirclingAI, AIState
 )
 from typing import TYPE_CHECKING
+from components.composite_ai import CompositeAI
+from engine.ai_profiles import effective_profile
 
 if TYPE_CHECKING:
     from engine.data_loader import DataLoader
@@ -17,6 +19,7 @@ AI_TYPES = {
     "ambush":    AmbushAI,
     "fleeing":   FleeingAI,
     "circling":  CirclingAI,
+    "composite": CompositeAI,
 }
 
 
@@ -35,6 +38,7 @@ class CreatureFactory:
         x:           int,
         y:           int,
         rng:         random.Random | None = None,
+        *, saved_composite_profile: dict | None = None,
     ) -> Actor | None:
         """
         Create a fully assembled Actor for the given creature id.
@@ -82,9 +86,17 @@ class CreatureFactory:
 
         # AI component
         ai_type    = defn.get("ai_type", "wandering")
+        if saved_composite_profile is None and 'ai_profile' in defn and ai_type != 'composite':
+            raise ValueError(f"Creature {creature_id!r}: ai_profile requires registered ai_type composite")
         ai_class   = AI_TYPES.get(ai_type, WanderingAI)
         wander_r   = defn.get("wander_radius", 8)
-        actor.ai   = ai_class(wander_radius=wander_r)
+        if saved_composite_profile is not None:
+            from engine.ai_profiles import saved_profile
+            actor.ai = CompositeAI(wander_radius=wander_r, profile=saved_profile(saved_composite_profile))
+        elif ai_type == 'composite':
+            actor.ai = CompositeAI(wander_radius=wander_r, profile=effective_profile(defn))
+        else:
+            actor.ai = ai_class(wander_radius=wander_r)
         actor.ai.set_home(x, y)
 
         return actor

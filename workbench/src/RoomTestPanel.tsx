@@ -3,7 +3,7 @@ import {invoke} from '@tauri-apps/api/core';
 import type {Inspection} from './protocol';
 import {sourceOperations} from './content';
 
-type Status={status:string;preparing?:boolean;session_id?:string;pid?:number;newer_saved?:boolean;error?:string;last_action_error?:unknown;diagnostics?:string;captured?:{snapshot_id:string;room_path:string;room_sha256:string;manifest_sha256:string;runtime_sha256:string;captured_ms:number;seed:number};validation?:{profile?:string;diagnostics?:unknown[]};readiness?:unknown};
+type Status={status:string;preparing?:boolean;session_id?:string;pid?:number;newer_saved?:boolean;error?:string;last_action_error?:unknown;diagnostics?:string;tactics?:unknown;captured?:{snapshot_id:string;room_path:string;room_sha256:string;manifest_sha256:string;runtime_sha256:string;captured_ms:number;seed:number};validation?:{profile?:string;diagnostics?:unknown[]};readiness?:unknown};
 export function RoomTestPanel({document,dirty,dependencyVersion}:{document?:Inspection;dirty:boolean;dependencyVersion:number}){
  const [state,setState]=useState<Status>({status:'stopped'}),[pending,setPending]=useState(false),[error,setError]=useState('');
  const mounted=useRef(true);
@@ -28,6 +28,7 @@ export function RoomTestPanel({document,dirty,dependencyVersion}:{document?:Insp
    <p>{state.validation?.profile||'Normal player components; lit tallow torch, crow jerky, water flask, crude blade, leather jack and moist pebble. Normal needs, combat and death.'}</p>
    {state.newer_saved&&<p className="notice warning">Newer saved inputs detected. This test retains its captured version; use Test latest saved version deliberately.</p>}
    <details><summary>Captured identities and diagnostics</summary><pre className="raw">{JSON.stringify({...captured,session_id:state.session_id,pid:state.pid,readiness:state.readiness,validation:state.validation},null,2)}</pre><pre className="raw">{state.diagnostics}</pre></details>
+   <details><summary>Privileged live tactic inspection</summary><p>Read-only actual instances from this captured game. Target references and counters are author diagnostics, hidden from ordinary play. Up to 16 actors and 16 recent opportunities each; inspection grants no action. Factory results and definition drafts are separate views.</p><pre className="raw" data-testid="tactic-inspection">{JSON.stringify(state.tactics??{status:'Awaiting captured game observation'},null,2)}</pre></details>
   </>}
   {!!(error||state.error||state.last_action_error)&&<p role="alert">{error||state.error||JSON.stringify(state.last_action_error)}</p>}
  </section>;

@@ -1,6 +1,7 @@
 # engine/engine.py
 from __future__ import annotations
 from engine.effect_lifecycle import creature_id
+from engine.ai_profiles import local_only, depart as depart_composites
 import enum
 import json
 import pygame
@@ -2167,6 +2168,9 @@ class Engine:
             return False
         new_map, new_entities = prepared
 
+        if (new_wx, new_wy) != (self.world_x, self.world_y):
+            depart_composites(self)
+
         from engine.effect_lifecycle import reset_wraith_aura
         reset_wraith_aura(self)
         self._wraith_overcorrect_turns = 0
@@ -2200,7 +2204,7 @@ class Engine:
             if _eai_tp is None or _eai_tp.state not in _pursuing_tp:
                 continue
             _can_cross_tp = self.data.entities.get(creature_id(_ep), {}).get("can_cross_chunks", False)
-            if not _can_cross_tp:
+            if local_only(_ep) or not _can_cross_tp:
                 continue
             # Allow re-extraction even with arrival cooldown — prevents losing
             # pursuit on back-and-forth transitions. Cooldown only gates
@@ -2533,6 +2537,9 @@ class Engine:
             return
         new_map, new_entities = prepared
 
+        if self.current_submap_id != submap_id:
+            depart_composites(self)
+
         self._free_move_pending = False
 
         self.particle_system.particles.clear()
@@ -2571,7 +2578,7 @@ class Engine:
             if not getattr(_e, "is_alive", True):
                 continue
             _cdef = self.data.entities.get(creature_id(_e), {})
-            if not _cdef.get("can_cross_chunks", False):
+            if local_only(_e) or not _cdef.get("can_cross_chunks", False):
                 continue
             _dist = max(abs(_e.x - _stair_x), abs(_e.y - _stair_y))
             from engine.effect_lifecycle import disrupted
@@ -2592,7 +2599,7 @@ class Engine:
             if not getattr(_lpe_sd, "is_alive", True):
                 continue
             _lpcd_sd = self.data.entities.get(creature_id(_lpe_sd), {})
-            if not _lpcd_sd.get("can_cross_chunks", False):
+            if local_only(_lpe_sd) or not _lpcd_sd.get("can_cross_chunks", False):
                 continue
             _lpt_sd = getattr(_lpeai_sd, "pursuit_turns_without_contact", 0)
             _lpto_sd = _lpcd_sd.get("pursuit_timeout", 20)
@@ -2683,6 +2690,8 @@ class Engine:
         if prepared is None:
             return
         new_map, new_entities = prepared
+        if self.current_submap_id is not None:
+            depart_composites(self)
         self._free_move_pending = False
         self.particle_system.particles.clear()
         from engine.effect_lifecycle import reset_wraith_aura
@@ -2704,7 +2713,7 @@ class Engine:
             if not getattr(_e, "is_alive", True):
                 continue
             _cdef2 = self.data.entities.get(creature_id(_e), {})
-            if not _cdef2.get("can_cross_chunks", False):
+            if local_only(_e) or not _cdef2.get("can_cross_chunks", False):
                 continue
             _dist2 = max(abs(_e.x - _stair_x2), abs(_e.y - _stair_y2))
             from engine.effect_lifecycle import disrupted
@@ -2726,7 +2735,7 @@ class Engine:
             if not getattr(_lpe_su, "is_alive", True):
                 continue
             _lpcd_su = self.data.entities.get(creature_id(_lpe_su), {})
-            if not _lpcd_su.get("can_cross_chunks", False):
+            if local_only(_lpe_su) or not _lpcd_su.get("can_cross_chunks", False):
                 continue
             _lpt_su = getattr(_lpeai_su, "pursuit_turns_without_contact", 0)
             _lpto_su = _lpcd_su.get("pursuit_timeout", 20)
@@ -2854,7 +2863,7 @@ class Engine:
             if disrupted(_e, self.local_map):
                 continue
             _eai = getattr(_e, "ai", None)
-            if _eai is None or _eai.state not in _pursuing:
+            if local_only(_e) or _eai is None or _eai.state not in _pursuing:
                 continue
             _lkx = getattr(_e, "_last_known_px", None)
             _lky = getattr(_e, "_last_known_py", None)
@@ -3541,7 +3550,7 @@ class Engine:
             _psu = getattr(_e, "_pending_stair_use", None)
             if not _psu:
                 continue
-            if getattr(_e.ai, 'local_target', None) is not None:
+            if local_only(_e) or getattr(_e.ai, 'local_target', None) is not None:
                 _e._pending_stair_use = None
                 continue
             from engine.effect_lifecycle import disrupted

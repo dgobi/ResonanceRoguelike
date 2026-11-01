@@ -61,4 +61,14 @@ describe("ordinary creature exact draft", () => {
     history.record(text,changed,'Hearing radius');
     expect(history.undo(changed)).toBe(text);expect(history.redo(text)).toBe(changed);
   });
+  it('creates local composite variants atomically from game defaults and preserves profile siblings on tuning',()=>{
+    const defaults={version:1,recipe:'strike_and_withdraw',capability:'melee',trigger:'hit',retreat_distance:2,hold_opportunities:1,withdrawal_budget:6,cornered:'defensive_melee',scene_scope:'active_scene'};
+    expect(()=>creatureValue(source,'ai_type','composite')).toThrow('defaults');
+    const next=creatureValue(source,'ai_type','composite',defaults),value=JSON.parse(next);
+    expect(value.ai_profile).toEqual(defaults);expect(value.can_cross_chunks).toBe(false);expect(value.can_use_stairs).toBe(false);
+    const history=new CanvasHistory();history.record(source,next,'Composite variant');expect(history.undo(next)).toBe(source);
+    const tuned=creatureValue(next,'ai_profile.hold_opportunities',0);
+    expect(tuned).toBe(next.replace('"hold_opportunities":1','"hold_opportunities":0'));
+    expect(()=>creatureValue(tuned,'ai_profile.target_id','player')).toThrow('Read-only');
+  });
 });

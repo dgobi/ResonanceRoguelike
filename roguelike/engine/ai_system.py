@@ -148,6 +148,9 @@ class AISystem:
         ai = getattr(entity, "ai", None)
         if ai is None:
             return
+        from engine.ai_profiles import local_only
+        if local_only(entity):
+            return  # Composite v1 never participates in the off-scene route.
         if not getattr(entity, "is_alive", True):
             return
 

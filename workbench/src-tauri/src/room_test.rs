@@ -221,6 +221,15 @@ impl Games {
             value["newer_saved"]=json!(value["newer_saved"]==true || !safe || fs::read(path).map(|b|hash(b)!=c.identity["room_sha256"]).unwrap_or(true));
         }
         if let Some(p)=&state.process{value["diagnostics"]=json!(p.diagnostics());}
+        if let (Some(c),Some(root))=(&state.capture,state.status["state_root"].as_str()) {
+            let root=Path::new(root);
+            if root.parent()==Some(c.temp.path()) && authoring::no_link(root).is_ok() {
+                let tactics=read_value(&root.join("tactics.json"));
+                if tactics["snapshot_id"]==c.identity["snapshot_id"] && tactics["session_id"]==state.status["session_id"] {
+                    value["tactics"]=tactics;
+                }
+            }
+        }
         value
     }
     fn launch(&self,capture:Arc<Capture>,generation:u64)->Result<(),Failure>{

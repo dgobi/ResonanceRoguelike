@@ -1,6 +1,6 @@
 # Creature and harvest authoring · W5N
 
-Workbench's `creature-rivals-3` adapter supports the twelve current Actor
+Workbench's `creature-composite-4` adapter supports the fourteen current Actor
 definitions under `data/entities/creatures/`. Open a source, inspect its body,
 binding and references, then **Begin edit**. The exact Source, typed controls,
 Undo/Redo, validation, Diff, recovery and reviewed publication share one document.
@@ -8,7 +8,7 @@ Several creatures and other registered families can remain open independently.
 
 | Source | Operations |
 | --- | --- |
-| drowned_revenant, grave_thing, heath_stalker, highland_bandit, hollow_revenant, sewer_thing | Same-ID edit; new-ID variant |
+| drowned_revenant, grave_thing, heath_stalker, highland_bandit, hollow_revenant, sewer_thing, grave_skirmisher, grave_harrier | Same-ID edit; new-ID variant |
 | barrow_wight, bog_wraith, briar_lurker, hollow_knight, plague_crow, stone_lurker | Same-ID edit; special binding retained |
 | vine_network | Inspect-only configuration for the vine consumer |
 | Player, NPC, unsupported or ambiguous shapes | Read-only inspection with specific limits |
@@ -16,7 +16,8 @@ Several creatures and other registered families can remain open independently.
 Special duplication is unavailable because `ABILITY_REGISTRY` dispatches by
 stable creature ID. A copied tile does not give a new ID that behavior. Same-ID
 edits fix ID, file, tile, AI class, body and special settings. An ordinary new-ID
-variant may select an existing `wandering`, `ambush`, `fleeing` or `circling` AI.
+variant may select a legacy AI; eligible ordinary melee sources also support the
+registered `composite` recipe described below.
 Capability is checked against the original source and complete entity namespace;
 raw edits or recovery metadata cannot grant additional operations.
 
@@ -38,7 +39,7 @@ new game balance rules. Raw Source and restored drafts receive the same checks.
 | `perception.hearing_radius` | Integer 0–1,000; zero is deaf. Consumed by bounded local sound propagation; see `engine/sound.py` |
 | `perception.sees_in_dark` | Boolean |
 | `wander_radius` | Integer 0–1,000 |
-| `pursuit_timeout` | Integer 0–10,000; active and off-map pursuit use this ID's definition |
+| `pursuit_timeout` | Integer 0–10,000; legacy pursuit reads this ID's definition; composite uses saved world-phase evidence age |
 | `speed` | Finite 0.01–2; the current scheduler supports at most two actions per turn |
 
 Booleans are not numeric values; invalid types, non-finite numbers and invalid
@@ -53,11 +54,12 @@ genuine sight/trail priority. Interest lasts twelve charged world increments;
 walls block, closed doors attenuate, and larger positive hearing never reduces
 audibility. Ambush/fleeing archetypes retain their special rules; sound never
 wakes a Stone Lurker. Saved actors retain their stored hearing. Ordinary
-`WanderingAI` actors without ID-bound abilities also use directional faction
+wandering/composite actors without ID-bound abilities also use directional faction
 membership for local observed targets. Other archetypes and special-bound actors
 retain their established player behavior. Bodies/limbs,
 corpse data, essence, effects, ranged blocks, spawn declarations, transition
-flags, callouts and unknown metadata remain exact and read-only.
+flags, callouts and unknown metadata remain exact and read-only, except the
+explicit new-composite-variant local transfer flag operation below.
 
 ## Local relationships
 
@@ -140,13 +142,14 @@ the current definition and then reinstates stored component snapshots:
 | Value | Previously saved actor after reload | Fresh actor |
 | --- | --- | --- |
 | Name, current/max HP, natural armour, saved sight/darkvision, wander radius | Retains stored instance values | Uses new constructor values |
-| Description, attack dice/bonus/verb, speed, pursuit timeout | Reads current definition by stable ID | Reads current definition |
+| Description, attack dice/bonus/verb, speed, legacy pursuit timeout | Reads current definition by stable ID | Reads current definition |
+| Composite effective profile (including pursuit timeout) and tactical commitment | Retains validated saved values; reconstructs CompositeAI explicitly | Uses current profile |
 | ID, AI class, body structure, special binding | Preserved by same-ID policy | Preserved for same-ID edits; ordinary variants use the selected AI |
 
 HP edits do not rescale injured saved actors. Older rows missing a snapshot field
 retain existing factory-default fallback semantics. Sight edits do not redefine
-the wight's separate fixed ability radius. The save format and restoration policy
-are unchanged; no migration, respawn or personal-save rewrite occurs.
+the wight's separate fixed ability radius. Legacy restoration remains unchanged; composite actors add an explicit profile
+and state record. No respawn or personal-save rewrite occurs.
 
 Accepted drafts checkpoint through shared recovery, including invalid JSON and
 variant intent. Recovery performs fresh discovery and policy checks and restores
@@ -232,3 +235,99 @@ No save schema/migration, yield-table snapshot, natural spawn registration or
 global transfer framework is introduced. See [W5N delivery](../../workbench/docs/W5N_DELIVERY.md)
 for the capability inventory, controlled authored-room provenance and separate
 ordinary-save fresh-catalogue proof.
+
+
+## AI-1: authorable strike and withdraw
+
+The registered `creature-composite-4` contract adds `ai_type: "composite"` with an
+embedded `ai_profile`. Start with an ordinary melee wandering source such as
+Hollow Revenant: **Begin edit -> Save as new variant**, enter a unique ID, choose
+**Creature AI: composite**, then use **Strike and withdraw behaviour**. The
+operation explicitly sets `can_cross_chunks` and `can_use_stairs` false in Diff.
+It preserves art, body, material/remains and unrelated metadata. Special-bound,
+ranged and unsupported original sources cannot gain this authority by deleting
+protected fields. Same-ID conversion of legacy AI is unavailable. An existing
+supported composite profile can be edited under its same ID.
+
+Version 1 registers one recipe, `strike_and_withdraw`, with `capability: "melee"`,
+`cornered: "defensive_melee"` and `scene_scope: "active_scene"`. These are fixed
+supported roles, not interchangeable arbitrary modules or executable conditions.
+
+| Control | Effective default / allowed values | Meaning |
+| --- | --- | --- |
+| Withdrawal trigger | `hit`; or `committed_attack` | Confirmed resolver hit/contact, or any committed ordinary attack attempt. |
+| Desired retreat distance | 2; integer 2-8 | Chebyshev tiles: max(abs(dx), abs(dy)) on the eight-direction grid. Uses visible prey or its bounded last-seen point. |
+| Full hold opportunities | 1; integer 0-12 | Full ordinary actor opportunities holding or repositioning after distance is established. Zero returns at the next available opportunity. |
+| Withdrawal opportunity budget | 6; integer 1-32 | Includes blocked waits and repositioning; the qualifying strike is excluded. Replanning cannot replenish it. |
+| Pursuit timeout | 20 if absent; integer 0-10000 | Maximum charged-world-phase age of last sight, for player and local rivals. Valid through last-seen phase + timeout; expires next phase. Zero permits no later-phase trail. |
+
+Controls distinguish explicit and defaulted profile values. The game owns parsing,
+bounds and effective defaults. Unknown versions/recipes/fields, unsupported
+capabilities, transfer routes and invalid numeric types are rejected, retaining
+exact draft text for repair. Runtime target IDs, phases and counters are saved
+instance data and have no definition controls.
+
+A miss/dodge and the established invincibility shortcut qualify only for
+`committed_attack`. Armour or shields can reduce a real hit to zero damage while
+`hit` remains true. Hit does not mean HP loss, affliction success or knowledge of
+hidden effects. Illegal/stale/rejected attacks never qualify. Combat runs once;
+legacy boolean callers keep their committed-attempt semantics.
+
+A qualifying strike records intent without a free retreat step. Withdrawal and
+hold count granted actor opportunities: speed may grant zero, one or two ordinary
+decisions per charged phase. UI frames, inspection, saved-state recovery and
+special callbacks grant none. Disruption skips do not bank progress. Sight and
+anonymous sound deadlines instead use the charged world clock.
+
+A bounded legal route search can initially move laterally or nearer the threat.
+Exhausting retreat yields defensive contacting melee, otherwise wait/abandon;
+it does not claim success. Defensive hits do not restart failed withdrawal. A
+previously blocked usable route becoming available can rearm it. Approach/return
+are capped at 32 opportunities and eight without route progress. Empty last-known
+locations, expired evidence, death, foreign-scene references and loss of hostility
+cancel the affected commitment. Retained prey is not replaced by convenient
+adjacent aggression. Ordinary directional faction membership and explicit empty
+hostility remain authoritative; sounds identify no maker and cannot interrupt a
+valid commitment. Visible withdrawal/return tells expose no private counters.
+
+Composite v1 stays in its active owning scene and cannot enter live pursuit,
+pending arrival, chunk or stair transfer. Successful player departure cancels
+local tactical/sound/transfer intent once. Revisit keeps actual health, location,
+identity and physical remains, and starts uncommitted. Failed transitions,
+serialization and same-scene F5/F9 preserve commitment. No offscene catch-up occurs.
+
+**Publication:** saved composite instances retain their validated effective profile
+(including pursuit timeout) and meaningful tactical state across F9 and cold load.
+Same-ID profile tuning affects fresh instances. Transient routes are recomputed;
+stale targets cancel safely. Missing definitions or malformed/unsupported saved
+profiles refuse installation through existing safe-load/recovery handling with a
+specific diagnostic. Legacy actors receive no empty composite fields. Other stat,
+item, description and legacy persistence policies remain as documented above.
+
+| Saved example | Trigger | Distance | Hold | Budget | Saved room |
+| --- | --- | --- | --- | --- | --- |
+| `grave_skirmisher` (Grave Skirmisher) | hit | 2 | 1 | 6 | `ai1_skirmisher_room` |
+| `grave_harrier` (Grave Harrier) | committed_attack | 4 | 3 | 8 | `ai1_harrier_room` |
+
+Both use the same registered implementation and matched Hollow Revenant combat
+stats/art/body/remains, speed 0.8 and explicit pursuit timeout 12. The matched rooms
+are ordinary 17 x 11 authored layouts. They are explicit demonstrations: neither
+new creature is enrolled in natural population tables; `spawn_zones` remains
+inactive metadata. Saving/duplicating a creature enrolls it nowhere.
+
+Validate the draft, inspect **Diff**, review/apply one allowed file and verify its
+reopen. Save/reopen dependencies before selecting **Placement creature** in an
+eligible room. **Test room** launches the actual captured game. **Reset current
+test** retains that capture; **Test latest saved version** captures current saved
+inputs. Parked dirty dependencies are excluded. A changed input makes earlier
+results historical. Factory result is construction evidence only.
+
+In the room-test panel, expand **Privileged live tactic inspection** for up to
+16 actual instances and 16 recent ordinary opportunities each: identity,
+effective profile, phase, retained target, evidence age/provenance, action/reason,
+result and consumed opportunity. This is explicitly privileged read-only data,
+bound to the test's captured runtime/content and session. It never advances play
+or selects an actor. Ordinary players receive only visibility-gated feedback.
+Use the withdrawal to reposition/disengage, or press it toward a constrained
+retreat with existing movement/melee. These are tactical openings, not venom,
+paralysis, observation sensitivity or a final balance/fun claim.

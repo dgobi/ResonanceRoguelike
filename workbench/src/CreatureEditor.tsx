@@ -20,8 +20,9 @@ export function CreatureEditor(p: ContentProps) {
     const v=key.split(".").reduce<unknown>((v,k)=>v&&typeof v==="object" ? (v as Record<string,unknown>)[k] : undefined,values);
     return v===undefined ? fallback : v;
   };
-  const edit=(key:string,value:string|number|boolean|string[])=>p.onEdit(s=>creatureValue(s,key,value),`Creature ${key}`);
-  const relationships=cap?.relationship_editable&&get('ai_type','wandering')==='wandering'&&!context?.records[0]?.capability.special_binding;
+  const edit=(key:string,value:string|number|boolean|string[])=>p.onEdit(s=>creatureValue(s,key,value,cap?.profile_defaults),`Creature ${key}`);
+  const composite=get('ai_type','wandering')==='composite';
+  const relationships=cap?.relationship_editable&&['wandering','composite'].includes(String(get('ai_type','wandering')))&&!context?.records[0]?.capability.special_binding;
   const hostile=get('perception.hostile_to',['player'])??['player'];
   const [newHostile,setNewHostile]=useState('');
   function number(key:string,label:string,fallback:number,step=1) {
@@ -62,9 +63,16 @@ export function CreatureEditor(p: ContentProps) {
         <small>Zero disables hearing. Mobile wandering/circling creatures investigate local sounds after losing a genuine player trail. Walls block and closed doors attenuate. Ambush and fleeing archetypes retain their special behavior.</small>
         <label>Sees in dark<input aria-label="Sees in dark" type="checkbox" checked={get("perception.sees_in_dark",false)===true} onChange={e=>edit("perception.sees_in_dark",e.target.checked)}/></label>
         {number("wander_radius","Wander radius",8)}{number("pursuit_timeout","Pursuit timeout",20)}{number("speed","Speed",1,0.01)}
-        <label>AI class<select aria-label="Creature AI" disabled={!p.variant||!cap.duplicable} value={String(get("ai_type","wandering"))} onChange={e=>edit("ai_type",e.target.value)}>{cap.ai_types.map(id=><option key={id}>{id}</option>)}</select></label>
+        <label>AI class<select aria-label="Creature AI" disabled={!p.variant||!cap.duplicable} value={String(get("ai_type","wandering"))} onChange={e=>edit("ai_type",e.target.value)}>{cap.ai_types.map(id=><option key={id} disabled={id==='composite'&&!cap.composite_variant}>{id}</option>)}</select></label>
         <small>AI choice is available only for an ordinary new-ID variant. Speed supports at most two actions per turn.</small>
       </fieldset>
+      {composite&&<fieldset className="item-properties" disabled={!!reason||!(cap.profile_editable||(p.variant&&cap.composite_variant))}><legend>Strike and withdraw behaviour</legend>
+        <p>Registered recipe {String(get('ai_profile.recipe',cap.profile_defaults?.recipe))} · version {String(get('ai_profile.version',cap.profile_defaults?.version))}. Ordinary melee; defensive melee when cornered, otherwise wait or abandon. Active owning scene only; no chunk or stair pursuit.</p>
+        <label>Withdrawal trigger<select aria-label="Withdrawal trigger" value={String(get('ai_profile.trigger',cap.profile_defaults?.trigger))} onChange={e=>edit('ai_profile.trigger',e.target.value)}><option value="hit">Confirmed hit/contact</option><option value="committed_attack">Committed attack attempt</option></select><small>{get('ai_profile.trigger',undefined)===undefined?'Defaulted':'Explicit'}. A real hit may deal zero damage through armour or shields. A miss or invincibility qualifies only as a committed attempt. Rejected actions never qualify.</small></label>
+        {(['retreat_distance','hold_opportunities','withdrawal_budget'] as const).map((key,i)=><div key={key}>{number('ai_profile.'+key,['Desired retreat distance (tiles)','Full hold opportunities','Withdrawal opportunity budget'][i],Number(cap.profile_defaults?.[key]))}<small>{get('ai_profile.'+key,undefined)===undefined?'Defaulted':'Explicit'} game-owned value.</small></div>)}
+        <p>Distance is Chebyshev tiles (eight-direction grid). Hold and withdrawal count granted ordinary actor opportunities; transitions grant no action. Pursuit timeout is the maximum charged-world-phase age of last sight for both player and rivals (default 20, valid through the deadline; zero allows no later phase). Hearing remains anonymous.</p>
+        <p>Existing saved composite actors retain their effective profile and commitment, including pursuit timeout. Profile tuning applies to fresh actors. Successful scene departure cancels local intent; F5/F9 in the same scene preserves it.</p>
+      </fieldset>}
       <fieldset className="item-properties" disabled={!!reason||!relationships}><legend>Local relationships</legend>
         {text('perception.faction','Faction label','hostile',32)}
         <small>Exact token: 1–32 lowercase letters, digits or underscores; begin with a letter. No global registry is required.</small>
@@ -74,7 +82,7 @@ export function CreatureEditor(p: ContentProps) {
         <button disabled={!!reason||!relationships||!Array.isArray(hostile)||hostile.length>=16||!/^[a-z][a-z0-9_]{0,31}$/.test(newHostile)||hostile.includes(newHostile)} onClick={()=>{edit('perception.hostile_to',[...(hostile as string[]),newHostile]);setNewHostile('');}}>Add hostile</button>
         <button onClick={()=>edit('perception.hostile_to',[])}>Clear hostiles</button>
         <small>Up to 16 distinct labels; [] deliberately selects nobody. Missing/null defaults to ["player"]. Directional: membership does not change the other actor. Saved actors retain their actual faction/list.</small>
-      </fieldset><p>{relationships?'Ordinary WanderingAI actors without ID-bound abilities can select observed local rivals. Sounds remain unidentified; rivalry stays in its scene.':'Relationship editing requires an originally supported ordinary WanderingAI source and a supported candidate. Other AI and special-bound creatures keep their existing player behavior.'}</p></>}
+      </fieldset><p>{relationships?'Ordinary wandering/composite actors without ID-bound abilities can select observed local rivals. Sounds remain unidentified; rivalry stays in its scene.':'Relationship editing requires an originally supported ordinary source and a supported candidate. Other AI and special-bound creatures keep their existing player behavior.'}</p></>}
       <p className="notice">{p.sourceFamily.descriptor.publication_note}</p>
       <details><summary>Saved actors and read-only behavior</summary><p>Restoration constructs from the current definition, then reapplies stored component snapshots. Name, current/max HP, natural armour, saved sight/hearing/darkvision and wander radius retain stored values. Older rows missing a field keep existing factory fallback semantics. No running game cache or saved actor is rewritten.</p><p>Identity, same-ID AI, body structure, tile and special settings remain fixed. An ordinary variant has its deliberately selected AI and no inherited special binding.</p></details>
     </>}

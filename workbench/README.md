@@ -798,7 +798,7 @@ CPython runtime without the game dependency wheels.
 The protocol is **8**, worker/app **0.9.0**, game structure contract **g2-3**,
 item contract **expedition-items-2**, recipe contract **item-preparation-1**,
 found-text contract **ordinary-found-text-1**, and
-creature contract **creature-rivals-3**, with Workbench layout capability
+creature contract **creature-composite-4**, with Workbench layout capability
 **authored-room-2** on the existing `authored_submap` route (game structure contract g2-3).
 W0 identify/describe/inspect/preview requests remain read-only. Draft validation
 is available only through the host's document boundary. Discovery grants an
@@ -995,3 +995,19 @@ worker suite is `worker/test_selection_w5q.py`; existing G3/G5 lifecycle coverag
 remains applicable. The W5P entrance diagnostic now inverts the actual failed
 transformed span cell, with all eight orientations asserting native, transformed
 and scene locations.
+
+
+## AI-1 strike and withdraw
+
+Eligible ordinary melee sources can create new composite variants through Creature AI.
+The behaviour card exposes trigger, distance, full hold and withdrawal budgets,
+with game-owned defaults/bounds. Existing supported composite profiles support
+same-ID tuning; saved instances retain their effective profile and commitment.
+See [creature authoring](../roguelike/docs/CREATURE_AUTHORING.md#ai-1-authorable-strike-and-withdraw).
+The saved Grave Skirmisher/Grave Harrier examples have matched combat stats and
+paired ai1_skirmisher_room/ai1_harrier_room layouts for explicit placement/testing.
+Neither joins natural population tables. Privileged live tactic inspection in
+Test room reports bounded actual-instance decisions against captured inputs.
+Reset retains the capture; latest saved excludes dirty dependency drafts.
+`node scripts/run-ai-1.mjs` authors the named demonstration assets in production
+main through app-local packaged controls and retains isolated test evidence.

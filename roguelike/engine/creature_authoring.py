@@ -17,13 +17,25 @@ from generation.structure_contract import read_document, StructureError
 from rendering.tile_registry import TileRegistry
 from engine.harvesting import profile_errors, construct_output, RULES
 from engine.item_factory import ItemFactory
+from engine.ai_profiles import DEFAULTS as PROFILE_DEFAULTS, BOUNDS as PROFILE_BOUNDS, effective_profile
 
-CONTRACT = "creature-rivals-3"
+CONTRACT = "creature-composite-4"
 RELATIONSHIP_FIELDS = ['perception.faction', 'perception.hostile_to']
 
 
 def relationship_supported(raw):
-    return raw.get('ai_type', 'wandering') == 'wandering' and raw.get('id') not in ABILITY_REGISTRY
+    return raw.get('ai_type', 'wandering') in ('wandering', 'composite') and raw.get('id') not in ABILITY_REGISTRY
+
+
+def composite_source(raw):
+    if (not relationship_supported(raw) or any(k in raw for k in ('ranged_attack', 'abilities', 'effects', 'statuses'))):
+        return False
+    if raw.get('ai_type') != 'composite' and 'ai_profile' in raw:
+        return False
+    if raw.get('ai_type') == 'composite':
+        try: effective_profile(raw)
+        except (ValueError, TypeError): return False
+    return True
 OBSERVE_INSPECTION = True
 READONLY_CONSTRUCTION = True
 HP_MAX = 1_000_000
@@ -39,7 +51,8 @@ SELECTION = ("spawn_zones is retained inactive metadata. Zone creature lists and
              "are separate inbound declarations, not observed encounters or proof of natural world selection. Saving a variant enrolls it nowhere.")
 PUBLICATION_NOTE = ("Changes load at the next game launch/catalogue initialization. Saved actors retain stored name, HP, "
                     "armour, sight/hearing/darkvision, faction, hostility (including []) and wander radius. Description, attack, speed and pursuit use the current "
-                    "definition. HP edits do not rescale injured saves. New actors receive current constructor values; variants require explicit placement.")
+                    "definition. Composite v1 saved actors retain their effective behavioural profile (including pursuit_timeout) and tactical commitment; profile edits affect fresh actors. "
+                    "HP edits do not rescale injured saves. New actors receive current constructor values; variants require explicit placement.")
 VIEWS = ["creature-properties", "creature-references", "creature-factory"]
 # This registered specialist uses exact-source paths and shared document commands.
 SCHEMA = {"$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object", "required": ["id"], "properties": {
@@ -90,10 +103,13 @@ def capability(raw, path, pointer=""):
     harvest = editable and ("ephemeral" not in raw or raw["ephemeral"] is False) and not profile_errors(raw)
     return dict(contract=CONTRACT, inspectable=True, constructible=bool(shape), editable=editable,
                 relationship_editable=editable and relationship_supported(raw),
+                composite_variant=editable and composite_source(raw),
+                profile_editable=editable and raw.get('ai_type') == 'composite' and composite_source(raw),
+                profile_defaults=PROFILE_DEFAULTS,
                 harvest_editable=harvest, harvest_rules=RULES,
                 harvest_reason="Complete native harvest profile; original non-ephemeral Actor authority." if harvest else "Harvest is protected: the original must be a supported non-ephemeral Actor with absent or supported native profile.",
                 duplicable=editable and not special, operations=(["edit"] if special else ["edit", "variant"]) if editable else [],
-                fields=FIELDS + (RELATIONSHIP_FIELDS if editable and relationship_supported(raw) else []), bounds=BOUNDS, ai_types=list(AI_TYPES), hp_min=1, hp_max=HP_MAX,
+                fields=FIELDS + (RELATIONSHIP_FIELDS if editable and relationship_supported(raw) else []), bounds={**BOUNDS, **{'ai_profile.'+k:v for k,v in PROFILE_BOUNDS.items() if k != 'pursuit_timeout'}}, ai_types=list(AI_TYPES), hp_min=1, hp_max=HP_MAX,
                 shape="Actor with ID-bound behavior" if special else "ordinary Actor" if shape else "unsupported entity shape",
                 reason=reason, special_binding=identifier if special else None,
                 duplication_reason="Duplication unavailable: ABILITY_REGISTRY dispatches by stable ID; a new ID would lose this behavior." if special else "",
@@ -102,8 +118,13 @@ def capability(raw, path, pointer=""):
                 description_note="Description and creature knowledge use stable definition identity; tile remains presentation only.")
 
 
-def unchanged_data(raw, *, variant=False, harvest=False, relationships=False):
+def unchanged_data(raw, *, variant=False, harvest=False, relationships=False, profile=False, local_flags=False):
     value = copy.deepcopy(raw)
+    if profile:
+        value.pop('ai_profile', None)
+    if local_flags:
+        value.pop('can_cross_chunks', None)
+        value.pop('can_use_stairs', None)
     for field in FIELDS + (["id", "ai_type"] if variant else []) + (["butcher_yield"] if harvest else []) + (RELATIONSHIP_FIELDS if relationships else []):
         parts = field.split("."); parent = value
         for part in parts[:-1]: parent = parent.get(part, {}) if isinstance(parent, dict) else {}
@@ -146,7 +167,14 @@ def authorize_candidate(original, candidate, source_path, target_path, *, data=N
         if isinstance(identifier, str) and identifier in ABILITY_REGISTRY: issue("SPECIAL_ID", "An ordinary variant cannot acquire an ID-bound special ability.")
     elif candidate.get("id") != original.get("id"): issue("IDENTITY_CHANGE", "Same-ID edits retain the exact stable identity.")
     relationships = cap['relationship_editable'] and relationship_supported(candidate)
-    if not same_json(unchanged_data(original, variant=variant and cap["duplicable"], harvest=cap["harvest_editable"], relationships=relationships), unchanged_data(candidate, variant=variant and cap["duplicable"], harvest=cap["harvest_editable"], relationships=relationships)):
+    composite = candidate.get('ai_type') == 'composite'
+    new_composite = variant and composite and cap['composite_variant']
+    profile = (new_composite or cap['profile_editable']) and composite
+    if composite and not profile:
+        issue('COMPOSITE_AUTHORITY', 'Composite v1 requires an original ordinary melee wandering/composite source; deleting protected fields cannot grant authority. Legacy same-ID conversion is unsupported.')
+    if new_composite and any(candidate.get(k) is not False for k in ('can_cross_chunks', 'can_use_stairs')):
+        issue('COMPOSITE_LOCAL', 'A new composite variant must explicitly set can_cross_chunks and can_use_stairs false; inspect these changes in Diff.')
+    if not same_json(unchanged_data(original, variant=variant and cap["duplicable"], harvest=cap["harvest_editable"], relationships=relationships, profile=profile, local_flags=new_composite), unchanged_data(candidate, variant=variant and cap["duplicable"], harvest=cap["harvest_editable"], relationships=relationships, profile=profile, local_flags=new_composite)):
         issue("READ_ONLY_FIELD", "Only supported common fields and originally entitled harvest fields may change; identity, tile, ephemeral, components and special settings remain exact. AI may change only for an ordinary new variant.")
     if cap["harvest_editable"] and not harvest_metadata_allowed(original, candidate):
         issue("HARVEST_METADATA", "Unknown harvest/profile/tier/output metadata is read-only. It may travel with retained records; new records contain only supported fields.")
@@ -224,6 +252,11 @@ def validate_definition(raw, data, path, indexes):
         issue('CREATURE_RELATIONSHIP', 'perception.hostile_to', 'Use at most 16 distinct exact faction tokens, or [] for no hostiles; no coercion or deduplication. Omission/null defaults to ["player"].')
     ai = raw.get("ai_type", "wandering")
     if not isinstance(ai, str) or ai not in AI_TYPES: issue("CREATURE_AI", "ai_type", "Choose an existing registered AI class; fallback is not validated behavior.")
+    if ai == 'composite':
+        try: effective_profile(raw)
+        except (ValueError, TypeError) as error: issue('CREATURE_PROFILE', 'ai_profile', str(error))
+    elif 'ai_profile' in raw:
+        issue('CREATURE_PROFILE', 'ai_profile', 'ai_profile is supported only with the registered composite AI route.')
     speed = raw.get("speed", 1.0)
     if type(speed) not in (int, float) or not math.isfinite(speed) or not 0.01 <= speed <= 2:
         issue("CREATURE_SPEED", "speed", "Speed must be finite from 0.01 to 2; scheduling supports at most two actions per turn.")
@@ -280,7 +313,8 @@ def factory_preview(raw, data):
                 instance=dict(name=actor.name, tile=actor.tile, blocks_movement=actor.blocks_movement,
                     fighter=dict(hp=f.hp, max_hp=f.max_hp, power=f.power, defense=f.defense, body_id=f.body_id, limbs=f.body_limbs, armour_value=f.effective_av),
                     perception=None if p is None else dict(sight_radius=p.sight_radius, hearing_radius=p.hearing_radius, sees_in_dark=p.sees_in_dark, faction=p.faction, hostile_to=p.hostile_to),
-                    ai_class=type(actor.ai).__name__, wander_radius=actor.ai.wander_radius, inventory=actor.inventory),
+                    ai_class=type(actor.ai).__name__, wander_radius=actor.ai.wander_radius, inventory=actor.inventory,
+                    **({'effective_ai_profile': actor.ai.profile} if hasattr(actor.ai, 'profile') else {})),
                 definition_values={k: raw.get(k, default) for k, default in (("description", ""), ("damage_dice", "1d4"), ("damage_bonus", 0), ("attack_verb", "strikes at thee"), ("speed", 1), ("pursuit_timeout", 20))},
                 comparisons=[dict(field="name → Actor.name", declared=raw.get("name"), instance=actor.name), dict(field="base_hp → Fighter.max_hp / hp", declared=raw.get("base_hp"), instance=f.max_hp), dict(field="armour_value → natural armour", declared=raw.get("armour_value", 0), instance=f.effective_av)],
                 definition_semantic_sha256=hashlib.sha256(json.dumps(raw, sort_keys=True, separators=(",", ":")).encode()).hexdigest(),

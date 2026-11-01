@@ -38,10 +38,11 @@ def current_interest(ai, turn):
 
 def eligible(actor):
     from components.ai import AI, WanderingAI, CirclingAI, AIState
+    from components.composite_ai import CompositeAI
     ai = getattr(actor, 'ai', None)
     # Ambushers (including awake Lurkers) and fleeing archetypes keep their
     # special behavior. Sound never initializes or triggers hibernation/ambush.
-    return (type(ai) in (AI, WanderingAI, CirclingAI)
+    return (type(ai) in (AI, WanderingAI, CirclingAI, CompositeAI)
             and getattr(actor, 'is_alive', True)
             and not getattr(actor, '_hibernating', False)
             and ai.state not in (AIState.DORMANT, AIState.WAITING, AIState.FLEEING))
@@ -97,6 +98,7 @@ def emit(engine, x, y, kind, *, maker=None):
         # Actual player trails always win. Ignored events cannot wait behind
         # genuine pursuit or refresh its memory. Sight is rechecked at decision.
         if (getattr(actor, '_last_known_px', None) is not None
+                or getattr(ai, 'target', None) is not None
                 or getattr(ai, 'local_target', None) is not None
                 or ai.state in (AIState.HUNTING, AIState.ALERTED, AIState.ATTACKING)):
             clear_interest(ai)
