@@ -88,9 +88,22 @@ async function witness(label,treatStage='warning'){
  }
  const before=await observe();assert.equal(before.inventory_rows[before.inventory_selected]?.item_id,'measured_venom_remedy');
  await key('e');await new Promise(r=>setTimeout(r,100));const after=await observe();s=await status();
- assert.equal(after.turn,before.turn+1);assert.equal(after.inventory.filter(i=>i.item_id==='measured_venom_remedy').length,before.inventory.filter(i=>i.item_id==='measured_venom_remedy').length-1);
- assert.equal(s.tactics.player_condition.dose.stage,'recovery');assert.equal(s.tactics.player_condition.dose.remaining,3);
- await key('escape');await key(undefined,true);await copyFile(resolve(session.state_root,'frame.png'),resolve(output,label+'.png'));
+ if(treatStage==='paralysis'){
+  assert.equal(after.turn,before.turn);assert.deepEqual(after.inventory,before.inventory);
+  assert.deepEqual(s.tactics.player_condition,saved);
+  await key('escape');
+  const remaining=s.tactics.player_condition.dose.remaining;
+  for(let n=0;n<remaining;n++){
+   const phase=s.tactics.turn;await key('.');
+   s=await until(async()=>{const next=await status();return next.tactics.turn===phase+1?next:null;});
+  }
+  assert.equal(s.tactics.player_condition.dose.stage,'recovery');assert.equal(s.tactics.player_condition.dose.remaining,4);
+ }else{
+  assert.equal(after.turn,before.turn+1);assert.equal(after.inventory.filter(i=>i.item_id==='measured_venom_remedy').length,before.inventory.filter(i=>i.item_id==='measured_venom_remedy').length-1);
+  assert.equal(s.tactics.player_condition.dose.stage,'recovery');assert.equal(s.tactics.player_condition.dose.remaining,3);
+  await key('escape');
+ }
+ await key(undefined,true);await copyFile(resolve(session.state_root,'frame.png'),resolve(output,label+'.png'));
  receipt[label]={capture:s.captured,rows,persistence:saved,treatment:{before,after,condition:s.tactics.player_condition}};
  await writeFile(resolve(output,label+'.json'),JSON.stringify(receipt[label],null,2));
 }
@@ -117,10 +130,10 @@ try{
   await room(opening,'ai3_drowsing_opening','drowsing_stalker');
   await room('roguelike/data/layouts/ai1_skirmisher_room.json','ai3_rival_ground','nettle_stalker',false,true);
  }
- await phase('packaged delivery, warning/paralysis treatment, F5/F9 and captured lifecycle');
+ await phase('packaged delivery, warning treatment, severe rejection, F5/F9 and captured lifecycle');
  await open(opening);await start();await witness('warning_treatment','warning');
  const original=receipt.warning_treatment.capture.manifest_sha256;
- await start('reset');assert.equal((await status()).captured.manifest_sha256,original);await witness('paralysis_treatment','paralysis');
+ await start('reset');assert.equal((await status()).captured.manifest_sha256,original);await witness('paralysis_rejection','paralysis');
  await b('Stop').click();await until(async()=>(await status()).status==='stopped');
  await open(long);await start('latest');await witness('long_warning','warning');
  await b('Stop').click();await until(async()=>(await status()).status==='stopped');
