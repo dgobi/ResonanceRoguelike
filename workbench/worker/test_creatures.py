@@ -33,9 +33,9 @@ class CreatureTests(unittest.TestCase):
     def test_loaded_catalog_noop_player_and_advanced_read_only(self):
         described = invoke("describe")["result"]["assets"]
         rows = [r for r in described if r["route"] == "creature_definition"]
-        self.assertEqual(len(rows), 16)
-        self.assertEqual(len([r for r in rows if r["category"] == "creatures"]), 15)
-        self.assertEqual(len([r for r in rows if r["editable"]]), 14)
+        self.assertEqual(len(rows), 18)
+        self.assertEqual(len([r for r in rows if r["category"] == "creatures"]), 17)
+        self.assertEqual(len([r for r in rows if r["editable"]]), 16)
         for path, editable in ((CREATURE, True), (CREATURE.replace("hollow_revenant", "hollow_knight"), True),
                                (CREATURE.replace("hollow_revenant", "vine_network"), False), ("roguelike/data/entities/player.json", False)):
             before = (ROOT/path).read_bytes()

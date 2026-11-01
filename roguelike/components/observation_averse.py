@@ -189,7 +189,9 @@ def take_turn(ai, actor, engine, ambient):
         ai.pursuit_left = ai.profile['pursuit_budget']
         ai.no_progress, ai.best_distance = 0, None
         ai.failed_entries, ai.retired_evidence = [], None
-        ai.cover_goal, ai.blocked_cover = None, False
+        # A material change rearms patience, not a still-useful destination.
+        # route_to_cover alone invalidates the commitment against fresh legality.
+        ai.blocked_cover = False
     perceived = ai._observed(engine, actor, ambient)
     target = ai.resolve_target(engine, actor)
     if target in perceived:

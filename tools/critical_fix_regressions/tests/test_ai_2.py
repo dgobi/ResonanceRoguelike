@@ -311,6 +311,15 @@ class ObservationTests(unittest.TestCase):
             self.e.world_time.turn+=1;self.decision(a)
         self.assertTrue(any(t['action']=='move' for t in a.ai.trace))
 
+    def test_material_change_retains_a_still_useful_cover_destination(self):
+        self.corridor([(12,12),(13,12),(13,11),(13,10),(14,10),(15,10),(16,10)])
+        a=self.actor(x=13);self.decision(a)
+        self.assertEqual('conceal',a.ai.phase);goal=a.ai.cover_goal[:]
+        # A changed opening is material but does not expose or block the goal.
+        self.e.local_map.set_tile(11,12,'floor',True,True)
+        self.e.world_time.turn+=1;self.decision(a)
+        self.assertEqual(goal,a.ai.cover_goal)
+
 
 def cold(root):
     with patch('engine.save_manager.SAVE_DIR',Path(root)):
