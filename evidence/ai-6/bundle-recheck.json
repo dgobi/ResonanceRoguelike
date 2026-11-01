@@ -1,0 +1,71 @@
+{
+  "passed": true,
+  "revision": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+  "package": {
+    "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+    "sha256": "cbec0b5b88166aaa589fb8a2995a749eeb06cf981789cc29db94b0543954a8cd"
+  },
+  "installers": [
+    {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "7d47ac2f0cd89ec0807f01dfb469f51dc080a6efdece2e9247eb15667b8fa205",
+      "size": 28495436
+    }
+  ],
+  "prior_native_executable": "86f1af987322c1728f50a84706de5e63d8556fd5614f3826a3bd0cb561c5c57c",
+  "reason": "NSIS packaging patches executable bundle metadata. Re-certify final bytes without changing frozen sources.",
+  "commands": [
+    {
+      "gate": "startup",
+      "command": [
+        "node",
+        "scripts/startup-test.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "seconds": 108.77098489995115,
+      "source_stable": true,
+      "executable_unchanged": true,
+      "passed": true
+    },
+    {
+      "gate": "desktop",
+      "command": [
+        "node",
+        "scripts/desktop-test.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "seconds": 26.60319639998488,
+      "source_stable": true,
+      "executable_unchanged": true,
+      "passed": true
+    },
+    {
+      "gate": "native",
+      "command": [
+        "node",
+        "scripts/run-ai-6.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "seconds": 91.5909176999703,
+      "source_stable": true,
+      "executable_unchanged": true,
+      "passed": true
+    },
+    {
+      "gate": "legacy-native",
+      "command": [
+        "node",
+        "scripts/run-ai-3.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "seconds": 104.31090559996665,
+      "source_stable": true,
+      "executable_unchanged": true,
+      "passed": true
+    }
+  ]
+}

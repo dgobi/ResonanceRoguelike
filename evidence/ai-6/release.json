@@ -1,0 +1,371 @@
+{
+  "passed": true,
+  "revision": "6c1366ac428978615cd25758c43f43cce640b23c",
+  "runtime_content_editor_revision": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+  "started_utc": "2026-11-01T23:32:00.075322+00:00",
+  "environment": {
+    "platform": "win32",
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+    "python_executable": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "dependencies": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6",
+      "cffi": "2.1.1",
+      "pycparser": "3.11",
+      "typing_extensions": "4.16.0"
+    },
+    "node": "v24.15.0",
+    "cargo": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)",
+    "rustc": "rustc 1.95.0 (59807616e 2026-04-14)"
+  },
+  "package": {
+    "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+    "sha256": "cbec0b5b88166aaa589fb8a2995a749eeb06cf981789cc29db94b0543954a8cd"
+  },
+  "inputs_sha256": "395a91c4f5d2fda8cf701883b13f7330f63907cc969542f34b096975c61fe3c5",
+  "verification_delta": [
+    "tools/critical_fix_regressions/tests/test_gameplay_g17.py",
+    "tools/critical_fix_regressions/tests/test_structure_contract.py"
+  ],
+  "commands": [
+    {
+      "gate": "frontend",
+      "command": [
+        "npm.cmd",
+        "test"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 2.7480274999979883,
+      "source_stable": true,
+      "log_sha256": "2e26511f47ee93803241b63a694a67e56c0bc99a79164ef23ce5074d5bb66e16",
+      "passed": true,
+      "execution_revision": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+      "retained": true,
+      "consumer_delta": [],
+      "retention_basis": "Current-task worker/frontend/host/build/native/gameplay evidence was executed at d448e7d and retained only because these two changed exact-inventory tests are not consumed by those gates. Runtime, content, editor, package and their exercised drivers remain byte-identical. Focused and production-D rerun unfiltered at this revision."
+    },
+    {
+      "gate": "typecheck",
+      "command": [
+        "npm.cmd",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 4.803228399949148,
+      "source_stable": true,
+      "log_sha256": "77783bf2ca9523ff1e6aa3f5a098f779a50fd8cade5fb2774a4da5c450761c89",
+      "passed": true,
+      "execution_revision": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+      "retained": true,
+      "consumer_delta": [],
+      "retention_basis": "Current-task worker/frontend/host/build/native/gameplay evidence was executed at d448e7d and retained only because these two changed exact-inventory tests are not consumed by those gates. Runtime, content, editor, package and their exercised drivers remain byte-identical. Focused and production-D rerun unfiltered at this revision."
+    },
+    {
+      "gate": "play",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_ai_6_play.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\ai-6\\final-a\\play"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 13.775589799974114,
+      "source_stable": true,
+      "log_sha256": "6834bd01faebe757493cb9ab3e6da1d5de1a520f00e68a8ab1ad4f6335dcf975",
+      "passed": true,
+      "execution_revision": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+      "retained": true,
+      "consumer_delta": [],
+      "retention_basis": "Current-task worker/frontend/host/build/native/gameplay evidence was executed at d448e7d and retained only because these two changed exact-inventory tests are not consumed by those gates. Runtime, content, editor, package and their exercised drivers remain byte-identical. Focused and production-D rerun unfiltered at this revision."
+    },
+    {
+      "gate": "ai5-play",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_ai_5_play.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\ai-6\\final-a\\ai5-play"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 7.2915870998986065,
+      "source_stable": true,
+      "log_sha256": "accd1a9e0e7df7b9d181a6b7f3d419a1c62b8dee37403292590218fea7506976",
+      "passed": true,
+      "execution_revision": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+      "retained": true,
+      "consumer_delta": [],
+      "retention_basis": "Current-task worker/frontend/host/build/native/gameplay evidence was executed at d448e7d and retained only because these two changed exact-inventory tests are not consumed by those gates. Runtime, content, editor, package and their exercised drivers remain byte-identical. Focused and production-D rerun unfiltered at this revision."
+    },
+    {
+      "gate": "ai3-play",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_ai_3_play.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\ai-6\\final-a\\ai3-play"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 6.572546700015664,
+      "source_stable": true,
+      "log_sha256": "4fa6ecf1dcd5a162c1544b23f3c885c3f2b734f0562ad7fc934f75c897970257",
+      "passed": true,
+      "execution_revision": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+      "retained": true,
+      "consumer_delta": [],
+      "retention_basis": "Current-task worker/frontend/host/build/native/gameplay evidence was executed at d448e7d and retained only because these two changed exact-inventory tests are not consumed by those gates. Runtime, content, editor, package and their exercised drivers remain byte-identical. Focused and production-D rerun unfiltered at this revision."
+    },
+    {
+      "gate": "host",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--manifest-path",
+        "src-tauri/Cargo.toml"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 57.18542380002327,
+      "source_stable": true,
+      "log_sha256": "51e643bcf9e7d22669e9a51baf3a212859bb166ae1b6b7921afe50400ba0cc1b",
+      "passed": true,
+      "execution_revision": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+      "retained": true,
+      "consumer_delta": [],
+      "retention_basis": "Current-task worker/frontend/host/build/native/gameplay evidence was executed at d448e7d and retained only because these two changed exact-inventory tests are not consumed by those gates. Runtime, content, editor, package and their exercised drivers remain byte-identical. Focused and production-D rerun unfiltered at this revision."
+    },
+    {
+      "gate": "clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "--manifest-path",
+        "src-tauri/Cargo.toml",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 6.12216249993071,
+      "source_stable": true,
+      "log_sha256": "ca22d6bd029168e688835e5cfad89d6e2463b497e6e6c51346f9d42e90bca15f",
+      "passed": true,
+      "execution_revision": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+      "retained": true,
+      "consumer_delta": [],
+      "retention_basis": "Current-task worker/frontend/host/build/native/gameplay evidence was executed at d448e7d and retained only because these two changed exact-inventory tests are not consumed by those gates. Runtime, content, editor, package and their exercised drivers remain byte-identical. Focused and production-D rerun unfiltered at this revision."
+    },
+    {
+      "gate": "debug-build",
+      "command": [
+        "cargo",
+        "build",
+        "--locked",
+        "--manifest-path",
+        "src-tauri/Cargo.toml"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 7.361786800203845,
+      "source_stable": true,
+      "log_sha256": "8a9bcf8599b69db6ada65748e6a6135d809a817df32801a323fdd71c7778b8e8",
+      "passed": true,
+      "execution_revision": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+      "retained": true,
+      "consumer_delta": [],
+      "retention_basis": "Current-task worker/frontend/host/build/native/gameplay evidence was executed at d448e7d and retained only because these two changed exact-inventory tests are not consumed by those gates. Runtime, content, editor, package and their exercised drivers remain byte-identical. Focused and production-D rerun unfiltered at this revision."
+    },
+    {
+      "gate": "build",
+      "command": [
+        "npm.cmd",
+        "run",
+        "build"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 42.94677700009197,
+      "source_stable": true,
+      "log_sha256": "1ce188de5bf8bf44c99ac5811b2b2fd5fcb166d6c725ac7c66765a91b1756546",
+      "passed": true,
+      "execution_revision": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+      "retained": true,
+      "consumer_delta": [],
+      "retention_basis": "Current-task worker/frontend/host/build/native/gameplay evidence was executed at d448e7d and retained only because these two changed exact-inventory tests are not consumed by those gates. Runtime, content, editor, package and their exercised drivers remain byte-identical. Focused and production-D rerun unfiltered at this revision."
+    },
+    {
+      "gate": "startup",
+      "command": [
+        "node",
+        "scripts/startup-test.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 115.88825240009464,
+      "source_stable": true,
+      "log_sha256": "eb2532126800ba56d549e78c16740e4f9e88bc0617858cffa32490629c99b0e9",
+      "passed": true,
+      "execution_revision": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+      "retained": true,
+      "consumer_delta": [],
+      "retention_basis": "Current-task worker/frontend/host/build/native/gameplay evidence was executed at d448e7d and retained only because these two changed exact-inventory tests are not consumed by those gates. Runtime, content, editor, package and their exercised drivers remain byte-identical. Focused and production-D rerun unfiltered at this revision."
+    },
+    {
+      "gate": "desktop",
+      "command": [
+        "node",
+        "scripts/desktop-test.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 30.972986900014803,
+      "source_stable": true,
+      "log_sha256": "51207594d05b775a0836a0aa02ccea5bcd645c644dedd304a250c72170bde70e",
+      "passed": true,
+      "execution_revision": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+      "retained": true,
+      "consumer_delta": [],
+      "retention_basis": "Current-task worker/frontend/host/build/native/gameplay evidence was executed at d448e7d and retained only because these two changed exact-inventory tests are not consumed by those gates. Runtime, content, editor, package and their exercised drivers remain byte-identical. Focused and production-D rerun unfiltered at this revision."
+    },
+    {
+      "gate": "native",
+      "command": [
+        "node",
+        "scripts/run-ai-6.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 109.9884451997932,
+      "source_stable": true,
+      "log_sha256": "35b5db895a10f065cafe4e632fc6d2997a36f1f301dbb2453ee27547b8c33249",
+      "passed": true,
+      "execution_revision": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+      "retained": true,
+      "consumer_delta": [],
+      "retention_basis": "Current-task worker/frontend/host/build/native/gameplay evidence was executed at d448e7d and retained only because these two changed exact-inventory tests are not consumed by those gates. Runtime, content, editor, package and their exercised drivers remain byte-identical. Focused and production-D rerun unfiltered at this revision."
+    },
+    {
+      "gate": "legacy-native",
+      "command": [
+        "node",
+        "scripts/run-ai-3.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 123.04241360002197,
+      "source_stable": true,
+      "log_sha256": "6a45c3c792d2ea75b86ee5150e551d5167b7f80900fe9f37403e5aaeb2081f00",
+      "passed": true,
+      "execution_revision": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+      "retained": true,
+      "consumer_delta": [],
+      "retention_basis": "Current-task worker/frontend/host/build/native/gameplay evidence was executed at d448e7d and retained only because these two changed exact-inventory tests are not consumed by those gates. Runtime, content, editor, package and their exercised drivers remain byte-identical. Focused and production-D rerun unfiltered at this revision."
+    },
+    {
+      "gate": "worker",
+      "command": [
+        "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+        "-X",
+        "utf8",
+        "-I",
+        "-B",
+        "-c",
+        "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_composite_ai', 'test_venom_treatment', 'test_creatures', 'test_creatures_w5f', 'test_items', 'test_supplies', 'test_equipment', 'test_rooms_w5g', 'test_rivals_g21', 'test_authoring', 'test_assignment']));sys.exit(not r.wasSuccessful())"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 1132.9789544001687,
+      "source_stable": true,
+      "log_sha256": "baf4de92b35b3fcc626d7b7069b75dccc7b311ba6c6a6950db490029122dfc96",
+      "passed": true,
+      "execution_revision": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+      "retained": true,
+      "consumer_delta": [],
+      "retention_basis": "Current-task worker/frontend/host/build/native/gameplay evidence was executed at d448e7d and retained only because these two changed exact-inventory tests are not consumed by those gates. Runtime, content, editor, package and their exercised drivers remain byte-identical. Focused and production-D rerun unfiltered at this revision."
+    },
+    {
+      "gate": "production-d",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_d.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\ai-6\\final-b\\production-d"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "seconds": 577.7221925000194,
+      "source_stable": true,
+      "execution_revision": "6c1366ac428978615cd25758c43f43cce640b23c",
+      "retained": false,
+      "log_sha256": "35319245b7dfa1085a7706ec1d8707872258a182c1c9b64360d26dc5766ee374",
+      "passed": true
+    },
+    {
+      "gate": "focused",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\critical_fix_regressions\\verify_fixes.py",
+        "--timeout",
+        "3600",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\ai-6\\final-b\\focused"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "seconds": 1221.4953485000879,
+      "source_stable": true,
+      "execution_revision": "6c1366ac428978615cd25758c43f43cce640b23c",
+      "retained": false,
+      "log_sha256": "3919ee6d7842fcba2681fce71909f4372f59826ff5d3cbae00bc152d01b77e2a",
+      "passed": true
+    }
+  ],
+  "retention": "Current-task worker/frontend/host/build/native/gameplay evidence was executed at d448e7d and retained only because these two changed exact-inventory tests are not consumed by those gates. Runtime, content, editor, package and their exercised drivers remain byte-identical. Focused and production-D rerun unfiltered at this revision.",
+  "superseded_focused": {
+    "revision": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+    "tests": 552,
+    "failures": 2,
+    "reason": "Exact catalogue expectations 83/15 preceded three commissioned rooms; corrected to 86/18 with explicit new-ID membership.",
+    "log": "../final-a/focused.log"
+  },
+  "source_stable": true,
+  "finished_utc": "2026-11-01T23:52:21.934641+00:00"
+}

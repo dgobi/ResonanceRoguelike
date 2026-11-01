@@ -1,0 +1,21 @@
+{
+  "command": [
+    "npm.cmd",
+    "run",
+    "bundle"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+  "exit_code": 0,
+  "seconds": 82.90577930002473,
+  "source_stable": true,
+  "executable_before": "86f1af987322c1728f50a84706de5e63d8556fd5614f3826a3bd0cb561c5c57c",
+  "executable_after": "cbec0b5b88166aaa589fb8a2995a749eeb06cf981789cc29db94b0543954a8cd",
+  "installers": [
+    {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "7d47ac2f0cd89ec0807f01dfb469f51dc080a6efdece2e9247eb15667b8fa205",
+      "size": 28495436
+    }
+  ],
+  "passed": false
+}

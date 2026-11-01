@@ -1,0 +1,58 @@
+{
+  "passed": true,
+  "boundary": "Development actual controls; source evolved afterwards. Initial run published five valid files before later input drift rejected store validation. Successful rerun reopened those files and completed store, selector, revision/reset/latest/dirty workflow. All final publication bytes match receipts; final-package lifecycle is separate.",
+  "source": "workbench\\.artifacts\\ai-6\\native-1793573799962",
+  "receipts": [
+    "authoring-initial-receipt.json.gz",
+    "authoring-receipt.json.gz"
+  ],
+  "checks": [
+    "create both ordinary new-ID engagements through actual packaged controls",
+    "publish matched saved rooms and guarded store preserving original",
+    "add guarded store to equal-weight 0.35 new-world assignment through controls",
+    "actual saved-room direct melee and qualifying hit/withdrawal share fixed objective",
+    "saved radius revision changes acquisition; Reset keeps old capture, latest saved excludes dirty dependencies",
+    "source preserved; native authoring/lifecycle complete"
+  ],
+  "published": [
+    {
+      "path": "roguelike/data/entities/creatures/barrow_sentinel.json",
+      "final_sha256": "54f885f84b844ff8c63eae8aa4dfe3be626aeddaa7a1f8eeb14f68e984b144af",
+      "receipt_sha256": "54f885f84b844ff8c63eae8aa4dfe3be626aeddaa7a1f8eeb14f68e984b144af",
+      "equal": true
+    },
+    {
+      "path": "roguelike/data/entities/creatures/barrow_watcher.json",
+      "final_sha256": "312af7f4b37632e9672cd3489bbfce2d93284d634a7dbdc0c2aad81f9879f21b",
+      "receipt_sha256": "312af7f4b37632e9672cd3489bbfce2d93284d634a7dbdc0c2aad81f9879f21b",
+      "equal": true
+    },
+    {
+      "path": "roguelike/data/layouts/ai6_sentinel_post.json",
+      "final_sha256": "d0298305f8539b1bdbdc539d8f9c4e62813532e64b62f09ba17403b7a197da78",
+      "receipt_sha256": "d0298305f8539b1bdbdc539d8f9c4e62813532e64b62f09ba17403b7a197da78",
+      "equal": true
+    },
+    {
+      "path": "roguelike/data/layouts/ai6_watcher_post.json",
+      "final_sha256": "cde795a6e01c3e41071a736ff9d4935207675828e98a6ca6c38a6c54c3cc6e62",
+      "receipt_sha256": "cde795a6e01c3e41071a736ff9d4935207675828e98a6ca6c38a6c54c3cc6e62",
+      "equal": true
+    },
+    {
+      "path": "roguelike/data/layouts/barrow_ward_store_b.json",
+      "final_sha256": "ff7f1369e503a30f72c1a77cdbbbf2d2a5f483f95e327c7a86b34c5fdb4d59cf",
+      "receipt_sha256": "ff7f1369e503a30f72c1a77cdbbbf2d2a5f483f95e327c7a86b34c5fdb4d59cf",
+      "equal": true
+    },
+    {
+      "path": "roguelike/data/generation/authored_submap_selection.json",
+      "final_sha256": "b034c7667be50d484a16d8975686fefe8025b0390a5942ac7799b8d9f87f2ff7",
+      "receipt_sha256": "b034c7667be50d484a16d8975686fefe8025b0390a5942ac7799b8d9f87f2ff7",
+      "equal": true
+    }
+  ],
+  "reset_manifest": "47238ecc8a3e2bee55d185374b9d41b0aea1c90c6de84e5072eb1e8b24a9a08e",
+  "revised_manifest": "b9362eafb259973250b553776a99b79f7838e583e871cadfa4e93a7b664526fe",
+  "dirty_manifest": "b9362eafb259973250b553776a99b79f7838e583e871cadfa4e93a7b664526fe"
+}

@@ -1,0 +1,41 @@
+[
+  {
+    "issue": "Shared extraction initially omitted ambient light required by patient monitoring.",
+    "evidence": ".baseline/ai-6/all-ai-development.log",
+    "repair": "Passed actual light into shared executor; all 107 AI preflight tests then passed."
+  },
+  {
+    "issue": "First actual-control run detected dependencies changing during store validation.",
+    "evidence": "authoring-initial-receipt.json.gz",
+    "repair": "Kept game inputs stable during the successful control rerun."
+  },
+  {
+    "issue": "New editor middle-dot prose had mixed encoding in development package.",
+    "repair": "Normalized CreatureEditor.tsx to UTF-8/LF before final build."
+  },
+  {
+    "issue": "Natural entrance fixture omitted the native surface generation revision required by cold-save validation.",
+    "repair": "Staging now follows production metadata publication including chunk generation_revision; independent cold consequences passed."
+  },
+  {
+    "issue": "Pre-change serialized-world comparison used Python tuples against JSON lists.",
+    "repair": "Compare JSON-normalized serialized world; all selected layouts and reports remain equal, without runtime migration."
+  },
+  {
+    "issue": "Corpus assertions described the older catalogue.",
+    "repair": "Exact room list and creature counts now include only the two commissioned species and three rooms."
+  },
+  {
+    "issue": "Final review identified resting-tile capability, nonwalkable bell approach and far-displacement search edges.",
+    "repair": "Resting checks host terrain capability; blocked anonymous sources use legal cardinal approaches; far recovery makes bounded domain-directed steps. Added focused coverage."
+  },
+  {
+    "issue": "NSIS packaging changed executable bundle metadata and therefore its hash after the original portable native run.",
+    "repair": "Build succeeded. Retain both package identities and rerun startup, desktop and AI-6/AI-3 native lifecycles against the final NSIS-patched executable; frozen source inputs unchanged."
+  },
+  {
+    "issue": "First unfiltered focused run: 550/552 passed; two historical exact-structure inventory assertions still expected 83 entries and 15 authored rooms.",
+    "repair": "Verification-only commit 6c1366a expects 86/18 and explicitly requires all three commissioned room IDs. The two affected tests pass directly; both unfiltered focused and production-D rerun. All runtime/content/editor/package bytes and their task-executed gates remain unchanged.",
+    "evidence": "initial-focused.log.gz"
+  }
+]

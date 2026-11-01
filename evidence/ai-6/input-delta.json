@@ -1,0 +1,5 @@
+{
+  "tested_revision": "6c1366ac428978615cd25758c43f43cce640b23c",
+  "changed_consumers": [],
+  "note": "Delivery follows tested verification revision with docs/owner and non-legacy evidence only. Game/runtime/content/editor/gate inputs remain byte-identical to the frozen manifest."
+}

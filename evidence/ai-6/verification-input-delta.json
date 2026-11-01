@@ -1,0 +1,19 @@
+{
+  "runtime_content_editor_revision": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+  "verification_revision": "6c1366ac428978615cd25758c43f43cce640b23c",
+  "changed_inputs": [
+    {
+      "path": "tools/critical_fix_regressions/tests/test_gameplay_g17.py",
+      "before_sha256": "ec376501622c4cadeba5053cf834fe89b3cc636150dcb173b8c328fe2ad53218",
+      "after_sha256": "e75bfee498fd4eba204dc6ce02695245e402105234b1bf789458133868aa3af2"
+    },
+    {
+      "path": "tools/critical_fix_regressions/tests/test_structure_contract.py",
+      "before_sha256": "1bd9b6b69b5a8601ab12108309df0adb3c92c07728e0d03ce355c469c0676061",
+      "after_sha256": "017e67b0895c0289c3d40f155acf4a89906cff15ffe60430bfa640d00a8313bd"
+    }
+  ],
+  "implementation_consumers_unchanged": true,
+  "retained_scope": "Task-executed Workbench worker/frontend/host/build/package/native and gameplay checks; neither modified critical-fix inventory test is executed/imported by these consumers. Focused and production-D are rerun unfiltered at the verification revision.",
+  "diff": "commit 6c1366ac428978615cd25758c43f43cce640b23c\nAuthor:     Daniel <dan.gobin@gmail.com>\nAuthorDate: Sun Nov 1 16:31:21 2026 -0700\nCommit:     Daniel <dan.gobin@gmail.com>\nCommitDate: Sun Nov 1 16:31:21 2026 -0700\n\n    test(ai): account for three territorial rooms in exact structure inventory\n\ndiff --git a/tools/critical_fix_regressions/tests/test_gameplay_g17.py b/tools/critical_fix_regressions/tests/test_gameplay_g17.py\nindex 7dd6516..20de757 100644\n--- a/tools/critical_fix_regressions/tests/test_gameplay_g17.py\n+++ b/tools/critical_fix_regressions/tests/test_gameplay_g17.py\n@@ -72,7 +72,7 @@ class AuthoredCreatures(unittest.TestCase):\n         self.assertTrue(receipt['record_id'].endswith('special[0]'))\n         self.assertEqual('wood_bundle', m.floor_objects[(42, 20)][0].item_id)\n         self.assertEqual('crate', m.container_state[(43, 22)]['decor_id'])\n-        self.assertEqual(len(self.data.structure_catalog.entries), 83)  # Includes AI-1/2/3 and three AI-4 rooms.\n+        self.assertEqual(len(self.data.structure_catalog.entries), 86)  # Includes the three commissioned AI-6 rooms.\n         self.assertNotIn(self.raw['id'], self.data.layouts)\n         ordinary = copy.deepcopy(self.raw); ordinary['special_tiles'] = ordinary['special_tiles'][1:]\n         self.assertTrue(preview(ordinary, 'authored_submap', self.data)[0]['passed'])\ndiff --git a/tools/critical_fix_regressions/tests/test_structure_contract.py b/tools/critical_fix_regressions/tests/test_structure_contract.py\nindex 98e28df..d9e70ae 100644\n--- a/tools/critical_fix_regressions/tests/test_structure_contract.py\n+++ b/tools/critical_fix_regressions/tests/test_structure_contract.py\n@@ -42,9 +42,10 @@ class StructureContractTests(unittest.TestCase):\n \n     def test_complete_inventory_and_immutable_defaults(self):\n         entries=self.data.structure_catalog.entries\n-        self.assertEqual(len(entries),83)\n+        self.assertEqual(len(entries),86)\n         self.assertEqual({r:sum(e.route==r for e in entries) for r in self.data.structure_catalog.by_route},\n-                         {'ordinary_building':60,'plaza':2,'interior_entrance':6,'authored_submap':15})\n+                         {'ordinary_building':60,'plaza':2,'interior_entrance':6,'authored_submap':18})\n+        self.assertTrue({'ai6_sentinel_post','ai6_watcher_post','barrow_ward_store_b'} <= set(self.data.layouts))\n         self.assertTrue({'ai4_patient_opening','ai4_timed_opening','ai4_rival_ground'} <= set(self.data.layouts))\n         self.assertTrue({'ai1_skirmisher_room','ai1_harrier_room'} <= set(self.data.layouts))\n         self.assertTrue({'ai3_nettle_opening','ai3_drowsing_opening','ai3_rival_ground'} <= set(self.data.layouts))\n"
+}

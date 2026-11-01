@@ -1,0 +1,76 @@
+{
+  "passed": true,
+  "revision": "6c1366ac428978615cd25758c43f43cce640b23c",
+  "focused": 552,
+  "production_d": {
+    "checks": 3704,
+    "passed": 3704,
+    "failed": 0,
+    "workers": 159
+  },
+  "workers": 159,
+  "workbench": {
+    "worker": 49,
+    "frontend": 94,
+    "host": 71,
+    "startup": 15,
+    "focused": 552
+  },
+  "package": {
+    "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+    "sha256": "cbec0b5b88166aaa589fb8a2995a749eeb06cf981789cc29db94b0543954a8cd"
+  },
+  "installers": [
+    {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "7d47ac2f0cd89ec0807f01dfb469f51dc080a6efdece2e9247eb15667b8fa205",
+      "size": 28495436
+    }
+  ],
+  "scenarios": [
+    "withdrawal",
+    "sound",
+    "natural",
+    "legacy",
+    "lifecycle"
+  ],
+  "natural": {
+    "seed": 20261027,
+    "world_size": [
+      128,
+      128
+    ],
+    "selected_chunk": [
+      64,
+      115
+    ],
+    "selected_id": "submap_64_115_0",
+    "selected_seed": 587983,
+    "selected_b_count": 127,
+    "cold_consequences_equal": true
+  },
+  "sound_damage": [
+    14,
+    10
+  ],
+  "cold_comparisons": 4,
+  "current_task_executed": true,
+  "historical_pass_counts_substituted": false,
+  "retained_prior_revision_gates": [
+    "frontend",
+    "typecheck",
+    "play",
+    "ai5-play",
+    "ai3-play",
+    "host",
+    "clippy",
+    "debug-build",
+    "build",
+    "startup",
+    "desktop",
+    "native",
+    "legacy-native",
+    "worker"
+  ],
+  "runtime_content_editor_revision": "d448e7d3a760bb2b27588571ad0823b667c8007b"
+}

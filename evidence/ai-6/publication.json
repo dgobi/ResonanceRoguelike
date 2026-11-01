@@ -1,0 +1,97 @@
+{
+  "passed": true,
+  "head": "6c1366ac428978615cd25758c43f43cce640b23c",
+  "command": [
+    "git",
+    "push",
+    "--atomic",
+    "origin",
+    "refs/heads/main",
+    "refs/tags/checkpoint/ai-6-start-20261101-a",
+    "refs/tags/checkpoint/ai-6-implementation-20261101-a",
+    "refs/tags/checkpoint/ai-6-verified-input-20261101-a",
+    "refs/tags/checkpoint/ai-6-verified-input-20261101-b"
+  ],
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "To https://github.com/dgobi/ResonanceRoguelike.git\n   8597133..6c1366a  main -> main\n * [new tag]         checkpoint/ai-6-start-20261101-a -> checkpoint/ai-6-start-20261101-a\n * [new tag]         checkpoint/ai-6-implementation-20261101-a -> checkpoint/ai-6-implementation-20261101-a\n * [new tag]         checkpoint/ai-6-verified-input-20261101-a -> checkpoint/ai-6-verified-input-20261101-a\n * [new tag]         checkpoint/ai-6-verified-input-20261101-b -> checkpoint/ai-6-verified-input-20261101-b\n",
+  "utc": "2026-11-01T23:53:06.454839+00:00",
+  "expected": {
+    "refs/heads/main": "6c1366ac428978615cd25758c43f43cce640b23c",
+    "refs/tags/checkpoint/ai-6-start-20261101-a": "95bf2bed6d82845feea828dbcd204e49cabbc6e0",
+    "refs/tags/checkpoint/ai-6-start-20261101-a^{}": "859713379cfc3eaa4441bf2d42215960117c4e65",
+    "refs/tags/checkpoint/ai-6-implementation-20261101-a": "8b72562661220bcec2343ac1ad51d61a5125c934",
+    "refs/tags/checkpoint/ai-6-implementation-20261101-a^{}": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+    "refs/tags/checkpoint/ai-6-verified-input-20261101-a": "ac15e5e65f3927555617fcaf0f9d7bff1ac545a0",
+    "refs/tags/checkpoint/ai-6-verified-input-20261101-a^{}": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+    "refs/tags/checkpoint/ai-6-verified-input-20261101-b": "bc97b5deb365d8e9b6b37f3c8b3da44ea8fb6655",
+    "refs/tags/checkpoint/ai-6-verified-input-20261101-b^{}": "6c1366ac428978615cd25758c43f43cce640b23c"
+  },
+  "remote": {
+    "refs/heads/main": "6c1366ac428978615cd25758c43f43cce640b23c",
+    "refs/tags/checkpoint/ai-6-implementation-20261101-a": "8b72562661220bcec2343ac1ad51d61a5125c934",
+    "refs/tags/checkpoint/ai-6-implementation-20261101-a^{}": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+    "refs/tags/checkpoint/ai-6-start-20261101-a": "95bf2bed6d82845feea828dbcd204e49cabbc6e0",
+    "refs/tags/checkpoint/ai-6-start-20261101-a^{}": "859713379cfc3eaa4441bf2d42215960117c4e65",
+    "refs/tags/checkpoint/ai-6-verified-input-20261101-a": "ac15e5e65f3927555617fcaf0f9d7bff1ac545a0",
+    "refs/tags/checkpoint/ai-6-verified-input-20261101-a^{}": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+    "refs/tags/checkpoint/ai-6-verified-input-20261101-b": "bc97b5deb365d8e9b6b37f3c8b3da44ea8fb6655",
+    "refs/tags/checkpoint/ai-6-verified-input-20261101-b^{}": "6c1366ac428978615cd25758c43f43cce640b23c"
+  },
+  "checks": [
+    {
+      "ref": "refs/heads/main",
+      "expected": "6c1366ac428978615cd25758c43f43cce640b23c",
+      "actual": "6c1366ac428978615cd25758c43f43cce640b23c",
+      "equal": true
+    },
+    {
+      "ref": "refs/tags/checkpoint/ai-6-start-20261101-a",
+      "expected": "95bf2bed6d82845feea828dbcd204e49cabbc6e0",
+      "actual": "95bf2bed6d82845feea828dbcd204e49cabbc6e0",
+      "equal": true
+    },
+    {
+      "ref": "refs/tags/checkpoint/ai-6-start-20261101-a^{}",
+      "expected": "859713379cfc3eaa4441bf2d42215960117c4e65",
+      "actual": "859713379cfc3eaa4441bf2d42215960117c4e65",
+      "equal": true
+    },
+    {
+      "ref": "refs/tags/checkpoint/ai-6-implementation-20261101-a",
+      "expected": "8b72562661220bcec2343ac1ad51d61a5125c934",
+      "actual": "8b72562661220bcec2343ac1ad51d61a5125c934",
+      "equal": true
+    },
+    {
+      "ref": "refs/tags/checkpoint/ai-6-implementation-20261101-a^{}",
+      "expected": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+      "actual": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+      "equal": true
+    },
+    {
+      "ref": "refs/tags/checkpoint/ai-6-verified-input-20261101-a",
+      "expected": "ac15e5e65f3927555617fcaf0f9d7bff1ac545a0",
+      "actual": "ac15e5e65f3927555617fcaf0f9d7bff1ac545a0",
+      "equal": true
+    },
+    {
+      "ref": "refs/tags/checkpoint/ai-6-verified-input-20261101-a^{}",
+      "expected": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+      "actual": "d448e7d3a760bb2b27588571ad0823b667c8007b",
+      "equal": true
+    },
+    {
+      "ref": "refs/tags/checkpoint/ai-6-verified-input-20261101-b",
+      "expected": "bc97b5deb365d8e9b6b37f3c8b3da44ea8fb6655",
+      "actual": "bc97b5deb365d8e9b6b37f3c8b3da44ea8fb6655",
+      "equal": true
+    },
+    {
+      "ref": "refs/tags/checkpoint/ai-6-verified-input-20261101-b^{}",
+      "expected": "6c1366ac428978615cd25758c43f43cce640b23c",
+      "actual": "6c1366ac428978615cd25758c43f43cce640b23c",
+      "equal": true
+    }
+  ]
+}
