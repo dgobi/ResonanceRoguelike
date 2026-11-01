@@ -718,8 +718,8 @@ def _monster_attack_entity(monster, target, engine) -> bool:
 def _monster_attack_result(monster, target, engine, *, defensive=False) -> MonsterAttackResult:
     """
     Resolve a monster attack using the full combat system.
-    Called from AI._attack() when engine is available. True means a committed
-    attempt (including a miss/dodge/invincibility), never merely a callback.
+    Reports commitment separately from authoritative contact. The legacy wrapper
+    projects only committed, including misses/dodges/invincibility shortcuts.
     """
     from engine.combat import resolve_attack
     import random as _random

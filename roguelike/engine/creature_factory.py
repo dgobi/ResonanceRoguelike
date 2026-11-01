@@ -50,6 +50,16 @@ class CreatureFactory:
             return None
 
         rng = rng or random.Random()
+        ai_type = defn.get('ai_type', 'wandering')
+        profile = None
+        if saved_composite_profile is not None:
+            from engine.ai_profiles import validate_binding, saved_profile
+            validate_binding(defn)
+            profile = saved_profile(saved_composite_profile)
+        elif ai_type == 'composite':
+            profile = effective_profile(defn)
+        elif 'ai_profile' in defn:
+            raise ValueError(f"Creature {creature_id!r}: ai_profile requires registered ai_type composite")
 
         actor = Actor(
             x    = x,
@@ -85,16 +95,10 @@ class CreatureFactory:
             )
 
         # AI component
-        ai_type    = defn.get("ai_type", "wandering")
-        if saved_composite_profile is None and 'ai_profile' in defn and ai_type != 'composite':
-            raise ValueError(f"Creature {creature_id!r}: ai_profile requires registered ai_type composite")
         ai_class   = AI_TYPES.get(ai_type, WanderingAI)
         wander_r   = defn.get("wander_radius", 8)
-        if saved_composite_profile is not None:
-            from engine.ai_profiles import saved_profile
-            actor.ai = CompositeAI(wander_radius=wander_r, profile=saved_profile(saved_composite_profile))
-        elif ai_type == 'composite':
-            actor.ai = CompositeAI(wander_radius=wander_r, profile=effective_profile(defn))
+        if profile is not None:
+            actor.ai = CompositeAI(wander_radius=wander_r, profile=profile)
         else:
             actor.ai = ai_class(wander_radius=wander_r)
         actor.ai.set_home(x, y)

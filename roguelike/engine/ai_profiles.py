@@ -10,9 +10,28 @@ BOUNDS = {'retreat_distance': (2, 8), 'hold_opportunities': (0, 12),
 PROFILE_FIELDS = list(DEFAULTS)
 
 
+def validate_binding(raw):
+    """The registered consumer requires an ordinary melee Actor definition.
+
+    A saved behavioural profile can outlive same-ID profile tuning, but cannot
+    turn a player, NPC, configuration or special-bound definition into its host.
+    Unrelated metadata and legacy definitions without this opt-in stay untouched.
+    """
+    from engine.creature_abilities import ABILITY_REGISTRY
+    identifier = raw.get('id')
+    if (not isinstance(identifier, str) or not identifier or identifier.casefold() == 'player'
+            or identifier in ABILITY_REGISTRY
+            or not isinstance(raw.get('fighter'), dict)
+            or not isinstance(raw.get('perception'), dict) or not raw['perception']
+            or any(k in raw for k in ('npc','dialogue','is_player','spawn_trigger','ranged_attack','abilities','effects','statuses'))):
+        raise ValueError('composite: binding requires an ordinary melee Actor with fighter/perception; player, NPC, ranged and ID-bound special hosts are unsupported')
+
+
 def effective_profile(raw):
     """Validate without coercion; definition pursuit_timeout is the evidence clock."""
     p = raw.get('ai_profile')
+    if 'id' in raw:
+        validate_binding(raw)
     if not isinstance(p, dict):
         raise ValueError('ai_profile: composite requires an embedded version-1 profile')
     unknown = set(p) - set(DEFAULTS)
@@ -69,8 +88,8 @@ def validate_saved(row, local_map=None):
             raise ValueError('composite: discriminator must be CompositeAI')
         return
     from engine.creature_abilities import ABILITY_REGISTRY
-    if isinstance(row.get('id'), str) and row['id'] in ABILITY_REGISTRY:
-        raise ValueError('composite: saved binding cannot acquire an ID-bound special ability')
+    if isinstance(row.get('id'), str) and (row['id'].casefold() == 'player' or row['id'] in ABILITY_REGISTRY):
+        raise ValueError('composite: saved binding cannot acquire player or ID-bound special behavior')
     if not isinstance(composite, dict) or set(composite) != {'profile', 'state'}:
         raise ValueError('composite: profile and tactical state required')
     p = saved_profile(composite['profile'])

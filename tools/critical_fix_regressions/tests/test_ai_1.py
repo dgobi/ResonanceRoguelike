@@ -314,6 +314,7 @@ class StrikeWithdrawTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'profile'):_validate_entities([bad],self.e.data)
         for mutate in (lambda r:r.pop('composite'),lambda r:r.update(ai_type='WanderingAI'),
                        lambda r:r.update(id='plague_crow'),lambda r:r.update(id='stone_lurker'),
+                       lambda r:r.update(id='player'),lambda r:r.update(id='vine_network'),
                        lambda r:r['composite']['state'].update(phase='hold',target=None),
                        lambda r:r['composite']['state'].update(withdraw_left=True)):
             bad=copy.deepcopy(row);mutate(bad)
@@ -321,6 +322,14 @@ class StrikeWithdrawTests(unittest.TestCase):
         with self.assertRaises(ValueError):_validate_transfer_actor(row)
         legacy=self.e.creature_factory.spawn('heath_stalker',16,16)
         self.assertNotIn('composite',_serialize_entity(legacy))
+
+    def test_fresh_composite_rejects_unsupported_actor_shapes_before_construction(self):
+        a=self.actor();raw=copy.deepcopy(self.e.data.entities[a._creature_id])
+        for field,value in (('fighter',None),('perception',{}),('npc',{}),('ranged_attack',{})):
+            candidate=copy.deepcopy(raw);candidate[field]=value
+            self.e.data.entities['ai1_invalid_binding']={**candidate,'id':'ai1_invalid_binding'}
+            with self.assertRaisesRegex(ValueError,'composite.*binding'):
+                self.e.creature_factory.spawn('ai1_invalid_binding',25,25)
 
     def test_successful_scene_departure_only_cancels_and_never_transfers(self):
         e=self.e;a=self.actor();self.strike(a);before=_serialize_entity(a)

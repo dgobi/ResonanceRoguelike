@@ -1171,6 +1171,9 @@ def _validate_entities(rows, data, local_map=None) -> None:
         identity = row.get("id")
         if not isinstance(identity, str) or identity not in data.entities:
             raise SaveFormatError(f"Actor row {index}: invalid stable creature identity {identity!r}")
+        if row.get('ai_type') == 'CompositeAI':
+            from engine.ai_profiles import validate_binding
+            validate_binding(data.entities[identity])
         if row.get('ai_type') != 'CompositeAI' and data.entities[identity].get('ai_type') == 'composite':
             raise SaveFormatError(f"Actor row {index} ({identity}): legacy instance cannot bind a composite definition; use a new creature ID")
         validate_actor_runtime(row, local_map)
