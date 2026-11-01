@@ -24,6 +24,9 @@ class CompositeAI(AI):
         self.last_cancellation = None
         self.hunt = None  # v4 only in saved state; ordinary sight memory stays exact
         self.hunt_evidence = None  # diagnostic only; never authorizes a later action
+        if self.profile['recipe'] == 'territorial_guard':
+            from components.territorial import initialize
+            initialize(self)
         if self.profile['recipe'] == 'observation_averse':
             from components.observation_averse import initialize
             initialize(self)
@@ -36,6 +39,8 @@ class CompositeAI(AI):
                 'no_progress', 'best_distance', 'suppressed', 'route_blocked', 'opportunities')
         if self.profile['recipe'] == 'patient_venom_hunt':
             keys += ('hunt',)
+        if self.profile['recipe'] == 'territorial_guard':
+            keys += ('territory',)
         if self.withdrawal_told:
             keys += ('withdrawal_told',)
         return dict(profile=copy.deepcopy(self.profile), state={k: copy.deepcopy(getattr(self, k)) for k in keys})
@@ -44,6 +49,9 @@ class CompositeAI(AI):
         from engine.local_rivals import retire_player
         from engine.sound import clear_interest
         interest = self.sound_interest if keep_sound else None
+        if self.profile['recipe'] == 'territorial_guard':
+            from components.territorial import retire
+            retire(self, actor, reason)
         self.phase, self.target = 'idle', None
         self.hunt = None
         self.withdraw_left = self.hold_left = self.approach_left = self.no_progress = 0
@@ -131,6 +139,9 @@ class CompositeAI(AI):
         This never acquires prey, selects an action or spends tactical counters.
         Current sight may refresh a retained trail; recovery/holding alone cannot.
         """
+        if self.profile['recipe'] == 'territorial_guard':
+            from components.territorial import refresh
+            return refresh(self, engine, actor, ambient_light)
         target = self.resolve_target(engine, actor)
         if target is None:
             return
@@ -155,6 +166,10 @@ class CompositeAI(AI):
         occupied = {(a.x, a.y) for a in engine.entities if a is not actor and getattr(a, 'blocks_movement', False)}
         cdef = engine.data.entities.get(actor._creature_id, {})
         def legal(a, b):
+            if self.profile['recipe'] == 'territorial_guard':
+                from components.territorial import permits
+                if not permits(self, a, b):
+                    return False
             return (m.in_bounds(*b) and b not in occupied and b not in forbidden and melee_contact(m, *a, *b)
                     and not engine._decor_blocks_movement(*b)
                     and (engine.data.terrain.get(str(m.tiles[b]['terrain']), {}).get('creature_passable', True) or cdef.get('can_swim', False)))
@@ -210,6 +225,9 @@ class CompositeAI(AI):
                                    reason='numbing_venom_paralysis', result=None))
             self.trace = self.trace[-16:]
             return
+        if self.profile['recipe'] == 'territorial_guard':
+            from components.territorial import take_turn
+            return take_turn(self, actor, engine, ambient_light)
         if self.profile['recipe'] == 'observation_averse':
             from components.observation_averse import take_turn
             return take_turn(self, actor, engine, ambient_light)
@@ -248,112 +266,7 @@ class CompositeAI(AI):
                 self.no_progress, self.best_distance = 0, None
         if self.target is not None:
             clear_interest(self)
-            tx, ty = self.target['x'], self.target['y']
-            distance = lambda x,y: max(abs(x-tx), abs(y-ty))
-            far = lambda x,y: distance(x,y) >= self.profile['retreat_distance']
-            seen = target in observed
-            if self.phase == 'withdraw' and far(actor.x, actor.y):
-                self.phase = 'monitor' if gated else ('hold' if self.hold_left else 'return')
-            if self.phase == 'cornered':
-                step, _ = self._route(engine, actor, far)
-                usable = bool(step)  # temporary paralysis is never route failure
-                if usable and self.route_blocked and not patient:
-                    # A newly useful route is the only same-encounter rearm.
-                    self.phase = 'withdraw'
-                    self.withdraw_left = self.profile['withdrawal_budget']
-                    self.hold_left = self.profile['hold_opportunities']
-                    self.route_blocked = False
-                elif not usable:
-                    self.route_blocked = True
-            if self.phase in ('withdraw', 'hold'):
-                hold = self.phase == 'hold'
-                if hold:
-                    self.hold_left -= 1
-                if not far(actor.x, actor.y) and movement_denial(actor):
-                    action, reason = 'wait', movement_denial(actor)
-                elif not far(actor.x, actor.y):
-                    self.withdraw_left = max(0, self.withdraw_left-1)
-                    step, _ = self._route(engine, actor, far)
-                    moved = self._move(engine, actor, step)
-                    action, reason = ('move' if moved else 'wait'), 'holding_reposition' if hold else 'withdrawal'
-                    if moved and not hold and not self.withdrawal_told:
-                        self._tell(engine, actor, 'skitters away with a chittering whine' if self.profile['capability'] == 'numbing_melee' else 'draws away', current_vision=True)
-                        self.withdrawal_told = True
-                    if patient and not step:
-                        contacts = [a for a in observed if melee_attack_legal(local_map, actor, a)]
-                        if contacts:
-                            result = _monster_attack_result(actor, contacts[0], engine, defensive=True)
-                            action, reason = 'melee', 'cornered_defensive'
-                    if not far(actor.x, actor.y) and self.withdraw_left == 0:
-                        if patient:
-                            self._retire_target(actor, 'withdrawal_exhausted')
-                        else:
-                            self.phase = 'cornered'
-                            self.route_blocked = not bool(step)
-                        reason = 'withdrawal_exhausted'
-                    elif not hold and far(actor.x, actor.y):
-                        self.phase = 'monitor' if gated else ('hold' if self.hold_left else 'return')
-                else:
-                    reason = 'holding_distance'
-                if hold and self.hold_left == 0 and self.phase == 'hold':
-                    self.phase, self.approach_left = 'return', 32
-                    self.no_progress, self.best_distance = 0, None
-            elif self.phase == 'monitor':
-                from components.patient_hunt import monitor
-                action, reason, result = monitor(self, engine, actor, target, observed, ambient_light)
-            elif self.phase == 'cornered':
-                contacts = [a for a in observed if melee_attack_legal(local_map, actor, a)]
-                defender = target if seen and target in contacts else (contacts[0] if contacts else None)
-                if defender:
-                    result = _monster_attack_result(actor, defender, engine, defensive=True)
-                    action, reason = 'melee', 'cornered_defensive'
-                else:
-                    self.suppressed = self._key(engine, target)
-                    self.cancel(actor, 'cornered_abandon')
-                    reason = 'cornered_abandon'
-            elif seen and melee_attack_legal(local_map, actor, target):
-                returning = patient and self.hunt is not None
-                result = _monster_attack_result(actor, target, engine)
-                action, reason = 'melee', 'engage'
-                if result.target_dead:
-                    self.cancel(actor, 'target_dead')
-                elif returning and self.profile['return_policy'] == 'after_hold' and result.committed:
-                    self._retire_target(actor, 'timed_return_complete')
-                elif result.committed and (bool(result.application and result.application.accepted)
-                        if self.profile['trigger'] == 'accepted_application' else
-                        (self.profile['trigger'] == 'committed_attack' or result.hit)) and not returning:
-                    if patient and self.hunt is None:
-                        from components.patient_hunt import bind
-                        bind(self, engine, result.application)
-                    self.phase = 'withdraw'
-                    self.withdraw_left = self.profile['withdrawal_budget']
-                    self.hold_left = self.profile['hold_opportunities']
-                    self.approach_left, self.no_progress, self.best_distance = 32, 0, None
-                    self.withdrawal_told = False
-            else:
-                if not seen and (actor.x, actor.y) == (tx, ty):
-                    self.cancel(actor, 'empty_trail')
-                    reason = 'empty_trail'
-                elif movement_denial(actor):
-                    action, reason = 'wait', movement_denial(actor)
-                else:
-                    self.approach_left = max(0, self.approach_left-1)
-                    goal = (lambda x,y: melee_contact(local_map,x,y,tx,ty)) if seen else (lambda x,y: (x,y)==(tx,ty))
-                    step, length = self._route(engine, actor, goal)
-                    progress = length is not None and (self.best_distance is None or length < self.best_distance)
-                    self.no_progress = 0 if progress else min(8, self.no_progress+1)
-                    if length is not None:
-                        self.best_distance = length
-                    if self.approach_left == 0 or self.no_progress >= 8:
-                        self.suppressed = self._key(engine, target)
-                        self.cancel(actor, 'approach_exhausted')
-                        reason = 'approach_exhausted'
-                    else:
-                        action = 'move' if self._move(engine, actor, step) else 'wait'
-                        reason = 'approach' if seen else 'last_seen_search'
-                        if not seen and (actor.x, actor.y) == (tx, ty):
-                            self.cancel(actor, 'empty_trail')
-                            reason = 'empty_trail'
+            action, reason, result = self._engage(engine, actor, target, observed, patient=patient, gated=gated, ambient_light=ambient_light)
         else:
             interest = current_interest(self, engine.world_time.turn)
             if patient and self.suppressed:
@@ -380,3 +293,115 @@ class CompositeAI(AI):
                                phase_before=before, phase=self.phase, action=action, reason=reason,
                                result=asdict(result) if result else None))
         self.trace = self.trace[-16:]
+
+    def _engage(self, engine, actor, target, observed, *, patient=False, gated=False, ambient_light=None):
+        local_map = engine.local_map
+        from engine.venom import movement_denial
+        action, reason, result = 'wait', 'engagement', None
+        tx, ty = self.target['x'], self.target['y']
+        distance = lambda x,y: max(abs(x-tx), abs(y-ty))
+        far = lambda x,y: distance(x,y) >= self.profile['retreat_distance']
+        seen = target in observed
+        if self.phase == 'withdraw' and far(actor.x, actor.y):
+            self.phase = 'monitor' if gated else ('hold' if self.hold_left else 'return')
+        if self.phase == 'cornered':
+            step, _ = self._route(engine, actor, far)
+            usable = bool(step)  # temporary paralysis is never route failure
+            if usable and self.route_blocked and not patient:
+                # A newly useful route is the only same-encounter rearm.
+                self.phase = 'withdraw'
+                self.withdraw_left = self.profile['withdrawal_budget']
+                self.hold_left = self.profile['hold_opportunities']
+                self.route_blocked = False
+            elif not usable:
+                self.route_blocked = True
+        if self.phase in ('withdraw', 'hold'):
+            hold = self.phase == 'hold'
+            if hold:
+                self.hold_left -= 1
+            if not far(actor.x, actor.y) and movement_denial(actor):
+                action, reason = 'wait', movement_denial(actor)
+            elif not far(actor.x, actor.y):
+                self.withdraw_left = max(0, self.withdraw_left-1)
+                step, _ = self._route(engine, actor, far)
+                moved = self._move(engine, actor, step)
+                action, reason = ('move' if moved else 'wait'), 'holding_reposition' if hold else 'withdrawal'
+                if moved and not hold and not self.withdrawal_told:
+                    self._tell(engine, actor, 'skitters away with a chittering whine' if self.profile['capability'] == 'numbing_melee' else 'draws away', current_vision=True)
+                    self.withdrawal_told = True
+                if patient and not step:
+                    contacts = [a for a in observed if melee_attack_legal(local_map, actor, a)]
+                    if contacts:
+                        result = _monster_attack_result(actor, contacts[0], engine, defensive=True)
+                        action, reason = 'melee', 'cornered_defensive'
+                if not far(actor.x, actor.y) and self.withdraw_left == 0:
+                    if patient:
+                        self._retire_target(actor, 'withdrawal_exhausted')
+                    else:
+                        self.phase = 'cornered'
+                        self.route_blocked = not bool(step)
+                    reason = 'withdrawal_exhausted'
+                elif not hold and far(actor.x, actor.y):
+                    self.phase = 'monitor' if gated else ('hold' if self.hold_left else 'return')
+            else:
+                reason = 'holding_distance'
+            if hold and self.hold_left == 0 and self.phase == 'hold':
+                self.phase, self.approach_left = 'return', 32
+                self.no_progress, self.best_distance = 0, None
+        elif self.phase == 'monitor':
+            from components.patient_hunt import monitor
+            action, reason, result = monitor(self, engine, actor, target, observed, ambient_light)
+        elif self.phase == 'cornered':
+            contacts = [a for a in observed if melee_attack_legal(local_map, actor, a)]
+            defender = target if seen and target in contacts else (contacts[0] if contacts else None)
+            if defender:
+                result = _monster_attack_result(actor, defender, engine, defensive=True)
+                action, reason = 'melee', 'cornered_defensive'
+            else:
+                self.suppressed = self._key(engine, target)
+                self.cancel(actor, 'cornered_abandon')
+                reason = 'cornered_abandon'
+        elif seen and melee_attack_legal(local_map, actor, target):
+            returning = patient and self.hunt is not None
+            result = _monster_attack_result(actor, target, engine)
+            action, reason = 'melee', 'engage'
+            if result.target_dead:
+                self.cancel(actor, 'target_dead')
+            elif returning and self.profile['return_policy'] == 'after_hold' and result.committed:
+                self._retire_target(actor, 'timed_return_complete')
+            elif self.profile.get('engagement') != 'direct_melee' and result.committed and (bool(result.application and result.application.accepted)
+                    if self.profile['trigger'] == 'accepted_application' else
+                    (self.profile['trigger'] == 'committed_attack' or result.hit)) and not returning:
+                if patient and self.hunt is None:
+                    from components.patient_hunt import bind
+                    bind(self, engine, result.application)
+                self.phase = 'withdraw'
+                self.withdraw_left = self.profile['withdrawal_budget']
+                self.hold_left = self.profile['hold_opportunities']
+                self.approach_left, self.no_progress, self.best_distance = 32, 0, None
+                self.withdrawal_told = False
+        else:
+            if not seen and (actor.x, actor.y) == (tx, ty):
+                self.cancel(actor, 'empty_trail')
+                reason = 'empty_trail'
+            elif movement_denial(actor):
+                action, reason = 'wait', movement_denial(actor)
+            else:
+                self.approach_left = max(0, self.approach_left-1)
+                goal = (lambda x,y: melee_contact(local_map,x,y,tx,ty)) if seen else (lambda x,y: (x,y)==(tx,ty))
+                step, length = self._route(engine, actor, goal)
+                progress = length is not None and (self.best_distance is None or length < self.best_distance)
+                self.no_progress = 0 if progress else min(8, self.no_progress+1)
+                if length is not None:
+                    self.best_distance = length
+                if self.approach_left == 0 or self.no_progress >= 8:
+                    self.suppressed = self._key(engine, target)
+                    self.cancel(actor, 'approach_exhausted')
+                    reason = 'approach_exhausted'
+                else:
+                    action = 'move' if self._move(engine, actor, step) else 'wait'
+                    reason = 'approach' if seen else 'last_seen_search'
+                    if not seen and (actor.x, actor.y) == (tx, ty):
+                        self.cancel(actor, 'empty_trail')
+                        reason = 'empty_trail'
+        return action, reason, result

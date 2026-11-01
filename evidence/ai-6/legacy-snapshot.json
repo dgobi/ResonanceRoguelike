@@ -1,0 +1,184 @@
+{
+  "actor": {
+    "type": "actor",
+    "composite": {
+      "profile": {
+        "version": 4,
+        "recipe": "patient_venom_hunt",
+        "capability": "numbing_melee",
+        "trigger": "accepted_application",
+        "retreat_distance": 2,
+        "hold_opportunities": 3,
+        "withdrawal_budget": 6,
+        "cornered": "defensive_melee",
+        "scene_scope": "active_scene",
+        "effect": "numbing_venom",
+        "warning_phases": 3,
+        "paralysis_phases": 3,
+        "recovery_phases": 4,
+        "return_policy": "observed_paralysis",
+        "pursuit_timeout": 20
+      },
+      "state": {
+        "phase": "withdraw",
+        "target": {
+          "role": "player",
+          "id": null,
+          "owner": "0,0/room-test-instance",
+          "x": 39,
+          "y": 21,
+          "seen": 484,
+          "deadline": 504,
+          "provenance": "sight"
+        },
+        "withdraw_left": 6,
+        "hold_left": 3,
+        "approach_left": 32,
+        "no_progress": 0,
+        "best_distance": null,
+        "suppressed": null,
+        "route_blocked": false,
+        "opportunities": 4,
+        "hunt": {
+          "version": 1,
+          "application_id": "1bef201db731452cacb18ba9feca9f65",
+          "source_id": "0,0/room-test-instance:00000001",
+          "owner": "0,0/room-test-instance",
+          "delivery_phase": 484,
+          "first_observation_phase": 488,
+          "last_useful_phase": 490
+        }
+      }
+    },
+    "individual_id": "0,0/room-test-instance:00000001",
+    "id": "patient_amber_hunter",
+    "x": 40,
+    "y": 21,
+    "tile": "amber_sting_beetle",
+    "name": "Amber Shell Hunter",
+    "is_alive": true,
+    "blocks_movement": true,
+    "fighter": {
+      "hp": 16,
+      "max_hp": 16,
+      "power": 4,
+      "defense": 1,
+      "body_id": "body_human",
+      "effective_av": 2
+    },
+    "component_state": {
+      "version": 1,
+      "actor": {
+        "chilled_turns": 0,
+        "_sickness_turns": 0,
+        "_last_known_px": null,
+        "_last_known_py": null,
+        "_arrival_cooldown": 0,
+        "_just_arrived": false,
+        "_pending_stair_use": null,
+        "_ability_suppressed_turns": 0,
+        "_disrupted_turns": 0,
+        "_wraith_exposure_turns": 0,
+        "_surface_exit_x": null,
+        "_surface_exit_y": null,
+        "_surface_exit_wx": null,
+        "_surface_exit_wy": null
+      },
+      "ai": {
+        "target_x": null,
+        "target_y": null,
+        "memory_turns": 0,
+        "alert_memory": 10
+      }
+    },
+    "ai_type": "CompositeAI",
+    "ai_state": "wandering",
+    "home_x": 42,
+    "home_y": 21,
+    "pursuit_turns_without_contact": 0,
+    "move_accumulator": 0.0,
+    "faction": "stalker",
+    "hostile_to": [
+      "player",
+      "outlaw"
+    ],
+    "sight_radius": 12,
+    "hearing_radius": 6,
+    "sees_in_dark": false,
+    "wander_radius": 14,
+    "lurker": null
+  },
+  "turn": 484,
+  "world": {
+    "width": 1,
+    "height": 1,
+    "seed": 20261027,
+    "generation_revision": "legacy-unversioned",
+    "plan_mode": "legacy",
+    "plan": null,
+    "surface_schema": 0,
+    "surface_policy": null,
+    "vukh_x": 0,
+    "vukh_y": 0,
+    "start_wx": 0,
+    "start_wy": 0,
+    "capital_chunks": [],
+    "town_chunks": [],
+    "road_tiles": [],
+    "chunks": {
+      "0,0": {
+        "region_type": "plains",
+        "seed": 20261027,
+        "explored": true,
+        "visited": true,
+        "generation_revision": null,
+        "is_locus": false,
+        "zones": [],
+        "name": "",
+        "name_register": "common",
+        "town_id": -1,
+        "town_role": "",
+        "biome_id": "plains",
+        "elevation": 0.5,
+        "moisture": 0.5,
+        "resonance": 0.1,
+        "difficulty": 0.1,
+        "distance_from_peak": 999.0,
+        "is_river": false,
+        "is_capital": false,
+        "river_connections": [],
+        "edges": {
+          "north": [],
+          "south": [],
+          "east": [],
+          "west": []
+        },
+        "town_data": null,
+        "submaps": [
+          {
+            "submap_id": "room-test-instance",
+            "submap_type": "cave",
+            "name": "Disposable Workbench room",
+            "seed": 20261027,
+            "layout_id": "ai4_patient_opening",
+            "generated": true,
+            "entry_x": 39,
+            "entry_y": 21,
+            "surface_x": 12,
+            "surface_y": 12,
+            "depth": 1
+          }
+        ]
+      }
+    },
+    "myth": null,
+    "town_groups": {},
+    "town_chunk_ids": [],
+    "chunk_names": []
+  },
+  "config": {
+    "seed": 20261027,
+    "room_path": "roguelike/data/layouts/ai4_patient_opening.json",
+    "session_id": "ai6-prechange"
+  }
+}

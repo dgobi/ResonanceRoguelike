@@ -364,3 +364,10 @@ Amber Sting Beetle seed supplies protected insect anatomy/art for new-ID
 variants. [Patient venom hunting](PATIENT_VENOM_AI.md) defines timing, lawful
 information, saved commitment, defensive fallback and the three saved rooms.
 Existing v1/v2/v3 definitions and saves are retained; populations remain explicit.
+
+## AI-6: fixed territorial posts
+
+Version-5 **Fixed territorial post** combines an original scene placement with
+**Direct melee** or **Strike and withdraw**. [Territorial AI](TERRITORIAL_AI.md)
+defines spatial/evidence clocks, inactive fields, strict authoring choices,
+finite return/blockage, persistence, matched examples and the new ward store.

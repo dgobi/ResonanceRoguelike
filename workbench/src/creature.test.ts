@@ -91,4 +91,15 @@ describe("ordinary creature exact draft", () => {
     expect(history.undo(changed)).toBe(next);expect(history.redo(next)).toBe(changed);
     const a=JSON.parse(next),b=JSON.parse(source);delete a.ai_profile;expect(a).toEqual(b);
   });
+  it('selects a fixed post and atomically restores inactive direct-melee defaults',()=>{
+    const defaults={version:5,recipe:'territorial_guard',engagement:'direct_melee',trigger:'hit',retreat_distance:2,hold_opportunities:1,withdrawal_budget:6,defended_radius:4,excursion_radius:6,pursuit_budget:32};
+    const post=creatureValue(source,'ai_profile.recipe','territorial_guard',defaults);
+    const withdraw=creatureValue(creatureValue(post,'ai_profile.engagement','strike_and_withdraw'),'ai_profile.hold_opportunities',3);
+    const direct=creatureValue(withdraw,'ai_profile.engagement','direct_melee',defaults);
+    expect(JSON.parse(direct).ai_profile).toEqual(defaults);
+    const history=new CanvasHistory();history.record(withdraw,direct,'Engagement');expect(history.undo(direct)).toBe(withdraw);
+    const tuned=creatureValue(post,'ai_profile.defended_radius',3);
+    expect(tuned).toBe(post.replace('"defended_radius":4','"defended_radius":3'));
+    expect(()=>creatureValue(post,'ai_profile.anchor_x',4)).toThrow('Read-only');
+  });
 });

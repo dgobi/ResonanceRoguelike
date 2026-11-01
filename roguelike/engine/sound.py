@@ -95,6 +95,14 @@ def emit(engine, x, y, kind, *, maker=None):
     for actor, budget in listeners:
         ai = actor.ai
         old = current_interest(ai, turn)
+        if getattr(ai, 'profile', {}).get('recipe') == 'territorial_guard':
+            from components.territorial import distance
+            t = ai.territory
+            anchor = t['anchor'] or [ai.home_x, ai.home_y]
+            if (t['phase'] in ('return', 'blocked')
+                    or distance(anchor, x, y) > ai.profile['defended_radius']):
+                clear_interest(ai)
+                continue
         # Actual player trails always win. Ignored events cannot wait behind
         # genuine pursuit or refresh its memory. Sight is rechecked at decision.
         if (getattr(actor, '_last_known_px', None) is not None

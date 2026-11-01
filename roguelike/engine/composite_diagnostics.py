@@ -14,6 +14,8 @@ def inspect(engine):
                 turn=engine.world_time.turn, total=len(actors), truncated=len(actors)>16,
                 actors=[dict(id=a._creature_id, individual_id=getattr(a, '_individual_id', None),
                              position=[a.x,a.y], profile=copy.deepcopy(a.ai.profile),
+                             original_home=[a.ai.home_x,a.ai.home_y],
+                             objective=copy.deepcopy(getattr(a.ai,'territory',None)),
                              condition=inspect_venom(a),
                              hunt_observation=copy.deepcopy(a.ai.hunt_evidence),
                              hunt_information='Own delivery provenance and timing are internal; only current direct sight supplies a symptom. Inspection does not refresh either.',

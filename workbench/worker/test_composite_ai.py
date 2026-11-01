@@ -9,6 +9,20 @@ SOURCE=BASE+'hollow_revenant.json'
 
 
 class CompositeAuthoringTests(unittest.TestCase):
+    def test_territorial_profile_two_engagements_strict_bounds_and_host_authority(self):
+        raw=self.draft();raw['ai_profile']={'version':5,'recipe':'territorial_guard'}
+        for engagement in ('direct_melee','strike_and_withdraw'):
+            raw['ai_profile']['engagement']=engagement
+            r=self.validate(raw);self.assertTrue(r['valid'],r['diagnostics'])
+            p=r['family']['context']['records'][0]['factory']['instance']['effective_ai_profile']
+            self.assertEqual((4,6,32,engagement),tuple(p[k] for k in ('defended_radius','excursion_radius','pursuit_budget','engagement')))
+        for field,value in [('defended_radius',True),('defended_radius',6),('excursion_radius',4),('excursion_radius',9),('engagement','venom'),('scene_scope','world'),('pursuit_budget',0)]:
+            bad=copy.deepcopy(raw);bad['ai_profile'][field]=value
+            self.assertFalse(self.validate(bad)['valid'],(field,value))
+        raw['ai_profile'].update(engagement='direct_melee',hold_opportunities=3)
+        self.assertFalse(self.validate(raw)['valid'])
+        raw['ai_profile']['engagement']='strike_and_withdraw';self.assertTrue(self.validate(raw)['valid'])
+
     def draft(self):
         raw=json.loads((ROOT/SOURCE).read_bytes())
         raw.update(id='ai1_contract_variant',ai_type='composite',ai_profile={'version':1,'recipe':'strike_and_withdraw'},

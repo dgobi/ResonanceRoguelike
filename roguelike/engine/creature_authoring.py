@@ -17,7 +17,7 @@ from generation.structure_contract import read_document, StructureError
 from rendering.tile_registry import TileRegistry
 from engine.harvesting import profile_errors, construct_output, RULES
 from engine.item_factory import ItemFactory
-from engine.ai_profiles import DEFAULTS as PROFILE_DEFAULTS, BOUNDS as PROFILE_BOUNDS, effective_profile, RECIPES, OBSERVATION_BOUNDS, VENOM_BOUNDS
+from engine.ai_profiles import DEFAULTS as PROFILE_DEFAULTS, BOUNDS as PROFILE_BOUNDS, effective_profile, RECIPES, OBSERVATION_BOUNDS, VENOM_BOUNDS, TERRITORY_BOUNDS
 
 CONTRACT = "creature-composite-7"
 RELATIONSHIP_FIELDS = ['perception.faction', 'perception.hostile_to', 'numbing_venom_trait']
@@ -110,7 +110,7 @@ def capability(raw, path, pointer=""):
                 harvest_editable=harvest, harvest_rules=RULES,
                 harvest_reason="Complete native harvest profile; original non-ephemeral Actor authority." if harvest else "Harvest is protected: the original must be a supported non-ephemeral Actor with absent or supported native profile.",
                 duplicable=editable and not special, operations=(["edit"] if special else ["edit", "variant"]) if editable else [],
-                fields=FIELDS + (RELATIONSHIP_FIELDS if editable and relationship_supported(raw) else []), bounds={**BOUNDS, **{'ai_profile.'+k:v for k,v in {**PROFILE_BOUNDS, **OBSERVATION_BOUNDS, **VENOM_BOUNDS}.items() if k != 'pursuit_timeout'}}, ai_types=list(AI_TYPES), hp_min=1, hp_max=HP_MAX,
+                fields=FIELDS + (RELATIONSHIP_FIELDS if editable and relationship_supported(raw) else []), bounds={**BOUNDS, **{'ai_profile.'+k:v for k,v in {**PROFILE_BOUNDS, **OBSERVATION_BOUNDS, **VENOM_BOUNDS, **TERRITORY_BOUNDS}.items() if k != 'pursuit_timeout'}}, ai_types=list(AI_TYPES), hp_min=1, hp_max=HP_MAX,
                 shape="Actor with ID-bound behavior" if special else "ordinary Actor" if shape else "unsupported entity shape",
                 reason=reason, special_binding=identifier if special else None,
                 duplication_reason="Duplication unavailable: ABILITY_REGISTRY dispatches by stable ID; a new ID would lose this behavior." if special else "",

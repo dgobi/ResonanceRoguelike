@@ -37,7 +37,7 @@ def candidates(world, role):
     else:
         for (wx, wy), chunk in world.chunks.items():
             for sub in chunk.submaps:
-                if sub.layout_id == "barrow_ward_store_a":
+                if sub.layout_id in ("barrow_ward_store_a", "barrow_ward_store_b"):
                     yield wx, wy, sub.submap_id, sub.layout_id
 
 

@@ -21,8 +21,12 @@ VENOM_DEFAULTS = dict(DEFAULTS, version=3, recipe='venom_strike_and_withdraw',
                       effect='numbing_venom', **VENOM_TIMINGS)
 HUNT_DEFAULTS = dict(VENOM_DEFAULTS, version=4, recipe='patient_venom_hunt',
                      return_policy='observed_paralysis')
+TERRITORY_DEFAULTS = dict(DEFAULTS, version=5, recipe='territorial_guard',
+    engagement='direct_melee', defended_radius=4, excursion_radius=6, pursuit_budget=32)
+TERRITORY_BOUNDS = dict(BOUNDS, defended_radius=(1, 7), excursion_radius=(2, 8), pursuit_budget=(1, 64))
 RECIPES = {'strike_and_withdraw': DEFAULTS, 'observation_averse': OBSERVATION_DEFAULTS,
-           'venom_strike_and_withdraw': VENOM_DEFAULTS, 'patient_venom_hunt': HUNT_DEFAULTS}
+           'venom_strike_and_withdraw': VENOM_DEFAULTS, 'patient_venom_hunt': HUNT_DEFAULTS,
+           'territorial_guard': TERRITORY_DEFAULTS}
 
 
 def profile_defaults(profile):
@@ -57,18 +61,19 @@ def effective_profile(raw):
     if not isinstance(p, dict):
         raise ValueError('ai_profile: composite requires an embedded registered profile')
     defaults = profile_defaults(p)
-    bounds = (OBSERVATION_BOUNDS if defaults is OBSERVATION_DEFAULTS else
+    bounds = (TERRITORY_BOUNDS if defaults is TERRITORY_DEFAULTS else
+              OBSERVATION_BOUNDS if defaults is OBSERVATION_DEFAULTS else
               {**BOUNDS, **VENOM_BOUNDS} if defaults in (VENOM_DEFAULTS, HUNT_DEFAULTS) else BOUNDS)
     unknown = set(p) - set(defaults)
     if unknown:
         raise ValueError('ai_profile: unsupported fields: ' + ', '.join(sorted(unknown)))
     result = {**defaults, **copy.deepcopy(p), 'pursuit_timeout': raw.get('pursuit_timeout', 20)}
     for key, expected in defaults.items():
-        if key in ('no_cover', *bounds) or (key == 'return_policy' and defaults is HUNT_DEFAULTS) or (key == 'trigger' and defaults is DEFAULTS):
+        if key in ('no_cover', *bounds) or (key == 'engagement' and defaults is TERRITORY_DEFAULTS) or (key == 'return_policy' and defaults is HUNT_DEFAULTS) or (key == 'trigger' and defaults in (DEFAULTS, TERRITORY_DEFAULTS)):
             continue
         if type(result[key]) is not type(expected) or result[key] != expected:
             raise ValueError(f'ai_profile.{key}: supported value is {expected!r}')
-    if defaults is DEFAULTS and result['trigger'] not in ('hit', 'committed_attack'):
+    if defaults in (DEFAULTS, TERRITORY_DEFAULTS) and result['trigger'] not in ('hit', 'committed_attack'):
         raise ValueError('ai_profile.trigger: choose hit or committed_attack')
     if defaults is OBSERVATION_DEFAULTS and result['no_cover'] not in ('defensive_melee', 'cower'):
         raise ValueError('ai_profile.no_cover: choose defensive_melee or cower')
@@ -77,6 +82,15 @@ def effective_profile(raw):
     for key, (lo, hi) in bounds.items():
         if type(result[key]) is not int or not lo <= result[key] <= hi:
             raise ValueError(f'ai_profile.{key}: expected integer {lo}..{hi}; booleans are not numbers')
+    if defaults is TERRITORY_DEFAULTS:
+        if result['engagement'] not in ('direct_melee', 'strike_and_withdraw'):
+            raise ValueError('ai_profile.engagement: choose direct_melee or strike_and_withdraw')
+        if result['excursion_radius'] <= result['defended_radius']:
+            raise ValueError('ai_profile.excursion_radius: must exceed defended_radius')
+        if result['retreat_distance'] > result['excursion_radius']:
+            raise ValueError('ai_profile.retreat_distance: cannot exceed excursion_radius')
+        if result['engagement'] == 'direct_melee' and any(result[k] != DEFAULTS[k] for k in ('trigger', 'retreat_distance', 'hold_opportunities', 'withdrawal_budget')):
+            raise ValueError('ai_profile: direct melee requires canonical inactive withdrawal defaults; select strike_and_withdraw to tune them')
     for key in ('can_cross_chunks', 'can_use_stairs'):
         if key in raw and raw[key] is not False:
             raise ValueError(f'{key}: composite is active-scene only; must be false')
@@ -124,6 +138,10 @@ def validate_saved(row, local_map=None):
         raise ValueError('composite: profile and tactical state required')
     p = saved_profile(composite['profile'])
     s = composite['state']
+    if p['recipe'] == 'territorial_guard':
+        from components.territorial import validate_state
+        validate_state(row, s, p, local_map)
+        return
     if isinstance(s, dict) and 'withdrawal_told' in s and p['recipe'] != 'observation_averse':
         if type(s['withdrawal_told']) is not bool:
             raise ValueError('composite.state.withdrawal_told: expected boolean')

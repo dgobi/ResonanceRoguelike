@@ -1,0 +1,12 @@
+{
+  "revision": "859713379cfc3eaa4441bf2d42215960117c4e65",
+  "checkpoint": "checkpoint/ai-6-start-20261101-a",
+  "capture": "capture-legacy.py",
+  "hunter": "Actual saved-room input sting at phase 484; v4 commitment in genuine SaveManager archive, disposable 1x1 room world.",
+  "selected_world": "Independent serialized 64x64 world from unmodified pre-AI-6 generator, seed 20261027; selected ward-store A and frozen reports. Metadata compatibility fixture, not a historical visited campaign.",
+  "files": {
+    "legacy-save.zip": "f8708257dedba505fa90bee7c2ef093238fb583b124119fa9d63ae15e1fdf5a4",
+    "legacy-snapshot.json": "946a14414ea815983dedbb97376cd5adfcc9e0ee112ae3cfc62d9ef8df3f2650",
+    "legacy-world.json.gz": "1f90113779c609682f7d8e361bff435dc3dfdc222a20783f571a424bc3f552d7"
+  }
+}

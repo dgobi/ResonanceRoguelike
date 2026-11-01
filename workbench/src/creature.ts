@@ -21,9 +21,15 @@ export function creatureValue(text: string, field: string, value: string | numbe
     next=valueEdit(next,['can_cross_chunks'],false);
     return valueEdit(next,['can_use_stairs'],false);
   }
+  if (field === 'ai_profile.engagement' && value === 'direct_melee') {
+    if (!profileDefaults || profileDefaults.recipe !== 'territorial_guard') throw new Error('Territorial defaults are unavailable.');
+    let next=valueEdit(text,['ai_profile','engagement'],value);
+    for (const key of ['trigger','retreat_distance','hold_opportunities','withdrawal_budget']) next=valueEdit(next,['ai_profile',key],profileDefaults[key]);
+    return next;
+  }
   const allowed = ["name","description","armour_value","damage_dice","damage_bonus","attack_verb","perception.sight_radius","perception.hearing_radius","perception.sees_in_dark","wander_radius","pursuit_timeout","speed","ai_type","numbing_venom_trait","ai_profile.warning_phases","ai_profile.paralysis_phases","ai_profile.recovery_phases","ai_profile.return_policy"];
   if (field !== "hp") {
-    if (![...allowed,"perception.faction","perception.hostile_to","ai_profile.trigger","ai_profile.retreat_distance","ai_profile.hold_opportunities","ai_profile.withdrawal_budget","ai_profile.concealment_budget","ai_profile.unseen_extra_step","ai_profile.no_cover","ai_profile.pursuit_budget"].includes(field)) throw new Error("Read-only creature field");
+    if (![...allowed,"perception.faction","perception.hostile_to","ai_profile.trigger","ai_profile.retreat_distance","ai_profile.hold_opportunities","ai_profile.withdrawal_budget","ai_profile.concealment_budget","ai_profile.unseen_extra_step","ai_profile.no_cover","ai_profile.pursuit_budget","ai_profile.engagement","ai_profile.defended_radius","ai_profile.excursion_radius"].includes(field)) throw new Error("Read-only creature field");
     const path=field.split(".");
     const current=path.reduce<unknown>((v,k)=>v && typeof v === "object" ? (v as Record<string,unknown>)[k] : undefined,model);
     return current===value ? text : valueEdit(text,path,value);

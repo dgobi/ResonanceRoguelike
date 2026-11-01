@@ -104,3 +104,9 @@ Repeatable scoped evidence: `workbench/scripts/run-assignments.mjs`, game tests
 `workbench/docs/W5I_DELIVERY.md`. Fixtures own explicit disposable save roots;
 they never inspect personal campaigns. Wider selectors, entrance editing,
 whole-world launch UI, grouped publication and campaign migration are deferred.
+
+AI-6 adds `barrow_ward_store_b` beside preserved `barrow_ward_store_a`, with
+equal weights and unchanged 0.35 overall authored-barrow chance. Only new worlds
+use this mixture. The Sentinel covers its Ward and eastern passage; the old room
+retains its identity and contents. Ward-store reports recognize both IDs without
+disclosing current contents or safety. See [Territorial AI](TERRITORIAL_AI.md).
