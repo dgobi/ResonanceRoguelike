@@ -184,7 +184,8 @@ class PerkScreen:
                 self._flat = []   # force rebuild
             else:
                 perk_id = self._selected_perk_id()
-                if perk_id and self._can_afford(perk_id, engine):
+                from engine.venom import fully_paralysed
+                if perk_id and not fully_paralysed(engine.player) and self._can_afford(perk_id, engine):
                     self._confirming = True
             return True
 
@@ -226,6 +227,9 @@ class PerkScreen:
         return level_comp.perk_points >= cost
 
     def _commit(self, engine: "Engine") -> None:
+        from engine.venom import fully_paralysed
+        if fully_paralysed(engine.player):
+            return
         perk_id = self._selected_perk_id()
         if not perk_id:
             return

@@ -49,7 +49,8 @@ class Fighter:
         return self.hp - prev
 
     def can_attack(self) -> bool:
-        return not self._dead
+        from engine.venom import fully_paralysed
+        return not self._dead and not fully_paralysed(self)
 
     def can_move(self) -> bool:
         from engine.venom import movement_denial

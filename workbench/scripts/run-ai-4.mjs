@@ -43,9 +43,9 @@ async function key(key,capture=false){const id=++eventId,path=resolve(session.st
 async function creature(source,id,name,policy){
  const path=base+id+'.json',fresh=!(await exists(path));await open(fresh?source:path);await begin();
  if(fresh){await eb('Save as new variant').click();await fill('New variant ID',id);if(source.endsWith('amber_sting_beetle.json'))await select('Creature AI','composite');await select('Behaviour recipe','patient_venom_hunt');}
- await fill('Creature name',name);await fill('Creature description',policy==='observed_paralysis'?'An amber-shelled insect that stings, withdraws, and watches for rigid prey.':'An amber-shelled insect that stings, withdraws, and returns after a short hold.');
+ await fill('Creature name',name);await fill('Creature description',policy==='observed_paralysis'?'A six-legged insect with a split amber shell. Its hooked mandibles glisten.':'A broad amber insect with twitching antennae and pale, hooked mandibles.');
  await fill('Damage dice','1d4');await fill('Damage bonus',1);await fill('Speed',1);
- await fill('Warning (charged phases)',3);await fill('Mobility paralysis (charged phases)',2);await fill('Recovery protection (charged phases)',4);
+ await fill('Warning (charged phases)',3);await fill('Full paralysis (charged phases)',3);await fill('Recovery protection (charged phases)',4);
  await fill('Desired retreat distance (tiles)',2);await fill('Withdrawal opportunity budget',6);
  await select('Re-engagement policy','after_hold');await fill('Full hold opportunities',3);await select('Re-engagement policy',policy);
  assert.equal(await page.getByLabel('Full hold opportunities',{exact:true}).filter({visible:true}).isDisabled(),policy==='observed_paralysis');
@@ -77,7 +77,7 @@ async function witness(label){
  await key('.');await new Promise(r=>setTimeout(r,100));s=await status();assert.equal(s.tactics.actors.find(a=>a.id==='patient_amber_hunter').state.phase,'monitor');
  const saved=structuredClone(s.tactics),turn=s.tactics.turn;
  await key('f5');await key('f9');await new Promise(r=>setTimeout(r,150));s=await status();assert.equal(s.tactics.turn,turn);assert.deepEqual(s.tactics.actors[0].state,saved.actors[0].state);
- for(let n=0;n<4;n++){await key('.');await new Promise(r=>setTimeout(r,80));rows.push((await status()).tactics);}
+ for(let n=0;n<5;n++){await key('.');await new Promise(r=>setTimeout(r,80));rows.push((await status()).tactics);}
  s=await status();const actions=rows.flatMap(t=>t.actors.flatMap(a=>a.recent));
  assert(actions.some(a=>a.phase_before==='return'&&a.action==='melee'&&a.result?.committed));
  await key(undefined,true);await copyFile(resolve(session.state_root,'frame.png'),resolve(output,label+'.png'));
@@ -91,9 +91,9 @@ try{
  const opening='roguelike/data/layouts/ai4_patient_opening.json',long='roguelike/data/layouts/ai4_timed_opening.json';
  if(process.env.AI4_RUNTIME_ONLY!=='1'){
   await phase('create, configure, validate, review/apply and reopen both policy variants through actual controls');
-  await creature(base+'amber_sting_beetle.json','patient_amber_hunter','Patient Amber Hunter','observed_paralysis');
+  await creature(base+'amber_sting_beetle.json','patient_amber_hunter','Amber Shell Hunter','observed_paralysis');
   await open(primary);await begin();await select('Re-engagement policy','after_hold');await b('Undo creature').click();await editIdle();assert.equal(await page.getByLabel('Re-engagement policy',{exact:true}).filter({visible:true}).inputValue(),'observed_paralysis');await b('Redo creature').click();await editIdle();await select('Re-engagement policy','observed_paralysis');await apply(primary);
-  await creature(primary,'timed_amber_hunter','Timed Amber Hunter','after_hold');
+  await creature(primary,'timed_amber_hunter','Amber Whine Beetle','after_hold');
   await phase('place saved insect policies, accessible remedy, door and ordinary rival through room controls');
   await room('roguelike/data/layouts/ai1_skirmisher_room.json','ai4_patient_opening','patient_amber_hunter');
   await room(opening,'ai4_timed_opening','timed_amber_hunter');

@@ -64,7 +64,7 @@ class CompositeAuthoringTests(unittest.TestCase):
         raw['numbing_venom_trait']='immune'
         r=self.validate(raw);self.assertTrue(r['valid'],r['diagnostics'])
         p=r['family']['context']['records'][0]['factory']['instance']['effective_ai_profile']
-        self.assertEqual(('numbing_melee','accepted_application','numbing_venom',3,2,4),
+        self.assertEqual(('numbing_melee','accepted_application','numbing_venom',3,3,4),
             tuple(p[k] for k in ('capability','trigger','effect','warning_phases','paralysis_phases','recovery_phases')))
         for field,value in [('warning_phases',1),('paralysis_phases',4),('recovery_phases',3),('trigger','hit'),('effect','other')]:
             bad=copy.deepcopy(raw);bad['ai_profile'][field]=value

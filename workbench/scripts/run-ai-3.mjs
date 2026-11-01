@@ -45,9 +45,9 @@ async function creature(source,id,name,warning){
  if(fresh){await eb('Save as new variant').click();await fill('New variant ID',id);}
  await fill('Creature name',name);
  if(fresh){if(source.endsWith('heath_stalker.json'))await select('Creature AI','composite');await select('Behaviour recipe','venom_strike_and_withdraw');}
- await fill('Creature description',warning===3?'A low hunter with a numbing bite. Its victim has a short warning before the legs lock.':'A low hunter whose numbing bite spreads slowly. The longer warning leaves more time to respond.');
+ await fill('Creature description',warning===3?'A low, bristling hunter with wet fangs and a nettled hide.':'A low hunter with drooping eyelids and dark saliva along its jaws.');
  await fill('Damage dice','1d4');await fill('Damage bonus',1);await fill('Attack verb','bites at thee');await fill('Speed',1);
- await fill('Warning (charged phases)',warning);await fill('Mobility paralysis (charged phases)',2);await fill('Recovery protection (charged phases)',4);
+ await fill('Warning (charged phases)',warning);await fill('Full paralysis (charged phases)',2);await fill('Recovery protection (charged phases)',4);
  await fill('Desired retreat distance (tiles)',3);await fill('Full hold opportunities',3);await fill('Withdrawal opportunity budget',6);
  await page.screenshot({path:resolve(output,id+'-controls.png')});await apply(path);return path;
 }

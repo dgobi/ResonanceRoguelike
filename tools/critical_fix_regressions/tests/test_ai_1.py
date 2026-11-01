@@ -284,7 +284,9 @@ class StrikeWithdrawTests(unittest.TestCase):
         for _ in range(20):inspect(e);e._update_fov()
         self.assertEqual(state,_serialize_entity(a))
         e.local_map.visible[:]=False
-        logs=len(e.log.messages);self.decision(a)
+        logs=len(e.log.messages)
+        with patch.object(e,'normal_player_vision',return_value={'visible':e.local_map.visible}):
+            self.decision(a)
         self.assertEqual(logs,len(e.log.messages))
 
     def test_save_f9_profile_edit_and_separate_process_actual_reconstruction(self):

@@ -61,6 +61,9 @@ def exchange(engine, consumed, outputs=()):
 
 
 def drop(engine, item):
+    from engine.venom import fully_paralysed
+    if fully_paralysed(engine.player):
+        return False
     from generation.floor_object_utils import place_floor_object
     inv = engine.player.inventory
     if not inv.contains(item):
@@ -73,6 +76,9 @@ def drop(engine, item):
 
 
 def take_floor(engine, item):
+    from engine.venom import fully_paralysed
+    if fully_paralysed(engine.player):
+        return False
     from generation.floor_object_utils import remove_floor_object
     inv = engine.player.inventory
     if getattr(item, 'source_creature', None) or not inv.can_add(item):
@@ -93,6 +99,9 @@ def take_floor(engine, item):
 
 
 def take_container(engine, x, y, item):
+    from engine.venom import fully_paralysed
+    if fully_paralysed(engine.player):
+        return False
     from generation.floor_object_utils import take_from_container
     inv = engine.player.inventory
     entry = engine.local_map.container_state.get((x, y))

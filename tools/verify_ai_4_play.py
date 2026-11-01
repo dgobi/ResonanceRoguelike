@@ -50,7 +50,7 @@ def run(room,response,cold=False):
             assert before==json.loads(child.stdout.splitlines()[-1]),label
             a=next(x for x in e.entities if getattr(x,'_creature_id','') in ('patient_amber_hunter','timed_amber_hunter'))
             persistence.append(dict(label=label,state=before,f5_f9_equal=True,cold_equal=True))
-        def use():
+        def use(rejected=False):
             key(pygame.K_i);e.inventory_screen.render(pygame.Surface((1280,900)),e)
             for _ in range(40):
                 item=e.inventory_screen._selected_item()
@@ -58,8 +58,11 @@ def run(room,response,cold=False):
                 key(pygame.K_DOWN)
             else:raise AssertionError('No ordinarily picked-up remedy')
             before=continuity(e);key(pygame.K_e);after=continuity(e);key(pygame.K_ESCAPE)
-            assert after['turn']==before['turn']+1
-            assert len(after['inventory'])==len(before['inventory'])-1
+            if rejected:
+                assert before==after, 'Severe self-treatment changed state'
+            else:
+                assert after['turn']==before['turn']+1
+                assert len(after['inventory'])==len(before['inventory'])-1
             return dict(before=before,after=after)
         key(pygame.K_COMMA)
         assert any(i.item_id=='measured_venom_remedy' for i in e.player.inventory.items)
@@ -72,16 +75,27 @@ def run(room,response,cold=False):
             assert a.ai.hunt and a.ai.target['id']==victim._individual_id and dose(victim)
             original=copy.deepcopy(a.ai.hunt)
             retained=a.ai.target['id']
-            for _ in range(6):
+            rival_phases=[]
+            for _ in range(8):
+                severe=bool(dose(victim) and dose(victim)['stage']=='paralysis')
+                pos=(victim.x,victim.y)
+                if severe:assert not victim.fighter.can_attack()
                 key(pygame.K_PERIOD)
+                if severe:assert pos==(victim.x,victim.y)
+                rival_phases.append(dict(turn=e.world_time.turn,severe_before=severe,
+                    position=[victim.x,victim.y],condition=copy.deepcopy(dose(victim)),
+                    can_attack=victim.fighter.can_attack(),accumulator=victim.ai.move_accumulator))
                 if a.ai.hunt==original:assert a.ai.target['id']==retained
             assert a.ai.hunt is None or a.ai.hunt['application_id']!=original['application_id']
-            return dict(room=room,response=response,trace=trace,original_commitment=original,passed=True)
+            assert sum(p['severe_before'] for p in rival_phases)==3
+            assert victim.fighter.can_attack() and victim.ai.move_accumulator<1
+            return dict(room=room,response=response,trace=trace,original_commitment=original,rival_phases=rival_phases,passed=True)
         key(pygame.K_RIGHT)  # ordinary paid opening of the saved door
         for _ in range(30):
             if a.ai.hunt:break
             key(pygame.K_PERIOD)
         assert a.ai.hunt and dose(e.player) and dose(e.player)['stage']=='warning'
+        assert not any('skitters away' in m.text for m in e.log.messages), 'Retreat prose preceded movement'
         original=copy.deepcopy(a.ai.hunt);sting=e.world_time.turn
         assert dose(e.player)['remaining']==3 and a.ai.phase=='withdraw'
         assert max(abs(a.x-e.player.x),abs(a.y-e.player.y))==1
@@ -90,14 +104,20 @@ def run(room,response,cold=False):
             assert a.ai.phase=='monitor' and max(abs(a.x-e.player.x),abs(a.y-e.player.y))==2
             if cold:checkpoint('monitor')
             key(pygame.K_PERIOD);key(pygame.K_PERIOD)
-            assert dose(e.player)['stage']=='paralysis'
-            hp=e.player.fighter.hp;key(pygame.K_PERIOD)
+            assert dose(e.player)['stage']=='paralysis' and dose(e.player)['remaining']==3
+            before=continuity(e)
+            for k in (pygame.K_RIGHT,pygame.K_UP,e.display.MOVESET_KEY_1):key(k)
+            assert before==continuity(e), 'Rejected physical input changed state'
+            hp=e.player.fighter.hp;phase=e.world_time.turn;key(pygame.K_PERIOD)
+            assert e.world_time.turn==phase+1 and dose(e.player)['remaining']==2
             assert a.ai.trace[-1]['action']=='move' and a.ai.phase=='return'
             if cold:checkpoint('confirmed_then_close')
             key(pygame.K_PERIOD)
             r=a.ai.trace[-1]
-            assert r['turn']==original['last_useful_phase'] and r['action']=='melee' and r['result']['committed']
+            assert r['turn']<=original['last_useful_phase'] and r['action']=='melee' and r['result']['committed']
             assert r['result']['damage']>0 and e.player.fighter.hp<hp
+            assert dose(e.player)['stage']=='paralysis' and dose(e.player)['remaining']==1
+            key(pygame.K_PERIOD)
             assert dose(e.player)['stage']=='recovery'
             key(pygame.K_PERIOD);assert a.ai.hunt is None
         elif response in ('hidden_treatment','escape'):
@@ -123,10 +143,11 @@ def run(room,response,cold=False):
         elif response=='cure_after_close':
             for _ in range(4):key(pygame.K_PERIOD)
             assert a.ai.phase=='return' and dose(e.player)['stage']=='paralysis'
-            hp=e.player.fighter.hp;treatment=use()
-            assert e.player.fighter.hp==hp and a.ai.hunt is None
-            assert a.ai.last_cancellation=='expected_impairment_absent'
+            treatment=use(rejected=True)
+            while dose(e.player)['stage']=='paralysis':key(pygame.K_PERIOD)
+            assert dose(e.player)['stage']=='recovery'
         else:raise AssertionError(response)
+        assert not any('AV=' in m.text or '[dodge:' in m.text for m in e.log.messages), 'Normal logs exposed formula'
         return dict(room=room,response=response,trace=trace,sting_phase=sting,original_commitment=original,
                     persistence=persistence,treatment=treatment,passed=True)
 

@@ -144,6 +144,9 @@ def resolve_attack(
     9. Apply to HP pool
     10. Build messages + debug formula
     """
+    from engine.venom import fully_paralysed
+    if fully_paralysed(defender_fighter):
+        defender_dodge_chance, shield_def = 0.0, None
     result = CombatResult(hit=True)
 
     # ── 1. Dodge roll ──────────────────────────────────────────────

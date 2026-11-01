@@ -18,6 +18,7 @@ class CompositeAI(AI):
         self.best_distance = None
         self.suppressed = None
         self.route_blocked = False
+        self.withdrawal_told = False
         self.opportunities = 0
         self.trace = []  # privileged bounded diagnostics; never definition/save data
         self.last_cancellation = None
@@ -35,6 +36,8 @@ class CompositeAI(AI):
                 'no_progress', 'best_distance', 'suppressed', 'route_blocked', 'opportunities')
         if self.profile['recipe'] == 'patient_venom_hunt':
             keys += ('hunt',)
+        if self.withdrawal_told:
+            keys += ('withdrawal_told',)
         return dict(profile=copy.deepcopy(self.profile), state={k: copy.deepcopy(getattr(self, k)) for k in keys})
 
     def cancel(self, actor, reason, *, keep_sound=False):
@@ -46,6 +49,7 @@ class CompositeAI(AI):
         self.withdraw_left = self.hold_left = self.approach_left = self.no_progress = 0
         self.best_distance = None
         self.route_blocked = False
+        self.withdrawal_told = False
         self.local_target = None
         retire_player(actor)
         clear_interest(self)
@@ -197,6 +201,15 @@ class CompositeAI(AI):
         if (engine is None or player is not engine.player or local_map is not engine.local_map
                 or not active(engine, actor) or disrupted(actor, local_map)):
             return
+        from engine.venom import fully_paralysed
+        if fully_paralysed(actor):
+            self.refresh_evidence(engine, actor, ambient_light)
+            self.opportunities += 1
+            self.trace.append(dict(opportunity=self.opportunities, turn=engine.world_time.turn,
+                                   phase_before=self.phase, phase=self.phase, action='wait',
+                                   reason='numbing_venom_paralysis', result=None))
+            self.trace = self.trace[-16:]
+            return
         if self.profile['recipe'] == 'observation_averse':
             from components.observation_averse import take_turn
             return take_turn(self, actor, engine, ambient_light)
@@ -263,6 +276,9 @@ class CompositeAI(AI):
                     step, _ = self._route(engine, actor, far)
                     moved = self._move(engine, actor, step)
                     action, reason = ('move' if moved else 'wait'), 'holding_reposition' if hold else 'withdrawal'
+                    if moved and not hold and not self.withdrawal_told:
+                        self._tell(engine, actor, 'skitters away with a chittering whine' if self.profile['capability'] == 'numbing_melee' else 'draws away', current_vision=True)
+                        self.withdrawal_told = True
                     if patient and not step:
                         contacts = [a for a in observed if melee_attack_legal(local_map, actor, a)]
                         if contacts:
@@ -313,7 +329,7 @@ class CompositeAI(AI):
                     self.withdraw_left = self.profile['withdrawal_budget']
                     self.hold_left = self.profile['hold_opportunities']
                     self.approach_left, self.no_progress, self.best_distance = 32, 0, None
-                    self._tell(engine, actor, 'stings and draws away to watch' if patient else 'strikes and draws away', current_vision=patient)
+                    self.withdrawal_told = False
             else:
                 if not seen and (actor.x, actor.y) == (tx, ty):
                     self.cancel(actor, 'empty_trail')
@@ -356,8 +372,8 @@ class CompositeAI(AI):
                 self.state = AIState.INVESTIGATING
                 investigate(self, actor, local_map, entities)
                 action, reason = 'investigate', 'anonymous_sound'
-        if before != 'return' and self.phase == 'return':
-            self._tell(engine, actor, 'closes in on the rigid prey' if gated else 'closes in again', current_vision=patient)
+        if before != 'return' and self.phase == 'return' and action == 'move' and reason == 'approach':
+            self._tell(engine, actor, 'creeps closer', current_vision=True)
         if result and result.target_dead:
             self.resolve_target(engine, actor)
         self.trace.append(dict(opportunity=self.opportunities, turn=engine.world_time.turn,

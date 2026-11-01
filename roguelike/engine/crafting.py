@@ -200,6 +200,9 @@ def commit_craft(engine, recipe, selected, ambient_sources=None, outputs=()):
     No material reservation is persisted. Cancel/load simply discards the plan;
     ingredients remain in inventory until successful confirmation.
     """
+    from engine.venom import fully_paralysed
+    if fully_paralysed(engine.player):
+        return False
     from components.inventory import Inventory
     from engine.item_transfers import exchange
     inv = engine.player.inventory

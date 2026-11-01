@@ -208,11 +208,11 @@ class HealthScreen:
         venom = dose(player)
         if venom:
             descriptions = {
-                'warning': 'Numbness is spreading. Movement and attacks remain available. Treat now or prepare to hold still.',
-                'paralysis': 'Voluntary movement is blocked. Wait, attack in place, or use venom treatment.',
-                'recovery': 'Movement is restored. Fresh numbing venom cannot take hold during recovery.',
+                'warning': 'Your limbs feel heavy.',
+                'paralysis': 'Your body will not answer. [.] Wait lets time pass.',
+                'recovery': 'Feeling returns in prickling waves.',
             }
-            out.append(('Numbing venom: '+venom['stage'], descriptions[venom['stage']], DUSTY_ROSE))
+            out.append(({'warning': 'Numbness', 'paralysis': 'Paralysed', 'recovery': 'Recovering'}[venom['stage']], descriptions[venom['stage']], DUSTY_ROSE))
 
         needs = getattr(player, "needs", None)
         if needs:

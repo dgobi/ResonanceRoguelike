@@ -1357,6 +1357,8 @@ class Engine:
 
     def _grass_concealment_reaction(self, actor, old_position):
         """One real contact attempt; return commitment, never mere eligibility."""
+        if self._movement_denied():
+            return False
         if (actor is self.player or not getattr(actor, 'is_alive', True)
                 or old_position is None or (actor.x, actor.y) == old_position):
             return False
@@ -1734,6 +1736,18 @@ class Engine:
             self._handle_key_overmap(key)
 
     def _handle_key_local(self, key: int) -> None:
+        if self._movement_denied():
+            if key in MOVE_KEYS:
+                self._pickup_mode = False
+                return
+            if key in (self.display.MOVESET_KEY_1, self.display.MOVESET_KEY_2,
+                       self.display.SPRINT_KEY, pygame.K_COMMA, pygame.K_g, pygame.K_w):
+                return
+            if key in WAIT_KEYS:
+                self._free_move_pending = False
+                self._advance_turn()
+                self._update_context_prompt()
+                return
         # Directional pickup mode
         if self._pickup_mode:
             if key == pygame.K_ESCAPE:
@@ -1937,15 +1951,18 @@ class Engine:
             phases = 0 if skip_turn else 1
             if _moveset_result:
                 phases = self._weapon_action_phases(_moveset_result.turn_cost)
+            paralysis_during_action = False
             for _ in range(phases):
                 if self._player_is_dead or not self.player.is_alive:
                     break
                 self._advance_turn()
+                paralysis_during_action |= self._movement_denied()
             while (self._move_debt >= 1.0
                    and not self._player_is_dead and self.player.is_alive):
                 self._move_debt -= 1.0
                 self._advance_turn()
-            if (_moveset_result and _moveset_result.free_move
+                paralysis_during_action |= self._movement_denied()
+            if (_moveset_result and _moveset_result.free_move and not paralysis_during_action
                     and not self._player_is_dead and self.player.is_alive):
                 self._free_move_pending = True
                 self.log.add("Momentum: one free local step. Terrain still slows you; another action gives it up.", MSG_COMBAT_OUT)
@@ -2031,6 +2048,9 @@ class Engine:
 
     def _teleport_to_overmap_cursor(self) -> None:
         """Debug travel shares normal scene ownership and complete creation."""
+        from engine.venom import fully_paralysed
+        if fully_paralysed(self.player):
+            return
         wx, wy = self.overmap_cursor_x, self.overmap_cursor_y
         chunk = self.world_map.get(wx, wy)
         if chunk is None:
@@ -2135,11 +2155,8 @@ class Engine:
     # ------------------------------------------------------------------ #
 
     def _movement_denied(self) -> bool:
-        from engine.venom import movement_denial
-        if movement_denial(self.player):
-            self.log.add('Your legs are locked. Wait or use venom treatment.', STONE_BLUE)
-            return True
-        return False
+        from engine.venom import fully_paralysed
+        return fully_paralysed(self.player)
 
     def _transition_chunk(self, dx: int, dy: int) -> bool:
         if self._movement_denied():
@@ -3667,6 +3684,9 @@ class Engine:
 
     def _try_drink_terrain(self) -> bool:
         """Drink from drinkable terrain at player's position (W key). Drink only — flask fill uses E key."""
+        from engine.venom import fully_paralysed
+        if fully_paralysed(self.player):
+            return False
         terrain_id    = self._resolve_terrain_id(self.player.x, self.player.y)
         terrain_entry = self.data.terrain.get(terrain_id, {})
 
@@ -3693,6 +3713,9 @@ class Engine:
 
     def _tick_rain_collection(self) -> None:
         """Accumulate rain toward filling an empty_water_skin while waiting outdoors."""
+        from engine.venom import fully_paralysed
+        if fully_paralysed(self.player):
+            return
         if self.current_submap_id is not None:
             self.rain_collection_progress = 0
             return
@@ -3737,6 +3760,9 @@ class Engine:
 
     def _try_harvest(self, x: int | None = None, y: int | None = None) -> bool:
         """Harvest a plant at (x, y), defaulting to player position. Returns True if a turn was spent."""
+        from engine.venom import fully_paralysed
+        if fully_paralysed(self.player):
+            return False
         from config import DEBUG_MODE as _DM
         hx = x if x is not None else self.player.x
         hy = y if y is not None else self.player.y
@@ -3807,6 +3833,9 @@ class Engine:
         If gather_depletes is true, tile changes to depleted_tile on success.
         Returns True if a turn was spent.
         """
+        from engine.venom import fully_paralysed
+        if fully_paralysed(self.player):
+            return False
         terrain_id    = self._resolve_terrain_id(x, y)
         terrain_entry = self.data.terrain.get(terrain_id, {})
         if not terrain_entry.get("gatherable", False):
@@ -3889,6 +3918,9 @@ class Engine:
 
     def _dispatch_interactable(self, x: int, y: int) -> bool:
         """Call the named handler for the interactable at (x, y). Checks decor first, then terrain."""
+        from engine.venom import fully_paralysed
+        if fully_paralysed(self.player):
+            return False
         # Decor layer — campfires and other placed objects live here
         decor_id = self.local_map.decor.get((x, y))
         if decor_id:
@@ -3910,16 +3942,25 @@ class Engine:
         return handler(x, y)
 
     def _interactable_butcher(self, x: int, y: int, corpse=None, *, scene=None, address=None) -> bool:
+        from engine.venom import fully_paralysed
+        if fully_paralysed(self.player):
+            return False
         from engine.harvesting import butcher
         return butcher(self, x, y, corpse, scene=scene, address=address)
 
     def _interactable_light_campfire(self, x: int, y: int) -> bool:
+        from engine.venom import fully_paralysed
+        if fully_paralysed(self.player):
+            return False
         from generation.decor_utils import place_decor
         place_decor(self.local_map, x, y, "campfire_lit")
         self.log.add("The fire takes.", MSG_DEFAULT)
         return True
 
     def _interactable_extinguish_campfire(self, x: int, y: int) -> bool:
+        from engine.venom import fully_paralysed
+        if fully_paralysed(self.player):
+            return False
         from generation.decor_utils import place_decor
         place_decor(self.local_map, x, y, "campfire_unlit")
         self.log.add("The fire dies.", MSG_DEFAULT)
@@ -3941,6 +3982,9 @@ class Engine:
 
     def _interactable_container(self, x: int, y: int) -> bool:
         """Single-step container interaction: open + browse in one action."""
+        from engine.venom import fully_paralysed
+        if fully_paralysed(self.player):
+            return False
         from generation.floor_object_utils import open_container, get_container_items
         entry = self.local_map.container_state.get((x, y))
         if not entry:
@@ -4008,6 +4052,9 @@ class Engine:
 
     def _interactable_drink_source(self, x: int, y: int) -> bool:
         """Fill empty_water_skin from drinkable terrain, or drink directly."""
+        from engine.venom import fully_paralysed
+        if fully_paralysed(self.player):
+            return False
         terrain_id = self._resolve_terrain_id(x, y)
         terrain_entry = self.data.terrain.get(terrain_id, {})
         if not terrain_entry.get("drinkable", False):
@@ -4042,6 +4089,9 @@ class Engine:
 
     def _interactable_vine(self, x: int, y: int) -> bool:
         """Cut a vine tile with an equipped cutting weapon."""
+        from engine.venom import fully_paralysed
+        if fully_paralysed(self.player):
+            return False
         decor_id = self.local_map.decor.get((x, y))
         if not decor_id or not decor_id.startswith("vine_"):
             return False
@@ -4341,6 +4391,9 @@ class Engine:
 
     def _start_placement_cursor(self, tile_id: str, recipe: dict, selected=None) -> None:
         """Enter PLACEMENT_CURSOR mode after a places_in_world craft succeeds."""
+        from engine.venom import fully_paralysed
+        if fully_paralysed(self.player):
+            return
         self._pending_placement_tile   = tile_id
         self._pending_placement_recipe = recipe
         from engine.crafting import plan_craft
@@ -4408,6 +4461,9 @@ class Engine:
 
     def _start_processing_placement(self, recipe: dict, selected=None) -> None:
         """Enter PLACEMENT_CURSOR mode for a passive_processing recipe."""
+        from engine.venom import fully_paralysed
+        if fully_paralysed(self.player):
+            return
         decor_id = recipe.get("processing_decor", "")
         self._pending_processing   = recipe
         self._pending_placement_recipe = recipe
@@ -4468,6 +4524,11 @@ class Engine:
             return
 
         if key in (pygame.K_RETURN, pygame.K_KP_ENTER):
+            if self._movement_denied():
+                self._pending_processing = self._pending_placement_tile = None
+                self._pending_placement_recipe = self._pending_craft_items = None
+                self.mode = GameMode.LOCAL
+                return
             cx, cy = self._placement_cursor_x, self._placement_cursor_y
 
             if self._placement_mode in ("drying", "cooking"):
@@ -4811,6 +4872,9 @@ class Engine:
     def _update_context_prompt(self) -> None:
         """Refresh the status-bar context prompt based on tile under player."""
         if not hasattr(self, "ui"):
+            return
+        if self._movement_denied():
+            self.ui.set_context_prompt("Paralysed | [.] Wait lets time pass", DUSTY_ROSE)
             return
         terrain = str(self.local_map.tiles["terrain"][self.player.x, self.player.y])
         if terrain == "stairs_down":
@@ -5225,6 +5289,8 @@ class Engine:
         return melee_contact(local_map, x1, y1, x2, y2)
 
     def _player_attack(self, target: "Actor") -> bool:
+        if self._movement_denied():
+            return False
         from engine.combat import resolve_attack
         from engine.effect_lifecycle import creature_id, coated_weapon, coating_contact, knight_disruption, ability_enabled
 
@@ -5302,7 +5368,7 @@ class Engine:
         coating_contact(self, _weapon_entity, result)
 
         # Log messages — outgoing damage (player→creature): mist_blue family
-        from config import DEBUG_MODE as _DEBUG_MODE
+        _DEBUG_MODE = bool(getattr(self, 'debug', None))
         _dbg_appended = False
         for msg, mtype in zip(result.messages, result.message_types):
             if mtype == "deflect":
@@ -5874,6 +5940,9 @@ class Engine:
     # ------------------------------------------------------------------ #
 
     def _pick_up_item(self) -> bool:
+        from engine.venom import fully_paralysed
+        if fully_paralysed(self.player):
+            return False
         inv = getattr(self.player, "inventory", None)
         if inv is None:
             return False
@@ -5940,6 +6009,9 @@ class Engine:
         return results
 
     def _take_item(self, item: "Item", inv: "Inventory") -> bool:
+        from engine.venom import fully_paralysed
+        if fully_paralysed(self.player):
+            return False
         from engine.item_transfers import take_floor
         if take_floor(self, item):
             _iname = getattr(item, "name", "") or "something"

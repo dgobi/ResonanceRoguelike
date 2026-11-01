@@ -149,7 +149,7 @@ def return_definition(identifier, data, sources, *, owner=None):
 def effective_use(raw, data):
     handler=raw.get('on_use')
     if handler == 'cure_numbing_venom':
-        return dict(explanation='Clears player numbing venom during warning or paralysis at any HP; no healing. One owned unit and one charged phase. Recovery uses the accepted dose snapshot and the paid phase counts first. No active impairment, existing recovery, death or stale ownership rejects without item/time cost. Duplicate this seed to author a new ID; use identity is protected.')
+        return dict(explanation='Clears player numbing venom during warning at any HP; self-use is rejected during full paralysis; no healing. One owned unit and one charged phase. Recovery uses the accepted dose snapshot and the paid phase counts first. No active impairment, existing recovery, death or stale ownership rejects without item/time cost. Duplicate this seed to author a new ID; use identity is protected.')
     if handler not in ('eat','drink','heal_minor'): return None
     if handler=='heal_minor':
         value=raw.get('heal_amount'); amount=value or 3

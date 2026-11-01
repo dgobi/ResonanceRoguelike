@@ -125,6 +125,9 @@ def butcher(engine, x, y, corpse=None, *, scene=None, address=None):
     False is a free refusal/failure. True owns the ordinary action's first turn;
     only successful harvesting adds the remaining move debt. RNG is not rewound.
     """
+    from engine.venom import fully_paralysed
+    if fully_paralysed(engine.player):
+        return False
     import random
     from generation import floor_object_utils as floor
     from engine.message_log import MSG_DEFAULT

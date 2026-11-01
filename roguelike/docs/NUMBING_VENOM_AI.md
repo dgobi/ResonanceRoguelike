@@ -16,7 +16,7 @@ observed-paralysis and finite-hold policies, insect examples and saved hunts.
 | Parameter | Default | Bounds | Meaning |
 | --- | --- | --- | --- |
 | `warning_phases` | 3 | 2–12 | Normal movement and attacks; numbness warns of impending restriction |
-| `paralysis_phases` | 2 | 1–3 | Voluntary displacement denied; stationary actions remain legal |
+| `paralysis_phases` | 3 | 1–3 | Full physical paralysis, including attacks, self-treatment and active defences |
 | `recovery_phases` | 4 | 4–16 | Movement restored; fresh doses rejected |
 | `retreat_distance` | 2 | 2–8 | Desired Chebyshev distance in tiles |
 | `hold_opportunities` | 1 | 0–12 | Full ordinary hold opportunities |
@@ -42,27 +42,38 @@ never stack, refresh, accelerate, replace provenance or extend protection.
 ## Clock and player response
 
 A dose delivered during AI phase T remains warning 3 at end T. End T+1 and T+2
-leave 2 and 1. End T+3 starts paralysis 2; next player input is restricted.
-End T+4 leaves paralysis 1; end T+5 restores mobility with recovery 4. End T+6
-through T+9 spends recovery and removes the record. A transition never also
+leave 2 and 1. End T+3 starts full paralysis 3; next player input is restricted.
+End T+4 and T+5 leave 2 and 1; end T+6 restores action with recovery 4. End T+7
+through T+10 spends recovery and removes the record. A transition never also
 spends its new stage. Each completed charged world phase ages once, independent
 of actor speed, extra decisions, queries, panels, cancelled/free inputs and
 rejected moves. Costly actions spend each legitimately charged phase.
 
-Move or disengage during warning, spend a finite remedy, or fight/wait in place
-through paralysis. There is no HP drain, mechanical slowing, attack prohibition
-or full-action stun. Movement keys still allow legal bump attacks and door
-interaction. Local steps, sprint, Press, chunk and stair travel cannot displace
-a paralyzed player or manufacture movement credit. Rejected movement is free;
-paid Wait remains available. Health shows warning, paralysis or recovery with
+AI-5 intentionally replaces the previous mobility-only contract. During warning,
+move, fight, break contact or use a finite remedy. Full paralysis prevents all
+voluntary physical action: movement/sprint/travel, melee/movesets/throws, item
+use/equip/pickup/drop/transfer, doors/containers/harvesting/dismantling/crafting
+and placement. Perks are view-only. Automatic attack reactions, active dodge and
+chance-based shield blocking are unavailable; passive armour/resistance and
+ordinary hit/critical/damage rules remain. The pure `fully_paralysed(actor_or_fighter)`
+predicate guards real committers, including stale menus/confirmations and zero-time
+craft output. Low-level passive consumption stays available for exhausted fuel.
+
+Each **`.` or keypad 5 Wait** during paralysis advances exactly one ordinary
+charged world phase: AI, needs, fuel, effects and existing processing continue.
+It collects no rain, grants no Press step and queues no action for recovery.
+Already-committed warning actions settle all phases they owe; onset withholds new
+actions and extra grants. Rejected actions cost no item/resource/time and emit no
+repeated denial tutorial. Inspection, look/map/log/menu browsing, cancellation,
+save/load and exit remain free. Death handling remains authoritative. Health shows warning, paralysis or recovery with
 accurate guidance. Visible creature symptoms and withdrawal tells respect
 visibility; hidden progression produces no omniscient narration.
 
 `venom_treatment` (Numbing Venom Remedy) is the game-owned authoring seed.
 `measured_venom_remedy` demonstrates its new-ID route. Ordinary inventory use of
-`cure_numbing_venom` clears warning/paralysis at any HP, heals no HP, consumes one
+`cure_numbing_venom` clears warning at any HP (including full HP), heals no HP, consumes one
 actual owned unit and pays one phase. That phase is recovery's first: default
-recovery 4 leaves 3. No impairment, existing recovery, dead recipient or stale
+recovery 4 leaves 3. Full paralysis rejects self-treatment without changing the dose. No impairment, existing recovery, dead recipient or stale
 ownership rejects without item/time cost or protection refresh. Saved stack
 counts spend one unit of the selected instance; grouped instances stay distinct.
 Herbal Dressing, Bitter Herb and existing preparations keep their meanings.
@@ -106,7 +117,11 @@ older records clear stale memory and mean susceptible, even if today's
 definition says immune. Fresh actors use today's trait. Saved immunity persists;
 trait edits never cure an existing dose. Source instances retain their effective
 composite profile, and accepted doses retain their own timing/recovery snapshot
-even after source tuning, death, departure or disappearance. Owned remedies
+even after source tuning, death, departure or disappearance. Old severe-stage saves
+now fully paralyse, with exactly their old stage, remaining counter, parameters,
+application/source identity and timestamps. Old P1/P2 profiles remain P1/P2; no
+redose, reset, extension or recipe version bump occurs. Fresh defaults are W3/P3/R4.
+Owned remedies
 retain their saved use binding.
 
 Player travel continues aging. Active/live/pending owners age once under the
@@ -121,7 +136,13 @@ tactical budgets. Evidence expiry, real hold opportunities, geometry changes and
 scene cancellation continue normally.
 
 **Privileged live tactic inspection** is read-only, bounded and separate from
-player knowledge. It includes delivery acceptance/rejection, effect parameters,
+player knowledge. Ordinary sensory cues follow real events and normal player vision,
+including the first successful withdrawal step. A compatible optional boolean
+`withdrawal_told` prevents repeating that cue after saving mid-retreat; absent old
+records retain all old tactical counters. Known shipped remedy prose and example
+names refresh only on exact ID/value matches; custom text and historical logs stay intact.
+Ordinary combat follows the engine runtime debug override; formula generation and
+privileged diagnostics remain available. The inspector includes delivery acceptance/rejection, effect parameters,
 stage/clocks, application/source identity, susceptibility and movement denial.
 It does not apply effects, rerun combat, age clocks or notify sources of hidden
 treatment. See the [AI-3 delivery report](../../docs/owner/AI_3.md) for source-bound

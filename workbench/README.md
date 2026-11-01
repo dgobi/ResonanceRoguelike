@@ -1039,3 +1039,12 @@ See [Patient venom hunting](../roguelike/docs/PATIENT_VENOM_AI.md) for the two
 matched policy examples, actual-input counterplay and local saved-hunt scope.
 `node scripts/run-ai-4.mjs` exercises actual packaged authoring and room lifecycle;
 `AI4_RUNTIME_ONLY=1` selects final-runtime verification without republishing.
+
+
+AI-5 corrects every severe numbing-venom stage to full physical paralysis,
+including old saves with their original timing. Fresh defaults and both insect
+examples are W3/P3/R4. The Full paralysis control and remedy help distinguish
+warning treatment from rejected severe self-use. `.` or keypad 5 Wait passes one
+helpless phase; inspection remains free. `node scripts/run-ai-5.mjs` verifies the
+seed defaults, existing policy authoring and saved-room lifecycle;
+`AI5_RUNTIME_ONLY=1` selects final-package verification without publication.

@@ -95,6 +95,9 @@ class AISystem:
                 from engine.creature_abilities import process_abilities
                 process_abilities(entity, engine)
 
+            from engine.venom import fully_paralysed
+            if fully_paralysed(entity):
+                entity._ambush_ready = False
             # One bonus opportunity, before the unchanged normal speed budget.
             # Waking arms it; only a legal committed melee attempt consumes it.
             if getattr(entity, "_ambush_ready", False) and ability_enabled(entity, local_map):

@@ -124,6 +124,10 @@ def validate_saved(row, local_map=None):
         raise ValueError('composite: profile and tactical state required')
     p = saved_profile(composite['profile'])
     s = composite['state']
+    if isinstance(s, dict) and 'withdrawal_told' in s and p['recipe'] != 'observation_averse':
+        if type(s['withdrawal_told']) is not bool:
+            raise ValueError('composite.state.withdrawal_told: expected boolean')
+        s = {k: v for k, v in s.items() if k != 'withdrawal_told'}
     if p['recipe'] == 'observation_averse':
         from components.observation_averse import validate_state
         validate_state(s, p, local_map)

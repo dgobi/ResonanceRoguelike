@@ -98,7 +98,9 @@ class AI:
                     and local_map.visible[actor.x, actor.y]):
                 engine.log.add(f"The {actor.name} turns toward a sound.", UI_TEXT_DIM)
             _fire_creature_callout(actor, engine, _prev_state, self.state)
-        self._act(actor, local_map, entities, player, log, rng, engine=engine)
+        from engine.venom import fully_paralysed
+        if not fully_paralysed(actor):
+            self._act(actor, local_map, entities, player, log, rng, engine=engine)
 
     # ------------------------------------------------------------------ #
     #  State transitions
@@ -793,7 +795,7 @@ def _resolve_monster_attack(monster, target, engine, *, defensive=False) -> Mons
 
     # Invincibility check (player only)
     if is_player and getattr(engine, "player_invincible", False):
-        from config import DEBUG_MODE as _DEBUG_MODE
+        _DEBUG_MODE = bool(getattr(engine, 'debug', None))
         inv_msg = f"The {monster.name} {attack_verb} — thou art untouched."
         if _DEBUG_MODE:
             from engine.combat import roll_dice as _roll_dice
@@ -873,7 +875,7 @@ def _resolve_monster_attack(monster, target, engine, *, defensive=False) -> Mons
         armor_contact(engine, result)
 
     # Log messages — incoming damage (creature→player/entity): dusty_rose family
-    from config import DEBUG_MODE as _DEBUG_MODE
+    _DEBUG_MODE = bool(getattr(engine, 'debug', None))
     _dbg_appended = False
     for msg, mtype in zip(result.messages, result.message_types):
         # Resolver body prose uses second-person "thy" even with a named

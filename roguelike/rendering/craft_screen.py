@@ -253,6 +253,9 @@ class CraftScreen:
 
     def _attempt_craft(self, engine: "Engine", recipe: dict,
                        chosen_items: dict | None = None) -> None:
+        from engine.venom import fully_paralysed
+        if fully_paralysed(engine.player):
+            return
         from engine.crafting import can_craft, plan_craft, commit_craft
         inv = getattr(engine.player, "inventory", None)
         if inv is None:

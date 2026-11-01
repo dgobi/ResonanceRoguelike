@@ -184,6 +184,9 @@ def confirm_consume(engine, key):
     if key != pygame.K_y:
         engine.log.add('You decide against it.', MSG_DEFAULT)
         return
+    from engine.venom import fully_paralysed
+    if fully_paralysed(engine.player):
+        return
     item = pending['item']
     from engine.item_transfers import consume
     if not engine.player.inventory.contains(item) or item.on_use != 'consume_wight_concentrate':
@@ -239,6 +242,12 @@ def throw_key(engine, key):
         engine.log.add(f"You keep the {pending['item'].name}.", MSG_DEFAULT)
         return
     if key not in (pygame.K_RETURN, pygame.K_KP_ENTER):
+        return
+    from engine.venom import fully_paralysed
+    if fully_paralysed(engine.player):
+        engine._pending_throw = None
+        engine._placement_mode = 'campfire'
+        engine.mode = GameMode.LOCAL
         return
     x,y=engine._placement_cursor_x,engine._placement_cursor_y
     if not valid_throw(engine,x,y):

@@ -215,6 +215,9 @@ class InteractionCursor:
         from generation.floor_object_utils import empty_crate_owner, dismantle_empty_crate
         prompt = self._dismantle_prompt
         self._dismantle_prompt = None
+        from engine.venom import fully_paralysed
+        if fully_paralysed(engine.player):
+            return
         x, y, owner = prompt["x"], prompt["y"], prompt["owner"]
         if (engine.local_map is not prompt["scene"]
                 or (engine.world_x, engine.world_y, engine.current_submap_id) != prompt["address"]
@@ -241,6 +244,9 @@ class InteractionCursor:
 
     def _interact(self, engine: "Engine", *, interactable_only: bool = False) -> None:
         """Run a reachable action; look-mode dispatch shares this action clock."""
+        from engine.venom import fully_paralysed
+        if fully_paralysed(engine.player):
+            return
         cx, cy = self._cursor_x, self._cursor_y
         if not self.can_reach(engine, cx, cy):
             engine.log.add("You cannot reach that.", MSG_DEFAULT)
@@ -308,6 +314,9 @@ class InteractionCursor:
             lx, ly = prompt["lx"], prompt["ly"]
             is_container = prompt.get("source") == "container"
             self._selection_prompt = None
+            from engine.venom import fully_paralysed
+            if fully_paralysed(engine.player):
+                return
             if not self.can_reach(engine, lx, ly):
                 engine.log.add("You cannot reach that.", MSG_DEFAULT)
                 return

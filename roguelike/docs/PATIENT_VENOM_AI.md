@@ -18,7 +18,7 @@ the existing exact-source workflow.
 
 The two control-authored definitions `patient_amber_hunter` and
 `timed_amber_hunter` have identical body/art, HP 16, armour 2, damage 1d4+1,
-speed 1, sight 12, warning/paralysis/recovery 3/2/4, retreat distance 2,
+speed 1, sight 12, warning/paralysis/recovery 3/3/4, retreat distance 2,
 withdrawal budget 6, stored hold 3 and sight timeout 20. Only the policy and
 identity/prose differ. Hold is disabled and marked inactive in observed mode;
 it is operative in timed mode, including holds longer than the impairment.
@@ -37,10 +37,10 @@ It never follows a live effect link. Miss, rejection and defensive contact canno
 fabricate or renew a commitment. Another nearer hostile cannot replace its prey.
 
 For delivery during AI phase T, first expected observation is T+W+1 and the last
-useful action is T+W+P, inclusive. With W=3/P=2, the next opportunity retreats
+useful action is T+W+P, inclusive. With W=3/P=3, the next opportunity retreats
 one step to distance 2; T+2/T+3 monitor; T+4 can observe paralysis and take one
-normal approach step; T+5 can attempt ordinary melee while paralysis still
-applies. AI acts before effect aging. No observation or transition grants an
+normal approach step; T+5 and T+6 can attempt ordinary melee while full paralysis still
+applies. End T+6 starts recovery; the next player decision permits action. AI acts before effect aging. No observation or transition grants an
 action. Geometry, speed, darkness, treatment and prey movement can defeat this
 sequence; other valid tunings do not guarantee an attack in time.
 
@@ -94,16 +94,27 @@ populations and add nothing to ordinary starting inventory.
 
 Try waiting through onset; moving north behind the door wall during warning;
 or picking up the remedy with comma and using it through inventory. Hidden
-treatment followed by reappearance distinguishes the policies. Treatment after
-the patient closes also prevents its stale predatory attack. Stationary attacks,
-paid Wait and treatment remain legal during mobility paralysis.
+treatment followed by reappearance distinguishes the policies. Once full paralysis
+begins, attacks and self-treatment are unavailable, including an already-open
+inventory or pending confirmation. Treatment after the patient closes rejects
+without item/time/effect changes. Use `.` or keypad 5 Wait for one phase at a time;
+three such phases restore action in fresh stock. Free inspection does not age it.
+The examples display as **Amber Shell Hunter** and **Amber Whine Beetle**; their
+stable IDs and author-visible return policies remain unchanged. No combat/loadout
+tuning beyond the commissioned P3 timing was needed for the real-damage anchor.
 
 The separate version-1 hunt record saves own-delivery provenance and prediction
 with the v4 tactical phase/counters. Exact validation rejects malformed shapes,
 timing, identity and incompatible phases. Last symptom observations and paths
 are transient. F5/F9 and cold same-scene loading preserve the commitment and the
 independent victim snapshot without aging or another dose; the next decision
-revalidates sight. Missing/dead/foreign prey resolves safely.
+revalidates sight. Missing/dead/foreign prey resolves safely. Old P2 hunter profiles,
+commitments/deadlines and victim counters are preserved; their severe stages now
+fully paralyse. Fresh hunters use P3. Source paralysis pauses physical dispatch
+without spending spatial budgets; perception/expiry and effect clocks continue.
+A first successful retreat step emits the withdrawal cue; blocked retreat does not.
+Return prose follows visible movement. Ordinary feedback describes sensations and
+observable actions, while exact clocks and policy reasoning remain diagnostic.
 
 The bounded privileged inspector exposes prey/scene, original application/source,
 window, selected policy, latest permitted cue/reason and its age, action result

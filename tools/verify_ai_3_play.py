@@ -52,7 +52,7 @@ def run(room,response,cold_checks=False):
         trace=[state(e,'initial')];persistence=[]
         def key(k):
             e._handle_key(k);trace.append(state(e,pygame.key.name(k)))
-        def use():
+        def use(rejected=False):
             key(pygame.K_i);e.inventory_screen.render(pygame.Surface((1280,900)),e)
             for _ in range(40):
                 item=e.inventory_screen._selected_item()
@@ -60,9 +60,12 @@ def run(room,response,cold_checks=False):
                 key(pygame.K_DOWN)
             else:raise AssertionError('Placed remedy was not acquired through ordinary pickup')
             before=condition_state(e);key(pygame.K_e);after=condition_state(e);key(pygame.K_ESCAPE)
-            assert after['turn']==before['turn']+1
-            assert len(after['inventory'])==len(before['inventory'])-1
-            assert dose(e.player)['stage']=='recovery' and dose(e.player)['remaining']==3
+            if rejected:
+                assert before==after
+            else:
+                assert after['turn']==before['turn']+1
+                assert len(after['inventory'])==len(before['inventory'])-1
+                assert dose(e.player)['stage']=='recovery' and dose(e.player)['remaining']==3
             return dict(before=before,after=after)
         def checkpoint(stage):
             expected=condition_state(e);key(pygame.K_F5);key(pygame.K_F9)
@@ -109,10 +112,9 @@ def run(room,response,cold_checks=False):
             before=state(e,'before_denial');key(pygame.K_DOWN);after=state(e,'after_denial')
             assert (before['turn'],before['player'])==(after['turn'],after['player'])
             blocked=dict(before=before,after=after)
-            if response=='treat_paralysis':treatment=use()
-            else:
-                key(pygame.K_PERIOD);key(pygame.K_PERIOD)
-                assert dose(e.player)['stage']=='recovery' and dose(e.player)['remaining']==4
+            if response=='treat_paralysis':treatment=use(rejected=True)
+            while dose(e.player)['stage']=='paralysis':key(pygame.K_PERIOD)
+            assert dose(e.player)['stage']=='recovery' and dose(e.player)['remaining']==4
         if cold_checks:checkpoint('recovery')
         recovery=dose(e.player)['remaining']
         for _ in range(recovery):key(pygame.K_PERIOD)

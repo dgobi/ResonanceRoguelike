@@ -20,6 +20,9 @@ class ItemSystem:
         Returns True if the item was consumed/used successfully.
         """
         self.last_use_committed = False
+        from engine.venom import fully_paralysed
+        if fully_paralysed(engine.player):
+            return False
         inv = getattr(engine.player, "inventory", None)
         if inv is None or not inv.contains(item):
             if item.on_use in ("heal_minor", "cure_numbing_venom"):

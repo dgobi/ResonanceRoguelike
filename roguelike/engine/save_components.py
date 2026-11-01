@@ -161,6 +161,8 @@ def restore_item(item, row):
             if key == "temporary_essence" and value is None:
                 value = []
             setattr(item, key, copy.deepcopy(value))
+    from engine.stock_prose import refresh
+    refresh(item, item.item_id)
 
 
 def serialize_runtime(engine):

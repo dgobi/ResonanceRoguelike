@@ -8,8 +8,8 @@ AI-3 adds one supported **venom treatment** class using `cure_numbing_venom`.
 Open `venom_treatment`, duplicate into a new ID, tune ordinary fields, validate,
 review/apply and reopen before placing it in a saved room. The control-created
 `measured_venom_remedy` is a usable example. Its fixed binding cures player warning
-or mobility paralysis at any HP without healing, consumes one owned unit and
-pays one charged phase; that phase spends recovery's first count. Rejected use
+at any HP without healing, consumes one owned unit and pays one charged phase;
+that phase spends recovery's first count. Full paralysis rejects self-use. Rejected use
 costs no item/time and never refreshes protection. It cannot be made by deleting
 healing fields from an HP treatment. See [Numbing venom](NUMBING_VENOM_AI.md) for
 stages, recipients, reapplication, actual room inputs and persistence policies.

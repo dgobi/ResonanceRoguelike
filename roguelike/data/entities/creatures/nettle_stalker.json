@@ -1,7 +1,7 @@
 {
   "id": "nettle_stalker",
   "name": "Nettle Stalker",
-  "description": "A low hunter with a numbing bite. Its victim has a short warning before the legs lock.",
+  "description": "A low, bristling hunter with wet fangs and a nettled hide.",
   "tile": "heath_stalker",
   "blocks_movement": true,
   "base_hp": 16,

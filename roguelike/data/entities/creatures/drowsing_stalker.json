@@ -1,7 +1,7 @@
 {
   "id": "drowsing_stalker",
   "name": "Drowsing Stalker",
-  "description": "A low hunter whose numbing bite spreads slowly. The longer warning leaves more time to respond.",
+  "description": "A low hunter with drooping eyelids and dark saliva along its jaws.",
   "tile": "heath_stalker",
   "blocks_movement": true,
   "base_hp": 16,

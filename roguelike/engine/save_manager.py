@@ -165,6 +165,8 @@ class ChunkCache:
         from world.local_map import LocalMap
         if not isinstance(cached, CachedChunk) or not isinstance(cached.local_map, LocalMap):
             raise SaveFormatError(f'Missing or invalid active scene record: {path.name}')
+        from engine.stock_prose import refresh_map
+        refresh_map(cached.local_map)
         return cached
 
     def _write(self, path, cached):
@@ -1219,6 +1221,8 @@ def _deserialize_entities(
 
         actor.tile = d.get("tile", actor.tile)
         actor.name = d.get("name", actor.name)
+        from engine.stock_prose import refresh
+        refresh(actor, creature_id)
         actor.blocks_movement = d.get("blocks_movement", actor.blocks_movement)
         if creature_id == "stone_lurker":
             state = d["lurker"]

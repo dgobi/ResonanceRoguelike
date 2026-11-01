@@ -9,7 +9,7 @@ import uuid
 from dataclasses import dataclass
 
 EFFECT = 'numbing_venom'
-DEFAULTS = dict(warning_phases=3, paralysis_phases=2, recovery_phases=4)
+DEFAULTS = dict(warning_phases=3, paralysis_phases=3, recovery_phases=4)
 BOUNDS = dict(warning_phases=(2, 12), paralysis_phases=(1, 3), recovery_phases=(4, 16))
 
 
@@ -17,9 +17,14 @@ def dose(actor):
     return getattr(getattr(actor, 'fighter', actor), '_numbing_venom', None)
 
 
-def movement_denial(actor):
+def fully_paralysed(actor):
+    """Pure severe-stage action/active-defence predicate for an actor or Fighter."""
     record = dose(actor)
-    return 'numbing_venom_paralysis' if record and record['stage'] == 'paralysis' else None
+    return bool(record and record['stage'] == 'paralysis')
+
+
+def movement_denial(actor):
+    return 'numbing_venom_paralysis' if fully_paralysed(actor) else None
 
 
 def eligible(engine, actor):
@@ -51,10 +56,10 @@ class ApplicationResult:
 
 def tell(engine, actor, player_text, creature_text):
     from engine.palette import DUSTY_ROSE, UI_TEXT_DIM
-    from engine.local_rivals import visible
     if actor is engine.player:
         engine.log.add(player_text, DUSTY_ROSE)
-    elif any(a is actor for a in engine.entities) and visible(engine, actor):
+    elif (any(a is actor for a in engine.entities) and engine.local_map.in_bounds(actor.x, actor.y)
+          and engine.normal_player_vision()['visible'][actor.x, actor.y]):
         engine.log.add(f'The {actor.name} {creature_text}.', UI_TEXT_DIM)
 
 
@@ -80,8 +85,8 @@ def deliver(engine, source, victim, attack):
         application_id=identity, source=dict(creature=creature_id(source),
         individual=source._individual_id, owner=owner(engine)),
         applied_phase=engine.world_time.turn, aged_phase=engine.world_time.turn)
-    tell(engine, victim, 'Numbing venom enters the wound. Movement remains possible; treat it or prepare to hold still.',
-         'trembles as venom takes hold')
+    tell(engine, victim, 'A strange numbness spreads from the bite. Your limbs feel heavy.',
+         'trembles')
     return ApplicationResult(True, 'accepted', identity, source._individual_id)
 
 
@@ -101,20 +106,23 @@ def age(engine, actor):
     stage = record['stage']
     if record['remaining'] > 0:
         if stage == 'warning' and record['remaining'] == 1:
-            tell(engine, actor, 'The numbness spreads. Your legs will soon lock; you can still move.', 'shakes with spreading numbness')
+            tell(engine, actor, 'The numbness deepens.', 'shivers')
         return
     if stage == 'warning':
         record.update(stage='paralysis', remaining=record['parameters']['paralysis_phases'])
-        tell(engine, actor, 'Your legs lock. Wait, fight in place, or use venom treatment.', 'locks in place, limbs rigid')
+        if actor is engine.player:
+            engine._free_move_pending = False
+        tell(engine, actor, 'Your body will not answer.', 'locks in place, limbs rigid')
     elif stage == 'paralysis':
         record.update(stage='recovery', remaining=record['parameters']['recovery_phases'])
-        tell(engine, actor, 'Your legs answer again. The venom cannot take hold during recovery.', 'moves freely again')
+        tell(engine, actor, 'Feeling returns in prickling waves.', 'loosens its rigid limbs')
     else:
         actor.fighter._numbing_venom = None
-        tell(engine, actor, 'The venom recovery has passed. You are susceptible again.', 'steadies after the venom')
 
 
 def cure(engine):
+    if fully_paralysed(engine.player):
+        return False
     actor = engine.player
     record = dose(actor)
     from engine.local_rivals import living
@@ -124,7 +132,7 @@ def cure(engine):
         return False
     record.update(stage='recovery', remaining=record['parameters']['recovery_phases'],
                   aged_phase=engine.world_time.turn)
-    tell(engine, actor, 'The treatment clears the numbness. Movement is free; recovery protects you briefly.', '')
+    tell(engine, actor, 'The numbness begins to recede.', '')
     return True
 
 
@@ -180,4 +188,5 @@ def restore(actor, record):
 
 def inspect(actor):
     return dict(trait=getattr(actor, '_numbing_venom_trait', 'susceptible'),
-                dose=copy.deepcopy(dose(actor)), movement_denial=movement_denial(actor))
+                dose=copy.deepcopy(dose(actor)), movement_denial=movement_denial(actor),
+                full_paralysis=fully_paralysed(actor))

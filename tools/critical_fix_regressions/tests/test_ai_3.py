@@ -43,7 +43,7 @@ class VenomTests(unittest.TestCase):
 
     def actor(self, x=13, y=12, profile=None):
         raw=self.e.data.entities['hollow_revenant']
-        raw.update(ai_type='composite', ai_profile=copy.deepcopy(profile or VENOM_DEFAULTS),
+        raw.update(ai_type='composite', ai_profile=copy.deepcopy(profile or dict(VENOM_DEFAULTS, paralysis_phases=2)),
                    can_cross_chunks=False, can_use_stairs=False, speed=1)
         a=self.e.creature_factory.spawn('hollow_revenant',x,y)
         self.e.entities.append(a)
@@ -89,7 +89,8 @@ class VenomTests(unittest.TestCase):
         for _ in range(5):self.phase()
         self.assertEqual(('warning',1),(dose(self.e.player)['stage'],dose(self.e.player)['remaining']))
         self.phase();self.assertEqual('paralysis',dose(self.e.player)['stage'])
-        self.assertTrue(cure(self.e));self.assertEqual(4,dose(self.e.player)['remaining'])
+        self.assertFalse(cure(self.e))
+        self.phase();self.phase();self.assertEqual(4,dose(self.e.player)['remaining'])
         self.assertEqual(original['source'],dose(self.e.player)['source'])
 
     def test_every_rejection_preserves_attack_and_prior_dose(self):
@@ -161,12 +162,14 @@ class VenomTests(unittest.TestCase):
             e._descend_to_submap('absent');e._ascend_from_submap();prepare.assert_not_called()
         e.local_map.set_tile(12,13,'door_closed',False,False)
         e._handle_key_local(pygame.K_DOWN)
-        self.assertEqual('door_open',str(e.local_map.tiles[12,13]['terrain']))
-        self.assertEqual(1,dose(e.player)['remaining'])
-        # A stationary contact attack is paid and legal; no movement occurs.
+        self.assertEqual('door_closed',str(e.local_map.tiles[12,13]['terrain']))
+        self.assertEqual(2,dose(e.player)['remaining'])
+        # Severe-stage bump attacks are rejected before dispatch and cost nothing.
         enemy=e.creature_factory.spawn('hollow_revenant',13,12);e.entities.append(enemy)
         with patch.object(e,'_player_attack',return_value=True) as attack:
-            e._handle_key_local(pygame.K_RIGHT);attack.assert_called_once_with(enemy)
+            e._handle_key_local(pygame.K_RIGHT);attack.assert_not_called()
+        e.entities=[e.player]
+        e._handle_key_local(pygame.K_PERIOD);e._handle_key_local(pygame.K_PERIOD)
         self.assertEqual('recovery',dose(e.player)['stage']);self.assertEqual((12,12),(e.player.x,e.player.y))
         self.assertFalse(e._free_move_pending)
 
@@ -181,6 +184,11 @@ class VenomTests(unittest.TestCase):
             one=ItemFactory(e.data).create('venom_treatment');other=ItemFactory(e.data).create('venom_treatment')
             e.player.inventory.add(one);e.player.inventory.add(other)
             start=e.world_time.turn;use(e,one)
+            if stage=='paralysis':
+                self.assertTrue(e.player.inventory.contains(one));self.assertEqual(start,e.world_time.turn)
+                self.assertEqual('paralysis',dose(e.player)['stage'])
+                self.e.entities.append(self.source)
+                continue
             self.assertFalse(e.player.inventory.contains(one));self.assertTrue(e.player.inventory.contains(other))
             self.assertEqual(start+1,e.world_time.turn);self.assertEqual(('recovery',3),(dose(e.player)['stage'],dose(e.player)['remaining']))
             self.assertEqual(e.player.fighter.max_hp,e.player.fighter.hp)
@@ -203,7 +211,7 @@ class VenomTests(unittest.TestCase):
         self.assertEqual(pos,(v.x,v.y))
         v.x,v.y=13,12
         with patch('engine.combat.resolve_attack',return_value=CombatResult(hit=True,damage_dealt=1)) as attack:
-            self.assertTrue(_monster_attack_result(v,e.player,e).committed);attack.assert_called_once()
+            self.assertFalse(_monster_attack_result(v,e.player,e).committed);attack.assert_not_called()
 
     def test_composite_budgets_and_spatial_failure_survive_temporary_denial(self):
         e=self.e;a=self.actor(x=16,profile=DEFAULTS)

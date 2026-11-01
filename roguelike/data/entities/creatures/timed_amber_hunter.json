@@ -1,7 +1,7 @@
 {
   "id": "timed_amber_hunter",
-  "name": "Timed Amber Hunter",
-  "description": "An amber-shelled insect that stings, withdraws, and returns after a short hold.",
+  "name": "Amber Whine Beetle",
+  "description": "A broad amber insect with twitching antennae and pale, hooked mandibles.",
   "tile": "amber_sting_beetle",
   "blocks_movement": true,
   "base_hp": 16,
@@ -31,4 +31,4 @@
   ],
   "corpse_sprite": {"sheet": "amber_insect", "col": 1, "row": 0},
   "speed": 1
-,"ai_profile":{"capability":"numbing_melee","cornered":"defensive_melee","effect":"numbing_venom","hold_opportunities":3,"paralysis_phases":2,"recipe":"patient_venom_hunt","recovery_phases":4,"retreat_distance":2,"return_policy":"after_hold","scene_scope":"active_scene","trigger":"accepted_application","version":4,"warning_phases":3,"withdrawal_budget":6}}
+,"ai_profile":{"capability":"numbing_melee","cornered":"defensive_melee","effect":"numbing_venom","hold_opportunities":3,"paralysis_phases":3,"recipe":"patient_venom_hunt","recovery_phases":4,"retreat_distance":2,"return_policy":"after_hold","scene_scope":"active_scene","trigger":"accepted_application","version":4,"warning_phases":3,"withdrawal_budget":6}}

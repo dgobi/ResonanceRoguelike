@@ -349,7 +349,7 @@ version-1 definitions and saved profiles retain their existing meaning.
 Contract `creature-composite-7` adds version-3 **Venom strike and withdraw** and
 ordinary recipient susceptibility controls. [Numbing venom](NUMBING_VENOM_AI.md)
 defines the accepted-application trigger, charged warning/paralysis/recovery
-clocks, consumed treatment, movement-only denial, provenance and saved-instance
+clocks, consumed warning-stage treatment, full physical paralysis, provenance and saved-instance
 policy. Nettle Stalker and Drowsing Stalker demonstrate warning 3 versus 6 through
 one consumer. Their finite timed return does not confirm actual paralysis.
 The three `ai3_*` saved rooms provide explicit placement, real remedy pickup and

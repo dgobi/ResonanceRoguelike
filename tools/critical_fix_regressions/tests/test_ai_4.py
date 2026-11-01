@@ -25,7 +25,7 @@ class PatientHuntTests(unittest.TestCase):
     def setUp(self):
         ai3.VenomTests.setUp(self)
         self.e.entities.remove(self.source)
-        self.source=self.actor(profile=HUNT_DEFAULTS)
+        self.source=self.actor(profile=dict(HUNT_DEFAULTS, paralysis_phases=2))
 
     def sting(self):
         with patch('engine.combat.resolve_attack',return_value=CombatResult(hit=True,damage_dealt=1)):
@@ -99,13 +99,13 @@ class PatientHuntTests(unittest.TestCase):
         e.player.x=19;a.perception.sight_radius=12;a.perception.sees_in_dark=False
         self.assertIsNone(observe(a.ai,e,a,e.player,0.01)['cue'])
 
-    def test_fresh_cure_between_close_and_attack_prevents_stale_predation(self):
+    def test_self_cure_between_close_and_attack_rejected_then_attack_remains_legal(self):
         e=self.e;a=self.source;self.sting()
         for _ in range(4):self.tick()
         self.assertEqual('return',a.ai.phase)
-        cure(e);hp=e.player.fighter.hp;self.tick()
-        self.assertEqual(hp,e.player.fighter.hp)
-        self.assertEqual('expected_impairment_absent',a.ai.last_cancellation)
+        self.assertFalse(cure(e));hp=e.player.fighter.hp;self.tick()
+        self.assertLess(e.player.fighter.hp,hp)
+        self.assertEqual('recovery',dose(e.player)['stage'])
 
     def test_sight_loss_between_confirmation_and_attack_uses_only_memory(self):
         e=self.e;a=self.source;self.sting()
@@ -178,13 +178,13 @@ class PatientHuntTests(unittest.TestCase):
         self.assertIsNone(a.ai.hunt);self.assertEqual('reacquisition_exhausted',a.ai.last_cancellation)
         self.assertEqual(h['last_useful_phase'],485)
 
-    def test_saved_confirmed_cue_cannot_authorize_resumed_cured_attack(self):
+    def test_saved_confirmed_cue_cannot_authorize_resumed_recovered_attack(self):
         e=self.e;a=self.source;self.sting()
         for _ in range(4):self.tick()
         row=_serialize_entity(a);restored=_deserialize_entities([row],e)[0]
         e.entities.remove(a);e.entities.append(restored)
         self.assertIsNone(restored.ai.hunt_evidence)
-        cure(e);hp=e.player.fighter.hp;self.decision(restored)
+        self.phase();hp=e.player.fighter.hp;self.decision(restored)
         self.assertEqual(hp,e.player.fighter.hp)
         self.assertEqual('expected_impairment_absent',restored.ai.last_cancellation)
 

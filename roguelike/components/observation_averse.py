@@ -228,7 +228,7 @@ def take_turn(ai, actor, engine, ambient):
             ai.blocked_cover = False
         if useful and ai.conceal_left > 0:
             if ai.phase != 'conceal' and watched:
-                ai._tell(engine, actor, 'recoils from the light and seeks shadow', current_vision=True)
+                ai._tell(engine, actor, 'shudders in the light', current_vision=True)
             ai.phase = 'conceal'
             if goal == (actor.x, actor.y):
                 ai.phase, ai.covered_phase = 'covered', now

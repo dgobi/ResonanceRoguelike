@@ -1,0 +1,16 @@
+{
+  "start_revision": "721c71e0769a575968d414393552458dce3c74aa",
+  "owner_file_sha256": "bcf41ab230fea7aa43a2a2f26b2826bd6d0d53ec814c788903badc642910f49a",
+  "legacy_files": {
+    "C:\\Users\\dango\\AppData\\Local\\Temp\\resonance-ai5-legacy-zfj_801k\\saves\\.slot_0.lock": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "C:\\Users\\dango\\AppData\\Local\\Temp\\resonance-ai5-legacy-zfj_801k\\saves\\slot_0\\HEAD.json": "94995ba68f313af166bcac7d70af35fd4dbcc764c71bf223e8fb079d695d98ce",
+    "C:\\Users\\dango\\AppData\\Local\\Temp\\resonance-ai5-legacy-zfj_801k\\saves\\slot_0\\.sessions\\4bcac4d2f7c64a0ea008f1e88fc40140\\chunks\\0_0.pkl": "4fc56dfdec4fecad45dc718d189c897095419e186fba6109b780bc1552d47aba",
+    "C:\\Users\\dango\\AppData\\Local\\Temp\\resonance-ai5-legacy-zfj_801k\\saves\\slot_0\\.sessions\\4bcac4d2f7c64a0ea008f1e88fc40140\\chunks\\room-test-instance.pkl": "323c23fbe77cd0d7f01df186e757dcd5534db40476ef7e87c56e6ec46fd485c3",
+    "C:\\Users\\dango\\AppData\\Local\\Temp\\resonance-ai5-legacy-zfj_801k\\saves\\slot_0\\generations\\g-0de0da025ed94b2ea2c38795044b12f7\\manifest.json": "74a1ed77464c7ac956579b71502bbbb7a0dd905a9f9feb9c2e7c2405a5a592e9",
+    "C:\\Users\\dango\\AppData\\Local\\Temp\\resonance-ai5-legacy-zfj_801k\\saves\\slot_0\\generations\\g-0de0da025ed94b2ea2c38795044b12f7\\meta.json": "84a6ae65cd421370e4c97cf719e0db2a7b9f612519745576ba863ebba267ed5a",
+    "C:\\Users\\dango\\AppData\\Local\\Temp\\resonance-ai5-legacy-zfj_801k\\saves\\slot_0\\generations\\g-0de0da025ed94b2ea2c38795044b12f7\\player.json": "20dfbd9258eef7ea11811ed7b153ff883152f532de39ea31f8278dfd62260b7e",
+    "C:\\Users\\dango\\AppData\\Local\\Temp\\resonance-ai5-legacy-zfj_801k\\saves\\slot_0\\generations\\g-0de0da025ed94b2ea2c38795044b12f7\\world.json": "64cec70326e289df2aa51dfe422b2a3112106a9b4a704c01d74c1a7764c8ed8f",
+    "C:\\Users\\dango\\AppData\\Local\\Temp\\resonance-ai5-legacy-zfj_801k\\saves\\slot_0\\generations\\g-0de0da025ed94b2ea2c38795044b12f7\\chunks\\0_0.pkl": "4fc56dfdec4fecad45dc718d189c897095419e186fba6109b780bc1552d47aba",
+    "C:\\Users\\dango\\AppData\\Local\\Temp\\resonance-ai5-legacy-zfj_801k\\saves\\slot_0\\generations\\g-0de0da025ed94b2ea2c38795044b12f7\\chunks\\room-test-instance.pkl": "4a3f38b4cf400b288d4df01a2b0c028dea74f8b7bb71cd97e31b3eaa8b4fcc17"
+  }
+}
