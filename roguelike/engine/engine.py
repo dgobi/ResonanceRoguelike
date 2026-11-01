@@ -5019,11 +5019,11 @@ class Engine:
             # Reveal the map grid
             self.local_map.tiles["visible"][:] = True
             self.local_map.tiles["explored"][:] = True
-    
+
             # Set the lighting multiplier to 1.0 (True Color)
             if hasattr(self, "light_map"):
                 self.light_map.fill(1.0)
-    
+
             self._update_last_known_positions()
             return
         # ── Unconditional surface guard ───────────────────────────────
