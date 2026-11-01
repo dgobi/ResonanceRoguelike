@@ -120,6 +120,10 @@ class FullParalysisTests(unittest.TestCase):
 
     def test_no_reaction_denial_flood_and_perks_are_view_only(self):
         e=self.e;self.paralysis();count=copy.deepcopy(e.log.messages);turn=e.world_time.turn
+        e._handle_key(pygame.K_h);self.assertTrue(e.health_screen.open)
+        e._handle_key(pygame.K_ESCAPE)
+        e._handle_key(pygame.K_l);self.assertTrue(e.lexicon_screen.open)
+        e._handle_key(pygame.K_ESCAPE)
         e.player.level.perk_points=100
         perk=next(iter(e.data.perks));e.perk_screen._flat=[(perk,False,'')];e.perk_screen.selected=0
         before=copy.deepcopy(e.player.perks.acquired)

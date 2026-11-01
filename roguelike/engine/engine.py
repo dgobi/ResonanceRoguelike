@@ -1736,18 +1736,9 @@ class Engine:
             self._handle_key_overmap(key)
 
     def _handle_key_local(self, key: int) -> None:
-        if self._movement_denied():
-            if key in MOVE_KEYS:
-                self._pickup_mode = False
-                return
-            if key in (self.display.MOVESET_KEY_1, self.display.MOVESET_KEY_2,
-                       self.display.SPRINT_KEY, pygame.K_COMMA, pygame.K_g, pygame.K_w):
-                return
-            if key in WAIT_KEYS:
-                self._free_move_pending = False
-                self._advance_turn()
-                self._update_context_prompt()
-                return
+        paralysed = self._movement_denied()
+        if paralysed:
+            self._pickup_mode = False
         # Directional pickup mode
         if self._pickup_mode:
             if key == pygame.K_ESCAPE:
@@ -1816,6 +1807,18 @@ class Engine:
         if key == pygame.K_l:
             self.lexicon_screen.toggle()
             return
+
+        # Free inspection takes precedence over overlapping vi movement keys.
+        if paralysed:
+            if key in WAIT_KEYS:
+                self._free_move_pending = False
+                self._advance_turn()
+                self._update_context_prompt()
+                return
+            if key in MOVE_KEYS or key in (
+                    self.display.MOVESET_KEY_1, self.display.MOVESET_KEY_2,
+                    self.display.SPRINT_KEY, pygame.K_COMMA, pygame.K_g, pygame.K_w):
+                return
 
         acted = False
         _was_move = False
