@@ -1,0 +1,21 @@
+{
+  "run_id": "d-20261031-234818-a3bdacd0",
+  "command": [
+    "tools/verify_d.py",
+    "--evidence",
+    ".baseline/ai-3/final-b/production-d"
+  ],
+  "base_commit": "d0a3a22504291a7def94cb59267ac80045b41de1",
+  "branch": "main",
+  "only": null,
+  "case": null,
+  "totals": {
+    "checks": 3704,
+    "passed": 3704,
+    "failed": 0,
+    "workers": 159
+  },
+  "passed": true,
+  "workers": 159,
+  "input_manifest_matches_current": true
+}

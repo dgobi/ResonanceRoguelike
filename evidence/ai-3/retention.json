@@ -1,0 +1,67 @@
+{
+  "runtime_revision": "5d757faa36bd0dd3f272ae6482fb1d8bd614a04b",
+  "retained_scope": "Development authoring publications and screenshots only. Six saved files byte-match. No historical AI-1/AI-2 test totals retained as AI-3 certification.",
+  "final_saved_files": [
+    {
+      "path": "roguelike/data/entities/creatures/nettle_stalker.json",
+      "sha256": "fc4ab8bb14a00d15e2b8a85a13a895adc4190e7248ea7c59cbc1923876b2bd65",
+      "bytes": 3598,
+      "matches_publication": true
+    },
+    {
+      "path": "roguelike/data/entities/creatures/drowsing_stalker.json",
+      "sha256": "1829b42e4ad20f09e203dec67af4851e719ac716390779638dd1e32e835ceaff",
+      "bytes": 3611,
+      "matches_publication": true
+    },
+    {
+      "path": "roguelike/data/items/consumables/measured_venom_remedy.json",
+      "sha256": "e5a5abc12eefe368a99a2f40c764b821ab60c77ac63ab27157a72b863293f404",
+      "bytes": 371,
+      "matches_publication": true
+    },
+    {
+      "path": "roguelike/data/layouts/ai3_nettle_opening.json",
+      "sha256": "1ae4e13548949c8b4c9ee020f0b33ba67800d911ef2be945f58bc4bc6bed91f5",
+      "bytes": 722,
+      "matches_publication": true
+    },
+    {
+      "path": "roguelike/data/layouts/ai3_drowsing_opening.json",
+      "sha256": "6361a3f1ffb222e04c2061225423dde692fae099570d291cf84a8da37e01024e",
+      "bytes": 726,
+      "matches_publication": true
+    },
+    {
+      "path": "roguelike/data/layouts/ai3_rival_ground.json",
+      "sha256": "abb40701b6f71012746fc42a2a291da9f64ba06da03d0b49d18a6b843736a19a",
+      "bytes": 767,
+      "matches_publication": true
+    }
+  ],
+  "final_runtime": "Fresh final play, cold-load, health, native, full focused/production-D and affected distribution gates use the frozen implementation boundary.",
+  "material_attempt": "First native authoring run published primary definitions, then source-changed readback rejected during concurrent runtime edits. Later successful authoring and final-runtime runs are distinct.",
+  "catalogue_test_correction": {
+    "changed": [
+      "tools/critical_fix_regressions/tests/test_structure_contract.py",
+      "tools/critical_fix_regressions/tests/test_usable_supplies.py",
+      "workbench/worker/test_authoring.py",
+      "workbench/worker/test_creatures.py"
+    ],
+    "patch": "catalogue-test-delta.patch.gz",
+    "reason": "Four existing catalogue expectations needed the commissioned two creatures, two remedies and three rooms. Only test assertions changed.",
+    "runtime_content_frontend_host_bridge_and_pinned_runtime_unchanged": true,
+    "all_frozen_game_capture_inputs_match": true,
+    "package_dependency_proof": "Tauri ships worker/bridge.py and worker/runtime; changed Workbench test modules are not bundled. The startup data_fixture function is byte-identical.",
+    "full_focused_and_production_d": "Fresh unfiltered reruns at the corrected verification revision; final results in gates.json.",
+    "worker": {
+      "fresh_full_affected_cases": 44,
+      "passed": 44,
+      "retained_partial_cases": 0,
+      "log": "worker-final.log"
+    },
+    "raw_patch_sha256": "6b1216c51165fd3b7f147795bd6f4cca34c6343ed1fe27d1a429ca695abe1cfe"
+  },
+  "verification_revision": "d0a3a22504291a7def94cb59267ac80045b41de1",
+  "fresh_unfiltered_core_gate_sources_match_current": true
+}

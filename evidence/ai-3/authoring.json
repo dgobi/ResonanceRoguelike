@@ -1,0 +1,332 @@
+{
+  "passed": true,
+  "scope": "Retained actual-control authoring, not final-runtime certification.",
+  "development_runs": [
+    {
+      "artifact": "workbench\\.artifacts\\ai-3\\native-1793509983380",
+      "complete_native_pass": false,
+      "failure": "locator.waitFor: Timeout 60000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText(/Saved and byte-checked reopen:/) to be visible\u001b[22m\n\n    at apply (G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-ai-3.mjs:31:433)\n    at async file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-ai-3.mjs:108:78",
+      "publications": [
+        {
+          "path": "roguelike/data/entities/creatures/nettle_stalker.json",
+          "sha256": "fc4ab8bb14a00d15e2b8a85a13a895adc4190e7248ea7c59cbc1923876b2bd65",
+          "source_asset": "roguelike/data/entities/creatures/heath_stalker.json",
+          "source_sha256": "09c66a44f64e38373f7f26d1575c3c66a32f5e9f021c2619320b1a59f242f015",
+          "review_token": "a169f371-aee7-4c0f-90ce-2c75eeb19a46",
+          "draft_sha256": "fc4ab8bb14a00d15e2b8a85a13a895adc4190e7248ea7c59cbc1923876b2bd65",
+          "contract": "creature-composite-6",
+          "source": {
+            "branch": "main",
+            "catalog_sha256": "5b4de4dc6d9dc1a93900c3ea2ed0e6fe339369265db5e87934ea95942892fc2f",
+            "commit": "28c9d88ade28daeb11f9f39922399eaf5085065f",
+            "game_dirty": true,
+            "game_source_sha256": "38ff607726148d47d5297f3f1cdad8d89829a3bf7ae363057ef52532c684f896",
+            "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+            "root": "G:\\GameDev\\RoguelikeProject"
+          },
+          "definition_id": "nettle_stalker",
+          "profile": {
+            "capability": "numbing_melee",
+            "cornered": "defensive_melee",
+            "effect": "numbing_venom",
+            "hold_opportunities": 3,
+            "paralysis_phases": 2,
+            "recipe": "venom_strike_and_withdraw",
+            "recovery_phases": 4,
+            "retreat_distance": 3,
+            "scene_scope": "active_scene",
+            "trigger": "accepted_application",
+            "version": 3,
+            "warning_phases": 3,
+            "withdrawal_budget": 6
+          },
+          "use": null
+        },
+        {
+          "path": "roguelike/data/entities/creatures/nettle_stalker.json",
+          "sha256": "3591ee08262d5f957790584edfc5c1493d210877770472218c33d5ddce766af3",
+          "source_asset": "roguelike/data/entities/creatures/nettle_stalker.json",
+          "source_sha256": "fc4ab8bb14a00d15e2b8a85a13a895adc4190e7248ea7c59cbc1923876b2bd65",
+          "review_token": "c52bbdaf-0bce-427a-b6fe-e4d96d261df0",
+          "draft_sha256": "3591ee08262d5f957790584edfc5c1493d210877770472218c33d5ddce766af3",
+          "contract": "creature-composite-6",
+          "source": {
+            "branch": "main",
+            "catalog_sha256": "e021240a49b2d040b57bff505341ec5c434e81b84cffd713eb175449855cc734",
+            "commit": "28c9d88ade28daeb11f9f39922399eaf5085065f",
+            "game_dirty": true,
+            "game_source_sha256": "38ff607726148d47d5297f3f1cdad8d89829a3bf7ae363057ef52532c684f896",
+            "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+            "root": "G:\\GameDev\\RoguelikeProject"
+          },
+          "definition_id": "nettle_stalker",
+          "profile": {
+            "capability": "numbing_melee",
+            "cornered": "defensive_melee",
+            "effect": "numbing_venom",
+            "hold_opportunities": 3,
+            "paralysis_phases": 2,
+            "recipe": "venom_strike_and_withdraw",
+            "recovery_phases": 4,
+            "retreat_distance": 3,
+            "scene_scope": "active_scene",
+            "trigger": "accepted_application",
+            "version": 3,
+            "warning_phases": 4,
+            "withdrawal_budget": 6
+          },
+          "use": null
+        }
+      ]
+    },
+    {
+      "artifact": "workbench\\.artifacts\\ai-3\\native-1793510128645",
+      "complete_native_pass": true,
+      "publications": [
+        {
+          "path": "roguelike/data/entities/creatures/nettle_stalker.json",
+          "sha256": "3591ee08262d5f957790584edfc5c1493d210877770472218c33d5ddce766af3",
+          "source_asset": "roguelike/data/entities/creatures/nettle_stalker.json",
+          "source_sha256": "fc4ab8bb14a00d15e2b8a85a13a895adc4190e7248ea7c59cbc1923876b2bd65",
+          "review_token": "b2ece842-14a4-48bd-8a41-99784ddc579c",
+          "draft_sha256": "3591ee08262d5f957790584edfc5c1493d210877770472218c33d5ddce766af3",
+          "contract": "creature-composite-6",
+          "source": {
+            "branch": "main",
+            "catalog_sha256": "e021240a49b2d040b57bff505341ec5c434e81b84cffd713eb175449855cc734",
+            "commit": "28c9d88ade28daeb11f9f39922399eaf5085065f",
+            "game_dirty": true,
+            "game_source_sha256": "72abfd2d8171cf23eb2bfef4c84b3d035b3fa613992f6520ebc12b39bc278170",
+            "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+            "root": "G:\\GameDev\\RoguelikeProject"
+          },
+          "definition_id": "nettle_stalker",
+          "profile": {
+            "capability": "numbing_melee",
+            "cornered": "defensive_melee",
+            "effect": "numbing_venom",
+            "hold_opportunities": 3,
+            "paralysis_phases": 2,
+            "recipe": "venom_strike_and_withdraw",
+            "recovery_phases": 4,
+            "retreat_distance": 3,
+            "scene_scope": "active_scene",
+            "trigger": "accepted_application",
+            "version": 3,
+            "warning_phases": 4,
+            "withdrawal_budget": 6
+          },
+          "use": null
+        },
+        {
+          "path": "roguelike/data/entities/creatures/nettle_stalker.json",
+          "sha256": "fc4ab8bb14a00d15e2b8a85a13a895adc4190e7248ea7c59cbc1923876b2bd65",
+          "source_asset": "roguelike/data/entities/creatures/nettle_stalker.json",
+          "source_sha256": "3591ee08262d5f957790584edfc5c1493d210877770472218c33d5ddce766af3",
+          "review_token": "166d2d6b-3eb3-46a2-b31e-46f28cd35346",
+          "draft_sha256": "fc4ab8bb14a00d15e2b8a85a13a895adc4190e7248ea7c59cbc1923876b2bd65",
+          "contract": "creature-composite-6",
+          "source": {
+            "branch": "main",
+            "catalog_sha256": "0350506d140167fec59df0cc991534b33d6463b4466c88e539de3e28c90e4384",
+            "commit": "28c9d88ade28daeb11f9f39922399eaf5085065f",
+            "game_dirty": true,
+            "game_source_sha256": "72abfd2d8171cf23eb2bfef4c84b3d035b3fa613992f6520ebc12b39bc278170",
+            "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+            "root": "G:\\GameDev\\RoguelikeProject"
+          },
+          "definition_id": "nettle_stalker",
+          "profile": {
+            "capability": "numbing_melee",
+            "cornered": "defensive_melee",
+            "effect": "numbing_venom",
+            "hold_opportunities": 3,
+            "paralysis_phases": 2,
+            "recipe": "venom_strike_and_withdraw",
+            "recovery_phases": 4,
+            "retreat_distance": 3,
+            "scene_scope": "active_scene",
+            "trigger": "accepted_application",
+            "version": 3,
+            "warning_phases": 3,
+            "withdrawal_budget": 6
+          },
+          "use": null
+        },
+        {
+          "path": "roguelike/data/entities/creatures/drowsing_stalker.json",
+          "sha256": "1829b42e4ad20f09e203dec67af4851e719ac716390779638dd1e32e835ceaff",
+          "source_asset": "roguelike/data/entities/creatures/nettle_stalker.json",
+          "source_sha256": "fc4ab8bb14a00d15e2b8a85a13a895adc4190e7248ea7c59cbc1923876b2bd65",
+          "review_token": "2893fbab-bdae-4340-a20b-2b3699f5ab07",
+          "draft_sha256": "1829b42e4ad20f09e203dec67af4851e719ac716390779638dd1e32e835ceaff",
+          "contract": "creature-composite-6",
+          "source": {
+            "branch": "main",
+            "catalog_sha256": "e021240a49b2d040b57bff505341ec5c434e81b84cffd713eb175449855cc734",
+            "commit": "28c9d88ade28daeb11f9f39922399eaf5085065f",
+            "game_dirty": true,
+            "game_source_sha256": "72abfd2d8171cf23eb2bfef4c84b3d035b3fa613992f6520ebc12b39bc278170",
+            "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+            "root": "G:\\GameDev\\RoguelikeProject"
+          },
+          "definition_id": "drowsing_stalker",
+          "profile": {
+            "capability": "numbing_melee",
+            "cornered": "defensive_melee",
+            "effect": "numbing_venom",
+            "hold_opportunities": 3,
+            "paralysis_phases": 2,
+            "recipe": "venom_strike_and_withdraw",
+            "recovery_phases": 4,
+            "retreat_distance": 3,
+            "scene_scope": "active_scene",
+            "trigger": "accepted_application",
+            "version": 3,
+            "warning_phases": 6,
+            "withdrawal_budget": 6
+          },
+          "use": null
+        },
+        {
+          "path": "roguelike/data/items/consumables/measured_venom_remedy.json",
+          "sha256": "e5a5abc12eefe368a99a2f40c764b821ab60c77ac63ab27157a72b863293f404",
+          "source_asset": "roguelike/data/items/consumables/venom_treatment.json",
+          "source_sha256": "2365cbc787d3b18e4770f65c64ff7764204216f33ef45ec79176119114197909",
+          "review_token": "82585b54-f848-4a73-9548-f14fbe7fbfbe",
+          "draft_sha256": "e5a5abc12eefe368a99a2f40c764b821ab60c77ac63ab27157a72b863293f404",
+          "contract": "expedition-items-3",
+          "source": {
+            "branch": "main",
+            "catalog_sha256": "4d755faf538973c0132693ab83a2c0a3721e554f04397be7555b22a59831c8c8",
+            "commit": "28c9d88ade28daeb11f9f39922399eaf5085065f",
+            "game_dirty": true,
+            "game_source_sha256": "72abfd2d8171cf23eb2bfef4c84b3d035b3fa613992f6520ebc12b39bc278170",
+            "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+            "root": "G:\\GameDev\\RoguelikeProject"
+          },
+          "definition_id": "measured_venom_remedy",
+          "profile": null,
+          "use": "cure_numbing_venom"
+        },
+        {
+          "path": "roguelike/data/layouts/ai3_nettle_opening.json",
+          "sha256": "1ae4e13548949c8b4c9ee020f0b33ba67800d911ef2be945f58bc4bc6bed91f5",
+          "source_asset": "roguelike/data/layouts/ai1_skirmisher_room.json",
+          "source_sha256": "d24612886abb861d45e7b2ea43fa63412d4cb377f236952ca4117e204a6a6ae5",
+          "review_token": "0e2adc2b-7da5-4722-bd06-5718cf9f499b",
+          "draft_sha256": "1ae4e13548949c8b4c9ee020f0b33ba67800d911ef2be945f58bc4bc6bed91f5",
+          "contract": "authored-room-2",
+          "source": {
+            "branch": "main",
+            "catalog_sha256": "f4088fb629eb0bf1137f7cb8cd76af0ea10b79912a012e5d03ce80858de20efd",
+            "commit": "28c9d88ade28daeb11f9f39922399eaf5085065f",
+            "game_dirty": true,
+            "game_source_sha256": "72abfd2d8171cf23eb2bfef4c84b3d035b3fa613992f6520ebc12b39bc278170",
+            "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+            "root": "G:\\GameDev\\RoguelikeProject"
+          },
+          "definition_id": "ai3_nettle_opening",
+          "profile": null,
+          "use": null
+        },
+        {
+          "path": "roguelike/data/layouts/ai3_drowsing_opening.json",
+          "sha256": "6361a3f1ffb222e04c2061225423dde692fae099570d291cf84a8da37e01024e",
+          "source_asset": "roguelike/data/layouts/ai3_nettle_opening.json",
+          "source_sha256": "1ae4e13548949c8b4c9ee020f0b33ba67800d911ef2be945f58bc4bc6bed91f5",
+          "review_token": "7bd9ab92-c31d-441f-9aa9-6746384d722b",
+          "draft_sha256": "6361a3f1ffb222e04c2061225423dde692fae099570d291cf84a8da37e01024e",
+          "contract": "authored-room-2",
+          "source": {
+            "branch": "main",
+            "catalog_sha256": "947d6102734e5d876a22d51c8d251c6f04c17b4586867fd1e34f5f27107ee501",
+            "commit": "28c9d88ade28daeb11f9f39922399eaf5085065f",
+            "game_dirty": true,
+            "game_source_sha256": "72abfd2d8171cf23eb2bfef4c84b3d035b3fa613992f6520ebc12b39bc278170",
+            "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+            "root": "G:\\GameDev\\RoguelikeProject"
+          },
+          "definition_id": "ai3_drowsing_opening",
+          "profile": null,
+          "use": null
+        },
+        {
+          "path": "roguelike/data/layouts/ai3_rival_ground.json",
+          "sha256": "abb40701b6f71012746fc42a2a291da9f64ba06da03d0b49d18a6b843736a19a",
+          "source_asset": "roguelike/data/layouts/ai1_skirmisher_room.json",
+          "source_sha256": "d24612886abb861d45e7b2ea43fa63412d4cb377f236952ca4117e204a6a6ae5",
+          "review_token": "b88c0aa5-377d-4e36-aa8c-630e1606ea69",
+          "draft_sha256": "abb40701b6f71012746fc42a2a291da9f64ba06da03d0b49d18a6b843736a19a",
+          "contract": "authored-room-2",
+          "source": {
+            "branch": "main",
+            "catalog_sha256": "ce93f1bf6fe53d85cfd9461cd338242278b244c179ab07e454b968fd2dddddfa",
+            "commit": "28c9d88ade28daeb11f9f39922399eaf5085065f",
+            "game_dirty": true,
+            "game_source_sha256": "72abfd2d8171cf23eb2bfef4c84b3d035b3fa613992f6520ebc12b39bc278170",
+            "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+            "root": "G:\\GameDev\\RoguelikeProject"
+          },
+          "definition_id": "ai3_rival_ground",
+          "profile": null,
+          "use": null
+        }
+      ],
+      "reopened": [
+        {
+          "path": "roguelike/data/entities/creatures/nettle_stalker.json",
+          "sha256": "fc4ab8bb14a00d15e2b8a85a13a895adc4190e7248ea7c59cbc1923876b2bd65"
+        }
+      ]
+    }
+  ],
+  "final_saved_files": [
+    {
+      "path": "roguelike/data/entities/creatures/nettle_stalker.json",
+      "sha256": "fc4ab8bb14a00d15e2b8a85a13a895adc4190e7248ea7c59cbc1923876b2bd65",
+      "bytes": 3598,
+      "matches_publication": true
+    },
+    {
+      "path": "roguelike/data/entities/creatures/drowsing_stalker.json",
+      "sha256": "1829b42e4ad20f09e203dec67af4851e719ac716390779638dd1e32e835ceaff",
+      "bytes": 3611,
+      "matches_publication": true
+    },
+    {
+      "path": "roguelike/data/items/consumables/measured_venom_remedy.json",
+      "sha256": "e5a5abc12eefe368a99a2f40c764b821ab60c77ac63ab27157a72b863293f404",
+      "bytes": 371,
+      "matches_publication": true
+    },
+    {
+      "path": "roguelike/data/layouts/ai3_nettle_opening.json",
+      "sha256": "1ae4e13548949c8b4c9ee020f0b33ba67800d911ef2be945f58bc4bc6bed91f5",
+      "bytes": 722,
+      "matches_publication": true
+    },
+    {
+      "path": "roguelike/data/layouts/ai3_drowsing_opening.json",
+      "sha256": "6361a3f1ffb222e04c2061225423dde692fae099570d291cf84a8da37e01024e",
+      "bytes": 726,
+      "matches_publication": true
+    },
+    {
+      "path": "roguelike/data/layouts/ai3_rival_ground.json",
+      "sha256": "abb40701b6f71012746fc42a2a291da9f64ba06da03d0b49d18a6b843736a19a",
+      "bytes": 767,
+      "matches_publication": true
+    }
+  ],
+  "matched_mechanics_except_warning_and_identity": true,
+  "seed": "venom_treatment is the code-delivered legal item template; measured_venom_remedy was control-created from it.",
+  "checks": [
+    "create, tune, review and reopen matched venom sources through controls",
+    "duplicate the registered treatment seed into a usable new ID",
+    "place saved creatures, remedy and ordinary rival through room controls",
+    "packaged delivery, warning/paralysis treatment, F5/F9 and captured lifecycle",
+    "source preserved; reset, stop, latest saved and dirty exclusion established"
+  ],
+  "complete_review_receipts": "authoring-receipts.json.gz"
+}

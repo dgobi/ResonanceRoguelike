@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "runtime_revision": "5d757faa36bd0dd3f272ae6482fb1d8bd614a04b",
+  "verification_revision": "d0a3a22504291a7def94cb59267ac80045b41de1",
+  "delivery": "Runtime/data/save, registered creature/item authoring, portable Workbench, 3/6 warning variants, legal remedy seed and variant, three saved rooms, ordinary-input/cold/native evidence and authoritative guides.",
+  "checkpoints": [
+    "checkpoint/ai-3-start-20261031-a",
+    "checkpoint/ai-3-implementation-20261031-a",
+    "checkpoint/ai-3-final-inputs-20261031-a",
+    "checkpoint/ai-3-catalogue-tests-20261031-a",
+    "checkpoint/ai-3-verified-inputs-20261031-a",
+    "checkpoint/ai-3-complete-20261031-a"
+  ],
+  "scope": "Living player and supported ordinary WanderingAI/CompositeAI victims; source recipe remains active-scene only. No patient hunter, player venom weapon, allied treatment, natural enrollment, new harvest chain, wiki/reference-pack maintenance or AI-4.",
+  "portable_sha256": "c86cca85f767c2a9e02006e780804c3c15d30f57dfab07698e3753d1eeea0041",
+  "gates": "gates.json",
+  "publication": "publication.json; final completion commit/tag readback recorded locally and in handoff",
+  "limits": "Portable Windows package and headless/app-local play. NSIS installation, clean-machine provisioning, final balance and unaided discovery were not claimed."
+}

@@ -1,0 +1,28 @@
+{
+  "initial_runtime": "5d757faa36bd0dd3f272ae6482fb1d8bd614a04b",
+  "corrected_test_revision": "d0a3a22504291a7def94cb59267ac80045b41de1",
+  "initial_focused": {
+    "tests": 503,
+    "passed": 501,
+    "failed": 2,
+    "reasons": [
+      "authored_submap count 9 instead of 12",
+      "missing venom treatment class count 2"
+    ],
+    "source_stable": true
+  },
+  "initial_worker": {
+    "tests": 44,
+    "passed": 42,
+    "failed": 2,
+    "reasons": [
+      "creature counts omitted two new examples",
+      "room enumeration omitted three new examples"
+    ]
+  },
+  "targeted_worker_rerun": {
+    "tests": 9,
+    "passed": 9
+  },
+  "correction": "Only four catalogue assertion files changed. Final-b full unfiltered and affected-worker reruns certify the corrected boundary."
+}

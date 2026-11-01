@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "setup": "Actual saved-room delivery; ordinary H/Escape and health render; RNG17/19, seed20261027.",
+  "checks": [
+    {
+      "stage": "warning",
+      "conditions": [
+        [
+          "Numbing venom: warning",
+          "Numbness is spreading. Movement and attacks remain available. Treat now or prepare to hold still.",
+          [
+            186,
+            117,
+            106
+          ]
+        ]
+      ],
+      "turn": 483,
+      "free_inspection": true
+    },
+    {
+      "stage": "paralysis",
+      "conditions": [
+        [
+          "Numbing venom: paralysis",
+          "Voluntary movement is blocked. Wait, attack in place, or use venom treatment.",
+          [
+            186,
+            117,
+            106
+          ]
+        ]
+      ],
+      "turn": 486,
+      "free_inspection": true
+    },
+    {
+      "stage": "recovery",
+      "conditions": [
+        [
+          "Numbing venom: recovery",
+          "Movement is restored. Fresh numbing venom cannot take hold during recovery.",
+          [
+            186,
+            117,
+            106
+          ]
+        ]
+      ],
+      "turn": 488,
+      "free_inspection": true
+    }
+  ]
+}

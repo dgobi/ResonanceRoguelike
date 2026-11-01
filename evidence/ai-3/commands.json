@@ -1,0 +1,102 @@
+{
+  "runtime_revision": "5d757faa36bd0dd3f272ae6482fb1d8bd614a04b",
+  "verification_revision": "d0a3a22504291a7def94cb59267ac80045b41de1",
+  "environment": "environment.json",
+  "commands": [
+    {
+      "gate": "focused",
+      "command": "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe -B tools/critical_fix_regressions/verify_fixes.py --timeout 3600 --evidence .baseline/ai-3/final-b/focused",
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "verification_revision": "d0a3a22504291a7def94cb59267ac80045b41de1",
+      "unfiltered": true
+    },
+    {
+      "gate": "production-D",
+      "command": "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe -B tools/verify_d.py --evidence .baseline/ai-3/final-b/production-d",
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "verification_revision": "d0a3a22504291a7def94cb59267ac80045b41de1",
+      "unfiltered": true
+    },
+    {
+      "gate": "worker-affected",
+      "command": "workbench/worker/runtime/python.exe -X utf8 -I -B -c \"import sys, unittest; sys.path.insert(0, 'workbench/worker'); r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_composite_ai','test_venom_treatment','test_creatures','test_creatures_w5f','test_items','test_supplies','test_equipment','test_rooms_w5g','test_rivals_g21','test_authoring'])); sys.exit(not r.wasSuccessful())\"",
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "verification_revision": "d0a3a22504291a7def94cb59267ac80045b41de1"
+    },
+    {
+      "gate": "frontend",
+      "command": "npm.cmd test",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "scope": "Final runtime/distribution inputs at runtime revision; unchanged through catalogue-test-only revision."
+    },
+    {
+      "gate": "typecheck",
+      "command": "npm.cmd run typecheck",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "scope": "Final runtime/distribution inputs at runtime revision; unchanged through catalogue-test-only revision."
+    },
+    {
+      "gate": "host",
+      "command": "cargo test --locked --manifest-path src-tauri/Cargo.toml",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "scope": "Final runtime/distribution inputs at runtime revision; unchanged through catalogue-test-only revision."
+    },
+    {
+      "gate": "clippy",
+      "command": "cargo clippy --locked --manifest-path src-tauri/Cargo.toml -- -D warnings",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "scope": "Final runtime/distribution inputs at runtime revision; unchanged through catalogue-test-only revision."
+    },
+    {
+      "gate": "release",
+      "command": "npm.cmd run build",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "scope": "Final runtime/distribution inputs at runtime revision; unchanged through catalogue-test-only revision."
+    },
+    {
+      "gate": "debug-build",
+      "command": "cargo build --locked --manifest-path src-tauri/Cargo.toml",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "scope": "Final runtime/distribution inputs at runtime revision; unchanged through catalogue-test-only revision."
+    },
+    {
+      "gate": "startup",
+      "command": "node scripts/startup-test.mjs",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "scope": "Final runtime/distribution inputs at runtime revision; unchanged through catalogue-test-only revision."
+    },
+    {
+      "gate": "desktop",
+      "command": "node scripts/desktop-test.mjs",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "scope": "Final runtime/distribution inputs at runtime revision; unchanged through catalogue-test-only revision."
+    },
+    {
+      "gate": "authoring",
+      "command": "node scripts/run-ai-3.mjs",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "scope": "Retained development control publications; final saved bytes match, distinct from final native runtime."
+    },
+    {
+      "gate": "final-native",
+      "command": "node scripts/run-ai-3.mjs",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "env": {
+        "AI3_RUNTIME_ONLY": "1"
+      },
+      "scope": "Final runtime/distribution inputs at runtime revision; unchanged through catalogue-test-only revision."
+    },
+    {
+      "gate": "responses-and-cold",
+      "command": "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe -B tools/verify_ai_3_play.py --evidence .baseline/ai-3/final/play",
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "runtime_revision": "5d757faa36bd0dd3f272ae6482fb1d8bd614a04b"
+    },
+    {
+      "gate": "health",
+      "command": "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe -B evidence/ai-3/health_probe.py",
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "runtime_revision": "5d757faa36bd0dd3f272ae6482fb1d8bd614a04b"
+    }
+  ]
+}

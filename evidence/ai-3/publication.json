@@ -1,0 +1,65 @@
+{
+  "passed": true,
+  "verified_utc": "2026-11-01T06:20:39.351328+00:00",
+  "runtime_revision": "5d757faa36bd0dd3f272ae6482fb1d8bd614a04b",
+  "verification_revision": "d0a3a22504291a7def94cb59267ac80045b41de1",
+  "remote": "origin https://github.com/dgobi/ResonanceRoguelike.git",
+  "published_main": "d0a3a22504291a7def94cb59267ac80045b41de1",
+  "command": [
+    "git",
+    "push",
+    "--atomic",
+    "origin",
+    "main",
+    "refs/tags/checkpoint/ai-3-start-20261031-a",
+    "refs/tags/checkpoint/ai-3-implementation-20261031-a",
+    "refs/tags/checkpoint/ai-3-final-inputs-20261031-a",
+    "refs/tags/checkpoint/ai-3-catalogue-tests-20261031-a",
+    "refs/tags/checkpoint/ai-3-verified-inputs-20261031-a"
+  ],
+  "readback_command": [
+    "git",
+    "ls-remote",
+    "origin",
+    "refs/heads/main",
+    "refs/tags/checkpoint/ai-3-*"
+  ],
+  "refs": {
+    "refs/tags/checkpoint/ai-3-start-20261031-a": {
+      "object": "db6d1dfe73aac524bc7558aeeccefd4b6a50e26c",
+      "commit": "28c9d88ade28daeb11f9f39922399eaf5085065f",
+      "remote_object": "db6d1dfe73aac524bc7558aeeccefd4b6a50e26c",
+      "remote_commit": "28c9d88ade28daeb11f9f39922399eaf5085065f",
+      "verified": true
+    },
+    "refs/tags/checkpoint/ai-3-implementation-20261031-a": {
+      "object": "641f510043f27207261319da19011ba9e1fb1244",
+      "commit": "5d757faa36bd0dd3f272ae6482fb1d8bd614a04b",
+      "remote_object": "641f510043f27207261319da19011ba9e1fb1244",
+      "remote_commit": "5d757faa36bd0dd3f272ae6482fb1d8bd614a04b",
+      "verified": true
+    },
+    "refs/tags/checkpoint/ai-3-final-inputs-20261031-a": {
+      "object": "8aad416b93ffc6ee888ce4c84d0e6f39d8129c30",
+      "commit": "5d757faa36bd0dd3f272ae6482fb1d8bd614a04b",
+      "remote_object": "8aad416b93ffc6ee888ce4c84d0e6f39d8129c30",
+      "remote_commit": "5d757faa36bd0dd3f272ae6482fb1d8bd614a04b",
+      "verified": true
+    },
+    "refs/tags/checkpoint/ai-3-catalogue-tests-20261031-a": {
+      "object": "66db8358028ec09fb84e709b9fdf6435287be50a",
+      "commit": "d0a3a22504291a7def94cb59267ac80045b41de1",
+      "remote_object": "66db8358028ec09fb84e709b9fdf6435287be50a",
+      "remote_commit": "d0a3a22504291a7def94cb59267ac80045b41de1",
+      "verified": true
+    },
+    "refs/tags/checkpoint/ai-3-verified-inputs-20261031-a": {
+      "object": "7d2828a6858851c7981857873151e194b3d3c6a4",
+      "commit": "d0a3a22504291a7def94cb59267ac80045b41de1",
+      "remote_object": "7d2828a6858851c7981857873151e194b3d3c6a4",
+      "remote_commit": "d0a3a22504291a7def94cb59267ac80045b41de1",
+      "verified": true
+    }
+  },
+  "completion": "The documentation/evidence delivery commit and completion checkpoint are subsequently pushed and read back; exact final identities are retained at .baseline/ai-3/final-publication.json and in the handoff, avoiding a self-embedding commit hash."
+}

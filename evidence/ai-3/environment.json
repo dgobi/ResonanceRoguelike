@@ -1,0 +1,13 @@
+{
+  "platform": "Windows x64",
+  "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+  "dependencies": {
+    "pygame": "2.6.1",
+    "tcod": "19.3.0",
+    "numpy": "2.4.6"
+  },
+  "node": "v24.15.0",
+  "cargo": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)",
+  "rustc": "rustc 1.95.0 (59807616e 2026-04-14)",
+  "policy": "Production main imports; disposable owned save/settings/recovery/capture roots, app-local events, no desktop control or campaign access."
+}
