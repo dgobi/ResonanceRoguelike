@@ -145,6 +145,9 @@ class PerkScreen:
         if not self.open:
             return False
 
+        from engine.venom import fully_paralysed
+        if fully_paralysed(engine.player):
+            self._confirming = False
         if self._confirming:
             return self._handle_confirm_key(key, engine)
 
@@ -216,6 +219,9 @@ class PerkScreen:
         self.scroll = max(0, self.scroll)
 
     def _can_afford(self, perk_id: str, engine: "Engine") -> bool:
+        from engine.venom import fully_paralysed
+        if fully_paralysed(engine.player):
+            return False
         perks      = getattr(engine.player, "perks", None)
         level_comp = getattr(engine.player, "level", None)
         if perks is None or level_comp is None:
@@ -298,7 +304,10 @@ class PerkScreen:
         # Hint row separator + text
         pygame.draw.line(popup, self.BORDER,
                          (PAD, _hint_row_top), (pw - PAD, _hint_row_top), 1)
+        from engine.venom import fully_paralysed
+        read_only = fully_paralysed(engine.player)
         footer = self._font_small.render(
+            "^ v navigate   View only while paralysed   K/ESC close" if read_only else
             "^ v navigate   Enter confirm   K/ESC close",
             True, self.DIM,
         )
@@ -307,7 +316,7 @@ class PerkScreen:
 
         surface.blit(popup, (px, py))
 
-        if self._confirming:
+        if self._confirming and not read_only:
             self._render_confirm(surface, engine, px, py, pw, ph)
 
     def _draw_left(
@@ -450,7 +459,10 @@ class PerkScreen:
             y += lh
         else:
             pts = lc.perk_points if lc else 0
-            if pts >= cost:
+            from engine.venom import fully_paralysed
+            if fully_paralysed(engine.player):
+                st = self._font_small.render("View only while paralysed.", True, self.DIM)
+            elif pts >= cost:
                 st = self._font_small.render(
                     "Press Enter to commit.", True, OLD_GOLD
                 )

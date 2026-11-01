@@ -123,6 +123,10 @@ class FullParalysisTests(unittest.TestCase):
         e.player.level.perk_points=100
         perk=next(iter(e.data.perks));e.perk_screen._flat=[(perk,False,'')];e.perk_screen.selected=0
         before=copy.deepcopy(e.player.perks.acquired)
+        self.assertFalse(e.perk_screen._can_afford(perk,e))
+        e.perk_screen.open=True;e.perk_screen._confirming=True
+        e.perk_screen.handle_key(pygame.K_DOWN,e)
+        self.assertFalse(e.perk_screen._confirming)
         for _ in range(5):
             self.assertFalse(e._player_attack(self.source))
             self.assertFalse(e._grass_concealment_reaction(self.source,(self.source.x+1,self.source.y)))
