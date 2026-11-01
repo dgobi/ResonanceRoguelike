@@ -1,0 +1,33 @@
+{
+  "scope": "Development outcomes; none substitutes for final gate certification.",
+  "attempts": [
+    {
+      "kind": "timing fixtures",
+      "result": "Initial assertions assumed phase zero; fixture starts at 480. Assertions corrected; game aging unchanged."
+    },
+    {
+      "kind": "occlusion preflight",
+      "result": "Immediate empty-trail abandonment was replaced by bounded alternate-viewpoint reacquisition; hidden treatment now retains the original commitment."
+    },
+    {
+      "kind": "native combat witness",
+      "result": "A legitimate return miss failed an overly strict damage assertion. Native lifecycle checks the real committed attempt; the fixed ordinary-input witness separately proves three damage during paralysis."
+    },
+    {
+      "kind": "control rerun",
+      "result": "A selector matched both visible and parked drafts; it now selects the visible controls."
+    },
+    {
+      "kind": "development captured validation",
+      "result": "Saved-input mutation during validation was correctly rejected; the frozen final capture passes."
+    },
+    {
+      "kind": "development affected worker",
+      "result": "45 cases ran with one KeyError: result at test_creatures.py:78 while source inputs were evolving. The response code was not retained, so no precise cause is claimed. A fresh final full affected run is required."
+    },
+    {
+      "kind": "hold fallback review",
+      "result": "A cancelled hold could fall through to a targetless return. Transition now requires still being in hold; focused regression added."
+    }
+  ]
+}

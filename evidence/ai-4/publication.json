@@ -1,0 +1,34 @@
+{
+  "phase": "implementation and prerequisite checkpoints published/read back before final documentation delivery",
+  "verified_at_utc": "2026-11-01T18:31:13.209174+00:00",
+  "remote": "https://github.com/dgobi/ResonanceRoguelike.git",
+  "main": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a",
+  "checkpoints": [
+    {
+      "name": "checkpoint/ai-4-final-inputs-20261101-a",
+      "tag_object": "f989e3d42bcdcfba6dbc16fc312c57374c2c9542",
+      "peeled_revision": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a",
+      "remote_verified": true
+    },
+    {
+      "name": "checkpoint/ai-4-implementation-20261101-a",
+      "tag_object": "61961934dce2a2cfffe4cfc72f209f7187e91fe1",
+      "peeled_revision": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a",
+      "remote_verified": true
+    },
+    {
+      "name": "checkpoint/ai-4-start-20261101-a",
+      "tag_object": "9d9998af6adb1b763141905c968ca1f9a675f18d",
+      "peeled_revision": "74675c649a1a6f0e36169e2ce35ffcfadea68354",
+      "remote_verified": true
+    },
+    {
+      "name": "checkpoint/ai-4-verified-inputs-20261101-a",
+      "tag_object": "c18da059479cbc92c3d4e59b66623e791822b6cc",
+      "peeled_revision": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a",
+      "remote_verified": true
+    }
+  ],
+  "readback": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a\trefs/heads/main\nf989e3d42bcdcfba6dbc16fc312c57374c2c9542\trefs/tags/checkpoint/ai-4-final-inputs-20261101-a\nfbe1f037bc5f7d82eac38d5c18886dadfb12176a\trefs/tags/checkpoint/ai-4-final-inputs-20261101-a^{}\n61961934dce2a2cfffe4cfc72f209f7187e91fe1\trefs/tags/checkpoint/ai-4-implementation-20261101-a\nfbe1f037bc5f7d82eac38d5c18886dadfb12176a\trefs/tags/checkpoint/ai-4-implementation-20261101-a^{}\n9d9998af6adb1b763141905c968ca1f9a675f18d\trefs/tags/checkpoint/ai-4-start-20261101-a\n74675c649a1a6f0e36169e2ce35ffcfadea68354\trefs/tags/checkpoint/ai-4-start-20261101-a^{}\nc18da059479cbc92c3d4e59b66623e791822b6cc\trefs/tags/checkpoint/ai-4-verified-inputs-20261101-a\nfbe1f037bc5f7d82eac38d5c18886dadfb12176a\trefs/tags/checkpoint/ai-4-verified-inputs-20261101-a^{}",
+  "completion": "The final documentation delivery and completion tag are subsequently published/read back; .baseline/ai-4/final-publication.json and the final handoff retain their exact identities without embedding a commit in itself."
+}

@@ -1,0 +1,88 @@
+{
+  "runtime_revision": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a",
+  "commands": [
+    {
+      "gate": "focused",
+      "command": "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe -B tools/critical_fix_regressions/verify_fixes.py --timeout 3600 --evidence .baseline/ai-4/final/focused",
+      "cwd": "G:/GameDev/RoguelikeProject",
+      "tested_input_revision": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a",
+      "unfiltered": true
+    },
+    {
+      "gate": "production-D",
+      "command": "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe -B tools/verify_d.py --evidence .baseline/ai-4/final/production-d",
+      "cwd": "G:/GameDev/RoguelikeProject",
+      "tested_input_revision": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a",
+      "unfiltered": true
+    },
+    {
+      "gate": "worker-affected",
+      "command": "worker/runtime/python.exe -X utf8 -I -B -c \"import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_composite_ai','test_venom_treatment','test_creatures','test_creatures_w5f','test_items','test_supplies','test_equipment','test_rooms_w5g','test_rivals_g21','test_authoring']));sys.exit(not r.wasSuccessful())\"",
+      "cwd": "G:/GameDev/RoguelikeProject/workbench",
+      "tested_input_revision": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a"
+    },
+    {
+      "gate": "frontend",
+      "command": "npm.cmd test",
+      "cwd": "G:/GameDev/RoguelikeProject/workbench",
+      "tested_input_revision": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a",
+      "execution_note": "Executed immediately before the implementation commit; frontend inputs were unchanged at the frozen build/verification boundary."
+    },
+    {
+      "gate": "typecheck",
+      "command": "npm.cmd run typecheck",
+      "cwd": "G:/GameDev/RoguelikeProject/workbench",
+      "tested_input_revision": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a"
+    },
+    {
+      "gate": "host",
+      "command": "cargo test --locked --manifest-path src-tauri/Cargo.toml",
+      "cwd": "G:/GameDev/RoguelikeProject/workbench",
+      "tested_input_revision": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a"
+    },
+    {
+      "gate": "clippy",
+      "command": "cargo clippy --locked --manifest-path src-tauri/Cargo.toml -- -D warnings",
+      "cwd": "G:/GameDev/RoguelikeProject/workbench",
+      "tested_input_revision": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a"
+    },
+    {
+      "gate": "portable",
+      "command": "npm.cmd run build",
+      "cwd": "G:/GameDev/RoguelikeProject/workbench",
+      "tested_input_revision": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a"
+    },
+    {
+      "gate": "debug",
+      "command": "cargo build --locked --manifest-path src-tauri/Cargo.toml",
+      "cwd": "G:/GameDev/RoguelikeProject/workbench",
+      "tested_input_revision": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a"
+    },
+    {
+      "gate": "startup",
+      "command": "node scripts/startup-test.mjs",
+      "cwd": "G:/GameDev/RoguelikeProject/workbench",
+      "tested_input_revision": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a"
+    },
+    {
+      "gate": "desktop",
+      "command": "node scripts/desktop-test.mjs",
+      "cwd": "G:/GameDev/RoguelikeProject/workbench",
+      "tested_input_revision": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a"
+    },
+    {
+      "gate": "final-authoring-native",
+      "command": "node scripts/run-ai-4.mjs",
+      "cwd": "G:/GameDev/RoguelikeProject/workbench",
+      "tested_input_revision": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a"
+    },
+    {
+      "gate": "ordinary-input-and-cold",
+      "command": "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe -B tools/verify_ai_4_play.py --evidence .baseline/ai-4/final/play",
+      "cwd": "G:/GameDev/RoguelikeProject",
+      "tested_input_revision": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a"
+    }
+  ],
+  "environment": "environment.json",
+  "policy": "Disposable state/settings/recovery/capture roots and app-local inputs. No desktop control, personal campaign access or dependency provisioning."
+}

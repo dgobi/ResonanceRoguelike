@@ -1,0 +1,183 @@
+{
+  "passed": true,
+  "runtime_revision": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a",
+  "verification_revision": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a",
+  "focused": {
+    "passed": true,
+    "unfiltered": true,
+    "tests": 523,
+    "source_stable": true,
+    "receipt": "focused-run.json.gz",
+    "log": "focused-tests.txt.gz"
+  },
+  "production_d": {
+    "passed": true,
+    "unfiltered": true,
+    "totals": {
+      "checks": 3704,
+      "passed": 3704,
+      "failed": 0,
+      "workers": 159
+    },
+    "source_stable": true,
+    "receipt": "production-d-results.json.gz"
+  },
+  "worker": {
+    "passed": true,
+    "fresh_full_affected_cases": 45,
+    "log": "worker-final.log.gz",
+    "modules": [
+      "test_composite_ai",
+      "test_venom_treatment",
+      "test_creatures",
+      "test_creatures_w5f",
+      "test_items",
+      "test_supplies",
+      "test_equipment",
+      "test_rooms_w5g",
+      "test_rivals_g21",
+      "test_authoring"
+    ]
+  },
+  "frontend": 93,
+  "host": 71,
+  "startup": 15,
+  "typecheck": true,
+  "clippy": true,
+  "portable_build": true,
+  "debug_build": true,
+  "desktop": true,
+  "native_lifecycle": true,
+  "ordinary_play_scenarios": 6,
+  "cold_processes": 3,
+  "commands": "commands.json",
+  "environment": "environment.json",
+  "package": "package.json",
+  "acceptance": "acceptance.json",
+  "authoring": "authoring.json",
+  "ordinary_play": "responses-summary.json",
+  "material_development_attempts": "attempts.json",
+  "evidence": {
+    "acceptance.json": {
+      "bytes": 3578,
+      "sha256": "19f1a58cc7b0c1890c1082c44bec13e1bf23d80cdfa25462463a1b42bd9b2324"
+    },
+    "attempts.json": {
+      "bytes": 1608,
+      "sha256": "50950731dc68bf4d85b8dfaf4c1b715c35d0a3f7aed208b945ce259cd984c1ce"
+    },
+    "authoring-final.log.gz": {
+      "bytes": 351,
+      "sha256": "280dec1929e03771bf31a4ae96e094051c8893986804f29dd563e865e5089888"
+    },
+    "authoring-receipts.json.gz": {
+      "bytes": 980197,
+      "sha256": "2c64720090fa61f30e1edf30c55a510270e5391f95673894b729f7ac04ec13a0"
+    },
+    "authoring.json": {
+      "bytes": 19529,
+      "sha256": "b61cbf31a8c7e4048af94dab85c9c46e7f6571cf4a95e9f931d944aba9d89464"
+    },
+    "build-final.log.gz": {
+      "bytes": 917,
+      "sha256": "7ee35db6a6412383fe715d3ad8bcefe8972e5f73c57734ded2e2f69ec056e3fa"
+    },
+    "clippy-final.log.gz": {
+      "bytes": 160,
+      "sha256": "ebc13a0388c1f7a6fda896561ccdca6bacc76645340b525b64a0b620a0408050"
+    },
+    "commands.json": {
+      "bytes": 4188,
+      "sha256": "d741e8dcb13ffce7a2fefbafab0264e309cabea7abc138498a3dd7111e3662e1"
+    },
+    "complete-hunt.png": {
+      "bytes": 77760,
+      "sha256": "91a392bd6f9271506f433a4739b13c77c4d486603fb60d8c8fb75f7af365f124"
+    },
+    "debug-build-final.log.gz": {
+      "bytes": 160,
+      "sha256": "c6375587cebe322ee435a51c669e30d9862126cede70f6541e9beb30ad00187d"
+    },
+    "desktop-final.log.gz": {
+      "bytes": 9947,
+      "sha256": "f56c5f124f42caa214d989062a3af3a2864f6afdcec8d83bf5ec8d7f2ad7b16f"
+    },
+    "desktop-receipt.json.gz": {
+      "bytes": 9091,
+      "sha256": "6975c421dc4d48008f3911530d2d6e587d3e107b87cac49bc35a52a965dd10fb"
+    },
+    "environment.json": {
+      "bytes": 550,
+      "sha256": "35c13294099afac7c6543dece222606a6e367709d9058a8db0e33b5df234b85c"
+    },
+    "focused-run.json.gz": {
+      "bytes": 43906,
+      "sha256": "5059152a3b958078c30acf21c85a8d39f1c13cf60a917e8b8b771aaf6fe5abf3"
+    },
+    "focused-tests.txt.gz": {
+      "bytes": 16299,
+      "sha256": "45d4d0fffaab48cfde03fddb6904e9c1cffab7efc48c37db3916fda3d1a151f9"
+    },
+    "frontend-preflight.log.gz": {
+      "bytes": 228,
+      "sha256": "39eb3226c407bd0890aa306ad10a615839bf923a93653e72051a8261853ed172"
+    },
+    "host-final.log.gz": {
+      "bytes": 2121,
+      "sha256": "21f190abc9188c82d3d8a766afbb6c570290a1d5367fe94b12ac4a8521a5c4a2"
+    },
+    "package.json": {
+      "bytes": 614604,
+      "sha256": "431550c71b1f902b703d89c53b64de5abc6a379bacd990b8f75ab4e3c8e58960"
+    },
+    "patient-amber-hunter-controls.png": {
+      "bytes": 474244,
+      "sha256": "9c2467f08ca87844603bfc5e3dacab5cf9ed431e40226b56d1f906098a38f4fe"
+    },
+    "play-final.log.gz": {
+      "bytes": 204,
+      "sha256": "2ea1e51d511ecd5c9d78d8ba5861f539439a1801ee96be2cbdc9fe76d121f7ce"
+    },
+    "preservation.json": {
+      "bytes": 354,
+      "sha256": "a65867580034ebfc76fee6af7126b2c53760dc663082c8ddaa5666b6fceec443"
+    },
+    "production-d-results.json.gz": {
+      "bytes": 604089,
+      "sha256": "ab9d62b9f3f431d261a6850ed18071db5c2b27f2bfe178e184128b0d77603fdd"
+    },
+    "responses-summary.json": {
+      "bytes": 33050,
+      "sha256": "d5636444c09a24c8bad93b515d0c118d00b868b359a4af4acc4e629c82af10ef"
+    },
+    "responses.json.gz": {
+      "bytes": 30189,
+      "sha256": "d9b4f84f61d7ebf3f41332e80ad5c54a90c0918102e3f9a2da2722a0cd87e22a"
+    },
+    "startup-final.log.gz": {
+      "bytes": 396,
+      "sha256": "e129c15aa17f66f51325412ee48d7903e39b6bce159901855bb9abd3d6ee10b8"
+    },
+    "startup-receipt.json.gz": {
+      "bytes": 12179,
+      "sha256": "a08deb94b41f56c312a8765a5af2449032b81d4ead58fb1612380339f76867d2"
+    },
+    "timed-amber-hunter-controls.png": {
+      "bytes": 471732,
+      "sha256": "32e916f03866e941a3edfce178f40de3d0ddcd8dd5f8188dc5f7a7e55b93a890"
+    },
+    "typecheck-final.log.gz": {
+      "bytes": 78,
+      "sha256": "90c3073bffc498506d0395ddb1bda386b0ff42492b6ee76d50b998824ac36798"
+    },
+    "worker-development.log.gz": {
+      "bytes": 1902,
+      "sha256": "4a5bd8fee0b8d76cc31581b5bda6ab4b3db04d58d3f7a332308be24782ed5b42"
+    },
+    "worker-final.log.gz": {
+      "bytes": 1677,
+      "sha256": "2f5cf97645893fbbc6c18c36594e4e062e3561d5915d92ae42c705937b124ad5"
+    }
+  },
+  "evidence_inventory_scope": "Verification receipts and artifacts before publication metadata; the gates manifest and publication readback do not hash themselves."
+}

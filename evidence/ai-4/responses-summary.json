@@ -1,0 +1,1090 @@
+{
+  "passed": true,
+  "runtime_revision": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a",
+  "setup": "AI-4 ordinary saved-room input witness, seed 20261027/combat 17/AI 19.\n\nNormal player loadout, visibility, damage and AI. No injected condition, owned\nremedy, or attack result. Setup uses the three control-published saved rooms.\nPlayer choices are scripted; this is bounded rule evidence, not human discovery.\n",
+  "scenarios": [
+    {
+      "room": "ai4_patient_opening",
+      "response": "untreated",
+      "passed": true,
+      "sting_phase": 484,
+      "original_commitment": {
+        "version": 1,
+        "application_id": "7995a7d5a7bc45b1abb42dbe3d1d390e",
+        "source_id": "0,0/room-test-instance:00000001",
+        "owner": "0,0/room-test-instance",
+        "delivery_phase": 484,
+        "first_observation_phase": 488,
+        "last_useful_phase": 489
+      },
+      "actions": [
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 1,
+          "turn": 481,
+          "phase_before": "idle",
+          "phase": "idle",
+          "action": "wait",
+          "reason": "idle",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 2,
+          "turn": 482,
+          "phase_before": "idle",
+          "phase": "approach",
+          "action": "move",
+          "reason": "approach",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 3,
+          "turn": 483,
+          "phase_before": "approach",
+          "phase": "approach",
+          "action": "move",
+          "reason": "approach",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 4,
+          "turn": 484,
+          "phase_before": "approach",
+          "phase": "withdraw",
+          "action": "melee",
+          "reason": "engage",
+          "result": {
+            "committed": true,
+            "hit": true,
+            "damage": 3,
+            "target_dead": false,
+            "reason": "hit",
+            "application": {
+              "accepted": true,
+              "reason": "accepted",
+              "application_id": "7995a7d5a7bc45b1abb42dbe3d1d390e",
+              "source_id": "0,0/room-test-instance:00000001"
+            }
+          }
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 5,
+          "turn": 485,
+          "phase_before": "withdraw",
+          "phase": "monitor",
+          "action": "move",
+          "reason": "withdrawal",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 6,
+          "turn": 486,
+          "phase_before": "monitor",
+          "phase": "monitor",
+          "action": "wait",
+          "reason": "watching_for_paralysis",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 7,
+          "turn": 487,
+          "phase_before": "monitor",
+          "phase": "monitor",
+          "action": "wait",
+          "reason": "watching_for_paralysis",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 8,
+          "turn": 488,
+          "phase_before": "monitor",
+          "phase": "return",
+          "action": "move",
+          "reason": "approach",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 9,
+          "turn": 489,
+          "phase_before": "return",
+          "phase": "return",
+          "action": "melee",
+          "reason": "engage",
+          "result": {
+            "committed": true,
+            "hit": true,
+            "damage": 3,
+            "target_dead": false,
+            "reason": "hit",
+            "application": {
+              "accepted": false,
+              "reason": "active_venom",
+              "application_id": null,
+              "source_id": null
+            }
+          }
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 10,
+          "turn": 490,
+          "phase_before": "idle",
+          "phase": "idle",
+          "action": "move",
+          "reason": "abandoned_defensive_distance",
+          "result": null
+        }
+      ],
+      "persistence": [
+        {
+          "label": "monitor",
+          "f5_f9_equal": true,
+          "separate_process_equal": true
+        },
+        {
+          "label": "confirmed_then_close",
+          "f5_f9_equal": true,
+          "separate_process_equal": true
+        }
+      ],
+      "final": {
+        "turn": 490,
+        "player": [
+          39,
+          21
+        ],
+        "hp": 54
+      }
+    },
+    {
+      "room": "ai4_patient_opening",
+      "response": "hidden_treatment",
+      "passed": true,
+      "sting_phase": 484,
+      "original_commitment": {
+        "version": 1,
+        "application_id": "6cc20468088c41318391d26ff847201e",
+        "source_id": "0,0/room-test-instance:00000001",
+        "owner": "0,0/room-test-instance",
+        "delivery_phase": 484,
+        "first_observation_phase": 488,
+        "last_useful_phase": 489
+      },
+      "actions": [
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 1,
+          "turn": 481,
+          "phase_before": "idle",
+          "phase": "idle",
+          "action": "wait",
+          "reason": "idle",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 2,
+          "turn": 482,
+          "phase_before": "idle",
+          "phase": "approach",
+          "action": "move",
+          "reason": "approach",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 3,
+          "turn": 483,
+          "phase_before": "approach",
+          "phase": "approach",
+          "action": "move",
+          "reason": "approach",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 4,
+          "turn": 484,
+          "phase_before": "approach",
+          "phase": "withdraw",
+          "action": "melee",
+          "reason": "engage",
+          "result": {
+            "committed": true,
+            "hit": true,
+            "damage": 3,
+            "target_dead": false,
+            "reason": "hit",
+            "application": {
+              "accepted": true,
+              "reason": "accepted",
+              "application_id": "6cc20468088c41318391d26ff847201e",
+              "source_id": "0,0/room-test-instance:00000001"
+            }
+          }
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 5,
+          "turn": 485,
+          "phase_before": "withdraw",
+          "phase": "monitor",
+          "action": "move",
+          "reason": "withdrawal",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 6,
+          "turn": 486,
+          "phase_before": "monitor",
+          "phase": "monitor",
+          "action": "move",
+          "reason": "evidence_reacquisition",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 7,
+          "turn": 487,
+          "phase_before": "monitor",
+          "phase": "monitor",
+          "action": "move",
+          "reason": "evidence_reacquisition",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 8,
+          "turn": 488,
+          "phase_before": "monitor",
+          "phase": "idle",
+          "action": "wait",
+          "reason": "expected_impairment_absent",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 9,
+          "turn": 489,
+          "phase_before": "idle",
+          "phase": "idle",
+          "action": "wait",
+          "reason": "idle",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 10,
+          "turn": 490,
+          "phase_before": "idle",
+          "phase": "idle",
+          "action": "wait",
+          "reason": "idle",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 11,
+          "turn": 491,
+          "phase_before": "idle",
+          "phase": "idle",
+          "action": "wait",
+          "reason": "idle",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 12,
+          "turn": 492,
+          "phase_before": "idle",
+          "phase": "idle",
+          "action": "wait",
+          "reason": "idle",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 13,
+          "turn": 493,
+          "phase_before": "idle",
+          "phase": "idle",
+          "action": "wait",
+          "reason": "idle",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 14,
+          "turn": 494,
+          "phase_before": "idle",
+          "phase": "idle",
+          "action": "wait",
+          "reason": "idle",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 15,
+          "turn": 495,
+          "phase_before": "idle",
+          "phase": "idle",
+          "action": "wait",
+          "reason": "idle",
+          "result": null
+        }
+      ],
+      "persistence": [
+        {
+          "label": "reacquisition",
+          "f5_f9_equal": true,
+          "separate_process_equal": true
+        }
+      ],
+      "final": {
+        "turn": 495,
+        "player": [
+          39,
+          21
+        ],
+        "hp": 57
+      },
+      "treatment": {
+        "before_turn": 486,
+        "after_turn": 487,
+        "items_before": 7,
+        "items_after": 6,
+        "original_hunt_preserved_after_paid_hidden_use": true
+      }
+    },
+    {
+      "room": "ai4_timed_opening",
+      "response": "hidden_treatment",
+      "passed": true,
+      "sting_phase": 484,
+      "original_commitment": {
+        "version": 1,
+        "application_id": "65e48976a0a34fb38c39c2c145173376",
+        "source_id": "0,0/room-test-instance:00000001",
+        "owner": "0,0/room-test-instance",
+        "delivery_phase": 484,
+        "first_observation_phase": 488,
+        "last_useful_phase": 489
+      },
+      "actions": [
+        {
+          "actor": "timed_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 1,
+          "turn": 481,
+          "phase_before": "idle",
+          "phase": "idle",
+          "action": "wait",
+          "reason": "idle",
+          "result": null
+        },
+        {
+          "actor": "timed_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 2,
+          "turn": 482,
+          "phase_before": "idle",
+          "phase": "approach",
+          "action": "move",
+          "reason": "approach",
+          "result": null
+        },
+        {
+          "actor": "timed_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 3,
+          "turn": 483,
+          "phase_before": "approach",
+          "phase": "approach",
+          "action": "move",
+          "reason": "approach",
+          "result": null
+        },
+        {
+          "actor": "timed_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 4,
+          "turn": 484,
+          "phase_before": "approach",
+          "phase": "withdraw",
+          "action": "melee",
+          "reason": "engage",
+          "result": {
+            "committed": true,
+            "hit": true,
+            "damage": 3,
+            "target_dead": false,
+            "reason": "hit",
+            "application": {
+              "accepted": true,
+              "reason": "accepted",
+              "application_id": "65e48976a0a34fb38c39c2c145173376",
+              "source_id": "0,0/room-test-instance:00000001"
+            }
+          }
+        },
+        {
+          "actor": "timed_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 5,
+          "turn": 485,
+          "phase_before": "withdraw",
+          "phase": "hold",
+          "action": "move",
+          "reason": "withdrawal",
+          "result": null
+        },
+        {
+          "actor": "timed_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 6,
+          "turn": 486,
+          "phase_before": "hold",
+          "phase": "hold",
+          "action": "wait",
+          "reason": "holding_distance",
+          "result": null
+        },
+        {
+          "actor": "timed_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 7,
+          "turn": 487,
+          "phase_before": "hold",
+          "phase": "hold",
+          "action": "wait",
+          "reason": "holding_distance",
+          "result": null
+        },
+        {
+          "actor": "timed_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 8,
+          "turn": 488,
+          "phase_before": "hold",
+          "phase": "return",
+          "action": "wait",
+          "reason": "holding_distance",
+          "result": null
+        },
+        {
+          "actor": "timed_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 9,
+          "turn": 489,
+          "phase_before": "return",
+          "phase": "return",
+          "action": "move",
+          "reason": "approach",
+          "result": null
+        },
+        {
+          "actor": "timed_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 10,
+          "turn": 490,
+          "phase_before": "return",
+          "phase": "idle",
+          "action": "melee",
+          "reason": "engage",
+          "result": {
+            "committed": true,
+            "hit": true,
+            "damage": 3,
+            "target_dead": false,
+            "reason": "hit",
+            "application": {
+              "accepted": false,
+              "reason": "recovery_protection",
+              "application_id": null,
+              "source_id": null
+            }
+          }
+        },
+        {
+          "actor": "timed_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 11,
+          "turn": 491,
+          "phase_before": "idle",
+          "phase": "idle",
+          "action": "move",
+          "reason": "abandoned_defensive_distance",
+          "result": null
+        },
+        {
+          "actor": "timed_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 12,
+          "turn": 492,
+          "phase_before": "idle",
+          "phase": "idle",
+          "action": "wait",
+          "reason": "idle",
+          "result": null
+        },
+        {
+          "actor": "timed_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 13,
+          "turn": 493,
+          "phase_before": "idle",
+          "phase": "idle",
+          "action": "wait",
+          "reason": "idle",
+          "result": null
+        },
+        {
+          "actor": "timed_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 14,
+          "turn": 494,
+          "phase_before": "idle",
+          "phase": "idle",
+          "action": "wait",
+          "reason": "idle",
+          "result": null
+        },
+        {
+          "actor": "timed_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 15,
+          "turn": 495,
+          "phase_before": "idle",
+          "phase": "idle",
+          "action": "wait",
+          "reason": "idle",
+          "result": null
+        }
+      ],
+      "persistence": [],
+      "final": {
+        "turn": 495,
+        "player": [
+          39,
+          21
+        ],
+        "hp": 54
+      },
+      "treatment": {
+        "before_turn": 486,
+        "after_turn": 487,
+        "items_before": 7,
+        "items_after": 6,
+        "original_hunt_preserved_after_paid_hidden_use": true
+      }
+    },
+    {
+      "room": "ai4_patient_opening",
+      "response": "escape",
+      "passed": true,
+      "sting_phase": 484,
+      "original_commitment": {
+        "version": 1,
+        "application_id": "4045cfeb0d404962aef722ae54e2107f",
+        "source_id": "0,0/room-test-instance:00000001",
+        "owner": "0,0/room-test-instance",
+        "delivery_phase": 484,
+        "first_observation_phase": 488,
+        "last_useful_phase": 489
+      },
+      "actions": [
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 1,
+          "turn": 481,
+          "phase_before": "idle",
+          "phase": "idle",
+          "action": "wait",
+          "reason": "idle",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 2,
+          "turn": 482,
+          "phase_before": "idle",
+          "phase": "approach",
+          "action": "move",
+          "reason": "approach",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 3,
+          "turn": 483,
+          "phase_before": "approach",
+          "phase": "approach",
+          "action": "move",
+          "reason": "approach",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 4,
+          "turn": 484,
+          "phase_before": "approach",
+          "phase": "withdraw",
+          "action": "melee",
+          "reason": "engage",
+          "result": {
+            "committed": true,
+            "hit": true,
+            "damage": 3,
+            "target_dead": false,
+            "reason": "hit",
+            "application": {
+              "accepted": true,
+              "reason": "accepted",
+              "application_id": "4045cfeb0d404962aef722ae54e2107f",
+              "source_id": "0,0/room-test-instance:00000001"
+            }
+          }
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 5,
+          "turn": 485,
+          "phase_before": "withdraw",
+          "phase": "monitor",
+          "action": "move",
+          "reason": "withdrawal",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 6,
+          "turn": 486,
+          "phase_before": "monitor",
+          "phase": "monitor",
+          "action": "move",
+          "reason": "evidence_reacquisition",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 7,
+          "turn": 487,
+          "phase_before": "monitor",
+          "phase": "monitor",
+          "action": "move",
+          "reason": "evidence_reacquisition",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 8,
+          "turn": 488,
+          "phase_before": "monitor",
+          "phase": "monitor",
+          "action": "move",
+          "reason": "evidence_reacquisition",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 9,
+          "turn": 489,
+          "phase_before": "monitor",
+          "phase": "monitor",
+          "action": "move",
+          "reason": "evidence_reacquisition",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 10,
+          "turn": 490,
+          "phase_before": "idle",
+          "phase": "idle",
+          "action": "wait",
+          "reason": "idle",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 11,
+          "turn": 491,
+          "phase_before": "idle",
+          "phase": "idle",
+          "action": "wait",
+          "reason": "idle",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 12,
+          "turn": 492,
+          "phase_before": "idle",
+          "phase": "idle",
+          "action": "wait",
+          "reason": "idle",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 13,
+          "turn": 493,
+          "phase_before": "idle",
+          "phase": "idle",
+          "action": "wait",
+          "reason": "idle",
+          "result": null
+        }
+      ],
+      "persistence": [],
+      "final": {
+        "turn": 493,
+        "player": [
+          39,
+          19
+        ],
+        "hp": 57
+      }
+    },
+    {
+      "room": "ai4_patient_opening",
+      "response": "cure_after_close",
+      "passed": true,
+      "sting_phase": 484,
+      "original_commitment": {
+        "version": 1,
+        "application_id": "17b5996ffc6b476283835f3e5a67c8d2",
+        "source_id": "0,0/room-test-instance:00000001",
+        "owner": "0,0/room-test-instance",
+        "delivery_phase": 484,
+        "first_observation_phase": 488,
+        "last_useful_phase": 489
+      },
+      "actions": [
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 1,
+          "turn": 481,
+          "phase_before": "idle",
+          "phase": "idle",
+          "action": "wait",
+          "reason": "idle",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 2,
+          "turn": 482,
+          "phase_before": "idle",
+          "phase": "approach",
+          "action": "move",
+          "reason": "approach",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 3,
+          "turn": 483,
+          "phase_before": "approach",
+          "phase": "approach",
+          "action": "move",
+          "reason": "approach",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 4,
+          "turn": 484,
+          "phase_before": "approach",
+          "phase": "withdraw",
+          "action": "melee",
+          "reason": "engage",
+          "result": {
+            "committed": true,
+            "hit": true,
+            "damage": 3,
+            "target_dead": false,
+            "reason": "hit",
+            "application": {
+              "accepted": true,
+              "reason": "accepted",
+              "application_id": "17b5996ffc6b476283835f3e5a67c8d2",
+              "source_id": "0,0/room-test-instance:00000001"
+            }
+          }
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 5,
+          "turn": 485,
+          "phase_before": "withdraw",
+          "phase": "monitor",
+          "action": "move",
+          "reason": "withdrawal",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 6,
+          "turn": 486,
+          "phase_before": "monitor",
+          "phase": "monitor",
+          "action": "wait",
+          "reason": "watching_for_paralysis",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 7,
+          "turn": 487,
+          "phase_before": "monitor",
+          "phase": "monitor",
+          "action": "wait",
+          "reason": "watching_for_paralysis",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 8,
+          "turn": 488,
+          "phase_before": "monitor",
+          "phase": "return",
+          "action": "move",
+          "reason": "approach",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000001",
+          "opportunity": 9,
+          "turn": 489,
+          "phase_before": "return",
+          "phase": "idle",
+          "action": "move",
+          "reason": "abandoned_defensive_distance",
+          "result": null
+        }
+      ],
+      "persistence": [],
+      "final": {
+        "turn": 489,
+        "player": [
+          39,
+          21
+        ],
+        "hp": 57
+      },
+      "treatment": {
+        "before_turn": 488,
+        "after_turn": 489,
+        "items_before": 7,
+        "items_after": 6
+      }
+    },
+    {
+      "room": "ai4_rival_ground",
+      "response": "rival",
+      "passed": true,
+      "original_commitment": {
+        "version": 1,
+        "application_id": "e2b9c591781b4b27835c8793062659ec",
+        "source_id": "0,0/room-test-instance:00000002",
+        "owner": "0,0/room-test-instance",
+        "delivery_phase": 481,
+        "first_observation_phase": 485,
+        "last_useful_phase": 486
+      },
+      "actions": [
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000002",
+          "opportunity": 1,
+          "turn": 481,
+          "phase_before": "idle",
+          "phase": "withdraw",
+          "action": "melee",
+          "reason": "engage",
+          "result": {
+            "committed": true,
+            "hit": true,
+            "damage": 4,
+            "target_dead": false,
+            "reason": "hit",
+            "application": {
+              "accepted": true,
+              "reason": "accepted",
+              "application_id": "e2b9c591781b4b27835c8793062659ec",
+              "source_id": "0,0/room-test-instance:00000002"
+            }
+          }
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000002",
+          "opportunity": 2,
+          "turn": 482,
+          "phase_before": "withdraw",
+          "phase": "monitor",
+          "action": "move",
+          "reason": "withdrawal",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000002",
+          "opportunity": 3,
+          "turn": 483,
+          "phase_before": "monitor",
+          "phase": "monitor",
+          "action": "move",
+          "reason": "monitoring_distance",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000002",
+          "opportunity": 4,
+          "turn": 484,
+          "phase_before": "monitor",
+          "phase": "monitor",
+          "action": "move",
+          "reason": "monitoring_distance",
+          "result": null
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000002",
+          "opportunity": 5,
+          "turn": 485,
+          "phase_before": "monitor",
+          "phase": "return",
+          "action": "melee",
+          "reason": "engage",
+          "result": {
+            "committed": true,
+            "hit": true,
+            "damage": 2,
+            "target_dead": false,
+            "reason": "hit",
+            "application": {
+              "accepted": false,
+              "reason": "active_venom",
+              "application_id": null,
+              "source_id": null
+            }
+          }
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000002",
+          "opportunity": 6,
+          "turn": 486,
+          "phase_before": "return",
+          "phase": "return",
+          "action": "melee",
+          "reason": "engage",
+          "result": {
+            "committed": true,
+            "hit": true,
+            "damage": 3,
+            "target_dead": false,
+            "reason": "hit",
+            "application": {
+              "accepted": false,
+              "reason": "active_venom",
+              "application_id": null,
+              "source_id": null
+            }
+          }
+        },
+        {
+          "actor": "patient_amber_hunter",
+          "individual_id": "0,0/room-test-instance:00000002",
+          "opportunity": 7,
+          "turn": 487,
+          "phase_before": "idle",
+          "phase": "withdraw",
+          "action": "melee",
+          "reason": "engage",
+          "result": {
+            "committed": true,
+            "hit": true,
+            "damage": 4,
+            "target_dead": false,
+            "reason": "hit",
+            "application": {
+              "accepted": true,
+              "reason": "accepted",
+              "application_id": "d9284d54e8664e21bb62c8829aab1a2a",
+              "source_id": "0,0/room-test-instance:00000002"
+            }
+          }
+        }
+      ],
+      "persistence": [],
+      "final": {
+        "turn": 487,
+        "player": [
+          39,
+          21
+        ],
+        "hp": 56
+      }
+    }
+  ]
+}

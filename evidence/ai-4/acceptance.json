@@ -1,0 +1,61 @@
+{
+  "runtime_revision": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a",
+  "scope": "One compact saved-room family plus focused rule fixtures. Test names refer to tools/critical_fix_regressions/tests/test_ai_4.py unless otherwise stated.",
+  "requirements": [
+    {
+      "requirement": "Complete anchor",
+      "evidence": "responses-summary.json: untreated",
+      "meaning": "Real damaging sting 484, retreat 485, observation/close 488, real damaging attack 489 before recovery."
+    },
+    {
+      "requirement": "Truthful entry",
+      "evidence": "test_ai_4.PatientHuntTests.test_rejected_delivery_does_not_bind_or_withdraw; retained test_ai_3 rejection matrix",
+      "meaning": "Fresh acceptance is required; ordinary commitment/hit/damage remain separate."
+    },
+    {
+      "requirement": "Hidden treatment",
+      "evidence": "responses-summary.json: both hidden_treatment rows",
+      "meaning": "Ordinary pickup/use leaves the original hunt intact during the charged hidden-use phase; later patient/timed behaviour diverges."
+    },
+    {
+      "requirement": "Positional response",
+      "evidence": "responses-summary.json: escape",
+      "meaning": "Ordinary movement behind the saved room wall prevents exploitation without treatment."
+    },
+    {
+      "requirement": "Fresh observation",
+      "evidence": "responses-summary.json: cure_after_close; test_ai_4 fresh cure/sight-loss/saved-confirmed tests",
+      "meaning": "Treatment between close and attack prevents damage; unseen or stale evidence cannot authorize predation."
+    },
+    {
+      "requirement": "Retained prey and fallible inference",
+      "evidence": "responses-summary.json: rival; test_ai_4 nearer-intruder, other-application, missing/dead/foreign tests",
+      "meaning": "Original actor identity remains stable while live; another visible paralysis may qualify without UUID attribution or window renewal."
+    },
+    {
+      "requirement": "Legal positioning",
+      "evidence": "test_ai_4 blocking-decor, blocked-retreat and reacquisition tests",
+      "meaning": "Shipped campfire blocker excludes planning and changed commitment for v1/v3/v4; exhausted budgets do not rearm."
+    },
+    {
+      "requirement": "Finite timing",
+      "evidence": "responses-summary.json: untreated; test_ai_4 timing/denial/expiry; retained test_ai_3 fast/slow phase-clock test",
+      "meaning": "Immutable inclusive window uses charged world phases; repeated decisions do not age victims; denied movement preserves spatial budgets."
+    },
+    {
+      "requirement": "Save and ownership",
+      "evidence": "responses-summary.json: three persistence points; test_ai_4 reconstruction/stale-cue/departure; retained AI-1/AI-3 transition tests",
+      "meaning": "F5/F9 and separate-process state comparisons preserve independent commitments; lifecycle cancellation shares the existing successful-departure path."
+    },
+    {
+      "requirement": "Authoring and reuse",
+      "evidence": "authoring.json; authoring-receipts.json.gz; worker-final.log.gz",
+      "meaning": "Five real control publications retain final bytes; frozen final controls/lifecycle pass; source/protected/stale/saved-capture rules rerun."
+    },
+    {
+      "requirement": "Presentation and compatibility",
+      "evidence": "complete-hunt.png; test_ai_4 insect-body/death; unfiltered focused and production-D gates",
+      "meaning": "Normal-view insect rendering and existing targetable body/remains consumers; older recipes and ownership gates retained."
+    }
+  ]
+}

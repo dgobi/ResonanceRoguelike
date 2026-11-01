@@ -1,0 +1,564 @@
+{
+  "passed": true,
+  "scope": "Initial actual-control creation/publication receipts are development evidence; final frozen-runtime authoring reopen and native lifecycle are separate.",
+  "runtime_revision": "fbe1f037bc5f7d82eac38d5c18886dadfb12176a",
+  "publications": [
+    {
+      "path": "roguelike/data/entities/creatures/patient_amber_hunter.json",
+      "sha256": "603d6a6f5dc4a6a460d813dce645aacb2a0a867b001f55276a4c4717114ea4f4",
+      "definition": {
+        "id": "patient_amber_hunter",
+        "name": "Patient Amber Hunter",
+        "description": "An amber-shelled insect that stings, withdraws, and watches for rigid prey.",
+        "tile": "amber_sting_beetle",
+        "blocks_movement": true,
+        "base_hp": 16,
+        "armour_value": 2,
+        "fighter": {
+          "max_hp": 16,
+          "power": 4,
+          "defense": 1
+        },
+        "perception": {
+          "sight_radius": 12,
+          "hearing_radius": 6,
+          "sees_in_dark": false,
+          "faction": "stalker",
+          "hostile_to": [
+            "player",
+            "outlaw"
+          ]
+        },
+        "ai_type": "composite",
+        "wander_radius": 14,
+        "pursuit_timeout": 20,
+        "can_cross_chunks": false,
+        "can_use_stairs": false,
+        "damage_dice": "1d4",
+        "damage_bonus": 1,
+        "attack_verb": "stings at thee",
+        "blood_type": "red",
+        "limbs": [
+          {
+            "id": "head",
+            "size": 1,
+            "damage_multiplier": 1.5
+          },
+          {
+            "id": "thorax",
+            "size": 3,
+            "damage_multiplier": 1
+          },
+          {
+            "id": "abdomen",
+            "size": 3,
+            "damage_multiplier": 1
+          },
+          {
+            "id": "left_foreleg",
+            "size": 1,
+            "damage_multiplier": 0.8
+          },
+          {
+            "id": "right_foreleg",
+            "size": 1,
+            "damage_multiplier": 0.8
+          },
+          {
+            "id": "left_midleg",
+            "size": 1,
+            "damage_multiplier": 0.8
+          },
+          {
+            "id": "right_midleg",
+            "size": 1,
+            "damage_multiplier": 0.8
+          },
+          {
+            "id": "left_hindleg",
+            "size": 1,
+            "damage_multiplier": 0.8
+          },
+          {
+            "id": "right_hindleg",
+            "size": 1,
+            "damage_multiplier": 0.8
+          }
+        ],
+        "corpse_sprite": {
+          "sheet": "amber_insect",
+          "col": 1,
+          "row": 0
+        },
+        "speed": 1,
+        "ai_profile": {
+          "capability": "numbing_melee",
+          "cornered": "defensive_melee",
+          "effect": "numbing_venom",
+          "hold_opportunities": 3,
+          "paralysis_phases": 2,
+          "recipe": "patient_venom_hunt",
+          "recovery_phases": 4,
+          "retreat_distance": 2,
+          "return_policy": "observed_paralysis",
+          "scene_scope": "active_scene",
+          "trigger": "accepted_application",
+          "version": 4,
+          "warning_phases": 3,
+          "withdrawal_budget": 6
+        }
+      },
+      "review": {
+        "valid": true,
+        "syntax_valid": true,
+        "contract_valid": true,
+        "references_valid": true,
+        "factory_verified": true,
+        "population_verified": false,
+        "draft_sha256": "603d6a6f5dc4a6a460d813dce645aacb2a0a867b001f55276a4c4717114ea4f4",
+        "source_sha256": "a15d1f9750f909775ee5c494632c7329d1923d61ee1ddfc5904eefd08b802c2a",
+        "source_asset": "roguelike/data/entities/creatures/amber_sting_beetle.json",
+        "source": {
+          "branch": "main",
+          "catalog_sha256": "0eab7fd6a2eefcf0cc140bf37b8bc017b1c25e040ed0d2068628f2a2574bc638",
+          "commit": "74675c649a1a6f0e36169e2ce35ffcfadea68354",
+          "game_dirty": true,
+          "game_source_sha256": "b3ffe488a684dcb2ad6d4d4338af9956fabf72993df39a04c21e06165f422ee5",
+          "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+          "root": "G:\\GameDev\\RoguelikeProject"
+        },
+        "worker_sha256": "d971a429e2efad6729eeadb4fd4a3dddaaec89a5d27ac8d3d31218ec07374f95",
+        "worker_version": "0.9.0",
+        "review_token": "a89f63cc-76c8-4742-8c22-4837e54b84a8",
+        "diagnostics": [
+          {
+            "asset": "patient_amber_hunter",
+            "code": "INACTIVE_REFERENCE",
+            "correction": "Retained as authored; no repair is needed for an unused dependency.",
+            "field": "body_id",
+            "message": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused.",
+            "path": "roguelike/data/entities/creatures/patient_amber_hunter.json",
+            "severity": "info"
+          }
+        ]
+      }
+    },
+    {
+      "path": "roguelike/data/entities/creatures/timed_amber_hunter.json",
+      "sha256": "8a1c6b9dc584f887be3992d0d4e9f1a1d2adc8bb03aa1734e876467de66ee47b",
+      "definition": {
+        "id": "timed_amber_hunter",
+        "name": "Timed Amber Hunter",
+        "description": "An amber-shelled insect that stings, withdraws, and returns after a short hold.",
+        "tile": "amber_sting_beetle",
+        "blocks_movement": true,
+        "base_hp": 16,
+        "armour_value": 2,
+        "fighter": {
+          "max_hp": 16,
+          "power": 4,
+          "defense": 1
+        },
+        "perception": {
+          "sight_radius": 12,
+          "hearing_radius": 6,
+          "sees_in_dark": false,
+          "faction": "stalker",
+          "hostile_to": [
+            "player",
+            "outlaw"
+          ]
+        },
+        "ai_type": "composite",
+        "wander_radius": 14,
+        "pursuit_timeout": 20,
+        "can_cross_chunks": false,
+        "can_use_stairs": false,
+        "damage_dice": "1d4",
+        "damage_bonus": 1,
+        "attack_verb": "stings at thee",
+        "blood_type": "red",
+        "limbs": [
+          {
+            "id": "head",
+            "size": 1,
+            "damage_multiplier": 1.5
+          },
+          {
+            "id": "thorax",
+            "size": 3,
+            "damage_multiplier": 1
+          },
+          {
+            "id": "abdomen",
+            "size": 3,
+            "damage_multiplier": 1
+          },
+          {
+            "id": "left_foreleg",
+            "size": 1,
+            "damage_multiplier": 0.8
+          },
+          {
+            "id": "right_foreleg",
+            "size": 1,
+            "damage_multiplier": 0.8
+          },
+          {
+            "id": "left_midleg",
+            "size": 1,
+            "damage_multiplier": 0.8
+          },
+          {
+            "id": "right_midleg",
+            "size": 1,
+            "damage_multiplier": 0.8
+          },
+          {
+            "id": "left_hindleg",
+            "size": 1,
+            "damage_multiplier": 0.8
+          },
+          {
+            "id": "right_hindleg",
+            "size": 1,
+            "damage_multiplier": 0.8
+          }
+        ],
+        "corpse_sprite": {
+          "sheet": "amber_insect",
+          "col": 1,
+          "row": 0
+        },
+        "speed": 1,
+        "ai_profile": {
+          "capability": "numbing_melee",
+          "cornered": "defensive_melee",
+          "effect": "numbing_venom",
+          "hold_opportunities": 3,
+          "paralysis_phases": 2,
+          "recipe": "patient_venom_hunt",
+          "recovery_phases": 4,
+          "retreat_distance": 2,
+          "return_policy": "after_hold",
+          "scene_scope": "active_scene",
+          "trigger": "accepted_application",
+          "version": 4,
+          "warning_phases": 3,
+          "withdrawal_budget": 6
+        }
+      },
+      "review": {
+        "valid": true,
+        "syntax_valid": true,
+        "contract_valid": true,
+        "references_valid": true,
+        "factory_verified": true,
+        "population_verified": false,
+        "draft_sha256": "8a1c6b9dc584f887be3992d0d4e9f1a1d2adc8bb03aa1734e876467de66ee47b",
+        "source_sha256": "603d6a6f5dc4a6a460d813dce645aacb2a0a867b001f55276a4c4717114ea4f4",
+        "source_asset": "roguelike/data/entities/creatures/patient_amber_hunter.json",
+        "source": {
+          "branch": "main",
+          "catalog_sha256": "763d8bd3a517c29fb3b1e31af11c0a493d7c26aefb83a77127ceffb997515406",
+          "commit": "74675c649a1a6f0e36169e2ce35ffcfadea68354",
+          "game_dirty": true,
+          "game_source_sha256": "b3ffe488a684dcb2ad6d4d4338af9956fabf72993df39a04c21e06165f422ee5",
+          "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+          "root": "G:\\GameDev\\RoguelikeProject"
+        },
+        "worker_sha256": "d971a429e2efad6729eeadb4fd4a3dddaaec89a5d27ac8d3d31218ec07374f95",
+        "worker_version": "0.9.0",
+        "review_token": "fac7f26d-923d-41b4-96e3-096942f8bd91",
+        "diagnostics": [
+          {
+            "asset": "timed_amber_hunter",
+            "code": "INACTIVE_REFERENCE",
+            "correction": "Retained as authored; no repair is needed for an unused dependency.",
+            "field": "body_id",
+            "message": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused.",
+            "path": "roguelike/data/entities/creatures/timed_amber_hunter.json",
+            "severity": "info"
+          }
+        ]
+      }
+    },
+    {
+      "path": "roguelike/data/layouts/ai4_patient_opening.json",
+      "sha256": "ec0a8fe0e36be6227234cd13fa78e198ea0fb70aa69e8a8045b909d03a69ac06",
+      "definition": {
+        "id": "ai4_patient_opening",
+        "width": 17,
+        "height": 11,
+        "layers": [
+          "#################",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#.......+.......#",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#################"
+        ],
+        "legend": {
+          "#": "wall",
+          ".": "floor",
+          "<": "stairs_up",
+          "+": "door_closed"
+        },
+        "player_start": {
+          "x": 7,
+          "y": 5
+        },
+        "special_tiles": [
+          {
+            "type": "creature",
+            "x": 10,
+            "y": 5,
+            "creature_id": "patient_amber_hunter"
+          },
+          {
+            "type": "item",
+            "x": 7,
+            "y": 5,
+            "item_id": "measured_venom_remedy"
+          },
+          {
+            "type": "container",
+            "x": 5,
+            "y": 3,
+            "decor_id": "crate",
+            "loot_pools": [
+              "storage_tools"
+            ]
+          }
+        ]
+      },
+      "review": {
+        "valid": true,
+        "syntax_valid": true,
+        "contract_valid": true,
+        "references_valid": true,
+        "factory_verified": null,
+        "population_verified": true,
+        "draft_sha256": "ec0a8fe0e36be6227234cd13fa78e198ea0fb70aa69e8a8045b909d03a69ac06",
+        "source_sha256": "d24612886abb861d45e7b2ea43fa63412d4cb377f236952ca4117e204a6a6ae5",
+        "source_asset": "roguelike/data/layouts/ai1_skirmisher_room.json",
+        "source": {
+          "branch": "main",
+          "catalog_sha256": "aeb267a569e62e6767ff0184ed6dd67953a73c0f27473209a811b4b7be7d6ca4",
+          "commit": "74675c649a1a6f0e36169e2ce35ffcfadea68354",
+          "game_dirty": true,
+          "game_source_sha256": "b3ffe488a684dcb2ad6d4d4338af9956fabf72993df39a04c21e06165f422ee5",
+          "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+          "root": "G:\\GameDev\\RoguelikeProject"
+        },
+        "worker_sha256": "d971a429e2efad6729eeadb4fd4a3dddaaec89a5d27ac8d3d31218ec07374f95",
+        "worker_version": "0.9.0",
+        "review_token": "9f90608b-bde5-4651-8c6f-3e06550fdcb1",
+        "diagnostics": []
+      }
+    },
+    {
+      "path": "roguelike/data/layouts/ai4_timed_opening.json",
+      "sha256": "ac88cb07a02178761f31a198608984979f4d32a4adeca7e2b3bf72bb2c86ef5a",
+      "definition": {
+        "id": "ai4_timed_opening",
+        "width": 17,
+        "height": 11,
+        "layers": [
+          "#################",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#.......+.......#",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#################"
+        ],
+        "legend": {
+          "#": "wall",
+          ".": "floor",
+          "<": "stairs_up",
+          "+": "door_closed"
+        },
+        "player_start": {
+          "x": 7,
+          "y": 5
+        },
+        "special_tiles": [
+          {
+            "type": "creature",
+            "x": 10,
+            "y": 5,
+            "creature_id": "timed_amber_hunter"
+          },
+          {
+            "type": "item",
+            "x": 7,
+            "y": 5,
+            "item_id": "measured_venom_remedy"
+          },
+          {
+            "type": "container",
+            "x": 5,
+            "y": 3,
+            "decor_id": "crate",
+            "loot_pools": [
+              "storage_tools"
+            ]
+          }
+        ]
+      },
+      "review": {
+        "valid": true,
+        "syntax_valid": true,
+        "contract_valid": true,
+        "references_valid": true,
+        "factory_verified": null,
+        "population_verified": true,
+        "draft_sha256": "ac88cb07a02178761f31a198608984979f4d32a4adeca7e2b3bf72bb2c86ef5a",
+        "source_sha256": "ec0a8fe0e36be6227234cd13fa78e198ea0fb70aa69e8a8045b909d03a69ac06",
+        "source_asset": "roguelike/data/layouts/ai4_patient_opening.json",
+        "source": {
+          "branch": "main",
+          "catalog_sha256": "3510a895079717f4fdc4c72d256daca7c56b4b1a80dc8bc30566bc40ee4a2674",
+          "commit": "74675c649a1a6f0e36169e2ce35ffcfadea68354",
+          "game_dirty": true,
+          "game_source_sha256": "b3ffe488a684dcb2ad6d4d4338af9956fabf72993df39a04c21e06165f422ee5",
+          "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+          "root": "G:\\GameDev\\RoguelikeProject"
+        },
+        "worker_sha256": "d971a429e2efad6729eeadb4fd4a3dddaaec89a5d27ac8d3d31218ec07374f95",
+        "worker_version": "0.9.0",
+        "review_token": "1ab8ef09-45e3-4202-b955-ebe023b0b4f3",
+        "diagnostics": []
+      }
+    },
+    {
+      "path": "roguelike/data/layouts/ai4_rival_ground.json",
+      "sha256": "7fa5e8c88f8d287c101f820d4c8800a6d5284845c634605b7a372ce42904b660",
+      "definition": {
+        "id": "ai4_rival_ground",
+        "width": 17,
+        "height": 11,
+        "layers": [
+          "#################",
+          "#...............#",
+          "#...............#",
+          "#...............#",
+          "#...............#",
+          "#...............#",
+          "#...............#",
+          "#...............#",
+          "#...............#",
+          "#...............#",
+          "#################"
+        ],
+        "legend": {
+          "#": "wall",
+          ".": "floor",
+          "<": "stairs_up"
+        },
+        "player_start": {
+          "x": 7,
+          "y": 5
+        },
+        "special_tiles": [
+          {
+            "type": "creature",
+            "x": 10,
+            "y": 5,
+            "creature_id": "patient_amber_hunter"
+          },
+          {
+            "type": "item",
+            "x": 7,
+            "y": 5,
+            "item_id": "measured_venom_remedy"
+          },
+          {
+            "type": "container",
+            "x": 5,
+            "y": 3,
+            "decor_id": "crate",
+            "loot_pools": [
+              "storage_tools"
+            ]
+          },
+          {
+            "type": "creature",
+            "x": 11,
+            "y": 5,
+            "creature_id": "highland_bandit"
+          }
+        ]
+      },
+      "review": {
+        "valid": true,
+        "syntax_valid": true,
+        "contract_valid": true,
+        "references_valid": true,
+        "factory_verified": null,
+        "population_verified": true,
+        "draft_sha256": "7fa5e8c88f8d287c101f820d4c8800a6d5284845c634605b7a372ce42904b660",
+        "source_sha256": "d24612886abb861d45e7b2ea43fa63412d4cb377f236952ca4117e204a6a6ae5",
+        "source_asset": "roguelike/data/layouts/ai1_skirmisher_room.json",
+        "source": {
+          "branch": "main",
+          "catalog_sha256": "3bef2fb1e2f3ff02ae82652888df5a3ef423fc2b1c6f97fa6c63f52a7601987e",
+          "commit": "74675c649a1a6f0e36169e2ce35ffcfadea68354",
+          "game_dirty": true,
+          "game_source_sha256": "b3ffe488a684dcb2ad6d4d4338af9956fabf72993df39a04c21e06165f422ee5",
+          "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+          "root": "G:\\GameDev\\RoguelikeProject"
+        },
+        "worker_sha256": "d971a429e2efad6729eeadb4fd4a3dddaaec89a5d27ac8d3d31218ec07374f95",
+        "worker_version": "0.9.0",
+        "review_token": "bf02cea2-d5e7-4a95-93ec-64e3b3be9c64",
+        "diagnostics": []
+      }
+    }
+  ],
+  "final_native_output": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\ai-4\\native-1793555967496",
+  "final_native_passed": true,
+  "final_reopened": [
+    {
+      "path": "roguelike/data/entities/creatures/patient_amber_hunter.json",
+      "sha256": "603d6a6f5dc4a6a460d813dce645aacb2a0a867b001f55276a4c4717114ea4f4"
+    },
+    {
+      "path": "roguelike/data/entities/creatures/patient_amber_hunter.json",
+      "sha256": "603d6a6f5dc4a6a460d813dce645aacb2a0a867b001f55276a4c4717114ea4f4"
+    },
+    {
+      "path": "roguelike/data/entities/creatures/timed_amber_hunter.json",
+      "sha256": "8a1c6b9dc584f887be3992d0d4e9f1a1d2adc8bb03aa1734e876467de66ee47b"
+    },
+    {
+      "path": "roguelike/data/layouts/ai4_patient_opening.json",
+      "sha256": "ec0a8fe0e36be6227234cd13fa78e198ea0fb70aa69e8a8045b909d03a69ac06"
+    },
+    {
+      "path": "roguelike/data/layouts/ai4_timed_opening.json",
+      "sha256": "ac88cb07a02178761f31a198608984979f4d32a4adeca7e2b3bf72bb2c86ef5a"
+    },
+    {
+      "path": "roguelike/data/layouts/ai4_rival_ground.json",
+      "sha256": "7fa5e8c88f8d287c101f820d4c8800a6d5284845c634605b7a372ce42904b660"
+    }
+  ],
+  "checks": [
+    "create, configure, validate, review/apply and reopen both policy variants through actual controls",
+    "place saved insect policies, accessible remedy, door and ordinary rival through room controls",
+    "packaged saved-room lifecycle and real sting, withdrawal, monitoring, save/load and predatory return",
+    "source preserved; reset, stop, latest-saved capture and dirty dependency exclusion established"
+  ],
+  "complete_receipts": "authoring-receipts.json.gz"
+}
