@@ -296,6 +296,7 @@ class StrikeWithdrawTests(unittest.TestCase):
             bad=copy.deepcopy(row);bad['composite']['profile'][field]=value
             with self.assertRaisesRegex(ValueError,'profile'):_validate_entities([bad],self.e.data)
         for mutate in (lambda r:r.pop('composite'),lambda r:r.update(ai_type='WanderingAI'),
+                       lambda r:r.update(id='plague_crow'),lambda r:r.update(id='stone_lurker'),
                        lambda r:r['composite']['state'].update(phase='hold',target=None),
                        lambda r:r['composite']['state'].update(withdraw_left=True)):
             bad=copy.deepcopy(row);mutate(bad)

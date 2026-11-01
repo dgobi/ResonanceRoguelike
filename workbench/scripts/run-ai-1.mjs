@@ -56,11 +56,18 @@ async function start(action='test'){
 }
 async function key(key,capture=false){const id=++eventId,path=resolve(session.state_root,'event.json'),tmp=path+'.tmp';await writeFile(tmp,JSON.stringify({id,key,capture}));await until(async()=>{try{await rename(tmp,path);return true;}catch(e){if(!['EPERM','EACCES','EBUSY'].includes(e.code))throw e;return false;}});return until(async()=>{const s=await status();assert.notEqual(s.status,'failed',s.diagnostics||JSON.stringify(s));try{const o=await observe();return o.applied===id?o:null;}catch{return null;}});}
 async function witness(label){
- const rows=[];
+ const rows=[],savedPhases=new Set();
  for(let n=0;n<24;n++){
   await key('.');await new Promise(r=>setTimeout(r,100));const s=await status(),o=await observe();
   rows.push({turn:o.turn,player:o.player,hp:o.hp,tactics:s.tactics,logs:o.logs});
-  const ai=s.tactics?.actors?.[0];if(ai?.recent?.some(r=>r.phase_before==='return'&&r.action==='melee'&&r.result?.committed))break;
+  const ai=s.tactics?.actors?.[0];
+  if(ai&&['withdraw','hold'].includes(ai.state.phase)&&!savedPhases.has(ai.state.phase)){
+   const expected=structuredClone(ai.state),profile=structuredClone(ai.profile),turn=o.turn;
+   await key('f5');await new Promise(r=>setTimeout(r,150));await key('f9');await new Promise(r=>setTimeout(r,150));
+   const loaded=await status(),actor=loaded.tactics?.actors?.[0];assert.deepEqual(actor?.state,expected);assert.deepEqual(actor?.profile,profile);assert.equal(loaded.tactics?.turn,turn);
+   (receipt.persistence??=[]).push({label,phase:ai.state.phase,turn,state:actor.state,profile:actor.profile});savedPhases.add(ai.state.phase);
+  }
+  if(ai?.recent?.some(r=>r.phase_before==='return'&&r.action==='melee'&&r.result?.committed))break;
  }
  receipt[label]={capture:(await status()).captured,rows};
  const phases=rows.flatMap(r=>r.tactics?.actors?.[0]?.recent||[]).map(r=>r.phase);
@@ -72,13 +79,16 @@ try{
  child=spawn(exe,[],{cwd:output,windowsHide:true,stdio:'ignore',env:{...process.env,SDL_VIDEODRIVER:'dummy',SDL_AUDIODRIVER:'dummy',RESONANCE_WORKBENCH_ROOM_TEST_AUTOMATION:'1',RESONANCE_WORKBENCH_CONFIG_DIR:settings,RESONANCE_WORKBENCH_RECOVERY_DIR:storage,WEBVIEW2_USER_DATA_FOLDER:resolve(output,'webview'),WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS:'--remote-debugging-port=9581 --remote-debugging-address=127.0.0.1'}});
  await until(async()=>{assert.equal(child.exitCode,null);try{return (await (await fetch('http://127.0.0.1:9581/json/list')).json()).length;}catch{return false;}});
  browser=await chromium.connectOverCDP('http://127.0.0.1:9581');page=browser.contexts()[0].pages()[0];page.setDefaultTimeout(25000);page.on('pageerror',e=>receipt.errors.push(e.stack||e.message));await page.setViewportSize({width:1700,height:1200});await page.getByTestId('startup-ready').waitFor({timeout:30000});await idle();
- await phase('create short composite variant using controls; publish/reopen, tune same ID and duplicate');
- const short=await creature(base+'hollow_revenant.json','grave_skirmisher','Grave Skirmisher','hit',2,2,6);
- await open(short);await begin();await fill('Full hold opportunities',1);await b('Undo creature').click();await editIdle();assert.equal(await page.getByLabel('Full hold opportunities',{exact:true}).inputValue(),'2');await b('Redo creature').click();await editIdle();await apply(short);
- const wide=await creature(short,'grave_harrier','Grave Harrier','committed_attack',4,3,8);
- await phase('place each saved ID in matched reusable authored rooms through layout controls');
- const shortRoom=await room(template,'ai1_skirmisher_room','grave_skirmisher',true);
- const wideRoom=await room(shortRoom,'ai1_harrier_room','grave_harrier',false);
+ let short=base+'grave_skirmisher.json',wide=base+'grave_harrier.json',shortRoom='roguelike/data/layouts/ai1_skirmisher_room.json',wideRoom='roguelike/data/layouts/ai1_harrier_room.json';
+ if(process.env.AI1_RUNTIME_ONLY!=='1'){
+  await phase('create short composite variant using controls; publish/reopen, tune same ID and duplicate');
+  short=await creature(base+'hollow_revenant.json','grave_skirmisher','Grave Skirmisher','hit',2,2,6);
+  await open(short);await begin();await fill('Full hold opportunities',1);await b('Undo creature').click();await editIdle();assert.equal(await page.getByLabel('Full hold opportunities',{exact:true}).inputValue(),'2');await b('Redo creature').click();await editIdle();await apply(short);
+  wide=await creature(short,'grave_harrier','Grave Harrier','committed_attack',4,3,8);
+  await phase('place each saved ID in matched reusable authored rooms through layout controls');
+  shortRoom=await room(template,'ai1_skirmisher_room','grave_skirmisher',true);
+  wideRoom=await room(shortRoom,'ai1_harrier_room','grave_harrier',false);
+ }else await phase('read-only final runtime pass over previously control-authored saved examples');
  await phase('packaged actual-game short and wide approach/strike/withdraw/hold/return witnesses');
  await open(shortRoom);await start('test');await witness('short_cycle');
  await start('reset');receipt.reset=await status();assert.equal(receipt.reset.captured.manifest_sha256,receipt.short_cycle.capture.manifest_sha256);

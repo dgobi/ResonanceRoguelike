@@ -68,6 +68,9 @@ def validate_saved(row, local_map=None):
         if composite is not None:
             raise ValueError('composite: discriminator must be CompositeAI')
         return
+    from engine.creature_abilities import ABILITY_REGISTRY
+    if isinstance(row.get('id'), str) and row['id'] in ABILITY_REGISTRY:
+        raise ValueError('composite: saved binding cannot acquire an ID-bound special ability')
     if not isinstance(composite, dict) or set(composite) != {'profile', 'state'}:
         raise ValueError('composite: profile and tactical state required')
     p = saved_profile(composite['profile'])

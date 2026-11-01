@@ -48,7 +48,9 @@ async function run(name,options={},action=async()=>{}) {
     if(options.error) {
       await page.locator('footer').getByText(new RegExp(options.error)).waitFor({timeout:30000});
       assert.equal(await page.getByTestId('startup-ready').count(),0);assert.equal(await page.locator('.asset-list .asset').count(),0);
-      assert.equal((await ipc(page,'worker_request',{request:{op:'describe'}})).error?.code,'WORKER_NOT_READY');
+      // Failed initialization has not installed an active project. The project
+      // admission guard runs before worker readiness in the current host.
+      assert.equal((await ipc(page,'worker_request',{request:{op:'describe'}})).error?.code,'NO_PROJECT');
       assert((await ipc(page,'open_document',{asset:source})).error);
       entry.visible_error=await page.locator('footer').innerText();
       await assert.rejects(stat(resolve(config,'project.json')));
@@ -57,7 +59,7 @@ async function run(name,options={},action=async()=>{}) {
       await page.getByRole('button',{name:'Cancel',exact:true}).click();
       await page.waitForFunction(()=>!document.querySelector('.status-dot.working'));
       assert.equal(await page.getByTestId('startup-ready').count(),0);
-      assert.equal((await ipc(page,'worker_request',{request:{op:'describe'}})).error?.code,'WORKER_NOT_READY');
+      assert.equal((await ipc(page,'worker_request',{request:{op:'describe'}})).error?.code,'NO_PROJECT');
       entry.cancelled=true;
     } else {
       await page.locator('[data-testid="map"][data-ready="true"]').waitFor({timeout:45000});
