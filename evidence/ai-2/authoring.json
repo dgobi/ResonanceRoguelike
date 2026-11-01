@@ -1,0 +1,1408 @@
+{
+  "meaning": "Actual local WebView controls, successful reviewed publications and reopened bytes. Development run failures occurred after the successful operations listed; final native lifecycle is recorded separately.",
+  "runs": [
+    {
+      "path": "workbench\\.artifacts\\ai-2\\native-1793502894819\\receipt.json",
+      "started_utc": "2026-11-01T03:14:54.821Z",
+      "overall_passed": false,
+      "checks": [
+        "new observation recipe through controls; tune, undo/redo, review/save and reopen",
+        "duplicate saved primary into matched cowering variant",
+        "place saved examples and paint opening/cover and matched open-ground rooms"
+      ],
+      "publication_count": 4
+    },
+    {
+      "path": "workbench\\.artifacts\\ai-2\\native-1793502992483\\receipt.json",
+      "started_utc": "2026-11-01T03:16:32.485Z",
+      "overall_passed": false,
+      "checks": [
+        "new observation recipe through controls; tune, undo/redo, review/save and reopen",
+        "duplicate saved primary into matched cowering variant",
+        "place saved examples and paint opening/cover and matched open-ground rooms"
+      ],
+      "publication_count": 2
+    },
+    {
+      "path": "workbench\\.artifacts\\ai-2\\native-1793503114018\\receipt.json",
+      "started_utc": "2026-11-01T03:18:34.023Z",
+      "overall_passed": false,
+      "checks": [
+        "place saved examples and paint opening/cover and matched open-ground rooms",
+        "packaged actual-game movement, fallback, persistence and captured-session lifecycle"
+      ],
+      "publication_count": 4
+    },
+    {
+      "path": "workbench\\.artifacts\\ai-2\\native-1793503289433\\receipt.json",
+      "started_utc": "2026-11-01T03:21:29.438Z",
+      "overall_passed": false,
+      "checks": [
+        "place saved examples and paint opening/cover and matched open-ground rooms",
+        "packaged actual-game movement, fallback, persistence and captured-session lifecycle"
+      ],
+      "publication_count": 2
+    },
+    {
+      "path": "workbench\\.artifacts\\ai-2\\native-1793503422314\\receipt.json",
+      "started_utc": "2026-11-01T03:23:42.319Z",
+      "overall_passed": false,
+      "checks": [
+        "place saved examples and paint opening/cover and matched open-ground rooms",
+        "packaged actual-game movement, fallback, persistence and captured-session lifecycle"
+      ],
+      "publication_count": 2
+    }
+  ],
+  "publications": [
+    {
+      "path": "roguelike/data/entities/creatures/gloam_stalker.json",
+      "sha256": "d4432a0a2d7137bbc2cffbfe564065a928f6dc765ac235c554d76f3aa94ddf01",
+      "definition": {
+        "id": "gloam_stalker",
+        "name": "Gloam Stalker",
+        "description": "It recoils from the light, then closes through the dark.",
+        "tile": "hollow_revenant",
+        "blocks_movement": true,
+        "base_hp": 14,
+        "armour_value": 1,
+        "fighter": {
+          "max_hp": 14,
+          "power": 3,
+          "defense": 1
+        },
+        "perception": {
+          "sight_radius": 7,
+          "hearing_radius": 6,
+          "sees_in_dark": true,
+          "faction": "hollow",
+          "hostile_to": [
+            "player"
+          ]
+        },
+        "ai_type": "composite",
+        "wander_radius": 8,
+        "pursuit_timeout": 12,
+        "spawn_zones": [
+          "undercroft",
+          "dead_ground",
+          "vault"
+        ],
+        "damage_dice": "1d4",
+        "damage_bonus": 1,
+        "essence_modifiers": {
+          "Dissolution": 0.2,
+          "Quickening": 1.5,
+          "Binding": 2,
+          "Severance": 2.5,
+          "Consumption": 0.1,
+          "Revelation": 1.8
+        },
+        "attack_verb": "lurches at thee",
+        "blood_type": "bone_dust",
+        "limbs": [
+          {
+            "id": "form",
+            "size": 1,
+            "damage_multiplier": 1
+          }
+        ],
+        "butcher_yield": {
+          "decay_turns": 150,
+          "tiers": [
+            {
+              "min_cutting_tier": 1,
+              "yields": [
+                {
+                  "item_id": "revenant_husk",
+                  "quantity_min": 1,
+                  "quantity_max": 1
+                },
+                {
+                  "item_id": "grave_dust",
+                  "quantity_min": 0,
+                  "quantity_max": 1
+                }
+              ]
+            },
+            {
+              "min_cutting_tier": 2,
+              "yields": [
+                {
+                  "item_id": "revenant_husk",
+                  "quantity_min": 1,
+                  "quantity_max": 2
+                },
+                {
+                  "item_id": "grave_dust",
+                  "quantity_min": 1,
+                  "quantity_max": 1
+                },
+                {
+                  "item_id": "compressed_marrow",
+                  "quantity_min": 0,
+                  "quantity_max": 1
+                }
+              ]
+            }
+          ]
+        },
+        "corpse_sprite": {
+          "col": 2055,
+          "row": 0,
+          "sheet": "urizen"
+        },
+        "can_cross_chunks": false,
+        "speed": 1,
+        "ai_profile": {
+          "capability": "melee",
+          "concealment_budget": 8,
+          "concealment_policy": "reachable_unobserved",
+          "exposure_response": "seek_concealment",
+          "no_cover": "defensive_melee",
+          "observer": "normal_player_vision",
+          "pursuit_budget": 32,
+          "recipe": "observation_averse",
+          "scene_scope": "active_scene",
+          "unseen_extra_step": 1,
+          "version": 2
+        },
+        "can_use_stairs": false
+      },
+      "valid": true,
+      "source_asset": "roguelike/data/entities/creatures/hollow_revenant.json",
+      "source_sha256": "44b2ee0fb49ab1f172791bf1775ea9c3a707942e2adbfd9e9fb5e176fad80a3b",
+      "source": {
+        "branch": "main",
+        "catalog_sha256": "5cab84adc2b60e6c4bd6bb03197f4d44b72677dbcdd38cad8ca2ce565b7d7702",
+        "commit": "76ebfacbc3bdebb6201c73d895d9070e6eebd303",
+        "game_dirty": true,
+        "game_source_sha256": "6123493d3a9e5d12c5fb39d9688725057e5a356f1055ec55cf00f8eb8c8393ab",
+        "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+        "root": "G:\\GameDev\\RoguelikeProject"
+      },
+      "contract": "creature-composite-5",
+      "draft_sha256": "d4432a0a2d7137bbc2cffbfe564065a928f6dc765ac235c554d76f3aa94ddf01",
+      "run": "workbench\\.artifacts\\ai-2\\native-1793502894819\\receipt.json"
+    },
+    {
+      "path": "roguelike/data/entities/creatures/gloam_stalker.json",
+      "sha256": "a5d2f95c3605071e06185d17c6fffcaabc8fdc3677863d9d5043d805a7b34d0f",
+      "definition": {
+        "id": "gloam_stalker",
+        "name": "Gloam Stalker",
+        "description": "It recoils from the light, then closes through the dark.",
+        "tile": "hollow_revenant",
+        "blocks_movement": true,
+        "base_hp": 14,
+        "armour_value": 1,
+        "fighter": {
+          "max_hp": 14,
+          "power": 3,
+          "defense": 1
+        },
+        "perception": {
+          "sight_radius": 7,
+          "hearing_radius": 6,
+          "sees_in_dark": true,
+          "faction": "hollow",
+          "hostile_to": [
+            "player"
+          ]
+        },
+        "ai_type": "composite",
+        "wander_radius": 8,
+        "pursuit_timeout": 12,
+        "spawn_zones": [
+          "undercroft",
+          "dead_ground",
+          "vault"
+        ],
+        "damage_dice": "1d4",
+        "damage_bonus": 1,
+        "essence_modifiers": {
+          "Dissolution": 0.2,
+          "Quickening": 1.5,
+          "Binding": 2,
+          "Severance": 2.5,
+          "Consumption": 0.1,
+          "Revelation": 1.8
+        },
+        "attack_verb": "lurches at thee",
+        "blood_type": "bone_dust",
+        "limbs": [
+          {
+            "id": "form",
+            "size": 1,
+            "damage_multiplier": 1
+          }
+        ],
+        "butcher_yield": {
+          "decay_turns": 150,
+          "tiers": [
+            {
+              "min_cutting_tier": 1,
+              "yields": [
+                {
+                  "item_id": "revenant_husk",
+                  "quantity_min": 1,
+                  "quantity_max": 1
+                },
+                {
+                  "item_id": "grave_dust",
+                  "quantity_min": 0,
+                  "quantity_max": 1
+                }
+              ]
+            },
+            {
+              "min_cutting_tier": 2,
+              "yields": [
+                {
+                  "item_id": "revenant_husk",
+                  "quantity_min": 1,
+                  "quantity_max": 2
+                },
+                {
+                  "item_id": "grave_dust",
+                  "quantity_min": 1,
+                  "quantity_max": 1
+                },
+                {
+                  "item_id": "compressed_marrow",
+                  "quantity_min": 0,
+                  "quantity_max": 1
+                }
+              ]
+            }
+          ]
+        },
+        "corpse_sprite": {
+          "col": 2055,
+          "row": 0,
+          "sheet": "urizen"
+        },
+        "can_cross_chunks": false,
+        "speed": 1,
+        "ai_profile": {
+          "capability": "melee",
+          "concealment_budget": 8,
+          "concealment_policy": "reachable_unobserved",
+          "exposure_response": "seek_concealment",
+          "no_cover": "defensive_melee",
+          "observer": "normal_player_vision",
+          "pursuit_budget": 32,
+          "recipe": "observation_averse",
+          "scene_scope": "active_scene",
+          "unseen_extra_step": 0,
+          "version": 2
+        },
+        "can_use_stairs": false
+      },
+      "valid": true,
+      "source_asset": "roguelike/data/entities/creatures/gloam_stalker.json",
+      "source_sha256": "d4432a0a2d7137bbc2cffbfe564065a928f6dc765ac235c554d76f3aa94ddf01",
+      "source": {
+        "branch": "main",
+        "catalog_sha256": "240d5248424cfb1d50f721e6f5c575aa1f3834ae4c43a5244b2f8dd5218328b0",
+        "commit": "76ebfacbc3bdebb6201c73d895d9070e6eebd303",
+        "game_dirty": true,
+        "game_source_sha256": "6123493d3a9e5d12c5fb39d9688725057e5a356f1055ec55cf00f8eb8c8393ab",
+        "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+        "root": "G:\\GameDev\\RoguelikeProject"
+      },
+      "contract": "creature-composite-5",
+      "draft_sha256": "a5d2f95c3605071e06185d17c6fffcaabc8fdc3677863d9d5043d805a7b34d0f",
+      "run": "workbench\\.artifacts\\ai-2\\native-1793502894819\\receipt.json"
+    },
+    {
+      "path": "roguelike/data/entities/creatures/gloam_stalker.json",
+      "sha256": "d4432a0a2d7137bbc2cffbfe564065a928f6dc765ac235c554d76f3aa94ddf01",
+      "definition": {
+        "id": "gloam_stalker",
+        "name": "Gloam Stalker",
+        "description": "It recoils from the light, then closes through the dark.",
+        "tile": "hollow_revenant",
+        "blocks_movement": true,
+        "base_hp": 14,
+        "armour_value": 1,
+        "fighter": {
+          "max_hp": 14,
+          "power": 3,
+          "defense": 1
+        },
+        "perception": {
+          "sight_radius": 7,
+          "hearing_radius": 6,
+          "sees_in_dark": true,
+          "faction": "hollow",
+          "hostile_to": [
+            "player"
+          ]
+        },
+        "ai_type": "composite",
+        "wander_radius": 8,
+        "pursuit_timeout": 12,
+        "spawn_zones": [
+          "undercroft",
+          "dead_ground",
+          "vault"
+        ],
+        "damage_dice": "1d4",
+        "damage_bonus": 1,
+        "essence_modifiers": {
+          "Dissolution": 0.2,
+          "Quickening": 1.5,
+          "Binding": 2,
+          "Severance": 2.5,
+          "Consumption": 0.1,
+          "Revelation": 1.8
+        },
+        "attack_verb": "lurches at thee",
+        "blood_type": "bone_dust",
+        "limbs": [
+          {
+            "id": "form",
+            "size": 1,
+            "damage_multiplier": 1
+          }
+        ],
+        "butcher_yield": {
+          "decay_turns": 150,
+          "tiers": [
+            {
+              "min_cutting_tier": 1,
+              "yields": [
+                {
+                  "item_id": "revenant_husk",
+                  "quantity_min": 1,
+                  "quantity_max": 1
+                },
+                {
+                  "item_id": "grave_dust",
+                  "quantity_min": 0,
+                  "quantity_max": 1
+                }
+              ]
+            },
+            {
+              "min_cutting_tier": 2,
+              "yields": [
+                {
+                  "item_id": "revenant_husk",
+                  "quantity_min": 1,
+                  "quantity_max": 2
+                },
+                {
+                  "item_id": "grave_dust",
+                  "quantity_min": 1,
+                  "quantity_max": 1
+                },
+                {
+                  "item_id": "compressed_marrow",
+                  "quantity_min": 0,
+                  "quantity_max": 1
+                }
+              ]
+            }
+          ]
+        },
+        "corpse_sprite": {
+          "col": 2055,
+          "row": 0,
+          "sheet": "urizen"
+        },
+        "can_cross_chunks": false,
+        "speed": 1,
+        "ai_profile": {
+          "capability": "melee",
+          "concealment_budget": 8,
+          "concealment_policy": "reachable_unobserved",
+          "exposure_response": "seek_concealment",
+          "no_cover": "defensive_melee",
+          "observer": "normal_player_vision",
+          "pursuit_budget": 32,
+          "recipe": "observation_averse",
+          "scene_scope": "active_scene",
+          "unseen_extra_step": 1,
+          "version": 2
+        },
+        "can_use_stairs": false
+      },
+      "valid": true,
+      "source_asset": "roguelike/data/entities/creatures/gloam_stalker.json",
+      "source_sha256": "a5d2f95c3605071e06185d17c6fffcaabc8fdc3677863d9d5043d805a7b34d0f",
+      "source": {
+        "branch": "main",
+        "catalog_sha256": "fd0a9986719163a8c764cc06e4787393bc445ad0a430b5a0a7b17c0af6fe4209",
+        "commit": "76ebfacbc3bdebb6201c73d895d9070e6eebd303",
+        "game_dirty": true,
+        "game_source_sha256": "6123493d3a9e5d12c5fb39d9688725057e5a356f1055ec55cf00f8eb8c8393ab",
+        "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+        "root": "G:\\GameDev\\RoguelikeProject"
+      },
+      "contract": "creature-composite-5",
+      "draft_sha256": "d4432a0a2d7137bbc2cffbfe564065a928f6dc765ac235c554d76f3aa94ddf01",
+      "run": "workbench\\.artifacts\\ai-2\\native-1793502894819\\receipt.json"
+    },
+    {
+      "path": "roguelike/data/entities/creatures/gloam_shudder.json",
+      "sha256": "a1243872cb2734796dd222976d958bf5c81897961ea568a49f1f961db00a9c95",
+      "definition": {
+        "id": "gloam_shudder",
+        "name": "Gloam Shudder",
+        "description": "It folds into shadow when the light finds it.",
+        "tile": "hollow_revenant",
+        "blocks_movement": true,
+        "base_hp": 14,
+        "armour_value": 1,
+        "fighter": {
+          "max_hp": 14,
+          "power": 3,
+          "defense": 1
+        },
+        "perception": {
+          "sight_radius": 7,
+          "hearing_radius": 6,
+          "sees_in_dark": true,
+          "faction": "hollow",
+          "hostile_to": [
+            "player"
+          ]
+        },
+        "ai_type": "composite",
+        "wander_radius": 8,
+        "pursuit_timeout": 12,
+        "spawn_zones": [
+          "undercroft",
+          "dead_ground",
+          "vault"
+        ],
+        "damage_dice": "1d4",
+        "damage_bonus": 1,
+        "essence_modifiers": {
+          "Dissolution": 0.2,
+          "Quickening": 1.5,
+          "Binding": 2,
+          "Severance": 2.5,
+          "Consumption": 0.1,
+          "Revelation": 1.8
+        },
+        "attack_verb": "lurches at thee",
+        "blood_type": "bone_dust",
+        "limbs": [
+          {
+            "id": "form",
+            "size": 1,
+            "damage_multiplier": 1
+          }
+        ],
+        "butcher_yield": {
+          "decay_turns": 150,
+          "tiers": [
+            {
+              "min_cutting_tier": 1,
+              "yields": [
+                {
+                  "item_id": "revenant_husk",
+                  "quantity_min": 1,
+                  "quantity_max": 1
+                },
+                {
+                  "item_id": "grave_dust",
+                  "quantity_min": 0,
+                  "quantity_max": 1
+                }
+              ]
+            },
+            {
+              "min_cutting_tier": 2,
+              "yields": [
+                {
+                  "item_id": "revenant_husk",
+                  "quantity_min": 1,
+                  "quantity_max": 2
+                },
+                {
+                  "item_id": "grave_dust",
+                  "quantity_min": 1,
+                  "quantity_max": 1
+                },
+                {
+                  "item_id": "compressed_marrow",
+                  "quantity_min": 0,
+                  "quantity_max": 1
+                }
+              ]
+            }
+          ]
+        },
+        "corpse_sprite": {
+          "col": 2055,
+          "row": 0,
+          "sheet": "urizen"
+        },
+        "can_cross_chunks": false,
+        "speed": 1,
+        "ai_profile": {
+          "capability": "melee",
+          "concealment_budget": 8,
+          "concealment_policy": "reachable_unobserved",
+          "exposure_response": "seek_concealment",
+          "no_cover": "cower",
+          "observer": "normal_player_vision",
+          "pursuit_budget": 32,
+          "recipe": "observation_averse",
+          "scene_scope": "active_scene",
+          "unseen_extra_step": 1,
+          "version": 2
+        },
+        "can_use_stairs": false
+      },
+      "valid": true,
+      "source_asset": "roguelike/data/entities/creatures/gloam_stalker.json",
+      "source_sha256": "d4432a0a2d7137bbc2cffbfe564065a928f6dc765ac235c554d76f3aa94ddf01",
+      "source": {
+        "branch": "main",
+        "catalog_sha256": "240d5248424cfb1d50f721e6f5c575aa1f3834ae4c43a5244b2f8dd5218328b0",
+        "commit": "76ebfacbc3bdebb6201c73d895d9070e6eebd303",
+        "game_dirty": true,
+        "game_source_sha256": "6123493d3a9e5d12c5fb39d9688725057e5a356f1055ec55cf00f8eb8c8393ab",
+        "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+        "root": "G:\\GameDev\\RoguelikeProject"
+      },
+      "contract": "creature-composite-5",
+      "draft_sha256": "a1243872cb2734796dd222976d958bf5c81897961ea568a49f1f961db00a9c95",
+      "run": "workbench\\.artifacts\\ai-2\\native-1793502894819\\receipt.json"
+    },
+    {
+      "path": "roguelike/data/entities/creatures/gloam_stalker.json",
+      "sha256": "a5d2f95c3605071e06185d17c6fffcaabc8fdc3677863d9d5043d805a7b34d0f",
+      "definition": {
+        "id": "gloam_stalker",
+        "name": "Gloam Stalker",
+        "description": "It recoils from the light, then closes through the dark.",
+        "tile": "hollow_revenant",
+        "blocks_movement": true,
+        "base_hp": 14,
+        "armour_value": 1,
+        "fighter": {
+          "max_hp": 14,
+          "power": 3,
+          "defense": 1
+        },
+        "perception": {
+          "sight_radius": 7,
+          "hearing_radius": 6,
+          "sees_in_dark": true,
+          "faction": "hollow",
+          "hostile_to": [
+            "player"
+          ]
+        },
+        "ai_type": "composite",
+        "wander_radius": 8,
+        "pursuit_timeout": 12,
+        "spawn_zones": [
+          "undercroft",
+          "dead_ground",
+          "vault"
+        ],
+        "damage_dice": "1d4",
+        "damage_bonus": 1,
+        "essence_modifiers": {
+          "Dissolution": 0.2,
+          "Quickening": 1.5,
+          "Binding": 2,
+          "Severance": 2.5,
+          "Consumption": 0.1,
+          "Revelation": 1.8
+        },
+        "attack_verb": "lurches at thee",
+        "blood_type": "bone_dust",
+        "limbs": [
+          {
+            "id": "form",
+            "size": 1,
+            "damage_multiplier": 1
+          }
+        ],
+        "butcher_yield": {
+          "decay_turns": 150,
+          "tiers": [
+            {
+              "min_cutting_tier": 1,
+              "yields": [
+                {
+                  "item_id": "revenant_husk",
+                  "quantity_min": 1,
+                  "quantity_max": 1
+                },
+                {
+                  "item_id": "grave_dust",
+                  "quantity_min": 0,
+                  "quantity_max": 1
+                }
+              ]
+            },
+            {
+              "min_cutting_tier": 2,
+              "yields": [
+                {
+                  "item_id": "revenant_husk",
+                  "quantity_min": 1,
+                  "quantity_max": 2
+                },
+                {
+                  "item_id": "grave_dust",
+                  "quantity_min": 1,
+                  "quantity_max": 1
+                },
+                {
+                  "item_id": "compressed_marrow",
+                  "quantity_min": 0,
+                  "quantity_max": 1
+                }
+              ]
+            }
+          ]
+        },
+        "corpse_sprite": {
+          "col": 2055,
+          "row": 0,
+          "sheet": "urizen"
+        },
+        "can_cross_chunks": false,
+        "speed": 1,
+        "ai_profile": {
+          "capability": "melee",
+          "concealment_budget": 8,
+          "concealment_policy": "reachable_unobserved",
+          "exposure_response": "seek_concealment",
+          "no_cover": "defensive_melee",
+          "observer": "normal_player_vision",
+          "pursuit_budget": 32,
+          "recipe": "observation_averse",
+          "scene_scope": "active_scene",
+          "unseen_extra_step": 0,
+          "version": 2
+        },
+        "can_use_stairs": false
+      },
+      "valid": true,
+      "source_asset": "roguelike/data/entities/creatures/gloam_stalker.json",
+      "source_sha256": "d4432a0a2d7137bbc2cffbfe564065a928f6dc765ac235c554d76f3aa94ddf01",
+      "source": {
+        "branch": "main",
+        "catalog_sha256": "a35d12b9c38095bbebfa7e49a2bfaedf0610f8a4509958d5df526aa7f5ff8383",
+        "commit": "76ebfacbc3bdebb6201c73d895d9070e6eebd303",
+        "game_dirty": true,
+        "game_source_sha256": "6123493d3a9e5d12c5fb39d9688725057e5a356f1055ec55cf00f8eb8c8393ab",
+        "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+        "root": "G:\\GameDev\\RoguelikeProject"
+      },
+      "contract": "creature-composite-5",
+      "draft_sha256": "a5d2f95c3605071e06185d17c6fffcaabc8fdc3677863d9d5043d805a7b34d0f",
+      "run": "workbench\\.artifacts\\ai-2\\native-1793502992483\\receipt.json"
+    },
+    {
+      "path": "roguelike/data/entities/creatures/gloam_stalker.json",
+      "sha256": "d4432a0a2d7137bbc2cffbfe564065a928f6dc765ac235c554d76f3aa94ddf01",
+      "definition": {
+        "id": "gloam_stalker",
+        "name": "Gloam Stalker",
+        "description": "It recoils from the light, then closes through the dark.",
+        "tile": "hollow_revenant",
+        "blocks_movement": true,
+        "base_hp": 14,
+        "armour_value": 1,
+        "fighter": {
+          "max_hp": 14,
+          "power": 3,
+          "defense": 1
+        },
+        "perception": {
+          "sight_radius": 7,
+          "hearing_radius": 6,
+          "sees_in_dark": true,
+          "faction": "hollow",
+          "hostile_to": [
+            "player"
+          ]
+        },
+        "ai_type": "composite",
+        "wander_radius": 8,
+        "pursuit_timeout": 12,
+        "spawn_zones": [
+          "undercroft",
+          "dead_ground",
+          "vault"
+        ],
+        "damage_dice": "1d4",
+        "damage_bonus": 1,
+        "essence_modifiers": {
+          "Dissolution": 0.2,
+          "Quickening": 1.5,
+          "Binding": 2,
+          "Severance": 2.5,
+          "Consumption": 0.1,
+          "Revelation": 1.8
+        },
+        "attack_verb": "lurches at thee",
+        "blood_type": "bone_dust",
+        "limbs": [
+          {
+            "id": "form",
+            "size": 1,
+            "damage_multiplier": 1
+          }
+        ],
+        "butcher_yield": {
+          "decay_turns": 150,
+          "tiers": [
+            {
+              "min_cutting_tier": 1,
+              "yields": [
+                {
+                  "item_id": "revenant_husk",
+                  "quantity_min": 1,
+                  "quantity_max": 1
+                },
+                {
+                  "item_id": "grave_dust",
+                  "quantity_min": 0,
+                  "quantity_max": 1
+                }
+              ]
+            },
+            {
+              "min_cutting_tier": 2,
+              "yields": [
+                {
+                  "item_id": "revenant_husk",
+                  "quantity_min": 1,
+                  "quantity_max": 2
+                },
+                {
+                  "item_id": "grave_dust",
+                  "quantity_min": 1,
+                  "quantity_max": 1
+                },
+                {
+                  "item_id": "compressed_marrow",
+                  "quantity_min": 0,
+                  "quantity_max": 1
+                }
+              ]
+            }
+          ]
+        },
+        "corpse_sprite": {
+          "col": 2055,
+          "row": 0,
+          "sheet": "urizen"
+        },
+        "can_cross_chunks": false,
+        "speed": 1,
+        "ai_profile": {
+          "capability": "melee",
+          "concealment_budget": 8,
+          "concealment_policy": "reachable_unobserved",
+          "exposure_response": "seek_concealment",
+          "no_cover": "defensive_melee",
+          "observer": "normal_player_vision",
+          "pursuit_budget": 32,
+          "recipe": "observation_averse",
+          "scene_scope": "active_scene",
+          "unseen_extra_step": 1,
+          "version": 2
+        },
+        "can_use_stairs": false
+      },
+      "valid": true,
+      "source_asset": "roguelike/data/entities/creatures/gloam_stalker.json",
+      "source_sha256": "a5d2f95c3605071e06185d17c6fffcaabc8fdc3677863d9d5043d805a7b34d0f",
+      "source": {
+        "branch": "main",
+        "catalog_sha256": "2ea378896621e12cd964f8e284fc4f960cc8748f14ee5c625b2a59a3f0544809",
+        "commit": "76ebfacbc3bdebb6201c73d895d9070e6eebd303",
+        "game_dirty": true,
+        "game_source_sha256": "6123493d3a9e5d12c5fb39d9688725057e5a356f1055ec55cf00f8eb8c8393ab",
+        "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+        "root": "G:\\GameDev\\RoguelikeProject"
+      },
+      "contract": "creature-composite-5",
+      "draft_sha256": "d4432a0a2d7137bbc2cffbfe564065a928f6dc765ac235c554d76f3aa94ddf01",
+      "run": "workbench\\.artifacts\\ai-2\\native-1793502992483\\receipt.json"
+    },
+    {
+      "path": "roguelike/data/layouts/ai2_shadow_opening.json",
+      "sha256": "1c96c6972ce838d91ea6694f40f758bda2f6a4e5f5f8f9beaedb58b1b57bf4d3",
+      "definition": {
+        "id": "ai2_shadow_opening",
+        "width": 17,
+        "height": 11,
+        "layers": [
+          "#################",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#.......+.......#",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#################"
+        ],
+        "legend": {
+          "#": "wall",
+          ".": "floor",
+          "<": "stairs_up",
+          "+": "door_closed"
+        },
+        "player_start": {
+          "x": 7,
+          "y": 5
+        },
+        "special_tiles": [
+          {
+            "type": "creature",
+            "x": 10,
+            "y": 5,
+            "creature_id": "gloam_stalker"
+          },
+          {
+            "type": "item",
+            "x": 7,
+            "y": 2,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "container",
+            "x": 5,
+            "y": 3,
+            "decor_id": "crate",
+            "loot_pools": [
+              "storage_tools"
+            ]
+          }
+        ]
+      },
+      "valid": true,
+      "source_asset": "roguelike/data/layouts/ai1_skirmisher_room.json",
+      "source_sha256": "d24612886abb861d45e7b2ea43fa63412d4cb377f236952ca4117e204a6a6ae5",
+      "source": {
+        "branch": "main",
+        "catalog_sha256": "a35d12b9c38095bbebfa7e49a2bfaedf0610f8a4509958d5df526aa7f5ff8383",
+        "commit": "76ebfacbc3bdebb6201c73d895d9070e6eebd303",
+        "game_dirty": true,
+        "game_source_sha256": "271dd53410d83ef3740b494e37986224ff2b717f246ba3bcaddb57ae789a11a1",
+        "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+        "root": "G:\\GameDev\\RoguelikeProject"
+      },
+      "contract": "authored-room-2",
+      "draft_sha256": "1c96c6972ce838d91ea6694f40f758bda2f6a4e5f5f8f9beaedb58b1b57bf4d3",
+      "run": "workbench\\.artifacts\\ai-2\\native-1793503114018\\receipt.json"
+    },
+    {
+      "path": "roguelike/data/layouts/ai2_defensive_ground.json",
+      "sha256": "3400ef6acd17046c149b77ceb4d57cdcfc5acafbb360157d1fa952d515824a0a",
+      "definition": {
+        "id": "ai2_defensive_ground",
+        "width": 17,
+        "height": 11,
+        "layers": [
+          "#################",
+          "#...............#",
+          "#...............#",
+          "#...............#",
+          "#...............#",
+          "#...............#",
+          "#...............#",
+          "#...............#",
+          "#...............#",
+          "#...............#",
+          "#################"
+        ],
+        "legend": {
+          "#": "wall",
+          ".": "floor",
+          "<": "stairs_up"
+        },
+        "player_start": {
+          "x": 6,
+          "y": 5
+        },
+        "special_tiles": [
+          {
+            "type": "creature",
+            "x": 7,
+            "y": 5,
+            "creature_id": "gloam_stalker"
+          },
+          {
+            "type": "item",
+            "x": 7,
+            "y": 2,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "container",
+            "x": 8,
+            "y": 4,
+            "decor_id": "crate",
+            "loot_pools": [
+              "storage_tools"
+            ]
+          }
+        ]
+      },
+      "valid": true,
+      "source_asset": "roguelike/data/layouts/ai1_skirmisher_room.json",
+      "source_sha256": "d24612886abb861d45e7b2ea43fa63412d4cb377f236952ca4117e204a6a6ae5",
+      "source": {
+        "branch": "main",
+        "catalog_sha256": "8e559e0de075c044ecdfc0f9635ee2adb1dd08e8392e9a4b2682c0d7cc7eac29",
+        "commit": "76ebfacbc3bdebb6201c73d895d9070e6eebd303",
+        "game_dirty": true,
+        "game_source_sha256": "271dd53410d83ef3740b494e37986224ff2b717f246ba3bcaddb57ae789a11a1",
+        "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+        "root": "G:\\GameDev\\RoguelikeProject"
+      },
+      "contract": "authored-room-2",
+      "draft_sha256": "3400ef6acd17046c149b77ceb4d57cdcfc5acafbb360157d1fa952d515824a0a",
+      "run": "workbench\\.artifacts\\ai-2\\native-1793503114018\\receipt.json"
+    },
+    {
+      "path": "roguelike/data/layouts/ai2_cowering_ground.json",
+      "sha256": "6cff74dcc953516e3c6eb2acae451c88bfdf34c4208e7eaf29210b870c335b15",
+      "definition": {
+        "id": "ai2_cowering_ground",
+        "width": 17,
+        "height": 11,
+        "layers": [
+          "#################",
+          "#...............#",
+          "#...............#",
+          "#...............#",
+          "#...............#",
+          "#...............#",
+          "#...............#",
+          "#...............#",
+          "#...............#",
+          "#...............#",
+          "#################"
+        ],
+        "legend": {
+          "#": "wall",
+          ".": "floor",
+          "<": "stairs_up"
+        },
+        "player_start": {
+          "x": 6,
+          "y": 5
+        },
+        "special_tiles": [
+          {
+            "type": "creature",
+            "x": 7,
+            "y": 5,
+            "creature_id": "gloam_shudder"
+          },
+          {
+            "type": "item",
+            "x": 7,
+            "y": 2,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "container",
+            "x": 8,
+            "y": 4,
+            "decor_id": "crate",
+            "loot_pools": [
+              "storage_tools"
+            ]
+          }
+        ]
+      },
+      "valid": true,
+      "source_asset": "roguelike/data/layouts/ai2_defensive_ground.json",
+      "source_sha256": "3400ef6acd17046c149b77ceb4d57cdcfc5acafbb360157d1fa952d515824a0a",
+      "source": {
+        "branch": "main",
+        "catalog_sha256": "bfd8b486451bce7043a2847f677a22625eb334507daadb59333a1349d9b9615c",
+        "commit": "76ebfacbc3bdebb6201c73d895d9070e6eebd303",
+        "game_dirty": true,
+        "game_source_sha256": "536fd5ace6a29dffdd4de9853ac2af929f31c322b416bf9c91105496e6cb3178",
+        "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+        "root": "G:\\GameDev\\RoguelikeProject"
+      },
+      "contract": "authored-room-2",
+      "draft_sha256": "6cff74dcc953516e3c6eb2acae451c88bfdf34c4208e7eaf29210b870c335b15",
+      "run": "workbench\\.artifacts\\ai-2\\native-1793503114018\\receipt.json"
+    },
+    {
+      "path": "roguelike/data/layouts/ai2_mixed_opening.json",
+      "sha256": "0b60af350411b2d875215a53f8a489b9b2c69bbf9317c83515ff4812a87d7a9f",
+      "definition": {
+        "id": "ai2_mixed_opening",
+        "width": 17,
+        "height": 11,
+        "layers": [
+          "#################",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#.......+.......#",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#.......#.......#",
+          "#################"
+        ],
+        "legend": {
+          "#": "wall",
+          ".": "floor",
+          "<": "stairs_up",
+          "+": "door_closed"
+        },
+        "player_start": {
+          "x": 7,
+          "y": 5
+        },
+        "special_tiles": [
+          {
+            "type": "creature",
+            "x": 10,
+            "y": 5,
+            "creature_id": "gloam_stalker"
+          },
+          {
+            "type": "item",
+            "x": 7,
+            "y": 2,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "container",
+            "x": 5,
+            "y": 3,
+            "decor_id": "crate",
+            "loot_pools": [
+              "storage_tools"
+            ]
+          },
+          {
+            "type": "creature",
+            "x": 4,
+            "y": 8,
+            "creature_id": "heath_stalker"
+          }
+        ]
+      },
+      "valid": true,
+      "source_asset": "roguelike/data/layouts/ai2_shadow_opening.json",
+      "source_sha256": "1c96c6972ce838d91ea6694f40f758bda2f6a4e5f5f8f9beaedb58b1b57bf4d3",
+      "source": {
+        "branch": "main",
+        "catalog_sha256": "22dac44bbfc781c4e7ac0d5201ce0090d7562763fbed347d9363e39db9e6faf2",
+        "commit": "76ebfacbc3bdebb6201c73d895d9070e6eebd303",
+        "game_dirty": true,
+        "game_source_sha256": "536fd5ace6a29dffdd4de9853ac2af929f31c322b416bf9c91105496e6cb3178",
+        "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+        "root": "G:\\GameDev\\RoguelikeProject"
+      },
+      "contract": "authored-room-2",
+      "draft_sha256": "0b60af350411b2d875215a53f8a489b9b2c69bbf9317c83515ff4812a87d7a9f",
+      "run": "workbench\\.artifacts\\ai-2\\native-1793503114018\\receipt.json"
+    },
+    {
+      "path": "roguelike/data/layouts/ai2_defensive_ground.json",
+      "sha256": "67d3e487ac66b0eb706dc9ccb952029b259a8340292fda33709b6a5f202ea6fb",
+      "definition": {
+        "id": "ai2_defensive_ground",
+        "width": 17,
+        "height": 11,
+        "layers": [
+          "#################",
+          "#...........#####",
+          "#...........#####",
+          "#...........#####",
+          "#...........#####",
+          "#...........#####",
+          "#...........#####",
+          "#...........#####",
+          "#...........#####",
+          "#...........#####",
+          "#################"
+        ],
+        "legend": {
+          "#": "wall",
+          ".": "floor",
+          "<": "stairs_up"
+        },
+        "player_start": {
+          "x": 6,
+          "y": 5
+        },
+        "special_tiles": [
+          {
+            "type": "creature",
+            "x": 7,
+            "y": 5,
+            "creature_id": "gloam_stalker"
+          },
+          {
+            "type": "item",
+            "x": 7,
+            "y": 2,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "container",
+            "x": 8,
+            "y": 4,
+            "decor_id": "crate",
+            "loot_pools": [
+              "storage_tools"
+            ]
+          }
+        ]
+      },
+      "valid": true,
+      "source_asset": "roguelike/data/layouts/ai2_defensive_ground.json",
+      "source_sha256": "3400ef6acd17046c149b77ceb4d57cdcfc5acafbb360157d1fa952d515824a0a",
+      "source": {
+        "branch": "main",
+        "catalog_sha256": "6863a255cca021b5e7250bce1f3e6525404ba97fd6b238f951061291d23942db",
+        "commit": "76ebfacbc3bdebb6201c73d895d9070e6eebd303",
+        "game_dirty": true,
+        "game_source_sha256": "349d684e77defe9eb133435ec82bdb0d3e91c358b1d7650d1b3e4691f98857ca",
+        "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+        "root": "G:\\GameDev\\RoguelikeProject"
+      },
+      "contract": "authored-room-2",
+      "draft_sha256": "67d3e487ac66b0eb706dc9ccb952029b259a8340292fda33709b6a5f202ea6fb",
+      "run": "workbench\\.artifacts\\ai-2\\native-1793503289433\\receipt.json"
+    },
+    {
+      "path": "roguelike/data/layouts/ai2_cowering_ground.json",
+      "sha256": "b3d448b0856bf2a03b53c0813f64f50017e2a7b5130ac3dd2927ea3b350081f1",
+      "definition": {
+        "id": "ai2_cowering_ground",
+        "width": 17,
+        "height": 11,
+        "layers": [
+          "#################",
+          "#...........#####",
+          "#...........#####",
+          "#...........#####",
+          "#...........#####",
+          "#...........#####",
+          "#...........#####",
+          "#...........#####",
+          "#...........#####",
+          "#...........#####",
+          "#################"
+        ],
+        "legend": {
+          "#": "wall",
+          ".": "floor",
+          "<": "stairs_up"
+        },
+        "player_start": {
+          "x": 6,
+          "y": 5
+        },
+        "special_tiles": [
+          {
+            "type": "creature",
+            "x": 7,
+            "y": 5,
+            "creature_id": "gloam_shudder"
+          },
+          {
+            "type": "item",
+            "x": 7,
+            "y": 2,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "container",
+            "x": 8,
+            "y": 4,
+            "decor_id": "crate",
+            "loot_pools": [
+              "storage_tools"
+            ]
+          }
+        ]
+      },
+      "valid": true,
+      "source_asset": "roguelike/data/layouts/ai2_cowering_ground.json",
+      "source_sha256": "6cff74dcc953516e3c6eb2acae451c88bfdf34c4208e7eaf29210b870c335b15",
+      "source": {
+        "branch": "main",
+        "catalog_sha256": "267292440ea7966cafe5a1886900393afa904357c88df1ce393a97504584447d",
+        "commit": "76ebfacbc3bdebb6201c73d895d9070e6eebd303",
+        "game_dirty": true,
+        "game_source_sha256": "349d684e77defe9eb133435ec82bdb0d3e91c358b1d7650d1b3e4691f98857ca",
+        "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+        "root": "G:\\GameDev\\RoguelikeProject"
+      },
+      "contract": "authored-room-2",
+      "draft_sha256": "b3d448b0856bf2a03b53c0813f64f50017e2a7b5130ac3dd2927ea3b350081f1",
+      "run": "workbench\\.artifacts\\ai-2\\native-1793503289433\\receipt.json"
+    },
+    {
+      "path": "roguelike/data/layouts/ai2_defensive_ground.json",
+      "sha256": "4cdff07feda244c6fb8a76a511416b0619ee7d1a8e70ef0a2c04eaf06290d377",
+      "definition": {
+        "id": "ai2_defensive_ground",
+        "width": 17,
+        "height": 11,
+        "layers": [
+          "#################",
+          "#################",
+          "##.........######",
+          "##.........######",
+          "##.........######",
+          "##.........######",
+          "##.........######",
+          "##.........######",
+          "##.........######",
+          "#################",
+          "#################"
+        ],
+        "legend": {
+          "#": "wall",
+          ".": "floor",
+          "<": "stairs_up"
+        },
+        "player_start": {
+          "x": 6,
+          "y": 5
+        },
+        "special_tiles": [
+          {
+            "type": "creature",
+            "x": 7,
+            "y": 5,
+            "creature_id": "gloam_stalker"
+          },
+          {
+            "type": "item",
+            "x": 7,
+            "y": 2,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "container",
+            "x": 8,
+            "y": 4,
+            "decor_id": "crate",
+            "loot_pools": [
+              "storage_tools"
+            ]
+          }
+        ]
+      },
+      "valid": true,
+      "source_asset": "roguelike/data/layouts/ai2_defensive_ground.json",
+      "source_sha256": "67d3e487ac66b0eb706dc9ccb952029b259a8340292fda33709b6a5f202ea6fb",
+      "source": {
+        "branch": "main",
+        "catalog_sha256": "58eb71f8cf68f7a3749bf14c4b7e77fc76dd1c3550beae690cd6d250fc62fe17",
+        "commit": "76ebfacbc3bdebb6201c73d895d9070e6eebd303",
+        "game_dirty": true,
+        "game_source_sha256": "349d684e77defe9eb133435ec82bdb0d3e91c358b1d7650d1b3e4691f98857ca",
+        "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+        "root": "G:\\GameDev\\RoguelikeProject"
+      },
+      "contract": "authored-room-2",
+      "draft_sha256": "4cdff07feda244c6fb8a76a511416b0619ee7d1a8e70ef0a2c04eaf06290d377",
+      "run": "workbench\\.artifacts\\ai-2\\native-1793503422314\\receipt.json"
+    },
+    {
+      "path": "roguelike/data/layouts/ai2_cowering_ground.json",
+      "sha256": "0e41499b8dcbc258c4e563371557edf3f9237c1975fe04f2c4692f559d73f552",
+      "definition": {
+        "id": "ai2_cowering_ground",
+        "width": 17,
+        "height": 11,
+        "layers": [
+          "#################",
+          "#################",
+          "##.........######",
+          "##.........######",
+          "##.........######",
+          "##.........######",
+          "##.........######",
+          "##.........######",
+          "##.........######",
+          "#################",
+          "#################"
+        ],
+        "legend": {
+          "#": "wall",
+          ".": "floor",
+          "<": "stairs_up"
+        },
+        "player_start": {
+          "x": 6,
+          "y": 5
+        },
+        "special_tiles": [
+          {
+            "type": "creature",
+            "x": 7,
+            "y": 5,
+            "creature_id": "gloam_shudder"
+          },
+          {
+            "type": "item",
+            "x": 7,
+            "y": 2,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "container",
+            "x": 8,
+            "y": 4,
+            "decor_id": "crate",
+            "loot_pools": [
+              "storage_tools"
+            ]
+          }
+        ]
+      },
+      "valid": true,
+      "source_asset": "roguelike/data/layouts/ai2_cowering_ground.json",
+      "source_sha256": "b3d448b0856bf2a03b53c0813f64f50017e2a7b5130ac3dd2927ea3b350081f1",
+      "source": {
+        "branch": "main",
+        "catalog_sha256": "066b8c12120bd66c004edf8ca2301852e2dc380385c947618436436b51233730",
+        "commit": "76ebfacbc3bdebb6201c73d895d9070e6eebd303",
+        "game_dirty": true,
+        "game_source_sha256": "349d684e77defe9eb133435ec82bdb0d3e91c358b1d7650d1b3e4691f98857ca",
+        "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+        "root": "G:\\GameDev\\RoguelikeProject"
+      },
+      "contract": "authored-room-2",
+      "draft_sha256": "0e41499b8dcbc258c4e563371557edf3f9237c1975fe04f2c4692f559d73f552",
+      "run": "workbench\\.artifacts\\ai-2\\native-1793503422314\\receipt.json"
+    }
+  ],
+  "final_byte_match": {
+    "roguelike/data/entities/creatures/gloam_stalker.json": true,
+    "roguelike/data/entities/creatures/gloam_shudder.json": true,
+    "roguelike/data/layouts/ai2_shadow_opening.json": true,
+    "roguelike/data/layouts/ai2_defensive_ground.json": true,
+    "roguelike/data/layouts/ai2_cowering_ground.json": true,
+    "roguelike/data/layouts/ai2_mixed_opening.json": true
+  },
+  "final_native_package_sha256": "1032cda9806cb857c5c3f1b86250027c257403cfc99fbc818c3308a4979a0b53"
+}

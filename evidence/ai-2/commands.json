@@ -1,0 +1,143 @@
+{
+  "runtime_revision": "00388245ddc8b9869fd00a31734b4a1c64ee506c",
+  "verification_revision": "4232937079b7b8f5a1de38a1124e818c73382e23",
+  "environment": {
+    "platform": "Windows x64",
+    "python": "3.11.0 [MSC v.1933 64 bit AMD64]",
+    "dependencies": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6"
+    },
+    "node": "24.15.0",
+    "npm": "11.12.1",
+    "cargo": "1.95.0",
+    "rustc": "1.95.0",
+    "save_policy": "Disposable explicitly owned roots; actual production imports; no campaign reads/writes"
+  },
+  "commands": [
+    {
+      "gate": "focused",
+      "command": "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe -B tools/critical_fix_regressions/verify_fixes.py --timeout 3600 --evidence .baseline/ai-2/final-c/focused",
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "verified_revision": "4232937079b7b8f5a1de38a1124e818c73382e23",
+      "result": "484 passed; unfiltered; source stable; exit 0"
+    },
+    {
+      "gate": "production-D",
+      "command": "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe -B tools/verify_d.py --evidence .baseline/ai-2/final-b/production-d",
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "result": "3704 checks passed, 159 workers, unfiltered",
+      "verified_revision": "00388245ddc8b9869fd00a31734b4a1c64ee506c",
+      "retention": "Only focused/Workbench catalogue assertions changed afterward; exact diff and consumer distinction in retention.json."
+    },
+    {
+      "gate": "worker-affected",
+      "command": "runtime/python.exe -X utf8 -I -B -c \"import sys, unittest; sys.path.insert(0, '.'); r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_composite_ai','test_creatures','test_rivals_g21','test_rooms_w5g','test_authoring'])); sys.exit(not r.wasSuccessful())\"",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench\\worker",
+      "result": "23 passed",
+      "verified_revision": "00388245ddc8b9869fd00a31734b4a1c64ee506c"
+    },
+    {
+      "gate": "worker-corpus",
+      "command": "runtime/python.exe -X utf8 -I -B -c \"import sys, unittest; sys.path.insert(0, '.'); r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_creatures_w5f'])); sys.exit(not r.wasSuccessful())\"",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench\\worker",
+      "result": "5 passed",
+      "verified_revision": "4232937079b7b8f5a1de38a1124e818c73382e23"
+    },
+    {
+      "gate": "frontend",
+      "command": "npm.cmd test",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "result": "92 passed",
+      "retention": "Frontend/test inputs unchanged; retained final log and packaged-input manifest."
+    },
+    {
+      "gate": "typecheck",
+      "command": "npm.cmd run typecheck",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "result": "passed",
+      "retention": "TypeScript inputs unchanged"
+    },
+    {
+      "gate": "host",
+      "command": "cargo test --locked --manifest-path src-tauri/Cargo.toml",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "result": "71 passed",
+      "retention": "Rust/host inputs unchanged"
+    },
+    {
+      "gate": "clippy",
+      "command": "cargo clippy --locked --manifest-path src-tauri/Cargo.toml -- -D warnings",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "result": "passed",
+      "retention": "Rust/host inputs unchanged"
+    },
+    {
+      "gate": "release",
+      "command": "npm.cmd run build",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "result": "usable portable release built, pinned runtime verified; exact executable consumed by final native capture",
+      "provenance": "Successful command/tool output; executable/input hashes in package.json. Frontend/host/bridge/runtime package inputs unchanged afterward."
+    },
+    {
+      "gate": "debug-build",
+      "command": "cargo build --locked --manifest-path src-tauri/Cargo.toml",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "result": "passed"
+    },
+    {
+      "gate": "startup",
+      "command": "node scripts/startup-test.mjs",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "result": "15 passed",
+      "retention": "Packaged startup consumer inputs unchanged"
+    },
+    {
+      "gate": "desktop",
+      "command": "node scripts/desktop-test.mjs",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "result": "passed",
+      "retention": "Portable frontend/host consumer inputs unchanged"
+    },
+    {
+      "gate": "final-native",
+      "command": "node scripts/run-ai-2.mjs",
+      "env": {
+        "AI2_RUNTIME_ONLY": "1"
+      },
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "result": "passed; three F5/F9 checks; reset/stop/latest saved/dirty exclusion",
+      "verified_revision": "00388245ddc8b9869fd00a31734b4a1c64ee506c"
+    },
+    {
+      "gate": "authoring",
+      "command": "node scripts/run-ai-2.mjs",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "result": "14 successful reviewed publications and six final byte matches; initial creation/duplication and later room tuning recorded separately from complete final native pass",
+      "provenance": "Actual local WebView control operations; some development runs failed later, after the listed successful publications."
+    },
+    {
+      "gate": "responses",
+      "command": "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe -B tools/verify_ai_2_play.py --evidence .baseline/ai-2/final-b/play",
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "result": "9 passed: 7 ordinary-input scenarios plus 2 labelled tuning fixtures",
+      "verified_revision": "00388245ddc8b9869fd00a31734b4a1c64ee506c"
+    },
+    {
+      "gate": "explicit-cold-load",
+      "command": "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe -B workbench/scripts/verify-ai-2-cold.py --evidence G:/GameDev/RoguelikeProject/.baseline/ai-2/final-b/cold",
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "result": "conceal/pursue F5/F9 exact; both separate-process cold loads exact",
+      "verified_revision": "00388245ddc8b9869fd00a31734b4a1c64ee506c"
+    },
+    {
+      "gate": "scheduling-probe",
+      "command": "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe -B evidence/ai-2/scheduling_probe.py",
+      "cwd": "G:/GameDev/RoguelikeProject",
+      "result": "Fast scheduler: two opportunities, three entirely unseen steps. Restored same-phase direct action-consumer call: one unseen normal step, no reminted bonus.",
+      "provenance": "Controlled real scheduler/factory/save reconstruction; weather fixture after restoration. Separate from normal-input witnesses."
+    }
+  ],
+  "passed": true
+}

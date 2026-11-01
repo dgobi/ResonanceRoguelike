@@ -1,0 +1,1338 @@
+{
+  "executable": "G:\\GameDev\\RoguelikeProject\\workbench\\src-tauri\\target\\release\\resonance-workbench.exe",
+  "mode": "release",
+  "started_utc": "2026-11-01T03:27:41.170Z",
+  "checks": [
+    "actual Tauri WebView2 window",
+    "WebView network offline",
+    "repository handshake, live asset validation and Pixi rendering",
+    "production arrival click maps to (15,20), stairs_up",
+    "real DIMENSION diagnostic for disposable fixture",
+    "byte-exact view, close and reopen journey",
+    "host traversal rejection",
+    "cancel and retry without app hang",
+    "invalid project visible",
+    "no temporary worker roots remain after native close"
+  ],
+  "console_errors": [],
+  "external_requests": [],
+  "host_pid": 30692,
+  "launch_to_shell_ms": 833,
+  "webview_url": "http://tauri.localhost/",
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+  "open_to_preview_ms": 6996,
+  "worker": {
+    "contract": "g2-3",
+    "creature_contract": "creature-composite-5",
+    "diagnostics": [],
+    "edit_route": "ordinary_building",
+    "families": [
+      {
+        "compatible": true,
+        "context": null,
+        "contract": "surface-building-1",
+        "descriptor": {
+          "policy": {
+            "identity": "id",
+            "operations": [
+              "edit",
+              "variant"
+            ],
+            "root": "roguelike/data/buildings/"
+          },
+          "production_route": "ordinary_building",
+          "publication_note": "Saved definitions affect fresh catalogues/generation. A pending planned surface retains its selected semantic dependencies: same-ID building, pool or item changes can require restoring matching definitions or starting a fresh world. No replanning/migration. Generated owned surfaces retain saved maps, contents and mutations; missing required caches still refuse regeneration. A new variant retains the old source and changes no explicit settlement/POI/compound membership, but legacy folder pools can discover it. A new building ID does not isolate shared pool/item dependencies from later edits.",
+          "schema": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "additionalProperties": true,
+            "properties": {
+              "description": {
+                "type": "string",
+                "x-control": "multiline"
+              },
+              "id": {
+                "readOnly": true,
+                "type": "string"
+              },
+              "weight": {
+                "description": "Legacy corner-scatter weight; current planned membership is separate.",
+                "minimum": 0,
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "views": [
+            "building-spatial"
+          ],
+          "vocabulary": "resonance-controls-1"
+        },
+        "descriptor_sha256": "5af2ff03c7647eea5d75801c1440b824d96b9eb73a3eff6a020cb7926631aa14",
+        "effective_operations": [],
+        "id": "building",
+        "problems": [],
+        "references": {}
+      },
+      {
+        "compatible": true,
+        "context": null,
+        "contract": "contextual-loot-1",
+        "descriptor": {
+          "policy": {
+            "identity": "id",
+            "operations": [
+              "edit",
+              "variant"
+            ],
+            "root": "roguelike/data/loot_pools/"
+          },
+          "production_route": "contextual_loot_pool",
+          "publication_note": "Saves definitions for the next catalogue and fresh construction. Pending planned surfaces retain selected semantic dependencies: changed consumed pools/items can reject construction until matching definitions are restored or a fresh world is started. Generated containers retain their saved physical contents and state; taking or consuming loot persists. Variants change no container reference. Reset uses the immutable capture; Test latest saved captures current saved dependencies.",
+          "schema": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "additionalProperties": true,
+            "properties": {
+              "description": {
+                "type": "string",
+                "x-control": "multiline"
+              },
+              "id": {
+                "readOnly": true,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "views": [
+            "pool-entries"
+          ],
+          "vocabulary": "resonance-controls-1"
+        },
+        "descriptor_sha256": "1060968596ff84a105516428e1934ae198d8c278ddb37e664dde4c50c6e874e7",
+        "effective_operations": [],
+        "id": "pool",
+        "problems": [],
+        "references": {}
+      },
+      {
+        "compatible": true,
+        "context": null,
+        "contract": "authored-submap-selection-1",
+        "descriptor": {
+          "policy": {
+            "identity": "id",
+            "operations": [
+              "edit"
+            ],
+            "root": "roguelike/data/generation/authored_submap_selection.json"
+          },
+          "production_route": "assignment_definition",
+          "publication_note": "Save/reopen rooms and linked contents first, then validate and apply this one profile. Parked drafts are excluded. Assignment changes apply to newly created worlds. Same-ID room edits still apply on first construction of pending rooms in existing worlds; generated scenes keep their saved contents. Use a new room variant to preserve the old definition's meaning.",
+          "schema": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "additionalProperties": true,
+            "properties": {
+              "authored_chance": {
+                "description": "Conditional on an ordinary matching dungeon occurring; 0 keeps it procedural, 1 always chooses a candidate.",
+                "maximum": 1,
+                "minimum": 0,
+                "title": "Authored-interior chance",
+                "type": "number"
+              },
+              "candidates": {
+                "items": {
+                  "properties": {
+                    "layout_id": {
+                      "title": "Saved room",
+                      "type": "string",
+                      "x-initial": "",
+                      "x-reference": "saved-rooms"
+                    },
+                    "weight": {
+                      "minimum": 0,
+                      "title": "Relative weight",
+                      "type": "number",
+                      "x-initial": 1
+                    }
+                  },
+                  "required": [
+                    "layout_id",
+                    "weight"
+                  ],
+                  "type": "object"
+                },
+                "title": "Layout candidates",
+                "type": "array",
+                "x-control": "ordered-records"
+              },
+              "enabled": {
+                "description": "Deliberate opt-in for later new worlds only.",
+                "title": "Enabled",
+                "type": "boolean"
+              },
+              "id": {
+                "readOnly": true,
+                "type": "string"
+              },
+              "target_type": {
+                "title": "Target underground type",
+                "type": "string",
+                "x-reference": "underground-types"
+              },
+              "version": {
+                "readOnly": true,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "id",
+              "version",
+              "enabled",
+              "target_type",
+              "authored_chance",
+              "candidates"
+            ],
+            "type": "object"
+          },
+          "views": [
+            "world-assignment"
+          ],
+          "vocabulary": "resonance-controls-1"
+        },
+        "descriptor_sha256": "248d133f4411a4f0c902d1ac9ff4716760250c324c1cbb11851ec81e9884d3fd",
+        "effective_operations": [],
+        "id": "assignment",
+        "problems": [],
+        "references": {}
+      },
+      {
+        "compatible": true,
+        "context": null,
+        "contract": "settlement-membership-1",
+        "descriptor": {
+          "policy": {
+            "identity": "fixed-file",
+            "operations": [
+              "edit"
+            ],
+            "root": "roguelike/data/generation/settlement_profiles.json"
+          },
+          "production_route": "settlement_selection",
+          "publication_note": "Membership edits affect new world plans. Existing saved plans retain their captured selection, base weights, IDs, roles and transforms; generated scene caches retain physical state. Same-ID consumed building/pool/item edits still face the separate pending-surface dependency gate. Save and byte-check reopen before sampling; parked drafts are excluded.",
+          "schema": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "additionalProperties": true,
+            "properties": {
+              "version": {
+                "readOnly": true,
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "views": [
+            "settlement-membership"
+          ],
+          "vocabulary": "resonance-controls-1"
+        },
+        "descriptor_sha256": "c38941e73c161a3b47f9ff7046bead535217a4031fc054fc9628a3d71c103bc8",
+        "effective_operations": [],
+        "id": "selection",
+        "problems": [],
+        "references": {}
+      },
+      {
+        "compatible": true,
+        "context": null,
+        "contract": "authored-room-2",
+        "descriptor": {
+          "policy": {
+            "identity": "id",
+            "operations": [
+              "edit",
+              "variant"
+            ],
+            "root": "roguelike/data/layouts/"
+          },
+          "production_route": "authored_submap",
+          "publication_note": "Saved layout changes load at the next game/catalogue initialization and apply when a scene using that layout is first generated. This can include an unvisited submap in an existing campaign. Already generated scenes use their saved map/population and stored entry metadata; Workbench does not regenerate or migrate them. A new layout ID joins no world selector automatically.",
+          "schema": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "additionalProperties": true,
+            "properties": {
+              "description": {
+                "type": "string",
+                "x-control": "multiline"
+              },
+              "id": {
+                "readOnly": true,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "views": [
+            "room-spatial"
+          ],
+          "vocabulary": "resonance-controls-1"
+        },
+        "descriptor_sha256": "063fc96c5c32d9eb88ffa0ae4a15a598f6a0770785c54b5b71df2dd02c016ee6",
+        "effective_operations": [],
+        "id": "room",
+        "problems": [],
+        "references": {}
+      },
+      {
+        "compatible": true,
+        "context": null,
+        "contract": "creature-composite-5",
+        "descriptor": {
+          "policy": {
+            "identity": "id",
+            "operations": [
+              "edit",
+              "variant"
+            ],
+            "root": "roguelike/data/entities/creatures/"
+          },
+          "production_route": "creature_definition",
+          "publication_note": "Changes load at the next game launch/catalogue initialization. Saved actors retain stored name, HP, armour, sight/hearing/darkvision, faction, hostility (including []) and wander radius. Description, attack, speed and pursuit use the current definition. Composite saved actors retain their effective behavioural profile (including pursuit_timeout) and tactical commitment; profile edits affect fresh actors. HP edits do not rescale injured saves. New actors receive current constructor values; variants require explicit placement.",
+          "schema": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "properties": {
+              "ai_type": {
+                "readOnly": true,
+                "title": "AI (ordinary new variant only)",
+                "type": "string"
+              },
+              "armour_value": {
+                "maximum": 1000000,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "attack_verb": {
+                "default": "strikes at thee",
+                "title": "Attack verb",
+                "type": "string"
+              },
+              "base_hp": {
+                "maximum": 1000000,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "damage_bonus": {
+                "maximum": 1000,
+                "minimum": -1000,
+                "type": "integer"
+              },
+              "damage_dice": {
+                "default": "1d4",
+                "title": "Attack dice",
+                "type": "string"
+              },
+              "description": {
+                "default": "",
+                "title": "Description",
+                "type": "string",
+                "x-control": "multiline"
+              },
+              "id": {
+                "readOnly": true,
+                "title": "Stable creature ID",
+                "type": "string"
+              },
+              "name": {
+                "title": "Name",
+                "type": "string"
+              },
+              "pursuit_timeout": {
+                "maximum": 10000,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "speed": {
+                "maximum": 2,
+                "minimum": 0.01,
+                "type": "number"
+              },
+              "wander_radius": {
+                "maximum": 1000,
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "type": "object"
+          },
+          "views": [
+            "creature-properties",
+            "creature-references",
+            "creature-factory"
+          ],
+          "vocabulary": "resonance-controls-1"
+        },
+        "descriptor_sha256": "c3456568d38fc78780dfbcf6c66ac762b323c48ceb8f7079fc1858b6e90ea717",
+        "effective_operations": [],
+        "id": "creature",
+        "problems": [],
+        "references": {}
+      },
+      {
+        "compatible": true,
+        "context": null,
+        "contract": "expedition-items-2",
+        "descriptor": {
+          "policy": {
+            "identity": "id",
+            "operations": [
+              "edit",
+              "variant"
+            ],
+            "root": "roguelike/data/items/"
+          },
+          "production_route": "item_definition",
+          "publication_note": "Save/reopen each item first, then reference its saved ID in a room or pool. Saving does not enroll it in loot, crafting, starting gear or world selection. Owned items retain copied physical fields; combat, armour and carrying use the loaded session definitions. Source saves do not hot-reload a running game. Reset keeps its capture; latest saved captures revisions.",
+          "schema": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "properties": {
+              "armor_layers": {
+                "items": {
+                  "properties": {
+                    "armor_value": {
+                      "maximum": 2147483647,
+                      "minimum": 0,
+                      "title": "Layer AV",
+                      "type": "integer",
+                      "x-initial": 0
+                    },
+                    "material": {
+                      "description": "Presentation only; no new material physics.",
+                      "title": "Layer material",
+                      "type": "string",
+                      "x-initial": "leather"
+                    },
+                    "name": {
+                      "title": "Layer name",
+                      "type": "string",
+                      "x-initial": "new layer"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "material",
+                    "armor_value"
+                  ],
+                  "type": "object"
+                },
+                "title": "Armour layers",
+                "type": "array",
+                "x-control": "ordered-records",
+                "x-view": "armour"
+              },
+              "block_chance": {
+                "default": 0,
+                "maximum": 1,
+                "minimum": 0,
+                "title": "Shield block chance",
+                "type": "number",
+                "x-view": "shield"
+              },
+              "block_value": {
+                "default": 0,
+                "maximum": 2147483647,
+                "minimum": 0,
+                "title": "Shield reduction",
+                "type": "integer",
+                "x-view": "shield"
+              },
+              "consumed_on_use": {
+                "default": true,
+                "description": "Enabled by default when absent. Disable to require an explicit material choice before crafting can spend this item. Recipe roles determine whether selected instances are consumed or retained; this does not change ordinary item-use disposal.",
+                "title": "Eligible for automatic ingredient selection",
+                "type": "boolean"
+              },
+              "crit_chance": {
+                "default": 0,
+                "description": "Added to the current base critical chance and head-hit bonus; not a final universal probability.",
+                "maximum": 1,
+                "minimum": 0,
+                "title": "Additional critical chance",
+                "type": "number",
+                "x-view": "weapon"
+              },
+              "damage_bonus": {
+                "default": 0,
+                "maximum": 2147483647,
+                "minimum": -2147483647,
+                "title": "Base damage bonus",
+                "type": "integer",
+                "x-view": "weapon"
+              },
+              "damage_dice": {
+                "default": "1d4",
+                "description": "Positive NdM: 1–100 dice, 1–1,000 sides. Declared base damage; not encounter damage or damage per turn.",
+                "title": "Base damage dice",
+                "type": "string",
+                "x-view": "weapon"
+              },
+              "description": {
+                "default": "",
+                "title": "Item description",
+                "type": "string",
+                "x-control": "multiline"
+              },
+              "drink_message": {
+                "description": "Absent/null/empty uses the ordinary generated message.",
+                "title": "Drink use message",
+                "type": "string",
+                "x-control": "multiline",
+                "x-view": "drink"
+              },
+              "eat_message": {
+                "description": "Absent/null/empty uses the ordinary generated message.",
+                "title": "Food use message",
+                "type": "string",
+                "x-control": "multiline",
+                "x-view": "food"
+              },
+              "empty_form": {
+                "description": "Absent/null/empty means no replacement. Exchange precedes hydration. A returned object is not automatically refillable; the canonical empty skin fills into canonical water_skin.",
+                "title": "Return item",
+                "type": "string",
+                "x-reference": "return-items",
+                "x-view": "drink"
+              },
+              "heal_amount": {
+                "description": "Absent/null uses 3 HP, limited by missing HP. Legacy zero also falls back to 3; new authored zero is rejected. Failed treatment retains its item and costs no turn.",
+                "maximum": 9007199254740991,
+                "minimum": 1,
+                "title": "Treatment healing",
+                "type": "integer",
+                "x-view": "treatment"
+              },
+              "hydration": {
+                "description": "Absent/null uses 400. Values at or below 1 are fractions; above 1 divide by saved thirst maximum. Whole item used, even at zero.",
+                "minimum": 0,
+                "title": "Stored hydration",
+                "type": "number",
+                "x-view": "drink"
+              },
+              "id": {
+                "readOnly": true,
+                "title": "Item ID",
+                "type": "string"
+              },
+              "keywords": {
+                "items": {
+                  "properties": {
+                    "tag": {
+                      "title": "Keyword",
+                      "type": "string",
+                      "x-reference": "keywords"
+                    },
+                    "tier": {
+                      "maximum": 9007199254740991,
+                      "minimum": 0,
+                      "title": "Keyword tier",
+                      "type": "integer",
+                      "x-initial": 1
+                    }
+                  },
+                  "required": [
+                    "tag",
+                    "tier"
+                  ],
+                  "type": "object"
+                },
+                "title": "Keywords",
+                "type": "array",
+                "x-control": "ordered-table"
+              },
+              "name": {
+                "description": "When absent, the factory uses this item's ID as its name.",
+                "title": "Item name",
+                "type": "string"
+              },
+              "nutrition": {
+                "description": "Absent/null uses 300. Values at or below 1 are fractions; above 1 divide by saved hunger maximum. Whole item used, even at zero.",
+                "minimum": 0,
+                "title": "Stored nutrition",
+                "type": "number",
+                "x-view": "food"
+              },
+              "slot": {
+                "description": "Same-ID edits keep their original slot. A new armour variant may use an existing armour slot.",
+                "title": "Armour slot (new variant only)",
+                "type": "string",
+                "x-reference": "armour-slots",
+                "x-view": "armour"
+              },
+              "stackable": {
+                "default": false,
+                "description": "Groups same-ID instances in inventory display. Instances and carried weights remain separate.",
+                "title": "Group in inventory",
+                "type": "boolean"
+              },
+              "tile": {
+                "default": "generic_item",
+                "title": "Existing tile",
+                "type": "string",
+                "x-reference": "tiles"
+              },
+              "weight": {
+                "default": 0.1,
+                "minimum": 0,
+                "title": "Item weight (kg)",
+                "type": "number"
+              },
+              "weight_reductions": {
+                "additionalProperties": {
+                  "maximum": 1,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                "description": "Fractions from 0 to 1. A category overrides all, including zero. Missing all means zero fallback; an empty map gives no reduction. Applies only while this exact owned bag is equipped.",
+                "properties": {},
+                "title": "Carried weight reductions",
+                "type": "object",
+                "x-control": "keyed-number-map",
+                "x-reference": "carrying-categories",
+                "x-view": "satchel"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "type": "object"
+          },
+          "views": [
+            "item-properties",
+            "references",
+            "recipes",
+            "use-binding",
+            "factory"
+          ],
+          "vocabulary": "resonance-controls-1"
+        },
+        "descriptor_sha256": "49b2a437ca0e8b374057d54f70caed8724639a63d3782835a6e4718c0a088175",
+        "effective_operations": [],
+        "id": "item",
+        "problems": [],
+        "references": {}
+      },
+      {
+        "compatible": true,
+        "context": null,
+        "contract": "item-preparation-1",
+        "descriptor": {
+          "policy": {
+            "identity": "id",
+            "operations": [
+              "edit",
+              "variant"
+            ],
+            "root": "roguelike/data/recipes/"
+          },
+          "production_route": "recipe_definition",
+          "publication_note": "Saved edits/variants enter fresh session catalogues. Existing sessions retain their catalogue; confirmed work retains captured parameters and output ID. known:false blocks crafting, not publication. Transactions publish one file independently.",
+          "schema": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "properties": {
+              "category": {
+                "title": "Recipe category",
+                "type": "string",
+                "x-reference": "categories"
+              },
+              "completion_message": {
+                "description": "Literal text, {item_name}, and escaped braces only. Absent/empty uses the source message fallback.",
+                "title": "Completion template",
+                "type": "string",
+                "x-view": "Preparation"
+              },
+              "components": {
+                "items": {
+                  "properties": {
+                    "min_tier": {
+                      "default": 1,
+                      "maximum": 9007199254740991,
+                      "minimum": 0,
+                      "title": "Minimum tier",
+                      "type": "integer"
+                    },
+                    "quantity": {
+                      "default": 1,
+                      "maximum": 32,
+                      "minimum": 1,
+                      "title": "Quantity",
+                      "type": "integer"
+                    },
+                    "tag": {
+                      "title": "Tag",
+                      "type": "string",
+                      "x-reference": "keywords"
+                    }
+                  },
+                  "required": [
+                    "tag"
+                  ],
+                  "type": "object"
+                },
+                "title": "Required items",
+                "type": "array",
+                "x-control": "ordered-table"
+              },
+              "description": {
+                "title": "Recipe description",
+                "type": "string",
+                "x-control": "multiline"
+              },
+              "id": {
+                "readOnly": true,
+                "title": "Recipe ID",
+                "type": "string"
+              },
+              "known": {
+                "default": true,
+                "description": "Known at startup. False displays an unknown recipe and blocks CraftScreen execution; no learning route is established.",
+                "title": "Recipe known",
+                "type": "boolean"
+              },
+              "name": {
+                "title": "Recipe name",
+                "type": "string"
+              },
+              "placement_message": {
+                "description": "Absent: Where will you set it to work? Empty remains empty; braces are literal.",
+                "title": "Placement prompt (literal)",
+                "type": "string",
+                "x-view": "Preparation"
+              },
+              "processing_decor": {
+                "default": "",
+                "title": "Temporary processing marker",
+                "type": "string",
+                "x-reference": "processing_decor",
+                "x-view": "Preparation"
+              },
+              "processing_source": {
+                "default": "drying",
+                "description": "Cooking places on fire; drying, steeping and rendering place beside fire.",
+                "title": "Processing source",
+                "type": "string",
+                "x-reference": "processing_sources",
+                "x-view": "Preparation"
+              },
+              "processing_turns": {
+                "default": 20,
+                "description": "Confirmation advances the first turn: a three-turn job has two remaining.",
+                "maximum": 9007199254740991,
+                "minimum": 1,
+                "title": "Processing turns",
+                "type": "integer",
+                "x-view": "Preparation"
+              },
+              "requires_ambient": {
+                "items": {
+                  "properties": {
+                    "min_tier": {
+                      "default": 1,
+                      "maximum": 9007199254740991,
+                      "minimum": 0,
+                      "title": "Minimum tier",
+                      "type": "integer"
+                    },
+                    "tag": {
+                      "title": "Tag",
+                      "type": "string",
+                      "x-reference": "ambient_tags"
+                    }
+                  },
+                  "required": [
+                    "tag"
+                  ],
+                  "type": "object"
+                },
+                "title": "Ambient conditions",
+                "type": "array",
+                "x-control": "ordered-table"
+              },
+              "result_item": {
+                "title": "Recipe output item",
+                "type": "string",
+                "x-reference": "items",
+                "x-view": "Output"
+              },
+              "tools": {
+                "items": {
+                  "properties": {
+                    "min_tier": {
+                      "default": 1,
+                      "maximum": 9007199254740991,
+                      "minimum": 0,
+                      "title": "Minimum tier",
+                      "type": "integer"
+                    },
+                    "quantity": {
+                      "default": 1,
+                      "maximum": 32,
+                      "minimum": 1,
+                      "title": "Quantity",
+                      "type": "integer"
+                    },
+                    "tag": {
+                      "title": "Tag",
+                      "type": "string",
+                      "x-reference": "keywords"
+                    }
+                  },
+                  "required": [
+                    "tag"
+                  ],
+                  "type": "object"
+                },
+                "title": "Tools · retained",
+                "type": "array",
+                "x-control": "ordered-table"
+              }
+            },
+            "required": [
+              "id",
+              "result_item"
+            ],
+            "type": "object"
+          },
+          "views": [
+            "recipe-requirements",
+            "recipe-processing",
+            "output",
+            "production-receipt"
+          ],
+          "vocabulary": "resonance-controls-1"
+        },
+        "descriptor_sha256": "4b42f25da51e57a750afa65ba2be9b28038c8692cda78c6ad9b2cac10e988256",
+        "effective_operations": [],
+        "id": "recipe",
+        "problems": [],
+        "references": {}
+      },
+      {
+        "compatible": true,
+        "context": null,
+        "contract": "ordinary-found-text-1",
+        "descriptor": {
+          "policy": {
+            "identity": "id",
+            "operations": [
+              "variant"
+            ],
+            "root": "roguelike/data/texts/"
+          },
+          "production_route": "text_definition",
+          "publication_note": "Creates a unique text ID/file. New game data loads discover it; saving does not bind it to an object or place. Reopened texts can be inspected or copied to another variant. Same-ID revisions are deferred because saved recovery knowledge uses page/span positions.",
+          "schema": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "additionalProperties": true,
+            "properties": {
+              "condition": {
+                "default": "worn",
+                "description": "Changes the panel tint and displayed condition. Pristine, worn, damaged, fragmentary and burned have tints; other strings use the worn tint. Without UI art, pristine/worn/damaged/fragmentary have borders; others use the brown fallback. Existing strings remain valid.",
+                "title": "Document condition",
+                "type": "string",
+                "x-suggestions": [
+                  "worn",
+                  "pristine",
+                  "damaged",
+                  "fragmentary",
+                  "stained",
+                  "weathered",
+                  "burned"
+                ]
+              },
+              "id": {
+                "readOnly": true,
+                "type": "string"
+              },
+              "location_reports": {
+                "description": "Absent or empty means no reports. Only workshop and ward_store are supported. Fresh worlds bind once within eight coarse squares; previews are unbound. Reading never explores terrain or checks present stock/safety.",
+                "items": {
+                  "properties": {
+                    "role": {
+                      "title": "Report role",
+                      "type": "string",
+                      "x-initial": "workshop",
+                      "x-suggestions": [
+                        "workshop",
+                        "ward_store"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "role"
+                  ],
+                  "type": "object"
+                },
+                "title": "Location reports",
+                "type": "array",
+                "x-control": "ordered-records",
+                "x-view": "text-references"
+              },
+              "pages": {
+                "items": {
+                  "properties": {
+                    "text": {
+                      "description": "Authored line breaks and blank paragraphs are retained. Literal [DAMAGED] renders corruption glyphs; [REDACTED] renders a solid block. Lexicon words still use production glyph/translation lookup.",
+                      "title": "Page text",
+                      "type": "string",
+                      "x-control": "multiline",
+                      "x-initial": ""
+                    },
+                    "trailing": {
+                      "default": false,
+                      "description": "Shows the reader's ending marker. Viewing an absent value does not insert false.",
+                      "title": "Text ends here",
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "text"
+                  ],
+                  "type": "object"
+                },
+                "title": "Pages",
+                "type": "array",
+                "x-control": "ordered-records"
+              },
+              "title": {
+                "title": "Reader title",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "pages"
+            ],
+            "type": "object"
+          },
+          "views": [
+            "text-pages",
+            "text-references",
+            "reader-preview"
+          ],
+          "vocabulary": "resonance-controls-1"
+        },
+        "descriptor_sha256": "6f996816d7900ffbc1030ef2ee1daf9e488dc39eea61863697c5b5f3aa5098fd",
+        "effective_operations": [],
+        "id": "text",
+        "problems": [],
+        "references": {}
+      },
+      {
+        "compatible": true,
+        "context": null,
+        "contract": "game-typography-1",
+        "descriptor": {
+          "policy": {
+            "identity": "id",
+            "operations": [
+              "edit"
+            ],
+            "root": "roguelike/data/display/typography.json"
+          },
+          "production_route": "typography_definition",
+          "publication_note": "One active project profile. Publish to the same file; fonts apply at the next game initialization. Screens cache fonts and metrics. No per-save profiles or live font replacement.",
+          "schema": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "additionalProperties": true,
+            "properties": {
+              "font_callout_creature": {
+                "description": "Creature sounds; tiny alias. Retained nominal size: 11.",
+                "title": "Creature callout",
+                "type": "string",
+                "x-reference": "project-fonts"
+              },
+              "font_callout_crit": {
+                "description": "Critical hit numbers. Retained nominal size: 18.",
+                "title": "Critical callout",
+                "type": "string",
+                "x-reference": "project-fonts"
+              },
+              "font_callout_damage": {
+                "description": "Floating damage numbers; small alias. Retained nominal size: 13.",
+                "title": "Damage callout",
+                "type": "string",
+                "x-reference": "project-fonts"
+              },
+              "font_callout_levelup": {
+                "description": "Level and perk-point announcements. Retained nominal size: 21.",
+                "title": "Level-up callout",
+                "type": "string",
+                "x-reference": "project-fonts"
+              },
+              "font_callout_status": {
+                "description": "Floating status effects. Retained nominal size: 12.",
+                "title": "Status callout",
+                "type": "string",
+                "x-reference": "project-fonts"
+              },
+              "font_deep": {
+                "description": "Known proportional Deep Tongue text; unknown-language glyphs are generated separately. Retained nominal size: 18.",
+                "title": "Known Deep Tongue",
+                "type": "string",
+                "x-reference": "project-fonts"
+              },
+              "font_ui_bold": {
+                "description": "Inventory, perk and lexicon titles; chosen face replaces the role without synthesis. Retained nominal size: 18.",
+                "title": "Bold role",
+                "type": "string",
+                "x-reference": "project-fonts"
+              },
+              "font_ui_bold_large": {
+                "description": "Prominent menu text; chosen face replaces the role without synthesis. Retained nominal size: 22.",
+                "title": "Large bold role",
+                "type": "string",
+                "x-reference": "project-fonts"
+              },
+              "font_ui_italic": {
+                "description": "Italic menu and lexicon text; chosen face replaces the role without synthesis. Retained nominal size: 18.",
+                "title": "Italic role",
+                "type": "string",
+                "x-reference": "project-fonts"
+              },
+              "font_ui_large": {
+                "description": "Reader and menu headings. Retained nominal size: 22.",
+                "title": "Headings",
+                "type": "string",
+                "x-reference": "project-fonts"
+              },
+              "font_ui_normal": {
+                "description": "Reader prose/footer and several menus. Retained nominal size: 18.",
+                "title": "Ordinary prose",
+                "type": "string",
+                "x-reference": "project-fonts"
+              },
+              "font_ui_small": {
+                "description": "Perk requirements, inventory and map details. Retained nominal size: 16.",
+                "title": "Small details",
+                "type": "string",
+                "x-reference": "project-fonts"
+              },
+              "font_ui_tiny": {
+                "description": "Message log, combat formulae and HUD. Retained nominal size: 14.",
+                "title": "Message log",
+                "type": "string",
+                "x-reference": "project-fonts"
+              },
+              "id": {
+                "readOnly": true,
+                "type": "string"
+              },
+              "version": {
+                "readOnly": true,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "id",
+              "version",
+              "font_ui_large",
+              "font_ui_normal",
+              "font_ui_small",
+              "font_ui_tiny",
+              "font_ui_italic",
+              "font_ui_bold",
+              "font_ui_bold_large",
+              "font_deep",
+              "font_callout_damage",
+              "font_callout_status",
+              "font_callout_creature",
+              "font_callout_crit",
+              "font_callout_levelup"
+            ],
+            "type": "object"
+          },
+          "views": [
+            "typography-roles",
+            "typography-preview"
+          ],
+          "vocabulary": "resonance-controls-1"
+        },
+        "descriptor_sha256": "79e77925f322a282b7f153ccc627a45bbfcffeb544ad8ca48b72893d66c87ca0",
+        "effective_operations": [],
+        "id": "typography",
+        "problems": [],
+        "references": {}
+      }
+    ],
+    "health": "ready",
+    "host_runtime": {
+      "application": "G:\\GameDev\\RoguelikeProject\\workbench\\src-tauri\\target\\release\\resonance-workbench.exe",
+      "bridge": "\\\\?\\G:\\GameDev\\RoguelikeProject\\workbench\\src-tauri\\target\\release\\bridge.py",
+      "mode": "bundled",
+      "notice": null,
+      "override_present": false,
+      "python": "\\\\?\\G:\\GameDev\\RoguelikeProject\\workbench\\src-tauri\\target\\release\\python\\python.exe",
+      "resource_directory": "\\\\?\\G:\\GameDev\\RoguelikeProject\\workbench\\src-tauri\\target\\release\\"
+    },
+    "layout_contract": "authored-room-2",
+    "preview": "generation.structure_preview.preview → engine.scene_generation.create_submap → generation.local_gen.generate_submap",
+    "protocol": 8,
+    "route": "authored_submap",
+    "runtime": {
+      "compatible": true,
+      "dependencies": {
+        "cffi": "2.1.1",
+        "numpy": "2.4.6",
+        "pycparser": "3.11",
+        "pygame": "2.6.1",
+        "tcod": "19.3.0",
+        "typing_extensions": "4.16.0"
+      },
+      "executable": "\\\\?\\G:\\GameDev\\RoguelikeProject\\workbench\\src-tauri\\target\\release\\python\\python.exe",
+      "game_imports": {
+        "config": "roguelike/config.py",
+        "engine.assignment_authoring": "roguelike/engine/assignment_authoring.py",
+        "engine.building_authoring": "roguelike/engine/building_authoring.py",
+        "engine.content_authoring": "roguelike/engine/content_authoring.py",
+        "engine.creature_authoring": "roguelike/engine/creature_authoring.py",
+        "engine.data_loader": "roguelike/engine/data_loader.py",
+        "engine.item_authoring": "roguelike/engine/item_authoring.py",
+        "engine.pool_authoring": "roguelike/engine/pool_authoring.py",
+        "engine.recipe_authoring": "roguelike/engine/recipe_authoring.py",
+        "engine.room_authoring": "roguelike/engine/room_authoring.py",
+        "engine.selection_authoring": "roguelike/engine/selection_authoring.py",
+        "engine.text_authoring": "roguelike/engine/text_authoring.py",
+        "engine.typography_authoring": "roguelike/engine/typography_authoring.py",
+        "generation.structure_contract": "roguelike/generation/structure_contract.py",
+        "generation.structure_preview": "roguelike/generation/structure_preview.py"
+      },
+      "imports_verified": true,
+      "numeric_threads": 1,
+      "python": "3.11.0"
+    },
+    "source": {
+      "branch": "main",
+      "catalog_sha256": "7fe4fbccd70f0e871fd9fdb4596ef2f04a47d70f176e192cea0b87e0eab392af",
+      "commit": "05d46fcf66c75fcab6b49d2c41992b54d4244c9c",
+      "game_dirty": false,
+      "game_source_sha256": "791745c39c004211f157c6fb11350bfe3d0358f3008f291cb8ea6e5e5af7dd03",
+      "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+      "root": "G:\\GameDev\\RoguelikeProject"
+    },
+    "unavailable": [
+      "authored-submap inactive decor-layer authoring",
+      "advanced item/world-placement recipe editing",
+      "native world selection",
+      "game renderer/FOV",
+      "combat simulation"
+    ],
+    "validator": "generation.structure_contract.compile_structure",
+    "worker_sha256": "d971a429e2efad6729eeadb4fd4a3dddaaec89a5d27ac8d3d31218ec07374f95",
+    "worker_version": "0.9.0"
+  },
+  "preview_sample": {
+    "asset": "starting_lab",
+    "seed": 20261023,
+    "scene_seed": "113010531217921702032332078087658070681",
+    "scene_address": [
+      0,
+      0,
+      "preview-submap"
+    ],
+    "origin": [
+      10,
+      13
+    ],
+    "spawn": [
+      15,
+      20
+    ],
+    "width": 80,
+    "height": 43,
+    "generation_ms": 0,
+    "host_ms": 1800,
+    "terrain_sha256": "8192b5d8c4ee3a81a8187e081b666d89eb8d1f9ff8cb5cca855680110fe1db18",
+    "candidate_sha256": "0bde7868f7545835c34efe5ee6bc463dc9619d58d826f099a97cffc6ed95f380",
+    "samples": [
+      [
+        15,
+        20,
+        "stairs_up"
+      ],
+      [
+        67,
+        16,
+        "door_open"
+      ],
+      [
+        79,
+        42,
+        "wall"
+      ]
+    ],
+    "containers": [
+      {
+        "decor_id": "crate",
+        "items": [
+          {
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "burn_turns": null,
+            "consumed_on_use": true,
+            "count": 1,
+            "decay_timer": null,
+            "description": "A sharp-edged chip knocked from a larger piece of flint.",
+            "drink_message": null,
+            "eat_message": null,
+            "harvest_from": null,
+            "heal_amount": null,
+            "hydration": null,
+            "item_id": "flint_shard",
+            "item_state_version": 1,
+            "keywords": [
+              {
+                "tag": "cutting",
+                "tier": 1
+              }
+            ],
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "name": "flint shard",
+            "nutrition": null,
+            "on_use": null,
+            "qualities": {},
+            "source_creature": null,
+            "stackable": false,
+            "temporary_essence": [],
+            "text_id": "",
+            "tile": "generic_item",
+            "turns_lit": 0,
+            "weight": 0.2
+          },
+          {
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "burn_turns": 600,
+            "consumed_on_use": false,
+            "count": 1,
+            "decay_timer": null,
+            "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+            "drink_message": null,
+            "eat_message": null,
+            "harvest_from": null,
+            "heal_amount": null,
+            "hydration": null,
+            "item_id": "tallow_torch",
+            "item_state_version": 1,
+            "keywords": [
+              {
+                "tag": "waxy",
+                "tier": 1
+              },
+              {
+                "tag": "fibrous",
+                "tier": 1
+              },
+              {
+                "tag": "fuel",
+                "tier": 1
+              }
+            ],
+            "light_data": {
+              "color": [
+                255,
+                180,
+                60
+              ],
+              "falloff": 1.8,
+              "flicker": true,
+              "radius": 8
+            },
+            "liquid": null,
+            "liquid_volume": 0,
+            "name": "Tallow Torch",
+            "nutrition": null,
+            "on_use": "equip_light",
+            "qualities": {},
+            "source_creature": null,
+            "stackable": false,
+            "temporary_essence": [],
+            "text_id": "",
+            "tile": "tallow_torch",
+            "turns_lit": 0,
+            "weight": 0.3
+          }
+        ],
+        "state": "closed",
+        "x": 26,
+        "y": 17
+      }
+    ],
+    "object_cells": 14,
+    "passed": true
+  },
+  "native_window": {
+    "Id": 30692,
+    "MainWindowHandle": 254740144,
+    "MainWindowTitle": "Resonance Workbench",
+    "WorkingSet64": 28827648,
+    "PrivateMemorySize64": 7090176
+  },
+  "webview_process_info": null,
+  "frame_intervals_ms": {
+    "median": 5.599999999998545,
+    "p95": 5.700000000000728,
+    "max": 5.700000000000728,
+    "count": 119
+  },
+  "process_memory": [
+    {
+      "Id": 8992,
+      "ProcessName": "msedgewebview2",
+      "WorkingSet64": 125726720,
+      "PrivateMemorySize64": 38645760
+    },
+    {
+      "Id": 13372,
+      "ProcessName": "msedgewebview2",
+      "WorkingSet64": 115851264,
+      "PrivateMemorySize64": 203464704
+    },
+    {
+      "Id": 24520,
+      "ProcessName": "msedgewebview2",
+      "WorkingSet64": 36352000,
+      "PrivateMemorySize64": 11915264
+    },
+    {
+      "Id": 28420,
+      "ProcessName": "msedgewebview2",
+      "WorkingSet64": 20316160,
+      "PrivateMemorySize64": 7843840
+    },
+    {
+      "Id": 29208,
+      "ProcessName": "msedgewebview2",
+      "WorkingSet64": 10534912,
+      "PrivateMemorySize64": 2629632
+    },
+    {
+      "Id": 30240,
+      "ProcessName": "msedgewebview2",
+      "WorkingSet64": 168767488,
+      "PrivateMemorySize64": 115462144
+    },
+    {
+      "Id": 30692,
+      "ProcessName": "resonance-workbench",
+      "WorkingSet64": 28827648,
+      "PrivateMemorySize64": 7090176
+    }
+  ],
+  "animation_frames_during_first_300ms_of_work": 55,
+  "passed": true,
+  "temporary_roots_remaining": [],
+  "total_ms": 35174
+}

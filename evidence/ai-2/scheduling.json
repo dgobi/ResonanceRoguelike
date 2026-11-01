@@ -1,0 +1,122 @@
+{
+  "passed": true,
+  "setup": "Controlled real-consumer scheduling proof; no alternate movement simulator.",
+  "initial_x": 19,
+  "fast_final_x": 16,
+  "fast_ordinary_opportunities": 2,
+  "fast_steps": 3,
+  "all_fast_steps_unseen": true,
+  "fast": [
+    {
+      "opportunity": 1,
+      "turn": 0,
+      "phase_before": "idle",
+      "phase": "pursue",
+      "observed": false,
+      "observation_reason": "normal_player_vision",
+      "action": "move",
+      "reason": "unseen_pursuit",
+      "result": null,
+      "steps": [
+        {
+          "from_cell": [
+            19,
+            12
+          ],
+          "to_cell": [
+            18,
+            12
+          ],
+          "moved": true,
+          "observed": false,
+          "reaction": false,
+          "ready": true
+        },
+        {
+          "from_cell": [
+            18,
+            12
+          ],
+          "to_cell": [
+            17,
+            12
+          ],
+          "moved": true,
+          "observed": false,
+          "reaction": false,
+          "ready": true
+        }
+      ],
+      "bonus_consumed": true,
+      "bonus_eligible": false
+    },
+    {
+      "opportunity": 2,
+      "turn": 0,
+      "phase_before": "pursue",
+      "phase": "pursue",
+      "observed": false,
+      "observation_reason": "normal_player_vision",
+      "action": "move",
+      "reason": "unseen_pursuit",
+      "result": null,
+      "steps": [
+        {
+          "from_cell": [
+            17,
+            12
+          ],
+          "to_cell": [
+            16,
+            12
+          ],
+          "moved": true,
+          "observed": false,
+          "reaction": false,
+          "ready": true
+        }
+      ],
+      "bonus_consumed": true,
+      "bonus_eligible": false
+    }
+  ],
+  "same_phase_restore_normal_step_unseen": true,
+  "after_restore": {
+    "opportunity": 3,
+    "turn": 0,
+    "phase_before": "pursue",
+    "phase": "pursue",
+    "observed": false,
+    "observation_reason": "normal_player_vision",
+    "action": "move",
+    "reason": "unseen_pursuit",
+    "result": null,
+    "steps": [
+      {
+        "from_cell": [
+          16,
+          12
+        ],
+        "to_cell": [
+          15,
+          12
+        ],
+        "moved": true,
+        "observed": false,
+        "reaction": false,
+        "ready": true
+      }
+    ],
+    "bonus_consumed": true,
+    "bonus_eligible": false
+  },
+  "saved_spent_phase": 0,
+  "inputs": {
+    "roguelike/engine/ai_system.py": "069136e44d142e4ed8f6b2e5a5202d3a50d404c0948a60b5f83c40317e86dbb7",
+    "roguelike/components/observation_averse.py": "c4c6160c4634387e99c9d2353ec0e31094078c2278799e95e0e0f0c5d0e8a4da",
+    "roguelike/components/composite_ai.py": "566027475fed7b40abf530856cf0803631f164b20ccdc521d84a165bef5dfd2d",
+    "roguelike/engine/ai_profiles.py": "56f9e27f9c29752cbcc070539ba1aeb340af907cb35b59bbbfd164abba4cc906",
+    "roguelike/engine/save_manager.py": "c589ce77689a59f5e765b727fb2772291a8c6a7248704bdbb6b50d07dadcef8f",
+    "tools/critical_fix_regressions/tests/test_ai_2.py": "6eee0a635f9150715431a834df2e8da8d78243cdbdcd5c6075aebc3f0deda073"
+  }
+}

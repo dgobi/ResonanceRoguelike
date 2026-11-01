@@ -1,0 +1,52 @@
+{
+  "runtime_revision": "00388245ddc8b9869fd00a31734b4a1c64ee506c",
+  "native_captures": [
+    {
+      "label": "opening",
+      "manifest_sha256": "f656211cbd56b20d023f526171c142b41a56f18119f85f185b2e5a9964e2741c",
+      "snapshot_id": "ef125456-279b-4f41-a30e-acf23bfa68c5",
+      "file_count": 571,
+      "all_current_bytes_match": true,
+      "runtime_file_count": 1809,
+      "all_pinned_runtime_bytes_match": true,
+      "room_sha256": "1c96c6972ce838d91ea6694f40f758bda2f6a4e5f5f8f9beaedb58b1b57bf4d3",
+      "runtime_sha256": "da918acc87d9602b2c45585e22dfe008f0cd08524627131bd86f2e19db3a86a5"
+    },
+    {
+      "label": "defensive_contact",
+      "manifest_sha256": "f656211cbd56b20d023f526171c142b41a56f18119f85f185b2e5a9964e2741c",
+      "snapshot_id": "02741ce4-8fa3-408a-bec0-aa3ab153295c",
+      "file_count": 571,
+      "all_current_bytes_match": true,
+      "runtime_file_count": 1809,
+      "all_pinned_runtime_bytes_match": true,
+      "room_sha256": "4cdff07feda244c6fb8a76a511416b0619ee7d1a8e70ef0a2c04eaf06290d377",
+      "runtime_sha256": "da918acc87d9602b2c45585e22dfe008f0cd08524627131bd86f2e19db3a86a5"
+    },
+    {
+      "label": "cower_contact",
+      "manifest_sha256": "f656211cbd56b20d023f526171c142b41a56f18119f85f185b2e5a9964e2741c",
+      "snapshot_id": "632e0627-13cd-4f83-af21-983a94128767",
+      "file_count": 571,
+      "all_current_bytes_match": true,
+      "runtime_file_count": 1809,
+      "all_pinned_runtime_bytes_match": true,
+      "room_sha256": "0e41499b8dcbc258c4e563371557edf3f9237c1975fe04f2c4692f559d73f552",
+      "runtime_sha256": "da918acc87d9602b2c45585e22dfe008f0cd08524627131bd86f2e19db3a86a5"
+    }
+  ],
+  "meaning": "All final gameplay/content/resource and pinned runtime capture dependencies are byte-identical to production inputs. The cold-load verification script and delivery records do not alter gameplay/package consumers.",
+  "reset_manifest_equal": true,
+  "dirty_saved_manifest_equal": true,
+  "verification_revision": "4232937079b7b8f5a1de38a1124e818c73382e23",
+  "production_d_retention": {
+    "passed": true,
+    "tested_runtime_revision": "00388245ddc8b9869fd00a31734b4a1c64ee506c",
+    "current_manifest_delta": [
+      "tools/critical_fix_regressions/tests/test_gameplay_g17.py"
+    ],
+    "reason": "Only a focused unittest catalogue assertion changed (73 to 77). Production-D workers do not execute that unittest; no game, vision, AI, save, authoring, package or production-D worker inputs changed. The full unfiltered production-D gate passed at the runtime boundary; the corrected focused suite is rerun.",
+    "exact_diff": "catalogue-test-delta.patch"
+  },
+  "worker_retention": "The 23 affected cases and their inputs are unchanged; the separate five-case corpus module is freshly rerun after updating its expected count from 16 to 18."
+}

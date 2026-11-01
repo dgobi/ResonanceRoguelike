@@ -1,0 +1,10 @@
+test_bounds_types_and_missing_defaults (test_creatures_w5f.CreatureCommonTests.test_bounds_types_and_missing_defaults) ... ok
+test_entire_corpus_inspection_construction_and_operation_subset (test_creatures_w5f.CreatureCommonTests.test_entire_corpus_inspection_construction_and_operation_subset) ... ok
+test_same_id_common_fields_and_ordinary_ai_variant (test_creatures_w5f.CreatureCommonTests.test_same_id_common_fields_and_ordinary_ai_variant) ... ok
+test_source_promotion_special_clones_and_namespace_collision (test_creatures_w5f.CreatureCommonTests.test_source_promotion_special_clones_and_namespace_collision) ... ok
+test_wight_inline_body_inactive_metadata_and_active_inbound_zones (test_creatures_w5f.CreatureCommonTests.test_wight_inline_body_inactive_metadata_and_active_inbound_zones) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 51.070s
+
+OK

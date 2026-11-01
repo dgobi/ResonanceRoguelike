@@ -1,0 +1,57 @@
+{
+  "passed": true,
+  "runtime_revision": "00388245ddc8b9869fd00a31734b4a1c64ee506c",
+  "verification_revision": "4232937079b7b8f5a1de38a1124e818c73382e23",
+  "scope": "AI-2 observation-averse pursuer only",
+  "profile": {
+    "version": 2,
+    "recipe": "observation_averse",
+    "authoring_contract": "creature-composite-5"
+  },
+  "definitions": [
+    "gloam_stalker",
+    "gloam_shudder"
+  ],
+  "rooms": [
+    "ai2_shadow_opening",
+    "ai2_mixed_opening",
+    "ai2_defensive_ground",
+    "ai2_cowering_ground"
+  ],
+  "gates": "gates.json",
+  "publication": "publication.json",
+  "completion_checkpoint": "checkpoint/ai-2-complete-20261031-a",
+  "final_main_identity": "This documentation/evidence delivery commit; readback in local .baseline/ai-2/final-publication.json",
+  "availability": "Explicit authored placement and captured actual-game room tests; no natural population enrollment",
+  "limits": [
+    "No NSIS/clean-machine rerun",
+    "No final balance or unaided discovery claim",
+    "No venom, allies, off-scene hunting, AI-3, wiki or broad reference-pack upkeep"
+  ],
+  "checkpoints": {
+    "checkpoint/ai-2-start-20261031-a": {
+      "tag_object": "6c880eace69aa3aedd1a1912839c3b8eb2e6740c",
+      "commit": "76ebfacbc3bdebb6201c73d895d9070e6eebd303"
+    },
+    "checkpoint/ai-2-implementation-20261031-a": {
+      "tag_object": "a2e277ce8a30866a0c0578f272ac7b47c2095be4",
+      "commit": "cb2f397a5e95e1939e7dbf766695e6b1d1fd77fa"
+    },
+    "checkpoint/ai-2-final-inputs-20261031-a": {
+      "tag_object": "8672b83d6416c2655b3e36ba3a1892558cb09e2e",
+      "commit": "05d46fcf66c75fcab6b49d2c41992b54d4244c9c"
+    },
+    "checkpoint/ai-2-cover-commitment-20261031-a": {
+      "tag_object": "7f7cc8b47df72b58d2ee4252ace3e8602c804785",
+      "commit": "00388245ddc8b9869fd00a31734b4a1c64ee506c"
+    },
+    "checkpoint/ai-2-catalogue-tests-20261031-a": {
+      "tag_object": "a237d666e409cc81ea38180b956d99f78411b907",
+      "commit": "6c6b299401e469419ba975a3fc69f2b6e36010dc"
+    },
+    "checkpoint/ai-2-verified-inputs-20261031-a": {
+      "tag_object": "d3fe618f460de96d40da4ee9258ebe70dd9f27c6",
+      "commit": "4232937079b7b8f5a1de38a1124e818c73382e23"
+    }
+  }
+}

@@ -1,0 +1,185 @@
+{
+  "passed": true,
+  "runtime_revision": "00388245ddc8b9869fd00a31734b4a1c64ee506c",
+  "verification_revision": "4232937079b7b8f5a1de38a1124e818c73382e23",
+  "focused": {
+    "passed": true,
+    "tests": 484,
+    "source_stable": true,
+    "unfiltered": true,
+    "receipt": "focused-run.json.gz",
+    "log": "focused-tests.txt.gz"
+  },
+  "production_d": {
+    "passed": true,
+    "unfiltered": true,
+    "counts": {
+      "checks": 3704,
+      "passed": 3704,
+      "failed": 0,
+      "workers": 159
+    },
+    "receipt": "production-d-results.json.gz",
+    "retention": "retention.json"
+  },
+  "worker": {
+    "affected_passed": 23,
+    "corpus_passed": 5,
+    "total_passed": 28
+  },
+  "frontend_passed": 92,
+  "host_passed": 71,
+  "startup_passed": 15,
+  "typecheck": true,
+  "clippy": true,
+  "portable_desktop": true,
+  "native_lifecycle": true,
+  "native_f5_f9": 3,
+  "explicit_f5_f9": 2,
+  "cold_processes": 2,
+  "response_scenarios": 7,
+  "tuning_fixtures": 2,
+  "scheduling_probe": true,
+  "commands": "commands.json",
+  "retention": "retention.json",
+  "environment": {
+    "platform": "Windows x64",
+    "python": "3.11.0 [MSC v.1933 64 bit AMD64]",
+    "dependencies": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6"
+    },
+    "node": "24.15.0",
+    "npm": "11.12.1",
+    "cargo": "1.95.0",
+    "rustc": "1.95.0",
+    "save_policy": "Disposable explicitly owned roots; actual production imports; no campaign reads/writes"
+  },
+  "evidence": {
+    "authoring.json": {
+      "bytes": 46704,
+      "sha256": "2539df1ed0276b13994805ad1c48a723016d8137534794778aa91ef636bca6e0"
+    },
+    "catalogue-test-delta.patch": {
+      "bytes": 1923,
+      "sha256": "9ef18497c4bec26983b674c0a3ea06d7f1fa5748825e84d6a5e3b900d2553a5c"
+    },
+    "clippy.log": {
+      "bytes": 164,
+      "sha256": "1d157009375114e2072e8c2087530c1c16245ec13da86d64b17b611c0d37eee9"
+    },
+    "cold-load.json": {
+      "bytes": 21478,
+      "sha256": "8bd430ea10cf6dbd158502957c8c7dadefcc1d2becd550a284fd944d8e4b3575"
+    },
+    "cold.log": {
+      "bytes": 109,
+      "sha256": "0dcf9f77e7faeaa80f721ffb3481d8b34be605d34c7be7c1b7e53030cbfb65b5"
+    },
+    "commands.json": {
+      "bytes": 6963,
+      "sha256": "289542d42d7735e8b78ff63183f0f6215c2682265480ada19766a989e3460184"
+    },
+    "cower_contact.png": {
+      "bytes": 41804,
+      "sha256": "e4180557d533c0f9e28e02513baa8da3603c48970f1aee60359a0c7912589edc"
+    },
+    "debug-build.log": {
+      "bytes": 165,
+      "sha256": "1b490ee910c7a6b1318b92fa2d50ed237c5d88d509e33d794c86fc0632919997"
+    },
+    "defensive_contact.png": {
+      "bytes": 75104,
+      "sha256": "7a63c59e3c28ee1ae50b16ef13d4acd9fc7e47806f949afa4f4a0c0e17a9d079"
+    },
+    "desktop.log": {
+      "bytes": 51439,
+      "sha256": "ef825875585cc42452e5672e61c9c0fc2e54642376dbd2eec30ca236208b7517"
+    },
+    "focused-run.json.gz": {
+      "bytes": 43134,
+      "sha256": "39e9e329fe06f9f8f04bce8ede1db0d4b75b65c4a2b9f42d7552b76b5c7b114c"
+    },
+    "focused-tests.txt.gz": {
+      "bytes": 15156,
+      "sha256": "f911f829cdac314eaf2324366253f423dd8a08144a57ebf00c8ddf2aca032aa1"
+    },
+    "frontend.log": {
+      "bytes": 287,
+      "sha256": "0ec03796bc1b835f2d984dd6a65c1ec10e1cea25781bfb50b3150a37d15b9bd7"
+    },
+    "gloam_shudder-controls.png": {
+      "bytes": 456318,
+      "sha256": "436d0653269ed11332076aee7012951d88e4131b711747ca79766a12f0c50329"
+    },
+    "gloam_stalker-controls.png": {
+      "bytes": 448277,
+      "sha256": "b889fc2adcb6cfe90250797400239df2ebe19874bce8d88047a0768dfc1b3cb6"
+    },
+    "host.log": {
+      "bytes": 6683,
+      "sha256": "5820d18cd943ba02340daec0559f70fbae430f727772764f301d6accbe737b90"
+    },
+    "native-console.log": {
+      "bytes": 271,
+      "sha256": "b2e43c845ebe6233c881603f224dd0d0ad3c2392dbcc53fd17f001b34f4594e9"
+    },
+    "native-lifecycle.json.gz": {
+      "bytes": 577054,
+      "sha256": "ccb4eb3039e3ae94cfffe143a90331d27eefef9c9398d770cca675788e056468"
+    },
+    "opening.png": {
+      "bytes": 46853,
+      "sha256": "5131b6f7be9e85beba47b49cc0ba34241d6bb70ee85c307cabbc1bc348ebbe89"
+    },
+    "package.json": {
+      "bytes": 6757,
+      "sha256": "037f606ab86ed2f0140f0830d5c000dd058f495910e7f9e1fa2f56342c13fafb"
+    },
+    "production-d-results.json.gz": {
+      "bytes": 1253889,
+      "sha256": "c8d03e8a1e3f9bad85bd09636bca7682a1bfa50478c3e72648fb3fe1a0822d9e"
+    },
+    "production-d-summary.json": {
+      "bytes": 5629,
+      "sha256": "e6880faed396affb4421e687e99dc97137e1cf8e5dc1b47c473f6c90dff05760"
+    },
+    "responses-summary.json": {
+      "bytes": 24681,
+      "sha256": "98145efd39ec1f3531dddf7a4d6cd9e34b8278c1874b3b74406fbf43362cc25f"
+    },
+    "responses.json.gz": {
+      "bytes": 30399,
+      "sha256": "c22535512c11ec1f4bbdcc7d2e9934f4e65e2f97c10b8b8ca2f66a70b0348c16"
+    },
+    "retention.json": {
+      "bytes": 2874,
+      "sha256": "4ead4926f33b6652963b908493128639d8cf6fe00854dbf5fe58da55b9b96eb7"
+    },
+    "scheduling.json": {
+      "bytes": 3218,
+      "sha256": "3a049b963434d4d6b5ce62fe247fee516a48cd37352055a50b45204f2a6b2e1d"
+    },
+    "scheduling_probe.py": {
+      "bytes": 2692,
+      "sha256": "afead1b5c03c2a030075d2088bac02add49fcfa5af66685d5209f4d1f860219b"
+    },
+    "startup.log": {
+      "bytes": 1514,
+      "sha256": "b7c1e8a498cd75dd5ab66f4b4cfe47085a904ea4693c27090d84f60738102e85"
+    },
+    "typecheck.log": {
+      "bytes": 59,
+      "sha256": "1261d2f780b856a24a85d6db5b2b4c2df5e5a6dc8bc05673ac6bf8c6448d5c5b"
+    },
+    "worker-affected.log": {
+      "bytes": 3983,
+      "sha256": "6f7baf2184d1e5c97495cc03b6c46e10aade899d67d928fcb45fbf71175ef023"
+    },
+    "worker-corpus.log": {
+      "bytes": 911,
+      "sha256": "872bd92dee019d2bd6207eab51aaf6e1a2c0b51ab7a0e1f7562a803ac1ee3715"
+    }
+  }
+}
