@@ -10,6 +10,10 @@ export function creatureModel(text: string): {model: Record<string, unknown> | n
 export function creatureValue(text: string, field: string, value: string | number | boolean | string[], profileDefaults?:Record<string,string|number>): string {
   const {model, reason} = creatureModel(text);
   if (!model) throw new Error(reason);
+  if (field === 'ai_profile.recipe') {
+    if (!profileDefaults || profileDefaults.recipe !== value) throw new Error('Game-owned recipe defaults are unavailable; reopen the source.');
+    return valueEdit(text,['ai_profile'],profileDefaults);
+  }
   if (field === 'ai_type' && value === 'composite' && model.ai_type !== 'composite') {
     if (!profileDefaults) throw new Error('Game-owned composite defaults are unavailable; reopen the source.');
     let next=valueEdit(text,['ai_type'],value);
@@ -19,7 +23,7 @@ export function creatureValue(text: string, field: string, value: string | numbe
   }
   const allowed = ["name","description","armour_value","damage_dice","damage_bonus","attack_verb","perception.sight_radius","perception.hearing_radius","perception.sees_in_dark","wander_radius","pursuit_timeout","speed","ai_type"];
   if (field !== "hp") {
-    if (![...allowed,"perception.faction","perception.hostile_to","ai_profile.trigger","ai_profile.retreat_distance","ai_profile.hold_opportunities","ai_profile.withdrawal_budget"].includes(field)) throw new Error("Read-only creature field");
+    if (![...allowed,"perception.faction","perception.hostile_to","ai_profile.trigger","ai_profile.retreat_distance","ai_profile.hold_opportunities","ai_profile.withdrawal_budget","ai_profile.concealment_budget","ai_profile.unseen_extra_step","ai_profile.no_cover","ai_profile.pursuit_budget"].includes(field)) throw new Error("Read-only creature field");
     const path=field.split(".");
     const current=path.reduce<unknown>((v,k)=>v && typeof v === "object" ? (v as Record<string,unknown>)[k] : undefined,model);
     return current===value ? text : valueEdit(text,path,value);

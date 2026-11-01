@@ -1,0 +1,21 @@
+{
+  "id": "ai2_mixed_opening",
+  "width": 17,
+  "height": 11,
+  "layers": [
+    "#################",
+    "#.......#.......#",
+    "#.......#.......#",
+    "#.......#.......#",
+    "#.......#.......#",
+    "#.......+.......#",
+    "#.......#.......#","#.......#.......#","#.......#.......#","#.......#.......#","#################"
+  ],
+  "legend": {"#": "wall", ".": "floor", "<": "stairs_up","+":"door_closed"},
+  "player_start": {"x": 7, "y": 5},
+  "special_tiles": [
+    {"type": "creature", "x": 10, "y": 5, "creature_id": "gloam_stalker"},
+    {"type": "item", "x": 7, "y": 2, "item_id": "wood_bundle"},
+    {"type": "container", "x": 5, "y": 3, "decor_id": "crate", "loot_pools": ["storage_tools"]},{"type":"creature","x":4,"y":8,"creature_id":"heath_stalker"}
+  ]
+}

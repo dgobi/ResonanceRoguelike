@@ -71,4 +71,15 @@ describe("ordinary creature exact draft", () => {
     expect(tuned).toBe(next.replace('"hold_opportunities":1','"hold_opportunities":0'));
     expect(()=>creatureValue(tuned,'ai_profile.target_id','player')).toThrow('Read-only');
   });
+  it('selects the observation recipe atomically, preserving exact unrelated source and undo',()=>{
+    const defaults={version:2,recipe:'observation_averse',capability:'melee',observer:'normal_player_vision',concealment_budget:8,unseen_extra_step:1,no_cover:'defensive_melee'};
+    const old=creatureValue(source,'ai_type','composite',{version:1,recipe:'strike_and_withdraw'});
+    const next=creatureValue(old,'ai_profile.recipe','observation_averse',defaults);
+    expect(JSON.parse(next).ai_profile).toEqual(defaults);
+    const a=JSON.parse(old),b=JSON.parse(next);delete a.ai_profile;delete b.ai_profile;expect(a).toEqual(b);
+    const history=new CanvasHistory();history.record(old,next,'Recipe');expect(history.undo(next)).toBe(old);expect(history.redo(old)).toBe(next);
+    const tuned=creatureValue(next,'ai_profile.unseen_extra_step',0);
+    expect(tuned).toBe(next.replace('"unseen_extra_step":1','"unseen_extra_step":0'));
+    expect(()=>creatureValue(next,'ai_profile.recipe','planner',defaults)).toThrow('defaults');
+  });
 });

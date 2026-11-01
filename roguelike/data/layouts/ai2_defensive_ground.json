@@ -1,0 +1,21 @@
+{
+  "id": "ai2_defensive_ground",
+  "width": 17,
+  "height": 11,
+  "layers": [
+    "#################",
+    "#################",
+    "##.........######",
+    "##.........######",
+    "##.........######",
+    "##.........######",
+    "##.........######","##.........######","##.........######","#################","#################"
+  ],
+  "legend": {"#": "wall", ".": "floor", "<": "stairs_up"},
+  "player_start": {"x": 6, "y": 5},
+  "special_tiles": [
+    {"type": "creature", "x": 7, "y": 5, "creature_id": "gloam_stalker"},
+    {"type": "item", "x": 7, "y": 2, "item_id": "wood_bundle"},
+    {"type": "container", "x": 8, "y": 4, "decor_id": "crate", "loot_pools": ["storage_tools"]}
+  ]
+}

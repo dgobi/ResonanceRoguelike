@@ -21,7 +21,7 @@ class CompositeAuthoringTests(unittest.TestCase):
     def test_defaults_construct_same_contract_without_turns(self):
         r=self.validate(self.draft());self.assertTrue(r['valid'],r['diagnostics'])
         record=r['family']['context']['records'][0]
-        self.assertEqual('creature-composite-4',record['capability']['contract'])
+        self.assertEqual('creature-composite-5',record['capability']['contract'])
         self.assertEqual('CompositeAI',record['factory']['instance']['ai_class'])
         p=record['factory']['instance']['effective_ai_profile']
         self.assertEqual((2,1,6,12),(p['retreat_distance'],p['hold_opportunities'],p['withdrawal_budget'],p['pursuit_timeout']))
@@ -57,6 +57,20 @@ class CompositeAuthoringTests(unittest.TestCase):
             for key,value in [('can_cross_chunks',True),('tile','plague_crow'),('ai_type','wandering')]:
                 changed=copy.deepcopy(original);changed[key]=value
                 self.assertFalse(invoke('preview_draft',asset=path,source_asset=path,draft=json.dumps(changed))['result']['valid'])
+
+    def test_observation_recipe_defaults_and_strict_discriminator(self):
+        raw=self.draft();raw['id']='ai2_contract_variant'
+        raw['ai_profile']={'version':2,'recipe':'observation_averse'}
+        r=self.validate(raw);self.assertTrue(r['valid'],r['diagnostics'])
+        p=r['family']['context']['records'][0]['factory']['instance']['effective_ai_profile']
+        self.assertEqual((8,1,'defensive_melee',32),(p['concealment_budget'],p['unseen_extra_step'],p['no_cover'],p['pursuit_budget']))
+        for field,value in [('version',1),('unseen_extra_step',2),('unseen_extra_step',True),('concealment_budget',0),('pursuit_budget',65),('no_cover','attack_anyone'),('trigger','hit'),('observer','camera')]:
+            bad=copy.deepcopy(raw);bad['ai_profile'][field]=value
+            self.assertFalse(self.validate(bad)['valid'],(field,value))
+        old=BASE+'grave_skirmisher.json';same=json.loads((ROOT/old).read_bytes())
+        same['ai_profile']=raw['ai_profile']
+        r=invoke('preview_draft',asset=old,source_asset=old,draft=json.dumps(same))['result']
+        self.assertIn('COMPOSITE_RECIPE_ID',[d['code'] for d in r['diagnostics']])
 
 
 if __name__=='__main__':unittest.main()

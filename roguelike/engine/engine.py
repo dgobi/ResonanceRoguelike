@@ -1355,6 +1355,26 @@ class Engine:
         # Step B: merge entities from all active_chunks when multi-chunk loading exists
         return self.entities
 
+    def _grass_concealment_reaction(self, actor, old_position):
+        """One real contact attempt; return commitment, never mere eligibility."""
+        if (actor is self.player or not getattr(actor, 'is_alive', True)
+                or old_position is None or (actor.x, actor.y) == old_position):
+            return False
+        from engine.local_rivals import supported
+        if supported(actor) and not actor.perception.is_hostile_to('player'):
+            return False
+        terrain = self.data.terrain.get(self._resolve_terrain_id(actor.x, actor.y), {})
+        if (terrain.get('secondary_effect') != 'concealment'
+                or max(abs(actor.x-self.player.x), abs(actor.y-self.player.y)) > 1):
+            return False
+        equip = getattr(self.player, 'equipment', None)
+        if equip and equip.slots.get('weapon') is None:
+            return False
+        if self._player_attack(actor):
+            self.log.add('It steps into your reach through the grass.', MSG_DEFAULT)
+            return True
+        return False
+
     def _advance_turn(self) -> None:
         # Paid modal actions also resolve Press. A killing moveset grants its
         # new opportunity only after all of its phases have finished.
@@ -1519,28 +1539,11 @@ class Engine:
             engine     = self,
         )
 
-        # Concealment free-hit: player gets one free attack when a hostile
-        # creature steps into a concealment tile while adjacent.
-        for _ce in self.entities:
-            if _ce is self.player or not getattr(_ce, "is_alive", True):
+        # Legacy actors retain end-phase timing; observation movers own each step.
+        for actor in list(self.entities):
+            if getattr(getattr(actor, 'ai', None), 'per_step_reactions', False):
                 continue
-            from engine.local_rivals import supported
-            if supported(_ce) and not _ce.perception.is_hostile_to("player"):
-                continue
-            _old_pos = _pre_ai_pos.get(id(_ce))
-            if _old_pos is None or (_ce.x, _ce.y) == _old_pos:
-                continue  # didn't move
-            _ct = self._resolve_terrain_id(_ce.x, _ce.y)
-            _ctd = self.data.terrain.get(_ct, {})
-            if _ctd.get("secondary_effect") != "concealment":
-                continue
-            if max(abs(_ce.x - self.player.x), abs(_ce.y - self.player.y)) > 1:
-                continue
-            equip = getattr(self.player, "equipment", None)
-            if equip and equip.slots.get("weapon") is None:
-                continue  # bare-handed — no free strike in grass
-            if self._player_attack(_ce):
-                self.log.add("It steps into your reach through the grass.", MSG_DEFAULT)
+            self._grass_concealment_reaction(actor, _pre_ai_pos.get(id(actor)))
 
         if getattr(self.player, "took_damage_this_turn", False):
             if hasattr(self, "ui"):
@@ -4874,67 +4877,34 @@ class Engine:
                     return lr
         return 0
 
-    def _update_fov(self) -> None:
-        # Revalidate absolute interest on scene return/F9 without a move or turn.
-        from engine.sound import current_interest
-        for actor in self.entities:
-            if getattr(actor, 'ai', None) is not None:
-                current_interest(actor.ai, self.world_time.turn)
-                from engine.local_rivals import revalidate
-                revalidate(self, actor)
-        from engine.engine import GameMode
-        
-        if getattr(self, "mode", None) == GameMode.OVERMAP:
-            # Reveal the map grid
-            self.local_map.tiles["visible"][:] = True
-            self.local_map.tiles["explored"][:] = True
-            
-            # Set the lighting multiplier to 1.0 (True Color)
-            if hasattr(self, "light_map"):
-                self.light_map.fill(1.0)
-            
-            self._update_last_known_positions()
-            return
-        # ── Unconditional surface guard ───────────────────────────────
-        # If current_submap_id is set but no matching submap exists in the
-        # current chunk, the ID is stale (e.g. from a debug teleport that
-        # skipped _ascend_from_submap). Clear it and log so the root cause
-        # can be traced. Generation functions must never write this field.
-        if self.current_submap_id is not None:
-            _guard_chunk = self.world_map.get(self.world_x, self.world_y) if hasattr(self, "world_map") else None
-            _chunk_subs  = getattr(_guard_chunk, "submaps", []) or []
-            if not any(getattr(s, "submap_id", None) == self.current_submap_id for s in _chunk_subs):
-                print(
-                    f"[FOV WARNING] current_submap_id={self.current_submap_id!r} has no matching "
-                    f"submap in chunk ({self.world_x},{self.world_y}) "
-                    f"biome={getattr(_guard_chunk, 'biome_id', '?')}. "
-                    f"Forcing surface. Check generation/debug teleport code for stale writes."
-                )
-                self.current_submap_id = None
+    def normal_player_vision(self):
+        """Pure current direct-vision query; no publication, clocks or identity work.
 
+        Supernatural observation awareness may use this mask, never its player's
+        coordinates as prey evidence. Overmap/debug/exploration are excluded.
+        Gameplay refreshes aura exposure at its existing action/phase boundary.
+        """
         # ── FOV formula (single definition) ──────────────────────────
         # base → with_light = max(base, light_radius)
         # with wraiths: snap to ability_range, then drain 1/turn/wraith, floor 2
         # on wraith death: +3 overcorrect for 3 turns
         base         = self._compute_fov_base()
         if self.current_submap_id is None and base < 3:
-            print(f"[WARNING] FOV radius {base} on surface — clamping to 8. Check _compute_fov_base().")
             base = 8
         light_radius = self._get_equipped_light_radius()
         with_light   = max(base, light_radius)
 
-        # Mark whether the torch is actually extending vision beyond ambient.
-        # When ambient dominates, suppress torch colour/brightness overlay in renderer.
-        _player_ls = getattr(self.player, "light_source", None)
-        if _player_ls and _player_ls.active:
-            _player_ls.is_dominant = (light_radius > base)
-
-        from engine.effect_lifecycle import refresh_wraith_aura
-        refresh_wraith_aura(self)
-        if self._wraith_aura_state:
+        # Read current eligible sources without refreshing exposure or aura state.
+        from engine.effect_lifecycle import ability_enabled, creature_id
+        exposures = [getattr(a, '_wraith_exposure_turns', 0) for a in self.entities
+            if a is not self.player and creature_id(a) == 'bog_wraith'
+            and ability_enabled(a, self.local_map)
+            and abs(a.x-self.player.x)+abs(a.y-self.player.y) <= self.data.entities.get('bog_wraith', {}).get('ability_range', 8)
+            and getattr(a, '_wraith_exposure_turns', 0) > 0]
+        if exposures:
             _wraith_range  = self.data.entities.get("bog_wraith", {}).get("ability_range", 8)
             snap_penalty   = max(0, with_light - _wraith_range)
-            drain_penalty  = sum(max(0, t - 1) for t in self._wraith_aura_state.values())
+            drain_penalty  = sum(max(0, t - 1) for t in exposures)
             wraith_penalty = snap_penalty + drain_penalty
             overcorrect    = 3 if self._wraith_overcorrect_turns > 0 else 0
             active_radius  = max(2, with_light - wraith_penalty + overcorrect)
@@ -4965,9 +4935,6 @@ class Engine:
         ambient_intensity, _ = self.world_time.get_ambient_light(
             zone_ambient, is_outdoor
         )
-
-        # Store for fog vignette clear-radius calculation
-        self._effective_fov_radius = active_radius
 
         # ── Active visible mask (circle) ─────────────────────────────
         raw_fov = tcod.map.compute_fov(
@@ -5033,6 +5000,58 @@ class Engine:
                     algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,
                 )
                 visible |= _lfov
+
+        return dict(visible=visible, radius=active_radius, base=base,
+                    light_radius=light_radius, fov_cap=_fov_cap,
+                    ambient_intensity=ambient_intensity)
+
+    def _update_fov(self) -> None:
+        # Revalidate absolute interest on scene return/F9 without a move or turn.
+        from engine.sound import current_interest
+        for actor in self.entities:
+            if getattr(actor, 'ai', None) is not None:
+                current_interest(actor.ai, self.world_time.turn)
+                from engine.local_rivals import revalidate
+                revalidate(self, actor)
+        from engine.engine import GameMode
+
+        if getattr(self, "mode", None) == GameMode.OVERMAP:
+            # Reveal the map grid
+            self.local_map.tiles["visible"][:] = True
+            self.local_map.tiles["explored"][:] = True
+    
+            # Set the lighting multiplier to 1.0 (True Color)
+            if hasattr(self, "light_map"):
+                self.light_map.fill(1.0)
+    
+            self._update_last_known_positions()
+            return
+        # ── Unconditional surface guard ───────────────────────────────
+        # If current_submap_id is set but no matching submap exists in the
+        # current chunk, the ID is stale (e.g. from a debug teleport that
+        # skipped _ascend_from_submap). Clear it and log so the root cause
+        # can be traced. Generation functions must never write this field.
+        if self.current_submap_id is not None:
+            _guard_chunk = self.world_map.get(self.world_x, self.world_y) if hasattr(self, "world_map") else None
+            _chunk_subs  = getattr(_guard_chunk, "submaps", []) or []
+            if not any(getattr(s, "submap_id", None) == self.current_submap_id for s in _chunk_subs):
+                print(
+                    f"[FOV WARNING] current_submap_id={self.current_submap_id!r} has no matching "
+                    f"submap in chunk ({self.world_x},{self.world_y}) "
+                    f"biome={getattr(_guard_chunk, 'biome_id', '?')}. "
+                    f"Forcing surface. Check generation/debug teleport code for stale writes."
+                )
+                self.current_submap_id = None
+
+        from engine.effect_lifecycle import refresh_wraith_aura
+        refresh_wraith_aura(self)
+        vision = self.normal_player_vision()
+        visible, active_radius = vision['visible'], vision['radius']
+        ambient_intensity, _fov_cap = vision['ambient_intensity'], vision['fov_cap']
+        self._effective_fov_radius = active_radius
+        _player_ls = getattr(self.player, 'light_source', None)
+        if _player_ls and _player_ls.active:
+            _player_ls.is_dominant = vision['light_radius'] > vision['base']
 
         self.local_map.tiles["visible"][:] = visible
 

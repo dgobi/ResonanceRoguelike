@@ -1,4 +1,4 @@
-"""Game-owned, deliberately small composite v1 contract (no executable content)."""
+"""Game-owned discriminated composite recipes (no executable profile content)."""
 from __future__ import annotations
 import copy
 
@@ -8,6 +8,21 @@ DEFAULTS = dict(version=1, recipe='strike_and_withdraw', capability='melee',
 BOUNDS = {'retreat_distance': (2, 8), 'hold_opportunities': (0, 12),
           'withdrawal_budget': (1, 32), 'pursuit_timeout': (0, 10000)}
 PROFILE_FIELDS = list(DEFAULTS)
+OBSERVATION_DEFAULTS = dict(version=2, recipe='observation_averse', capability='melee',
+    observer='normal_player_vision', exposure_response='seek_concealment',
+    concealment_policy='reachable_unobserved', concealment_budget=8,
+    unseen_extra_step=1, no_cover='defensive_melee', pursuit_budget=32,
+    scene_scope='active_scene')
+OBSERVATION_BOUNDS = {'concealment_budget': (1, 32), 'unseen_extra_step': (0, 1),
+                      'pursuit_budget': (1, 64), 'pursuit_timeout': (0, 10000)}
+RECIPES = {'strike_and_withdraw': DEFAULTS, 'observation_averse': OBSERVATION_DEFAULTS}
+
+
+def profile_defaults(profile):
+    if (not isinstance(profile, dict) or not isinstance(profile.get('recipe', 'strike_and_withdraw'), str)
+            or profile.get('recipe', 'strike_and_withdraw') not in RECIPES):
+        raise ValueError('ai_profile.recipe: unsupported registered recipe')
+    return RECIPES[profile.get('recipe', 'strike_and_withdraw')]
 
 
 def validate_binding(raw):
@@ -33,36 +48,41 @@ def effective_profile(raw):
     if 'id' in raw:
         validate_binding(raw)
     if not isinstance(p, dict):
-        raise ValueError('ai_profile: composite requires an embedded version-1 profile')
-    unknown = set(p) - set(DEFAULTS)
+        raise ValueError('ai_profile: composite requires an embedded registered profile')
+    defaults = profile_defaults(p)
+    bounds = OBSERVATION_BOUNDS if defaults is OBSERVATION_DEFAULTS else BOUNDS
+    unknown = set(p) - set(defaults)
     if unknown:
         raise ValueError('ai_profile: unsupported fields: ' + ', '.join(sorted(unknown)))
-    result = {**DEFAULTS, **copy.deepcopy(p), 'pursuit_timeout': raw.get('pursuit_timeout', 20)}
-    for key, expected in DEFAULTS.items():
-        if key in ('trigger', *BOUNDS):
+    result = {**defaults, **copy.deepcopy(p), 'pursuit_timeout': raw.get('pursuit_timeout', 20)}
+    for key, expected in defaults.items():
+        if key in ('trigger', 'no_cover', *bounds):
             continue
         if type(result[key]) is not type(expected) or result[key] != expected:
             raise ValueError(f'ai_profile.{key}: supported value is {expected!r}')
-    if result['trigger'] not in ('hit', 'committed_attack'):
+    if defaults is DEFAULTS and result['trigger'] not in ('hit', 'committed_attack'):
         raise ValueError('ai_profile.trigger: choose hit or committed_attack')
-    for key, (lo, hi) in BOUNDS.items():
+    if defaults is OBSERVATION_DEFAULTS and result['no_cover'] not in ('defensive_melee', 'cower'):
+        raise ValueError('ai_profile.no_cover: choose defensive_melee or cower')
+    for key, (lo, hi) in bounds.items():
         if type(result[key]) is not int or not lo <= result[key] <= hi:
             raise ValueError(f'ai_profile.{key}: expected integer {lo}..{hi}; booleans are not numbers')
     for key in ('can_cross_chunks', 'can_use_stairs'):
         if key in raw and raw[key] is not False:
-            raise ValueError(f'{key}: composite v1 is active-scene only; must be false')
+            raise ValueError(f'{key}: composite is active-scene only; must be false')
     for key in ('ranged_attack', 'abilities', 'effects', 'statuses'):
         if key in raw:
-            raise ValueError(f'{key}: unsupported with composite v1 ordinary melee')
+            raise ValueError(f'{key}: unsupported with composite ordinary melee')
     from engine.creature_abilities import ABILITY_REGISTRY
     if raw.get('id') in ABILITY_REGISTRY:
-        raise ValueError('ai_profile: ID-bound special actors cannot use composite v1')
+        raise ValueError('ai_profile: ID-bound special actors cannot use composite')
     return result
 
 
 def saved_profile(profile):
-    if not isinstance(profile, dict) or set(profile) != set(DEFAULTS) | {'pursuit_timeout'}:
-        raise ValueError('composite.profile: complete effective version-1 profile required')
+    defaults = profile_defaults(profile)
+    if set(profile) != set(defaults) | {'pursuit_timeout'}:
+        raise ValueError('composite.profile: complete effective registered profile required')
     return effective_profile(dict(ai_profile={k: v for k, v in profile.items() if k != 'pursuit_timeout'},
                                   pursuit_timeout=profile['pursuit_timeout']))
 
@@ -94,10 +114,16 @@ def validate_saved(row, local_map=None):
         raise ValueError('composite: profile and tactical state required')
     p = saved_profile(composite['profile'])
     s = composite['state']
+    if p['recipe'] == 'observation_averse':
+        from components.observation_averse import validate_state
+        validate_state(s, p, local_map)
     keys = {'phase', 'target', 'withdraw_left', 'hold_left', 'approach_left',
             'no_progress', 'best_distance', 'suppressed', 'route_blocked', 'opportunities'}
-    if not isinstance(s, dict) or set(s) != keys:
+    if p['recipe'] == 'strike_and_withdraw' and (not isinstance(s, dict) or set(s) != keys):
         raise ValueError('composite.state: incomplete or unsupported tactical state')
+    if p['recipe'] == 'observation_averse':
+        validate_target_and_intent(row, s, p, local_map, optional_target=True)
+        return
     if s['phase'] not in ('idle', 'approach', 'withdraw', 'hold', 'return', 'cornered'):
         raise ValueError('composite.state.phase: unsupported phase')
     if type(s['route_blocked']) is not bool:
@@ -112,11 +138,15 @@ def validate_saved(row, local_map=None):
             or (s['phase'] == 'withdraw' and s['withdraw_left'] == 0)
             or (s['phase'] == 'idle' and any(s[k] != 0 for k in ('withdraw_left','hold_left','approach_left','no_progress')))):
         raise ValueError('composite.state: phase and remaining opportunity counters disagree')
+    validate_target_and_intent(row, s, p, local_map)
+
+
+def validate_target_and_intent(row, s, p, local_map, *, optional_target=False):
     from engine.local_rivals import OWNER, IDENTITY
     from config import MAP_WIDTH, MAP_HEIGHT
     w, h = (local_map.width, local_map.height) if local_map else (MAP_WIDTH, MAP_HEIGHT)
     t = s['target']
-    if (t is None) != (s['phase'] == 'idle'):
+    if not optional_target and (t is None) != (s['phase'] == 'idle'):
         raise ValueError('composite.state: tactical phase requires retained target')
     if t is not None:
         if (row.get('individual_id') is None or not isinstance(t, dict) or set(t) != {'role', 'id', 'owner', 'x', 'y', 'seen', 'deadline', 'provenance'}
@@ -130,7 +160,7 @@ def validate_saved(row, local_map=None):
                 or type(t['deadline']) is not int or t['deadline'] != t['seen'] + p['pursuit_timeout']
                 or t['provenance'] != 'sight'):
             raise ValueError('composite.state.target: invalid local sight evidence')
-    if s['suppressed'] is not None and (not isinstance(s['suppressed'], str)
+    if not optional_target and s['suppressed'] is not None and (not isinstance(s['suppressed'], str)
             or (s['suppressed'] != 'player' and not IDENTITY.fullmatch(s['suppressed']))):
         raise ValueError('composite.state.suppressed: invalid encounter reference')
     a = row.get('component_state', {}).get('actor', {})

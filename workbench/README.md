@@ -798,7 +798,7 @@ CPython runtime without the game dependency wheels.
 The protocol is **8**, worker/app **0.9.0**, game structure contract **g2-3**,
 item contract **expedition-items-2**, recipe contract **item-preparation-1**,
 found-text contract **ordinary-found-text-1**, and
-creature contract **creature-composite-4**, with Workbench layout capability
+creature contract **creature-composite-5**, with Workbench layout capability
 **authored-room-2** on the existing `authored_submap` route (game structure contract g2-3).
 W0 identify/describe/inspect/preview requests remain read-only. Draft validation
 is available only through the host's document boundary. Discovery grants an
@@ -1011,3 +1011,15 @@ Test room reports bounded actual-instance decisions against captured inputs.
 Reset retains the capture; latest saved excludes dirty dependency drafts.
 `node scripts/run-ai-1.mjs` authors the named demonstration assets in production
 main through app-local packaged controls and retains isolated test evidence.
+
+
+### Observation-averse pursuit (AI-2)
+
+The version-2 card shares the exact-source/history/review lifecycle with AI-1.
+Select it deliberately on a new-ID composite variant, tune finite cover/pursuit
+budgets and movement allowance, and choose defensive melee or cower only after
+useful escape fails. Same-ID recipe conversion is rejected. See the game-owned
+[authoring guide](../roguelike/docs/OBSERVATION_AVERSE_AI.md) for supported normal
+vision, prey information, phase clocks, saved-instance policy and the two saved
+examples. Save/reopen before placement; Test room/Reset/latest saved retain their
+captured-input and dirty-draft boundaries. Natural populations are not enrolled.

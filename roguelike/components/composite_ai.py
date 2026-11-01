@@ -1,4 +1,4 @@
-"""One ordinary action authority for the registered strike-and-withdraw recipe."""
+"""Shared perception, legal positioning and ordinary action authority for recipes."""
 from __future__ import annotations
 from collections import deque
 import copy
@@ -21,8 +21,14 @@ class CompositeAI(AI):
         self.opportunities = 0
         self.trace = []  # privileged bounded diagnostics; never definition/save data
         self.last_cancellation = None
+        if self.profile['recipe'] == 'observation_averse':
+            from components.observation_averse import initialize
+            initialize(self)
 
     def snapshot(self):
+        if self.profile['recipe'] == 'observation_averse':
+            from components.observation_averse import snapshot
+            return snapshot(self)
         keys = ('phase', 'target', 'withdraw_left', 'hold_left', 'approach_left',
                 'no_progress', 'best_distance', 'suppressed', 'route_blocked', 'opportunities')
         return dict(profile=copy.deepcopy(self.profile), state={k: copy.deepcopy(getattr(self, k)) for k in keys})
@@ -41,6 +47,11 @@ class CompositeAI(AI):
         self.state = AIState.WANDERING
         self.sound_interest = interest
         self.last_cancellation = reason
+        if self.profile['recipe'] == 'observation_averse':
+            from components.observation_averse import initialize
+            spent = self.bonus_phase, self.reaction_phase
+            initialize(self)
+            self.bonus_phase, self.reaction_phase = spent
         for field in ('_surface_exit_x', '_surface_exit_y', '_surface_exit_wx', '_surface_exit_wy'):
             setattr(actor, field, None)
         actor._arrival_cooldown, actor._just_arrived = 0, False
@@ -52,14 +63,21 @@ class CompositeAI(AI):
         if t is None:
             return None
         if not living(actor) or not active(engine, actor) or t['owner'] != owner(engine):
-            self.cancel(actor, 'foreign_scene')
+            self._retire_target(actor, 'foreign_scene')
             return None
         matches = ([engine.player] if t['role'] == 'player' else
                    [a for a in engine.entities if getattr(a, '_individual_id', None) == t['id']])
         if len(matches) != 1 or not eligible(engine, actor, matches[0]):
-            self.cancel(actor, 'invalid_target')
+            self._retire_target(actor, 'invalid_target')
             return None
         return matches[0]
+
+    def _retire_target(self, actor, reason, *, keep_sound=False):
+        if self.profile['recipe'] == 'observation_averse':
+            from components.observation_averse import retire_prey
+            retire_prey(self, actor, reason, keep_sound=keep_sound)
+        else:
+            self.cancel(actor, reason, keep_sound=keep_sound)
 
     def _observed(self, engine, actor, ambient):
         from engine.local_rivals import eligible, allocate
@@ -101,12 +119,12 @@ class CompositeAI(AI):
         if target in self._observed(engine, actor, ambient_light):
             self._remember(engine, target)
         elif engine.world_time.turn > self.target['deadline']:
-            self.cancel(actor, 'evidence_expired', keep_sound=True)
+            self._retire_target(actor, 'evidence_expired', keep_sound=True)
         if self.target is not None:
             from engine.sound import clear_interest
             clear_interest(self)
 
-    def _route(self, engine, actor, goal):
+    def _route(self, engine, actor, goal, *, forbidden=()):
         """At most 512 cells and 16 steps. BFS permits initially nearer/lateral steps.
 
         Occupancy, terrain capability and sealed diagonal rules are shared by
@@ -117,7 +135,8 @@ class CompositeAI(AI):
         occupied = {(a.x, a.y) for a in engine.entities if a is not actor and getattr(a, 'blocks_movement', False)}
         cdef = engine.data.entities.get(actor._creature_id, {})
         def legal(a, b):
-            return (m.in_bounds(*b) and b not in occupied and melee_contact(m, *a, *b)
+            return (m.in_bounds(*b) and b not in occupied and b not in forbidden and melee_contact(m, *a, *b)
+                    and (self.profile['recipe'] != 'observation_averse' or not engine._decor_blocks_movement(*b))
                     and (engine.data.terrain.get(str(m.tiles[b]['terrain']), {}).get('creature_passable', True) or cdef.get('can_swim', False)))
         queue, parents, depth = deque([start]), {start: None}, {start: 0}
         while queue:
@@ -148,10 +167,10 @@ class CompositeAI(AI):
         actor.x, actor.y = step
         return True
 
-    def _tell(self, engine, actor, text):
+    def _tell(self, engine, actor, text, *, current_vision=False):
         from engine.local_rivals import visible
         from engine.palette import UI_TEXT_DIM
-        if visible(engine, actor):
+        if (bool(engine.normal_player_vision()['visible'][actor.x,actor.y]) if current_vision else visible(engine, actor)):
             engine.log.add(f'The {actor.name} {text}.', UI_TEXT_DIM)
 
     def take_turn(self, actor, local_map, entities, player, log, rng, ambient_light, engine=None):
@@ -161,6 +180,9 @@ class CompositeAI(AI):
         if (engine is None or player is not engine.player or local_map is not engine.local_map
                 or not active(engine, actor) or disrupted(actor, local_map)):
             return
+        if self.profile['recipe'] == 'observation_averse':
+            from components.observation_averse import take_turn
+            return take_turn(self, actor, engine, ambient_light)
         self.opportunities += 1
         before = self.phase
         action, reason, result = 'wait', 'idle', None

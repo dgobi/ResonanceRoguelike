@@ -42,10 +42,11 @@ class StructureContractTests(unittest.TestCase):
 
     def test_complete_inventory_and_immutable_defaults(self):
         entries=self.data.structure_catalog.entries
-        self.assertEqual(len(entries),73)
+        self.assertEqual(len(entries),77)
         self.assertEqual({r:sum(e.route==r for e in entries) for r in self.data.structure_catalog.by_route},
-                         {'ordinary_building':60,'plaza':2,'interior_entrance':6,'authored_submap':5})
+                         {'ordinary_building':60,'plaza':2,'interior_entrance':6,'authored_submap':9})
         self.assertTrue({'ai1_skirmisher_room','ai1_harrier_room'} <= set(self.data.layouts))
+        self.assertTrue({'ai2_shadow_opening','ai2_defensive_ground','ai2_cowering_ground','ai2_mixed_opening'} <= set(self.data.layouts))
         self.assertEqual(len(self.data.buildings['residential']),12)
         doc=copy.deepcopy(self.cottage)
         c=next(s for s in doc['special_tiles'] if s['type']=='container')

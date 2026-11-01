@@ -17,9 +17,9 @@ from generation.structure_contract import read_document, StructureError
 from rendering.tile_registry import TileRegistry
 from engine.harvesting import profile_errors, construct_output, RULES
 from engine.item_factory import ItemFactory
-from engine.ai_profiles import DEFAULTS as PROFILE_DEFAULTS, BOUNDS as PROFILE_BOUNDS, effective_profile
+from engine.ai_profiles import DEFAULTS as PROFILE_DEFAULTS, BOUNDS as PROFILE_BOUNDS, effective_profile, RECIPES, OBSERVATION_BOUNDS
 
-CONTRACT = "creature-composite-4"
+CONTRACT = "creature-composite-5"
 RELATIONSHIP_FIELDS = ['perception.faction', 'perception.hostile_to']
 
 
@@ -51,7 +51,7 @@ SELECTION = ("spawn_zones is retained inactive metadata. Zone creature lists and
              "are separate inbound declarations, not observed encounters or proof of natural world selection. Saving a variant enrolls it nowhere.")
 PUBLICATION_NOTE = ("Changes load at the next game launch/catalogue initialization. Saved actors retain stored name, HP, "
                     "armour, sight/hearing/darkvision, faction, hostility (including []) and wander radius. Description, attack, speed and pursuit use the current "
-                    "definition. Composite v1 saved actors retain their effective behavioural profile (including pursuit_timeout) and tactical commitment; profile edits affect fresh actors. "
+                    "definition. Composite saved actors retain their effective behavioural profile (including pursuit_timeout) and tactical commitment; profile edits affect fresh actors. "
                     "HP edits do not rescale injured saves. New actors receive current constructor values; variants require explicit placement.")
 VIEWS = ["creature-properties", "creature-references", "creature-factory"]
 # This registered specialist uses exact-source paths and shared document commands.
@@ -106,10 +106,11 @@ def capability(raw, path, pointer=""):
                 composite_variant=editable and composite_source(raw),
                 profile_editable=editable and raw.get('ai_type') == 'composite' and composite_source(raw),
                 profile_defaults=PROFILE_DEFAULTS,
+                profile_recipes=RECIPES,
                 harvest_editable=harvest, harvest_rules=RULES,
                 harvest_reason="Complete native harvest profile; original non-ephemeral Actor authority." if harvest else "Harvest is protected: the original must be a supported non-ephemeral Actor with absent or supported native profile.",
                 duplicable=editable and not special, operations=(["edit"] if special else ["edit", "variant"]) if editable else [],
-                fields=FIELDS + (RELATIONSHIP_FIELDS if editable and relationship_supported(raw) else []), bounds={**BOUNDS, **{'ai_profile.'+k:v for k,v in PROFILE_BOUNDS.items() if k != 'pursuit_timeout'}}, ai_types=list(AI_TYPES), hp_min=1, hp_max=HP_MAX,
+                fields=FIELDS + (RELATIONSHIP_FIELDS if editable and relationship_supported(raw) else []), bounds={**BOUNDS, **{'ai_profile.'+k:v for k,v in {**PROFILE_BOUNDS, **OBSERVATION_BOUNDS}.items() if k != 'pursuit_timeout'}}, ai_types=list(AI_TYPES), hp_min=1, hp_max=HP_MAX,
                 shape="Actor with ID-bound behavior" if special else "ordinary Actor" if shape else "unsupported entity shape",
                 reason=reason, special_binding=identifier if special else None,
                 duplication_reason="Duplication unavailable: ABILITY_REGISTRY dispatches by stable ID; a new ID would lose this behavior." if special else "",
@@ -170,8 +171,12 @@ def authorize_candidate(original, candidate, source_path, target_path, *, data=N
     composite = candidate.get('ai_type') == 'composite'
     new_composite = variant and composite and cap['composite_variant']
     profile = (new_composite or cap['profile_editable']) and composite
+    if (not variant and original.get('ai_type') == 'composite'
+            and original.get('ai_profile', {}).get('recipe', 'strike_and_withdraw')
+            != candidate.get('ai_profile', {}).get('recipe', 'strike_and_withdraw')):
+        issue('COMPOSITE_RECIPE_ID', 'Changing the registered recipe requires a new creature ID; duplicate this creature first.')
     if composite and not profile:
-        issue('COMPOSITE_AUTHORITY', 'Composite v1 requires an original ordinary melee wandering/composite source; deleting protected fields cannot grant authority. Legacy same-ID conversion is unsupported.')
+        issue('COMPOSITE_AUTHORITY', 'Composite requires an original ordinary melee wandering/composite source; deleting protected fields cannot grant authority. Legacy same-ID conversion is unsupported.')
     if new_composite and any(candidate.get(k) is not False for k in ('can_cross_chunks', 'can_use_stairs')):
         issue('COMPOSITE_LOCAL', 'A new composite variant must explicitly set can_cross_chunks and can_use_stairs false; inspect these changes in Diff.')
     if not same_json(unchanged_data(original, variant=variant and cap["duplicable"], harvest=cap["harvest_editable"], relationships=relationships, profile=profile, local_flags=new_composite), unchanged_data(candidate, variant=variant and cap["duplicable"], harvest=cap["harvest_editable"], relationships=relationships, profile=profile, local_flags=new_composite)):
