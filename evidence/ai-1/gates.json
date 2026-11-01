@@ -1,0 +1,504 @@
+{
+  "passed": true,
+  "verification_revision": "f43501680e7e8c901b11bdd8d1df00f706023ab7",
+  "runtime_revision": "b4b90b67860a4db093f1457a4e15d13a02ef75af",
+  "issued_local_date": "2026-10-31",
+  "environment": {
+    "platform": "Windows x64",
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+    "dependencies": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6"
+    },
+    "node": "24.15.0",
+    "rust": "1.95.0",
+    "test_save_policy": "Disposable owned roots only; production game imports in place.",
+    "npm": "11.12.1",
+    "cargo": "1.95.0",
+    "bundled_dependencies": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6",
+      "cffi": "2.1.1",
+      "pycparser": "3.11",
+      "typing_extensions": "4.16.0"
+    }
+  },
+  "commands": [
+    {
+      "gate": "focused",
+      "command": "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe -B tools/critical_fix_regressions/verify_fixes.py --timeout 3600 --evidence evidence/ai-1/final-e/focused",
+      "result": "465 tests pass; source stable",
+      "cwd": "G:\\GameDev\\RoguelikeProject"
+    },
+    {
+      "gate": "production-D",
+      "command": "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe -B tools/verify_d.py --evidence .baseline/ai-1/production-d-final-e",
+      "result": "3704 checks, 159 workers; all pass; source stable",
+      "cwd": "G:\\GameDev\\RoguelikeProject"
+    },
+    {
+      "gate": "worker",
+      "command": "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe -X utf8 -I -B -m unittest discover -s worker -v",
+      "result": "122 cases, 121 pass and one expected embedded-runtime skip",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench"
+    },
+    {
+      "gate": "missing-dependency",
+      "command": "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe -B -m unittest test_bridge.BridgeTests.test_dependency_absence_structured -v",
+      "result": "1 pass in earlier development negative control; unchanged test and -S missing-dependency contract; final full embedded suite records its expected skip.",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench\\worker"
+    },
+    {
+      "gate": "frontend",
+      "command": "npm.cmd test (cwd workbench)",
+      "result": "91 pass across 21 files",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench"
+    },
+    {
+      "gate": "typecheck",
+      "command": "npm.cmd run typecheck (also run by npm.cmd run build)",
+      "result": "pass",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench"
+    },
+    {
+      "gate": "host",
+      "command": "cargo test --locked --manifest-path src-tauri/Cargo.toml (cwd workbench)",
+      "result": "71 pass",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench"
+    },
+    {
+      "gate": "clippy",
+      "command": "cargo clippy --locked --manifest-path src-tauri/Cargo.toml -- -D warnings (cwd workbench)",
+      "result": "pass",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench"
+    },
+    {
+      "gate": "release",
+      "command": "npm.cmd run build (cwd workbench)",
+      "result": "complete usable portable release and pinned runtime verified",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench"
+    },
+    {
+      "gate": "startup",
+      "command": "cargo build --locked --manifest-path src-tauri/Cargo.toml; node scripts/startup-test.mjs (cwd workbench)",
+      "result": "15 cases pass",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench"
+    },
+    {
+      "gate": "desktop",
+      "command": "node scripts/desktop-test.mjs (cwd workbench)",
+      "result": "pass, app-local real WebView2",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench"
+    },
+    {
+      "gate": "authoring",
+      "command": "node scripts/run-ai-1.mjs (cwd workbench)",
+      "result": "control-authored IDs, same-ID edit, duplication, rooms, exact-source publication/reopen; final full lifecycle pass",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench"
+    },
+    {
+      "gate": "final-game",
+      "command": "node scripts/run-ai-1.mjs",
+      "result": "both cycles, four F5/F9 phase checks, Reset/Stop/latest saved and dirty exclusion pass",
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "env": {
+        "AI1_RUNTIME_ONLY": "1"
+      }
+    },
+    {
+      "gate": "responses",
+      "command": "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe -B tools/verify_ai_1_play.py --evidence .baseline/ai-1/play-frozen",
+      "result": "six actual-game handler scenarios pass; staged only room choice and combat/AI RNG seeds",
+      "cwd": "G:\\GameDev\\RoguelikeProject"
+    }
+  ],
+  "totals": {
+    "focused": 465,
+    "production_d_checks": 3704,
+    "production_d_workers": 159,
+    "worker_cases": 122,
+    "worker_passed": 121,
+    "worker_expected_skips": 1,
+    "frontend": 91,
+    "host": 71,
+    "startup": 15,
+    "native_f5_f9": 4
+  },
+  "evidence": {
+    ".gitattributes": {
+      "bytes": 74,
+      "sha256": "8d83dc2dcfdf3263a6ac4a4d1c8c2a05838ecbaa15925938fc3677334d9a14ba"
+    },
+    "authoring.json": {
+      "bytes": 43368,
+      "sha256": "a5deffdac6bd8f52790d550745f811f3406141f2c81995d8e254ef8c610b08f9"
+    },
+    "completion.json": {
+      "bytes": 3220,
+      "sha256": "21f1162372c05a9e24e39f53ce8f4183528320064d3d50535a50e878ad77eeca"
+    },
+    "development-catalogue-failure.json.gz": {
+      "bytes": 57643,
+      "sha256": "7b59a6ce40e6454a854d7195a8720c12a057104029df0bdf672c754ffa9cee30"
+    },
+    "final-e/focused/action_routes_stairs.json": {
+      "bytes": 53839,
+      "sha256": "193cbb3f8a90f32b2a0bdab8b5758e99fcde2031d2d0521664d574497ca2bc11"
+    },
+    "final-e/focused/cohort-certification.json": {
+      "bytes": 108999,
+      "sha256": "8725e9b6242324b90c185bd7184612a99317718987923bcaf095b2ba2158bfdf"
+    },
+    "final-e/focused/focused-tests.txt": {
+      "bytes": 83468,
+      "sha256": "d50c1c9e77d1f1a0c13b39a429309b8aa0749669cc4bc274e0acc7c52ab99f5c"
+    },
+    "final-e/focused/g10-atomic-recovery.json": {
+      "bytes": 546,
+      "sha256": "4791f79818bfc4135b95946843e5573e516df3a531e1e61d52468831dd8808ff"
+    },
+    "final-e/focused/g10-frozen-policy.json": {
+      "bytes": 281,
+      "sha256": "e5c8f9f2eed423c3018684dc7599764103da908fee25c92badf9113001551593"
+    },
+    "final-e/focused/g10-genuine-g9.json": {
+      "bytes": 2780,
+      "sha256": "75fd70792b0e778c2299f1f68820c787f0b65402c1e24b9acd80abfbc75bda03"
+    },
+    "final-e/focused/g10-policy-negatives.json": {
+      "bytes": 1107,
+      "sha256": "87d0095302cf6374347719600c983f893c2275e1cb1f7ba2a7204fe9e896ab61"
+    },
+    "final-e/focused/g11-atomic.json": {
+      "bytes": 592,
+      "sha256": "43a67442ee7a474c9c02081db4a94229f8bab4497ec460100c3ed69e65134153"
+    },
+    "final-e/focused/g11-contract.json": {
+      "bytes": 1114,
+      "sha256": "f90f4eef48ff87a261ecf9251c429ef55aaf71e86e9b6798b39f84e9520b8621"
+    },
+    "final-e/focused/g11-exact.json": {
+      "bytes": 861,
+      "sha256": "009dd2a3ce1293f3857aa2b15860810c50824448a3f50d29cc66244534155c7a"
+    },
+    "final-e/focused/g11-genuine-g10.json": {
+      "bytes": 1046,
+      "sha256": "d99498e56c76c2a834c2d0938cadc302716894733cb77c83b83185e25da856fd"
+    },
+    "final-e/focused/g11-late-cut-fallback.json": {
+      "bytes": 789,
+      "sha256": "f5b3a6790a7580c3304cc6fdddefe0260f3a7271e3d64f27a675d76915594464"
+    },
+    "final-e/focused/g11-macro.json": {
+      "bytes": 512,
+      "sha256": "447172274c52b593bfde2dd90e560cc1c346b51b60f48ee7a4d30fdf509c2694"
+    },
+    "final-e/focused/g11-sample.json": {
+      "bytes": 34520,
+      "sha256": "844246b5c6d20259d3b22603c7a5c391f7bd54f55d1cf27a2cc7be7337a8694c"
+    },
+    "final-e/focused/g11-water-projection.json": {
+      "bytes": 204,
+      "sha256": "3a2c527ac0621c2f0f14cf77fde1f3bd9e7b5e09da73ca6c4a4837b815a2339c"
+    },
+    "final-e/focused/g20-reuse.json": {
+      "bytes": 1070,
+      "sha256": "c28673c499ff219048af2ba03a906e5438e724b32ab1fd402d9ef01bde5ef39f"
+    },
+    "final-e/focused/g4-interactions.json": {
+      "bytes": 485,
+      "sha256": "f32d783fd8f440dff3aa396deb006a0142a8f785b60645063e47e9a0edcb9a55"
+    },
+    "final-e/focused/g4-native-members.json": {
+      "bytes": 2117,
+      "sha256": "b64b26c0f2dc0a3d043a753533a1306a111317fc18b3e8c1d2923fec82dda344"
+    },
+    "final-e/focused/g4-native-production.png": {
+      "bytes": 18890,
+      "sha256": "51489c9b321445df576f8ce692b112159307723b5edd66e6373fb69853e5d30d"
+    },
+    "final-e/focused/g5-apothecary-production.png": {
+      "bytes": 11527,
+      "sha256": "622237f3a924ec7492cdd888eee9addf84e8a7cae68b3424eae7e1d0ddf6d4c6"
+    },
+    "final-e/focused/g5-interactions.json": {
+      "bytes": 494,
+      "sha256": "f5041078ddbf83bbe3f0a89c1e71678c0cbad6448ff14998585982135e7ed0b2"
+    },
+    "final-e/focused/g5-waymarker-production.png": {
+      "bytes": 11362,
+      "sha256": "280514fa8689229cbe25ceb968593e8d99e5a4e44a1228feb2e4a83d1257be90"
+    },
+    "final-e/focused/g6-cohort.json": {
+      "bytes": 13720,
+      "sha256": "7661b6370966274b5163192424449f8be138f2664ad1f137c6694296f6967850"
+    },
+    "final-e/focused/g6-independent-owners.json": {
+      "bytes": 653,
+      "sha256": "526ffa72855f4a0c771f069d6bdb7dedf0ad48f9de9aa4a8e406dff47871159b"
+    },
+    "final-e/focused/g6-site-0-production.png": {
+      "bytes": 15115,
+      "sha256": "6db3fe48f645c8b317de461d44910e48e1a5946d2f15230c7a7456d8a4f24f99"
+    },
+    "final-e/focused/g6-site-1-production.png": {
+      "bytes": 11711,
+      "sha256": "9bc670ff567961c808661927d17866d0d3d5a9c67a167d3be74b885bceeb256b"
+    },
+    "final-e/focused/g7-atomic-fit.json": {
+      "bytes": 617,
+      "sha256": "d35f58b93f6b3d8b29268638499a2b60579fd4ee4a2670cb3dcdbc4c45fe478e"
+    },
+    "final-e/focused/g7-authentic-g6-restore.json": {
+      "bytes": 218,
+      "sha256": "a262c1981b8f35a6675cb792e6baead2d322d907bf89c5f672b14e2d9ab02235"
+    },
+    "final-e/focused/g7-hash-seeds.json": {
+      "bytes": 298,
+      "sha256": "ab00b9813c4c8d59f633073efeca09363c37e93355d4a66b9d07f109e80c7618"
+    },
+    "final-e/focused/g7-homestead_workyard-production.png": {
+      "bytes": 63539,
+      "sha256": "4760ad30b9fe50d54e1a52e567bddf6dedbf875a4db5ba320be36a0ccd7183d3"
+    },
+    "final-e/focused/g7-independent-children.json": {
+      "bytes": 1318,
+      "sha256": "a109f1a528d70c86ff33a33922f14d0f62bf150d939dd1c35af2ad5b6b33d0fd"
+    },
+    "final-e/focused/g7-invalid-recipes.json": {
+      "bytes": 1673,
+      "sha256": "fad64ab8928b7a9b8031646082d4f7602e0ddc5197a9c93a95240494620dea19"
+    },
+    "final-e/focused/g7-late-child-rollback.json": {
+      "bytes": 291,
+      "sha256": "5ae8b383f55b5e990833ce7a0349894722916bfc98910d2e98e3b70cedf90c31"
+    },
+    "final-e/focused/g7-native-views.json": {
+      "bytes": 631,
+      "sha256": "6bcfcebe1cd30c79ba15836b32a826eaee7f5cc32261bf6f33fbe7568273ca0f"
+    },
+    "final-e/focused/g7-real-preparation-negatives.json": {
+      "bytes": 1650,
+      "sha256": "1cdc51e60cd6c7c555643aca6c5c0ce0eb9420f561879b2cfb5abe51597fc73d"
+    },
+    "final-e/focused/g7-recipe-transforms.json": {
+      "bytes": 170834,
+      "sha256": "5d4e23ef2dcf70cd888e38bda4db01b05f1af680e4ffe5293fc1dbd0416bb0f3"
+    },
+    "final-e/focused/g7-wayside_shrine_court-production.png": {
+      "bytes": 62169,
+      "sha256": "eb4481fd86137e1f18b998652bee0a16bccca445d27471e3d2cb3d472ca5be69"
+    },
+    "final-e/focused/g8-cardinal-layouts.json": {
+      "bytes": 542,
+      "sha256": "1b58e9622d002562a9ea8e466955261e57436213175a2266ffd25728efa0b116"
+    },
+    "final-e/focused/g8-checksum-corruptions.json": {
+      "bytes": 1290,
+      "sha256": "b9914c5b7a8054026e3c1a9f80fa58ccf2de78abca8dd525a9ac3e6b261bcde8"
+    },
+    "final-e/focused/g8-explored-checkpoint.json": {
+      "bytes": 1114,
+      "sha256": "6db44b7084b3a680025d3a4e0b73a6d5f25215c461b812316cf5545975d5e7d6"
+    },
+    "final-e/focused/g8-frontage-fixtures.json": {
+      "bytes": 3585,
+      "sha256": "31fbdad55b966d101a8c1193a84a73140479b39951715930a3977a4dfaa01989"
+    },
+    "final-e/focused/g8-genuine-g7-restore.json": {
+      "bytes": 1317,
+      "sha256": "8dde8aa62d2b68cf9d2797ebfd587eabbe0d8f15bf84cd0ba8ddbcee7d25746d"
+    },
+    "final-e/focused/g8-late-rollback.json": {
+      "bytes": 339,
+      "sha256": "2bac6f2676b991c42e4c8b44bbf2d09a4fde50eadef693634913f3be357b9266"
+    },
+    "final-e/focused/g8-ordinary.json": {
+      "bytes": 5492,
+      "sha256": "51046d9b52cb00521c78b76c71a542633412e14ce5bc79c38c0d003d5afeba04"
+    },
+    "final-e/focused/g8-policy-combinations.json": {
+      "bytes": 509,
+      "sha256": "6a975d2a914bec76c6d23b1c6c2c19624ad992aea8a42ebb80d3903648c60061"
+    },
+    "final-e/focused/g9-checksum-corruptions.json": {
+      "bytes": 2020,
+      "sha256": "b8933c9718ab65a1853dfaed501cb842ddb964d0a4cdb508b31e247ab5781252"
+    },
+    "final-e/focused/g9-genuine-g8-restore.json": {
+      "bytes": 854,
+      "sha256": "d58950eb74a5bef26970bc2a01020328ca7fb437e9f6ec2ebaef174feb33cca3"
+    },
+    "final-e/focused/g9-late-rollback.json": {
+      "bytes": 276,
+      "sha256": "732066f626f1d22daf86e23681a0e562377cf44d19f05cdb449067c7d9f51111"
+    },
+    "final-e/focused/g9-optional-outcomes.json": {
+      "bytes": 15429,
+      "sha256": "bf76ed6d4a088918cb2785f3f9eac53a16c518793c52fc50eb2330e500f7afec"
+    },
+    "final-e/focused/g9-ordinary-touched.json": {
+      "bytes": 54856,
+      "sha256": "766c6cf32eddcbff0126e4de41f149355979ff8c4078dbbcaf0e013747f8b7a6"
+    },
+    "final-e/focused/g9-policy-combinations.json": {
+      "bytes": 301,
+      "sha256": "66cbb0065128f8e81838030128e28ce3c624139932ad9be7e4daccfa5658f3d3"
+    },
+    "final-e/focused/g9-real-deck-replay.json": {
+      "bytes": 217,
+      "sha256": "cc74fed308372b09178667827f927bae47917d39644d368b45fa484a0b5a19da"
+    },
+    "final-e/focused/g9-two-link-marginal-budget.json": {
+      "bytes": 1081,
+      "sha256": "823c52204b468668589fda3a01d01695aceb828fc1270cbf09acb32e8deea627"
+    },
+    "final-e/focused/held_stairs.json": {
+      "bytes": 793,
+      "sha256": "9712b18294627e62d75683e6e05340e4ef383a6e10b4852bfbc51be214bcdd73"
+    },
+    "final-e/focused/run.json": {
+      "bytes": 109088,
+      "sha256": "62f42e15544871220ebb5481dae7da13f45007040db8d43b9b10398073ddbed2"
+    },
+    "final-e/focused/wfc-outskirts.json": {
+      "bytes": 803,
+      "sha256": "5c54ddcb2f5fce207e0f9bb68e27e61cd2f020fa479a6be4a6658e6b74bcb83b"
+    },
+    "grave_harrier-controls.png": {
+      "bytes": 451967,
+      "sha256": "bd7b0f0c133280002ecaa4a28c2c8182ed569ae7f6d1f0fa96c47a985c484db4"
+    },
+    "grave_skirmisher-controls.png": {
+      "bytes": 442969,
+      "sha256": "75abdf86a389316e9cafe1fd58a1af4778fa67c970d469e9752ad8fa73bd71d9"
+    },
+    "logs/ai-1-build.log": {
+      "bytes": 1827,
+      "sha256": "a15c34654baecb6eab07856bf9784ff510aa617c5e1f59a58fa6310b89129eab"
+    },
+    "logs/ai-1-catalogue-preflight-supported.log": {
+      "bytes": 2960,
+      "sha256": "20404751609d699449e960b22c66db202d37969bb2d959f2f6c54d3d83df63c3"
+    },
+    "logs/ai-1-clippy.log": {
+      "bytes": 164,
+      "sha256": "ce08c78adbde3a18330ed93777a7d86079b3a0aa1bd7a347d1d29e1fa98728e7"
+    },
+    "logs/ai-1-debug-build.log": {
+      "bytes": 165,
+      "sha256": "6d8218dba6f79da29e08cd04561278f838231a212532c7158ee4df72eeb2850d"
+    },
+    "logs/ai-1-desktop.log": {
+      "bytes": 51141,
+      "sha256": "7925484edf0a9346960118a72859f9fbaf635bb9149e7d7d5a23d6bdfcc79a96"
+    },
+    "logs/ai-1-final-e-d.log": {
+      "bytes": 5397,
+      "sha256": "4248727d63dfd4aaa9ddf9c4e92d28aefc519f1a3fecd89a1f5ae3b76dec5e47"
+    },
+    "logs/ai-1-final-e-focused.log": {
+      "bytes": 83740,
+      "sha256": "6a9b1df21b1ceefc8c9782cd007fc8ae6a1ed7c657758abd9bc93bd0a3e25fb7"
+    },
+    "logs/ai-1-frontend.log": {
+      "bytes": 287,
+      "sha256": "f71249483aa1ed49cf3c5208e3a89607123537cd641d61c44d90919bfd428a00"
+    },
+    "logs/ai-1-host.log": {
+      "bytes": 6683,
+      "sha256": "08f29139a848fa068d435a28ebfd2294e05141c7fd6ab8b89207f0836cc3f7d9"
+    },
+    "logs/ai-1-native-final-d.log": {
+      "bytes": 356,
+      "sha256": "4a82b0d7964c47a80c47fbfa489b3c2d6d0c929c686964fab3fe880d8085d5d4"
+    },
+    "logs/ai-1-preflight-final-d.log": {
+      "bytes": 22750,
+      "sha256": "eaeec5863740f5727a85fc986f46cd0587d230781f210ce636bfc20d3a03ea30"
+    },
+    "logs/ai-1-startup-final.log": {
+      "bytes": 1513,
+      "sha256": "3d720551cbf1fb57db25478d92a3aab60d16cdcd74bba97e1538056e6aa9d23a"
+    },
+    "logs/ai-1-worker-final-d.log": {
+      "bytes": 20265,
+      "sha256": "9a4cce9bde616bb8a5e0bb42123d68c468282563195fb417410327390236bc69"
+    },
+    "logs/ai-1-worker-preflight-final-d.log": {
+      "bytes": 1093,
+      "sha256": "da60d96130a1fa41ddf6421c0b38db20c035d8ecc5802f9b5198dbae109e2087"
+    },
+    "native-lifecycle.json.gz": {
+      "bytes": 457134,
+      "sha256": "8589dc6db4fde7dfd0bc6daa3f7114c7f156eb5f6da03ccdf162b988ae3ebaa7"
+    },
+    "package.json": {
+      "bytes": 315820,
+      "sha256": "1e6da9c0206c748c1e7cd6fda9c72ece84cc281aa770c0d27a97f07d07ad16af"
+    },
+    "production-d-summary.json": {
+      "bytes": 114102,
+      "sha256": "91b4b03c9aeadad81c375a340cd202b7e0203394b697b618c94c862ce39ec5d0"
+    },
+    "production-d.json.gz": {
+      "bytes": 1251967,
+      "sha256": "c2f12e961ce88c2b19d9cd2ef3e990aaf5c8100b1a31b8cbcbc76a568a48b1f2"
+    },
+    "publication.json": {
+      "bytes": 3046,
+      "sha256": "7493a7e21f31665f92e11e23d3b370bd75d2d6301576894a4cb69b2d117e8339"
+    },
+    "responses-summary.json": {
+      "bytes": 20293,
+      "sha256": "a186149b93bcde0c07dd5fb518399025c8a522cfec5b9b04a7c506b72f5f190c"
+    },
+    "responses.json.gz": {
+      "bytes": 24312,
+      "sha256": "80a1b515ba956d3651e581812b2f1b87b078a48d1035377708fdd058d72d5260"
+    },
+    "retention.json": {
+      "bytes": 752,
+      "sha256": "14681226f11356224323274ebbdc377e99775b34cc6a366bf42fd394e28363bb"
+    },
+    "short_cycle.json": {
+      "bytes": 344776,
+      "sha256": "a94fad1161dbb6177209fc1eb93d56640dbc8e1edad81e8ce0ed09ac71d73d69"
+    },
+    "short_cycle.png": {
+      "bytes": 71771,
+      "sha256": "90b57c0452b8d92488c66c893d7925c1f9e0ece3ad6cf47c28e93690e5daf8e2"
+    },
+    "startup.json": {
+      "bytes": 463873,
+      "sha256": "19658da3782261a5e95435d3bdcd710458e6a5842c55b22901e4bb81a7cf8c45"
+    },
+    "wide_cycle.json": {
+      "bytes": 364961,
+      "sha256": "e76697fa741354dd2a02906c5f7dd115518c374144445e96de0ef3f9c7a62160"
+    },
+    "wide_cycle.png": {
+      "bytes": 66157,
+      "sha256": "e94ac9bd0c302ceed1166ea9b143bc61c81ad8820dd9b590b08f2aba7bf9c7fb"
+    }
+  },
+  "publication_rule": "Saved composite instances retain the effective behavioural profile and tactical state. Tuning applies to fresh actors; legacy and unrelated stat/item policies are unchanged.",
+  "preservation": {
+    "branch": "main",
+    "owner_plan_untracked": true,
+    "owner_plan_sha256": "bcf41ab230fea7aa43a2a2f26b2826bd6d0d53ec814c788903badc642910f49a",
+    "source_creature_sha256": "44b2ee0fb49ab1f172791bf1775ea9c3a707942e2adbfd9e9fb5e176fad80a3b",
+    "template_sha256": "c44f9c5e3dd5c01ffc9e7fd112fc37942b008ec142773fb079086a86ccb4a665",
+    "wiki_changed": false,
+    "natural_population_tables_changed": false
+  },
+  "development_history": "Early attempts are historical, not final passes. Corrected malformed special/player/NPC host admission, world-phase evidence on skipped opportunities, stale source-review/harness assumptions, and catalogue expectations for the two new rooms. Final unfiltered focused and production-D gates were rerun after the last test correction. Runtime/native/package retention is byte checked.",
+  "limits": [
+    "Explicit authored placement and test rooms only; no natural population enrollment.",
+    "Active owning scene only; no chunk/stair pursuit or offscene catch-up.",
+    "Controlled play is not fun/final balance or global deterministic replay.",
+    "NSIS installation and clean-machine provisioning not rerun."
+  ]
+}

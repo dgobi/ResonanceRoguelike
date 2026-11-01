@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "old_validator_accepts": true,
+  "final_validator_rejects": true,
+  "blocking_decor": "campfire_unlit",
+  "links": [
+    "fixture-0",
+    "fixture-1"
+  ],
+  "diagnostics": [
+    {
+      "kind": "entrance",
+      "submap": "fixture-0",
+      "status": "bare-stair-fallback",
+      "reason": "no authored layout",
+      "revision": "wg9",
+      "access_revision": 1,
+      "access_rejections": 0,
+      "stair": [
+        15,
+        5
+      ]
+    },
+    {
+      "kind": "entrance",
+      "submap": "fixture-1",
+      "status": "bare-stair-fallback",
+      "reason": "no authored layout",
+      "revision": "wg9",
+      "access_revision": 1,
+      "access_rejections": 0,
+      "stair": [
+        12,
+        4
+      ]
+    }
+  ]
+}

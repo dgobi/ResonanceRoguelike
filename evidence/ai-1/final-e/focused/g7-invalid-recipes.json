@@ -1,0 +1,50 @@
+[
+  {
+    "case": "unknown child",
+    "error": "compound wayside_shrine_court: shrine: unknown/duplicate child absent"
+  },
+  {
+    "case": "gate names a connected but nonadjacent path",
+    "error": "compound wayside_shrine_court: gate does not touch its named path"
+  },
+  {
+    "case": "weight",
+    "error": "compound wayside_shrine_court: shrine: finite positive child weight required"
+  },
+  {
+    "case": "duplicate slot",
+    "error": "compound wayside_shrine_court: invalid/duplicate slot ID"
+  },
+  {
+    "case": "missing path",
+    "error": "compound wayside_shrine_court: shrine: unknown path or join outside its circulation"
+  },
+  {
+    "case": "out of envelope",
+    "error": "compound wayside_shrine_court: shrine: buildable outside envelope"
+  },
+  {
+    "case": "private overlap",
+    "error": "compound wayside_shrine_court: shrine: sibling private buildable regions overlap"
+  },
+  {
+    "case": "common space",
+    "error": "compound wayside_shrine_court: shrine: private buildable region consumes common circulation"
+  },
+  {
+    "case": "disconnected path",
+    "error": "compound wayside_shrine_court: court: disconnected common path (corner contact is insufficient)"
+  },
+  {
+    "case": "blocked gate",
+    "error": "compound wayside_shrine_court: gate or required circulation disconnected"
+  },
+  {
+    "case": "unbounded budget",
+    "error": "compound wayside_shrine_court: fit_budget must be integer 2..256 actual child transform trials"
+  },
+  {
+    "case": "forbidden transform",
+    "error": "compound wayside_shrine_court: shrine: forbidden effective child transform for parent 90"
+  }
+]

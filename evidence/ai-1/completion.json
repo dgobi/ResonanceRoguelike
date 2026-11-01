@@ -1,0 +1,81 @@
+{
+  "status": "complete",
+  "scope": "AI-1 only",
+  "verified_revision": "f43501680e7e8c901b11bdd8d1df00f706023ab7",
+  "runtime_revision": "b4b90b67860a4db093f1457a4e15d13a02ef75af",
+  "branch": "main",
+  "schema": "ai_type composite; embedded ai_profile version 1; recipe strike_and_withdraw",
+  "contract": "creature-composite-4",
+  "examples": [
+    {
+      "id": "grave_skirmisher",
+      "profile": {
+        "capability": "melee",
+        "cornered": "defensive_melee",
+        "hold_opportunities": 1,
+        "recipe": "strike_and_withdraw",
+        "retreat_distance": 2,
+        "scene_scope": "active_scene",
+        "trigger": "hit",
+        "version": 1,
+        "withdrawal_budget": 6
+      },
+      "pursuit_timeout": 12,
+      "speed": 0.8,
+      "definition_sha256": "07a685466563f14c26cf4099beac1f6a049d5be5240b440e31862711631e8442"
+    },
+    {
+      "id": "grave_harrier",
+      "profile": {
+        "capability": "melee",
+        "cornered": "defensive_melee",
+        "hold_opportunities": 3,
+        "recipe": "strike_and_withdraw",
+        "retreat_distance": 4,
+        "scene_scope": "active_scene",
+        "trigger": "committed_attack",
+        "version": 1,
+        "withdrawal_budget": 8
+      },
+      "pursuit_timeout": 12,
+      "speed": 0.8,
+      "definition_sha256": "63f4e602b4cdede679dbc27d0bb406210218f5fec765c5294ed5abd0a2c2e417"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "ai1_skirmisher_room",
+      "sha256": "d24612886abb861d45e7b2ea43fa63412d4cb377f236952ca4117e204a6a6ae5"
+    },
+    {
+      "id": "ai1_harrier_room",
+      "sha256": "fb9e645de5a1c15485cdd3fb1f3232f7a8242860928c97be9c120214865804cc"
+    }
+  ],
+  "availability": "Supported explicit authored placement and actual-game room tests; no natural population enrollment.",
+  "saved_instance_policy": "Saved composite instances retain the effective behavioural profile and tactical state. Tuning applies to fresh actors; legacy and unrelated stat/item policies are unchanged.",
+  "scene_policy": "Active owning scene only; successful real departure cancels once, same-scene F5/F9 preserves intent; no offscene catch-up.",
+  "owner_route": "Ordinary source -> composite new-ID variant -> tune -> validate -> Diff/review/publish -> reopen/same-ID tune -> duplicate -> save room placements -> actual game -> reset/stop/latest saved",
+  "gates": {
+    "focused": 465,
+    "production_d_checks": 3704,
+    "production_d_workers": 159,
+    "worker_cases": 122,
+    "worker_passed": 121,
+    "worker_expected_skips": 1,
+    "frontend": 91,
+    "host": 71,
+    "startup": 15,
+    "native_f5_f9": 4
+  },
+  "record": "docs/owner/AI_1.md",
+  "gate_evidence": "evidence/ai-1/gates.json",
+  "source_publication": "evidence/ai-1/publication.json",
+  "delivery_ref": "refs/tags/checkpoint/ai-1-complete-20261031-a",
+  "limits": [
+    "Explicit authored placement and test rooms only; no natural population enrollment.",
+    "Active owning scene only; no chunk/stair pursuit or offscene catch-up.",
+    "Controlled play is not fun/final balance or global deterministic replay.",
+    "NSIS installation and clean-machine provisioning not rerun."
+  ]
+}

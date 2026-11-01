@@ -1,0 +1,1223 @@
+{
+  "initial_creation": {
+    "artifact": "workbench\\.artifacts\\ai-1\\native-1793494951438\\receipt.json",
+    "sha256": "3709b71734ccc1f8dabf0fd53393a9e6386b59fcea909b8969d4a2f6ed9b5b03",
+    "publications": [
+      {
+        "path": "roguelike/data/entities/creatures/grave_skirmisher.json",
+        "saved_sha256": "d5c08f2de908c056e47299aa9b49628f291dcce4f8a2e89ed4f0e3e65e387140",
+        "definition": {
+          "id": "grave_skirmisher",
+          "name": "Grave Skirmisher",
+          "description": "Not quite the same thing as a Hollow Knight. The difference is meaningful to it, if to nothing else.",
+          "tile": "hollow_revenant",
+          "blocks_movement": true,
+          "base_hp": 14,
+          "armour_value": 1,
+          "fighter": {
+            "max_hp": 14,
+            "power": 3,
+            "defense": 1
+          },
+          "perception": {
+            "sight_radius": 7,
+            "hearing_radius": 6,
+            "sees_in_dark": true,
+            "faction": "hollow",
+            "hostile_to": [
+              "player"
+            ]
+          },
+          "ai_type": "composite",
+          "wander_radius": 8,
+          "pursuit_timeout": 12,
+          "spawn_zones": [
+            "undercroft",
+            "dead_ground",
+            "vault"
+          ],
+          "damage_dice": "1d4",
+          "damage_bonus": 1,
+          "essence_modifiers": {
+            "Dissolution": 0.2,
+            "Quickening": 1.5,
+            "Binding": 2,
+            "Severance": 2.5,
+            "Consumption": 0.1,
+            "Revelation": 1.8
+          },
+          "attack_verb": "lurches at thee",
+          "blood_type": "bone_dust",
+          "limbs": [
+            {
+              "id": "form",
+              "size": 1,
+              "damage_multiplier": 1
+            }
+          ],
+          "butcher_yield": {
+            "decay_turns": 150,
+            "tiers": [
+              {
+                "min_cutting_tier": 1,
+                "yields": [
+                  {
+                    "item_id": "revenant_husk",
+                    "quantity_min": 1,
+                    "quantity_max": 1
+                  },
+                  {
+                    "item_id": "grave_dust",
+                    "quantity_min": 0,
+                    "quantity_max": 1
+                  }
+                ]
+              },
+              {
+                "min_cutting_tier": 2,
+                "yields": [
+                  {
+                    "item_id": "revenant_husk",
+                    "quantity_min": 1,
+                    "quantity_max": 2
+                  },
+                  {
+                    "item_id": "grave_dust",
+                    "quantity_min": 1,
+                    "quantity_max": 1
+                  },
+                  {
+                    "item_id": "compressed_marrow",
+                    "quantity_min": 0,
+                    "quantity_max": 1
+                  }
+                ]
+              }
+            ]
+          },
+          "corpse_sprite": {
+            "col": 2055,
+            "row": 0,
+            "sheet": "urizen"
+          },
+          "can_cross_chunks": false,
+          "speed": 0.8,
+          "ai_profile": {
+            "capability": "melee",
+            "cornered": "defensive_melee",
+            "hold_opportunities": 2,
+            "recipe": "strike_and_withdraw",
+            "retreat_distance": 2,
+            "scene_scope": "active_scene",
+            "trigger": "hit",
+            "version": 1,
+            "withdrawal_budget": 6
+          },
+          "can_use_stairs": false
+        },
+        "source_asset": "roguelike/data/entities/creatures/hollow_revenant.json",
+        "exact_draft_sha256": "d5c08f2de908c056e47299aa9b49628f291dcce4f8a2e89ed4f0e3e65e387140",
+        "original_source_sha256": "44b2ee0fb49ab1f172791bf1775ea9c3a707942e2adbfd9e9fb5e176fad80a3b",
+        "valid": true,
+        "source": {
+          "branch": "main",
+          "catalog_sha256": "c7db162d033316f4f280f50cf7856db057bd92dd90cb08b2fdaed740199346c4",
+          "commit": "749420b9018cdc0e5ed78d85e50abbe46561fb2f",
+          "game_dirty": true,
+          "game_source_sha256": "41fad37e34372106539e0efaa61958bcf6eec036a44f2bb720881a58afa6e478",
+          "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+          "root": "G:\\GameDev\\RoguelikeProject"
+        },
+        "contract": "creature-composite-4",
+        "factory": {
+          "ability_executed": false,
+          "actor_class": "entities.actor.Actor",
+          "body": "Body supplied by inline limbs",
+          "comparisons": [
+            {
+              "declared": "Grave Skirmisher",
+              "field": "name → Actor.name",
+              "instance": "Grave Skirmisher"
+            },
+            {
+              "declared": 14,
+              "field": "base_hp → Fighter.max_hp / hp",
+              "instance": 14
+            },
+            {
+              "declared": 1,
+              "field": "armour_value → natural armour",
+              "instance": 1
+            }
+          ],
+          "consumer": "DataLoader → CreatureFactory.spawn → Actor / Fighter / Perception / AI",
+          "contract": "creature-composite-4",
+          "creature_id": "grave_skirmisher",
+          "definition_semantic_sha256": "86702dfb7f969740cbe0323834c60eed1fd16e2ff1d868ba681cdfe3223a9788",
+          "definition_values": {
+            "attack_verb": "lurches at thee",
+            "damage_bonus": 1,
+            "damage_dice": "1d4",
+            "description": "Not quite the same thing as a Hollow Knight. The difference is meaningful to it, if to nothing else.",
+            "pursuit_timeout": 12,
+            "speed": 0.8
+          },
+          "instance": {
+            "ai_class": "CompositeAI",
+            "blocks_movement": true,
+            "effective_ai_profile": {
+              "capability": "melee",
+              "cornered": "defensive_melee",
+              "hold_opportunities": 2,
+              "pursuit_timeout": 12,
+              "recipe": "strike_and_withdraw",
+              "retreat_distance": 2,
+              "scene_scope": "active_scene",
+              "trigger": "hit",
+              "version": 1,
+              "withdrawal_budget": 6
+            },
+            "fighter": {
+              "armour_value": 1,
+              "body_id": "body_human",
+              "defense": 1,
+              "hp": 14,
+              "limbs": [
+                {
+                  "damage_multiplier": 1,
+                  "id": "form",
+                  "size": 1
+                }
+              ],
+              "max_hp": 14,
+              "power": 3
+            },
+            "inventory": null,
+            "name": "Grave Skirmisher",
+            "perception": {
+              "faction": "hollow",
+              "hearing_radius": 6,
+              "hostile_to": [
+                "player"
+              ],
+              "sees_in_dark": true,
+              "sight_radius": 7
+            },
+            "tile": "hollow_revenant",
+            "wander_radius": 8
+          },
+          "loaded_catalog_sha256": "2233ee6f846bba5a50b32060df5d7e1875f281f8df9169451a00ed949770288b",
+          "observed_at_utc": "2026-11-01T01:02:42.763810+00:00",
+          "path": "roguelike/data/entities/creatures/grave_skirmisher.json",
+          "scope": "Factory construction only; no AI/combat turns, balance, natural encounter, campaign or saved instance was exercised.",
+          "source": {
+            "branch": "main",
+            "catalog_sha256": "c7db162d033316f4f280f50cf7856db057bd92dd90cb08b2fdaed740199346c4",
+            "commit": "749420b9018cdc0e5ed78d85e50abbe46561fb2f",
+            "game_dirty": true,
+            "game_source_sha256": "41fad37e34372106539e0efaa61958bcf6eec036a44f2bb720881a58afa6e478",
+            "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+            "root": "G:\\GameDev\\RoguelikeProject"
+          },
+          "source_sha256": "d5c08f2de908c056e47299aa9b49628f291dcce4f8a2e89ed4f0e3e65e387140",
+          "special_binding": null
+        }
+      },
+      {
+        "path": "roguelike/data/entities/creatures/grave_skirmisher.json",
+        "saved_sha256": "07a685466563f14c26cf4099beac1f6a049d5be5240b440e31862711631e8442",
+        "definition": {
+          "id": "grave_skirmisher",
+          "name": "Grave Skirmisher",
+          "description": "Not quite the same thing as a Hollow Knight. The difference is meaningful to it, if to nothing else.",
+          "tile": "hollow_revenant",
+          "blocks_movement": true,
+          "base_hp": 14,
+          "armour_value": 1,
+          "fighter": {
+            "max_hp": 14,
+            "power": 3,
+            "defense": 1
+          },
+          "perception": {
+            "sight_radius": 7,
+            "hearing_radius": 6,
+            "sees_in_dark": true,
+            "faction": "hollow",
+            "hostile_to": [
+              "player"
+            ]
+          },
+          "ai_type": "composite",
+          "wander_radius": 8,
+          "pursuit_timeout": 12,
+          "spawn_zones": [
+            "undercroft",
+            "dead_ground",
+            "vault"
+          ],
+          "damage_dice": "1d4",
+          "damage_bonus": 1,
+          "essence_modifiers": {
+            "Dissolution": 0.2,
+            "Quickening": 1.5,
+            "Binding": 2,
+            "Severance": 2.5,
+            "Consumption": 0.1,
+            "Revelation": 1.8
+          },
+          "attack_verb": "lurches at thee",
+          "blood_type": "bone_dust",
+          "limbs": [
+            {
+              "id": "form",
+              "size": 1,
+              "damage_multiplier": 1
+            }
+          ],
+          "butcher_yield": {
+            "decay_turns": 150,
+            "tiers": [
+              {
+                "min_cutting_tier": 1,
+                "yields": [
+                  {
+                    "item_id": "revenant_husk",
+                    "quantity_min": 1,
+                    "quantity_max": 1
+                  },
+                  {
+                    "item_id": "grave_dust",
+                    "quantity_min": 0,
+                    "quantity_max": 1
+                  }
+                ]
+              },
+              {
+                "min_cutting_tier": 2,
+                "yields": [
+                  {
+                    "item_id": "revenant_husk",
+                    "quantity_min": 1,
+                    "quantity_max": 2
+                  },
+                  {
+                    "item_id": "grave_dust",
+                    "quantity_min": 1,
+                    "quantity_max": 1
+                  },
+                  {
+                    "item_id": "compressed_marrow",
+                    "quantity_min": 0,
+                    "quantity_max": 1
+                  }
+                ]
+              }
+            ]
+          },
+          "corpse_sprite": {
+            "col": 2055,
+            "row": 0,
+            "sheet": "urizen"
+          },
+          "can_cross_chunks": false,
+          "speed": 0.8,
+          "ai_profile": {
+            "capability": "melee",
+            "cornered": "defensive_melee",
+            "hold_opportunities": 1,
+            "recipe": "strike_and_withdraw",
+            "retreat_distance": 2,
+            "scene_scope": "active_scene",
+            "trigger": "hit",
+            "version": 1,
+            "withdrawal_budget": 6
+          },
+          "can_use_stairs": false
+        },
+        "source_asset": "roguelike/data/entities/creatures/grave_skirmisher.json",
+        "exact_draft_sha256": "07a685466563f14c26cf4099beac1f6a049d5be5240b440e31862711631e8442",
+        "original_source_sha256": "d5c08f2de908c056e47299aa9b49628f291dcce4f8a2e89ed4f0e3e65e387140",
+        "valid": true,
+        "source": {
+          "branch": "main",
+          "catalog_sha256": "2233ee6f846bba5a50b32060df5d7e1875f281f8df9169451a00ed949770288b",
+          "commit": "749420b9018cdc0e5ed78d85e50abbe46561fb2f",
+          "game_dirty": true,
+          "game_source_sha256": "41fad37e34372106539e0efaa61958bcf6eec036a44f2bb720881a58afa6e478",
+          "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+          "root": "G:\\GameDev\\RoguelikeProject"
+        },
+        "contract": "creature-composite-4",
+        "factory": {
+          "ability_executed": false,
+          "actor_class": "entities.actor.Actor",
+          "body": "Body supplied by inline limbs",
+          "comparisons": [
+            {
+              "declared": "Grave Skirmisher",
+              "field": "name → Actor.name",
+              "instance": "Grave Skirmisher"
+            },
+            {
+              "declared": 14,
+              "field": "base_hp → Fighter.max_hp / hp",
+              "instance": 14
+            },
+            {
+              "declared": 1,
+              "field": "armour_value → natural armour",
+              "instance": 1
+            }
+          ],
+          "consumer": "DataLoader → CreatureFactory.spawn → Actor / Fighter / Perception / AI",
+          "contract": "creature-composite-4",
+          "creature_id": "grave_skirmisher",
+          "definition_semantic_sha256": "744af1a14fede4d47413cd53f6a660eb18ca2b8f69c8d4124f9083c54174161e",
+          "definition_values": {
+            "attack_verb": "lurches at thee",
+            "damage_bonus": 1,
+            "damage_dice": "1d4",
+            "description": "Not quite the same thing as a Hollow Knight. The difference is meaningful to it, if to nothing else.",
+            "pursuit_timeout": 12,
+            "speed": 0.8
+          },
+          "instance": {
+            "ai_class": "CompositeAI",
+            "blocks_movement": true,
+            "effective_ai_profile": {
+              "capability": "melee",
+              "cornered": "defensive_melee",
+              "hold_opportunities": 1,
+              "pursuit_timeout": 12,
+              "recipe": "strike_and_withdraw",
+              "retreat_distance": 2,
+              "scene_scope": "active_scene",
+              "trigger": "hit",
+              "version": 1,
+              "withdrawal_budget": 6
+            },
+            "fighter": {
+              "armour_value": 1,
+              "body_id": "body_human",
+              "defense": 1,
+              "hp": 14,
+              "limbs": [
+                {
+                  "damage_multiplier": 1,
+                  "id": "form",
+                  "size": 1
+                }
+              ],
+              "max_hp": 14,
+              "power": 3
+            },
+            "inventory": null,
+            "name": "Grave Skirmisher",
+            "perception": {
+              "faction": "hollow",
+              "hearing_radius": 6,
+              "hostile_to": [
+                "player"
+              ],
+              "sees_in_dark": true,
+              "sight_radius": 7
+            },
+            "tile": "hollow_revenant",
+            "wander_radius": 8
+          },
+          "loaded_catalog_sha256": "52baf131c8cba3a444e7b03cf6e185b8f6e81fa5a87ce2906cccd43dec0711c5",
+          "observed_at_utc": "2026-11-01T01:02:50.400360+00:00",
+          "path": "roguelike/data/entities/creatures/grave_skirmisher.json",
+          "scope": "Factory construction only; no AI/combat turns, balance, natural encounter, campaign or saved instance was exercised.",
+          "source": {
+            "branch": "main",
+            "catalog_sha256": "2233ee6f846bba5a50b32060df5d7e1875f281f8df9169451a00ed949770288b",
+            "commit": "749420b9018cdc0e5ed78d85e50abbe46561fb2f",
+            "game_dirty": true,
+            "game_source_sha256": "41fad37e34372106539e0efaa61958bcf6eec036a44f2bb720881a58afa6e478",
+            "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+            "root": "G:\\GameDev\\RoguelikeProject"
+          },
+          "source_sha256": "07a685466563f14c26cf4099beac1f6a049d5be5240b440e31862711631e8442",
+          "special_binding": null
+        }
+      },
+      {
+        "path": "roguelike/data/entities/creatures/grave_harrier.json",
+        "saved_sha256": "63f4e602b4cdede679dbc27d0bb406210218f5fec765c5294ed5abd0a2c2e417",
+        "definition": {
+          "id": "grave_harrier",
+          "name": "Grave Harrier",
+          "description": "Not quite the same thing as a Hollow Knight. The difference is meaningful to it, if to nothing else.",
+          "tile": "hollow_revenant",
+          "blocks_movement": true,
+          "base_hp": 14,
+          "armour_value": 1,
+          "fighter": {
+            "max_hp": 14,
+            "power": 3,
+            "defense": 1
+          },
+          "perception": {
+            "sight_radius": 7,
+            "hearing_radius": 6,
+            "sees_in_dark": true,
+            "faction": "hollow",
+            "hostile_to": [
+              "player"
+            ]
+          },
+          "ai_type": "composite",
+          "wander_radius": 8,
+          "pursuit_timeout": 12,
+          "spawn_zones": [
+            "undercroft",
+            "dead_ground",
+            "vault"
+          ],
+          "damage_dice": "1d4",
+          "damage_bonus": 1,
+          "essence_modifiers": {
+            "Dissolution": 0.2,
+            "Quickening": 1.5,
+            "Binding": 2,
+            "Severance": 2.5,
+            "Consumption": 0.1,
+            "Revelation": 1.8
+          },
+          "attack_verb": "lurches at thee",
+          "blood_type": "bone_dust",
+          "limbs": [
+            {
+              "id": "form",
+              "size": 1,
+              "damage_multiplier": 1
+            }
+          ],
+          "butcher_yield": {
+            "decay_turns": 150,
+            "tiers": [
+              {
+                "min_cutting_tier": 1,
+                "yields": [
+                  {
+                    "item_id": "revenant_husk",
+                    "quantity_min": 1,
+                    "quantity_max": 1
+                  },
+                  {
+                    "item_id": "grave_dust",
+                    "quantity_min": 0,
+                    "quantity_max": 1
+                  }
+                ]
+              },
+              {
+                "min_cutting_tier": 2,
+                "yields": [
+                  {
+                    "item_id": "revenant_husk",
+                    "quantity_min": 1,
+                    "quantity_max": 2
+                  },
+                  {
+                    "item_id": "grave_dust",
+                    "quantity_min": 1,
+                    "quantity_max": 1
+                  },
+                  {
+                    "item_id": "compressed_marrow",
+                    "quantity_min": 0,
+                    "quantity_max": 1
+                  }
+                ]
+              }
+            ]
+          },
+          "corpse_sprite": {
+            "col": 2055,
+            "row": 0,
+            "sheet": "urizen"
+          },
+          "can_cross_chunks": false,
+          "speed": 0.8,
+          "ai_profile": {
+            "capability": "melee",
+            "cornered": "defensive_melee",
+            "hold_opportunities": 3,
+            "recipe": "strike_and_withdraw",
+            "retreat_distance": 4,
+            "scene_scope": "active_scene",
+            "trigger": "committed_attack",
+            "version": 1,
+            "withdrawal_budget": 8
+          },
+          "can_use_stairs": false
+        },
+        "source_asset": "roguelike/data/entities/creatures/grave_skirmisher.json",
+        "exact_draft_sha256": "63f4e602b4cdede679dbc27d0bb406210218f5fec765c5294ed5abd0a2c2e417",
+        "original_source_sha256": "07a685466563f14c26cf4099beac1f6a049d5be5240b440e31862711631e8442",
+        "valid": true,
+        "source": {
+          "branch": "main",
+          "catalog_sha256": "52baf131c8cba3a444e7b03cf6e185b8f6e81fa5a87ce2906cccd43dec0711c5",
+          "commit": "749420b9018cdc0e5ed78d85e50abbe46561fb2f",
+          "game_dirty": true,
+          "game_source_sha256": "41fad37e34372106539e0efaa61958bcf6eec036a44f2bb720881a58afa6e478",
+          "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+          "root": "G:\\GameDev\\RoguelikeProject"
+        },
+        "contract": "creature-composite-4",
+        "factory": {
+          "ability_executed": false,
+          "actor_class": "entities.actor.Actor",
+          "body": "Body supplied by inline limbs",
+          "comparisons": [
+            {
+              "declared": "Grave Harrier",
+              "field": "name → Actor.name",
+              "instance": "Grave Harrier"
+            },
+            {
+              "declared": 14,
+              "field": "base_hp → Fighter.max_hp / hp",
+              "instance": 14
+            },
+            {
+              "declared": 1,
+              "field": "armour_value → natural armour",
+              "instance": 1
+            }
+          ],
+          "consumer": "DataLoader → CreatureFactory.spawn → Actor / Fighter / Perception / AI",
+          "contract": "creature-composite-4",
+          "creature_id": "grave_harrier",
+          "definition_semantic_sha256": "744d397dd84c6dbfd05e8087432aa83ac7b826aeafc8edae577216dd482c29c8",
+          "definition_values": {
+            "attack_verb": "lurches at thee",
+            "damage_bonus": 1,
+            "damage_dice": "1d4",
+            "description": "Not quite the same thing as a Hollow Knight. The difference is meaningful to it, if to nothing else.",
+            "pursuit_timeout": 12,
+            "speed": 0.8
+          },
+          "instance": {
+            "ai_class": "CompositeAI",
+            "blocks_movement": true,
+            "effective_ai_profile": {
+              "capability": "melee",
+              "cornered": "defensive_melee",
+              "hold_opportunities": 3,
+              "pursuit_timeout": 12,
+              "recipe": "strike_and_withdraw",
+              "retreat_distance": 4,
+              "scene_scope": "active_scene",
+              "trigger": "committed_attack",
+              "version": 1,
+              "withdrawal_budget": 8
+            },
+            "fighter": {
+              "armour_value": 1,
+              "body_id": "body_human",
+              "defense": 1,
+              "hp": 14,
+              "limbs": [
+                {
+                  "damage_multiplier": 1,
+                  "id": "form",
+                  "size": 1
+                }
+              ],
+              "max_hp": 14,
+              "power": 3
+            },
+            "inventory": null,
+            "name": "Grave Harrier",
+            "perception": {
+              "faction": "hollow",
+              "hearing_radius": 6,
+              "hostile_to": [
+                "player"
+              ],
+              "sees_in_dark": true,
+              "sight_radius": 7
+            },
+            "tile": "hollow_revenant",
+            "wander_radius": 8
+          },
+          "loaded_catalog_sha256": "e4f8bcae56c0bded645fdcfb0c8d8e86d09111b048d0b24cf2b9768a1c3d083a",
+          "observed_at_utc": "2026-11-01T01:02:58.506500+00:00",
+          "path": "roguelike/data/entities/creatures/grave_harrier.json",
+          "scope": "Factory construction only; no AI/combat turns, balance, natural encounter, campaign or saved instance was exercised.",
+          "source": {
+            "branch": "main",
+            "catalog_sha256": "52baf131c8cba3a444e7b03cf6e185b8f6e81fa5a87ce2906cccd43dec0711c5",
+            "commit": "749420b9018cdc0e5ed78d85e50abbe46561fb2f",
+            "game_dirty": true,
+            "game_source_sha256": "41fad37e34372106539e0efaa61958bcf6eec036a44f2bb720881a58afa6e478",
+            "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+            "root": "G:\\GameDev\\RoguelikeProject"
+          },
+          "source_sha256": "63f4e602b4cdede679dbc27d0bb406210218f5fec765c5294ed5abd0a2c2e417",
+          "special_binding": null
+        }
+      },
+      {
+        "path": "roguelike/data/layouts/ai1_skirmisher_room.json",
+        "saved_sha256": "d24612886abb861d45e7b2ea43fa63412d4cb377f236952ca4117e204a6a6ae5",
+        "definition": {
+          "id": "ai1_skirmisher_room",
+          "width": 17,
+          "height": 11,
+          "layers": [
+            "#################",
+            "#...............#",
+            "#...............#",
+            "#...............#",
+            "#...............#",
+            "#...............#",
+            "#...............#",
+            "#...............#",
+            "#...............#",
+            "#...............#",
+            "#################"
+          ],
+          "legend": {
+            "#": "wall",
+            ".": "floor",
+            "<": "stairs_up"
+          },
+          "player_start": {
+            "x": 6,
+            "y": 5
+          },
+          "special_tiles": [
+            {
+              "type": "creature",
+              "x": 10,
+              "y": 5,
+              "creature_id": "grave_skirmisher"
+            },
+            {
+              "type": "item",
+              "x": 7,
+              "y": 2,
+              "item_id": "wood_bundle"
+            },
+            {
+              "type": "container",
+              "x": 8,
+              "y": 4,
+              "decor_id": "crate",
+              "loot_pools": [
+                "storage_tools"
+              ]
+            }
+          ]
+        },
+        "source_asset": "roguelike/docs/examples/g17_authored_creature_room.json",
+        "exact_draft_sha256": "d24612886abb861d45e7b2ea43fa63412d4cb377f236952ca4117e204a6a6ae5",
+        "original_source_sha256": "c44f9c5e3dd5c01ffc9e7fd112fc37942b008ec142773fb079086a86ccb4a665",
+        "valid": true,
+        "source": {
+          "branch": "main",
+          "catalog_sha256": "e4f8bcae56c0bded645fdcfb0c8d8e86d09111b048d0b24cf2b9768a1c3d083a",
+          "commit": "749420b9018cdc0e5ed78d85e50abbe46561fb2f",
+          "game_dirty": true,
+          "game_source_sha256": "41fad37e34372106539e0efaa61958bcf6eec036a44f2bb720881a58afa6e478",
+          "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+          "root": "G:\\GameDev\\RoguelikeProject"
+        },
+        "contract": "authored-room-2",
+        "factory": null
+      }
+    ],
+    "later_failure": "locator.textContent: Timeout 25000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"authoring\"]:visible').getByTestId('draft-receipt')\u001b[22m\n\n    at validate (G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-ai-1.mjs:29:168)\n    at async apply (G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-ai-1.mjs:30:50)\n    at async room (G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-ai-1.mjs:47:2)\n    at async file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-ai-1.mjs:80:17",
+    "boundary": "Actual packaged controls created the two IDs and first room. Later room validation correctly rejected changing development source. This is historical creation evidence, not a final runtime pass."
+  },
+  "policy": "Owner source and template preserved by byte hash; all new creature profiles were authored through controls, never patched manually.",
+  "authoring_lifecycle": {
+    "artifact": "workbench\\.artifacts\\ai-1\\native-1793495613168\\receipt.json",
+    "sha256": "254dee83f57b7179978e637fb8525123e55e6a09e1896a1433398035bd2b734a",
+    "passed": true,
+    "checks": [
+      "create short composite variant using controls; publish/reopen, tune same ID and duplicate",
+      "place each saved ID in matched reusable authored rooms through layout controls",
+      "packaged actual-game short and wide approach/strike/withdraw/hold/return witnesses",
+      "exact source/template preserved; reset, stop and latest-saved lifecycle established"
+    ],
+    "publications": [
+      {
+        "path": "roguelike/data/entities/creatures/grave_skirmisher.json",
+        "sha256": "d5c08f2de908c056e47299aa9b49628f291dcce4f8a2e89ed4f0e3e65e387140",
+        "definition": {
+          "id": "grave_skirmisher",
+          "name": "Grave Skirmisher",
+          "description": "Not quite the same thing as a Hollow Knight. The difference is meaningful to it, if to nothing else.",
+          "tile": "hollow_revenant",
+          "blocks_movement": true,
+          "base_hp": 14,
+          "armour_value": 1,
+          "fighter": {
+            "max_hp": 14,
+            "power": 3,
+            "defense": 1
+          },
+          "perception": {
+            "sight_radius": 7,
+            "hearing_radius": 6,
+            "sees_in_dark": true,
+            "faction": "hollow",
+            "hostile_to": [
+              "player"
+            ]
+          },
+          "ai_type": "composite",
+          "wander_radius": 8,
+          "pursuit_timeout": 12,
+          "spawn_zones": [
+            "undercroft",
+            "dead_ground",
+            "vault"
+          ],
+          "damage_dice": "1d4",
+          "damage_bonus": 1,
+          "essence_modifiers": {
+            "Dissolution": 0.2,
+            "Quickening": 1.5,
+            "Binding": 2,
+            "Severance": 2.5,
+            "Consumption": 0.1,
+            "Revelation": 1.8
+          },
+          "attack_verb": "lurches at thee",
+          "blood_type": "bone_dust",
+          "limbs": [
+            {
+              "id": "form",
+              "size": 1,
+              "damage_multiplier": 1
+            }
+          ],
+          "butcher_yield": {
+            "decay_turns": 150,
+            "tiers": [
+              {
+                "min_cutting_tier": 1,
+                "yields": [
+                  {
+                    "item_id": "revenant_husk",
+                    "quantity_min": 1,
+                    "quantity_max": 1
+                  },
+                  {
+                    "item_id": "grave_dust",
+                    "quantity_min": 0,
+                    "quantity_max": 1
+                  }
+                ]
+              },
+              {
+                "min_cutting_tier": 2,
+                "yields": [
+                  {
+                    "item_id": "revenant_husk",
+                    "quantity_min": 1,
+                    "quantity_max": 2
+                  },
+                  {
+                    "item_id": "grave_dust",
+                    "quantity_min": 1,
+                    "quantity_max": 1
+                  },
+                  {
+                    "item_id": "compressed_marrow",
+                    "quantity_min": 0,
+                    "quantity_max": 1
+                  }
+                ]
+              }
+            ]
+          },
+          "corpse_sprite": {
+            "col": 2055,
+            "row": 0,
+            "sheet": "urizen"
+          },
+          "can_cross_chunks": false,
+          "speed": 0.8,
+          "ai_profile": {
+            "capability": "melee",
+            "cornered": "defensive_melee",
+            "hold_opportunities": 2,
+            "recipe": "strike_and_withdraw",
+            "retreat_distance": 2,
+            "scene_scope": "active_scene",
+            "trigger": "hit",
+            "version": 1,
+            "withdrawal_budget": 6
+          },
+          "can_use_stairs": false
+        }
+      },
+      {
+        "path": "roguelike/data/entities/creatures/grave_skirmisher.json",
+        "sha256": "07a685466563f14c26cf4099beac1f6a049d5be5240b440e31862711631e8442",
+        "definition": {
+          "id": "grave_skirmisher",
+          "name": "Grave Skirmisher",
+          "description": "Not quite the same thing as a Hollow Knight. The difference is meaningful to it, if to nothing else.",
+          "tile": "hollow_revenant",
+          "blocks_movement": true,
+          "base_hp": 14,
+          "armour_value": 1,
+          "fighter": {
+            "max_hp": 14,
+            "power": 3,
+            "defense": 1
+          },
+          "perception": {
+            "sight_radius": 7,
+            "hearing_radius": 6,
+            "sees_in_dark": true,
+            "faction": "hollow",
+            "hostile_to": [
+              "player"
+            ]
+          },
+          "ai_type": "composite",
+          "wander_radius": 8,
+          "pursuit_timeout": 12,
+          "spawn_zones": [
+            "undercroft",
+            "dead_ground",
+            "vault"
+          ],
+          "damage_dice": "1d4",
+          "damage_bonus": 1,
+          "essence_modifiers": {
+            "Dissolution": 0.2,
+            "Quickening": 1.5,
+            "Binding": 2,
+            "Severance": 2.5,
+            "Consumption": 0.1,
+            "Revelation": 1.8
+          },
+          "attack_verb": "lurches at thee",
+          "blood_type": "bone_dust",
+          "limbs": [
+            {
+              "id": "form",
+              "size": 1,
+              "damage_multiplier": 1
+            }
+          ],
+          "butcher_yield": {
+            "decay_turns": 150,
+            "tiers": [
+              {
+                "min_cutting_tier": 1,
+                "yields": [
+                  {
+                    "item_id": "revenant_husk",
+                    "quantity_min": 1,
+                    "quantity_max": 1
+                  },
+                  {
+                    "item_id": "grave_dust",
+                    "quantity_min": 0,
+                    "quantity_max": 1
+                  }
+                ]
+              },
+              {
+                "min_cutting_tier": 2,
+                "yields": [
+                  {
+                    "item_id": "revenant_husk",
+                    "quantity_min": 1,
+                    "quantity_max": 2
+                  },
+                  {
+                    "item_id": "grave_dust",
+                    "quantity_min": 1,
+                    "quantity_max": 1
+                  },
+                  {
+                    "item_id": "compressed_marrow",
+                    "quantity_min": 0,
+                    "quantity_max": 1
+                  }
+                ]
+              }
+            ]
+          },
+          "corpse_sprite": {
+            "col": 2055,
+            "row": 0,
+            "sheet": "urizen"
+          },
+          "can_cross_chunks": false,
+          "speed": 0.8,
+          "ai_profile": {
+            "capability": "melee",
+            "cornered": "defensive_melee",
+            "hold_opportunities": 1,
+            "recipe": "strike_and_withdraw",
+            "retreat_distance": 2,
+            "scene_scope": "active_scene",
+            "trigger": "hit",
+            "version": 1,
+            "withdrawal_budget": 6
+          },
+          "can_use_stairs": false
+        }
+      }
+    ],
+    "reopened": [
+      {
+        "path": "roguelike/data/entities/creatures/grave_harrier.json",
+        "sha256": "63f4e602b4cdede679dbc27d0bb406210218f5fec765c5294ed5abd0a2c2e417"
+      },
+      {
+        "path": "roguelike/data/layouts/ai1_skirmisher_room.json",
+        "sha256": "d24612886abb861d45e7b2ea43fa63412d4cb377f236952ca4117e204a6a6ae5"
+      },
+      {
+        "path": "roguelike/data/layouts/ai1_harrier_room.json",
+        "sha256": "fb9e645de5a1c15485cdd3fb1f3232f7a8242860928c97be9c120214865804cc"
+      }
+    ],
+    "package_sha256": "d11462856010f5a7281c016c78449ae085a21e092c0d4eaaa60fa950769409b5"
+  },
+  "final_runtime": {
+    "artifact": "workbench\\.artifacts\\ai-1\\native-1793497772618\\receipt.json",
+    "sha256": "a60300bf216d10390d622f0868abd5d0d7f3ba87a060ab2a5b6aa376e26c270b",
+    "passed": true,
+    "checks": [
+      "read-only final runtime pass over previously control-authored saved examples",
+      "packaged actual-game short and wide approach/strike/withdraw/hold/return witnesses",
+      "exact source/template preserved; reset, stop and latest-saved lifecycle established"
+    ],
+    "f5_f9": [
+      {
+        "label": "short_cycle",
+        "phase": "withdraw",
+        "turn": 487,
+        "state": {
+          "approach_left": 32,
+          "best_distance": null,
+          "hold_left": 1,
+          "no_progress": 0,
+          "opportunities": 5,
+          "phase": "withdraw",
+          "route_blocked": false,
+          "suppressed": null,
+          "target": {
+            "deadline": 499,
+            "id": null,
+            "owner": "0,0/room-test-instance",
+            "provenance": "sight",
+            "role": "player",
+            "seen": 487,
+            "x": 38,
+            "y": 21
+          },
+          "withdraw_left": 6
+        },
+        "profile": {
+          "capability": "melee",
+          "cornered": "defensive_melee",
+          "hold_opportunities": 1,
+          "pursuit_timeout": 12,
+          "recipe": "strike_and_withdraw",
+          "retreat_distance": 2,
+          "scene_scope": "active_scene",
+          "trigger": "hit",
+          "version": 1,
+          "withdrawal_budget": 6
+        }
+      },
+      {
+        "label": "short_cycle",
+        "phase": "hold",
+        "turn": 488,
+        "state": {
+          "approach_left": 32,
+          "best_distance": null,
+          "hold_left": 1,
+          "no_progress": 0,
+          "opportunities": 6,
+          "phase": "hold",
+          "route_blocked": false,
+          "suppressed": null,
+          "target": {
+            "deadline": 500,
+            "id": null,
+            "owner": "0,0/room-test-instance",
+            "provenance": "sight",
+            "role": "player",
+            "seen": 488,
+            "x": 38,
+            "y": 21
+          },
+          "withdraw_left": 5
+        },
+        "profile": {
+          "capability": "melee",
+          "cornered": "defensive_melee",
+          "hold_opportunities": 1,
+          "pursuit_timeout": 12,
+          "recipe": "strike_and_withdraw",
+          "retreat_distance": 2,
+          "scene_scope": "active_scene",
+          "trigger": "hit",
+          "version": 1,
+          "withdrawal_budget": 6
+        }
+      },
+      {
+        "label": "wide_cycle",
+        "phase": "withdraw",
+        "turn": 485,
+        "state": {
+          "approach_left": 32,
+          "best_distance": null,
+          "hold_left": 3,
+          "no_progress": 0,
+          "opportunities": 4,
+          "phase": "withdraw",
+          "route_blocked": false,
+          "suppressed": null,
+          "target": {
+            "deadline": 497,
+            "id": null,
+            "owner": "0,0/room-test-instance",
+            "provenance": "sight",
+            "role": "player",
+            "seen": 485,
+            "x": 38,
+            "y": 21
+          },
+          "withdraw_left": 8
+        },
+        "profile": {
+          "capability": "melee",
+          "cornered": "defensive_melee",
+          "hold_opportunities": 3,
+          "pursuit_timeout": 12,
+          "recipe": "strike_and_withdraw",
+          "retreat_distance": 4,
+          "scene_scope": "active_scene",
+          "trigger": "committed_attack",
+          "version": 1,
+          "withdrawal_budget": 8
+        }
+      },
+      {
+        "label": "wide_cycle",
+        "phase": "hold",
+        "turn": 489,
+        "state": {
+          "approach_left": 32,
+          "best_distance": null,
+          "hold_left": 3,
+          "no_progress": 0,
+          "opportunities": 7,
+          "phase": "hold",
+          "route_blocked": false,
+          "suppressed": null,
+          "target": {
+            "deadline": 501,
+            "id": null,
+            "owner": "0,0/room-test-instance",
+            "provenance": "sight",
+            "role": "player",
+            "seen": 489,
+            "x": 38,
+            "y": 21
+          },
+          "withdraw_left": 5
+        },
+        "profile": {
+          "capability": "melee",
+          "cornered": "defensive_melee",
+          "hold_opportunities": 3,
+          "pursuit_timeout": 12,
+          "recipe": "strike_and_withdraw",
+          "retreat_distance": 4,
+          "scene_scope": "active_scene",
+          "trigger": "committed_attack",
+          "version": 1,
+          "withdrawal_budget": 8
+        }
+      }
+    ],
+    "verified_inputs": "b4b90b67860a4db093f1457a4e15d13a02ef75af"
+  },
+  "room_variant_creation": {
+    "artifact": "workbench\\.artifacts\\ai-1\\native-1793495335322\\receipt.json",
+    "sha256": "a29331f2e6f21c87c3ec4f465db08a02f679d98f879c7b328454b9559e00dacd",
+    "publications": [
+      {
+        "path": "roguelike/data/layouts/ai1_harrier_room.json",
+        "sha256": "fb9e645de5a1c15485cdd3fb1f3232f7a8242860928c97be9c120214865804cc",
+        "definition": {
+          "id": "ai1_harrier_room",
+          "width": 17,
+          "height": 11,
+          "layers": [
+            "#################",
+            "#...............#",
+            "#...............#",
+            "#...............#",
+            "#...............#",
+            "#...............#",
+            "#...............#",
+            "#...............#",
+            "#...............#",
+            "#...............#",
+            "#################"
+          ],
+          "legend": {
+            "#": "wall",
+            ".": "floor",
+            "<": "stairs_up"
+          },
+          "player_start": {
+            "x": 6,
+            "y": 5
+          },
+          "special_tiles": [
+            {
+              "type": "creature",
+              "x": 10,
+              "y": 5,
+              "creature_id": "grave_harrier"
+            },
+            {
+              "type": "item",
+              "x": 7,
+              "y": 2,
+              "item_id": "wood_bundle"
+            },
+            {
+              "type": "container",
+              "x": 8,
+              "y": 4,
+              "decor_id": "crate",
+              "loot_pools": [
+                "storage_tools"
+              ]
+            }
+          ]
+        },
+        "review_valid": true,
+        "source_asset": "roguelike/data/layouts/ai1_skirmisher_room.json",
+        "source_sha256": "d24612886abb861d45e7b2ea43fa63412d4cb377f236952ca4117e204a6a6ae5"
+      }
+    ],
+    "later_harness_failure": "AssertionError [ERR_ASSERTION]: Timed out\n    at until (file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-ai-1.mjs:26:104)\n    at async witness (file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-ai-1.mjs:61:3)\n    at async file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-ai-1.mjs:83:44"
+  }
+}

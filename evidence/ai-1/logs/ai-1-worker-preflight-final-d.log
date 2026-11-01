@@ -1,0 +1,11 @@
+test_defaults_construct_same_contract_without_turns (test_composite_ai.CompositeAuthoringTests.test_defaults_construct_same_contract_without_turns) ... ok
+test_invalid_profiles_retain_exact_repairable_draft_and_diagnostic (test_composite_ai.CompositeAuthoringTests.test_invalid_profiles_retain_exact_repairable_draft_and_diagnostic) ... ok
+test_saved_examples_same_id_profile_edit_and_protected_metadata (test_composite_ai.CompositeAuthoringTests.test_saved_examples_same_id_profile_edit_and_protected_metadata) ... ok
+test_source_cannot_be_promoted_by_deleting_special_fields (test_composite_ai.CompositeAuthoringTests.test_source_cannot_be_promoted_by_deleting_special_fields) ... ok
+test_capability_inventory_all_sources_and_reference_only_items (test_harvest.HarvestAuthoring.test_capability_inventory_all_sources_and_reference_only_items) ... ok
+test_authoritative_constraints_and_inactive_fields (test_pools.PoolTests.test_authoritative_constraints_and_inactive_fields) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 76.837s
+
+OK

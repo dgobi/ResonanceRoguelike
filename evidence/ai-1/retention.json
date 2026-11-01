@@ -1,0 +1,14 @@
+{
+  "verification_revision": "f43501680e7e8c901b11bdd8d1df00f706023ab7",
+  "runtime_boundary": "b4b90b67860a4db093f1457a4e15d13a02ef75af",
+  "changed_tracked_paths": [
+    "tools/critical_fix_regressions/tests/test_gameplay_g17.py",
+    "tools/critical_fix_regressions/tests/test_structure_contract.py"
+  ],
+  "native_captured_files": 564,
+  "native_current_byte_mismatches": [],
+  "package_input_files": 54,
+  "package_inputs_unchanged": true,
+  "package_binaries_unchanged": true,
+  "interpretation": "Only catalogue test expectations changed after the runtime boundary. Native captured game/content/resources and packaged frontend/host inputs remain byte-identical. Current focused and production-D gates include the changed tests."
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "layout": "cross-market",
+    "normals": [
+      "E",
+      "N",
+      "S",
+      "W"
+    ],
+    "reverse_visits": true,
+    "unordered_membership_invariant": true,
+    "controlled_schedule": [
+      "residential",
+      "commercial"
+    ]
+  },
+  {
+    "layout": "linked-courts",
+    "normals": [
+      "E",
+      "N",
+      "S",
+      "W"
+    ],
+    "reverse_visits": true,
+    "unordered_membership_invariant": true,
+    "controlled_schedule": [
+      "residential",
+      "commercial"
+    ]
+  }
+]

@@ -1,0 +1,81 @@
+{
+  "passed": true,
+  "output": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w4b\\startup-1793496007861",
+  "runs": [
+    {
+      "name": "fresh-owner-launch",
+      "passed": true,
+      "ms": 13574
+    },
+    {
+      "name": "owner-restart",
+      "passed": true,
+      "ms": 7463
+    },
+    {
+      "name": "change-project",
+      "passed": true,
+      "ms": 15109
+    },
+    {
+      "name": "changed-project-restart",
+      "passed": true,
+      "ms": 7316
+    },
+    {
+      "name": "stale-setting",
+      "passed": true,
+      "ms": 7632
+    },
+    {
+      "name": "corrupt-setting",
+      "passed": true,
+      "ms": 7461
+    },
+    {
+      "name": "stale-override-normal",
+      "passed": true,
+      "ms": 7458
+    },
+    {
+      "name": "missing-external",
+      "passed": true,
+      "ms": 1157
+    },
+    {
+      "name": "raw-dependency",
+      "passed": true,
+      "ms": 1279
+    },
+    {
+      "name": "portable-spaces",
+      "passed": true,
+      "ms": 10145
+    },
+    {
+      "name": "development",
+      "passed": true,
+      "ms": 8438
+    },
+    {
+      "name": "initialization-exit",
+      "passed": true,
+      "ms": 1895
+    },
+    {
+      "name": "protocol-mismatch",
+      "passed": true,
+      "ms": 1218
+    },
+    {
+      "name": "malformed-worker",
+      "passed": true,
+      "ms": 1271
+    },
+    {
+      "name": "initialization-cancel",
+      "passed": true,
+      "ms": 1474
+    }
+  ]
+}

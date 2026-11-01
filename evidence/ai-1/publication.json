@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "readback_utc": "2026-11-01T02:33:12.755473+00:00",
+  "remote_url": "https://github.com/dgobi/ResonanceRoguelike.git",
+  "publication_stage": "Verified implementation and all six source checkpoints, before documentation-only completion commit.",
+  "main": "f43501680e7e8c901b11bdd8d1df00f706023ab7",
+  "checkpoints": [
+    {
+      "ref": "refs/tags/checkpoint/ai-1-catalogue-tests-20261031-a",
+      "tag_object": "083134963cde0bdb4bcd77951d8998b6615145b4",
+      "commit": "f43501680e7e8c901b11bdd8d1df00f706023ab7"
+    },
+    {
+      "ref": "refs/tags/checkpoint/ai-1-clock-inputs-20261031-a",
+      "tag_object": "5c612a81c172269973defa4baa14cdd8cc928786",
+      "commit": "38e14f0270a5898ff8f9e30be1bc40895b3d4132"
+    },
+    {
+      "ref": "refs/tags/checkpoint/ai-1-final-inputs-20261031-a",
+      "tag_object": "2540925d9f6965b4bd4bb2be6bf96c746b8c6866",
+      "commit": "b4b90b67860a4db093f1457a4e15d13a02ef75af"
+    },
+    {
+      "ref": "refs/tags/checkpoint/ai-1-implementation-20261031-a",
+      "tag_object": "711d9bd9b781459f3b823f58615d3255c38b9ef4",
+      "commit": "b62b3276276b588166b465cf5408b838d28ebd4b"
+    },
+    {
+      "ref": "refs/tags/checkpoint/ai-1-start-20261031-a",
+      "tag_object": "2fe9f445afc2bc13f692b7618e42523e1c74d1d3",
+      "commit": "749420b9018cdc0e5ed78d85e50abbe46561fb2f"
+    },
+    {
+      "ref": "refs/tags/checkpoint/ai-1-verified-inputs-20261031-a",
+      "tag_object": "af518996ce67e535d9c0f47907ef110090e0fd4a",
+      "commit": "f0e254da64f80542ac224cfa6c32d3eef6e4ecc5"
+    }
+  ],
+  "final_delivery_ref": "refs/tags/checkpoint/ai-1-complete-20261031-a",
+  "final_delivery_readback": "Performed after this evidence commit and recorded in the final handoff; the final delivery ref resolves the evidence commit itself.",
+  "raw": "f43501680e7e8c901b11bdd8d1df00f706023ab7\trefs/heads/main\n083134963cde0bdb4bcd77951d8998b6615145b4\trefs/tags/checkpoint/ai-1-catalogue-tests-20261031-a\nf43501680e7e8c901b11bdd8d1df00f706023ab7\trefs/tags/checkpoint/ai-1-catalogue-tests-20261031-a^{}\n5c612a81c172269973defa4baa14cdd8cc928786\trefs/tags/checkpoint/ai-1-clock-inputs-20261031-a\n38e14f0270a5898ff8f9e30be1bc40895b3d4132\trefs/tags/checkpoint/ai-1-clock-inputs-20261031-a^{}\n2540925d9f6965b4bd4bb2be6bf96c746b8c6866\trefs/tags/checkpoint/ai-1-final-inputs-20261031-a\nb4b90b67860a4db093f1457a4e15d13a02ef75af\trefs/tags/checkpoint/ai-1-final-inputs-20261031-a^{}\n711d9bd9b781459f3b823f58615d3255c38b9ef4\trefs/tags/checkpoint/ai-1-implementation-20261031-a\nb62b3276276b588166b465cf5408b838d28ebd4b\trefs/tags/checkpoint/ai-1-implementation-20261031-a^{}\n2fe9f445afc2bc13f692b7618e42523e1c74d1d3\trefs/tags/checkpoint/ai-1-start-20261031-a\n749420b9018cdc0e5ed78d85e50abbe46561fb2f\trefs/tags/checkpoint/ai-1-start-20261031-a^{}\naf518996ce67e535d9c0f47907ef110090e0fd4a\trefs/tags/checkpoint/ai-1-verified-inputs-20261031-a\nf0e254da64f80542ac224cfa6c32d3eef6e4ecc5\trefs/tags/checkpoint/ai-1-verified-inputs-20261031-a^{}\n"
+}
