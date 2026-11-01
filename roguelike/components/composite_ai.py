@@ -21,6 +21,8 @@ class CompositeAI(AI):
         self.opportunities = 0
         self.trace = []  # privileged bounded diagnostics; never definition/save data
         self.last_cancellation = None
+        self.hunt = None  # v4 only in saved state; ordinary sight memory stays exact
+        self.hunt_evidence = None  # diagnostic only; never authorizes a later action
         if self.profile['recipe'] == 'observation_averse':
             from components.observation_averse import initialize
             initialize(self)
@@ -31,6 +33,8 @@ class CompositeAI(AI):
             return snapshot(self)
         keys = ('phase', 'target', 'withdraw_left', 'hold_left', 'approach_left',
                 'no_progress', 'best_distance', 'suppressed', 'route_blocked', 'opportunities')
+        if self.profile['recipe'] == 'patient_venom_hunt':
+            keys += ('hunt',)
         return dict(profile=copy.deepcopy(self.profile), state={k: copy.deepcopy(getattr(self, k)) for k in keys})
 
     def cancel(self, actor, reason, *, keep_sound=False):
@@ -38,6 +42,7 @@ class CompositeAI(AI):
         from engine.sound import clear_interest
         interest = self.sound_interest if keep_sound else None
         self.phase, self.target = 'idle', None
+        self.hunt = None
         self.withdraw_left = self.hold_left = self.approach_left = self.no_progress = 0
         self.best_distance = None
         self.route_blocked = False
@@ -77,20 +82,29 @@ class CompositeAI(AI):
             from components.observation_averse import retire_prey
             retire_prey(self, actor, reason, keep_sound=keep_sound)
         else:
+            if self.profile['recipe'] == 'patient_venom_hunt' and self.target:
+                self.suppressed = 'player' if self.target['role'] == 'player' else self.target['id']
             self.cancel(actor, reason, keep_sound=keep_sound)
+
+    def sees(self, engine, actor, candidate, ambient):
+        """Pure particular-prey sight, independent of player/debug visibility."""
+        from engine.local_rivals import eligible, active
+        from engine.spatial import terrain_conceals
+        if not active(engine, actor) or not eligible(engine, actor, candidate):
+            return False
+        if terrain_conceals(candidate, engine.local_map, engine.data.terrain):
+            sight = actor.perception.sight_radius + (engine.weather.get_mechanic('creature_alert_radius_bonus', 0) if engine.weather else 0)
+            if (candidate.x-actor.x)**2 + (candidate.y-actor.y)**2 > max(1, sight-2)**2:
+                return False
+        return _creature_can_see_player(actor, candidate, engine.local_map, ambient, engine=engine)
 
     def _observed(self, engine, actor, ambient):
         from engine.local_rivals import eligible, allocate
-        from engine.spatial import terrain_conceals
         found = []
         for candidate in engine.entities:
             if not eligible(engine, actor, candidate):
                 continue
-            if candidate is not engine.player and terrain_conceals(candidate, engine.local_map, engine.data.terrain):
-                sight = actor.perception.sight_radius + (engine.weather.get_mechanic('creature_alert_radius_bonus', 0) if engine.weather else 0)
-                if (candidate.x-actor.x)**2 + (candidate.y-actor.y)**2 > max(1, sight-2)**2:
-                    continue
-            if _creature_can_see_player(actor, candidate, engine.local_map, ambient, engine=engine):
+            if self.sees(engine, actor, candidate, ambient):
                 found.append(candidate)
         allocate(engine, [actor] + [a for a in found if a is not engine.player])
         return sorted(found, key=lambda a: ((a.x-actor.x)**2+(a.y-actor.y)**2, self._key(engine, a)))
@@ -123,6 +137,8 @@ class CompositeAI(AI):
         if self.target is not None:
             from engine.sound import clear_interest
             clear_interest(self)
+        if self.hunt and self.profile['return_policy'] == 'observed_paralysis' and engine.world_time.turn > self.hunt['last_useful_phase']:
+            self._retire_target(actor, 'hunt_window_expired')
 
     def _route(self, engine, actor, goal, *, forbidden=()):
         """At most 512 cells and 16 steps. BFS permits initially nearer/lateral steps.
@@ -136,7 +152,7 @@ class CompositeAI(AI):
         cdef = engine.data.entities.get(actor._creature_id, {})
         def legal(a, b):
             return (m.in_bounds(*b) and b not in occupied and b not in forbidden and melee_contact(m, *a, *b)
-                    and (self.profile['recipe'] != 'observation_averse' or not engine._decor_blocks_movement(*b))
+                    and not engine._decor_blocks_movement(*b)
                     and (engine.data.terrain.get(str(m.tiles[b]['terrain']), {}).get('creature_passable', True) or cdef.get('can_swim', False)))
         queue, parents, depth = deque([start]), {start: None}, {start: 0}
         while queue:
@@ -189,6 +205,8 @@ class CompositeAI(AI):
         action, reason, result = 'wait', 'idle', None
         observed = self._observed(engine, actor, ambient_light)
         target = self.resolve_target(engine, actor)
+        patient = self.profile['recipe'] == 'patient_venom_hunt'
+        gated = patient and self.profile['return_policy'] == 'observed_paralysis'
         if target in observed:
             self._remember(engine, target)
         if self.target is not None and engine.world_time.turn > self.target['deadline']:
@@ -196,6 +214,16 @@ class CompositeAI(AI):
             self.cancel(actor, 'evidence_expired', keep_sound=True)
             target = None
             reason = 'evidence_expired'
+        if self.hunt and gated:
+            from components.patient_hunt import observe, return_reason
+            self.hunt_evidence = observe(self, engine, actor, target, ambient_light)
+            failure = return_reason(self, engine.world_time.turn)
+            if failure:
+                self._retire_target(actor, failure)
+                target, reason = None, failure
+            elif self.phase != 'withdraw':
+                self.phase = ('return' if self.hunt_evidence['cue'] == 'paralysis'
+                              and engine.world_time.turn >= self.hunt['first_observation_phase'] else 'monitor')
         if self.suppressed and all(self._key(engine, a) != self.suppressed for a in observed):
             self.suppressed = None  # later genuinely new observed encounter
         if self.target is None:
@@ -212,11 +240,11 @@ class CompositeAI(AI):
             far = lambda x,y: distance(x,y) >= self.profile['retreat_distance']
             seen = target in observed
             if self.phase == 'withdraw' and far(actor.x, actor.y):
-                self.phase = 'hold' if self.hold_left else 'return'
+                self.phase = 'monitor' if gated else ('hold' if self.hold_left else 'return')
             if self.phase == 'cornered':
                 step, _ = self._route(engine, actor, far)
                 usable = bool(step)  # temporary paralysis is never route failure
-                if usable and self.route_blocked:
+                if usable and self.route_blocked and not patient:
                     # A newly useful route is the only same-encounter rearm.
                     self.phase = 'withdraw'
                     self.withdraw_left = self.profile['withdrawal_budget']
@@ -235,16 +263,28 @@ class CompositeAI(AI):
                     step, _ = self._route(engine, actor, far)
                     moved = self._move(engine, actor, step)
                     action, reason = ('move' if moved else 'wait'), 'holding_reposition' if hold else 'withdrawal'
+                    if patient and not step:
+                        contacts = [a for a in observed if melee_attack_legal(local_map, actor, a)]
+                        if contacts:
+                            result = _monster_attack_result(actor, contacts[0], engine, defensive=True)
+                            action, reason = 'melee', 'cornered_defensive'
                     if not far(actor.x, actor.y) and self.withdraw_left == 0:
-                        self.phase, reason = 'cornered', 'withdrawal_exhausted'
-                        self.route_blocked = not bool(step)
+                        if patient:
+                            self._retire_target(actor, 'withdrawal_exhausted')
+                        else:
+                            self.phase = 'cornered'
+                            self.route_blocked = not bool(step)
+                        reason = 'withdrawal_exhausted'
                     elif not hold and far(actor.x, actor.y):
-                        self.phase = 'hold' if self.hold_left else 'return'
+                        self.phase = 'monitor' if gated else ('hold' if self.hold_left else 'return')
                 else:
                     reason = 'holding_distance'
-                if hold and self.hold_left == 0 and self.phase != 'cornered':
+                if hold and self.hold_left == 0 and self.phase == 'hold':
                     self.phase, self.approach_left = 'return', 32
                     self.no_progress, self.best_distance = 0, None
+            elif self.phase == 'monitor':
+                from components.patient_hunt import monitor
+                action, reason, result = monitor(self, engine, actor, target, observed, ambient_light)
             elif self.phase == 'cornered':
                 contacts = [a for a in observed if melee_attack_legal(local_map, actor, a)]
                 defender = target if seen and target in contacts else (contacts[0] if contacts else None)
@@ -256,18 +296,24 @@ class CompositeAI(AI):
                     self.cancel(actor, 'cornered_abandon')
                     reason = 'cornered_abandon'
             elif seen and melee_attack_legal(local_map, actor, target):
+                returning = patient and self.hunt is not None
                 result = _monster_attack_result(actor, target, engine)
                 action, reason = 'melee', 'engage'
                 if result.target_dead:
                     self.cancel(actor, 'target_dead')
+                elif returning and self.profile['return_policy'] == 'after_hold' and result.committed:
+                    self._retire_target(actor, 'timed_return_complete')
                 elif result.committed and (bool(result.application and result.application.accepted)
                         if self.profile['trigger'] == 'accepted_application' else
-                        (self.profile['trigger'] == 'committed_attack' or result.hit)):
+                        (self.profile['trigger'] == 'committed_attack' or result.hit)) and not returning:
+                    if patient and self.hunt is None:
+                        from components.patient_hunt import bind
+                        bind(self, engine, result.application)
                     self.phase = 'withdraw'
                     self.withdraw_left = self.profile['withdrawal_budget']
                     self.hold_left = self.profile['hold_opportunities']
                     self.approach_left, self.no_progress, self.best_distance = 32, 0, None
-                    self._tell(engine, actor, 'strikes and draws away')
+                    self._tell(engine, actor, 'stings and draws away to watch' if patient else 'strikes and draws away', current_vision=patient)
             else:
                 if not seen and (actor.x, actor.y) == (tx, ty):
                     self.cancel(actor, 'empty_trail')
@@ -294,12 +340,24 @@ class CompositeAI(AI):
                             reason = 'empty_trail'
         else:
             interest = current_interest(self, engine.world_time.turn)
-            if interest:
+            if patient and self.suppressed:
+                # An abandoned encounter can still defend itself, but only
+                # without a useful retreat; this never binds/renews a hunt.
+                contacts = [a for a in observed if melee_attack_legal(local_map, actor, a)]
+                if contacts:
+                    goal = lambda x,y: all(max(abs(x-a.x),abs(y-a.y)) >= 2 for a in contacts)
+                    step, _ = self._route(engine, actor, goal)
+                    if step:
+                        action, reason = ('move' if self._move(engine, actor, step) else 'wait'), 'abandoned_defensive_distance'
+                    else:
+                        result = _monster_attack_result(actor, contacts[0], engine, defensive=True)
+                        action, reason = 'melee', 'abandoned_cornered_defensive'
+            elif interest:
                 self.state = AIState.INVESTIGATING
                 investigate(self, actor, local_map, entities)
                 action, reason = 'investigate', 'anonymous_sound'
         if before != 'return' and self.phase == 'return':
-            self._tell(engine, actor, 'closes in again')
+            self._tell(engine, actor, 'closes in on the rigid prey' if gated else 'closes in again', current_vision=patient)
         if result and result.target_dead:
             self.resolve_target(engine, actor)
         self.trace.append(dict(opportunity=self.opportunities, turn=engine.world_time.turn,

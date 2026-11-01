@@ -21,7 +21,7 @@ export function creatureValue(text: string, field: string, value: string | numbe
     next=valueEdit(next,['can_cross_chunks'],false);
     return valueEdit(next,['can_use_stairs'],false);
   }
-  const allowed = ["name","description","armour_value","damage_dice","damage_bonus","attack_verb","perception.sight_radius","perception.hearing_radius","perception.sees_in_dark","wander_radius","pursuit_timeout","speed","ai_type","numbing_venom_trait","ai_profile.warning_phases","ai_profile.paralysis_phases","ai_profile.recovery_phases"];
+  const allowed = ["name","description","armour_value","damage_dice","damage_bonus","attack_verb","perception.sight_radius","perception.hearing_radius","perception.sees_in_dark","wander_radius","pursuit_timeout","speed","ai_type","numbing_venom_trait","ai_profile.warning_phases","ai_profile.paralysis_phases","ai_profile.recovery_phases","ai_profile.return_policy"];
   if (field !== "hp") {
     if (![...allowed,"perception.faction","perception.hostile_to","ai_profile.trigger","ai_profile.retreat_distance","ai_profile.hold_opportunities","ai_profile.withdrawal_budget","ai_profile.concealment_budget","ai_profile.unseen_extra_step","ai_profile.no_cover","ai_profile.pursuit_budget"].includes(field)) throw new Error("Read-only creature field");
     const path=field.split(".");

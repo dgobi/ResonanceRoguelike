@@ -727,7 +727,7 @@ def _monster_attack_result(monster, target, engine, *, defensive=False) -> Monst
     from dataclasses import replace
     from engine.venom import deliver
     result = _resolve_monster_attack(monster, target, engine, defensive=defensive)
-    if getattr(getattr(monster, 'ai', None), 'profile', {}).get('recipe') == 'venom_strike_and_withdraw':
+    if getattr(getattr(monster, 'ai', None), 'profile', {}).get('capability') == 'numbing_melee':
         result = replace(result, application=deliver(engine, monster, target, result))
     return result
 

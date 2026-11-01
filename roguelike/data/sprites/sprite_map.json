@@ -1,5 +1,6 @@
 {
   "sheets": {
+    "amber_insect": {"file": "assets/sprites/amber_insect.png", "tile_w": 16, "tile_h": 16},
     "urizen": {
       "file": "assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png",
       "tile_w": 16,
@@ -32,6 +33,7 @@
     }
   },
   "tiles": {
+    "amber_sting_beetle": {"sheet": "amber_insect", "col": 0, "row": 0},
     "player": {
       "sheet": "creatures",
       "col": 0,

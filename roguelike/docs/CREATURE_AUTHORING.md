@@ -335,7 +335,7 @@ paralysis, observation sensitivity or a final balance/fun claim.
 
 ## AI-2: observation-averse pursuit
 
-Contract `creature-composite-6` also supports the separate version-2
+Contract `creature-composite-7` also supports the separate version-2
 `observation_averse` recipe. New-ID variants deliberately select it through
 **Behaviour recipe: Observation-averse pursuit**; same-ID tuning retains the
 recipe. [Observation-averse AI authoring](OBSERVATION_AVERSE_AI.md) is the
@@ -346,7 +346,7 @@ version-1 definitions and saved profiles retain their existing meaning.
 
 ## AI-3: progressive numbing venom
 
-Contract `creature-composite-6` adds version-3 **Venom strike and withdraw** and
+Contract `creature-composite-7` adds version-3 **Venom strike and withdraw** and
 ordinary recipient susceptibility controls. [Numbing venom](NUMBING_VENOM_AI.md)
 defines the accepted-application trigger, charged warning/paralysis/recovery
 clocks, consumed treatment, movement-only denial, provenance and saved-instance
@@ -354,3 +354,13 @@ policy. Nettle Stalker and Drowsing Stalker demonstrate warning 3 versus 6 throu
 one consumer. Their finite timed return does not confirm actual paralysis.
 The three `ai3_*` saved rooms provide explicit placement, real remedy pickup and
 an ordinary rival victim. No natural population enrollment is included.
+
+
+## AI-4: patient venom hunt
+
+Version-4 **Patient venom hunt** exposes observed-paralysis versus finite-hold
+re-engagement through the same delivery and withdrawal consumer. The ordinary
+Amber Sting Beetle seed supplies protected insect anatomy/art for new-ID
+variants. [Patient venom hunting](PATIENT_VENOM_AI.md) defines timing, lawful
+information, saved commitment, defensive fallback and the three saved rooms.
+Existing v1/v2/v3 definitions and saves are retained; populations remain explicit.

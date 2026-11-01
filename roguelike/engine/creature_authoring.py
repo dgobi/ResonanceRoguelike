@@ -19,7 +19,7 @@ from engine.harvesting import profile_errors, construct_output, RULES
 from engine.item_factory import ItemFactory
 from engine.ai_profiles import DEFAULTS as PROFILE_DEFAULTS, BOUNDS as PROFILE_BOUNDS, effective_profile, RECIPES, OBSERVATION_BOUNDS, VENOM_BOUNDS
 
-CONTRACT = "creature-composite-6"
+CONTRACT = "creature-composite-7"
 RELATIONSHIP_FIELDS = ['perception.faction', 'perception.hostile_to', 'numbing_venom_trait']
 
 

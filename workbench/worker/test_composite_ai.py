@@ -21,7 +21,7 @@ class CompositeAuthoringTests(unittest.TestCase):
     def test_defaults_construct_same_contract_without_turns(self):
         r=self.validate(self.draft());self.assertTrue(r['valid'],r['diagnostics'])
         record=r['family']['context']['records'][0]
-        self.assertEqual('creature-composite-6',record['capability']['contract'])
+        self.assertEqual('creature-composite-7',record['capability']['contract'])
         self.assertEqual('CompositeAI',record['factory']['instance']['ai_class'])
         p=record['factory']['instance']['effective_ai_profile']
         self.assertEqual((2,1,6,12),(p['retreat_distance'],p['hold_opportunities'],p['withdrawal_budget'],p['pursuit_timeout']))
@@ -87,6 +87,28 @@ class CompositeAuthoringTests(unittest.TestCase):
         same['ai_profile']=raw['ai_profile']
         r=invoke('preview_draft',asset=old,source_asset=old,draft=json.dumps(same))['result']
         self.assertIn('COMPOSITE_RECIPE_ID',[d['code'] for d in r['diagnostics']])
+
+    def test_patient_policy_reuses_delivery_and_preserves_protected_insect_source(self):
+        raw=self.draft();raw['ai_profile']={'version':4,'recipe':'patient_venom_hunt'}
+        for policy in ('observed_paralysis','after_hold'):
+            raw['ai_profile']['return_policy']=policy
+            r=self.validate(raw);self.assertTrue(r['valid'],r['diagnostics'])
+            p=r['family']['context']['records'][0]['factory']['instance']['effective_ai_profile']
+            self.assertEqual(('numbing_melee','accepted_application',policy),tuple(p[k] for k in ('capability','trigger','return_policy')))
+        for field,value in [('return_policy','effect_link'),('version',3),('observer','debug_reveal')]:
+            bad=copy.deepcopy(raw);bad['ai_profile'][field]=value
+            self.assertFalse(self.validate(bad)['valid'])
+        source=BASE+'patient_amber_hunter.json';saved=json.loads((ROOT/source).read_bytes())
+        saved['ai_profile']['return_policy']='after_hold'
+        self.assertTrue(invoke('preview_draft',asset=source,source_asset=source,draft=json.dumps(saved))['result']['valid'])
+        saved['limbs'][0]['size']=20
+        self.assertFalse(invoke('preview_draft',asset=source,source_asset=source,draft=json.dumps(saved))['result']['valid'])
+        a=json.loads((ROOT/BASE/'patient_amber_hunter.json').read_bytes())
+        b=json.loads((ROOT/BASE/'timed_amber_hunter.json').read_bytes())
+        for v in (a,b):
+            for key in ('id','name','description'):v.pop(key)
+            v['ai_profile'].pop('return_policy')
+        self.assertEqual(a,b)
 
 
 if __name__=='__main__':unittest.main()

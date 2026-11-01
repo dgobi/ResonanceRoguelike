@@ -82,4 +82,13 @@ describe("ordinary creature exact draft", () => {
     expect(tuned).toBe(next.replace('"unseen_extra_step":1','"unseen_extra_step":0'));
     expect(()=>creatureValue(next,'ai_profile.recipe','planner',defaults)).toThrow('defaults');
   });
+  it('selects patient hunt and changes only the policy span with reversible history',()=>{
+    const defaults={version:4,recipe:'patient_venom_hunt',capability:'numbing_melee',return_policy:'observed_paralysis'};
+    const next=creatureValue(source,'ai_profile.recipe','patient_venom_hunt',defaults);
+    const changed=creatureValue(next,'ai_profile.return_policy','after_hold');
+    expect(changed).toBe(next.replace('"return_policy":"observed_paralysis"','"return_policy":"after_hold"'));
+    const history=new CanvasHistory();history.record(next,changed,'Policy');
+    expect(history.undo(changed)).toBe(next);expect(history.redo(next)).toBe(changed);
+    const a=JSON.parse(next),b=JSON.parse(source);delete a.ai_profile;expect(a).toEqual(b);
+  });
 });

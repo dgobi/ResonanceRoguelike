@@ -8,6 +8,11 @@ rearm. It does **not** wait for confirmed paralysis and is not the patient hunte
 Version-1 strike and withdraw and version-2 observation-averse profiles keep
 their defaults and saved shapes.
 
+AI-4 adds version-4 **Patient venom hunt** alongside this unchanged v3 recipe.
+Both dispatch the registered `numbing_melee` delivery capability and use the
+same withdrawal tasks. See [Patient venom hunting](PATIENT_VENOM_AI.md) for the
+observed-paralysis and finite-hold policies, insect examples and saved hunts.
+
 | Parameter | Default | Bounds | Meaning |
 | --- | --- | --- | --- |
 | `warning_phases` | 3 | 2–12 | Normal movement and attacks; numbness warns of impending restriction |

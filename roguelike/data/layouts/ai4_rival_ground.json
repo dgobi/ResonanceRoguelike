@@ -1,0 +1,21 @@
+{
+  "id": "ai4_rival_ground",
+  "width": 17,
+  "height": 11,
+  "layers": [
+    "#################",
+    "#...............#",
+    "#...............#",
+    "#...............#",
+    "#...............#",
+    "#...............#",
+    "#...............#","#...............#","#...............#","#...............#","#################"
+  ],
+  "legend": {"#": "wall", ".": "floor", "<": "stairs_up"},
+  "player_start": {"x": 7, "y": 5},
+  "special_tiles": [
+    {"type": "creature", "x": 10, "y": 5, "creature_id": "patient_amber_hunter"},
+    {"type": "item", "x": 7, "y": 5, "item_id": "measured_venom_remedy"},
+    {"type": "container", "x": 5, "y": 3, "decor_id": "crate", "loot_pools": ["storage_tools"]},{"type":"creature","x":11,"y":5,"creature_id":"highland_bandit"}
+  ]
+}

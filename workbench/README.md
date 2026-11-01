@@ -798,7 +798,7 @@ CPython runtime without the game dependency wheels.
 The protocol is **8**, worker/app **0.9.0**, game structure contract **g2-3**,
 item contract **expedition-items-3**, recipe contract **item-preparation-1**,
 found-text contract **ordinary-found-text-1**, and
-creature contract **creature-composite-6**, with Workbench layout capability
+creature contract **creature-composite-7**, with Workbench layout capability
 **authored-room-2** on the existing `authored_submap` route (game structure contract g2-3).
 W0 identify/describe/inspect/preview requests remain read-only. Draft validation
 is available only through the host's document boundary. Discovery grants an
@@ -1027,4 +1027,15 @@ captured-input and dirty-draft boundaries. Natural populations are not enrolled.
 AI-3 adds **Venom strike and withdraw** beside both existing recipes and a narrow
 **venom treatment** item seed/variant route. See [Numbing venom authoring](../roguelike/docs/NUMBING_VENOM_AI.md)
 for stage clocks, effective values, susceptibility, consumed treatment, saved-instance
-policy, explicit rooms and the distinction between timed return and a future hunter.
+policy, explicit rooms and the unchanged version-3 timed return.
+
+
+AI-4 adds **Patient venom hunt**, with a deliberate **Re-engagement policy**
+choice. Observed paralysis disables the inactive hold control and displays the
+derived original opportunity window separately from sight timeout. After finite
+hold uses the same delivery/withdrawal without a symptom gate. Duplicate Amber
+Sting Beetle, configure, validate/review/apply/reopen and place in a saved room.
+See [Patient venom hunting](../roguelike/docs/PATIENT_VENOM_AI.md) for the two
+matched policy examples, actual-input counterplay and local saved-hunt scope.
+`node scripts/run-ai-4.mjs` exercises actual packaged authoring and room lifecycle;
+`AI4_RUNTIME_ONLY=1` selects final-runtime verification without republishing.

@@ -19,8 +19,10 @@ from engine.venom import DEFAULTS as VENOM_TIMINGS, BOUNDS as VENOM_BOUNDS
 VENOM_DEFAULTS = dict(DEFAULTS, version=3, recipe='venom_strike_and_withdraw',
                       capability='numbing_melee', trigger='accepted_application',
                       effect='numbing_venom', **VENOM_TIMINGS)
+HUNT_DEFAULTS = dict(VENOM_DEFAULTS, version=4, recipe='patient_venom_hunt',
+                     return_policy='observed_paralysis')
 RECIPES = {'strike_and_withdraw': DEFAULTS, 'observation_averse': OBSERVATION_DEFAULTS,
-           'venom_strike_and_withdraw': VENOM_DEFAULTS}
+           'venom_strike_and_withdraw': VENOM_DEFAULTS, 'patient_venom_hunt': HUNT_DEFAULTS}
 
 
 def profile_defaults(profile):
@@ -56,13 +58,13 @@ def effective_profile(raw):
         raise ValueError('ai_profile: composite requires an embedded registered profile')
     defaults = profile_defaults(p)
     bounds = (OBSERVATION_BOUNDS if defaults is OBSERVATION_DEFAULTS else
-              {**BOUNDS, **VENOM_BOUNDS} if defaults is VENOM_DEFAULTS else BOUNDS)
+              {**BOUNDS, **VENOM_BOUNDS} if defaults in (VENOM_DEFAULTS, HUNT_DEFAULTS) else BOUNDS)
     unknown = set(p) - set(defaults)
     if unknown:
         raise ValueError('ai_profile: unsupported fields: ' + ', '.join(sorted(unknown)))
     result = {**defaults, **copy.deepcopy(p), 'pursuit_timeout': raw.get('pursuit_timeout', 20)}
     for key, expected in defaults.items():
-        if key in ('no_cover', *bounds) or (key == 'trigger' and defaults is DEFAULTS):
+        if key in ('no_cover', *bounds) or (key == 'return_policy' and defaults is HUNT_DEFAULTS) or (key == 'trigger' and defaults is DEFAULTS):
             continue
         if type(result[key]) is not type(expected) or result[key] != expected:
             raise ValueError(f'ai_profile.{key}: supported value is {expected!r}')
@@ -70,6 +72,8 @@ def effective_profile(raw):
         raise ValueError('ai_profile.trigger: choose hit or committed_attack')
     if defaults is OBSERVATION_DEFAULTS and result['no_cover'] not in ('defensive_melee', 'cower'):
         raise ValueError('ai_profile.no_cover: choose defensive_melee or cower')
+    if defaults is HUNT_DEFAULTS and result['return_policy'] not in ('observed_paralysis', 'after_hold'):
+        raise ValueError('ai_profile.return_policy: choose observed_paralysis or after_hold')
     for key, (lo, hi) in bounds.items():
         if type(result[key]) is not int or not lo <= result[key] <= hi:
             raise ValueError(f'ai_profile.{key}: expected integer {lo}..{hi}; booleans are not numbers')
@@ -123,6 +127,10 @@ def validate_saved(row, local_map=None):
     if p['recipe'] == 'observation_averse':
         from components.observation_averse import validate_state
         validate_state(s, p, local_map)
+    if p['recipe'] == 'patient_venom_hunt':
+        from components.patient_hunt import validate_state
+        validate_state(row, s, p, local_map)
+        return
     keys = {'phase', 'target', 'withdraw_left', 'hold_left', 'approach_left',
             'no_progress', 'best_distance', 'suppressed', 'route_blocked', 'opportunities'}
     if p['recipe'] != 'observation_averse' and (not isinstance(s, dict) or set(s) != keys):
