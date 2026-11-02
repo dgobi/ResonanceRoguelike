@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "runtime_content_editor_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+  "final_verification_input_revision": "087bcc9c70102dee17166415f61fd8be6ccff629",
+  "focused": {
+    "passed": 588,
+    "total": 588,
+    "unfiltered": true
+  },
+  "production_d": {
+    "checks": 3704,
+    "passed": 3704,
+    "failed": 0,
+    "workers": 159
+  },
+  "workbench_worker": {
+    "tests": 51,
+    "modules": 11,
+    "passed": true
+  },
+  "frontend": {
+    "passed": 96,
+    "total": 96
+  },
+  "host": {
+    "passed": 71,
+    "total": 71
+  },
+  "startup": {
+    "passed": 15,
+    "total": 15
+  },
+  "gate_count": 20,
+  "retained": 19,
+  "retention": "Exact two-file catalogue-only test delta; all product and other verification inputs unchanged.",
+  "play_families": [
+    "controlled",
+    "interrupt",
+    "stale",
+    "reverse",
+    "natural",
+    "legacy"
+  ],
+  "supplemental_native_world": true
+}

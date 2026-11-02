@@ -1,0 +1,89 @@
+{
+  "passed": true,
+  "command": [
+    "node",
+    "scripts/run-ai-8.mjs"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+  "entry": "workbench/Launch Workbench.vbs",
+  "package_sha256": "50753b5cb72b09fd830334492a89708c50639db9313d2047e9c95d4dd0eca589",
+  "runtime_boundary": "Initial authoring run on pre-freeze implementation. Final package repeats the runtime rooms; exact receipt retains each captured source manifest.",
+  "checks": [
+    "publish four reusable component combinations through the packaged creature controls",
+    "publish two Test rooms and one ordinary barrow variant",
+    "actual game call, receipt and delayed physical investigation on both host recipes",
+    "module participation edit, undo/redo, save, captured reset and latest saved dependency",
+    "native component authoring and room lifecycle passed"
+  ],
+  "publications": [
+    {
+      "path": "roguelike/data/entities/creatures/barrow_alarm_sentinel.json",
+      "sha256": "882811d5176415ddab50690d630f5e3c1c38b65b84b6a6e9bb69ea70d69fb658"
+    },
+    {
+      "path": "roguelike/data/entities/creatures/barrow_alarm_sentinel.json",
+      "sha256": "62b8676b8b77fbbb3accf49ab949b0a8e9e643a99b881823edff6126174fb8cd"
+    }
+  ],
+  "noops": [
+    {
+      "path": "roguelike/data/entities/creatures/barrow_alarm_sentinel.json",
+      "sha256": "62b8676b8b77fbbb3accf49ab949b0a8e9e643a99b881823edff6126174fb8cd"
+    },
+    {
+      "path": "roguelike/data/entities/creatures/barrow_alarm_skirmisher.json",
+      "sha256": "92b1c6ae1f133306a0c087230dbdf02977fca3b4ca35fb3d7d2b177336875fb2"
+    },
+    {
+      "path": "roguelike/data/entities/creatures/barrow_alarm_runner.json",
+      "sha256": "5d0e9bee6b4e418e8b30e8e06bdab8f1040243bdedffa44487dd3f6888aa0028"
+    },
+    {
+      "path": "roguelike/data/entities/creatures/barrow_alarm_watch.json",
+      "sha256": "ad66cbce4418b21153974169bfa24e1ef5eb9212d71176611442ef11e39f833e"
+    },
+    {
+      "path": "roguelike/data/layouts/ai8_alarm_crossing.json",
+      "sha256": "c741a4bbf416ea73c70b7dc6c534ca0ba78b0a5a625271b3b49890c48e63763d"
+    },
+    {
+      "path": "roguelike/data/layouts/ai8_alarm_reverse.json",
+      "sha256": "6125697014b0eef0c3b48a9ac1a0f4ba8cdc3d89051727df223710f3c3f2d093"
+    },
+    {
+      "path": "roguelike/data/layouts/barrow_ward_store_c.json",
+      "sha256": "5774f6679b3ac182447b0cba22061bc7d45b5a0c4f9259cdd912af7bd2536223"
+    }
+  ],
+  "invalid_rejected": true,
+  "captured_reset": "91c31029ccb61e8cbe585fe00c0eccd3d7aeb3c1a4de072208aeeef964f905a9",
+  "disabled_capture": "f8808638d5ecda4e45ef86d3a5713d8cc84fbf4c49eef38a7717269d3bc0497f",
+  "dirty_capture": "f8808638d5ecda4e45ef86d3a5713d8cc84fbf4c49eef38a7717269d3bc0497f",
+  "initial_publications": [
+    {
+      "path": "roguelike/data/entities/creatures/barrow_alarm_sentinel.json",
+      "sha256": "62b8676b8b77fbbb3accf49ab949b0a8e9e643a99b881823edff6126174fb8cd"
+    },
+    {
+      "path": "roguelike/data/entities/creatures/barrow_alarm_skirmisher.json",
+      "sha256": "92b1c6ae1f133306a0c087230dbdf02977fca3b4ca35fb3d7d2b177336875fb2"
+    },
+    {
+      "path": "roguelike/data/entities/creatures/barrow_alarm_runner.json",
+      "sha256": "5d0e9bee6b4e418e8b30e8e06bdab8f1040243bdedffa44487dd3f6888aa0028"
+    },
+    {
+      "path": "roguelike/data/entities/creatures/barrow_alarm_watch.json",
+      "sha256": "ad66cbce4418b21153974169bfa24e1ef5eb9212d71176611442ef11e39f833e"
+    },
+    {
+      "path": "roguelike/data/layouts/ai8_alarm_crossing.json",
+      "sha256": "c741a4bbf416ea73c70b7dc6c534ca0ba78b0a5a625271b3b49890c48e63763d"
+    },
+    {
+      "path": "roguelike/data/layouts/ai8_alarm_reverse.json",
+      "sha256": "6125697014b0eef0c3b48a9ac1a0f4ba8cdc3d89051727df223710f3c3f2d093"
+    }
+  ],
+  "initial_attempt": "Four creature variants and two rooms published. C was written after review/confirmation, then dependency inspection correctly reported SOURCE_CHANGED after concurrent selection metadata editing. Sequential reopen/no-op review in the successful run confirms all seven final sources."
+}

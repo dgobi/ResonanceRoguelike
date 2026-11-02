@@ -1,0 +1,30 @@
+{
+  "development_not_certification": [
+    "default override merge and recipient individual allocation failures were fixed before frozen input",
+    "play assertions initially expected transient diagnostic traces to survive F9; authoritative saved counts/ledger were used instead",
+    "interrupt fixture first used the v5 guard outside its defended radius; changed to the v1 caller at its lawful sight edge",
+    "controlled real-venom fixture initially attempted an invalid faction attack; source hostility was explicitly staged and ordinary resolver/delivery used",
+    "initial packaged C publication wrote source, then correctly rejected changed dependency inspection after concurrent selection editing; sequential native reopen and complete lifecycle passed",
+    "supplemental witness first had an incorrect script root path; corrected portable source was executed and retained"
+  ],
+  "limitations": [
+    "Controlled room comparison removes only the call component before first input; sight-edge interruption stages player position",
+    "Natural 128x128 witnesses stage player at a genuine selected entrance and script known-geometry routes; no unaided laboratory travel or balance claim",
+    "Eastern route first engages the skirmisher; its later own_commitment rejection is expected. Supplemental western route proves actual accepted receipt and delayed investigation",
+    "Historical v6 archive was captured during AI-8 using pinned AI-7 Python imported in memory; it is not claimed captured before AI-8",
+    "Combat RNG 17 and AI RNG 19 are controlled. Same-scene cold equality is not a universal RNG-stream persistence claim",
+    "Support stays at hostile ordinary v1/v5 hosts, exact same faction, active scene and two modules; no networks, NPC medicine or wiki work"
+  ],
+  "final_gate_correction": {
+    "initial_focused_passed": 586,
+    "total": 588,
+    "failures": [
+      "test_gameplay_g17: expected 88 structures, actual 91",
+      "test_structure_contract: expected 88 structures, actual 91; authored submaps 20->23"
+    ],
+    "final_focused_passed": 588,
+    "product_unchanged": true,
+    "delta": "verification-input-delta.json"
+  },
+  "reporting_note": "A reporting log was renamed retained-legacy-native.log.gz to keep it outside the immutable legacy-fixture input namespace; no fixture bytes or runtime consumer changed."
+}

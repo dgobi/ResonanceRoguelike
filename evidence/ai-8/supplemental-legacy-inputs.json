@@ -1,0 +1,16 @@
+{
+  "evidence/ai-5/legacy-native-receipt.json.gz": "d9fe440802d9bee17bcb2777a620f2bb2a1c59d0da2f95196b342c9dac1a800d",
+  "evidence/ai-5/legacy-native.log.gz": "cd9e283a56ef8a2d1e7f4b65901335d868db1312c9537ad9a15280f5268da051",
+  "evidence/ai-5/legacy-provenance.json": "eb594e564471038ac6224abff97319a95b621002301380842dbf845002fd7c72",
+  "evidence/ai-5/legacy-save.zip": "778de0e668472f67243a89b1569919c999e8aab6e0e498171ca20a6cbe82706e",
+  "evidence/ai-5/legacy-snapshot.json": "f853d5bff4a8613e38be20e2ec618a7cead8b71d71d27b7274e2f44f8c668b2f",
+  "evidence/ai-6/legacy-provenance.json": "98d27166cc8a6b926981e202c0f6a30212cfa5a688b4861740efabefbdad9ab6",
+  "evidence/ai-6/legacy-save.zip": "f8708257dedba505fa90bee7c2ef093238fb583b124119fa9d63ae15e1fdf5a4",
+  "evidence/ai-6/legacy-snapshot.json": "946a14414ea815983dedbb97376cd5adfcc9e0ee112ae3cfc62d9ef8df3f2650",
+  "evidence/ai-6/legacy-world.json.gz": "1f90113779c609682f7d8e361bff435dc3dfdc222a20783f571a424bc3f552d7",
+  "evidence/ai-7/legacy-v5-save.zip": "02114bee5470a2cdb7ca2e786b94f1d2b7f2bb3230109488a208660e5555d790",
+  "evidence/ai-7/legacy-v5-snapshot.json": "a809d1fad10ff321a4410d046b0fd83945967431b862fc142f47a76efa26bfda",
+  "evidence/ai-8/legacy-native.log.gz": "ca1e78f432bbe72021ccd9650af5192407927f4952182a9b338802c61bb1706b",
+  "evidence/ai-8/legacy-v6-save.zip": "5553688186890daa6784d3671093a4d8293f908626a9e6009d94c9eb415db3af",
+  "evidence/ai-8/legacy-v6-snapshot.json": "872f0b1702550e0700c1378b4cecb0aadf419793f2fbfff5357e86f9402dc82b"
+}

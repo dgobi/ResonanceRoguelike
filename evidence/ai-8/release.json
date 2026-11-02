@@ -1,0 +1,649 @@
+{
+  "passed": true,
+  "revision": "087bcc9c70102dee17166415f61fd8be6ccff629",
+  "started_utc": "2026-11-02T04:52:05.256372+00:00",
+  "inputs_sha256": "c39c4c7db4c28780346e0646cb12f11974ca28315f80c82c33312075b33c7b1b",
+  "commands": [
+    {
+      "gate": "frontend",
+      "command": [
+        "npm.cmd",
+        "test"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 4.647088400088251,
+      "source_stable": true,
+      "log_sha256": "8bc812bed02e4bd5a42c85eafb7cf65647742c8cbc9671970bcc885025e07b0c",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+      "retention_basis": "Only catalogue expectations 88->91, authored_submap 20->23, and explicit AI-8 layout membership change. Runtime, content, editor, native scripts and all other verification inputs are byte-identical. The entire affected focused gate is newly rerun; nineteen other gates retain their exact original revision/input bindings."
+    },
+    {
+      "gate": "typecheck",
+      "command": [
+        "npm.cmd",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 7.896803600015119,
+      "source_stable": true,
+      "log_sha256": "77783bf2ca9523ff1e6aa3f5a098f779a50fd8cade5fb2774a4da5c450761c89",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+      "retention_basis": "Only catalogue expectations 88->91, authored_submap 20->23, and explicit AI-8 layout membership change. Runtime, content, editor, native scripts and all other verification inputs are byte-identical. The entire affected focused gate is newly rerun; nineteen other gates retain their exact original revision/input bindings."
+    },
+    {
+      "gate": "play",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_ai_8_play.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\ai-8\\final-a\\play"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 35.82128249993548,
+      "source_stable": true,
+      "log_sha256": "510fec41f2f3dce9fe1f974fb2546cd2cf5ef26347aca1af8adf85266fa42669",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+      "retention_basis": "Only catalogue expectations 88->91, authored_submap 20->23, and explicit AI-8 layout membership change. Runtime, content, editor, native scripts and all other verification inputs are byte-identical. The entire affected focused gate is newly rerun; nineteen other gates retain their exact original revision/input bindings."
+    },
+    {
+      "gate": "host",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--manifest-path",
+        "src-tauri/Cargo.toml"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 38.847875400213525,
+      "source_stable": true,
+      "log_sha256": "3c40b57ff94767d9c39ea2bbad5ebac8c305ce1db6b875850df154698488c1c3",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+      "retention_basis": "Only catalogue expectations 88->91, authored_submap 20->23, and explicit AI-8 layout membership change. Runtime, content, editor, native scripts and all other verification inputs are byte-identical. The entire affected focused gate is newly rerun; nineteen other gates retain their exact original revision/input bindings."
+    },
+    {
+      "gate": "clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "--manifest-path",
+        "src-tauri/Cargo.toml",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 2.312502099899575,
+      "source_stable": true,
+      "log_sha256": "da6858a09769b742a7d559272470bf38a7fe64ddb8d7742ee890384530154a2f",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+      "retention_basis": "Only catalogue expectations 88->91, authored_submap 20->23, and explicit AI-8 layout membership change. Runtime, content, editor, native scripts and all other verification inputs are byte-identical. The entire affected focused gate is newly rerun; nineteen other gates retain their exact original revision/input bindings."
+    },
+    {
+      "gate": "ai7-play",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_ai_7_play.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\ai-8\\final-a\\ai7-play"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 25.856537700165063,
+      "source_stable": true,
+      "log_sha256": "6b5b077a04dc462e4a0b44c3f425452569bcef6ddc1261c65d8c5293bb95c127",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+      "retention_basis": "Only catalogue expectations 88->91, authored_submap 20->23, and explicit AI-8 layout membership change. Runtime, content, editor, native scripts and all other verification inputs are byte-identical. The entire affected focused gate is newly rerun; nineteen other gates retain their exact original revision/input bindings."
+    },
+    {
+      "gate": "debug-build",
+      "command": [
+        "cargo",
+        "build",
+        "--locked",
+        "--manifest-path",
+        "src-tauri/Cargo.toml"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 8.532579599879682,
+      "source_stable": true,
+      "log_sha256": "363d7bfd4a557968e7cb643198d6017eda83a2c2724716e20a378d1a361ff99d",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+      "retention_basis": "Only catalogue expectations 88->91, authored_submap 20->23, and explicit AI-8 layout membership change. Runtime, content, editor, native scripts and all other verification inputs are byte-identical. The entire affected focused gate is newly rerun; nineteen other gates retain their exact original revision/input bindings."
+    },
+    {
+      "gate": "ai6-play",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_ai_6_play.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\ai-8\\final-a\\ai6-play"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 22.056946099968627,
+      "source_stable": true,
+      "log_sha256": "6834bd01faebe757493cb9ab3e6da1d5de1a520f00e68a8ab1ad4f6335dcf975",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+      "retention_basis": "Only catalogue expectations 88->91, authored_submap 20->23, and explicit AI-8 layout membership change. Runtime, content, editor, native scripts and all other verification inputs are byte-identical. The entire affected focused gate is newly rerun; nineteen other gates retain their exact original revision/input bindings."
+    },
+    {
+      "gate": "ai5-play",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_ai_5_play.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\ai-8\\final-a\\ai5-play"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 14.826371799921617,
+      "source_stable": true,
+      "log_sha256": "accd1a9e0e7df7b9d181a6b7f3d419a1c62b8dee37403292590218fea7506976",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+      "retention_basis": "Only catalogue expectations 88->91, authored_submap 20->23, and explicit AI-8 layout membership change. Runtime, content, editor, native scripts and all other verification inputs are byte-identical. The entire affected focused gate is newly rerun; nineteen other gates retain their exact original revision/input bindings."
+    },
+    {
+      "gate": "ai3-play",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_ai_3_play.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\ai-8\\final-a\\ai3-play"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 11.990763500100002,
+      "source_stable": true,
+      "log_sha256": "4fa6ecf1dcd5a162c1544b23f3c885c3f2b734f0562ad7fc934f75c897970257",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+      "retention_basis": "Only catalogue expectations 88->91, authored_submap 20->23, and explicit AI-8 layout membership change. Runtime, content, editor, native scripts and all other verification inputs are byte-identical. The entire affected focused gate is newly rerun; nineteen other gates retain their exact original revision/input bindings."
+    },
+    {
+      "gate": "build",
+      "command": [
+        "npm.cmd",
+        "run",
+        "build"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 64.62712470022961,
+      "source_stable": true,
+      "log_sha256": "aad9268c0177f24a5ab0d753628cbc0766820ea119b68d1a25bbafeef4b10e50",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+      "retention_basis": "Only catalogue expectations 88->91, authored_submap 20->23, and explicit AI-8 layout membership change. Runtime, content, editor, native scripts and all other verification inputs are byte-identical. The entire affected focused gate is newly rerun; nineteen other gates retain their exact original revision/input bindings."
+    },
+    {
+      "gate": "bundle",
+      "command": [
+        "npm.cmd",
+        "run",
+        "bundle"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 122.46862699999474,
+      "source_stable": true,
+      "log_sha256": "0c180cb533cf60e3d378b5d070100da565a35f9c085cc658690d201f9b40fde3",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+      "retention_basis": "Only catalogue expectations 88->91, authored_submap 20->23, and explicit AI-8 layout membership change. Runtime, content, editor, native scripts and all other verification inputs are byte-identical. The entire affected focused gate is newly rerun; nineteen other gates retain their exact original revision/input bindings."
+    },
+    {
+      "gate": "startup",
+      "command": [
+        "node",
+        "scripts/startup-test.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 153.9065761999227,
+      "source_stable": true,
+      "log_sha256": "33b3b622c3a1882b3e443a52a3a75d0f26eeb8873311bdfbef0eab5d10a3aa1b",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+      "retention_basis": "Only catalogue expectations 88->91, authored_submap 20->23, and explicit AI-8 layout membership change. Runtime, content, editor, native scripts and all other verification inputs are byte-identical. The entire affected focused gate is newly rerun; nineteen other gates retain their exact original revision/input bindings."
+    },
+    {
+      "gate": "desktop",
+      "command": [
+        "node",
+        "scripts/desktop-test.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 34.39173729997128,
+      "source_stable": true,
+      "log_sha256": "316f21867ffdb15f72444352d9d82f86fe7d9f8ef8428e639731deebc8e782e2",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+      "retention_basis": "Only catalogue expectations 88->91, authored_submap 20->23, and explicit AI-8 layout membership change. Runtime, content, editor, native scripts and all other verification inputs are byte-identical. The entire affected focused gate is newly rerun; nineteen other gates retain their exact original revision/input bindings."
+    },
+    {
+      "gate": "native",
+      "command": [
+        "node",
+        "scripts/run-ai-8.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 74.38253360008821,
+      "source_stable": true,
+      "log_sha256": "d0b7e3ce15b1a42e529e5971b0269c73a52334a2265ac765c254f7aa09ec2ef3",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+      "retention_basis": "Only catalogue expectations 88->91, authored_submap 20->23, and explicit AI-8 layout membership change. Runtime, content, editor, native scripts and all other verification inputs are byte-identical. The entire affected focused gate is newly rerun; nineteen other gates retain their exact original revision/input bindings."
+    },
+    {
+      "gate": "worker",
+      "cohort": [
+        "test_composite_ai",
+        "test_venom_treatment",
+        "test_creatures",
+        "test_creatures_w5f",
+        "test_items",
+        "test_supplies",
+        "test_equipment",
+        "test_rooms_w5g",
+        "test_rivals_g21",
+        "test_authoring",
+        "test_assignment"
+      ],
+      "modules": [
+        {
+          "gate": "test_composite_ai",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_composite_ai']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 463.2266925999429,
+          "source_stable": true,
+          "log_sha256": "4549ac4eab9c09a35219b4bbec24b140d413cf803bf66f176f2262f95215a8c1",
+          "passed": true
+        },
+        {
+          "gate": "test_venom_treatment",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_venom_treatment']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 37.93761570006609,
+          "source_stable": true,
+          "log_sha256": "280be8b86b7776ce842d4feb6841f2c2676203c6830cf29b48463f7cfa5aec1c",
+          "passed": true
+        },
+        {
+          "gate": "test_creatures",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_creatures']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 230.60826840018854,
+          "source_stable": true,
+          "log_sha256": "13940608cfff4db429d2a8559c724b616d5772b9f8144ef7e1619fd3807a1ebc",
+          "passed": true
+        },
+        {
+          "gate": "test_creatures_w5f",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_creatures_w5f']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 150.46844329987653,
+          "source_stable": true,
+          "log_sha256": "3c13854962913f3f9dda055c418cd317881de559e78ce9b32aa56be2eaf60b18",
+          "passed": true
+        },
+        {
+          "gate": "test_items",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_items']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 156.43852710002102,
+          "source_stable": true,
+          "log_sha256": "07d17a25b42249e8d80747432470a7ed48a8766a37d9541dd95a3eeb8a44858c",
+          "passed": true
+        },
+        {
+          "gate": "test_supplies",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_supplies']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 167.2933134001214,
+          "source_stable": true,
+          "log_sha256": "ffdb0356e6f2ffea850a117481efdf867e2b5661a2962ea1eb8ed515a08a0cdb",
+          "passed": true
+        },
+        {
+          "gate": "test_equipment",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_equipment']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 367.196111000143,
+          "source_stable": true,
+          "log_sha256": "658aa29a5e74461a03c690f1482644f5359a09be5c066d771dd8d38fcdd346ec",
+          "passed": true
+        },
+        {
+          "gate": "test_rooms_w5g",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_rooms_w5g']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 190.31215779995546,
+          "source_stable": true,
+          "log_sha256": "fd6c02ed5e2ba5eeb922b1f39f7cc4810a3d3099f3e0528aca1f118d6f58b494",
+          "passed": true
+        },
+        {
+          "gate": "test_rivals_g21",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_rivals_g21']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 79.71626989985816,
+          "source_stable": true,
+          "log_sha256": "c483eb70af0fda45959866cb81bd53b9670cd5f486280eaebd5ab7ced0cef61c",
+          "passed": true
+        },
+        {
+          "gate": "test_authoring",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_authoring']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 72.86955800000578,
+          "source_stable": true,
+          "log_sha256": "e23311f8b96b7afd8ce87bd857f6c25c55e3618d8950570d88d1bedae55eafd7",
+          "passed": true
+        },
+        {
+          "gate": "test_assignment",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_assignment']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 136.90477210003883,
+          "source_stable": true,
+          "log_sha256": "083637fae86de1823b6dbb234f93a3af6dc96fb613af248c7b8d6346e36611b2",
+          "passed": true
+        }
+      ],
+      "seconds": 563.4326746999286,
+      "tests": 51,
+      "passed": true,
+      "source_stable": true,
+      "log_sha256": "679e2014bf04ca7fa747eab89644b35e30e756b0e6d10e1c06ec7a534a86823e",
+      "retained": true,
+      "tested_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+      "retention_basis": "Only catalogue expectations 88->91, authored_submap 20->23, and explicit AI-8 layout membership change. Runtime, content, editor, native scripts and all other verification inputs are byte-identical. The entire affected focused gate is newly rerun; nineteen other gates retain their exact original revision/input bindings."
+    },
+    {
+      "gate": "retained-native",
+      "command": [
+        "node",
+        "scripts/run-ai-7.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 72.19665760011412,
+      "source_stable": true,
+      "log_sha256": "35cd4e32032808e8b60ba920956cf42a2a65df01893a860f2e2e9bd423a2086c",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+      "retention_basis": "Only catalogue expectations 88->91, authored_submap 20->23, and explicit AI-8 layout membership change. Runtime, content, editor, native scripts and all other verification inputs are byte-identical. The entire affected focused gate is newly rerun; nineteen other gates retain their exact original revision/input bindings."
+    },
+    {
+      "gate": "legacy-native",
+      "command": [
+        "node",
+        "scripts/run-ai-3.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 108.41558029991575,
+      "source_stable": true,
+      "log_sha256": "c55c34a94bd04511279242538e14d7eef17879ab9057b939c6f29a4433a07dfd",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+      "retention_basis": "Only catalogue expectations 88->91, authored_submap 20->23, and explicit AI-8 layout membership change. Runtime, content, editor, native scripts and all other verification inputs are byte-identical. The entire affected focused gate is newly rerun; nineteen other gates retain their exact original revision/input bindings."
+    },
+    {
+      "gate": "production-d",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_d.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\ai-8\\final-a\\production-d"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 883.1850368999876,
+      "source_stable": true,
+      "log_sha256": "a7a4dc09bba18c9e8f58fde8c9a4c47477d648003faa64ca6e30fb277af3abf2",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+      "retention_basis": "Only catalogue expectations 88->91, authored_submap 20->23, and explicit AI-8 layout membership change. Runtime, content, editor, native scripts and all other verification inputs are byte-identical. The entire affected focused gate is newly rerun; nineteen other gates retain their exact original revision/input bindings."
+    },
+    {
+      "gate": "focused",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\critical_fix_regressions\\verify_fixes.py",
+        "--timeout",
+        "3600",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\ai-8\\final-b\\focused"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "seconds": 1646.9274196999613,
+      "source_stable": true,
+      "log_sha256": "e9dbf8dfb6181f22d45aae6a9eb0b94f2ca29b07c975a07a2ef0ce40bbdfb7e0",
+      "passed": true,
+      "tested_revision": "087bcc9c70102dee17166415f61fd8be6ccff629"
+    }
+  ],
+  "environment": {
+    "platform": "win32",
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+    "python_executable": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "dependencies": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6",
+      "cffi": "2.1.1",
+      "pycparser": "3.11",
+      "typing_extensions": "4.16.0"
+    },
+    "node": "v24.15.0",
+    "cargo": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)",
+    "rustc": "rustc 1.95.0 (59807616e 2026-04-14)"
+  },
+  "package": {
+    "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+    "sha256": "38404df09762b257823dc6cb2250de14976e0bd7e7ae07682d97b09c75df19e4"
+  },
+  "installers": [
+    {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "dd85424d3c5909e28b6fa7d6388498e8106fbe34b023b216770b954be920eb6e",
+      "size": 28492423
+    }
+  ],
+  "source_stable": true,
+  "finished_utc": "2026-11-02T05:19:32.196751+00:00",
+  "runtime_content_editor_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+  "verification_input_delta": [
+    "tools/critical_fix_regressions/tests/test_gameplay_g17.py",
+    "tools/critical_fix_regressions/tests/test_structure_contract.py"
+  ]
+}

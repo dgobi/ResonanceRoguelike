@@ -1,0 +1,27 @@
+{
+  "repository": "dgobi/ResonanceRoguelike",
+  "branch": "main",
+  "runtime_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+  "checkpoints": [
+    {
+      "tag": "checkpoint/ai-8-start-20261101-a",
+      "object_sha": "fe97455e303bfe008ee4b1d58126166c7e516243",
+      "peeled_revision": "272b0b1cb691df77057045631dd3788a1bae6315",
+      "independent_readback": "GitHub REST connector GET tag object"
+    },
+    {
+      "tag": "checkpoint/ai-8-implementation-20261101-a",
+      "object_sha": "fd1d854f0f5b3b6936efbc8e64ba369f18db4679",
+      "peeled_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+      "independent_readback": "GitHub REST connector GET tag object"
+    },
+    {
+      "tag": "checkpoint/ai-8-verified-input-20261101-a",
+      "object_sha": "0ecd903bd648f0fd7541bac4c78e93cfcda91f98",
+      "peeled_revision": "087bcc9c70102dee17166415f61fd8be6ccff629",
+      "independent_readback": "GitHub REST connector GET ref and tag object"
+    }
+  ],
+  "completion": "Final main and complete-tag SHA/object readback is supplied after the reporting commit in the handoff; it cannot be self-embedded.",
+  "verification_input_revision": "087bcc9c70102dee17166415f61fd8be6ccff629"
+}

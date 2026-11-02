@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+  "frozen_inputs_equal": true,
+  "source": "native-world-response-witness.py",
+  "source_sha256": "be029d71d3017ab8a378a8dc0b850b670e4b62d48db095406c6e29f770b6a054",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "evidence/ai-8/native-world-response-witness.py"
+  ],
+  "seed": 20261027,
+  "chunk": [
+    69,
+    92
+  ],
+  "submap": "submap_69_92_0",
+  "staging": "Player staged at the genuine selected surface entrance. Known-geometry route script, fixed RNG 17/19 after entrance. No unaided laboratory journey or balance claim.",
+  "purpose": "Supplemental ordinarily selected western approach accepts a typed call, investigates on a later phase, fights with real handlers, leaves remains and collects Ward before F5/F9, independent cold load and return."
+}

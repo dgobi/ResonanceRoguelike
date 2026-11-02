@@ -1,0 +1,14 @@
+{
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\.baseline\\ai-8-focused-final-b.py"
+  ],
+  "source": "focused-retention-witness.py",
+  "source_sha256": "28f1c279e0c309b6d8f25cd358069e2bd6cff2293b88030dd8f87b9ab6d131e1",
+  "result": true,
+  "runtime_revision": "6f4b347adf8b699d76b2f3bdba2f094c65d9b8cd",
+  "verification_input_revision": "087bcc9c70102dee17166415f61fd8be6ccff629"
+}
