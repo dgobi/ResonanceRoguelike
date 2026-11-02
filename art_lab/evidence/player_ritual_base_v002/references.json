@@ -1,0 +1,51 @@
+{
+  "references": [
+    {
+      "file": "anubis_ref.png",
+      "origin": "Owner Downloads",
+      "dimensions": [
+        630,
+        630
+      ],
+      "sha256": "5837b0d9d462fe6b17cd51f10e260eef6f93453b1f4873ca3493063763154bb6",
+      "visually_inspected": true
+    },
+    {
+      "file": "lineup.png",
+      "origin": "Owner Downloads",
+      "dimensions": [
+        1491,
+        906
+      ],
+      "sha256": "662e4f01d2e5840b92b60c9ef9d622a438d98baa17c3285b9c6e6a904b3cebde",
+      "visually_inspected": true
+    },
+    {
+      "file": "amber_sting_beetle_a_relief_v001_8x.png",
+      "origin": "previews/amber_sting_beetle_a_relief_v001_8x.png",
+      "dimensions": [
+        256,
+        256
+      ],
+      "sha256": "fdb79d9ac1440d7e0bc66b06ee03fb4a2e48404286c11c27a89021e8b1b0bffc",
+      "visually_inspected": true
+    },
+    {
+      "file": "player.png",
+      "origin": "references/crops/player.png",
+      "dimensions": [
+        16,
+        16
+      ],
+      "sha256": "71ddcbdc8c8d74529f8cc8ee6c6c7bf99fbca870d3def986c5be8acc113418fc",
+      "visually_inspected": true
+    }
+  ],
+  "hld_page": "https://store.steampowered.com/app/257850/Hyper_Light_Drifter/",
+  "hld_official_screenshot": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/257850/ss_e786b1d9c66eb9c61e4da2945fe1d9faeb2af736.1920x1080.jpg?t=1762899660",
+  "unavailable_reference_images": [
+    "Anubis resolution comparison panel",
+    "Dark spiky figure"
+  ],
+  "reference_image_bytes_committed": false
+}

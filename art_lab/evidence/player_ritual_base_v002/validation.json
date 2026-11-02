@@ -1,0 +1,95 @@
+{
+  "status": "passed",
+  "authoring": "Live Aseprite MCP, sprite #11; arbitrary Lua disabled",
+  "dimensions": [
+    32,
+    32
+  ],
+  "frames": 1,
+  "figure_bbox_exclusive": [
+    8,
+    2,
+    26,
+    30
+  ],
+  "figure_height": 28,
+  "foot_baseline_y": 29,
+  "editable_layers": [
+    "body-leg-rear",
+    "body-leg-forward",
+    "body-torso",
+    "body-arm-hanging-left",
+    "body-arm-reaching-right",
+    "body-head-profile",
+    "clothing-fitted-tunic",
+    "clothing-split-waist",
+    "clothing-stepped-collar",
+    "head-wrapped-brow",
+    "ornament-collar-turn",
+    "clothing-footwraps"
+  ],
+  "opaque_pixels": 203,
+  "transparent_pixels": 821,
+  "alpha_values": [
+    0,
+    255
+  ],
+  "colors": [
+    "#282d35",
+    "#31464e",
+    "#517e79",
+    "#85634f",
+    "#8db0a0",
+    "#c6a472",
+    "#d77b57",
+    "#e6c999"
+  ],
+  "connected_components": 1,
+  "source_live_export_pixel_equality": true,
+  "negative_spaces": "passed",
+  "empty_hand_bounds_inclusive": {
+    "hanging_viewer_left": [
+      8,
+      18,
+      10,
+      20
+    ],
+    "reaching_screen_right": [
+      24,
+      13,
+      25,
+      15
+    ]
+  },
+  "both_feet_point_right": true,
+  "pre_existing_owner_files_unchanged": 46,
+  "source_sha256": "51c78f4afe5fb036e34f7246bfeedc15fbec1d79e61f68319e0cf98bf516809f",
+  "png_sha256": "4ad7a27b9bbc12b6e8c475b68fa02bd1c00dcf2b8f2f4319a1f6696e4c8c9efb",
+  "previews": {
+    "1x": {
+      "dimensions": [
+        32,
+        32
+      ],
+      "exact_nearest_neighbor": true,
+      "sha256": "4ad7a27b9bbc12b6e8c475b68fa02bd1c00dcf2b8f2f4319a1f6696e4c8c9efb"
+    },
+    "2x": {
+      "dimensions": [
+        64,
+        64
+      ],
+      "exact_nearest_neighbor": true,
+      "sha256": "d296b96a81694baf8d6340de96d3308836b955e3326ebd42042a66ccfe3d2973"
+    },
+    "8x": {
+      "dimensions": [
+        256,
+        256
+      ],
+      "exact_nearest_neighbor": true,
+      "sha256": "e238f5f738b0c65bbc2b938953b79e37b6104a9e2baf0adbb40ee58e599b395d"
+    }
+  },
+  "mcp_validate": "Not exposed in this client; independent source/PNG checks used as documented in lab README."
+}

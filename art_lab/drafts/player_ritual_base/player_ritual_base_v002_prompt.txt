@@ -1,0 +1,124 @@
+# Player art revision — right-facing ritual figure
+
+Create a new version of the main-player sprite for Resonance Roguelike in the existing Aseprite art lab.
+
+Work directly at native 32×32 resolution. Produce an original, slender humanoid character facing SCREEN-RIGHT in an aspective ceremonial stance.
+
+This direction supersedes the earlier requirement for a frontal player and the previous raised-hand pose. Both arms, both hands, and both legs must remain individually readable.
+
+Preserve player_ritual_base_v001 as an earlier experiment. Make a fresh drawing for this revision.
+
+## 1. Target
+
+An elegant, slightly uncanny humanoid traveler whose posture has the composure of a figure in an ancient relief. Give the character an intentional costume, a distinctive profile, and a strong silhouette.
+
+Combine:
+
+- The formal aspective pose of the supplied Anubis references.
+- The slender proportions of the taller figures in the supplied character lineup.
+- The strong colour shapes, selective detail, and expressive character design that I admire in Hyper Light Drifter.
+- The angular construction and ritual geometry of our preferred beetle study A.
+
+Keep the design original to Resonance.
+
+## 2. How to use the references
+
+**The large Anubis figure:** use primarily for the relationship between head, shoulders, arms, hips, and feet. Notice how the head and feet face right while the chest is presented broadly enough to explain the body.
+
+**The Anubis resolution comparison:** use the panel labelled 32×32 as the most relevant guide to the amount of information our sprite can carry. Study its connected torso, distinct limbs, clear profile, and economical clothing shapes.
+
+**The four-character lineup:** use the first and third figures for elongated proportions, narrow waists, composed posture, and ornament placed at meaningful locations. Translate their major shapes into our resolution.
+
+**The dark, spiky figure:** use its ominous presence and distinctive silhouette as atmospheric inspiration. Keep the player’s limb arrangement clear.
+
+**Beetle study A:** retain the deliberate angles, stepped shapes, flat planes, and inward-turning geometric motifs. Our proportional preference is slender and elongated.
+
+**Hyper Light Drifter:** use as a rendering and character-design reference. Explore cohesive masses, purposeful shadows, sparing bright accents, and evocative clothing. Develop our own face, costume, and symbols.
+
+## 3. Exact pose
+
+Create a standing, right-facing aspective figure:
+
+- The head is in clear right profile, with a readable forehead, nose or short facial projection, chin, and eye area.
+- Open the chest and shoulders toward the viewer sufficiently to show both arms. Deliberately combine viewpoints to keep the figure legible.
+- The arm along the rear, VIEWER-LEFT edge of the body hangs beside the torso. Keep its hand visible near the upper thigh, with a small gap between arm and body.
+- The other arm bends outward toward SCREEN-RIGHT. Place its hand ahead of the torso at approximately waist or lower-chest height, echoing the staff-bearing arm in the Anubis references.
+- Keep the hands empty in the base export, with a clear position for a future held item.
+- Separate the legs in a restrained processional stance. Let one knee bend slightly.
+- Both feet point right and meet a common ground baseline.
+- Keep the posture calm, formal, and deliberate.
+
+The ritual character should come from the arrangement of the whole figure. Preserve the asymmetry and clear direction of the reference poses.
+
+## 4. Proportions and body construction
+
+Use slender adult proportions: a modest head, elongated torso and legs, a narrow waist, and controlled shoulder width.
+
+Give the torso a recognizable, filled chest shape that tapers into the waist. Build arms and legs from continuous shapes with enough interior colour to remain visible.
+
+Thinness should come from proportions and taper. Avoid reducing the anatomy to single-pixel wires or a sequence of highlighted joints.
+
+Keep useful negative spaces between the limbs and torso. These spaces should clarify the body without breaking it into disconnected-looking pieces.
+
+Aim for approximately 27–29 pixels of total figure height, while leaving sufficient canvas space for the pose. Treat this as a composition guide rather than a rigid anatomical grid.
+
+## 5. Character and clothing
+
+Design a complete first character candidate with a simple ceremonial traveling outfit.
+
+Use a short angular collar or shoulder wrap, a fitted torso garment, and a short split waist cloth. Keep the elbows, hands, knees, and feet easy to locate. Let the garment shapes reinforce the narrow, upright silhouette.
+
+Give the head a distinctive humanoid profile. A small head wrap or original ceremonial face treatment is welcome if it strengthens that profile.
+
+Use the Anubis images for pose and construction; invent our own character identity.
+
+Keep clothing and any head covering on separate editable layers, with the underlying body retained where practical. Later equipment must be able to replace or cover these parts.
+
+Choose one main identifying detail, such as a stepped collar, an inward-turning waist motif, or an unusual angular brow. Concentrate the strongest small details around the face and one other focal area.
+
+## 6. Pixel treatment
+
+Use larger, connected colour clusters and a small number of clearly separated planes.
+
+Let the silhouette and major clothing shapes carry most of the design. Add interior lines only where they explain an overlap, a garment division, or an important feature.
+
+Use dark contours selectively. Preserve the clarity we liked in beetle A without enclosing every small limb segment in a heavy dark border.
+
+Use highlights to clarify a form or establish a focal point. Avoid bright dots at every joint and scattered decorative pixels.
+
+Use a temporary palette with clear value separation and a deliberate accent. Final palette decisions remain with the owner.
+
+Draw directly on the 32×32 grid, with crisp pixels and transparent background. Do not reduce a larger finished illustration to produce the final sprite. Reference-image backgrounds, labels, and checkerboards are not part of the asset.
+
+## 7. Working process
+
+First establish the right-facing silhouette, aspective stance, and substantial body shapes.
+
+Then add the main clothing masses and head design. Inspect the actual rendered sprite at native size before adding ornament.
+
+Refine until the character reads as a coherent figure at 1×. Check that the direction of the head, the two arms, the two hands, and the two legs remain understandable on both a dark and a neutral background.
+
+Create one finished candidate in this pose.
+
+## 8. Deliverables
+
+Save a versioned Aseprite source and a native transparent PNG, using player_ritual_base_v002 if that version is available, or the next unused version.
+
+Keep the full 32×32 canvas, a stable foot baseline, and useful named layers for body, clothing, head treatment, and ornament.
+
+Provide:
+
+- The native transparent PNG.
+- The editable Aseprite source.
+- Nearest-neighbour previews at 1×, 2×, and 8×.
+- A comparison with v001 at the same scale and baseline.
+- A short note identifying the major changes and the resulting hand positions.
+
+Keep this iteration within the art lab. Record the result in the lab’s existing notes, then commit and push the completed art changes according to the project’s standing workflow.
+
+Visual references:
+- The images attached to this request.
+- [Hyper Light Drifter — official game page](https://store.steampowered.com/app/257850/Hyper_Light_Drifter/)
+
+FOLLOW-UP OWNER MESSAGE
+the references are now in my downloads folder

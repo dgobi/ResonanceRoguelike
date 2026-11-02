@@ -154,3 +154,39 @@ the previously blocked Python interpreter ran, and the Aseprite `frame` tool
 frames without prompting. This test did not mutate artwork. Local config remains
 lab-scoped, and existing owner studies were excluded from this change and commit.
 See `evidence/full-access-launch.json` for the concise verification record.
+
+## Player ritual revision v002 — 1 November 2026
+
+Created a fresh native 32x32 right-facing traveler in live Aseprite, preserving
+the frontal v001 experiment byte-for-byte. The 28px figure has an open chest,
+narrow waist, a profile head, short stepped collar with a copper inward turn,
+fitted tunic, split waist cloth and separate right-pointing feet on row 29.
+The empty viewer-left hand hangs at `(8..10,18..20)` beside the upper thigh;
+the other empty hand extends to `(24..25,13..15)` ahead of the waist.
+
+- Source: `drafts/player_ritual_base/player_ritual_base_v002.aseprite`.
+- Native transparent PNG: `exports/player_ritual_base_v002.png`.
+- Exact previews: `previews/player_ritual_base_v002_{1x,2x,8x}.png`.
+- Baseline-matched comparison: `previews/player_ritual_base_v002_comparison_8x.png`.
+- Dark/neutral review: `previews/player_ritual_base_v002_background_review.png`.
+- Prompt and revision notes are beside the source; concise checks and reference
+  provenance are in `evidence/player_ritual_base_v002/`.
+
+All creative pixels were drawn through the single live MCP connection at native
+resolution. Twelve editable layers preserve body, clothing, head covering and
+ornament separately. Inspected the supplied Downloads Anubis/lineup images,
+beetle A, the actual player definition/crop and an official Hyper Light Drifter
+screenshot. Reviewed native/2x views before ornament and dark/neutral exports
+afterward. The collar's turn resolves most clearly at 2x; fingers remain grouped.
+
+Independent source decoding matched both the live composite and exported PNG.
+Checks passed for one frame, 32x32 geometry, alpha 0/255, 203 opaque pixels,
+one connected silhouette, limb/hand gaps, foot direction/baseline and exact
+nearest-neighbor previews. The client's known missing MCP `validate` tool was
+covered by these checks. All 46 pre-existing untracked owner files passed
+preservation hashes. No runtime, definitions, workbench, saves or wiki changes.
+
+Named local checkpoint: `checkpoint/player-ritual-v002-before-2026-11-01`.
+This brief explicitly authorizes committing and pushing the completed iteration
+to existing `main`. Only v002 art, notes, reviews and evidence are in scope for
+publication; earlier untracked experiments remain in their original state.

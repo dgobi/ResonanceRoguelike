@@ -1,0 +1,101 @@
+PLAYER RITUAL BASE — v002 / right-facing traveler
+
+Fresh native 32x32 drawing; v001 is preserved byte-for-byte as an earlier
+frontal experiment. The new candidate is 28 pixels tall (y=2..29), with a
+right-profile forehead, recessed eye, short nose and chin; open shoulders;
+a filled chest tapering into a four-pixel waist; and two separate legs.
+Both feet point screen-right and meet the existing y=29 baseline.
+
+HAND POSITIONS (zero-based, inclusive canvas coordinates)
+- Viewer-left hanging hand: x=8..10, y=18..20, beside the upper thigh.
+  Column 11 stays transparent beside the lower arm and hand.
+- Screen-right forward hand: x=24..25, y=13..15, ahead of the lower chest/waist.
+  A small upward thumb separates it from the horizontal forearm. Its center
+  (24,14) is a useful provisional held-item anchor. The base contains no item.
+These labels describe screen placement, not anatomical handedness.
+
+CHARACTER AND COSTUME
+Temporary petrol/teal clothing, warm skin planes and a restrained copper accent.
+A short stepped collar has one inward-turning copper fold. The fitted tunic
+continues into a short asymmetric split cloth; simple foot wraps suggest travel.
+The low wrapped brow and tiny dark eye make a severe humanoid profile. No jackal
+head, staff, copied emblem, or reference background was imported.
+The figure uses continuous two/three-pixel limb masses, with selective shadow
+planes instead of dark borders around each segment. The rear knee bends slightly.
+At 1x, the collar turn reads primarily as a copper patch; its inward geometry
+is clearer at 2x. Hands group fingers into small palm/mitten shapes.
+
+EDITABLE SOURCE
+Twelve visible editable layers, one static frame:
+body-leg-rear; body-leg-forward; body-torso; body-arm-hanging-left;
+body-arm-reaching-right; body-head-profile; clothing-fitted-tunic;
+clothing-split-waist; clothing-stepped-collar; head-wrapped-brow;
+ornament-collar-turn; clothing-footwraps.
+Body pixels remain under the clothing, head covering and sandals.
+Eight opaque working colors plus transparency; no permanent palette proposal:
+#282D35, #85634F, #C6A472, #E6C999, #31464E, #517E79, #8DB0A0, #D77B57.
+All drawing used paletteLock:false. The document swatches were then set to
+these exact working colors with remapArt:false; artwork was not quantized.
+
+REFERENCE EVIDENCE
+- Read ../roguelike/data/entities/player.json and data/bodies/body_player.json.
+  The definitions identify the player tile and six body regions; neither
+  dictates a costume or a new runtime sprite size.
+- Read references/manifest.json and inspected the existing player crop.
+  It is a non-placeholder 16x16 source, not an image enlarged into this asset.
+- Inspected previews/amber_sting_beetle_a_relief_v001_8x.png: stepped contours,
+  flat planes and an inward turn; did not inherit its squat proportions.
+- Owner provided Downloads/anubis_ref.png and Downloads/lineup.png during work.
+  Inspected both. Anubis supplied the head/chest/arm/hip/foot relationship;
+  the first and third lineup figures supplied narrow waists and composed length.
+  The separately described 32x32 comparison and dark spiky figure were not
+  present among the supplied local files; no claim is made to inspecting them.
+- Hyper Light Drifter official game page and first official screenshot:
+  https://store.steampowered.com/app/257850/Hyper_Light_Drifter/
+  The screenshot informed cohesive color masses and restrained accent placement.
+  Character identity and outfit geometry were drawn afresh.
+Reference hashes and screenshot URL: evidence/player_ritual_base_v002/references.json.
+Third-party reference image bytes are not included in the art commit.
+
+PROCESS / REVIEW
+Live preflight returned ready:true, mode:live; Aseprite 1.3.18.6, adapter 0.8.2.
+Read skill://draw, skill://review, skill://export and relevant craft resources.
+New document #11: sprite_info and blank-pixel look before editing. Blocked the
+body first; inspected native, 2x and 8x; retained a silhouette checkpoint.
+Added skin/clothing/head masses and inspected at native size before ornament.
+Refinements narrowed the profile, opened the hanging-hand gap, then added the
+collar turn and foot wraps. Final look at 1x/2x/8x plus exact ASCII inspection.
+No headless authoring, arbitrary Lua, image-generation service, desktop control,
+or second authoring session. Creative sprite pixels were drawn only through MCP.
+
+Cold read: a slender right-facing traveler stands formally, one hand low and
+one hand extended. First focal points: profile, copper collar, forward palm.
+Dark/neutral review at 1x, 2x and 8x confirms both arms/hands and legs remain
+distinguishable. The unadorned lower legs keep the silhouette economical.
+
+DELIVERABLES / CHECKS
+Source: drafts/player_ritual_base/player_ritual_base_v002.aseprite
+Native PNG: exports/player_ritual_base_v002.png
+Previews: previews/player_ritual_base_v002_{1x,2x,8x}.png
+Comparison: previews/player_ritual_base_v002_comparison_8x.png
+Dark/neutral review: previews/player_ritual_base_v002_background_review.png
+Comparison uses unmodified v001/v002 exports, same 8x scale and y=29 baseline.
+Review layouts use mechanical Pillow compositing and nearest-neighbor scaling;
+they never generate or change the native creative pixels or source files.
+
+Independent verification: evidence/player_ritual_base_v002/verify.py and
+validation.json. Source decoded independently and matched live composite and
+export exactly. Passed: 32x32, one frame, 12 editable nonempty layers, alpha
+only 0/255, 203 opaque pixels, one connected silhouette, no stray islands,
+transparent limb corridors, both feet rightward on row 29, exact preview scaling.
+The adapter's validate tool is absent from the client's exposed schema, as
+already documented in README.md; independent checks supply mechanical evidence.
+All 46 pre-existing untracked owner files passed preservation hash checks.
+
+SCOPE / PUBLICATION
+Named local checkpoint: checkpoint/player-ritual-v002-before-2026-11-01.
+The owner's revision brief explicitly requests committing and pushing this
+completed iteration. Stage only v002 art, notes, review and evidence paths plus
+the appended lab delivery record. Leave v001 and other owner experiments as-is.
+No runtime, map, definition, settings, saves, workbench, wiki or migration edits.
+Publication result is reported in chat; this note avoids a self-referential SHA.
