@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-01",
+  "baseline": "a7959114317aab08b5fde918013b69ec6c6b6b1a",
+  "checkpoint": "checkpoint/art-1-before-launcher-path-fix-2026-11-01",
+  "reported_failure": "Missing codex when double-clicking launch-art.cmd",
+  "cause": "The desktop app supplied an extra PATH entry that normal Windows launches do not inherit.",
+  "checks": {
+    "reproduced_with_persisted_machine_and_user_path": true,
+    "saved_codex_location_resolved_without_app_path": true,
+    "stale_saved_location_falls_back_to_installed_desktop_build": true,
+    "discovered_cli_version": "0.166.0-alpha.5.1",
+    "full_launcher_preflight_with_normal_path": "passed",
+    "visible_art_lab_console_started": true,
+    "codex_child_process_running": true,
+    "art_session_lock_held": true,
+    "existing_aseprite_reused": true,
+    "system_path_changed": false
+  }
+}

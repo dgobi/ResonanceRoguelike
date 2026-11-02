@@ -112,3 +112,16 @@ Publication is to existing remote `main`, without force. The delivered commit
 and remote readback result are reported with this delivery in the chat; this
 receipt is stored inside that revision rather than embedding a self-referential
 commit SHA.
+
+## Explorer launcher correction — 1 November 2026
+
+The initial terminal verification inherited Codex's app-specific PATH. The owner
+then reported that double-clicking the launcher could not find Codex. This was
+reproduced using only the persisted Windows machine/user PATH. Discovery now
+uses PATH first, then the executable recorded by setup, then installed desktop
+builds if that saved executable no longer exists. No system PATH was changed.
+
+Both the saved-path route and the stale-cache discovery route passed under the
+ordinary Windows PATH. The full launcher preflight passed, and a new visible
+art-lab console was launched with Codex running beneath it and the session lock
+held. Existing Aseprite was reused. See `evidence/launcher-path-fix.json`.

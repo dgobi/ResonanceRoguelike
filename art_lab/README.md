@@ -83,7 +83,10 @@ slash commands.
    Steam libraries from `libraryfolders.vdf`, including custom locations. For
    a nonstandard portable install set `ASEPRITE_PATH` in your local environment;
    use `ASEPRITE_USER_FOLDER` if its config folder is nonstandard.
-2. Have native Windows Node 22.6+ with `npm.cmd` and the Codex CLI on PATH.
+2. Have native Windows Node 22.6+ with `npm.cmd` on PATH. The launcher finds
+   Codex on PATH, at its saved setup location, or in the desktop app's installed
+   build directories. Double-clicking from Explorer does not require adding
+   the desktop app's private executable directory to your system PATH.
    Existing Codex sign-in is reused; this lab stores no credentials and installs
    no image service. A WSL executable is not the Windows art-session route.
 3. Run `setup-art.cmd`. It runs `npm ci` using the exact dependency and lock,

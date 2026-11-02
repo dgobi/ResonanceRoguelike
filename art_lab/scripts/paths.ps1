@@ -7,10 +7,35 @@ function Find-CommandPath([string]$Name) {
     if ($command) { return $command.Source }
     return $null
 }
+function Find-CodexPath {
+    foreach ($name in @('codex.exe', 'codex.cmd')) {
+        $command = Find-CommandPath $name
+        if ($command) { return $command }
+    }
+    # Explorer does not inherit the desktop app's private PATH additions.
+    # Reuse the executable verified by setup before looking for a newer build.
+    $savedPaths = Join-Path $Local 'paths.json'
+    if (Test-Path -LiteralPath $savedPaths) {
+        try {
+            $saved = Get-Content -LiteralPath $savedPaths -Raw | ConvertFrom-Json
+            if ($saved.codex -and (Test-Path -LiteralPath $saved.codex -PathType Leaf)) {
+                return $saved.codex
+            }
+        } catch { Write-Warning 'Could not read saved lab paths; discovering the installed Codex client.' }
+    }
+    # Build directory names change during desktop updates; do not pin one here.
+    $desktopBin = Join-Path $env:LOCALAPPDATA 'OpenAI\Codex\bin'
+    if (Test-Path -LiteralPath $desktopBin) {
+        $installed = Get-ChildItem -LiteralPath $desktopBin -Directory | ForEach-Object {
+            Get-Item -LiteralPath (Join-Path $_.FullName 'codex.exe') -ErrorAction SilentlyContinue
+        } | Where-Object { !$_.PSIsContainer } | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+        if ($installed) { return $installed.FullName }
+    }
+    return $null
+}
 function Get-ArtPaths {
     $node = Find-CommandPath 'node.exe'
-    $codex = Find-CommandPath 'codex.exe'
-    if (!$codex) { $codex = Find-CommandPath 'codex.cmd' }
+    $codex = Find-CodexPath
     $npm = Find-CommandPath 'npm.cmd'
     if ($env:ASEPRITE_PATH -and !(Test-Path -LiteralPath $env:ASEPRITE_PATH -PathType Leaf)) {
         throw 'ASEPRITE_PATH points to a missing executable. Correct that local override before continuing.'
