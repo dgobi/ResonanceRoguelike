@@ -5,6 +5,13 @@ import { CanvasHistory } from "./layout";
 import { sourceDiff } from "./draft";
 
 describe("ordinary creature exact draft", () => {
+  it('tunes escort fields without changing art/body/unknown bytes and restores recipe history',()=>{
+    const text=readFileSync(new URL('../../roguelike/data/entities/creatures/ash_escort.json',import.meta.url),'utf8');
+    const tuned=creatureValue(creatureValue(text,'ai_profile.initial_order','hold'),'ai_profile.follow_spacing',1);
+    const a=JSON.parse(text),b=JSON.parse(tuned);delete a.ai_profile;delete b.ai_profile;expect(a).toEqual(b);
+    expect(JSON.parse(tuned).ai_profile.initial_order).toBe('hold');
+    const history=new CanvasHistory();history.record(text,tuned,'Escort order and spacing');expect(history.undo(tuned)).toBe(text);expect(history.redo(text)).toBe(tuned);
+  });
   const source = readFileSync(new URL("../../roguelike/data/entities/creatures/hollow_revenant.json", import.meta.url), "utf8");
   it("changes both HP authorities with only two focused spans and one history entry", () => {
     const history = new CanvasHistory();

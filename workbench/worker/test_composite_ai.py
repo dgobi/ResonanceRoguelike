@@ -9,6 +9,26 @@ SOURCE=BASE+'hollow_revenant.json'
 
 
 class CompositeAuthoringTests(unittest.TestCase):
+    def test_escort_registry_alignment_bounds_same_id_tuning_and_preserved_art(self):
+        raw=self.draft();raw['ai_profile']={'version':6,'recipe':'protective_escort'}
+        raw['perception'].update(faction='player',hostile_to=['hollow'])
+        r=self.validate(raw);self.assertTrue(r['valid'],r['diagnostics'])
+        record=r['family']['context']['records'][0]
+        self.assertIn('protective_escort',record['capability']['profile_recipes'])
+        self.assertEqual([1,2],record['capability']['profile_recipe_bounds']['protective_escort']['follow_spacing'])
+        for field,value in [('initial_order','attack'),('follow_spacing',True),('follow_spacing',3),('protection_radius',6),('pursuit_budget',33)]:
+            bad=copy.deepcopy(raw);bad['ai_profile'][field]=value
+            self.assertFalse(self.validate(bad)['valid'],(field,value))
+        for faction,hostile in [('hollow',['hollow']),('player',['player']),('player',None)]:
+            bad=copy.deepcopy(raw);bad['perception'].update(faction=faction,hostile_to=hostile)
+            self.assertFalse(self.validate(bad)['valid'])
+        for identifier in ('ash_escort','stone_escort'):
+            path=BASE+identifier+'.json';original=json.loads((ROOT/path).read_bytes());raw=copy.deepcopy(original)
+            raw['ai_profile']['initial_order']='hold' if raw['ai_profile']['initial_order']=='follow' else 'follow'
+            self.assertTrue(invoke('preview_draft',asset=path,source_asset=path,draft=json.dumps(raw))['result']['valid'])
+            raw['tile']='plague_crow'
+            self.assertFalse(invoke('preview_draft',asset=path,source_asset=path,draft=json.dumps(raw))['result']['valid'])
+
     def test_territorial_profile_two_engagements_strict_bounds_and_host_authority(self):
         raw=self.draft();raw['ai_profile']={'version':5,'recipe':'territorial_guard'}
         for engagement in ('direct_melee','strike_and_withdraw'):
@@ -35,7 +55,7 @@ class CompositeAuthoringTests(unittest.TestCase):
     def test_defaults_construct_same_contract_without_turns(self):
         r=self.validate(self.draft());self.assertTrue(r['valid'],r['diagnostics'])
         record=r['family']['context']['records'][0]
-        self.assertEqual('creature-composite-7',record['capability']['contract'])
+        self.assertEqual('creature-composite-8',record['capability']['contract'])
         self.assertEqual('CompositeAI',record['factory']['instance']['ai_class'])
         p=record['factory']['instance']['effective_ai_profile']
         self.assertEqual((2,1,6,12),(p['retreat_distance'],p['hold_opportunities'],p['withdrawal_budget'],p['pursuit_timeout']))

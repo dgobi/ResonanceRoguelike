@@ -24,6 +24,9 @@ class CompositeAI(AI):
         self.last_cancellation = None
         self.hunt = None  # v4 only in saved state; ordinary sight memory stays exact
         self.hunt_evidence = None  # diagnostic only; never authorizes a later action
+        if self.profile['recipe'] == 'protective_escort':
+            from components.protective_escort import initialize
+            initialize(self)
         if self.profile['recipe'] == 'territorial_guard':
             from components.territorial import initialize
             initialize(self)
@@ -32,6 +35,10 @@ class CompositeAI(AI):
             initialize(self)
 
     def snapshot(self):
+        if self.profile['recipe'] == 'protective_escort':
+            return dict(profile=copy.deepcopy(self.profile), state=dict(
+                escort=copy.deepcopy(self.escort), target=copy.deepcopy(self.target),
+                opportunities=self.opportunities))
         if self.profile['recipe'] == 'observation_averse':
             from components.observation_averse import snapshot
             return snapshot(self)
@@ -49,6 +56,9 @@ class CompositeAI(AI):
         from engine.local_rivals import retire_player
         from engine.sound import clear_interest
         interest = self.sound_interest if keep_sound else None
+        if self.profile['recipe'] == 'protective_escort':
+            from components.protective_escort import retire
+            retire(self, reason)
         if self.profile['recipe'] == 'territorial_guard':
             from components.territorial import retire
             retire(self, actor, reason)
@@ -139,6 +149,9 @@ class CompositeAI(AI):
         This never acquires prey, selects an action or spends tactical counters.
         Current sight may refresh a retained trail; recovery/holding alone cannot.
         """
+        if self.profile['recipe'] == 'protective_escort':
+            from components.protective_escort import refresh
+            return refresh(self, engine, actor, ambient_light)
         if self.profile['recipe'] == 'territorial_guard':
             from components.territorial import refresh
             return refresh(self, engine, actor, ambient_light)
@@ -166,6 +179,11 @@ class CompositeAI(AI):
         occupied = {(a.x, a.y) for a in engine.entities if a is not actor and getattr(a, 'blocks_movement', False)}
         cdef = engine.data.entities.get(actor._creature_id, {})
         def legal(a, b):
+            if self.profile['recipe'] == 'protective_escort':
+                from components.protective_escort import permits
+                from engine.escort_commands import physical
+                if not permits(self, a, b) or not physical(engine, actor, a, b):
+                    return False
             if self.profile['recipe'] == 'territorial_guard':
                 from components.territorial import permits
                 if not permits(self, a, b):
@@ -225,6 +243,9 @@ class CompositeAI(AI):
                                    reason='numbing_venom_paralysis', result=None))
             self.trace = self.trace[-16:]
             return
+        if self.profile['recipe'] == 'protective_escort':
+            from components.protective_escort import take_turn
+            return take_turn(self, actor, engine, ambient_light)
         if self.profile['recipe'] == 'territorial_guard':
             from components.territorial import take_turn
             return take_turn(self, actor, engine, ambient_light)

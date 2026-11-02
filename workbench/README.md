@@ -798,7 +798,7 @@ CPython runtime without the game dependency wheels.
 The protocol is **8**, worker/app **0.9.0**, game structure contract **g2-3**,
 item contract **expedition-items-3**, recipe contract **item-preparation-1**,
 found-text contract **ordinary-found-text-1**, and
-creature contract **creature-composite-7**, with Workbench layout capability
+creature contract **creature-composite-8**, with Workbench layout capability
 **authored-room-2** on the existing `authored_submap` route (game structure contract g2-3).
 W0 identify/describe/inspect/preview requests remain read-only. Draft validation
 is available only through the host's document boundary. Discovery grants an
@@ -1048,3 +1048,18 @@ warning treatment from rejected severe self-use. `.` or keypad 5 Wait passes one
 helpless phase; inspection remains free. `node scripts/run-ai-5.mjs` verifies the
 seed defaults, existing policy authoring and saved-room lifecycle;
 `AI5_RUNTIME_ONLY=1` selects final-package verification without publication.
+
+
+## Protective escort (AI-7)
+
+Version 6 adds game-owned per-recipe bounds, initial Follow/Hold, spacing,
+protection, excursion and finite pursuit controls. Faction must be `player`;
+explicit hostile factions exclude `player`. Ordinary enemies may target it
+through their own perception and hostility. The role stays in the active scene.
+See [Protective escort authoring and controls](../roguelike/docs/PROTECTIVE_ESCORT_AI.md).
+Ash Escort and Stone Escort share combat/perception/speed with different order
+and protection profiles. `ai7_escort_lane` and `ai7_escort_threat` are isolated
+saved rooms, with no natural enrollment. `node scripts/run-ai-7.mjs` uses the
+stable VBS launcher and app-local packaged controls to publish/reopen and compare
+saved versus dirty configuration, Reset/Stop/latest-saved lifecycle.
+`AI7_RUNTIME_ONLY=1` verifies final-package lifecycle without publication.

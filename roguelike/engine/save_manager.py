@@ -353,6 +353,7 @@ class SaveManager:
         for scene in sorted((path / 'chunks').glob('*.pkl')):
             cached = cold_cache._read(scene)
             _validate_entities(cached.entities, engine.data, cached.local_map)
+            _validate_escort_scene(cached.entities, scene.stem, world_data)
             _claim_individuals(cached.entities, identities)
             _deserialize_entities(cached.entities, engine)
         cached = address.load(cold_cache)
@@ -1142,6 +1143,23 @@ def _claim_individuals(rows, identities):
             if identity in identities:
                 raise SaveFormatError('Duplicate individual_id across scene/transfer owners')
             identities.add(identity)
+
+
+def _validate_escort_scene(rows, scene_name, world_data):
+    """V6 binding must match the actual cache owner before staged installation."""
+    for row in rows:
+        c = row.get('composite', {})
+        if c.get('profile', {}).get('recipe') != 'protective_escort':
+            continue
+        binding = c['state']['escort']['owner']
+        if binding is None:
+            continue
+        wxwy, sid = binding.split('/')
+        chunk = world_data.get('chunks', {}).get(wxwy)
+        expected = sid or wxwy.replace(',', '_')
+        if (scene_name != expected or chunk is None
+                or sid and sum(s.get('submap_id') == sid for s in chunk.get('submaps', [])) != 1):
+            raise SaveFormatError('composite.escort: foreign cache scene owner')
 
 
 def _validate_entities(rows, data, local_map=None) -> None:

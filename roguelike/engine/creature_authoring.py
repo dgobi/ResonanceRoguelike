@@ -17,9 +17,9 @@ from generation.structure_contract import read_document, StructureError
 from rendering.tile_registry import TileRegistry
 from engine.harvesting import profile_errors, construct_output, RULES
 from engine.item_factory import ItemFactory
-from engine.ai_profiles import DEFAULTS as PROFILE_DEFAULTS, BOUNDS as PROFILE_BOUNDS, effective_profile, RECIPES, OBSERVATION_BOUNDS, VENOM_BOUNDS, TERRITORY_BOUNDS
+from engine.ai_profiles import DEFAULTS as PROFILE_DEFAULTS, BOUNDS as PROFILE_BOUNDS, effective_profile, RECIPES, OBSERVATION_BOUNDS, VENOM_BOUNDS, TERRITORY_BOUNDS, ESCORT_BOUNDS
 
-CONTRACT = "creature-composite-7"
+CONTRACT = "creature-composite-8"
 RELATIONSHIP_FIELDS = ['perception.faction', 'perception.hostile_to', 'numbing_venom_trait']
 
 
@@ -107,6 +107,7 @@ def capability(raw, path, pointer=""):
                 profile_editable=editable and raw.get('ai_type') == 'composite' and composite_source(raw),
                 profile_defaults=PROFILE_DEFAULTS,
                 profile_recipes=RECIPES,
+                profile_recipe_bounds={'protective_escort': ESCORT_BOUNDS},
                 harvest_editable=harvest, harvest_rules=RULES,
                 harvest_reason="Complete native harvest profile; original non-ephemeral Actor authority." if harvest else "Harvest is protected: the original must be a supported non-ephemeral Actor with absent or supported native profile.",
                 duplicable=editable and not special, operations=(["edit"] if special else ["edit", "variant"]) if editable else [],

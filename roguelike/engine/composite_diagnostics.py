@@ -16,6 +16,7 @@ def inspect(engine):
                              position=[a.x,a.y], profile=copy.deepcopy(a.ai.profile),
                              original_home=[a.ai.home_x,a.ai.home_y],
                              objective=copy.deepcopy(getattr(a.ai,'territory',None)),
+                             escort=copy.deepcopy(getattr(a.ai,'escort',None)),
                              condition=inspect_venom(a),
                              hunt_observation=copy.deepcopy(a.ai.hunt_evidence),
                              hunt_information='Own delivery provenance and timing are internal; only current direct sight supplies a symptom. Inspection does not refresh either.',

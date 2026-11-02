@@ -271,6 +271,9 @@ class LookMode:
                         "description",
                         "Something that should not be here."
                     )
+                    from engine.escort_commands import reachable
+                    if reachable(engine, entity):
+                        entry['description'] += f" Order: {entity.ai.escort['order'].title()}. [E] local orders; one world phase."
                     fighter = getattr(entity, "fighter", None)
                     ai      = getattr(entity, "ai",      None)
                     entry["fighter"] = fighter

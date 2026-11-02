@@ -1864,7 +1864,15 @@ class Engine:
             elif self.local_map.walkable[dest_x, dest_y]:
                 blocker = self._get_blocking_entity(dest_x, dest_y)
                 if blocker:
-                    acted = self._player_attack(blocker)
+                    from engine.escort_commands import registered, yield_to_player
+                    if registered(blocker):
+                        acted = yield_to_player(self, blocker)
+                        _was_move = acted
+                        _press_step = acted and self._free_move_pending
+                        if acted and self.sprint_turns_remaining > 0:
+                            self.sprint_turns_remaining -= 1
+                    else:
+                        acted = self._player_attack(blocker)
                 elif self._decor_blocks_movement(dest_x, dest_y):
                     pass  # blocked by decor object (campfire, barrel, etc.)
                 elif self._movement_denied():
@@ -3893,6 +3901,10 @@ class Engine:
         for dx, dy in _OFFSETS:
             ax, ay = self.player.x + dx, self.player.y + dy
             if not self.local_map.in_bounds(ax, ay):
+                continue
+            from engine.escort_commands import at as escort_at
+            if escort_at(self, ax, ay) is not None:
+                candidates.append((ax, ay))
                 continue
             terrain_id    = self._resolve_terrain_id(ax, ay)
             terrain_entry = self.data.terrain.get(terrain_id, {})

@@ -24,9 +24,14 @@ HUNT_DEFAULTS = dict(VENOM_DEFAULTS, version=4, recipe='patient_venom_hunt',
 TERRITORY_DEFAULTS = dict(DEFAULTS, version=5, recipe='territorial_guard',
     engagement='direct_melee', defended_radius=4, excursion_radius=6, pursuit_budget=32)
 TERRITORY_BOUNDS = dict(BOUNDS, defended_radius=(1, 7), excursion_radius=(2, 8), pursuit_budget=(1, 64))
+ESCORT_DEFAULTS = dict(version=6, recipe='protective_escort', capability='melee',
+    initial_order='follow', follow_spacing=2, protection_radius=4, excursion_radius=6,
+    pursuit_budget=18, scene_scope='active_scene')
+ESCORT_BOUNDS = dict(follow_spacing=(1, 2), protection_radius=(1, 7),
+    excursion_radius=(2, 8), pursuit_budget=(1, 32), pursuit_timeout=(0, 10000))
 RECIPES = {'strike_and_withdraw': DEFAULTS, 'observation_averse': OBSERVATION_DEFAULTS,
            'venom_strike_and_withdraw': VENOM_DEFAULTS, 'patient_venom_hunt': HUNT_DEFAULTS,
-           'territorial_guard': TERRITORY_DEFAULTS}
+           'territorial_guard': TERRITORY_DEFAULTS, 'protective_escort': ESCORT_DEFAULTS}
 
 
 def profile_defaults(profile):
@@ -61,7 +66,8 @@ def effective_profile(raw):
     if not isinstance(p, dict):
         raise ValueError('ai_profile: composite requires an embedded registered profile')
     defaults = profile_defaults(p)
-    bounds = (TERRITORY_BOUNDS if defaults is TERRITORY_DEFAULTS else
+    bounds = (ESCORT_BOUNDS if defaults is ESCORT_DEFAULTS else
+              TERRITORY_BOUNDS if defaults is TERRITORY_DEFAULTS else
               OBSERVATION_BOUNDS if defaults is OBSERVATION_DEFAULTS else
               {**BOUNDS, **VENOM_BOUNDS} if defaults in (VENOM_DEFAULTS, HUNT_DEFAULTS) else BOUNDS)
     unknown = set(p) - set(defaults)
@@ -69,7 +75,7 @@ def effective_profile(raw):
         raise ValueError('ai_profile: unsupported fields: ' + ', '.join(sorted(unknown)))
     result = {**defaults, **copy.deepcopy(p), 'pursuit_timeout': raw.get('pursuit_timeout', 20)}
     for key, expected in defaults.items():
-        if key in ('no_cover', *bounds) or (key == 'engagement' and defaults is TERRITORY_DEFAULTS) or (key == 'return_policy' and defaults is HUNT_DEFAULTS) or (key == 'trigger' and defaults in (DEFAULTS, TERRITORY_DEFAULTS)):
+        if key in ('no_cover', *bounds) or (key == 'initial_order' and defaults is ESCORT_DEFAULTS) or (key == 'engagement' and defaults is TERRITORY_DEFAULTS) or (key == 'return_policy' and defaults is HUNT_DEFAULTS) or (key == 'trigger' and defaults in (DEFAULTS, TERRITORY_DEFAULTS)):
             continue
         if type(result[key]) is not type(expected) or result[key] != expected:
             raise ValueError(f'ai_profile.{key}: supported value is {expected!r}')
@@ -82,6 +88,13 @@ def effective_profile(raw):
     for key, (lo, hi) in bounds.items():
         if type(result[key]) is not int or not lo <= result[key] <= hi:
             raise ValueError(f'ai_profile.{key}: expected integer {lo}..{hi}; booleans are not numbers')
+    if defaults is ESCORT_DEFAULTS:
+        if result['initial_order'] not in ('follow', 'hold'):
+            raise ValueError('ai_profile.initial_order: choose follow or hold')
+        if result['excursion_radius'] <= result['protection_radius']:
+            raise ValueError('ai_profile.excursion_radius: must exceed protection_radius')
+        if 'id' in raw:
+            validate_escort_alignment(raw.get('perception'))
     if defaults is TERRITORY_DEFAULTS:
         if result['engagement'] not in ('direct_melee', 'strike_and_withdraw'):
             raise ValueError('ai_profile.engagement: choose direct_melee or strike_and_withdraw')
@@ -103,6 +116,17 @@ def effective_profile(raw):
     return result
 
 
+def validate_escort_alignment(perception):
+    from engine.local_rivals import TOKEN
+    if (not isinstance(perception, dict) or perception.get('faction') != 'player'
+            or not isinstance(perception.get('hostile_to'), list)
+            or len(perception['hostile_to']) > 16
+            or any(not isinstance(v, str) or not TOKEN.fullmatch(v) or v == 'player'
+                   for v in perception['hostile_to'])
+            or len(set(perception['hostile_to'])) != len(perception['hostile_to'])):
+        raise ValueError('protective_escort: requires faction player and explicit distinct hostile factions excluding player')
+
+
 def saved_profile(profile):
     defaults = profile_defaults(profile)
     if set(profile) != set(defaults) | {'pursuit_timeout'}:
@@ -118,6 +142,9 @@ def local_only(actor):
 
 def depart(engine):
     """Call only after destination admission succeeds, before caching the old scene."""
+    cursor = getattr(engine, 'interaction_cursor', None)
+    if cursor is not None:
+        cursor._order_prompt = None
     for actor in engine.entities:
         if local_only(actor):
             actor.ai.cancel(actor, 'scene_departure')
@@ -138,6 +165,10 @@ def validate_saved(row, local_map=None):
         raise ValueError('composite: profile and tactical state required')
     p = saved_profile(composite['profile'])
     s = composite['state']
+    if p['recipe'] == 'protective_escort':
+        from components.protective_escort import validate_state
+        validate_state(row, s, p, local_map)
+        return
     if p['recipe'] == 'territorial_guard':
         from components.territorial import validate_state
         validate_state(row, s, p, local_map)

@@ -179,3 +179,14 @@ The startup, movement, manual wait and inventory screen were observed. Full norm
 </details>
 
 </details>
+
+
+## AI-7 local escort controls
+
+Use **E**, select an adjacent visible protective escort and Enter, choose
+**Follow** or **Hold here**, then Enter to accept for one world phase. Esc cancels
+freely. Bumping tries legal yielding or a passage swap; paralysis prevents yielding.
+It stays in its old scene when you leave. See
+[Protective escort](../PROTECTIVE_ESCORT_AI.md) for saved Workbench rooms,
+alignment and ordinary combat vulnerability. These examples require authored
+placement or Test room; normal worlds receive no automatic companion.

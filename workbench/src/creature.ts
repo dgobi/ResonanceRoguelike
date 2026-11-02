@@ -27,7 +27,7 @@ export function creatureValue(text: string, field: string, value: string | numbe
     for (const key of ['trigger','retreat_distance','hold_opportunities','withdrawal_budget']) next=valueEdit(next,['ai_profile',key],profileDefaults[key]);
     return next;
   }
-  const allowed = ["name","description","armour_value","damage_dice","damage_bonus","attack_verb","perception.sight_radius","perception.hearing_radius","perception.sees_in_dark","wander_radius","pursuit_timeout","speed","ai_type","numbing_venom_trait","ai_profile.warning_phases","ai_profile.paralysis_phases","ai_profile.recovery_phases","ai_profile.return_policy"];
+  const allowed = ["name","description","armour_value","damage_dice","damage_bonus","attack_verb","perception.sight_radius","perception.hearing_radius","perception.sees_in_dark","wander_radius","pursuit_timeout","speed","ai_type","numbing_venom_trait","ai_profile.warning_phases","ai_profile.paralysis_phases","ai_profile.recovery_phases","ai_profile.return_policy","ai_profile.initial_order","ai_profile.follow_spacing","ai_profile.protection_radius"];
   if (field !== "hp") {
     if (![...allowed,"perception.faction","perception.hostile_to","ai_profile.trigger","ai_profile.retreat_distance","ai_profile.hold_opportunities","ai_profile.withdrawal_budget","ai_profile.concealment_budget","ai_profile.unseen_extra_step","ai_profile.no_cover","ai_profile.pursuit_budget","ai_profile.engagement","ai_profile.defended_radius","ai_profile.excursion_radius"].includes(field)) throw new Error("Read-only creature field");
     const path=field.split(".");

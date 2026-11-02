@@ -371,3 +371,14 @@ Version-5 **Fixed territorial post** combines an original scene placement with
 **Direct melee** or **Strike and withdraw**. [Territorial AI](TERRITORIAL_AI.md)
 defines spatial/evidence clocks, inactive fields, strict authoring choices,
 finite return/blockage, persistence, matched examples and the new ward store.
+
+
+## AI-7 local protective escort
+
+The registered **Protective escort** card supports ordinary player-aligned melee
+variants, Follow/Hold and bounded local protection. See
+[the fields, commands and saved-instance contract](PROTECTIVE_ESCORT_AI.md).
+Duplicate, configure faction `player` and explicit nonplayer hostile factions,
+validate/review/apply/reopen, then place in a saved room. New recipe selection
+requires a new ID; same-recipe tuning affects fresh instances. Ash Escort and
+Stone Escort are authored examples, with no natural population change.

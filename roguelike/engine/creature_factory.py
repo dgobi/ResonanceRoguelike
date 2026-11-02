@@ -56,6 +56,9 @@ class CreatureFactory:
             from engine.ai_profiles import validate_binding, saved_profile
             validate_binding(defn)
             profile = saved_profile(saved_composite_profile)
+            if profile['recipe'] == 'protective_escort':
+                from engine.ai_profiles import validate_escort_alignment
+                validate_escort_alignment(defn.get('perception'))
         elif ai_type == 'composite':
             profile = effective_profile(defn)
         elif 'ai_profile' in defn:

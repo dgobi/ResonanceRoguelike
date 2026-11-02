@@ -46,6 +46,7 @@ class InteractionCursor:
         # Multi-item selection prompt state
         self._selection_prompt: dict | None = None  # {items, selected, lx, ly}
         self._dismantle_prompt: dict | None = None
+        self._order_prompt: dict | None = None
 
     def init(self, display: "DisplayConfig") -> None:
         self._font_small = display.font_ui_small
@@ -67,6 +68,7 @@ class InteractionCursor:
         """
         self._selection_prompt = None
         self._dismantle_prompt = None
+        self._order_prompt = None
         self.candidates = list(candidates)
         self.player_x   = player_x
         self.player_y   = player_y
@@ -144,6 +146,16 @@ class InteractionCursor:
         All keys consumed here — no fall-through to normal dispatch.
         """
         from engine.engine import MOVE_KEYS, GameMode
+
+        if self._order_prompt is not None:
+            if key == pygame.K_ESCAPE:
+                self._order_prompt = None
+            elif key in (pygame.K_UP, pygame.K_KP8, pygame.K_DOWN, pygame.K_KP2):
+                self._order_prompt['selected'] = 1-self._order_prompt['selected']
+            elif key in (pygame.K_RETURN, pygame.K_KP_ENTER):
+                from engine.escort_commands import confirm
+                confirm(self, engine)
+            return
 
         if self._dismantle_prompt is not None:
             self._handle_dismantle_key(key, engine)
@@ -244,6 +256,9 @@ class InteractionCursor:
 
     def _interact(self, engine: "Engine", *, interactable_only: bool = False) -> None:
         """Run a reachable action; look-mode dispatch shares this action clock."""
+        from engine.escort_commands import offer
+        if offer(self, engine):
+            return
         from engine.venom import fully_paralysed
         if fully_paralysed(engine.player):
             return
@@ -451,6 +466,10 @@ class InteractionCursor:
             self._render_dismantle_prompt(screen, engine, viewport)
             return
 
+        if self._order_prompt is not None:
+            self._render_order_prompt(screen, engine, viewport)
+            return
+
         cx, cy = self._cursor_x, self._cursor_y
         reachable = self.can_reach(engine, cx, cy)
         on_candidate = reachable and (cx, cy) in self.candidates
@@ -461,6 +480,38 @@ class InteractionCursor:
         from generation.floor_object_utils import empty_crate_owner
         dismantle = reachable and empty_crate_owner(engine.local_map, cx, cy) is not None
         self._render_hint(screen, viewport, on_candidate, dismantle=dismantle)
+
+    def _render_order_prompt(self, screen, engine, viewport):
+        fn = self._font_small
+        if fn is None:
+            return
+        prompt = self._order_prompt
+        a = prompt['actor']
+        lines = [a.name, f"Current order: {prompt['order'].title()}",
+                 'Follow', 'Hold here', 'Cost: one world phase. Local scene only.']
+        hint = '[ Up/Down ] choose   [ ENTER ] order   [ ESC ] cancel'
+        pad, row = 18, fn.get_linesize()+4
+        hh = fn.get_linesize()+8
+        width = min(viewport.width, max(fn.size(s)[0] for s in (*lines,hint))+2*pad)
+        height = len(lines)*row+hh+2*pad+4
+        panel = pygame.Surface((width,height),pygame.SRCALPHA)
+        engine.ui_registry.draw_panel(panel,panel.get_rect(),'weathered_temple',
+            tint_color=UI_BORDER,fill_color=DEEP_NOTHING,fill_alpha=250)
+        content = panel.get_rect().inflate(-2*pad,-2*pad)
+        hint_top = content.bottom-hh
+        for i,line in enumerate(lines):
+            y = content.top+i*row
+            if i==2+prompt['selected']:
+                pygame.draw.rect(panel,UI_PANEL_DARK,(content.left,y,content.width,row))
+            while fn.size(line)[0]>content.width and line:
+                line=line[:-1]
+            panel.blit(fn.render(line,True,RESONANCE_GOLD if i==2+prompt['selected'] else WORN_STONE),(content.left,y))
+        pygame.draw.line(panel,UI_BORDER,(content.left,hint_top),(content.right,hint_top))
+        while fn.size(hint)[0]>content.width and hint:
+            hint=hint[:-1]
+        label=fn.render(hint,True,UI_TEXT_DIM)
+        panel.blit(label,(content.centerx-label.get_width()//2,hint_top+(hh-label.get_height())//2))
+        screen.blit(panel,(viewport.centerx-width//2,viewport.centery-height//2))
 
     def _render_dismantle_prompt(self, screen, engine, viewport) -> None:
         fn = self._font_small
