@@ -1,0 +1,506 @@
+{
+  "start_revision": "a5ce9bfe38e3e6c3c2d54c583be70cabf7393fa2",
+  "tracked_art_delta": [],
+  "untracked_owner_files": [
+    {
+      "path": "RESONANCE_WORKBENCH_PLAN_PROPOSED_2026-10-25.md",
+      "size": 36303,
+      "sha256": "bcf41ab230fea7aa43a2a2f26b2826bd6d0d53ec814c788903badc642910f49a"
+    },
+    {
+      "path": "art_lab/drafts/amber_sting_beetle_a_relief/amber_sting_beetle_a_relief_v001.aseprite",
+      "size": 1747,
+      "sha256": "5f70cbb2664d7d7e7af149eeb1d5b4f439f550f3133bd9310d4cac76c5471a5b"
+    },
+    {
+      "path": "art_lab/drafts/amber_sting_beetle_a_relief/amber_sting_beetle_a_relief_v001_notes.txt",
+      "size": 4460,
+      "sha256": "1e7b738dc4d36a5a66459838617a351fad6f0d07adc17e6dd29809d51dedbb37"
+    },
+    {
+      "path": "art_lab/drafts/amber_sting_beetle_b_creature/amber_sting_beetle_b_creature_v001.aseprite",
+      "size": 1835,
+      "sha256": "5770c7ab2fea284112d590aa679d9f70bbd933494c60997117ecf4a191d8d7ea"
+    },
+    {
+      "path": "art_lab/drafts/amber_sting_beetle_b_creature/amber_sting_beetle_b_creature_v001_notes.txt",
+      "size": 4457,
+      "sha256": "25d3441ea69e022172baf32613ec8286f3f78517144da1e58dc8a77f9f991d8f"
+    },
+    {
+      "path": "art_lab/drafts/amber_sting_beetle_b_creature/amber_sting_beetle_b_creature_v002.aseprite",
+      "size": 1834,
+      "sha256": "4a68e3e569305d99a571024c6285e67e7e4822bf3b1c7ef610ef7eb7f3f61a7a"
+    },
+    {
+      "path": "art_lab/drafts/amber_sting_beetle_b_creature/amber_sting_beetle_b_creature_v002_notes.txt",
+      "size": 1071,
+      "sha256": "a96ef3401ddd63685f8153b2524a81ff11ff32865c83da6558f9bf2e42c49e4a"
+    },
+    {
+      "path": "art_lab/drafts/amber_sting_beetle_c_graphic/amber_sting_beetle_c_graphic_v001.aseprite",
+      "size": 1816,
+      "sha256": "e29768cde34abc241f8a79f042c87643570647076b9c6a83b6bf3c9d7a054b24"
+    },
+    {
+      "path": "art_lab/drafts/amber_sting_beetle_c_graphic/amber_sting_beetle_c_graphic_v001_notes.txt",
+      "size": 4422,
+      "sha256": "6993803d458f82d2daba99920d47211d776854acc5135b6b05e83ae74846979d"
+    },
+    {
+      "path": "art_lab/drafts/heath_stalker/heath_stalker_v001.aseprite",
+      "size": 1357,
+      "sha256": "8b0e6a17cb3f37b18404f21c0bcebab2446a3bcfe0e665dad4d7be9def40cfde"
+    },
+    {
+      "path": "art_lab/drafts/heath_stalker/heath_stalker_v001_notes.txt",
+      "size": 4584,
+      "sha256": "be0641fe18930070d0ea7218fb161b331125049b62939a7b8ca04deb7481e0b0"
+    },
+    {
+      "path": "art_lab/drafts/heath_stalker/heath_stalker_v001_prompt.txt",
+      "size": 2148,
+      "sha256": "deeb42913a4f8fcfa5f961077edc174ff9466d96c53f3da549f87675c672ce79"
+    },
+    {
+      "path": "art_lab/drafts/hollow_knight/hollow_knight_v001.aseprite",
+      "size": 2089,
+      "sha256": "b13a3a0e541c1e590479d9c9888e1ecc239af007fc88363518629938df386db5"
+    },
+    {
+      "path": "art_lab/drafts/hollow_knight/hollow_knight_v001_notes.txt",
+      "size": 5359,
+      "sha256": "46478bd1debe3e98d8556152dfdec9d20ffd7b88f1c03deea2eb0abc25962422"
+    },
+    {
+      "path": "art_lab/drafts/hollow_knight/hollow_knight_v001_prompt.txt",
+      "size": 2276,
+      "sha256": "8b5d741073b935d866e83390aa692e3b2dabfd4b689957f37e3313f9d306e513"
+    },
+    {
+      "path": "art_lab/drafts/plague_crow/plague_crow_v001.aseprite",
+      "size": 1506,
+      "sha256": "67825387eecc2046cd1dc1974b8bf0b349c516ee75860aff9221402d76470a3a"
+    },
+    {
+      "path": "art_lab/drafts/plague_crow/plague_crow_v002.aseprite",
+      "size": 1501,
+      "sha256": "b48e8eac0a0966746c7be5a4246afa1455cd2865bc8001cc6fe630d7d74a0ef9"
+    },
+    {
+      "path": "art_lab/drafts/player_ritual_base/player_ritual_base_v001.aseprite",
+      "size": 1269,
+      "sha256": "a65e633ca561279efc2713743d0c3f47f2ccde22d4f692c3f16472a9898cffa7"
+    },
+    {
+      "path": "art_lab/drafts/player_ritual_base/player_ritual_base_v001_notes.txt",
+      "size": 10707,
+      "sha256": "da33e072e65d0a6c38c1798600977936550548008d2c3709a12c19a5720d0734"
+    },
+    {
+      "path": "art_lab/evidence/beetle_studies_v001/live-state-final.json",
+      "size": 13193,
+      "sha256": "0987b40f7ed1a31f3666521b5e52e6614a73e7e8e0147c8bb3ece4f3f51364ce"
+    },
+    {
+      "path": "art_lab/evidence/beetle_studies_v001/live-state.json",
+      "size": 47031,
+      "sha256": "a3205863bad1aa1740fc1530223aca4477d80a7967668c9062ae7fbbea830303"
+    },
+    {
+      "path": "art_lab/evidence/beetle_studies_v001/validation.json",
+      "size": 4605,
+      "sha256": "c094c80224a7860274c47b693ca073e5b0e98fbd114cd5cd0411612406029308"
+    },
+    {
+      "path": "art_lab/evidence/beetle_studies_v001/verify.mjs",
+      "size": 9200,
+      "sha256": "7705427e34601a9df879e1b8fc13cc63b53954792507473c13bc60e3837be087"
+    },
+    {
+      "path": "art_lab/evidence/heath_stalker_v001/live-state.json",
+      "size": 6463,
+      "sha256": "e647e3c964c6f040a477266247493b456039b2ee86312467a29281450d54da37"
+    },
+    {
+      "path": "art_lab/evidence/heath_stalker_v001/make_review.py",
+      "size": 938,
+      "sha256": "c2ac3a4f7772d02dce628044d34eb89cbb89780ee3333c1fd0038ebc43aebe4c"
+    },
+    {
+      "path": "art_lab/evidence/heath_stalker_v001/reference.json",
+      "size": 726,
+      "sha256": "76cdcb741625994c64b8e55de65768e89028fa62bb3074eac1c83f8a591062a6"
+    },
+    {
+      "path": "art_lab/evidence/heath_stalker_v001/silhouette_1x.png",
+      "size": 244,
+      "sha256": "c36306de7da41008cfb08d702982902c263ae6efd34aea7a5f97025a6a4eee2a"
+    },
+    {
+      "path": "art_lab/evidence/heath_stalker_v001/silhouette_checkpoint.aseprite",
+      "size": 1832,
+      "sha256": "308ffc444f9086504e9e96640332f2568e09a4fb00512e0b402d3dbb4125fe39"
+    },
+    {
+      "path": "art_lab/evidence/heath_stalker_v001/validation.json",
+      "size": 1855,
+      "sha256": "b7354c5353974370b0221fa0ab00724cdcb3068fdeb998f5f079edfeef9ca595"
+    },
+    {
+      "path": "art_lab/evidence/heath_stalker_v001/verify.py",
+      "size": 5982,
+      "sha256": "20770445462b4ece7db1cb2100ab43f5a68bab5d8f0b68728cbf2689d7d185f8"
+    },
+    {
+      "path": "art_lab/evidence/hollow_knight_v001/live-state.json",
+      "size": 13871,
+      "sha256": "fd4134427c80966ad7a59df48e309569330c4f68c567bbab02c8baa53e09ee4c"
+    },
+    {
+      "path": "art_lab/evidence/hollow_knight_v001/make_review.py",
+      "size": 921,
+      "sha256": "1a754a6639bdcab76aaf0478f724f541a66111dc10a60ba38bb1a2203cc7d9a5"
+    },
+    {
+      "path": "art_lab/evidence/hollow_knight_v001/reference.json",
+      "size": 915,
+      "sha256": "20181e7c324fe649b1fdf392362e3f46526e6ddff208b7592ff0020557858fc4"
+    },
+    {
+      "path": "art_lab/evidence/hollow_knight_v001/silhouette_1x.png",
+      "size": 275,
+      "sha256": "e9d1894028959d318f4f6ac6736f75bea7782359f2c1e2db4fa49f5cade7bf18"
+    },
+    {
+      "path": "art_lab/evidence/hollow_knight_v001/silhouette_checkpoint.aseprite",
+      "size": 2116,
+      "sha256": "5a1f0ee01c04a2062c2440ed753d1d1cefb60b109540524201c035adfe3b3096"
+    },
+    {
+      "path": "art_lab/evidence/hollow_knight_v001/source_crop.png",
+      "size": 174,
+      "sha256": "12a588e0cdad78eac4fc6699a7fdabaa87b462d23915049635809e6580429400"
+    },
+    {
+      "path": "art_lab/evidence/hollow_knight_v001/source_crop_8x.png",
+      "size": 524,
+      "sha256": "c2f1e0d11f6af26d82c06b53a678c10c783ab802f109a562c8003ccca1dd5b3d"
+    },
+    {
+      "path": "art_lab/evidence/hollow_knight_v001/validation.json",
+      "size": 1834,
+      "sha256": "9d5b6a550005749ba7788f6013b97735b79ccd9d7ce1e21a2d39c7ed58f7109d"
+    },
+    {
+      "path": "art_lab/evidence/hollow_knight_v001/verify.py",
+      "size": 5675,
+      "sha256": "2ec70d6ebd52d80b93c0dec442394b8e84e3f0ebd555c3e6a4f60457702f54d2"
+    },
+    {
+      "path": "art_lab/evidence/plague_crow_v001/live-state.json",
+      "size": 6778,
+      "sha256": "751f4f1f878bb26a10688455273b6eb81f2ef3b057cb64433ccb029ed0e7d79e"
+    },
+    {
+      "path": "art_lab/evidence/plague_crow_v001/make_review.py",
+      "size": 934,
+      "sha256": "7fec296bb1c8cfa002143b1cef1545802eacb6ed8584fae52be6f3f7b63714cc"
+    },
+    {
+      "path": "art_lab/evidence/plague_crow_v001/reference.json",
+      "size": 790,
+      "sha256": "d6bad5fd9c815d61311e17e33a257ee5a15bacf115dc6246d16fd384ef95b530"
+    },
+    {
+      "path": "art_lab/evidence/plague_crow_v001/silhouette_1x.png",
+      "size": 281,
+      "sha256": "eb271d068026da7e3b4790b7c2c28013da2de135f0f9e28fd63ef0259fb316f1"
+    },
+    {
+      "path": "art_lab/evidence/plague_crow_v001/silhouette_checkpoint.aseprite",
+      "size": 1910,
+      "sha256": "571a18dd6ac8b8efac99dc92143eb477a37e7305c7bce4143a90f1af7120f423"
+    },
+    {
+      "path": "art_lab/evidence/plague_crow_v001/source_crop.png",
+      "size": 174,
+      "sha256": "2ce8b96e6de7c9a7e281da8694f2bfb80eb697f65b3329db6aaaeac3f87dce3c"
+    },
+    {
+      "path": "art_lab/evidence/plague_crow_v001/source_crop_8x.png",
+      "size": 476,
+      "sha256": "f6bcd24afc0dd2daf5a720ec7900e7a6030b655e96eabc68ca66c1ae11b05b1c"
+    },
+    {
+      "path": "art_lab/evidence/plague_crow_v001/validation.json",
+      "size": 647,
+      "sha256": "c9767037878ff97278346dbe79649d041a45aa1b7222363ff64207a7f2147a81"
+    },
+    {
+      "path": "art_lab/evidence/plague_crow_v001/verify.py",
+      "size": 4031,
+      "sha256": "6a9b43aa69c92285966afa6e25ba677785cb5efec1cd73e92dbcacff2523cf5f"
+    },
+    {
+      "path": "art_lab/evidence/plague_crow_v002/live-state.json",
+      "size": 6768,
+      "sha256": "709b964c74036480b8583085cd4f7b18e2e60a246b0a1baec07ac571e8625707"
+    },
+    {
+      "path": "art_lab/evidence/plague_crow_v002/make_review.py",
+      "size": 934,
+      "sha256": "d5eafd4e6fe73702ce7682a7a8eb075f74cda518dd58dd2ab2e49677bb0d78be"
+    },
+    {
+      "path": "art_lab/evidence/plague_crow_v002/silhouette_1x.png",
+      "size": 272,
+      "sha256": "877287662645a22b873d4b9b6738e8b3e3b41f7319d00103189248511b606395"
+    },
+    {
+      "path": "art_lab/evidence/plague_crow_v002/silhouette_checkpoint.aseprite",
+      "size": 1329,
+      "sha256": "c23af4e732bea9f4715b95624f55910c26f63d6c2fe2fa5c8e3ddc95272b2e97"
+    },
+    {
+      "path": "art_lab/evidence/plague_crow_v002/validation.json",
+      "size": 1924,
+      "sha256": "99b49d89880f02cc142dee6e8ff3194a112d9733221a145458ff0a1d984fcde3"
+    },
+    {
+      "path": "art_lab/evidence/plague_crow_v002/verify.py",
+      "size": 6024,
+      "sha256": "02b83e4c6d28a8e769169dfcce438eaba645b8dc8ef052a0ea44204976b80fa2"
+    },
+    {
+      "path": "art_lab/evidence/player_ritual_base_v001/achra-characters.avif",
+      "size": 2942,
+      "sha256": "ee9d5e5dd7a9733df50d3aadafc1bb61a6b00f8ab81d4da068263ffdb2f3ea22"
+    },
+    {
+      "path": "art_lab/evidence/player_ritual_base_v001/achra-characters.png",
+      "size": 20300,
+      "sha256": "043c8ef1aadb23689fdc01b767eb3dd8ae83d0fc17a17359b1b09bfc1664ac62"
+    },
+    {
+      "path": "art_lab/evidence/player_ritual_base_v001/achra-screen.jpg",
+      "size": 311109,
+      "sha256": "1dfd0973e47ca8d7389d6d7e334f782148708d2f86dbc0505af1084a8dbf6f5d"
+    },
+    {
+      "path": "art_lab/evidence/player_ritual_base_v001/hatiay.jpg",
+      "size": 238051,
+      "sha256": "6acface4c7a5821106fe23e3fc2720fc89d7d2d316752a89ff130cd1b0d07d4e"
+    },
+    {
+      "path": "art_lab/evidence/player_ritual_base_v001/king-raised-arms.jpg",
+      "size": 52555,
+      "sha256": "20e8f1a4e99d41b4768d8adc2e6dace63e8a28cda23f8de6480d12ad5044629e"
+    },
+    {
+      "path": "art_lab/evidence/player_ritual_base_v001/live-state.json",
+      "size": 12274,
+      "sha256": "db6f20043a2c8314e97c32f96082dd7d46d311c58f3356d06dcb37a4c225333e"
+    },
+    {
+      "path": "art_lab/evidence/player_ritual_base_v001/silhouette_1x.png",
+      "size": 270,
+      "sha256": "abd4aeefb7e148a335a06338b833069f45bf4bcae1d483eec247be41d16280ca"
+    },
+    {
+      "path": "art_lab/evidence/player_ritual_base_v001/silhouette_checkpoint.aseprite",
+      "size": 1733,
+      "sha256": "f9cea2516589f6e8b7a1bd0d9f38b18ce1d96c4ffb114464d5d291b926fa8e21"
+    },
+    {
+      "path": "art_lab/evidence/player_ritual_base_v001/validation.json",
+      "size": 1750,
+      "sha256": "a10734197c4d1f8c06049b462388e524f62096afa503fd7e19e6707337846970"
+    },
+    {
+      "path": "art_lab/evidence/player_ritual_base_v001/verify.py",
+      "size": 5761,
+      "sha256": "c860ccb470d13a2559610a68c778b2060982a15ffa5ee8444eea0778f17a690c"
+    },
+    {
+      "path": "art_lab/exports/amber_sting_beetle_a_relief_v001.png",
+      "size": 554,
+      "sha256": "ec910059d77a26a005fe251a395f821fe07647cb12d5b3ee93f617f71d58a215"
+    },
+    {
+      "path": "art_lab/exports/amber_sting_beetle_b_creature_v001.png",
+      "size": 659,
+      "sha256": "1e439d8618115cd6577d60de592ae53453cddb697ea8c84cc90305d7af4b20fa"
+    },
+    {
+      "path": "art_lab/exports/amber_sting_beetle_b_creature_v002.png",
+      "size": 653,
+      "sha256": "fe1b843c7fd604a85b97f122d99f523fe1f524abe9d7dbc2a183a71f619cfcf1"
+    },
+    {
+      "path": "art_lab/exports/amber_sting_beetle_c_graphic_v001.png",
+      "size": 670,
+      "sha256": "358bf68db0022db7a11b4a6c0b99f73e2d8a0827408d1f724bbac0d96518b652"
+    },
+    {
+      "path": "art_lab/exports/heath_stalker_v001.png",
+      "size": 432,
+      "sha256": "149f0df2a2d95b54681bf63b5873a7827798e16f14feabe63110243bfde30c5b"
+    },
+    {
+      "path": "art_lab/exports/hollow_knight_v001.png",
+      "size": 594,
+      "sha256": "eee7b709859b9d876d3f735f6d2ee1c896cc860d391e7153933b80d82034d34b"
+    },
+    {
+      "path": "art_lab/exports/plague_crow_v001.png",
+      "size": 544,
+      "sha256": "74356767208cd41b3d2556ba67b4644220a22b8e38580d882b0ff2ef6065bc72"
+    },
+    {
+      "path": "art_lab/exports/plague_crow_v002.png",
+      "size": 542,
+      "sha256": "637b20a086712c2869930e19f1b2275ddff3d541bf0b52b3494ad7bebc63b51c"
+    },
+    {
+      "path": "art_lab/exports/player_ritual_base_v001.png",
+      "size": 552,
+      "sha256": "1de63fb947e12508fcd0d41a0e38e5c5a46132e1ed2fe9651c2b3d557ae06db1"
+    },
+    {
+      "path": "art_lab/previews/amber_sting_beetle_a_relief_v001_1x.png",
+      "size": 554,
+      "sha256": "ec910059d77a26a005fe251a395f821fe07647cb12d5b3ee93f617f71d58a215"
+    },
+    {
+      "path": "art_lab/previews/amber_sting_beetle_a_relief_v001_2x.png",
+      "size": 664,
+      "sha256": "167a37550542a9524a46e2fbe22f10b7e16ab6d120770e6439753db6a9f0be91"
+    },
+    {
+      "path": "art_lab/previews/amber_sting_beetle_a_relief_v001_8x.png",
+      "size": 1461,
+      "sha256": "fdb79d9ac1440d7e0bc66b06ee03fb4a2e48404286c11c27a89021e8b1b0bffc"
+    },
+    {
+      "path": "art_lab/previews/amber_sting_beetle_b_creature_v001_1x.png",
+      "size": 659,
+      "sha256": "1e439d8618115cd6577d60de592ae53453cddb697ea8c84cc90305d7af4b20fa"
+    },
+    {
+      "path": "art_lab/previews/amber_sting_beetle_b_creature_v001_2x.png",
+      "size": 754,
+      "sha256": "c272fc2e74856e3932bbe3646c5a02a8dd89c67a026b75e00e85b7cb71d8e3fd"
+    },
+    {
+      "path": "art_lab/previews/amber_sting_beetle_b_creature_v001_8x.png",
+      "size": 1607,
+      "sha256": "25214f3e18b553da22d3109497f3964cafbbe07c28d221ae6f4f23c443180001"
+    },
+    {
+      "path": "art_lab/previews/amber_sting_beetle_b_creature_v002_1x.png",
+      "size": 653,
+      "sha256": "fe1b843c7fd604a85b97f122d99f523fe1f524abe9d7dbc2a183a71f619cfcf1"
+    },
+    {
+      "path": "art_lab/previews/amber_sting_beetle_b_creature_v002_2x.png",
+      "size": 746,
+      "sha256": "a9ed3391c0e9938ac15e1c5e23604df224e46ed5bb03c327ad855c89b7e8bdfe"
+    },
+    {
+      "path": "art_lab/previews/amber_sting_beetle_b_creature_v002_8x.png",
+      "size": 1604,
+      "sha256": "cb146e18b95334bdf7b1c1626c75f50642c92ac33ec5e2f58897bbce9724df3c"
+    },
+    {
+      "path": "art_lab/previews/amber_sting_beetle_c_graphic_v001_1x.png",
+      "size": 670,
+      "sha256": "358bf68db0022db7a11b4a6c0b99f73e2d8a0827408d1f724bbac0d96518b652"
+    },
+    {
+      "path": "art_lab/previews/amber_sting_beetle_c_graphic_v001_2x.png",
+      "size": 774,
+      "sha256": "88ae4beebe0113fcf7b17e1b70d8cb7476c224140daeb28c2bd159faf830f600"
+    },
+    {
+      "path": "art_lab/previews/amber_sting_beetle_c_graphic_v001_8x.png",
+      "size": 1667,
+      "sha256": "e5f412eaa71fd2feccff22bf220ba23655f040ae86687934fdcc6c179caeff38"
+    },
+    {
+      "path": "art_lab/previews/amber_sting_beetle_studies_v001.html",
+      "size": 10767,
+      "sha256": "25c6309f3c01c335be1cabc0c70ae932026e3bdf3746c2b0b1d31d5aff2e3ea9"
+    },
+    {
+      "path": "art_lab/previews/heath_stalker_v001_2x.png",
+      "size": 507,
+      "sha256": "bcdcde10d10d13626a1b08fc124dae2babead7a2f1969bbf86c8549f3a764cad"
+    },
+    {
+      "path": "art_lab/previews/heath_stalker_v001_8x.png",
+      "size": 1038,
+      "sha256": "5c420c66fc5cb4bbef9374bc40c2121b6518664a90d8c6478a745c5bb69cf59d"
+    },
+    {
+      "path": "art_lab/previews/heath_stalker_v001_background_review.png",
+      "size": 4987,
+      "sha256": "b565d1030d8e1b0913514feb64bc7393a4d72013fc2a8e70a3370f606626b9e5"
+    },
+    {
+      "path": "art_lab/previews/hollow_knight_v001_2x.png",
+      "size": 727,
+      "sha256": "ba093b0f8d96227c4b9352ebc20f6d373d0166f6ed58ff3ee42fd711dc26b976"
+    },
+    {
+      "path": "art_lab/previews/hollow_knight_v001_8x.png",
+      "size": 1556,
+      "sha256": "523966545c561abe54d4a0bbf76508f6c831e1d2f5daab8fc5c52356e32845b4"
+    },
+    {
+      "path": "art_lab/previews/hollow_knight_v001_background_review.png",
+      "size": 5730,
+      "sha256": "4abfc8507d003915523f0283744b026fa749dd2d3967ea1bf09da5a2b5743a20"
+    },
+    {
+      "path": "art_lab/previews/plague_crow_v001_2x.png",
+      "size": 639,
+      "sha256": "a7d58f5983728ea7fe3f49080c648ceb67d9bc080093315373cef083d551caa4"
+    },
+    {
+      "path": "art_lab/previews/plague_crow_v001_8x.png",
+      "size": 1357,
+      "sha256": "7e5deca24d69a219db5a202f32dc265401614bf446c93e9029b85e90b7e1d309"
+    },
+    {
+      "path": "art_lab/previews/plague_crow_v002_2x.png",
+      "size": 634,
+      "sha256": "429c1a791da7a250dbc356aa9483af6c930e449638d8ea7f91ebff0259c74f40"
+    },
+    {
+      "path": "art_lab/previews/plague_crow_v002_8x.png",
+      "size": 1356,
+      "sha256": "825089ea59cd39af4ff9cc03c443c7bea68fe7052f1659469598d14b1d7c41b4"
+    },
+    {
+      "path": "art_lab/previews/plague_crow_v002_background_review.png",
+      "size": 5539,
+      "sha256": "2c298f8d4a4b4e8845b9ef4eedd3cd3c0202569f4ed2b8170a2a6055e978e2d2"
+    },
+    {
+      "path": "art_lab/previews/player_ritual_base_v001_1x.png",
+      "size": 552,
+      "sha256": "1de63fb947e12508fcd0d41a0e38e5c5a46132e1ed2fe9651c2b3d557ae06db1"
+    },
+    {
+      "path": "art_lab/previews/player_ritual_base_v001_2x.png",
+      "size": 681,
+      "sha256": "b1fd11a4bdfe2efbd604ec6a09ee69b6bbd7fa684f3a15ce9f8befddf931e35b"
+    },
+    {
+      "path": "art_lab/previews/player_ritual_base_v001_8x.png",
+      "size": 1534,
+      "sha256": "c8a22eb7bcbba776e71164c7b1472213c62b693fff94bd534949abe11286cb05"
+    }
+  ]
+}

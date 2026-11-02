@@ -1,0 +1,12 @@
+{
+  "runtime_tested_revision": "8c17f961ff400447e29facc70243fb301ebdaebe",
+  "verification_input_revision": "3ac18d8763ce4683eb5ffc0c479352472cdda5d6",
+  "changed_consumers": [],
+  "verifier_only_delta": [
+    "workbench/worker/test_authoring.py",
+    "workbench/worker/test_creatures.py",
+    "workbench/worker/test_creatures_w5f.py"
+  ],
+  "frozen_manifest_sha256": "bd4842ba58812b350ee1fc0a163f421a8188661b474b958e428e268326fe90f0",
+  "note": "Later completion changes only docs/owner and non-legacy evidence; product inputs equal the runtime cohort, final worker test inputs equal the corrected verifier cohort."
+}

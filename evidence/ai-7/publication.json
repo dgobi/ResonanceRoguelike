@@ -1,0 +1,63 @@
+{
+  "phase": "Runtime and corrected verification publication before completion reporting",
+  "runtime_content_editor_revision": "8c17f961ff400447e29facc70243fb301ebdaebe",
+  "verification_input_revision": "3ac18d8763ce4683eb5ffc0c479352472cdda5d6",
+  "independent_readback_command": [
+    "git",
+    "ls-remote",
+    "origin",
+    "refs/heads/main",
+    "refs/tags/checkpoint/ai-7-*"
+  ],
+  "verified_utc": "2026-11-02T03:34:35.225014+00:00",
+  "refs": {
+    "refs/heads/main": {
+      "expected": "3ac18d8763ce4683eb5ffc0c479352472cdda5d6",
+      "remote": "3ac18d8763ce4683eb5ffc0c479352472cdda5d6",
+      "matched": true
+    },
+    "refs/tags/checkpoint/ai-7-start-20261101-a": {
+      "expected": "d42ca27942655b2fcb294e224eb6b4d19f5845fd",
+      "remote": "d42ca27942655b2fcb294e224eb6b4d19f5845fd",
+      "matched": true
+    },
+    "refs/tags/checkpoint/ai-7-start-20261101-a^{}": {
+      "expected": "a5ce9bfe38e3e6c3c2d54c583be70cabf7393fa2",
+      "remote": "a5ce9bfe38e3e6c3c2d54c583be70cabf7393fa2",
+      "matched": true
+    },
+    "refs/tags/checkpoint/ai-7-implementation-20261101-a": {
+      "expected": "0127ab631b6cb4102cc1e3587246774da9f54d8c",
+      "remote": "0127ab631b6cb4102cc1e3587246774da9f54d8c",
+      "matched": true
+    },
+    "refs/tags/checkpoint/ai-7-implementation-20261101-a^{}": {
+      "expected": "b31779cb717faf0e5ab20e33cf0ecd37d27f16a1",
+      "remote": "b31779cb717faf0e5ab20e33cf0ecd37d27f16a1",
+      "matched": true
+    },
+    "refs/tags/checkpoint/ai-7-implementation-20261101-b": {
+      "expected": "2f3c8b7714fe916aeb3b2a11f4d2791051b303d7",
+      "remote": "2f3c8b7714fe916aeb3b2a11f4d2791051b303d7",
+      "matched": true
+    },
+    "refs/tags/checkpoint/ai-7-implementation-20261101-b^{}": {
+      "expected": "8c17f961ff400447e29facc70243fb301ebdaebe",
+      "remote": "8c17f961ff400447e29facc70243fb301ebdaebe",
+      "matched": true
+    },
+    "refs/tags/checkpoint/ai-7-verified-inputs-20261101-a": {
+      "expected": "7394f233841f7376f4bb82ee2701012917350df7",
+      "remote": "7394f233841f7376f4bb82ee2701012917350df7",
+      "matched": true
+    },
+    "refs/tags/checkpoint/ai-7-verified-inputs-20261101-a^{}": {
+      "expected": "3ac18d8763ce4683eb5ffc0c479352472cdda5d6",
+      "remote": "3ac18d8763ce4683eb5ffc0c479352472cdda5d6",
+      "matched": true
+    }
+  },
+  "origin_main_fetch_matched": true,
+  "completion_checkpoint": "checkpoint/ai-7-complete-20261101-a",
+  "note": "Completion reporting follows this verified source revision. Its own future SHA and complete-tag readback are supplied in the final handoff."
+}

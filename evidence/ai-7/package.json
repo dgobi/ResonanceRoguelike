@@ -1,0 +1,17 @@
+{
+  "source_revision": "8c17f961ff400447e29facc70243fb301ebdaebe",
+  "verification_input_revision": "3ac18d8763ce4683eb5ffc0c479352472cdda5d6",
+  "package": {
+    "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+    "sha256": "8890699377091234e4e84280486a320a75c464e6bec9043222fe6bd70931e149"
+  },
+  "installers": [
+    {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "ff12a847aa8ffb7573de3bfce1eeb018c5f94b123a77e4d006a49a4aef2e2d00",
+      "size": 28492913
+    }
+  ],
+  "native_receipt": "final-native-receipt.json.gz",
+  "python_runtime_verified_by": "build.log.gz and bundle.log.gz"
+}

@@ -1,0 +1,197 @@
+{
+  "files": {
+    "ai3-play-responses.json.gz": {
+      "size": 59667,
+      "sha256": "a943026a0a1bdc0c89865b37fb84c899d7d4b95b3d5ea8f7b40f978e484d91ec"
+    },
+    "ai3-play.log.gz": {
+      "size": 297,
+      "sha256": "cd0a3b3ef6545b2aa6f5243fd475e698ff9c21caf5e67f63db2fa70ab3297295"
+    },
+    "ai5-play-responses.json.gz": {
+      "size": 54439,
+      "sha256": "27e92ba4822ef2bf7ccff886e8e1e8b6addda1872f2ed70314768f266df6f33d"
+    },
+    "ai5-play.log.gz": {
+      "size": 148,
+      "sha256": "c96496afa1ec9bd6759f54043381e0a1ef666ccc6565b0bf567d9e2e0565bd88"
+    },
+    "ash_escort-controls.png": {
+      "size": 499542,
+      "sha256": "a85bd0453b65ad60828c226a84547fc4f4672af88778ea79b59d024844b6b896"
+    },
+    "attempts.json": {
+      "size": 1986,
+      "sha256": "cbe687419695e99c20e6f2a50c6a5e4f0765e729c802e4c8b3d42bdcd7357a26"
+    },
+    "authoring-initial-receipt.json.gz": {
+      "size": 1021443,
+      "sha256": "7b7692a7dca4902e744f5ef73b6f19859369a736b1d12615b15773c6e3f0a410"
+    },
+    "authoring-receipt.json.gz": {
+      "size": 970583,
+      "sha256": "5a102aa13d0b80d935a1f2f6dfa1c9655618f29e0b3944b184d246b78463ea24"
+    },
+    "authoring.json": {
+      "size": 1584,
+      "sha256": "89ce5285114fa8553d6f29c41b80500d7263bd1dc402acda1051ae0bb67c47db"
+    },
+    "build.log.gz": {
+      "size": 842,
+      "sha256": "0acbec0e423f7e72314e7d6cd3c027bbf4837f694b593ac32f18729671df1f57"
+    },
+    "bundle.log.gz": {
+      "size": 948,
+      "sha256": "c2558789e25860adcbdc9f7988f669b22d4e5920ef596b462b8f981b2c0885ca"
+    },
+    "clippy.log.gz": {
+      "size": 168,
+      "sha256": "2ab5aed7bacdb8194184f84205ae632acdd79bda9b4d1989088e8b2bb47106db"
+    },
+    "debug-build.log.gz": {
+      "size": 172,
+      "sha256": "16a2c51c45eb130b9af6b62f2a59e32ae9d7aefa546f1016e11c78035991f8b6"
+    },
+    "desktop.log.gz": {
+      "size": 9687,
+      "sha256": "47efd9a0aad4fe4ef8fcbfabca61c2ee26ee7e8e6cf605ae67e9ad4af7eddd55"
+    },
+    "final-native-follow-lane.png": {
+      "size": 42926,
+      "sha256": "aea778423c7c64f7aab7d275816d3db7c1d8def4604d56a0e17261ce7fe3036b"
+    },
+    "final-native-hold-threat.png": {
+      "size": 45090,
+      "sha256": "d93f6d901c2bf1d254d7401fe54cad4ee4d0c42ba6cc94c77588ae93b7142d20"
+    },
+    "final-native-receipt.json.gz": {
+      "size": 475152,
+      "sha256": "7efaee7bb64070e3dc62d6013a0b327f62953aab4bf5b84a38e26c97b7e1bf48"
+    },
+    "focused-run.json.gz": {
+      "size": 45211,
+      "sha256": "1734cc1342be8f9c70685a03279bf4deea42789702f86f353b9f976adb237019"
+    },
+    "focused.log.gz": {
+      "size": 17931,
+      "sha256": "c5c67a100b9d79bfa0fbe350d6afaba3005e922be6448d34375b3087f7130143"
+    },
+    "frontend.log.gz": {
+      "size": 235,
+      "sha256": "7f05416e3d027976f302706cdc27283018c6da1c2a9344f2cf89b0b48a463e3f"
+    },
+    "gates.json": {
+      "size": 1885,
+      "sha256": "d92fbadd51dda41c2b28537b5fff8ffae10a7c5acd2c7986cdef763c88667e95"
+    },
+    "host.log.gz": {
+      "size": 2126,
+      "sha256": "2e24dd53b9c672aed131e93076914fcd0d59cde8d6756badd8a9f74a7054b02b"
+    },
+    "initial-host-failure.log.gz": {
+      "size": 2375,
+      "sha256": "ebfb0685795b9aa9385d8c920c503b14a9cd40d794d3e3e16afcdabc353a0692"
+    },
+    "initial-host-repeat.log.gz": {
+      "size": 1955,
+      "sha256": "e02d6084bdaf18d73e4fd421696785088790231041bbb73597356e8f8675d53b"
+    },
+    "input-delta.json": {
+      "size": 629,
+      "sha256": "48c2e585010b3773388e193613d58170da8f7dab63eae032c8b0eee0f1467c8b"
+    },
+    "inputs.json.gz": {
+      "size": 52810,
+      "sha256": "1d0da8566aaa6a3fdf763d8bb07e69f33893e5f0e6cb201d90314bc65a914ee2"
+    },
+    "legacy-v5-save.zip": {
+      "size": 21368,
+      "sha256": "02114bee5470a2cdb7ca2e786b94f1d2b7f2bb3230109488a208660e5555d790"
+    },
+    "legacy-v5-snapshot.json": {
+      "size": 13140,
+      "sha256": "a809d1fad10ff321a4410d046b0fd83945967431b862fc142f47a76efa26bfda"
+    },
+    "native.log.gz": {
+      "size": 214,
+      "sha256": "c6e5ca2bcfec8340a922f7ea2015e455e75455af112315943617d796c528335a"
+    },
+    "order-1280x900.png": {
+      "size": 52545,
+      "sha256": "26671c5a251f87915f5ea6376c9a011ca808a6aad7e960b26c9a58deec945c25"
+    },
+    "order-960x720.png": {
+      "size": 48622,
+      "sha256": "3b3179274ecc471b7ad372b443c6a1fb114d25f922bb152db96e96abd907f286"
+    },
+    "package.json": {
+      "size": 699,
+      "sha256": "bbf6f0598f803f6ee0f016691e91a60b70da34e3b41894ab51cfb7ae5d8a2e35"
+    },
+    "play-responses.json.gz": {
+      "size": 45694,
+      "sha256": "1713e83af2d7e3f8fab3798e20d1aec3866dd6d92748091f0965bb6534579ffe"
+    },
+    "play.log.gz": {
+      "size": 300,
+      "sha256": "445321b55c60e0c776cdfe8140999dbc99561edec789fbf5f1354de1d31a5d17"
+    },
+    "preservation.json": {
+      "size": 278,
+      "sha256": "766b729e0e078e68176b48937946b919b6edab1e49de2e8561a037c686ca5269"
+    },
+    "preserved-owner-files.json": {
+      "size": 19494,
+      "sha256": "1e2c59ef2ad3e751d6e099f6b2f319238c5ddb06cf3ea2824339efbb04f782b2"
+    },
+    "production-d.json.gz": {
+      "size": 1301606,
+      "sha256": "8332c99ba4a9e1b79ec7a0f3d122558047684597982db47c90290bdcb6858e5e"
+    },
+    "production-d.log.gz": {
+      "size": 1145,
+      "sha256": "1edb7cd78e41e3a37649c57b4a551ae66b1b111f209c98ec15d361d4f41dc7e5"
+    },
+    "publication.json": {
+      "size": 2645,
+      "sha256": "5894f6bdbf0709ad60241de28383b4faf9afb92b9d0330bf98c81b174389ad13"
+    },
+    "release.json": {
+      "size": 21845,
+      "sha256": "79bfec13487a2b393b6f3a0ec3cdfe00713e27a89dbd54354113b31c40780ead"
+    },
+    "retained-native.log.gz": {
+      "size": 248,
+      "sha256": "3348457c73501d02e0f83bfc2618451dc69a3524b3c4a05114f7d93bbbc03441"
+    },
+    "runtime-inputs.json.gz": {
+      "size": 52819,
+      "sha256": "3e5316ef081152688a09f26d932503a6b67247e78d2ceb25d80e28c12df0713c"
+    },
+    "startup.log.gz": {
+      "size": 404,
+      "sha256": "d05c16609355a5aa78eb493a7f8ae8e1a58e4d32f0eb509503d72b5318f25264"
+    },
+    "stone_escort-controls.png": {
+      "size": 499968,
+      "sha256": "ca4350c8c7c56dd2ce365a5120937afe523242234590f8a3de66331f57336340"
+    },
+    "typecheck.log.gz": {
+      "size": 89,
+      "sha256": "e638373e11f114cff43fd3f0cfb2ab8e244d99649eb9c5a99aae83357b49711c"
+    },
+    "verification-input-delta.json": {
+      "size": 5457,
+      "sha256": "4acd9f579a03c8b10e1100381dbad92e1cab7b3c899b008babe76d0978f61c17"
+    },
+    "worker-initial.log.gz": {
+      "size": 2359,
+      "sha256": "150874bec71b39f3887b87bfc6b0a0d7c12e9b41e061ed96cc23264c7d299c42"
+    },
+    "worker.log.gz": {
+      "size": 1981,
+      "sha256": "4ad23d4e42c19fac789e0de10853fe2342d6180ac291a420367479284f2199d8"
+    }
+  },
+  "completion_report_sha256": "890daada8a943aa7708dc5772ab0944940c7bf6928739469bd796430e5868a99"
+}

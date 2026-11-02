@@ -1,0 +1,567 @@
+{
+  "passed": true,
+  "revision": "3ac18d8763ce4683eb5ffc0c479352472cdda5d6",
+  "started_utc": "2026-11-02T02:45:08.662471+00:00",
+  "inputs_sha256": "bd4842ba58812b350ee1fc0a163f421a8188661b474b958e428e268326fe90f0",
+  "commands": [
+    {
+      "gate": "frontend",
+      "command": [
+        "npm.cmd",
+        "test"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 3.7629637999925762,
+      "source_stable": true,
+      "log_sha256": "42760334aceed97fabc8ac72afc7e107f59ac4605f5d94814f73ca8375e8fa67",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "8c17f961ff400447e29facc70243fb301ebdaebe",
+      "retention_basis": "Only three Workbench test inventory expectations changed. Product bytes and all other test inputs are unchanged."
+    },
+    {
+      "gate": "typecheck",
+      "command": [
+        "npm.cmd",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 5.105409499956295,
+      "source_stable": true,
+      "log_sha256": "77783bf2ca9523ff1e6aa3f5a098f779a50fd8cade5fb2774a4da5c450761c89",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "8c17f961ff400447e29facc70243fb301ebdaebe",
+      "retention_basis": "Only three Workbench test inventory expectations changed. Product bytes and all other test inputs are unchanged."
+    },
+    {
+      "gate": "play",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_ai_7_play.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\ai-7\\final-b\\play"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 22.381117600016296,
+      "source_stable": true,
+      "log_sha256": "6b5b077a04dc462e4a0b44c3f425452569bcef6ddc1261c65d8c5293bb95c127",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "8c17f961ff400447e29facc70243fb301ebdaebe",
+      "retention_basis": "Only three Workbench test inventory expectations changed. Product bytes and all other test inputs are unchanged."
+    },
+    {
+      "gate": "ai5-play",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_ai_5_play.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\ai-7\\final-b\\ai5-play"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 9.119342100108042,
+      "source_stable": true,
+      "log_sha256": "accd1a9e0e7df7b9d181a6b7f3d419a1c62b8dee37403292590218fea7506976",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "8c17f961ff400447e29facc70243fb301ebdaebe",
+      "retention_basis": "Only three Workbench test inventory expectations changed. Product bytes and all other test inputs are unchanged."
+    },
+    {
+      "gate": "ai3-play",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_ai_3_play.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\ai-7\\final-b\\ai3-play"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 7.1320517000276595,
+      "source_stable": true,
+      "log_sha256": "4fa6ecf1dcd5a162c1544b23f3c885c3f2b734f0562ad7fc934f75c897970257",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "8c17f961ff400447e29facc70243fb301ebdaebe",
+      "retention_basis": "Only three Workbench test inventory expectations changed. Product bytes and all other test inputs are unchanged."
+    },
+    {
+      "gate": "host",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--manifest-path",
+        "src-tauri/Cargo.toml"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 31.099948100047186,
+      "source_stable": true,
+      "log_sha256": "31476af936442e06cdefc607d3aba64ad0f310ef64a027348424c7309904060c",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "8c17f961ff400447e29facc70243fb301ebdaebe",
+      "retention_basis": "Only three Workbench test inventory expectations changed. Product bytes and all other test inputs are unchanged."
+    },
+    {
+      "gate": "clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "--manifest-path",
+        "src-tauri/Cargo.toml",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 1.9011270999908447,
+      "source_stable": true,
+      "log_sha256": "70b7ca659f676bd445374cdc874818811691db2c079bc4336b3f2d8cc857f260",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "8c17f961ff400447e29facc70243fb301ebdaebe",
+      "retention_basis": "Only three Workbench test inventory expectations changed. Product bytes and all other test inputs are unchanged."
+    },
+    {
+      "gate": "debug-build",
+      "command": [
+        "cargo",
+        "build",
+        "--locked",
+        "--manifest-path",
+        "src-tauri/Cargo.toml"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 3.9487787999678403,
+      "source_stable": true,
+      "log_sha256": "960400f3fc1630aadd81d019bd4a9cbb9e9e13c435a79c45ca9753211f3dc6ae",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "8c17f961ff400447e29facc70243fb301ebdaebe",
+      "retention_basis": "Only three Workbench test inventory expectations changed. Product bytes and all other test inputs are unchanged."
+    },
+    {
+      "gate": "build",
+      "command": [
+        "npm.cmd",
+        "run",
+        "build"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 48.2579737000633,
+      "source_stable": true,
+      "log_sha256": "6eb4c71881ff11b74df986b40425d355bceb37d57104b8fd83bcf0ce56df055e",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "8c17f961ff400447e29facc70243fb301ebdaebe",
+      "retention_basis": "Only three Workbench test inventory expectations changed. Product bytes and all other test inputs are unchanged."
+    },
+    {
+      "gate": "bundle",
+      "command": [
+        "npm.cmd",
+        "run",
+        "bundle"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 99.45232930011116,
+      "source_stable": true,
+      "log_sha256": "2b97e6d49e49c859eb515725ea985f39cc910ded90bc84b55c122d95efb5ca21",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "8c17f961ff400447e29facc70243fb301ebdaebe",
+      "retention_basis": "Only three Workbench test inventory expectations changed. Product bytes and all other test inputs are unchanged."
+    },
+    {
+      "gate": "startup",
+      "command": [
+        "node",
+        "scripts/startup-test.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 112.64906560000964,
+      "source_stable": true,
+      "log_sha256": "58d89a2c615cda5b05cd51f407dcbf547f7952e0a45f1f9ec68cdaf7703eea9a",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "8c17f961ff400447e29facc70243fb301ebdaebe",
+      "retention_basis": "Only three Workbench test inventory expectations changed. Product bytes and all other test inputs are unchanged."
+    },
+    {
+      "gate": "desktop",
+      "command": [
+        "node",
+        "scripts/desktop-test.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 29.88671229989268,
+      "source_stable": true,
+      "log_sha256": "4fb2525abc3d57751fffd279108758da1971bf13d042d6011ee38d03672900bf",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "8c17f961ff400447e29facc70243fb301ebdaebe",
+      "retention_basis": "Only three Workbench test inventory expectations changed. Product bytes and all other test inputs are unchanged."
+    },
+    {
+      "gate": "native",
+      "command": [
+        "node",
+        "scripts/run-ai-7.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 70.32199110020883,
+      "source_stable": true,
+      "log_sha256": "4728a25941acc860a121c818bbd4519ccf00b3257646aaf4f2bb08f1c1465efd",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "8c17f961ff400447e29facc70243fb301ebdaebe",
+      "retention_basis": "Only three Workbench test inventory expectations changed. Product bytes and all other test inputs are unchanged."
+    },
+    {
+      "gate": "legacy-native",
+      "command": [
+        "node",
+        "scripts/run-ai-3.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 108.25814919988625,
+      "source_stable": true,
+      "log_sha256": "fbb258524ed8c4cca3885ae41cbc027d524c4a4d6a329d7669c9d94547c3401d",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "8c17f961ff400447e29facc70243fb301ebdaebe",
+      "retention_basis": "Only three Workbench test inventory expectations changed. Product bytes and all other test inputs are unchanged."
+    },
+    {
+      "gate": "production-d",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_d.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\ai-7\\final-b\\production-d"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 771.9270999999717,
+      "source_stable": true,
+      "log_sha256": "cd9ffec4444a7981e0d10ed0e2930e6545b5d767153faa1d2a77cc60353b645f",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "8c17f961ff400447e29facc70243fb301ebdaebe",
+      "retention_basis": "Only three Workbench test inventory expectations changed. Product bytes and all other test inputs are unchanged."
+    },
+    {
+      "gate": "worker",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\ai7-worker-c-parallel.py"
+      ],
+      "cohort": [
+        "test_composite_ai",
+        "test_venom_treatment",
+        "test_creatures",
+        "test_creatures_w5f",
+        "test_items",
+        "test_supplies",
+        "test_equipment",
+        "test_rooms_w5g",
+        "test_rivals_g21",
+        "test_authoring",
+        "test_assignment"
+      ],
+      "modules": [
+        {
+          "module": "test_composite_ai",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_composite_ai']));sys.exit(not r.wasSuccessful())"
+          ],
+          "exit_code": 0,
+          "seconds": 397.68830809998326,
+          "tests": 9,
+          "log_sha256": "030d32bc4ce1e3009f95fae184e7169fb22d75cf5dacaafa91fb887a1ff75066"
+        },
+        {
+          "module": "test_venom_treatment",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_venom_treatment']));sys.exit(not r.wasSuccessful())"
+          ],
+          "exit_code": 0,
+          "seconds": 32.222862700000405,
+          "tests": 1,
+          "log_sha256": "1952d2882ce77a19ae1dc967d9f8a7a7314faea09e887aaff3d669bc4c70d49e"
+        },
+        {
+          "module": "test_creatures",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_creatures']));sys.exit(not r.wasSuccessful())"
+          ],
+          "exit_code": 0,
+          "seconds": 219.61168169998564,
+          "tests": 6,
+          "log_sha256": "7e39d2cacb7a641ae520e8412b3dcb402d6ce9b69de7dd3e9d8a6764b30d7b36"
+        },
+        {
+          "module": "test_creatures_w5f",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_creatures_w5f']));sys.exit(not r.wasSuccessful())"
+          ],
+          "exit_code": 0,
+          "seconds": 130.99995269998908,
+          "tests": 5,
+          "log_sha256": "4a647938401da35c86e28140b3f56b98e16fff93bd86fa64de05df5fd86bcb46"
+        },
+        {
+          "module": "test_items",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_items']));sys.exit(not r.wasSuccessful())"
+          ],
+          "exit_code": 0,
+          "seconds": 144.52087509981357,
+          "tests": 5,
+          "log_sha256": "5326a8056e080789892a747cc4c563cca8235d8d578a6c4a5fc9d394641e9e0e"
+        },
+        {
+          "module": "test_supplies",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_supplies']));sys.exit(not r.wasSuccessful())"
+          ],
+          "exit_code": 0,
+          "seconds": 170.90530330012552,
+          "tests": 3,
+          "log_sha256": "f2712b3de335157153a313abee1d541c09d2ac56f3c3cab42875d89c8453e25b"
+        },
+        {
+          "module": "test_equipment",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_equipment']));sys.exit(not r.wasSuccessful())"
+          ],
+          "exit_code": 0,
+          "seconds": 405.487218900118,
+          "tests": 6,
+          "log_sha256": "b3d6235da35df7ce1d8b64465b5549b19979036e8c023f9fcaac8af2b8080754"
+        },
+        {
+          "module": "test_rooms_w5g",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_rooms_w5g']));sys.exit(not r.wasSuccessful())"
+          ],
+          "exit_code": 0,
+          "seconds": 177.32433840003796,
+          "tests": 7,
+          "log_sha256": "fae339680c61bcd030d9bcc0df739444364e6e8389f8cc299837a78a30ddfd49"
+        },
+        {
+          "module": "test_rivals_g21",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_rivals_g21']));sys.exit(not r.wasSuccessful())"
+          ],
+          "exit_code": 0,
+          "seconds": 64.31102290004492,
+          "tests": 2,
+          "log_sha256": "a16b123f488cff1970b735281a99f7b9452c165baabde32f635cad75f5dbc973"
+        },
+        {
+          "module": "test_authoring",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_authoring']));sys.exit(not r.wasSuccessful())"
+          ],
+          "exit_code": 0,
+          "seconds": 97.57567279995419,
+          "tests": 3,
+          "log_sha256": "00d7bafa98e6f880af214b7543d61c0ff079bd4ba93ed32bf9b3b1d147629fc3"
+        },
+        {
+          "module": "test_assignment",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_assignment']));sys.exit(not r.wasSuccessful())"
+          ],
+          "exit_code": 0,
+          "seconds": 126.16065509989858,
+          "tests": 3,
+          "log_sha256": "7f3f8f70d6480627453ae1869059b1ba8a12cf56a2e1fbc3e540e1317083fe36"
+        }
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "seconds": 582.263073500013,
+      "tests": 50,
+      "source_stable": true,
+      "log_sha256": "a941e7d2757b9cb7aacf56235b17a77b343a5b9a5f4aa463a45fad6a270f29c4",
+      "log_path": "G:\\GameDev\\RoguelikeProject\\.baseline\\ai-7\\final-c\\worker.log",
+      "tested_revision": "3ac18d8763ce4683eb5ffc0c479352472cdda5d6",
+      "passed": true
+    },
+    {
+      "gate": "focused",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\critical_fix_regressions\\verify_fixes.py",
+        "--timeout",
+        "3600",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\ai-7\\final-b\\focused"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 1784.826932300115,
+      "source_stable": true,
+      "log_sha256": "1bed5eff044108c2dd343e59556405a2eeb8a2b7f28f242a513a28f4b97a8dd6",
+      "passed": true,
+      "retained": true,
+      "tested_revision": "8c17f961ff400447e29facc70243fb301ebdaebe",
+      "retention_basis": "Only three Workbench test inventory expectations changed. Product bytes and all other test inputs are unchanged."
+    }
+  ],
+  "environment": {
+    "platform": "win32",
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+    "python_executable": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "dependencies": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6",
+      "cffi": "2.1.1",
+      "pycparser": "3.11",
+      "typing_extensions": "4.16.0"
+    },
+    "node": "v24.15.0",
+    "cargo": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)",
+    "rustc": "rustc 1.95.0 (59807616e 2026-04-14)"
+  },
+  "package": {
+    "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+    "sha256": "8890699377091234e4e84280486a320a75c464e6bec9043222fe6bd70931e149"
+  },
+  "installers": [
+    {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "ff12a847aa8ffb7573de3bfce1eeb018c5f94b123a77e4d006a49a4aef2e2d00",
+      "size": 28492913
+    }
+  ],
+  "source_stable": true,
+  "finished_utc": "2026-11-02T03:14:54.722675+00:00",
+  "runtime_content_editor_revision": "8c17f961ff400447e29facc70243fb301ebdaebe",
+  "verification_input_delta": [
+    "workbench/worker/test_authoring.py",
+    "workbench/worker/test_creatures.py",
+    "workbench/worker/test_creatures_w5f.py"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "launch_entry": "workbench/Launch Workbench.vbs",
+  "files": [
+    {
+      "path": "roguelike/data/entities/creatures/ash_escort.json",
+      "sha256": "acd2d5d6ffd91afc0fcc4b17e400afb53a2c8c8accf4cd066d329831c6d12a8b",
+      "published_through_controls": true,
+      "byte_checked_reopened": true,
+      "final_native_capture_matched": true
+    },
+    {
+      "path": "roguelike/data/entities/creatures/stone_escort.json",
+      "sha256": "0eaf3f2f8174e4f7006496452333e07c59ade3112351b2c3e184eedccc6284f2",
+      "published_through_controls": true,
+      "byte_checked_reopened": true,
+      "final_native_capture_matched": true
+    },
+    {
+      "path": "roguelike/data/layouts/ai7_escort_lane.json",
+      "sha256": "ec0d366ea17c612d83279265d19d755cefe455171ac6bde949b5602fea9e3d6d",
+      "published_through_controls": true,
+      "byte_checked_reopened": true,
+      "final_native_capture_matched": true
+    },
+    {
+      "path": "roguelike/data/layouts/ai7_escort_threat.json",
+      "sha256": "18c7173fb27f38dcb7c63df0cb6909ebc5586a5834927aa1872a7f4614906583",
+      "published_through_controls": true,
+      "byte_checked_reopened": true,
+      "final_native_capture_matched": true
+    }
+  ],
+  "follow_position": [
+    36,
+    21
+  ],
+  "saved_hold_position": [
+    38,
+    21
+  ],
+  "reset_order": "follow",
+  "latest_order": "hold",
+  "dirty_dependency_excluded": true,
+  "receipts": [
+    "authoring-initial-receipt.json.gz",
+    "authoring-receipt.json.gz",
+    "final-native-receipt.json.gz"
+  ]
+}
