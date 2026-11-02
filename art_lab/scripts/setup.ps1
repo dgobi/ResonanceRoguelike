@@ -23,5 +23,5 @@ try {
     if ($LASTEXITCODE) { throw 'Configuration failed.' }
     $paths | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $Local 'paths.json') -Encoding UTF8
     Write-Host 'Setup saved. If Aseprite is open, save your documents and close it normally before launch-art.cmd.'
-    Write-Host 'Only the four owner-approved art-tool permissions were configured; general model/trust/approval/sandbox defaults were preserved.'
+    Write-Host 'Lab art-tool approvals configured. launch-art.cmd starts full access; -StandardPermissions uses standard shell permissions. User-wide defaults were preserved.'
 } finally { Pop-Location }

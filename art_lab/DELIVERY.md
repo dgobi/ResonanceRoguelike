@@ -125,3 +125,32 @@ Both the saved-path route and the stale-cache discovery route passed under the
 ordinary Windows PATH. The full launcher preflight passed, and a new visible
 art-lab console was launched with Codex running beneath it and the session lock
 held. Existing Aseprite was reused. See `evidence/launcher-path-fix.json`.
+
+## Owner-requested full access — 1 November 2026
+
+The owner requested an easy way to grant full access or start with it enabled
+because the art conversation repeatedly requested permissions. The default
+launcher now supplies `--sandbox danger-full-access --ask-for-approval never`.
+Its `/permissions` menu was verified to show **Full Access (current)** immediately
+after startup, without an additional confirmation. These are process options;
+user-wide Codex defaults are unchanged. `launch-art.cmd -StandardPermissions`
+omits the full-access shell options.
+
+The lab's ignored MCP configuration now preapproves the Aseprite server's
+normal tools with `default_tools_approval_mode = "approve"`, replacing the
+original four-tool list. Setup reproduces this setting and preserves backups.
+It applies in both launcher modes. Arbitrary Lua remains disabled. The MCP
+setting is stored in project config because passing it as an inline `-c`
+override caused this CLI build's interactive bootstrap to fail; the final
+project-config route successfully opened the interactive conversation.
+
+For an existing conversation, `/permissions` > **Full Access** > **Yes, continue
+anyway** was also verified. Relaunch the art conversation to load the new MCP
+preapproval policy. Aseprite does not need a restart or reinstall.
+
+Verification included a fresh native session using the launcher's final options:
+the previously blocked Python interpreter ran, and the Aseprite `frame` tool
+(outside the original four approvals) successfully listed the current document's
+frames without prompting. This test did not mutate artwork. Local config remains
+lab-scoped, and existing owner studies were excluded from this change and commit.
+See `evidence/full-access-launch.json` for the concise verification record.

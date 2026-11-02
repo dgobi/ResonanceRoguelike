@@ -12,6 +12,18 @@ run `launch-art.cmd -Model <available-model-id>`. Keep one art conversation per
 live Aseprite editor. The launcher prevents a second launcher session in this
 lab, but cannot lock conversations started by other routes.
 
+**Full access is now the default for this launcher**, at the owner's request.
+Codex can run shell commands and Aseprite tools without routine approval prompts.
+This includes filesystem/network access available to your Windows account;
+starting in the lab is not a filesystem sandbox. The setting applies to the
+launched art session, not user-wide Codex defaults. Arbitrary Lua remains off.
+
+For standard shell permissions, run `launch-art.cmd -StandardPermissions`.
+In an already-open Codex conversation, use `/permissions` and select **Full
+Access**, then confirm **Yes, continue anyway**; `/status` shows the current mode.
+Relaunch to load the automatic Aseprite-tool approvals as well. Save manual Aseprite
+edits before changing conversations; no editor restart or reinstall is needed.
+
 ## First experiment
 
 Paste this into the local Codex conversation:
@@ -104,10 +116,12 @@ Generated `.codex/config.toml`, `.local/paths.json`, backups and logs are ignore
 The MCP command is the detected native Node executable plus the **locked local
 `node_modules/@pebbly/aseprite-ai-artist/dist/cli.js`**, never `npx @latest`.
 Lua escape-hatch execution and headless mode are explicitly disabled.
-The owner approved lab-scoped preapproval for exactly `sprite_manage`, `layer`,
-`draw` and `export`. Their tool tables use `approval_mode = "approve"`, because
-the native noninteractive client otherwise rejects these writes. General
-approval and sandbox settings, and other servers/tools, retain their defaults.
+The owner approved the connected art tools without routine prompts. The lab's
+server stanza uses `default_tools_approval_mode = "approve"`; this replaces the
+initial four-tool approval list. The normal launcher also adds session-only
+shell options: `--sandbox danger-full-access --ask-for-approval never`.
+`-StandardPermissions` omits those shell options; Aseprite tools remain approved.
+User-wide configuration and other servers' tool policies remain unchanged.
 Startup uses installed packages; it does not fetch an adapter from the network.
 Codex itself still needs its normal service connection.
 
@@ -139,7 +153,7 @@ not a substitute for the retained draw/inspect/revise/save evidence.
 ## Remove or restore the connection
 
 Exit the art Codex session. Remove only `[mcp_servers.aseprite-ai-artist]` and
-its `.env` and four `.tools.*` tables from this lab's ignored `.codex/config.toml` (or set
+its child tables from this lab's ignored `.codex/config.toml` (or set
 `enabled = false` in that server table). Leave unrelated entries intact.
 Prior local config copies, when one existed, are next to it as `config.toml.bak-*`;
 restore just the affected stanza if other configuration has since changed.
@@ -162,3 +176,4 @@ Project Compass and Workflow under the repository's G11 review references.
 - [Pinned adapter source and install documentation](https://github.com/with-pebbly/aseprite-ai-artist/blob/a32a2a58e76b06fc9ad7b29b12abd003ec769665/docs/INSTALL.md)
 - [Official Codex project configuration and trust](https://learn.chatgpt.com/docs/config-file/config-basic)
 - [Official Codex MCP documentation](https://learn.chatgpt.com/docs/extend/mcp)
+- [Official Codex session commands, including /permissions](https://learn.chatgpt.com/docs/developer-commands)

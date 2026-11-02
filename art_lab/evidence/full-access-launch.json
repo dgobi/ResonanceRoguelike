@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-01",
+  "baseline": "8933f9f43d82b54a130e36a696fd0a1be183e80a",
+  "checkpoint": "checkpoint/art-1-before-full-access-2026-11-01",
+  "codex": "0.166.0-alpha.5.1",
+  "default_launcher_shell_options": [
+    "--sandbox",
+    "danger-full-access",
+    "--ask-for-approval",
+    "never"
+  ],
+  "mcp_policy": {
+    "scope": "art_lab/.codex/config.toml only",
+    "server": "aseprite-ai-artist",
+    "default_tools_approval_mode": "approve",
+    "arbitrary_lua": false
+  },
+  "verification": {
+    "full_access_tui_bootstrap": "passed using Windows PowerShell 5 launcher",
+    "permissions_menu": "Full Access (current) on startup",
+    "manual_permissions_menu_route": "verified /permissions -> Full Access -> Yes, continue anyway",
+    "full_and_standard_preflight": "passed",
+    "native_python": "3.11.0",
+    "pillow": "12.3.0",
+    "previously_blocked_python_launch": "passed without approval",
+    "additional_mcp_tool": "frame op=list; tool metadata marks it destructive but requested operation was read-only",
+    "additional_mcp_tool_result": "passed without approval",
+    "run_lua_exposed": false,
+    "artwork_mutations": false,
+    "preexisting_owner_files_hash_preserved": 30,
+    "powershell_syntax": "passed"
+  },
+  "standard_permissions_mode": "Omits full-access shell options; lab Aseprite tools remain preapproved.",
+  "compatibility_note": "Inline -c MCP policy overrides failed during this client TUI bootstrap. Final implementation stores that policy in supported project configuration; successful interactive launch and fresh tool smoke test verified.",
+  "published_private_logs": false
+}

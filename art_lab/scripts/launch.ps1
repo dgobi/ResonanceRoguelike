@@ -1,7 +1,9 @@
-param([switch]$CheckOnly, [string]$Model)
+param([switch]$CheckOnly, [string]$Model, [switch]$StandardPermissions)
 . "$PSScriptRoot\paths.ps1"
+. "$PSScriptRoot\codex-options.ps1"
 $paths = Get-ArtPaths
 Assert-ArtPaths $paths
+$codexArgs = @(Get-ArtCodexArguments -StandardPermissions:$StandardPermissions -Model $Model)
 if (!(Test-Path -LiteralPath $Adapter) -or !(Test-Path -LiteralPath (Join-Path $Lab '.codex\config.toml'))) {
     throw 'Lab dependencies/config are missing. Run setup-art.cmd first.'
 }
@@ -12,7 +14,7 @@ try {
     try {
         $lock = [IO.File]::Open((Join-Path $Local 'art-session.lock'), 'OpenOrCreate', 'ReadWrite', 'None')
     } catch { throw 'Another launch-art session owns this lab. Use that conversation or close it first.' }
-    $effectiveText = & $paths.codex mcp get aseprite-ai-artist --json
+    $effectiveText = & $paths.codex @codexArgs mcp get aseprite-ai-artist --json
     if ($LASTEXITCODE) { throw 'Lab MCP config is not loaded. See README: project trust and fresh session.' }
     $effective = ($effectiveText -join "`n") | ConvertFrom-Json
     if (!$effective.enabled -or $effective.transport.command -ne $paths.node -or
@@ -29,8 +31,11 @@ try {
     if ($CheckOnly) { Write-Host 'Launcher preflight passed.'; return }
     Write-Host "Type art prompts in the Codex conversation below. Artwork appears in Aseprite. Lab: $Lab"
     Write-Host 'Use /model to select an available model. Keep one authoring conversation per editor.'
-    $codexArgs = @('--no-daemon', '--cd', $Lab)
-    if ($Model) { $codexArgs += @('--model', $Model) }
+    if ($StandardPermissions) {
+        Write-Host 'Permissions: existing Codex defaults (standard mode).'
+    } else {
+        Write-Host 'Permissions: full access; shell and Aseprite tools run without routine approval prompts.'
+    }
     & $paths.codex @codexArgs
     if ($LASTEXITCODE) { throw "Codex exited with code $LASTEXITCODE. The error remains visible in this window." }
 } finally {
