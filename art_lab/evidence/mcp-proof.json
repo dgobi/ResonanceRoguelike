@@ -1,0 +1,90 @@
+{
+  "method": "Fresh native Windows Codex exec using the project-scoped live MCP server; compacted from private JSONL events. No raw logs or image payloads published.",
+  "successful_calls_by_tool": {
+    "preflight": 1,
+    "read_mcp_resource": 3,
+    "sprite_manage": 10,
+    "sprite_info": 8,
+    "look": 21,
+    "layer": 2,
+    "draw": 11,
+    "export": 9,
+    "read_pixels": 5
+  },
+  "draw_calls": 11,
+  "all_draws_disable_palette_lock": true,
+  "drawing_arguments_sha256": "ad0097c6692961d69a9879cb10dcae13380977b0bcb79212f0ccfe6d1348a75b",
+  "successful_look_calls": 21,
+  "look_scales": [
+    1,
+    2,
+    8
+  ],
+  "saved_and_opened": [
+    {
+      "status": "completed",
+      "arguments": {
+        "sprite": "#11",
+        "op": "save_as",
+        "path": "drafts/diagnostic/diagnostic_v001.aseprite"
+      }
+    },
+    {
+      "status": "completed",
+      "arguments": {
+        "sprite": "#11",
+        "op": "save_as",
+        "path": "drafts/diagnostic/diagnostic_v002.aseprite"
+      }
+    },
+    {
+      "status": "completed",
+      "arguments": {
+        "sprite": "#11",
+        "op": "open",
+        "path": "drafts/diagnostic/diagnostic_v002.aseprite"
+      }
+    },
+    {
+      "status": "completed",
+      "arguments": {
+        "sprite": "#126",
+        "op": "save_as",
+        "path": "drafts/amber_sting_beetle/amber_sting_beetle_v001.aseprite"
+      }
+    },
+    {
+      "status": "completed",
+      "arguments": {
+        "sprite": "#126",
+        "op": "save_as",
+        "path": "drafts/amber_sting_beetle/amber_sting_beetle_v002.aseprite"
+      }
+    },
+    {
+      "status": "completed",
+      "arguments": {
+        "sprite": "#126",
+        "op": "save"
+      }
+    },
+    {
+      "status": "completed",
+      "arguments": {
+        "sprite": "#126",
+        "op": "open",
+        "path": "drafts/amber_sting_beetle/amber_sting_beetle_v002.aseprite"
+      }
+    }
+  ],
+  "recovered_tool_errors": [
+    {
+      "tool": "draw",
+      "message": "invalid_args: Grid row 5 (y=8) has 9 cell(s) but row 0 has 10. Every row must be the same width \u2014 pad with '.' rather than leaving a row short."
+    },
+    {
+      "tool": "look",
+      "message": "too_large: Colour #a85d24 has no glyph: the palette and the off-palette colours together need more than 261. Sharing a glyph would make the grid lie about which colour is where. Snap the art to the palette (recolor op 'snap') or use the preview op."
+    }
+  ]
+}

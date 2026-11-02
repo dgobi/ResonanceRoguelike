@@ -1,0 +1,372 @@
+{
+  "source_revision": "2e3168ea915650658af66d1ae41a9ae399185425",
+  "mapping": "roguelike/data/sprites/sprite_map.json",
+  "mapping_sha256": "77ec66cebe805d878b038e83a50573f662828011e4adda82033f9fbd91a72533",
+  "enlargement": "Exact nearest-neighbor 4x; these are existing 16px references, not new 32px art.",
+  "entries": [
+    {
+      "id": "player",
+      "mapping": {
+        "sheet": "creatures",
+        "col": 0,
+        "row": 0
+      },
+      "source": "roguelike/assets/sprites/creatures.png",
+      "sheet_size": [
+        256,
+        320
+      ],
+      "sheet_columns": 16,
+      "crop_box": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "native_size": [
+        16,
+        16
+      ],
+      "placeholder": false,
+      "source_sha256": "5d43f84e53c913f4100813c48a966cd679f877c9ab03fc1cf53146512ab88fb5"
+    },
+    {
+      "id": "hollow_revenant",
+      "mapping": {
+        "sheet": "creatures",
+        "col": 6,
+        "row": 0
+      },
+      "source": "roguelike/assets/sprites/creatures.png",
+      "sheet_size": [
+        256,
+        320
+      ],
+      "sheet_columns": 16,
+      "crop_box": [
+        96,
+        0,
+        112,
+        16
+      ],
+      "native_size": [
+        16,
+        16
+      ],
+      "placeholder": false,
+      "source_sha256": "5d43f84e53c913f4100813c48a966cd679f877c9ab03fc1cf53146512ab88fb5"
+    },
+    {
+      "id": "heath_stalker",
+      "mapping": {
+        "sheet": "creatures",
+        "col": 2,
+        "row": 9
+      },
+      "source": "roguelike/assets/sprites/creatures.png",
+      "sheet_size": [
+        256,
+        320
+      ],
+      "sheet_columns": 16,
+      "crop_box": [
+        32,
+        144,
+        48,
+        160
+      ],
+      "native_size": [
+        16,
+        16
+      ],
+      "placeholder": false,
+      "source_sha256": "5d43f84e53c913f4100813c48a966cd679f877c9ab03fc1cf53146512ab88fb5"
+    },
+    {
+      "id": "amber_sting_beetle",
+      "mapping": {
+        "sheet": "amber_insect",
+        "col": 0,
+        "row": 0
+      },
+      "source": "roguelike/assets/sprites/amber_insect.png",
+      "sheet_size": [
+        32,
+        16
+      ],
+      "sheet_columns": 2,
+      "crop_box": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "native_size": [
+        16,
+        16
+      ],
+      "placeholder": false,
+      "source_sha256": "c52e60171048354b3d3c4b2bea785c8a8aaff2ff1281f808cae79c83f5126d94"
+    },
+    {
+      "id": "oil_lantern",
+      "mapping": {
+        "sheet": "objects",
+        "col": 15,
+        "row": 0
+      },
+      "source": "roguelike/assets/sprites/objects.png",
+      "sheet_size": [
+        384,
+        384
+      ],
+      "sheet_columns": 24,
+      "crop_box": [
+        240,
+        0,
+        256,
+        16
+      ],
+      "native_size": [
+        16,
+        16
+      ],
+      "placeholder": false,
+      "source_sha256": "ec612644525bcce38fd28103a6a19b16eb79a0fa5f3b278f3c3e0f83e89a4796"
+    },
+    {
+      "id": "water_flask",
+      "mapping": {
+        "sheet": "objects",
+        "col": 17,
+        "row": 0
+      },
+      "source": "roguelike/assets/sprites/objects.png",
+      "sheet_size": [
+        384,
+        384
+      ],
+      "sheet_columns": 24,
+      "crop_box": [
+        272,
+        0,
+        288,
+        16
+      ],
+      "native_size": [
+        16,
+        16
+      ],
+      "placeholder": false,
+      "source_sha256": "ec612644525bcce38fd28103a6a19b16eb79a0fa5f3b278f3c3e0f83e89a4796"
+    },
+    {
+      "id": "cracked_bell",
+      "mapping": {
+        "sheet": "terrain",
+        "col": 18,
+        "row": 6
+      },
+      "source": "roguelike/assets/sprites/terrain.png",
+      "sheet_size": [
+        384,
+        384
+      ],
+      "sheet_columns": 24,
+      "crop_box": [
+        288,
+        96,
+        304,
+        112
+      ],
+      "native_size": [
+        16,
+        16
+      ],
+      "placeholder": false,
+      "source_sha256": "00b20d5973bde42f5f1432d5ecb102614d3113d11078eda4e9906a2e0ca9b237"
+    },
+    {
+      "id": "floor",
+      "mapping": {
+        "sheet": "terrain",
+        "col": 20,
+        "row": 1
+      },
+      "source": "roguelike/assets/sprites/terrain.png",
+      "sheet_size": [
+        384,
+        384
+      ],
+      "sheet_columns": 24,
+      "crop_box": [
+        320,
+        16,
+        336,
+        32
+      ],
+      "native_size": [
+        16,
+        16
+      ],
+      "placeholder": false,
+      "source_sha256": "00b20d5973bde42f5f1432d5ecb102614d3113d11078eda4e9906a2e0ca9b237"
+    },
+    {
+      "id": "ancient_floor",
+      "mapping": {
+        "sheet": "terrain",
+        "col": 1,
+        "row": 7
+      },
+      "source": "roguelike/assets/sprites/terrain.png",
+      "sheet_size": [
+        384,
+        384
+      ],
+      "sheet_columns": 24,
+      "crop_box": [
+        16,
+        112,
+        32,
+        128
+      ],
+      "native_size": [
+        16,
+        16
+      ],
+      "placeholder": true,
+      "source_sha256": "00b20d5973bde42f5f1432d5ecb102614d3113d11078eda4e9906a2e0ca9b237"
+    },
+    {
+      "id": "wall",
+      "mapping": {
+        "sheet": "terrain",
+        "col": 0,
+        "row": 11
+      },
+      "source": "roguelike/assets/sprites/terrain.png",
+      "sheet_size": [
+        384,
+        384
+      ],
+      "sheet_columns": 24,
+      "crop_box": [
+        0,
+        176,
+        16,
+        192
+      ],
+      "native_size": [
+        16,
+        16
+      ],
+      "placeholder": false,
+      "source_sha256": "00b20d5973bde42f5f1432d5ecb102614d3113d11078eda4e9906a2e0ca9b237"
+    },
+    {
+      "id": "wall_1",
+      "mapping": {
+        "sheet": "terrain",
+        "col": 1,
+        "row": 11
+      },
+      "source": "roguelike/assets/sprites/terrain.png",
+      "sheet_size": [
+        384,
+        384
+      ],
+      "sheet_columns": 24,
+      "crop_box": [
+        16,
+        176,
+        32,
+        192
+      ],
+      "native_size": [
+        16,
+        16
+      ],
+      "placeholder": false,
+      "source_sha256": "00b20d5973bde42f5f1432d5ecb102614d3113d11078eda4e9906a2e0ca9b237"
+    },
+    {
+      "id": "wall_2",
+      "mapping": {
+        "sheet": "terrain",
+        "col": 2,
+        "row": 11
+      },
+      "source": "roguelike/assets/sprites/terrain.png",
+      "sheet_size": [
+        384,
+        384
+      ],
+      "sheet_columns": 24,
+      "crop_box": [
+        32,
+        176,
+        48,
+        192
+      ],
+      "native_size": [
+        16,
+        16
+      ],
+      "placeholder": false,
+      "source_sha256": "00b20d5973bde42f5f1432d5ecb102614d3113d11078eda4e9906a2e0ca9b237"
+    },
+    {
+      "id": "wall_3",
+      "mapping": {
+        "sheet": "terrain",
+        "col": 3,
+        "row": 11
+      },
+      "source": "roguelike/assets/sprites/terrain.png",
+      "sheet_size": [
+        384,
+        384
+      ],
+      "sheet_columns": 24,
+      "crop_box": [
+        48,
+        176,
+        64,
+        192
+      ],
+      "native_size": [
+        16,
+        16
+      ],
+      "placeholder": false,
+      "source_sha256": "00b20d5973bde42f5f1432d5ecb102614d3113d11078eda4e9906a2e0ca9b237"
+    },
+    {
+      "id": "sprite_placeholder",
+      "mapping": {
+        "sheet": "terrain",
+        "col": 1,
+        "row": 7
+      },
+      "source": "roguelike/assets/sprites/terrain.png",
+      "sheet_size": [
+        384,
+        384
+      ],
+      "sheet_columns": 24,
+      "crop_box": [
+        16,
+        112,
+        32,
+        128
+      ],
+      "native_size": [
+        16,
+        16
+      ],
+      "placeholder": true,
+      "source_sha256": "00b20d5973bde42f5f1432d5ecb102614d3113d11078eda4e9906a2e0ca9b237"
+    }
+  ]
+}

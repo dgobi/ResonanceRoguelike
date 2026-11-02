@@ -1,0 +1,8 @@
+{
+  "name": "resonance-art-lab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local native 32px Aseprite authoring for Resonance (ART-1)",
+  "engines": { "node": ">=22.6.0" },
+  "dependencies": { "@pebbly/aseprite-ai-artist": "0.8.2" }
+}

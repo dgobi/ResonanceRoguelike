@@ -1,0 +1,160 @@
+{
+  "status": "passed",
+  "assets": {
+    "amber_sting_beetle_v001": {
+      "dimensions": [
+        32,
+        32
+      ],
+      "frames": 1,
+      "depth": 32,
+      "layers": [
+        {
+          "name": "legs",
+          "editable": true,
+          "type": 0
+        },
+        {
+          "name": "body",
+          "editable": true,
+          "type": 0
+        },
+        {
+          "name": "elytra",
+          "editable": true,
+          "type": 0
+        },
+        {
+          "name": "head",
+          "editable": true,
+          "type": 0
+        }
+      ],
+      "cel_count": 4,
+      "sha256": "fe0f89fe0ffaf574fb7202f984303b98425f76b4f264ee9d7d617fad18fabf17",
+      "transparent_pixels": 628,
+      "nontransparent_pixels": 396,
+      "decoded_rgba_sha256": "5cebaf051fc50b3d77292a53c17daa492de6b1780f5572cb80aa7eb84bc168aa",
+      "png_sha256": "287858370996896f69c5943b0e34492ede7d80291f6d356679c73fff09ed0130",
+      "exact_2x_preview": true
+    },
+    "amber_sting_beetle_v002": {
+      "dimensions": [
+        32,
+        32
+      ],
+      "frames": 1,
+      "depth": 32,
+      "layers": [
+        {
+          "name": "legs",
+          "editable": true,
+          "type": 0
+        },
+        {
+          "name": "body",
+          "editable": true,
+          "type": 0
+        },
+        {
+          "name": "elytra",
+          "editable": true,
+          "type": 0
+        },
+        {
+          "name": "head",
+          "editable": true,
+          "type": 0
+        }
+      ],
+      "cel_count": 4,
+      "sha256": "8a0c3294fcd9d531606af00bf0011bb5edf444aeddedd6e9668d4f6ca281d459",
+      "transparent_pixels": 628,
+      "nontransparent_pixels": 396,
+      "decoded_rgba_sha256": "d78e53a815b7bdcccafbc97b9ffb0874ad8526e6ffb97dcb516686c2bd29ff87",
+      "png_sha256": "b2d24a7ee6466db9507dffcdb1f469ea48565e610e81fde7a27f8754cc0d89a9",
+      "exact_2x_preview": true
+    },
+    "diagnostic_v001": {
+      "dimensions": [
+        32,
+        32
+      ],
+      "frames": 1,
+      "depth": 32,
+      "layers": [
+        {
+          "name": "metal",
+          "editable": true,
+          "type": 0
+        },
+        {
+          "name": "light",
+          "editable": true,
+          "type": 0
+        }
+      ],
+      "cel_count": 2,
+      "sha256": "81a04ba6e0f514a71b603097b29fea4345a35ed568c78e07e2163737e01a8bc9",
+      "transparent_pixels": 772,
+      "nontransparent_pixels": 252,
+      "decoded_rgba_sha256": "ddd069bfd7e1a46574f8eb230c3bb2b9885893c68435b20b4a17945bdff3a371",
+      "png_sha256": "2c9f2b1fb00f9670278a7eea3aeb328920b2a4dd669bfc993e465a6d6062e5ad"
+    },
+    "diagnostic_v002": {
+      "dimensions": [
+        32,
+        32
+      ],
+      "frames": 1,
+      "depth": 32,
+      "layers": [
+        {
+          "name": "metal",
+          "editable": true,
+          "type": 0
+        },
+        {
+          "name": "light",
+          "editable": true,
+          "type": 0
+        }
+      ],
+      "cel_count": 2,
+      "sha256": "17be4504520b264d0f0ff0a73e09cfba8a0b6f78cba702d8c456272457e0675a",
+      "transparent_pixels": 772,
+      "nontransparent_pixels": 252,
+      "decoded_rgba_sha256": "4902dc4f14dc41582f3865ff8609bbc119c15f9907f9bed5b357c9ec6995bcd8",
+      "png_sha256": "9f57d31920e63836ec8e4dc5b3df32fffbbc8785c9e1f7e800f66cffaeaf6f98",
+      "exact_2x_preview": true
+    }
+  },
+  "diagnostic_correction": {
+    "changed_pixels": [
+      [
+        15,
+        17
+      ],
+      [
+        16,
+        17
+      ],
+      [
+        15,
+        18
+      ],
+      [
+        16,
+        18
+      ]
+    ],
+    "before": "#e65050ff",
+    "after": "#5de4d0ff",
+    "other_pixels_preserved": true
+  },
+  "beetle_revision_changed_pixels": 23,
+  "live_reopen_comparisons": {
+    "diagnostic": "decoded RGBA equal",
+    "beetle": "decoded RGBA equal"
+  }
+}
