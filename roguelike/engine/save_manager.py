@@ -1152,6 +1152,8 @@ def _validate_escort_scene(rows, scene_name, world_data):
         if c.get('profile', {}).get('recipe') != 'protective_escort':
             continue
         binding = c['state']['escort']['owner']
+        if binding is None and row.get('individual_id') is not None:
+            binding = row['individual_id'].rsplit(':', 1)[0]
         if binding is None:
             continue
         wxwy, sid = binding.split('/')

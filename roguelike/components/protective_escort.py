@@ -260,6 +260,9 @@ def validate_state(row, s, p, local_map):
             or t['reason'] is not None and (not isinstance(t['reason'],str) or len(t['reason'])>80)
             or (t['phase']=='protect') != (s['target'] is not None)
             or (t['phase']=='protect') != bool(t['pursuit_left'])
+            or (t['phase']=='protect' and t['order']=='follow' and t['ward'] is None)
+            or (t['phase']=='wait' and t['failures'] != 0)
+            or (t['phase']=='return' and t['rejoin_left'] == 0)
             or (t['phase']=='blocked') != bool(t['retry'])):
         raise ValueError('composite.escort: contradictory commitment')
     # Reuse strict ordinary evidence and legacy-intent exclusion without changing

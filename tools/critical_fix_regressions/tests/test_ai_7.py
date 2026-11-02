@@ -270,5 +270,14 @@ class EscortTests(unittest.TestCase):
             route.assert_not_called()
             self.assertEqual(ward,a.ai.escort['ward']);self.assertIsNone(a.ai.target)
 
+    def test_saved_protection_requires_a_ward_reference_and_fresh_identity_owns_its_scene(self):
+        a=self.actor(x=14,initial_order='follow');self.threat(x=16);self.decision(a);self.decision(a)
+        row=_serialize_entity(a);self.assertIsNotNone(row['composite']['state']['target'])
+        bad=copy.deepcopy(row);bad['composite']['state']['escort']['ward']=None
+        with self.assertRaises(ValueError):validate_saved(bad,self.e.local_map)
+        self.e.entities=[self.e.player];a=self.actor();allocate(self.e,[a]);row=_serialize_entity(a)
+        row['individual_id']='1,1/foreign:00000001'
+        with self.assertRaises(ValueError):_validate_escort_scene([row],'0_0',{'chunks':{'0,0':{}}})
+
 
 if __name__=='__main__':unittest.main()
