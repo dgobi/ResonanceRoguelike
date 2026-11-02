@@ -382,3 +382,11 @@ Duplicate, configure faction `player` and explicit nonplayer hostile factions,
 validate/review/apply/reopen, then place in a saved room. New recipe selection
 requires a new ID; same-recipe tuning affects fresh instances. Ash Escort and
 Stone Escort are authored examples, with no natural population change.
+
+## AI-8 independent hostile response components
+
+The **Enemy response components** palette independently attaches call-on-sight
+and allied-alarm investigation to new-ID v1/v5 hostile melee variants. Base
+recipe selection stays separate. [Fields, timing, information, examples and
+saves](ENEMY_RESPONSE_COMPONENTS.md) define the game-owned two-entry registry
+and contract `creature-composite-9`.

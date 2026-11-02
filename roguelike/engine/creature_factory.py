@@ -39,6 +39,7 @@ class CreatureFactory:
         y:           int,
         rng:         random.Random | None = None,
         *, saved_composite_profile: dict | None = None,
+        saved_response_config: dict | None = None,
     ) -> Actor | None:
         """
         Create a fully assembled Actor for the given creature id.
@@ -52,16 +53,20 @@ class CreatureFactory:
         rng = rng or random.Random()
         ai_type = defn.get('ai_type', 'wandering')
         profile = None
+        responses = None
         if saved_composite_profile is not None:
             from engine.ai_profiles import validate_binding, saved_profile
             validate_binding(defn)
             profile = saved_profile(saved_composite_profile)
+            responses = saved_response_config
             if profile['recipe'] == 'protective_escort':
                 from engine.ai_profiles import validate_escort_alignment
                 validate_escort_alignment(defn.get('perception'))
         elif ai_type == 'composite':
             profile = effective_profile(defn)
-        elif 'ai_profile' in defn:
+            from engine.enemy_responses import configuration
+            responses = configuration(defn.get('enemy_responses'), profile, defn.get('perception'))
+        elif 'ai_profile' in defn or 'enemy_responses' in defn:
             raise ValueError(f"Creature {creature_id!r}: ai_profile requires registered ai_type composite")
 
         actor = Actor(
@@ -101,7 +106,7 @@ class CreatureFactory:
         ai_class   = AI_TYPES.get(ai_type, WanderingAI)
         wander_r   = defn.get("wander_radius", 8)
         if profile is not None:
-            actor.ai = CompositeAI(wander_radius=wander_r, profile=profile)
+            actor.ai = CompositeAI(wander_radius=wander_r, profile=profile, responses=responses)
         else:
             actor.ai = ai_class(wander_radius=wander_r)
         actor.ai.set_home(x, y)

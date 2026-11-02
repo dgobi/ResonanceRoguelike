@@ -1,10 +1,24 @@
 import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
-import { creatureModel, creatureValue } from "./creature";
+import { creatureModel, creatureValue, responseValue } from "./creature";
 import { CanvasHistory } from "./layout";
 import { sourceDiff } from "./draft";
 
 describe("ordinary creature exact draft", () => {
+  it('independently attaches and tunes registered responses with exact history and preserved metadata',()=>{
+    const text='\uFEFF'+readFileSync(new URL('../../roguelike/data/entities/creatures/grave_skirmisher.json',import.meta.url),'utf8').replace(/\r?\n/g,'\r\n');
+    const registry={alarm_call_on_sight:{cooldown_phases:24},investigate_allied_alarm:{opportunity_budget:12}};
+    const call=responseValue(text,'alarm_call_on_sight',true,registry),both=responseValue(call,'investigate_allied_alarm',true,registry);
+    expect(responseValue(both,'alarm_call_on_sight',true,registry)).toBe(both);
+    const tuned=responseValue(both,'investigate_allied_alarm',{field:'opportunity_budget',value:4},registry);
+    expect(tuned).toBe(both.replace('"opportunity_budget":12','"opportunity_budget":4'));
+    const answer=responseValue(tuned,'alarm_call_on_sight',false,registry),parsed=JSON.parse(answer.slice(1));
+    expect(parsed.enemy_responses.modules).toEqual([{id:'investigate_allied_alarm',opportunity_budget:4}]);
+    delete parsed.enemy_responses;expect(parsed).toEqual(JSON.parse(text.slice(1)));
+    const history=new CanvasHistory();history.record(call,both,'Add answer');expect(history.undo(both)).toBe(call);expect(history.redo(call)).toBe(both);
+    expect(()=>responseValue(text,'relay',true,registry)).toThrow('defaults');
+    expect(()=>responseValue(call,'alarm_call_on_sight',{field:'player_x',value:4},registry)).toThrow('Unsupported');
+  });
   it('tunes escort fields without changing art/body/unknown bytes and restores recipe history',()=>{
     const text=readFileSync(new URL('../../roguelike/data/entities/creatures/ash_escort.json',import.meta.url),'utf8');
     const tuned=creatureValue(creatureValue(text,'ai_profile.initial_order','hold'),'ai_profile.follow_spacing',1);

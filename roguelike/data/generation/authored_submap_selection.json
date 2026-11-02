@@ -6,5 +6,6 @@
   "authored_chance": 0.35,
   "candidates": [
     {"layout_id": "barrow_ward_store_a", "weight": 1.0}
-  ,{"layout_id":"barrow_ward_store_b","weight":1}]
+  ,{"layout_id":"barrow_ward_store_b","weight":1}
+  ,{"layout_id":"barrow_ward_store_c","weight":1}]
 }

@@ -1063,3 +1063,10 @@ saved rooms, with no natural enrollment. `node scripts/run-ai-7.mjs` uses the
 stable VBS launcher and app-local packaged controls to publish/reopen and compare
 saved versus dirty configuration, Reset/Stop/latest-saved lifecycle.
 `AI7_RUNTIME_ONLY=1` verifies final-package lifecycle without publication.
+
+AI-8 adds **Enemy response components** beside independently selected v1/v5
+recipes. Call-on-sight and allied-alarm investigation are separate optional
+controls with game-owned defaults/bounds and explicit hostile alignment.
+First attachment requires a new ID; enrolled variants can tune participation
+and budgets for fresh actors. See [the feature/authoring contract](../roguelike/docs/ENEMY_RESPONSE_COMPONENTS.md).
+Current creature authoring contract: **creature-composite-9**.

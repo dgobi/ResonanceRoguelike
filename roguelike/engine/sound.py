@@ -94,6 +94,8 @@ def emit(engine, x, y, kind, *, maker=None):
     from components.ai import AIState
     for actor, budget in listeners:
         ai = actor.ai
+        if getattr(ai, 'responses', None) and ai.responses['interest']:
+            continue  # attributed call-site has finite priority over anonymous noise
         old = current_interest(ai, turn)
         if getattr(ai, 'profile', {}).get('recipe') == 'territorial_guard':
             from components.territorial import distance

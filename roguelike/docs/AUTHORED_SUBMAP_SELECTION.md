@@ -110,3 +110,11 @@ equal weights and unchanged 0.35 overall authored-barrow chance. Only new worlds
 use this mixture. The Sentinel covers its Ward and eastern passage; the old room
 retains its identity and contents. Ward-store reports recognize both IDs without
 disclosing current contents or safety. See [Territorial AI](TERRITORIAL_AI.md).
+
+AI-8 adds new-ID `barrow_ward_store_c` with hostile call/response attachments,
+a closed doorway and southern alternate route. A/B/C have relative weights
+**1/1/1**; overall authored-barrow chance stays **0.35** (one third of that
+share each). Only fresh assignments use this mixture; A/B source definitions
+and existing assignments/constructed rooms remain owned. Ward-store reports
+recognize C under the same information policy. See
+[Enemy response components](ENEMY_RESPONSE_COMPONENTS.md).

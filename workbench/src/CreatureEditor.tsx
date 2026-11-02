@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { creatureModel, creatureValue } from "./creature";
+import { creatureModel, creatureValue, responseValue } from "./creature";
 import { request, asFailure, type Inspection } from "./protocol";
 import type { ContentProps } from "./ContentEditor";
 import { CreatureHarvest } from "./CreatureHarvest";
@@ -69,6 +69,20 @@ export function CreatureEditor(p: ContentProps) {
         <small>AI choice is available only for an ordinary new-ID variant. Speed supports at most two actions per turn.</small>
       </fieldset>
       {composite&&<label>Registered behaviour recipe<select aria-label="Behaviour recipe" disabled={!!reason||!p.variant||!cap.composite_variant} value={recipe} onChange={e=>edit('ai_profile.recipe',e.target.value)}><option value="strike_and_withdraw">Strike and withdraw</option><option value="observation_averse">Observation-averse pursuit</option><option value="venom_strike_and_withdraw">Venom strike and withdraw</option><option value="patient_venom_hunt">Patient venom hunt</option><option value="territorial_guard">Fixed territorial post</option><option value="protective_escort">Protective escort</option></select><small>Changing recipe requires a new ID. Selection installs the game's legal recipe defaults in one undoable edit.</small></label>}
+      {composite&&cap.response_defaults&&<fieldset className="item-properties" disabled={!!reason||!(cap.response_editable||(p.variant&&cap.composite_variant))}><legend>Enemy response components</legend>
+        <p>Version 1 attachments · supported recipes: {cap.response_recipes?.join(', ')}. Requires an explicit non-player faction hostile to player. First attachment requires a new ID. Base recipe remains independently selected; saved actors retain their effective components.</p>
+        {!cap.response_recipes?.includes(recipe)&&<p className="notice warning">This recipe cannot host enemy response components. Remove attachments before saving, or choose a supported recipe on a new variant.</p>}
+        {Object.entries(cap.response_defaults).map(([id,registered])=>{
+          const rows=get('enemy_responses.modules',[]) as ({id:string}&Record<string,unknown>)[],row=rows.find(m=>m.id===id);
+          const change=(value:boolean|{field:string;value:number})=>p.onEdit(s=>responseValue(s,id,value,cap.response_defaults!),`Enemy response ${id}`);
+          const title=id==='alarm_call_on_sight'?'Call on hostile sight':'Investigate allied alarm';
+          return <div key={id}><label>{title}<input type="checkbox" aria-label={title} checked={!!row} onChange={e=>change(e.target.checked)}/></label>
+            {row&&Object.entries(registered).map(([key,fallback])=>{const bounds=cap.response_bounds?.[id]?.[key]||[0,0],unit=key.endsWith('_phases')?'charged phases':key==='strength'?'acoustic cost':'ordinary opportunities',label=`${title}: ${key.replaceAll('_',' ')} (${unit})`;
+              return <label key={key}>{label}<input aria-label={label} type="number" min={bounds[0]} max={bounds[1]} step={1} value={Number(row[key]??fallback)} onChange={e=>{if(e.target.value!=='')change({field:key,value:Number(e.target.value)});}}/><small>{row[key]===undefined?'Defaulted':'Explicit'}; effective {String(row[key]??fallback)} {unit}. Integer {bounds[0]}–{bounds[1]}.</small></label>;
+            })}</div>;
+        })}
+        <p>A visible call has a paid tell, then a paid cry on a later charged phase. A receiver hears only the call site and moves no earlier than the following phase. Own threats, withdrawal and territorial return have priority. Hearing or arrival never relays a call. Walls block; closed doors attenuate; investigation and recurrence are finite. Anonymous sounds remain separate.</p>
+      </fieldset>}
       {composite&&recipe==='protective_escort'&&<fieldset className="item-properties" disabled={!!reason||!(cap.profile_editable||(p.variant&&cap.composite_variant))}><legend>Protective escort</legend>
         <p>Version 6 · ordinary melee · player ward in the active owning scene only. Requires faction player and explicit hostile factions excluding player. Enemies hostile to player may lawfully target this escort through their own perception and AI. No recruitment, stairs, chunk travel or automatic population placement.</p>
         <label>Initial order<select aria-label="Initial escort order" value={String(get('ai_profile.initial_order',defaults?.initial_order))} onChange={e=>edit('ai_profile.initial_order',e.target.value)}><option value="follow">Follow</option><option value="hold">Hold here</option></select></label>

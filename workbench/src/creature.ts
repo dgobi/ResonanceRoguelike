@@ -40,3 +40,19 @@ export function creatureValue(text: string, field: string, value: string | numbe
   if (model.base_hp === value && fighter.max_hp === value) return text;
   return valueEdit(valueEdit(text, ["base_hp"], value), ["fighter", "max_hp"], value);
 }
+
+// Registry/defaults come from the game-owned source capability, never a TS schema.
+export function responseValue(text:string,id:string,value:boolean|{field:string;value:number},registry:Record<string,Record<string,number>>):string {
+  const {model,reason}=creatureModel(text);if(!model)throw new Error(reason);
+  if(!registry[id])throw new Error('Game-owned response defaults unavailable.');
+  const attachment=model.enemy_responses as {version:number;modules:({id:string}&Record<string,unknown>)[]}|undefined;
+  const modules=attachment?.modules||[],index=modules.findIndex(m=>m.id===id);
+  if(typeof value==='boolean'){
+    if(value===(index>=0))return text;
+    const next=value?[...modules,{id,...registry[id]}]:modules.filter(m=>m.id!==id);
+    return attachment?valueEdit(text,['enemy_responses','modules'],next):valueEdit(text,['enemy_responses'],{version:1,modules:next});
+  }
+  if(index<0||!(value.field in registry[id]))throw new Error('Unsupported response field.');
+  if(modules[index][value.field]===value.value)return text;
+  return valueEdit(text,['enemy_responses','modules',index,value.field],value.value);
+}

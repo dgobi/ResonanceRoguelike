@@ -161,7 +161,8 @@ def take_turn(ai, actor, engine, ambient):
         if t['phase'] in ('return','blocked'):
             action, reason, result = _return(ai, actor, engine, observed, route)
         else:
-            if t['phase'] == 'guard' and (actor.x,actor.y) != tuple(t['anchor']):
+            if (t['phase'] == 'guard' and (actor.x,actor.y) != tuple(t['anchor'])
+                    and not (ai.responses and ai.responses['interest'])):
                 # A declared fallback holds until route conditions change.
                 if t['resting'] != [actor.x,actor.y] or route != t['route']:
                     ai.cancel(actor,'displaced_or_post_changed')
@@ -180,7 +181,16 @@ def take_turn(ai, actor, engine, ambient):
                     t.update(phase='engaged',pursuit_left=ai.profile['pursuit_budget'],investigation_left=0,reason=None)
                     clear_interest(ai)
                     break
-            if t['phase'] == 'engaged':
+            from engine.enemy_responses import choose
+            reaction = choose(ai, engine, actor, observed, ambient,
+                call=t['phase']=='engaged' and ai.target is not None and ai.target['role']=='player' and ai.phase=='approach',
+                idle=t['phase']=='guard' and ai.target is None)
+            if reaction:
+                action,reason,result = reaction
+                if t['phase']=='engaged':
+                    t['pursuit_left'] = max(0,t['pursuit_left']-1)
+                    if not t['pursuit_left']: ai.cancel(actor,'pursuit_exhausted')
+            elif t['phase'] == 'engaged':
                 target = ai.resolve_target(engine,actor)
                 if target is not None:
                     t['route'] = route

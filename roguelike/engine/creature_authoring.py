@@ -19,7 +19,7 @@ from engine.harvesting import profile_errors, construct_output, RULES
 from engine.item_factory import ItemFactory
 from engine.ai_profiles import DEFAULTS as PROFILE_DEFAULTS, BOUNDS as PROFILE_BOUNDS, effective_profile, RECIPES, OBSERVATION_BOUNDS, VENOM_BOUNDS, TERRITORY_BOUNDS, ESCORT_BOUNDS
 
-CONTRACT = "creature-composite-8"
+CONTRACT = "creature-composite-9"
 RELATIONSHIP_FIELDS = ['perception.faction', 'perception.hostile_to', 'numbing_venom_trait']
 
 
@@ -85,6 +85,7 @@ def indexes_for(data_root):
 
 
 def capability(raw, path, pointer=""):
+    from engine.enemy_responses import REGISTRY as RESPONSE_DEFAULTS, BOUNDS as RESPONSE_BOUNDS, RECIPES as RESPONSE_RECIPES
     raw = raw if isinstance(raw, dict) else {}
     identifier = raw.get("id"); player = isinstance(identifier, str) and identifier.casefold() == "player"
     f, p, limbs = raw.get("fighter"), raw.get("perception"), raw.get("limbs")
@@ -107,6 +108,9 @@ def capability(raw, path, pointer=""):
                 profile_editable=editable and raw.get('ai_type') == 'composite' and composite_source(raw),
                 profile_defaults=PROFILE_DEFAULTS,
                 profile_recipes=RECIPES,
+                response_defaults=RESPONSE_DEFAULTS, response_bounds=RESPONSE_BOUNDS,
+                response_recipes=list(RESPONSE_RECIPES),
+                response_editable=editable and composite_source(raw) and 'enemy_responses' in raw,
                 profile_recipe_bounds={'protective_escort': ESCORT_BOUNDS},
                 harvest_editable=harvest, harvest_rules=RULES,
                 harvest_reason="Complete native harvest profile; original non-ephemeral Actor authority." if harvest else "Harvest is protected: the original must be a supported non-ephemeral Actor with absent or supported native profile.",
@@ -172,6 +176,9 @@ def authorize_candidate(original, candidate, source_path, target_path, *, data=N
     composite = candidate.get('ai_type') == 'composite'
     new_composite = variant and composite and cap['composite_variant']
     profile = (new_composite or cap['profile_editable']) and composite
+    response_authority = new_composite or cap['response_editable'] and profile
+    if 'enemy_responses' in candidate and not response_authority:
+        issue('ENEMY_RESPONSE_ID', 'First attachment requires an eligible new-ID composite variant. Existing enrolled variants may tune/add/remove modules for fresh actors.')
     if (not variant and original.get('ai_type') == 'composite'
             and original.get('ai_profile', {}).get('recipe', 'strike_and_withdraw')
             != candidate.get('ai_profile', {}).get('recipe', 'strike_and_withdraw')):
@@ -180,7 +187,10 @@ def authorize_candidate(original, candidate, source_path, target_path, *, data=N
         issue('COMPOSITE_AUTHORITY', 'Composite requires an original ordinary melee wandering/composite source; deleting protected fields cannot grant authority. Legacy same-ID conversion is unsupported.')
     if new_composite and any(candidate.get(k) is not False for k in ('can_cross_chunks', 'can_use_stairs')):
         issue('COMPOSITE_LOCAL', 'A new composite variant must explicitly set can_cross_chunks and can_use_stairs false; inspect these changes in Diff.')
-    if not same_json(unchanged_data(original, variant=variant and cap["duplicable"], harvest=cap["harvest_editable"], relationships=relationships, profile=profile, local_flags=new_composite), unchanged_data(candidate, variant=variant and cap["duplicable"], harvest=cap["harvest_editable"], relationships=relationships, profile=profile, local_flags=new_composite)):
+    original_fields, candidate_fields = copy.deepcopy(original), copy.deepcopy(candidate)
+    if response_authority:
+        original_fields.pop('enemy_responses', None); candidate_fields.pop('enemy_responses', None)
+    if not same_json(unchanged_data(original_fields, variant=variant and cap["duplicable"], harvest=cap["harvest_editable"], relationships=relationships, profile=profile, local_flags=new_composite), unchanged_data(candidate_fields, variant=variant and cap["duplicable"], harvest=cap["harvest_editable"], relationships=relationships, profile=profile, local_flags=new_composite)):
         issue("READ_ONLY_FIELD", "Only supported common fields and originally entitled harvest fields may change; identity, tile, ephemeral, components and special settings remain exact. AI may change only for an ordinary new variant.")
     if cap["harvest_editable"] and not harvest_metadata_allowed(original, candidate):
         issue("HARVEST_METADATA", "Unknown harvest/profile/tier/output metadata is read-only. It may travel with retained records; new records contain only supported fields.")
@@ -269,7 +279,7 @@ def validate_definition(raw, data, path, indexes):
     if ai == 'composite':
         try: effective_profile(raw)
         except (ValueError, TypeError) as error: issue('CREATURE_PROFILE', 'ai_profile', str(error))
-    elif 'ai_profile' in raw:
+    elif 'ai_profile' in raw or 'enemy_responses' in raw:
         issue('CREATURE_PROFILE', 'ai_profile', 'ai_profile is supported only with the registered composite AI route.')
     speed = raw.get("speed", 1.0)
     if type(speed) not in (int, float) or not math.isfinite(speed) or not 0.01 <= speed <= 2:
@@ -328,7 +338,8 @@ def factory_preview(raw, data):
                     fighter=dict(hp=f.hp, max_hp=f.max_hp, power=f.power, defense=f.defense, body_id=f.body_id, limbs=f.body_limbs, armour_value=f.effective_av),
                     perception=None if p is None else dict(sight_radius=p.sight_radius, hearing_radius=p.hearing_radius, sees_in_dark=p.sees_in_dark, faction=p.faction, hostile_to=p.hostile_to),
                     ai_class=type(actor.ai).__name__, wander_radius=actor.ai.wander_radius, inventory=actor.inventory,
-                    **({'effective_ai_profile': actor.ai.profile} if hasattr(actor.ai, 'profile') else {})),
+                    **({'effective_ai_profile': actor.ai.profile,
+                        'effective_enemy_responses': actor.ai.response_config} if hasattr(actor.ai, 'profile') else {})),
                 definition_values={k: raw.get(k, default) for k, default in (("description", ""), ("damage_dice", "1d4"), ("damage_bonus", 0), ("attack_verb", "strikes at thee"), ("speed", 1), ("pursuit_timeout", 20))},
                 comparisons=[dict(field="name → Actor.name", declared=raw.get("name"), instance=actor.name), dict(field="base_hp → Fighter.max_hp / hp", declared=raw.get("base_hp"), instance=f.max_hp), dict(field="armour_value → natural armour", declared=raw.get("armour_value", 0), instance=f.effective_av)],
                 definition_semantic_sha256=hashlib.sha256(json.dumps(raw, sort_keys=True, separators=(",", ":")).encode()).hexdigest(),

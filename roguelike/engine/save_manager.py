@@ -1146,12 +1146,15 @@ def _claim_individuals(rows, identities):
 
 
 def _validate_escort_scene(rows, scene_name, world_data):
-    """V6 binding must match the actual cache owner before staged installation."""
+    """Escort/module bindings match the actual cache before staged installation."""
     for row in rows:
         c = row.get('composite', {})
-        if c.get('profile', {}).get('recipe') != 'protective_escort':
+        if 'responses' in c:
+            binding = c['responses']['state']['owner']
+        elif c.get('profile', {}).get('recipe') == 'protective_escort':
+            binding = c['state']['escort']['owner']
+        else:
             continue
-        binding = c['state']['escort']['owner']
         if binding is None and row.get('individual_id') is not None:
             binding = row['individual_id'].rsplit(':', 1)[0]
         if binding is None:
@@ -1161,7 +1164,7 @@ def _validate_escort_scene(rows, scene_name, world_data):
         expected = sid or wxwy.replace(',', '_')
         if (scene_name != expected or chunk is None
                 or sid and sum(s.get('submap_id') == sid for s in chunk.get('submaps', [])) != 1):
-            raise SaveFormatError('composite.escort: foreign cache scene owner')
+            raise SaveFormatError('composite: foreign cache scene owner')
 
 
 def _validate_entities(rows, data, local_map=None) -> None:
@@ -1234,7 +1237,8 @@ def _deserialize_entities(
         # Try to spawn from creature definition
         creature_id = d["id"]
         actor = factory.spawn(creature_id, d["x"], d["y"],
-                              saved_composite_profile=d['composite']['profile'] if d.get('ai_type') == 'CompositeAI' else None)
+                              saved_composite_profile=d['composite']['profile'] if d.get('ai_type') == 'CompositeAI' else None,
+                              saved_response_config=d.get('composite',{}).get('responses',{}).get('config'))
 
         if actor is None:
             raise SaveFormatError(f"Cannot reconstruct creature {creature_id!r}")
@@ -1289,6 +1293,8 @@ def _deserialize_entities(
         if d.get('ai_type') == 'CompositeAI':
             for key, value in d['composite']['state'].items():
                 setattr(actor.ai, key, copy.deepcopy(value))
+            if 'responses' in d['composite']:
+                actor.ai.responses = copy.deepcopy(d['composite']['responses']['state'])
         restored.append(actor)
 
     return restored

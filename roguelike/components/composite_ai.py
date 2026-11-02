@@ -8,10 +8,12 @@ from engine.spatial import melee_contact, melee_attack_legal
 
 
 class CompositeAI(AI):
-    def __init__(self, wander_radius=8, *, profile):
+    def __init__(self, wander_radius=8, *, profile, responses=None):
         super().__init__(wander_radius=wander_radius)
         from engine.ai_profiles import saved_profile
         self.profile = saved_profile(profile)
+        from engine.enemy_responses import initialize
+        initialize(self, responses)
         self.phase = 'idle'
         self.target = None
         self.withdraw_left = self.hold_left = self.approach_left = self.no_progress = 0
@@ -50,9 +52,14 @@ class CompositeAI(AI):
             keys += ('territory',)
         if self.withdrawal_told:
             keys += ('withdrawal_told',)
-        return dict(profile=copy.deepcopy(self.profile), state={k: copy.deepcopy(getattr(self, k)) for k in keys})
+        result = dict(profile=copy.deepcopy(self.profile), state={k: copy.deepcopy(getattr(self, k)) for k in keys})
+        if self.response_config:
+            result['responses'] = dict(config=copy.deepcopy(self.response_config), state=copy.deepcopy(self.responses))
+        return result
 
     def cancel(self, actor, reason, *, keep_sound=False):
+        from engine.enemy_responses import cancel
+        cancel(self)
         from engine.local_rivals import retire_player
         from engine.sound import clear_interest
         interest = self.sound_interest if keep_sound else None
@@ -149,6 +156,8 @@ class CompositeAI(AI):
         This never acquires prey, selects an action or spends tactical counters.
         Current sight may refresh a retained trail; recovery/holding alone cannot.
         """
+        from engine.enemy_responses import refresh
+        refresh(self, engine, actor, ambient_light)
         if self.profile['recipe'] == 'protective_escort':
             from components.protective_escort import refresh
             return refresh(self, engine, actor, ambient_light)
@@ -231,8 +240,11 @@ class CompositeAI(AI):
         from engine.sound import current_interest, clear_interest, investigate
         from engine.effect_lifecycle import disrupted
         from engine.venom import movement_denial
+        from engine.local_rivals import living
         if (engine is None or player is not engine.player or local_map is not engine.local_map
-                or not active(engine, actor) or disrupted(actor, local_map)):
+                or not active(engine, actor) or not living(actor) or disrupted(actor, local_map)):
+            from engine.enemy_responses import cancel
+            cancel(self)
             return
         from engine.venom import fully_paralysed
         if fully_paralysed(actor):
@@ -285,7 +297,13 @@ class CompositeAI(AI):
                 self._remember(engine, target)
                 self.phase, self.approach_left = 'approach', 32
                 self.no_progress, self.best_distance = 0, None
-        if self.target is not None:
+        from engine.enemy_responses import choose
+        reaction = choose(self, engine, actor, observed, ambient_light,
+                          call=self.target is not None and self.target['role']=='player' and self.phase=='approach',
+                          idle=self.target is None)
+        if reaction:
+            action, reason, result = reaction
+        elif self.target is not None:
             clear_interest(self)
             action, reason, result = self._engage(engine, actor, target, observed, patient=patient, gated=gated, ambient_light=ambient_light)
         else:

@@ -9,6 +9,22 @@ SOURCE=BASE+'hollow_revenant.json'
 
 
 class CompositeAuthoringTests(unittest.TestCase):
+    def test_independent_enemy_responses_game_defaults_host_and_exact_metadata(self):
+        raw=self.draft();raw['perception'].update(faction='hollow',hostile_to=['player'])
+        for recipe,version in [('strike_and_withdraw',1),('territorial_guard',5)]:
+            raw['ai_profile']={'version':version,'recipe':recipe}
+            for ids in [('alarm_call_on_sight',),('investigate_allied_alarm',),('alarm_call_on_sight','investigate_allied_alarm')]:
+                raw['enemy_responses']={'version':1,'modules':[{'id':k} for k in ids]}
+                r=self.validate(raw);self.assertTrue(r['valid'],r['diagnostics'])
+                record=r['family']['context']['records'][0]
+                self.assertEqual(2,len(record['capability']['response_defaults']))
+                self.assertEqual(list(ids),[m['id'] for m in record['factory']['instance']['effective_enemy_responses']['modules']])
+        for value in (True,0,25):
+            raw['enemy_responses']={'version':1,'modules':[{'id':'investigate_allied_alarm','opportunity_budget':value}]}
+            self.assertFalse(self.validate(raw)['valid'])
+        raw['enemy_responses']={'version':1,'modules':[{'id':'alarm_call_on_sight'}]}
+        raw['perception']['faction']='player';self.assertFalse(self.validate(raw)['valid'])
+
     def test_escort_registry_alignment_bounds_same_id_tuning_and_preserved_art(self):
         raw=self.draft();raw['ai_profile']={'version':6,'recipe':'protective_escort'}
         raw['perception'].update(faction='player',hostile_to=['hollow'])
@@ -55,7 +71,7 @@ class CompositeAuthoringTests(unittest.TestCase):
     def test_defaults_construct_same_contract_without_turns(self):
         r=self.validate(self.draft());self.assertTrue(r['valid'],r['diagnostics'])
         record=r['family']['context']['records'][0]
-        self.assertEqual('creature-composite-8',record['capability']['contract'])
+        self.assertEqual('creature-composite-9',record['capability']['contract'])
         self.assertEqual('CompositeAI',record['factory']['instance']['ai_class'])
         p=record['factory']['instance']['effective_ai_profile']
         self.assertEqual((2,1,6,12),(p['retreat_distance'],p['hold_opportunities'],p['withdrawal_budget'],p['pursuit_timeout']))

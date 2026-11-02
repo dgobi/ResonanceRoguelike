@@ -113,6 +113,11 @@ def effective_profile(raw):
     from engine.creature_abilities import ABILITY_REGISTRY
     if raw.get('id') in ABILITY_REGISTRY:
         raise ValueError('ai_profile: ID-bound special actors cannot use composite')
+    if 'enemy_responses' in raw:
+        from engine.enemy_responses import configuration
+        if raw['enemy_responses'] is None:
+            raise ValueError('enemy_responses: omit an absent attachment')
+        configuration(raw['enemy_responses'], result, raw.get('perception'))
     return result
 
 
@@ -153,6 +158,14 @@ def depart(engine):
 
 
 def validate_saved(row, local_map=None):
+    _validate_recipe_saved(row, local_map)
+    composite = row.get('composite')
+    if isinstance(composite, dict) and 'responses' in composite:
+        from engine.enemy_responses import validate_saved as validate_responses
+        validate_responses(composite['responses'], row, composite['profile'], local_map)
+
+
+def _validate_recipe_saved(row, local_map=None):
     composite = row.get('composite')
     if row.get('ai_type') != 'CompositeAI':
         if composite is not None:
@@ -161,7 +174,7 @@ def validate_saved(row, local_map=None):
     from engine.creature_abilities import ABILITY_REGISTRY
     if isinstance(row.get('id'), str) and (row['id'].casefold() == 'player' or row['id'] in ABILITY_REGISTRY):
         raise ValueError('composite: saved binding cannot acquire player or ID-bound special behavior')
-    if not isinstance(composite, dict) or set(composite) != {'profile', 'state'}:
+    if not isinstance(composite, dict) or set(composite) not in ({'profile', 'state'}, {'profile','state','responses'}):
         raise ValueError('composite: profile and tactical state required')
     p = saved_profile(composite['profile'])
     s = composite['state']
