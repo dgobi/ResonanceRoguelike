@@ -18,3 +18,15 @@ automatically edit wiki chapters/examples, rebuild the standalone HTML or add a
 wiki release gate to implementation work. Preserve the existing edition unless
 the owner explicitly commissions wiki changes. Features still update their
 affected authoritative guides and retain concise source-bound completion evidence.
+
+For substantial commissioned work, use one finite outcome package with internal
+milestones and one final delivery. The lead Codex session owns implementation,
+scoped repair, autonomous verification/review, checkpoints and continuation through
+the authorized scope. Internal milestones are progress/recovery points, not new
+owner approval points. Keep one concise resumable progress record. Ask only about
+consequential unresolved choices, genuinely missing permission or blockers that
+cannot be resolved within scope. Preserve the production-main/checkpoint
+arrangement, existing work and saves, required verification and separately
+commissioned wiki work. A package's explicit commit/push authorization carries
+through its final delivery and remote readback. Stop at the package boundary;
+later roadmap stages require their own commission. Small corrections remain small.
