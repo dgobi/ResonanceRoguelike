@@ -1,0 +1,267 @@
+{
+  "runtime_revision": "732b9430aa07b550d84f88ec83ec46a5ac939a57",
+  "files": [
+    {
+      "path": "roguelike/data/entities/creatures/barrow_kin_sentinel.json",
+      "sha256": "9781003aca1520bcaaace3d80a0c9bbb638eda131e4b4e41da945f0a68085621",
+      "id": "barrow_kin_sentinel",
+      "recipe": "territorial_guard",
+      "responses": {
+        "version": 2,
+        "modules": [
+          {
+            "id": "alarm_call_on_sight",
+            "cooldown_phases": 24,
+            "rearm_unseen_phases": 12,
+            "strength": 12
+          }
+        ]
+      },
+      "maneuvers": {
+        "version": 1,
+        "modules": [
+          {
+            "id": "regroup_when_wounded",
+            "expiry_phases": 16,
+            "hold_opportunities": 2,
+            "opportunity_budget": 6,
+            "rearm_percent": 75,
+            "wounded_percent": 50
+          }
+        ]
+      }
+    },
+    {
+      "path": "roguelike/data/entities/creatures/barrow_lane_revenant.json",
+      "sha256": "e2275cb29d67f74ee99ac556a2cc058af0d07e1d88f2a2d8ff254a77295b2605",
+      "id": "barrow_lane_revenant",
+      "recipe": "strike_and_withdraw",
+      "responses": {
+        "version": 2,
+        "modules": [
+          {
+            "id": "alarm_call_on_sight",
+            "cooldown_phases": 24,
+            "rearm_unseen_phases": 12,
+            "strength": 12
+          },
+          {
+            "id": "investigate_allied_alarm",
+            "expiry_phases": 16,
+            "failure_budget": 2,
+            "opportunity_budget": 12
+          }
+        ]
+      },
+      "maneuvers": {
+        "version": 1,
+        "modules": [
+          {
+            "id": "regroup_when_wounded",
+            "expiry_phases": 16,
+            "hold_opportunities": 2,
+            "opportunity_budget": 6,
+            "rearm_percent": 75,
+            "wounded_percent": 50
+          },
+          {
+            "id": "seek_lateral_approach",
+            "expiry_phases": 16,
+            "opportunity_budget": 8
+          }
+        ]
+      }
+    },
+    {
+      "path": "roguelike/data/entities/creatures/barrow_nettle_guard.json",
+      "sha256": "a896d44e6a7299ba75396197a0c47f5f858f045ef3cc8bb101e1eecfd6db26be",
+      "id": "barrow_nettle_guard",
+      "recipe": "venom_strike_and_withdraw",
+      "responses": {
+        "version": 2,
+        "modules": [
+          {
+            "id": "alarm_call_on_sight",
+            "cooldown_phases": 24,
+            "rearm_unseen_phases": 12,
+            "strength": 12
+          }
+        ]
+      },
+      "maneuvers": {
+        "version": 1,
+        "modules": [
+          {
+            "id": "regroup_when_wounded",
+            "expiry_phases": 16,
+            "hold_opportunities": 2,
+            "opportunity_budget": 6,
+            "rearm_percent": 75,
+            "wounded_percent": 50
+          }
+        ]
+      }
+    },
+    {
+      "path": "roguelike/data/entities/creatures/barrow_patient_weevil.json",
+      "sha256": "b2a9732d00a06de571cb8b4f740269b8bc115269bb79fe64294a59599e0e1fa2",
+      "id": "barrow_patient_weevil",
+      "recipe": "patient_venom_hunt",
+      "responses": {
+        "version": 2,
+        "modules": [
+          {
+            "id": "investigate_allied_alarm",
+            "expiry_phases": 16,
+            "failure_budget": 2,
+            "opportunity_budget": 12
+          }
+        ]
+      },
+      "maneuvers": {
+        "version": 1,
+        "modules": [
+          {
+            "id": "seek_lateral_approach",
+            "expiry_phases": 16,
+            "opportunity_budget": 8
+          },
+          {
+            "id": "regroup_when_wounded",
+            "expiry_phases": 16,
+            "hold_opportunities": 2,
+            "opportunity_budget": 6,
+            "rearm_percent": 75,
+            "wounded_percent": 50
+          }
+        ]
+      }
+    },
+    {
+      "path": "roguelike/data/entities/creatures/barrow_shy_listener.json",
+      "sha256": "966ae26fc914c127d57312a0146d49f6244f949e9dbaa959c811690c58ce443f",
+      "id": "barrow_shy_listener",
+      "recipe": "observation_averse",
+      "responses": {
+        "version": 2,
+        "modules": [
+          {
+            "id": "investigate_allied_alarm",
+            "expiry_phases": 16,
+            "failure_budget": 2,
+            "opportunity_budget": 12
+          }
+        ]
+      },
+      "maneuvers": {
+        "version": 1,
+        "modules": [
+          {
+            "id": "regroup_when_wounded",
+            "expiry_phases": 16,
+            "hold_opportunities": 2,
+            "opportunity_budget": 6,
+            "rearm_percent": 75,
+            "wounded_percent": 50
+          }
+        ]
+      }
+    },
+    {
+      "path": "roguelike/data/entities/creatures/barrow_shy_stalker.json",
+      "sha256": "4388521cd76471f116b1cb42944782c32b1806d7fde4703e9ca18b5c68cc4b6e",
+      "id": "barrow_shy_stalker",
+      "recipe": "observation_averse",
+      "responses": {
+        "version": 2,
+        "modules": [
+          {
+            "id": "investigate_allied_alarm",
+            "expiry_phases": 16,
+            "failure_budget": 2,
+            "opportunity_budget": 12
+          }
+        ]
+      },
+      "maneuvers": {
+        "version": 1,
+        "modules": [
+          {
+            "id": "seek_lateral_approach",
+            "expiry_phases": 16,
+            "opportunity_budget": 8
+          }
+        ]
+      }
+    },
+    {
+      "path": "roguelike/data/layouts/ai9_lateral_lane.json",
+      "sha256": "f07a5088a2bdf50dd8959ca9901e7f2f1de37b1df7ae43f84285b01e136c336b",
+      "id": "ai9_lateral_lane",
+      "recipe": null,
+      "responses": null,
+      "maneuvers": null
+    },
+    {
+      "path": "roguelike/data/layouts/ai9_shadow_lane.json",
+      "sha256": "bac859ff62598bdd959c4a7844db3391043a9653bb0c0b8aee67019521e677cd",
+      "id": "ai9_shadow_lane",
+      "recipe": null,
+      "responses": null,
+      "maneuvers": null
+    },
+    {
+      "path": "roguelike/data/layouts/ai9_venom_lane.json",
+      "sha256": "8f45678d8999a185806cf2d10edc613f41eb4d2be9ee2e9514ab44e08a7f09b2",
+      "id": "ai9_venom_lane",
+      "recipe": null,
+      "responses": null,
+      "maneuvers": null
+    },
+    {
+      "path": "roguelike/data/layouts/barrow_ward_store_d.json",
+      "sha256": "a6fc8894aba46ec39b0fc8084a09a519d120485b6fcca7a4c54772abad268866",
+      "id": "barrow_ward_store_d",
+      "recipe": null,
+      "responses": null,
+      "maneuvers": null
+    },
+    {
+      "path": "roguelike/data/layouts/barrow_ward_store_e.json",
+      "sha256": "64b6e01bcbfa13cb73244544ffc59abbec779483d6c730029d9a8f85112cbbfb",
+      "id": "barrow_ward_store_e",
+      "recipe": null,
+      "responses": null,
+      "maneuvers": null
+    }
+  ],
+  "selection": {
+    "id": "authored_submap_selection",
+    "version": 1,
+    "enabled": true,
+    "target_type": "barrow",
+    "authored_chance": 0.35,
+    "candidates": [
+      {
+        "layout_id": "barrow_ward_store_a",
+        "weight": 1.0
+      },
+      {
+        "layout_id": "barrow_ward_store_b",
+        "weight": 1
+      },
+      {
+        "layout_id": "barrow_ward_store_c",
+        "weight": 1
+      },
+      {
+        "layout_id": "barrow_ward_store_d",
+        "weight": 1
+      },
+      {
+        "layout_id": "barrow_ward_store_e",
+        "weight": 1
+      }
+    ]
+  }
+}

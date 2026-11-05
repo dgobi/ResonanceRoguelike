@@ -1,0 +1,45 @@
+{
+  "implementation_revision": "732b9430aa07b550d84f88ec83ec46a5ac939a57",
+  "review_mode": "Two read-only helpers inspected runtime and package acceptance; lead remained sole implementation writer.",
+  "repaired_findings": [
+    "Observation-averse attachment exposure selected a second concealment move in the same opportunity; select the paid reaction before the changed host phase.",
+    "Exposure during observation-averse investigation could leave an incompatible saved report; drop the report when exposure commits concealment.",
+    "A lateral path could reach normal melee contact before its off-axis destination; exclude premature prey-adjacent contact cells from the bounded route.",
+    "Regroup arriving on its final travel credit dropped configured holds; preserve zero-travel arrival only at the saved goal with positive hold credit. A new production-path roundtrip test covers both holds and rejects displaced zero-credit saves.",
+    "Natural revisit proof needed explicit identity, injury, home and remains equality; assertions now verify these alongside Ward ownership.",
+    "The release input manifest omitted two executed Workbench lifecycle scripts; it now binds every workbench/scripts/*.mjs verifier."
+  ],
+  "preflight": {
+    "ai_1_through_9_before_final_hold_case": {"passed": 160, "total": 160},
+    "ai_9_after_final_hold_case": {"passed": 17, "total": 17},
+    "stable_worker_composition": {"passed": 11, "total": 11},
+    "frontend": {"passed": 97, "total": 97},
+    "native_saved_edit": {"turn": 486, "enabled_position": [34, 21], "disabled_position": [34, 20]},
+    "natural_tuned_pair": {"d_direct_hp": 56, "d_alternate_hp": 60, "e_direct_hp": 56, "e_alternate_hp": 58}
+  },
+  "development_failures_not_certification": [
+    "The first frozen full run passed 21 gates; the worker cohort found one stale exact authored-room list in test_authoring. Only the five commissioned memberships were added. The full eleven-module worker cohort repeats on the final verification-input revision; successful unaffected gates retain their original exact inputs.",
+    "First native authoring run published all eleven new files, then capture correctly rejected concurrently edited source. Later sequential authoring runs passed; final frozen native lifecycle runs separately.",
+    "An early worker run overlapped native source publication and returned stale/capture errors. Stable composition preflight passed all eleven tests.",
+    "The worker test initially assumed every source used body_id; hollow_revenant uses protected inline limbs. The assertion now preserves the actual source representation.",
+    "A natural-world cold test initially used the room-only loader. It now uses the existing ordinary natural-world cold loader.",
+    "Early controlled fixtures had missing inherited setup, an invalid rival target for venom delivery, and a rearm expectation before mandatory withdrawal. Fixture corrections preserve real delivery, required host phases and tested coverage."
+  ],
+  "inventory_delta": {
+    "new_creatures": 6,
+    "new_layouts": 5,
+    "structures": [91, 96],
+    "authored_submaps": [23, 28],
+    "creature_catalogue_rows": [31, 37],
+    "creatures": [30, 36],
+    "editable_creatures": [29, 35],
+    "authoring_contract": ["creature-composite-9", "creature-composite-10"],
+    "coverage": "Existing inventory assertions retained with explicit new ID membership checks; no gates removed."
+  },
+  "limits": [
+    "Ordinary witnesses stage the player at real selector-generated entrances and script known room geometry; they do not establish unaided travel from the laboratory.",
+    "The E ordinary witness demonstrates observation-averse and patient core identity and lawful attachment fallback, not successful flank/regroup there.",
+    "Finite resolution includes successful disengagement with living enemies. The tested routes do not establish universal balance or subjective fun.",
+    "Cold snapshot equality is not a universal RNG stream persistence claim."
+  ]
+}

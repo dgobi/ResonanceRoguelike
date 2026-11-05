@@ -1,0 +1,29 @@
+{
+  "repository": "dgobi/ResonanceRoguelike",
+  "branch": "main",
+  "runtime_content_editor_revision": "732b9430aa07b550d84f88ec83ec46a5ac939a57",
+  "final_verification_input_revision": "2d6bc172054ee1f8832d3cdfff948aa3135defac",
+  "checkpoints": [
+    {
+      "tag": "checkpoint/ai-9-start-20261105-a",
+      "object_sha": "22fc71797175e2f2310cca8f51c53e25ced4210f",
+      "peeled_revision": "bc7feaa08910548c2e236fed97c81c627a49fd1b",
+      "independent_readback": "GitHub REST connector GET ref and annotated tag object"
+    },
+    {
+      "tag": "checkpoint/ai-9-implementation-20261105-a",
+      "object_sha": "b907f3eb62eed34198a01aee232fe9702ded09a6",
+      "peeled_revision": "732b9430aa07b550d84f88ec83ec46a5ac939a57",
+      "independent_readback": "GitHub REST connector GET ref and annotated tag object"
+    },
+    {
+      "tag": "checkpoint/ai-9-verified-input-20261105-a",
+      "object_sha": "8dacb87943005a1112941b0550990164b90559e5",
+      "peeled_revision": "2d6bc172054ee1f8832d3cdfff948aa3135defac",
+      "independent_readback": "GitHub REST connector GET ref and annotated tag object"
+    }
+  ],
+  "git_transport_readback": "git ls-remote origin refs/heads/main refs/tags/checkpoint/ai-9-* matched these tag objects and peeled commits.",
+  "main_at_checkpoint_publication": "bc7feaa08910548c2e236fed97c81c627a49fd1b",
+  "completion": "Completed main and complete checkpoint will be published atomically after the reporting commit. Exact final main, annotated object and peeled SHA are supplied by independent Git/GitHub readback in the final handoff; they cannot be self-embedded."
+}

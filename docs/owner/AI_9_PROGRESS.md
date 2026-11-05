@@ -1,39 +1,30 @@
-# AI-9 progress
+# AI-9 progress — completed package
 
-Active commission: **AI-9 v2.0 — Enemy composition and encounter integration
-package**, supplied 5 November 2026. One integrated delivery through M1–M5;
-commit/push/checkpoint publication explicitly authorized. Lead is sole writer.
+AI-9 v2.0, “Enemy composition and encounter integration package,” commissioned
+5 November 2026. All five internal milestones are complete; stop at AI-9.
+One implementation writer worked directly in production `main`.
 
-Start: production `main`, `bc7feaa08910548c2e236fed97c81c627a49fd1b`, identical to
-reviewed baseline and remote main. Named annotated checkpoint:
-`checkpoint/ai-9-start-20261105-a`. Pre-existing untracked art/proposal preserved;
-initial hashes in `evidence/ai-9/preservation.json`. Personal saves are excluded.
-Supplied references extracted only to ignored `.baseline/ai-9/package` for resume.
+- Start: `bc7feaa08910548c2e236fed97c81c627a49fd1b`.
+- Contract/genuine legacy captures: `6f97e06edd9facb8c5288114b7a45be7a6237f8d`.
+- Runtime/content/editor: `732b9430aa07b550d84f88ec83ec46a5ac939a57`.
+- Final verifier inputs: `2d6bc172054ee1f8832d3cdfff948aa3135defac`.
+  Its only consumed-input change adds five expected room IDs in one worker test.
+- Twenty-two gates pass: focused605, production-D3704/159 workers, worker52,
+  frontend97, host71, startup15; all required build, package, native and play checks.
+  Twenty-one unchanged gate results retain their exact original bindings; the
+  entire eleven-module worker cohort repeats on the corrected input revision.
+- Six UI-authored variants, five saved layouts and D/E normal encounters verified;
+  direct/alternate routes, actual effects, F5/F9/cold load and revisit preserved.
+- All 278 initial owner files remain byte-identical; art/wiki/A–C unchanged.
+  Personal campaigns were not opened. No task branch/worktree/development copy.
 
-- **M1 complete:** contract/fixtures commit `6f97e06edd9facb8c5288114b7a45be7a6237f8d`.
-  Six genuine untouched AI-8 archives captured through Wait/F5; existing archives
-  cover unattached v4/v5 and v6 escort. Narrow AGENTS amendment installed.
-- **M2 complete:** separate versioned maneuvers; opt-in response v2 across five
-  hosts, preserved v1. Twenty host/module action witnesses, meaningful mixed
-  configurations and 17 adversarial checks pass. Retained AI-1–8: 144/144.
-  Read-only review repairs: v2 double-step/exposed investigation, productive flank
-  route, and arrival on final regroup travel credit now retains paid holds/save.
-- **M3 complete:** frontend 97/97, typecheck/build passed. Genuine packaged controls
-  created six variants and five rooms. Successful native receipt
-  `workbench/.artifacts/ai-9/native-1793912666519/receipt.json`: create/publish/reopen,
-  placement/Test room, F5/F9, undo/redo, invalid draft, Reset/latest and dirty-draft
-  exclusion. Saved lateral off/on changes actual matched-turn physical position.
-- **M4 implemented:** D/E, equal A–E weights, unchanged 0.35 chance. Real seed
-  20261027 selects D(80,97), E(69,92). Direct and alternate routes finish with Ward,
-  cold load and revisit; dark/light and support/isolation affect actual actions.
-  Tuned replay passes: D direct/alternate HP56/60, E56/58; identities, injuries,
-  homes and remains unchanged on revisit. Stable worker preflight is running.
-- **M5 active:** focused read-only reviews complete, fixes integrated. Next:
-  freeze/commit implementation and verifier inputs; run all 22 unfiltered release
-  gates; retain concise evidence, guide + AI_9.md; publish/read back main and all
-  four checkpoints. No unresolved owner choice or blocker. Stop at AI-9.
+Final report: [AI_9.md](AI_9.md). Usage/phase guide:
+[Enemy components](../../roguelike/docs/ENEMY_RESPONSE_COMPONENTS.md).
+Source-bound evidence: `evidence/ai-9/release.json`, `gates.json`, `play.json`,
+`authoring.json`, `review.json` and `verification-input-delta.json`.
 
-Decisions: retain historical base schemas and absent attachment save shapes.
-Observation-averse adapters must retain safe-step reactions and covered-phase
-commitment; patient retirement precedes installation of regroup. New state ages
-on charged phases even with no granted action. No unresolved owner choice/blocker.
+Start/implementation/verified-input checkpoints are published and independently
+read back in `evidence/ai-9/publication.json`. The reporting commit carries the
+`checkpoint/ai-9-complete-20261105-a` checkpoint; final main/tag object/peeled
+identities and remote readback are supplied in the completion handoff, avoiding
+a self-referential commit hash. No remaining implementation or verification work.

@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "runtime_content_editor_revision": "732b9430aa07b550d84f88ec83ec46a5ac939a57",
+  "final_verification_input_revision": "2d6bc172054ee1f8832d3cdfff948aa3135defac",
+  "inputs_sha256": "551c0cce90518108b320333eb46115844c6cacfde41eea107fb3ce3a9b96ad66",
+  "gate_count": 22,
+  "focused": {
+    "passed": 605,
+    "total": 605,
+    "unfiltered": true
+  },
+  "production_d": {
+    "checks": 3704,
+    "passed": 3704,
+    "failed": 0,
+    "workers": 159
+  },
+  "workbench_worker": {
+    "tests": 52,
+    "modules": 11,
+    "passed": true
+  },
+  "frontend": {
+    "passed": 97
+  },
+  "host": {
+    "passed": 71
+  },
+  "startup": {
+    "passed": 15,
+    "total": 15
+  },
+  "source_stable": true,
+  "verification": "All gates newly executed for AI-9. Twenty-one retain their original unchanged inputs; the complete worker cohort repeats after one exact test-only membership correction. No prior-task certification substituted."
+}

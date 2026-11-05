@@ -1,0 +1,282 @@
+{
+  "revision": "732b9430aa07b550d84f88ec83ec46a5ac939a57",
+  "full_traces": "play-responses.json.gz",
+  "staging": "AI-9 ordinary controls, genuine selected entrances and cold legacy saves.\n\nPlayer placement at a real newly selected entrance and scripted knowledge of room\ngeometry are disclosed. No damage, AI decisions, perception or outcomes are set.\n",
+  "comparisons": [
+    {
+      "layout": "barrow_ward_store_d",
+      "direct_hp": 56,
+      "alternate_hp": 60,
+      "direct_actions": [
+        "alarm_emitted",
+        "alarm_prepare",
+        "approach",
+        "engage",
+        "guarding",
+        "holding_distance",
+        "idle",
+        "lateral_approach",
+        "regroup_hold",
+        "returning_to_post",
+        "withdrawal",
+        "wounded_regroup"
+      ],
+      "alternate_actions": [
+        "alarm_emitted",
+        "alarm_prepare",
+        "approach",
+        "approach_exhausted",
+        "guarding",
+        "idle",
+        "returning_to_post"
+      ]
+    },
+    {
+      "layout": "barrow_ward_store_e",
+      "direct_hp": 56,
+      "alternate_hp": 58,
+      "direct_actions": [
+        "abandoned_defensive_distance",
+        "approach",
+        "engage",
+        "idle",
+        "no_prey",
+        "unseen_melee",
+        "unseen_pursuit",
+        "watching_for_paralysis"
+      ],
+      "alternate_actions": [
+        "approach",
+        "cover_reached",
+        "engage",
+        "idle",
+        "no_prey",
+        "seek_concealment",
+        "unseen_pursuit",
+        "watched",
+        "watching_for_paralysis",
+        "withdrawal"
+      ]
+    }
+  ],
+  "natural": [
+    {
+      "layout": "barrow_ward_store_d",
+      "response": "direct",
+      "seed": 20261027,
+      "chunk": [
+        80,
+        97
+      ],
+      "submap_id": "submap_80_97_0",
+      "selected_counts": {
+        "a": 57,
+        "b": 49,
+        "c": 54,
+        "d": 40,
+        "e": 58
+      },
+      "hp": 56,
+      "survivors": [
+        {
+          "id": "barrow_kin_sentinel",
+          "individual_id": "80,97/submap_80_97_0:00000002",
+          "hp": 14
+        }
+      ],
+      "cold_equal": true,
+      "revisit_residents_equal": true,
+      "revisit_remains_equal": true
+    },
+    {
+      "layout": "barrow_ward_store_d",
+      "response": "alternate",
+      "seed": 20261027,
+      "chunk": [
+        80,
+        97
+      ],
+      "submap_id": "submap_80_97_0",
+      "selected_counts": {
+        "a": 57,
+        "b": 49,
+        "c": 54,
+        "d": 40,
+        "e": 58
+      },
+      "hp": 60,
+      "survivors": [
+        {
+          "id": "barrow_lane_revenant",
+          "individual_id": "80,97/submap_80_97_0:00000001",
+          "hp": 14
+        },
+        {
+          "id": "barrow_kin_sentinel",
+          "individual_id": "80,97/submap_80_97_0:00000002",
+          "hp": 14
+        }
+      ],
+      "cold_equal": true,
+      "revisit_residents_equal": true,
+      "revisit_remains_equal": true
+    },
+    {
+      "layout": "barrow_ward_store_e",
+      "response": "direct",
+      "seed": 20261027,
+      "chunk": [
+        69,
+        92
+      ],
+      "submap_id": "submap_69_92_0",
+      "selected_counts": {
+        "a": 57,
+        "b": 49,
+        "c": 54,
+        "d": 40,
+        "e": 58
+      },
+      "hp": 56,
+      "survivors": [
+        {
+          "id": "barrow_patient_weevil",
+          "individual_id": "69,92/submap_69_92_0:00000002",
+          "hp": 16
+        }
+      ],
+      "cold_equal": true,
+      "revisit_residents_equal": true,
+      "revisit_remains_equal": true
+    },
+    {
+      "layout": "barrow_ward_store_e",
+      "response": "alternate",
+      "seed": 20261027,
+      "chunk": [
+        69,
+        92
+      ],
+      "submap_id": "submap_69_92_0",
+      "selected_counts": {
+        "a": 57,
+        "b": 49,
+        "c": 54,
+        "d": 40,
+        "e": 58
+      },
+      "hp": 58,
+      "survivors": [
+        {
+          "id": "barrow_shy_stalker",
+          "individual_id": "69,92/submap_69_92_0:00000001",
+          "hp": 14
+        },
+        {
+          "id": "barrow_patient_weevil",
+          "individual_id": "69,92/submap_69_92_0:00000002",
+          "hp": 16
+        }
+      ],
+      "cold_equal": true,
+      "revisit_residents_equal": true,
+      "revisit_remains_equal": true
+    }
+  ],
+  "rooms": [
+    {
+      "room": "ai9_lateral_lane",
+      "hp": 57,
+      "checkpoints": [
+        {
+          "label": "seek_lateral_approach",
+          "f5_f9_equal": true,
+          "cold_equal": true
+        },
+        {
+          "label": "regroup_when_wounded",
+          "f5_f9_equal": true,
+          "cold_equal": true
+        },
+        {
+          "label": "ai9_lateral_lane_resolved_or_finite_continuation",
+          "f5_f9_equal": true,
+          "cold_equal": true
+        }
+      ]
+    },
+    {
+      "room": "ai9_venom_lane",
+      "hp": 22,
+      "checkpoints": [
+        {
+          "label": "seek_lateral_approach",
+          "f5_f9_equal": true,
+          "cold_equal": true
+        },
+        {
+          "label": "regroup_when_wounded",
+          "f5_f9_equal": true,
+          "cold_equal": true
+        },
+        {
+          "label": "ai9_venom_lane_resolved_or_finite_continuation",
+          "f5_f9_equal": true,
+          "cold_equal": true
+        }
+      ]
+    },
+    {
+      "room": "ai9_shadow_lane",
+      "hp": 60,
+      "checkpoints": [
+        {
+          "label": "ai9_shadow_lane_resolved_or_finite_continuation",
+          "f5_f9_equal": true,
+          "cold_equal": true
+        }
+      ]
+    }
+  ],
+  "legacy": {
+    "passed": true,
+    "archives": [
+      {
+        "label": "v5-prepared",
+        "source_revision": "bc7feaa08910548c2e236fed97c81c627a49fd1b",
+        "sha256": "dd80f2c19ea09daac6037c0c424006cccc3a3a545e4b3f9103e33bdfd3b9276e",
+        "cold_equal": true
+      },
+      {
+        "label": "v1-investigating",
+        "source_revision": "bc7feaa08910548c2e236fed97c81c627a49fd1b",
+        "sha256": "ae50f4d20592e9a2519a197c16f0a07bca60e56653cc97adb091d814eb7315ca",
+        "cold_equal": true
+      },
+      {
+        "label": "v5-investigating",
+        "source_revision": "bc7feaa08910548c2e236fed97c81c627a49fd1b",
+        "sha256": "4161d7c1d0a7055818fa871ce1d28f23d148050520c85c9ba1266a7623949889",
+        "cold_equal": true
+      },
+      {
+        "label": "v1-unattached",
+        "source_revision": "bc7feaa08910548c2e236fed97c81c627a49fd1b",
+        "sha256": "8fe39fb02fb990e2e8e84676f5b7cdbf00c1feaef159349124afb2d6e7a536f1",
+        "cold_equal": true
+      },
+      {
+        "label": "v2-unattached",
+        "source_revision": "bc7feaa08910548c2e236fed97c81c627a49fd1b",
+        "sha256": "384f0fd451a2985fbd265659ea9e9f10ee756e9f7d79632085aba803d249df19",
+        "cold_equal": true
+      },
+      {
+        "label": "v3-unattached",
+        "source_revision": "bc7feaa08910548c2e236fed97c81c627a49fd1b",
+        "sha256": "b2db6eebd6cb5029ccc21cc9ce0538cc1b2393e70915c624074f27cdd912fc2b",
+        "cold_equal": true
+      }
+    ]
+  }
+}
