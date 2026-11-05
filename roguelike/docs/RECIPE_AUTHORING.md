@@ -1,8 +1,16 @@
-# Ordinary recipe authoring · item-preparation-1
+# Ordinary recipe authoring · item-preparation-2
 
 `engine/recipe_authoring.py` is the game-owned Workbench adapter. Gameplay uses
 `engine/crafting.py`, `rendering/craft_screen.py` and the engine's existing
 placement/processing path; it never imports editor descriptors.
+
+SYS-1 adds a bounded `vessel_process` requirement for the existing bone-tincture
+output. Requirements controls edit its exact water batch and heatproof condition.
+The selected physical vessel is a separate allocation slot, owned by the job
+after confirmation; completion returns it empty with one dose. It is not a
+retained tool. Saved jobs capture their requirement and effective vessel. See
+[Practical vessels](PRACTICAL_VESSELS.md) for the 250 mL/35-turn default, another
+authorable vessel, recovery, ordinary acquisition and compatibility.
 
 Rules admit 15 of 18 shipped, uniquely resolved single-object sources under
 `data/recipes/`: 2 immediate, 2 cooking, 5 drying, 4 steeping, 2 rendering.

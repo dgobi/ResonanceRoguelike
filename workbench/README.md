@@ -7,6 +7,10 @@ direct creature placement in authored underground layouts, found-text variants
 and game typography. The game remains the
 validation authority. No campaign, running game or Internet service is required.
 
+SYS-1 adds water-vessel capacity/heat controls and a measured vessel requirement
+for resonant bone tincture. See [Practical vessels](../roguelike/docs/PRACTICAL_VESSELS.md)
+for the player loop, authoring workflow and saved-state boundaries.
+
 Item, recipe, found-text, typography and creature controls use the selected game's registered content
 contract and the same exact-source document lifecycle. See
 [content contracts](docs/CONTENT_CONTRACTS.md) for the extension seam, supported

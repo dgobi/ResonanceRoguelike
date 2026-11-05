@@ -15,7 +15,7 @@ from engine.save_components import ITEM_STATE, snapshot, validate_fields
 from engine.crafting import _item_has_tag, _item_has_all_tags
 from rendering.tile_registry import TileRegistry
 
-CONTRACT = "expedition-items-3"
+CONTRACT = "expedition-items-4"
 SCHEMA = {
     "$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object", "required": ["id"],
     "properties": {
@@ -43,6 +43,10 @@ SCHEMA = {
 VIEWS = ["item-properties", "references", "recipes", "use-binding", "factory"]
 from engine import equipment_authoring as equipment
 SCHEMA['properties'].update(equipment.SCHEMA)
+SCHEMA['properties']['vessel'] = dict(type='object', title='Water vessel', **{'x-view':'Vessel','x-control':'bounded-record'},
+    properties=dict(version=dict(type='integer',default=1,readOnly=True),
+        capacity_ml=dict(type='integer',title='Capacity (mL)',minimum=1,maximum=10000),
+        contents=dict(type='string',default='water',readOnly=True)))
 PUBLICATION_NOTE = "Save/reopen each item first, then reference its saved ID in a room or pool. Saving does not enroll it in loot, crafting, starting gear or world selection. Owned items retain copied physical fields; combat, armour and carrying use the loaded session definitions. Source saves do not hot-reload a running game. Reset keeps its capture; latest saved captures revisions."
 
 
@@ -64,7 +68,7 @@ def authoring_evidence(context):
 
 
 LIMITATIONS = "Exact staged bytes loaded and an unowned item instantiated by the actual factory. No use action, pool sampling, world selection or saved instance changed."
-FIELDS = ["name", "description", "tile", "weight", "stackable", "keywords", "consumed_on_use"]
+FIELDS = ["name", "description", "tile", "weight", "stackable", "keywords", "consumed_on_use", "vessel"]
 CLASS_FIELDS = {"material": [], "food": ["nutrition", "eat_message"],
                 "drink": ["hydration", "drink_message", "empty_form"], "treatment": ["heal_amount"], "venom treatment": []}
 # Known runtime-bearing fields outside an ordinary inert component. Unknown
@@ -200,13 +204,16 @@ def validate_definition(raw, data, path, sources, *, writable=False):
         issue("LOADER_IDENTITY", "id", "DataLoader did not load this exact definition from this source.")
     if writable and not capability(raw, path)["editable"]:
         issue("UNSUPPORTED_ITEM", "category", capability(raw, path)["reason"])
+    from engine.vessels import validate_definition as validate_vessel
+    try: validate_vessel(raw)
+    except ValueError as error: issue('VESSEL_CONFIG','vessel',str(error))
     equipment_class = capability(raw,path).get('equipment_class')
     if equipment_class:
         for field,message in equipment.validate(raw,equipment_class,data): issue('EQUIPMENT_FIELD',field,message)
     # Use the actual game instance validators, including bool-vs-number and
     # finite/nonnegative rules. Default fields are supplied by the factory later.
     for field in FIELDS + ["on_use", "qualities", "text_id", "nutrition", "hydration", "heal_amount", "eat_message", "drink_message", "liquid", "liquid_volume", "harvest_from"]:
-        if field in raw:
+        if field in raw and field in ITEM_STATE:
             try:
                 validate_fields({field: raw[field]}, {field: ITEM_STATE[field]}, "definition")
             except (ValueError, OverflowError) as error:
@@ -251,6 +258,7 @@ def factory_preview(raw, data):
     item = ItemFactory(data).create(raw["id"])
     if item is None: raise ValueError("ItemFactory returned no instance")
     state = snapshot(item, ITEM_STATE)
+    if getattr(item,'vessel',None): state['vessel']=item.vessel
     validate_fields(state, ITEM_STATE, "factory instance")
     defaults=dict(name=raw['id'],description='',tile='generic_item',weight=0.1,stackable=False,keywords=[],consumed_on_use=True,on_use=None,
                   nutrition=None,hydration=None,heal_amount=None,eat_message=None,drink_message=None)

@@ -24,7 +24,9 @@ def item_category(item, definitions) -> str:
 
 def effective_weight(item, category, reductions) -> float:
     reduction = reductions.get(category, reductions.get("all", 0.0))
-    return getattr(item, "weight", 0.0) * (1.0 - reduction)
+    vessel = getattr(item, 'vessel', None)
+    water = vessel['water_ml'] / 1000 if vessel else 0
+    return (getattr(item, "weight", 0.0) + water) * (1.0 - reduction)
 
 
 class Inventory:

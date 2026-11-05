@@ -11,6 +11,19 @@ ITEM = "roguelike/data/items/components/wood_bundle.json"
 POOL = "roguelike/data/loot_pools/workshop_b_fuel.json"
 
 class ItemTests(unittest.TestCase):
+    def test_vessels_preserve_special_use_protection_and_effective_capacity(self):
+        path='roguelike/data/items/components/clay_pot.json'
+        raw=json.loads((ROOT/path).read_bytes());raw['vessel']['capacity_ml']=750
+        r=invoke('preview_draft',asset=path,draft=json.dumps(raw))['result']
+        self.assertTrue(r['valid'],r['diagnostics'])
+        self.assertEqual(750,r['factory']['instance']['vessel']['config']['capacity_ml'])
+        path='roguelike/data/items/components/flint_shard.json'
+        raw=json.loads((ROOT/path).read_bytes());raw.update(vessel=dict(version=1,capacity_ml=750,contents='water'),stackable=False,consumed_on_use=False)
+        self.assertFalse(invoke('preview_draft',asset=path,draft=json.dumps(raw))['result']['valid'])
+        raw['id']='inert_flint_vessel'
+        r=invoke('preview_draft',asset=path.replace('flint_shard','inert_flint_vessel'),source_asset=path,draft=json.dumps(raw))['result']
+        self.assertTrue(r['valid'],r['diagnostics'])
+
     def test_flint_exact_id_capability_preserves_pending_definition_and_saved_fields(self):
         path='roguelike/data/items/components/flint_shard.json'
         raw=(ROOT/path).read_bytes()
@@ -23,11 +36,11 @@ class ItemTests(unittest.TestCase):
     def test_recursive_catalogue_noop_complex_sources_and_truthful_binding(self):
         assets = invoke("describe")["result"]["assets"]
         rows = [a for a in assets if a["route"] == "item_definition"]
-        self.assertEqual(len(rows), 81)
+        self.assertEqual(len(rows), 85)
         self.assertEqual([r["path"] for r in rows], sorted(r["path"] for r in rows))
         from collections import Counter
-        self.assertEqual(len([r for r in rows if r["editable"]]),56)
-        self.assertEqual(Counter(r['category'] for r in rows if r['editable']),dict(component=4,butchery=18,consumable=22,weapon=6,armor=2,shield=1,equipment=3))
+        self.assertEqual(len([r for r in rows if r["editable"]]),59)
+        self.assertEqual(Counter(r['category'] for r in rows if r['editable']),dict(component=7,butchery=18,consumable=22,weapon=6,armor=2,shield=1,equipment=3))
         for asset in (ITEM, "roguelike/data/items/tools/tallow_torch.json", "roguelike/data/items/weapons/binding_knife.json",
                       "roguelike/data/items/consumables/resonant_tincture.json"):
             path = ROOT / asset; before = path.read_bytes(); meta = path.stat()

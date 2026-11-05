@@ -124,8 +124,12 @@ class DataLoader:
             if path.name in exclude:
                 continue
             try:
-                with open(path, encoding="utf-8") as f:
-                    data = json.load(f)
+                if subdir in ('items','recipes'):
+                    from generation.structure_contract import read_document
+                    data = read_document(path)
+                else:
+                    with open(path, encoding="utf-8") as f:
+                        data = json.load(f)
                 # Handle both single objects and arrays of objects
                 entries = data if isinstance(data, list) else [data]
                 for entry in entries:

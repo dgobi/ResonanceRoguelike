@@ -11,11 +11,31 @@ publication are authorized. No wiki or later roadmap work.
   AI-8 status is historical; actual source is delivered AI-9.
 - 278 pre-existing untracked owner files hashed in preservation-start.json;
   excluded from task commits. Personal saves remain unopened.
-- M1 active: capture genuine old item/job saves before serializer changes, repair
-  exhausted regroup displacement and verify real engine/save/cold-load sequence.
-- M2/M3: additive saved effective water-vessel state; exact physical allocation
-  and map-owned processing, preserving legacy skins/jobs and active/hot/cold timing.
-- M4: Item/Recipe controls and packaged flow, bounded pools/clue and two ordinary
-  contexts. M5: focused review, unfiltered production/Workbench gates, guidance,
-  SYS_1.md and exact remote main/tag-object/peeled readback.
-- No blocker. Final verification input freeze follows authoring publication.
+- M1 complete: `e8268cf3cfed8407da48fee0c3b97a6d5af7309a`; checkpoint
+  `checkpoint/sys-1-m1-20261105-a`. Genuine baseline archive captured from
+  unchanged 09cc1e5. 19 M1/AI-9 checks passed, including real Wait/F5/F9 and
+  separate-process cold continuation with normal visibility (staged position).
+- M2/M3 implemented and focused checks pass: additive effective water state,
+  physical inventory handling, exact conjunction/batch/vessel allocation,
+  single-owner busy work, recovery, hot/cold timing and old-format compatibility.
+  Twenty SYS-1 tests pass, including strict malformed-load preflight and two
+  menu sizes. Read-only review fixes include protected special uses, timer bound,
+  reusable state, marker/delivery recovery, reach and historical container rows.
+- M4 complete: packaged Item/Recipe controls created/published kettle/flask/cup
+  and a Test room. Final integrated capture passed (`native-1793921061419`),
+  including invalid-item/recipe Undo, no-ops, 125 mL small-cup work, old 250 mL
+  Reset behavior, latest saved inputs and excluded dirty 200 mL. The capture
+  exposed and prompted repair of invalid-candidate Undo availability. Explicit
+  modern clay absence now stays inert across JSON/pickle; legacy migration is
+  load-only. Full receipts and initial creation phase are in evidence/sys-1.
+- Both ordinary selected-world journeys pass in `.baseline/sys-1/ordinary-dev7`:
+  found kettle at (17,55) then plains preparation; found clay/flask and optional
+  note at (16,56) then forest preparation. Seed 20261024; one public-join staging
+  each, subsequent normal controls/AI/costs/survival. Flask rejection, transfer,
+  native fuel/fire, real knowledge payoff, four F5/F9/cold checkpoints per journey
+  and depleted-source revisits pass. No campaign edits or threat removals.
+- M5 active: guidance written; `tools/verify_sys_1.py` schedules unfiltered
+  production/focused suites, all 26 worker modules, frontend/host/build/bundle,
+  native lifecycle and SYS-1 play. Then concise evidence, SYS_1.md, commit/push
+  and independent remote main/tag-object/peeled readback.
+- No blocker. Implementation checkpoint and final frozen-input gates are next.

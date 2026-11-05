@@ -4,16 +4,14 @@
   "category": "alchemy",
   "description": "Steep resonant bone until the language in it surfaces. Drink what remains.",
   "known": true,
-  "components": [
+  "requires_single_item": [
     {
       "tag": "resonant",
-      "min_tier": 2,
-      "quantity": 1
+      "min_tier": 2
     },
     {
       "tag": "bony",
-      "min_tier": 2,
-      "quantity": 1
+      "min_tier": 2
     }
   ],
   "requires_ambient": [
@@ -28,10 +26,5 @@
   "processing_source": "steeping",
   "processing_decor": "drying_herb",
   "completion_message": "The tincture is ready. Something stirs in the liquid.",
-  "tools": [
-    {
-      "tag": "vessel",
-      "min_tier": 1
-    }
-  ]
+  "vessel_process": {"version": 1, "water_ml": 250, "heatproof": true}
 }

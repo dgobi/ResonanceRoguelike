@@ -80,7 +80,7 @@ export type RecipeProbe = {
   path: string; recipe_id: string; source_sha256: string; source: Source; consumer: string; scope: string; observed_at_utc: string;
   cases: {preset: string; eligible: boolean; missing: {tag: string; min_tier: number; have: number; need: number; ambient?: boolean; role?: string}[];
     inventory: {instance: string; item_id: string; source: string; keywords: unknown; consumed_on_use: boolean}[];
-    ambient: unknown[]; selected: string[]; materials: string[]; retained_tools: string[]; before: string[]; after: string[];
+    ambient: unknown[]; selected: string[]; materials: string[]; retained_tools: string[]; owned_vessel?: string | null; before: string[]; after: string[];
     committed: boolean | null; output: {item_id: string; properties: Record<string, unknown>; in_inventory: boolean} | null}[];
 };
 export type RecipeRecord = {

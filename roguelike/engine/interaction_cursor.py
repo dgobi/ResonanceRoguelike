@@ -267,6 +267,10 @@ class InteractionCursor:
             engine.log.add("You cannot reach that.", MSG_DEFAULT)
             return
 
+        from engine.vessel_menu import offer_job
+        if offer_job(engine,(cx,cy)):
+            return
+
         acted = False
         if not interactable_only:
             acted = engine._try_harvest(cx, cy)

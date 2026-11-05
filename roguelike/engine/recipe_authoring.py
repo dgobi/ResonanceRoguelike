@@ -15,7 +15,7 @@ from engine.crafting import _item_has_tag, _item_has_all_tags, _tag_tier_on_item
 from engine.item_factory import ItemFactory
 from engine.save_components import ITEM_STATE, snapshot, validate_fields
 
-CONTRACT = "item-preparation-1"
+CONTRACT = "item-preparation-2"
 PROCESSING_SOURCES = ("cooking", "drying", "steeping", "rendering")
 PROCESSING_DECOR = ("drying_herb", "cooking_meat")
 def requirement_schema(title, reference, physical=True):
@@ -65,7 +65,11 @@ def authoring_validate(raw, data, path, data_root):
 def authoring_evidence(context):
     return dict(semantic_verified=bool(context and context["records"][0]["probe"]))
 FIELDS = ["name", "description", "category", "known", "components", "tools", "requires_ambient", "requires_single_item", "result_item"]
-PROCESSING_FIELDS = ["processing_turns", "processing_source", "processing_decor", "placement_message", "completion_message"]
+PROCESSING_FIELDS = ["processing_turns", "processing_source", "processing_decor", "placement_message", "completion_message", "vessel_process"]
+SCHEMA['properties']['vessel_process']=dict(type='object',title='Vessel-backed preparation',
+    **{'x-view':'Vessel','x-control':'bounded-record'},properties=dict(version=dict(type='integer',default=1,readOnly=True),
+        water_ml=dict(type='integer',title='Batch water (mL)',minimum=1,maximum=10000),
+        heatproof=dict(type='boolean',title='Require heatproof vessel')))
 EXCLUDED = ["_deprecated", "result_tile", "places_in_world", "apply_turns"]
 VISIBILITY = ("DataLoader recursively loads recipe files at session startup. CraftScreen hides truthy _deprecated; "
               "known defaults to true. known:false is shown as unknown and refuses crafting. Publishing a variant "
@@ -160,6 +164,10 @@ def validate_definition(raw, data, path, sources, item_sources, *, writable=Fals
         issue("LOADER_IDENTITY", "id", "DataLoader did not load this exact recipe from this source.")
     if writable and not capability(raw, path)["editable"]:
         issue("UNSUPPORTED_RECIPE", "", capability(raw, path)["reason"])
+    if 'vessel_process' in raw:
+        from engine.vessel_jobs import validate_recipe
+        try: validate_recipe(raw)
+        except ValueError as error: issue('VESSEL_PROCESS','vessel_process',str(error))
     for field in ("name", "description", "category"):
         if field in raw and not isinstance(raw[field], str): issue("RECIPE_FIELD", field, "Expected a string.")
     for field in ("known", "passive_processing", "places_in_world", "_deprecated"):
@@ -311,6 +319,19 @@ def probe(raw, data, item_sources, path, digest, identity):
     for preset in ("eligible", "missing_items", "missing_ambient", "torch_only"):
         inv = Inventory(capacity=1000000)
         physical = []
+        vessel = None
+        if 'vessel_process' in raw and preset != 'missing_items':
+            from engine.vessels import state,set_water,matches
+            req=raw['vessel_process']
+            for identifier in sorted(data.items):
+                candidate=factory.create(identifier)
+                if not state(candidate) or state(candidate)['config']['capacity_ml']<req['water_ml']:continue
+                set_water(candidate,req['water_ml'])
+                if matches(candidate,req):vessel=candidate;break
+            if vessel:
+                inv.add(vessel)
+                physical.append((vessel,dict(instance='vessel-1',item_id=vessel.item_id,
+                    keywords=vessel.keywords,source=item_sources[vessel.item_id][0]['path'],water_ml=req['water_ml'])))
         for n, ref in enumerate(fixture if preset != "missing_items" else []):
             item = factory.create(ref["id"])
             if not inv.add(item): raise ValueError("Fixture exceeds explicit capacity")
@@ -325,6 +346,7 @@ def probe(raw, data, item_sources, path, digest, identity):
         selected, missing = plan_craft(raw, inv, data.keywords, ambient_case)
         ids = {id(item): record["instance"] for item, record in physical}
         selected_ids = [ids[id(item)] for item in selected]
+        selected_vessel = ids.get(id(getattr(selected,'vessel',None)))
         materials = [ids[id(item)] for item in getattr(selected, "materials", [])]
         before = [ids[id(item)] for item in inv.items]
         output = None; committed = None
@@ -342,7 +364,8 @@ def probe(raw, data, item_sources, path, digest, identity):
                           source_sha256=hashlib.sha256((data.root / PurePosixPath(output_source["path"]).relative_to("roguelike/data")).read_bytes()).hexdigest())
             ids[id(created)] = "output-1"
         cases.append(dict(preset=preset, eligible=not missing, missing=missing, inventory=[record for _, record in physical],
-                          ambient=ambient_case, selected=selected_ids, materials=materials, retained_tools=[i for i in selected_ids if i not in materials] if not missing else [],
+                          ambient=ambient_case, selected=selected_ids, materials=materials, owned_vessel=selected_vessel,
+                          retained_tools=[i for i in selected_ids if i not in materials and i!=selected_vessel] if not missing else [],
                           before=before, after=[ids[id(i)] for i in inv.items], committed=committed, output=output,
                           capacity=inv.capacity, weight_after=inv.current_weight,
                           execution="passive allocation and unowned construction only" if raw.get("passive_processing") else "immediate synthetic exchange"))

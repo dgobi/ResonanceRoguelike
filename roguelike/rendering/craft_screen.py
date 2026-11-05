@@ -283,7 +283,7 @@ class CraftScreen:
 
         selected, missing = plan_craft(recipe, inv, kw_data, ambient, chosen_items)
         if missing:
-            engine.log.add("Materials, tools or conditions are missing. Passive work needs a stationary fire.", MSG_DEFAULT)
+            engine.log.add("Missing: " + ", ".join(r['tag'] for r in missing) + ". Passive work needs a stationary fire.", MSG_DEFAULT)
             self.open = False
             return
         if recipe.get("places_in_world"):
@@ -356,6 +356,15 @@ class CraftScreen:
                     "header":     f"Choose: [{disp_name} >= {min_tier}]",
                     "options":    options,
                 })
+        if 'vessel_process' in recipe:
+            from engine.vessels import state,label
+            options=[dict(item_id=i.item_id,instance=i,name=label(i),count=1,
+                          kw_display='Busy until completed or abandoned',kw_color=UI_TEXT_MID)
+                     for i in inv.items if state(i)]
+            if options:
+                req=recipe['vessel_process']
+                prompts.append(dict(comp_index='vessel',header=f"Choose vessel: exactly {req['water_ml']} mL"+
+                                    ('; heatproof' if req['heatproof'] else ''),options=options))
         return prompts
 
     def _handle_choice_key(self, key: int, engine: "Engine") -> bool:
@@ -381,7 +390,7 @@ class CraftScreen:
         if key in (pygame.K_RETURN, pygame.K_KP_ENTER):
             # Store choice
             chosen = prompt["options"][self._choice_selected]
-            self._chosen_items[prompt["comp_index"]] = chosen["item_id"]
+            self._chosen_items[prompt["comp_index"]] = chosen.get('instance',chosen["item_id"])
             # Advance to next prompt or finalize
             if self._choice_index + 1 < len(self._choice_prompts):
                 self._choice_index    += 1

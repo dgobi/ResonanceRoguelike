@@ -323,6 +323,7 @@ class Engine:
         self._pending_placement_tile:   str | None  = None
         self._pending_placement_recipe: dict | None = None
         self._pending_craft_items: list | None = None
+        self._vessel_menu = None
         self._placement_cursor_x:       int         = 0
         self._placement_cursor_y:       int         = 0
         self._placement_mode:           str         = "campfire"   # "campfire"|"drying"|"cooking"
@@ -457,6 +458,7 @@ class Engine:
         self.inventory_screen._flat = []
         self.inventory_screen.selected = 0
         self._pending_consume = self._pending_throw = None
+        self._vessel_menu = None
         self._pending_processing = self._pending_placement_recipe = None
         self._pending_craft_items = None
         self._pending_placement_tile = None
@@ -1265,6 +1267,9 @@ class Engine:
             self.craft_screen.render(screen, self)
             self.lexicon_screen.render(screen, self)
 
+            from engine.vessel_menu import render as render_vessel_menu
+            render_vessel_menu(self, screen)
+
             if self.text_reader.open:
                 self.text_reader.render(screen, self)
 
@@ -1639,7 +1644,10 @@ class Engine:
             template = record.get("completion_message") or messages.get(
                 record.get("source", ""), {}).get("complete", "{item_name} is ready.")
             message = completion_text(template, item.name)
-            place_floor_object(local_map, x, y, item)
+            from engine.vessel_jobs import deliver
+            outputs = [record['vessel_job']['vessel'], item] if 'vessel_job' in record else [item]
+            if not deliver(local_map, (x,y), outputs):
+                continue
             del local_map.processing_layer[(x, y)]
             failures.pop(failure_key, None)
             decor_id = record.get("decor_id", "")
@@ -1668,6 +1676,11 @@ class Engine:
                 raise SystemExit(2)
             return   # ignore all other keys
         
+        if self._vessel_menu is not None:
+            from engine.vessel_menu import key as vessel_key
+            vessel_key(self, key)
+            return
+
         if self._pending_consume is not None:
             from engine.effect_lifecycle import confirm_consume
             confirm_consume(self, key)
@@ -4481,6 +4494,8 @@ class Engine:
             return
         decor_id = recipe.get("processing_decor", "")
         self._pending_processing   = recipe
+        from engine.vessels import context
+        self._pending_vessel_context = context(self)
         self._pending_placement_recipe = recipe
         from engine.crafting import plan_craft
         from rendering.craft_screen import CraftScreen
@@ -4564,6 +4579,19 @@ class Engine:
                 # Build ambient for the campfire at (cx, cy)
                 from rendering.craft_screen import CraftScreen
                 ambient = CraftScreen._build_ambient_sources(self)
+                if 'vessel_process' in recipe:
+                    from engine.vessel_jobs import start
+                    accepted = start(self, recipe, self._pending_craft_items, ambient, (cx,cy))
+                    self._pending_processing = self._pending_placement_tile = None
+                    self._pending_placement_recipe = self._pending_craft_items = None
+                    self._placement_mode = 'campfire'
+                    self.mode = GameMode.LOCAL
+                    if accepted:
+                        self._emit_placement_burst(cx,cy)
+                        self._advance_turn()
+                    else:
+                        self.log.add('The vessel, exact water batch or materials are not ready. Nothing was spent.',MSG_DEFAULT)
+                    return
                 result_id = recipe.get("result_item", "")
                 if result_id not in self.data.items or not commit_craft(
                         self, recipe, self._pending_craft_items, ambient):

@@ -2,6 +2,11 @@
 
 # Engine Systems Reference
 
+Current SYS-1 vessel and preparation behavior is specified in
+[Practical vessels](PRACTICAL_VESSELS.md), including owned water, busy work,
+recovery, cache timing and legacy compatibility. The historical overview below
+does not replace that bounded contract.
+
 Core systems that run the game loop. All live in `roguelike/engine/`.
 
 ---

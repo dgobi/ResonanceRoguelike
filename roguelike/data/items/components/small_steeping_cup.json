@@ -1,0 +1,16 @@
+{
+  "id": "small_steeping_cup",
+  "name": "small steeping cup",
+  "description": "A small cup for measured work. Too small for a full quarter-litre batch.",
+  "tile": "generic_item",
+  "category": "component",
+  "weight": 0.25,
+  "stackable": false,
+  "on_use": null,
+  "consumed_on_use": false,
+  "vessel": {"version": 1, "capacity_ml": 150, "contents": "water"},
+  "keywords": [
+    {"tag": "vessel", "tier": 1},
+    {"tag": "heatproof", "tier": 1}
+  ]
+}

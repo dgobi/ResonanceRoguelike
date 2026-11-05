@@ -1,0 +1,27 @@
+{
+  "id": "sys1_preparation_room",
+  "width": 13,
+  "height": 9,
+  "layers": [
+    "#############",
+    "#...........#",
+    "#...........#",
+    "#...........#",
+    "#.....~.....#",
+    "#...........#",
+    "#.<.........#",
+    "#...........#",
+    "#############"
+  ],
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "<": "stairs_up",
+    "~": "shallow_water"
+  },
+  "player_start": {
+    "x": 3,
+    "y": 6
+  },
+  "special_tiles": [{"type":"item","x":2,"y":3,"item_id":"clay_pot"},{"type":"item","x":3,"y":3,"item_id":"copper_steeping_kettle"},{"type":"item","x":4,"y":3,"item_id":"waxed_water_flask"},{"type":"item","x":5,"y":3,"item_id":"small_steeping_cup"},{"type":"item","x":6,"y":3,"item_id":"resonant_bone_fragment"},{"type":"item","x":7,"y":3,"item_id":"resonant_bone_fragment"},{"type":"decor","x":6,"y":6,"decor_id":"campfire_lit"}]
+}

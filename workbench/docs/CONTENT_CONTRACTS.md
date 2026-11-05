@@ -1,6 +1,6 @@
 # Registered content authoring
 
-W5K versions recipe authoring as `item-preparation-1`: rules admit ordinary
+SYS-1 versions recipe authoring as `item-preparation-2`: rules admit ordinary
 immediate and passive item output with components and/or either conjunction
 shape. Specialized conjunction controls preserve representation and metadata;
 processing controls use the verified source/default/marker/template contract.
@@ -71,6 +71,9 @@ still independently pins and rechecks exact source/dependency bytes. Monitoring
 does not narrow dependencies, cache stamps across sweeps, or create review authority.
 
 ## Descriptor vocabulary
+
+SYS-1 registers bounded-record: one root-field object of scalar settings, used for versioned water-vessel and measured-preparation controls. Extra nesting and unsupported schema nodes fail negotiation.
+
 
 The declared dialect is JSON Schema **2020-12**, with a deliberately small
 `resonance-controls-1` subset. This is a control description, not a complete

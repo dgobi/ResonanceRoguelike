@@ -1,0 +1,13 @@
+{
+  "id": "waxed_water_flask",
+  "name": "waxed water flask",
+  "description": "A light waxed carrier. Holds water; keep it away from fire.",
+  "tile": "generic_item",
+  "category": "component",
+  "weight": 0.2,
+  "stackable": false,
+  "on_use": null,
+  "consumed_on_use": false,
+  "vessel": {"version": 1, "capacity_ml": 2000, "contents": "water"},
+  "keywords": [{"tag":"vessel","tier":1}]
+}

@@ -3,6 +3,7 @@ import { rowDefaults, type ContentFamily } from "./content";
 import { useMemo, useState } from "react";
 import { itemModel, itemValue, keywordEntry } from "./item";
 import type { ItemContext, ItemTrail } from "./protocol";
+import { VesselFields } from './VesselFields';
 
 export function ItemEditor(p: {
   family: ContentFamily; variant:boolean; evidenceStale: boolean; draft: string; path: string; context?: ItemContext; selectedId?: string; dirty: boolean; validated: boolean;
@@ -38,10 +39,12 @@ export function ItemEditor(p: {
     {reason && <p className="notice warning" data-testid="item-disabled">{reason}</p>}
     {!evidenceCurrent && <p className="notice">References, use binding and factory evidence below belong to the opened source. Validate the exact draft to refresh them.</p>}
     {view === "Properties" && <>
-      <div className="edit-actions"><button onClick={p.onUndo} disabled={!!reason || !p.canUndo}>Undo item</button><button onClick={p.onRedo} disabled={!!reason || !p.canRedo}>Redo item</button><small>Raw source and variant-ID edits clear item history.</small></div>
+      <div className="edit-actions"><button onClick={p.onUndo} disabled={!!p.disabled || p.busy || !p.canUndo}>Undo item</button><button onClick={p.onRedo} disabled={!!p.disabled || p.busy || !p.canRedo}>Redo item</button><small>Raw source and variant-ID edits clear item history.</small></div>
       <p className="muted">{cap?.reason}. Category: {String(values.category ?? "not declared")} · appearance: {String(values.tile ?? "factory default")}</p>
       {cap?.editable ? <fieldset disabled={!!reason} className="item-properties"><legend>Common item properties · {cap.supply_class}</legend>
         <ContractFields family={p.family} values={values} onChange={edit} />
+        {cap.supply_class==='material'&&<VesselFields family={p.family} values={values} disabled={!!reason} onChange={edit}
+          onEnable={()=>p.onEdit(s=>itemValue(itemValue(itemValue(s,['vessel'],{version:1,capacity_ml:500,contents:'water'}),['stackable'],false),['consumed_on_use'],false),'Enable water vessel')}/>}
         {cap.supply_class && cap.supply_class!=="material" && <><h3>{cap.supply_class} use</h3><ContractFields family={p.family} values={values} view={cap.supply_class} disabledFields={p.variant ? [] : ["slot"]} nullableFields={["nutrition","hydration","heal_amount","eat_message","drink_message","empty_form"]} onChange={edit}/></>}
         {cap.equipment_class==="armour" && <><p>1–32 layers. Name and material are presentation; AV is summed. Coverage and preserved row metadata are read-only and do not select protected body parts.</p><OrderedRecords family={p.family} values={values} view="armour" disabled={!!reason} onEdit={p.onEdit}/></>}
         {cap.equipment_class==="satchel" && p.family.descriptor.schema.properties?.weight_reductions && <KeyedNumberMap family={p.family} field="weight_reductions" schema={p.family.descriptor.schema.properties.weight_reductions} value={values.weight_reductions} disabled={!!reason} onEdit={p.onEdit}/>}

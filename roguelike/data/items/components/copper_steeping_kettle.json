@@ -1,0 +1,16 @@
+{
+  "id": "copper_steeping_kettle",
+  "name": "copper steeping kettle",
+  "description": "A broad copper kettle. Heavy empty, roomy over a fire.",
+  "tile": "generic_item",
+  "category": "component",
+  "weight": 0.9,
+  "stackable": false,
+  "on_use": null,
+  "consumed_on_use": false,
+  "vessel": {"version": 1, "capacity_ml": 1000, "contents": "water"},
+  "keywords": [
+    {"tag": "vessel", "tier": 1},
+    {"tag": "heatproof", "tier": 1}
+  ]
+}

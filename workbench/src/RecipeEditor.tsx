@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { recipeModel, recipeRow, recipeValue } from "./recipe";
 import type { RecipeContext } from "./protocol";
 import { ConjunctionEditor } from "./ConjunctionEditor";
+import { VesselFields } from './VesselFields';
 
 export function RecipeEditor(p: {
   family: ContentFamily; draft: string; path: string; context?: RecipeContext; selectedId?: string; dirty: boolean; validated: boolean;
@@ -38,7 +39,8 @@ export function RecipeEditor(p: {
     <p className="notice">{p.context?.visibility}</p>
     {!evidenceCurrent && <p className="notice warning">Source or dependencies changed. Validate to refresh catalogue matches and requirement evidence; drafts are retained.</p>}
     {view === "Requirements" && <>
-      {cap?.editable && <><div className="edit-actions"><button disabled={!!reason || !p.canUndo} onClick={p.onUndo}>Undo recipe</button><button disabled={!!reason || !p.canRedo} onClick={p.onRedo}>Redo recipe</button><small>Raw and variant-ID edits clear recipe history.</small></div>
+      <div className="edit-actions"><button disabled={!!p.disabled || p.busy || !p.canUndo} onClick={p.onUndo}>Undo recipe</button><button disabled={!!p.disabled || p.busy || !p.canRedo} onClick={p.onRedo}>Redo recipe</button><small>Raw and variant-ID edits clear recipe history.</small></div>
+      {cap?.editable && <>
       <fieldset disabled={!!reason} className="item-properties"><legend>Recipe properties · execution class fixed</legend>
         <ContractFields family={p.family} values={values} onChange={edit} />
       </fieldset></>}
@@ -60,8 +62,10 @@ export function RecipeEditor(p: {
         </section>;
       })}
       <ConjunctionEditor family={p.family} value={values.requires_single_item} record={record} disabled={!!reason} current={evidenceCurrent} busy={p.busy} onItem={p.onItem} onEdit={p.onEdit}/>
+      {passive&&values.result_item==='resonant_bone_tincture'&&<VesselFields family={p.family} values={values} process disabled={!!reason} onChange={edit}
+        onEnable={()=>edit(['vessel_process'],{version:1,water_ml:250,heatproof:true})}/>}
     </>}
-    {view === "Preparation" && (passive ? <><p>Requires a stationary fire in addition to the declared conditions. Placement must pass the ordinary map, occupancy and warmth checks. Confirmation spends materials, retains tools and advances the first processing turn. Finished output is one floor object to collect.</p><fieldset disabled={!!reason}>
+    {view === "Preparation" && (passive ? <><p>Requires a stationary fire in addition to the declared conditions. Placement must pass the ordinary map, occupancy and warmth checks. Confirmation spends materials and advances the first processing turn. {values.vessel_process ? "The selected vessel stays with the work. Completion returns that empty vessel and one dose on the floor; abandonment recovers the vessel and loses the committed ingredients and water." : "Tools stay carried. Finished output is one floor object to collect."}</p><fieldset disabled={!!reason}>
       {Object.entries(p.family.descriptor.schema.properties || {}).filter(([,s])=>s["x-view"]==="Preparation").map(([key,s])=><label key={key}>{s.title}<ScalarControl schema={s} references={p.family.references} value={values[key]} disabled={key==="processing_decor"&&(values.processing_source || "drying")==="cooking"} onChange={v=>edit([key],v)}/>{values[key]===undefined&&<small>Absent in source{s.default!==undefined?` · effective default: ${s.default}`:""}</small>}<small>{s.description}</small>{key==="processing_decor"&&(values.processing_source || "drying")==="cooking"&&<small>Inactive for cooking: the fire is preserved and this marker is ignored.</small>}</label>)}
       </fieldset><p>Confirmed work captures its output ID, duration, source, marker and completion text. Recipe revisions apply to later work in a fresh catalogue. Completion constructs the recorded output ID from that session's item catalogue.</p></> : <p>Immediate exchange uses the current inventory and advances no turn. This source has no passive preparation parameters.</p>)}
     {view === "Output" && <>
@@ -77,7 +81,7 @@ export function RecipeEditor(p: {
       {evidence ? <><p>{evidence.scope}</p><code>{evidence.path} · source {evidence.source_sha256.slice(0,12)}<br />Game {evidence.source.game_source_sha256.slice(0,12)} · catalogue {evidence.source.catalog_sha256.slice(0,12)}</code>
         <label>Fixture<select aria-label="Recipe fixture" value={preset} onChange={e=>setPreset(e.target.value)}><option value="eligible">Candidate inventory + ambient</option><option value="missing_items">No physical inputs</option><option value="missing_ambient">No ambient sources</option><option value="torch_only">Burning only · no stationary fire</option></select></label>
         {sample && <><h3>{sample.eligible ? "Game-owned eligibility: requirements met in this fixture" : "Game-owned eligibility: missing requirements"}</h3>
-          <table className="pool-table"><thead><tr><th>Physical instance</th><th>Definition</th><th>Keywords / role</th></tr></thead><tbody>{sample.inventory.map(i=><tr key={i.instance}><td>{i.instance}</td><td>{i.item_id}<small>{i.source}</small></td><td>{JSON.stringify(i.keywords)}<small>{sample.materials.includes(i.instance) ? "Selected material" : sample.retained_tools.includes(i.instance) ? "Selected retained tool" : "Not committed as material"}</small></td></tr>)}</tbody></table>
+          <table className="pool-table"><thead><tr><th>Physical instance</th><th>Definition</th><th>Keywords / role</th></tr></thead><tbody>{sample.inventory.map(i=><tr key={i.instance}><td>{i.instance}</td><td>{i.item_id}<small>{i.source}</small></td><td>{JSON.stringify(i.keywords)}<small>{sample.materials.includes(i.instance) ? "Selected material" : sample.owned_vessel===i.instance ? "Selected vessel · owned by the work after confirmation" : sample.retained_tools.includes(i.instance) ? "Selected retained tool" : "Not committed as material"}</small></td></tr>)}</tbody></table>
           <p>Ambient fixture: <code>{JSON.stringify(sample.ambient)}</code></p>
           {sample.missing.map((r,i)=><p className="notice warning" key={i}>{r.ambient ? "Ambient condition" : r.role === "tool" ? "Tool" : "Material"}: {r.tag} ≥ {r.min_tier} · have {r.have}, need {r.need}</p>)}
           <p>Selected instances: {sample.selected.join(", ") || "None"}</p><p>Production inventory exchange: {sample.committed === null ? passive ? "Not attempted · passive allocation/factory probe only; use Test room for placement and completion" : "Not attempted (requirements missing)" : sample.committed ? "Accepted in disposable fixture" : "Rejected; materials retained"}</p>

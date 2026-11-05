@@ -167,6 +167,8 @@ class ChunkCache:
             raise SaveFormatError(f'Missing or invalid active scene record: {path.name}')
         from engine.stock_prose import refresh_map
         refresh_map(cached.local_map)
+        from engine.vessels import validate_map
+        validate_map(cached.local_map)
         return cached
 
     def _write(self, path, cached):
@@ -236,6 +238,8 @@ class ChunkCache:
                 raise SaveFormatError(f'Invalid scene: {name}')
             _validate_entities(cached.entities, data, cached.local_map)
             _claim_individuals(cached.entities, identities)
+            from engine.vessels import validate_map
+            validate_map(cached.local_map)
         return payloads
 
 
@@ -318,6 +322,10 @@ class SaveManager:
             address = SceneAddress.from_player(player_data, world_data)
             _validate_pending_arrivals(player_data, world_data)
             payloads = self.cache.snapshot(address, engine.local_map, engine.entities, engine.data)
+            from engine.vessels import claim, validate_map
+            vessel_ids=set()
+            for row in player_data['inventory']['items']: claim(row,vessel_ids)
+            for raw in payloads.values(): validate_map(pickle.loads(raw).local_map,vessel_ids)
             identities = set()
             for raw in payloads.values():
                 _claim_individuals(pickle.loads(raw).entities, identities)
@@ -350,8 +358,12 @@ class SaveManager:
         # All scenes belong to the checkpoint: validate even inactive owners
         # before installing any player/world/cache reference.
         identities = set()
+        from engine.vessels import claim, validate_map
+        vessel_ids=set()
+        for row in player_data['inventory']['items']: claim(row,vessel_ids)
         for scene in sorted((path / 'chunks').glob('*.pkl')):
             cached = cold_cache._read(scene)
+            validate_map(cached.local_map,vessel_ids)
             _validate_entities(cached.entities, engine.data, cached.local_map)
             _validate_escort_scene(cached.entities, scene.stem, world_data)
             _claim_individuals(cached.entities, identities)
@@ -1320,5 +1332,11 @@ def _write_json(path: Path, data: dict) -> None:
 
 
 def _read_json(path: Path) -> dict:
+    def unique(rows):
+        result={}
+        for key,value in rows:
+            if key in result:raise SaveFormatError(f'Duplicate saved field: {key}')
+            result[key]=value
+        return result
     with open(path, encoding="utf-8") as f:
-        return json.load(f)
+        return json.load(f,object_pairs_hook=unique)

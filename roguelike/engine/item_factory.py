@@ -28,6 +28,8 @@ class ItemFactory:
         if not defn:
             print(f"Warning: item '{item_id}' not found.")
             return None
+        from engine.vessels import validate_definition, create
+        validate_definition(defn)
 
         item             = Item(
             x       = x,
@@ -67,6 +69,13 @@ class ItemFactory:
         # Reusability controls automatic material eligibility, not recipe cost.
         # Materials are spent and tools kept according to their recipe role.
         item.consumed_on_use = defn.get("consumed_on_use", True)
+
+        if 'vessel' in defn:
+            item.vessel = create(defn['vessel'])
+        elif item.item_id == 'clay_pot':
+            # Explicit modern absence must not become historical initialization
+            # when this new object later crosses a JSON or pickle save boundary.
+            item.vessel_absent_version = 1
 
         return item
 

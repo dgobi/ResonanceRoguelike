@@ -4,6 +4,17 @@ from test_bridge import ROOT, invoke
 from test_authoring import data_fixture
 
 class PreparationWorker(unittest.TestCase):
+    def test_vessel_batch_probe_distinguishes_busy_implement_from_retained_tools(self):
+        r=self.preview('resonant_bone_tincture',dict(vessel_process=dict(version=1,water_ml=125,heatproof=True)))
+        self.assertTrue(r['valid'],r['diagnostics'])
+        probe=r['family']['context']['records'][0]['probe']['cases'][0]
+        self.assertTrue(probe['eligible']);self.assertIn(probe['owned_vessel'],probe['selected'])
+        self.assertNotIn(probe['owned_vessel'],probe['retained_tools']);self.assertNotIn(probe['owned_vessel'],probe['materials'])
+        self.assertEqual(probe['before'],probe['after']);self.assertIsNone(probe['committed'])
+        for bad in (True,0,10001,125.5):
+            invalid=self.preview('resonant_bone_tincture',dict(vessel_process=dict(version=1,water_ml=bad,heatproof=True)))
+            self.assertFalse(invalid['valid'])
+
     def preview(self, source, changes=None, root=ROOT, variant=False):
         path='roguelike/data/recipes/'+source+'.json'
         raw=json.loads((root/path).read_bytes());raw.update(changes or {})
@@ -20,7 +31,7 @@ class PreparationWorker(unittest.TestCase):
             path=p.relative_to(ROOT).as_posix();response=invoke('inspect',asset=path)['result']
             if response['editable']:
                 admitted.append(response['id']);self.assertEqual(response['family']['effective_operations'],['edit','variant'])
-                self.assertEqual(response['family']['contract'],'item-preparation-1')
+                self.assertEqual(response['family']['contract'],'item-preparation-2')
         self.assertEqual(len(admitted),15);self.assertIn('dry_resonant_herb',admitted)
         for source in ('cook_meat','dry_coldbell','briar_binding_oil'):
             for variant in (False,True):

@@ -29,11 +29,15 @@ def schema_problems(schema):
         kind = node.get("type")
         if kind not in ("string", "number", "integer", "boolean", "object", "array"):
             errors.append(f"{path}: unsupported type {kind}")
-        if node.get("x-control", "scalar") not in ("scalar", "multiline", "ordered-table", "ordered-records", "keyed-number-map"):
+        if node.get("x-control", "scalar") not in ("scalar", "multiline", "ordered-table", "ordered-records", "keyed-number-map", "bounded-record"):
             errors.append(f"{path}: unsupported control {node['x-control']}")
         keyed_map = node.get('x-control') == 'keyed-number-map'
+        if node.get('x-control') == 'bounded-record' and (kind != 'object' or depth != 1 or
+                not isinstance(node.get('properties'),dict) or
+                any(not isinstance(v,dict) or v.get('type') not in ('string','integer','number','boolean') for v in node['properties'].values())):
+            errors.append(f'{path}: bounded-record requires one root-field object of scalar settings')
         if keyed_map and (kind != 'object' or depth != 1 or not isinstance(node.get('x-reference'),str) or not isinstance(node.get('additionalProperties'),dict) or node['additionalProperties'].get('type') != 'number' or node.get('properties') != {}): errors.append(f'{path}: keyed-number-map requires one referenced root-field object with numeric values')
-        if kind == "object" and depth not in (0, 2) and not keyed_map: errors.append(f"{path}: only root, keyed maps and table-row objects are supported")
+        if kind == "object" and depth not in (0, 2) and not keyed_map and not (depth == 1 and node.get("x-control") == "bounded-record"): errors.append(f"{path}: only root, keyed maps and table-row objects are supported")
         if kind == "array" and (depth != 1 or node.get("x-control") not in ("ordered-table", "ordered-records")):
             errors.append(f"{path}: only registered ordered tables are supported")
         if node.get("x-control") == "multiline" and kind != "string": errors.append(f"{path}: multiline requires a string")

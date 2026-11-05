@@ -8,6 +8,7 @@
   "stackable": false,
   "on_use": null,
   "consumed_on_use": false,
+  "vessel": {"version": 1, "capacity_ml": 500, "contents": "water"},
   "keywords": [
     {"tag": "vessel", "tier": 1},
     {"tag": "heatproof", "tier": 1}

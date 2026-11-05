@@ -298,6 +298,11 @@ class InventoryScreen:
                     self.selected = min(self.selected, max(0, len(self._flat) - 1))
                     self._clamp_scroll()
                 else:
+                    from engine.vessels import state
+                    if state(row_item):
+                        from engine.vessel_menu import open_item
+                        open_item(engine,row_item)
+                        return True
                     before_items = tuple(id(item) for item in inv.items)
                     consumed = engine.item_system.use(row_item, engine)
                     if before_items != tuple(id(item) for item in inv.items):
@@ -636,6 +641,8 @@ class InventoryScreen:
 
             # Item name at COL_NAME — truncated before COL_WEIGHT
             name_str = getattr(item, "name", "?")
+            from engine.vessels import label as vessel_label
+            name_str = vessel_label(item)
             if label:
                 name_str += f" ({label})"
             elif getattr(item, "stackable", False) and getattr(item, "count", 1) > 1:

@@ -30,6 +30,11 @@ class Item(Entity):
     in an actor's inventory.
     """
 
+    def __setstate__(self, values):
+        self.__dict__.update(values)
+        from engine.vessels import legacy
+        legacy(self)
+
     def __init__(
         self,
         x:       int,

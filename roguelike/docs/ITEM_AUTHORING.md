@@ -1,6 +1,6 @@
 # Expedition item authoring (W5M)
 
-The registered item family uses `expedition-items-3`. Begin edit changes the same
+The registered item family uses `expedition-items-4`. Begin edit changes the same
 ID; **Save as new variant** creates a distinct ID beside a verified source.
 IDs are machine identities. Display-name edits never redirect references.
 
@@ -21,9 +21,9 @@ HP treatment, plus the registered `cure_numbing_venom` remedy seed class. The or
 Raw Source, recovery and descriptor flags cannot promote unsupported originals.
 Arrays, ambiguous/case-colliding IDs, corpses, lights,
 readable items, effects and special preparations remain inspect-only. Rules admit
-44 shipped supplies: 30 materials, nine foods, two drinks, one HP treatment and two venom remedies.
+47 shipped supplies: 33 materials, nine foods, two drinks, one HP treatment and two venom remedies.
 Equipment adds six ordinary weapons, two armour definitions, one shield and three
-satchels: 56 of 81 total sources. Run `workbench/scripts/equipment-inventory.py`
+satchels: 59 of 85 total sources. Run `workbench/scripts/equipment-inventory.py`
 with an output JSON path for operation/class eligibility and exclusion reasons.
 This is an executable inventory, not an ID allowlist.
 
@@ -42,6 +42,13 @@ capability; explicit nonempty instance handlers win, and a new-ID material varia
 does not inherit it. This does not enable general material throwing or effect editing.
 
 ## Controls and source fidelity
+
+SYS-1 adds bounded water-vessel controls for supported inert materials: capacity
+in integral mL and actual heatproof suitability. Enable water vessel also makes
+the definition reusable and nonstackable. Special-use identities remain protected.
+Effective owned state is saved separately from the definition. See
+[Practical vessels](PRACTICAL_VESSELS.md) for handling, weight, compatibility and
+the publish/reopen/place/Test workflow.
 
 Common controls edit name, multiline description, existing tile, nonnegative
 weight in kg, inventory grouping, ordered keyword tag/tier records and **Eligible

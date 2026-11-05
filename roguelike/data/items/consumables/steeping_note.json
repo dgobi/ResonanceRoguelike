@@ -1,0 +1,12 @@
+{
+  "id": "steeping_note",
+  "name": "a steeping note",
+  "description": "An alchemist's practical notes, stained at the bottom by a water ring.",
+  "tile": "document",
+  "category": "consumable",
+  "weight": 0.05,
+  "stackable": false,
+  "on_use": "read",
+  "text_id": "practical_steeping_note",
+  "keywords": [{"tag": "fibrous", "tier": 1}]
+}

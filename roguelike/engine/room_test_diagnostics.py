@@ -44,6 +44,9 @@ class DiagnosticEvents:
             self._counting=True
         def observed_item(item):
             return dict(serialize_item(item),instance=str(id(item)))
+        def observed_job(r):
+            return {**r,**({'vessel_job':{**r['vessel_job'],'vessel':observed_item(r['vessel_job']['vessel'])}}
+                         if 'vessel_job' in r else {})}
         m=e.local_map
         inv=e.inventory_screen
         craft=e.craft_screen
@@ -66,10 +69,11 @@ class DiagnosticEvents:
             inventory_rows=[dict(item_id=getattr(item,'item_id',None),instance=str(id(item)) if item else None,header=header,label=label) for item,header,label in inv._flat],
             craft=dict(open=craft.open,selected=craft.selected,choosing=craft._choosing,
                 choice_selected=craft._choice_selected,choice_index=craft._choice_index,
-                prompts=[dict(comp_index=p['comp_index'],options=[dict(item_id=o['item_id'],count=o['count']) for o in p['options']]) for p in craft._choice_prompts],
+                prompts=[dict(comp_index=p['comp_index'],options=[dict(item_id=o['item_id'],count=o['count'],name=o['name']) for o in p['options']]) for p in craft._choice_prompts],
                 rows=[dict(type=r['type'],id=r.get('recipe',{}).get('id'),category=r.get('category')) for r in craft._build_flat_items(craft._get_recipes(e))]),
             placement=dict(mode=e._placement_mode,cursor=[e._placement_cursor_x,e._placement_cursor_y]),
-            processing=[dict(x=x,y=y,**r) for (x,y),r in m.processing_layer.items()],
+            processing=[dict(x=x,y=y,**observed_job(r)) for (x,y),r in m.processing_layer.items()],
+            vessel_menu=None if not e._vessel_menu else dict(title=e._vessel_menu['title'],selected=e._vessel_menu['selected'],options=[r[0] for r in e._vessel_menu['options']]),
             decor=[dict(x=x,y=y,id=d) for (x,y),d in m.decor.items()],
             reader=dict(open=e.text_reader.open,text_id=getattr(e.text_reader,'_text_id',None),definition=getattr(e.text_reader,'_def',None)),
             floor=[dict(x=x,y=y,items=[observed_item(i) for i in rows]) for (x,y),rows in m.floor_objects.items()],

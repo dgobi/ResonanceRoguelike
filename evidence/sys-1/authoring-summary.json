@@ -1,0 +1,84 @@
+{
+  "passed": true,
+  "final_artifact": "workbench\\.artifacts\\sys-1\\native-1793921061419",
+  "package_sha256": "4123c7858ef9d6513bbb64ecac928fad3583407a1409de23e9419c78eaa74112",
+  "checks": [
+    "Author three vessel variants through packaged Item controls",
+    "Packaged saved room: acquire, measured fill, actual selected vessel and processing",
+    "Recipe batch edit, undo/redo, captured Reset and excluded dirty draft",
+    "SYS-1 native flow passed"
+  ],
+  "publications": [
+    {
+      "path": "roguelike/data/recipes/resonant_bone_tincture.json",
+      "sha256": "6226ef504308d770b02f17ce10fc54787e70a75eed56088fc53c5f30c6ce844d"
+    },
+    {
+      "path": "roguelike/data/recipes/resonant_bone_tincture.json",
+      "sha256": "22f1048858f7dcbbab92f121490136c22de9db3c8d114dda09c45185f42d1cc4"
+    }
+  ],
+  "noops": [
+    {
+      "path": "roguelike/data/items/components/copper_steeping_kettle.json",
+      "sha256": "9ba804f074eb06911521dbbc09f6ff74b01fdde668fe13cd931f9842570861b0"
+    },
+    {
+      "path": "roguelike/data/items/components/waxed_water_flask.json",
+      "sha256": "6638d44493e9409e54387d2c39a6e98ffc2bb073926edaa83bc3fd3bc5498e31"
+    },
+    {
+      "path": "roguelike/data/items/components/small_steeping_cup.json",
+      "sha256": "6a2aa70db8f1fa566d6b6a76a5aef4f3d7f68521ac80fc0118ea7b5cbeb12aae"
+    }
+  ],
+  "invalid_vessels": [
+    {
+      "path": "roguelike/data/items/components/copper_steeping_kettle.json",
+      "rejected": true,
+      "undo_restored": true
+    },
+    {
+      "path": "roguelike/data/items/components/waxed_water_flask.json",
+      "rejected": true,
+      "undo_restored": true
+    },
+    {
+      "path": "roguelike/data/items/components/small_steeping_cup.json",
+      "rejected": true,
+      "undo_restored": true
+    }
+  ],
+  "invalid_recipe_rejected": true,
+  "old_capture_batch": 250,
+  "latest_batch": 125,
+  "dirty_excluded_batch": 250,
+  "unchanged_sources": {
+    "roguelike/data/entities/creatures/hollow_revenant.json": "44b2ee0fb49ab1f172791bf1775ea9c3a707942e2adbfd9e9fb5e176fad80a3b",
+    "roguelike/data/layouts/barrow_ward_store_a.json": "ae196c3ba45ab244ab472557c4cd1692a92bb8b5d4f5b4d1a1d5ec9623f7d553",
+    "roguelike/docs/examples/g17_authored_creature_room.json": "c44f9c5e3dd5c01ffc9e7fd112fc37942b008ec142773fb079086a86ccb4a665"
+  },
+  "creation_phase": {
+    "artifact": "workbench\\.artifacts\\sys-1\\native-1793918993155",
+    "publications": [
+      {
+        "path": "roguelike/data/items/components/copper_steeping_kettle.json",
+        "sha256": "bd081dc1162edf372d669a80167b471aa94439883c33c711b8ef530eb0e564a2"
+      },
+      {
+        "path": "roguelike/data/items/components/waxed_water_flask.json",
+        "sha256": "1ac64601c55df77b4aec4b25fc9af3c3ed518ac633df18b58429f807c48a3a62"
+      },
+      {
+        "path": "roguelike/data/items/components/small_steeping_cup.json",
+        "sha256": "a0c8dbcd7ba9823cd974ee0051ede4e812fa36d2ced99a4c14d4adf760fff083"
+      },
+      {
+        "path": "roguelike/data/layouts/sys1_preparation_room.json",
+        "sha256": "06df6be033f0951884b8851e7cfd9deb648373a4ab790a2a9a28ee94643edba7"
+      }
+    ],
+    "subsequent_failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n0 !== 1\n\n    at witness (file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-sys-1.mjs:91:9)\n    at async file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-sys-1.mjs:110:54"
+  },
+  "scope": "Initial packaged source-creation phase retained separately; final integrated authoring and real-input flow passed. Both full receipts compressed beside this summary."
+}

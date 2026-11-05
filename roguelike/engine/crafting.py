@@ -54,6 +54,7 @@ class CraftPlan(list):
         super().__init__()
         self.choices = dict(chosen_items or {})
         self.materials = []
+        self.vessel = None
 
 
 def conditions_for(recipe):
@@ -154,6 +155,15 @@ def plan_craft(recipe, inv, keyword_data=None, ambient_sources=None, chosen_item
         add_requirement([dict(tag=tag, min_tier=tier)], tool.get("quantity", 1),
                         dict(tag=tag, min_tier=tier, role="tool"), role="tool")
 
+    if 'vessel_process' in recipe:
+        from engine.vessels import matches, process_configuration
+        req=process_configuration(recipe['vessel_process'])
+        chosen=selected.choices.get('vessel')
+        candidates=[n for n,item in enumerate(items) if (chosen is None or item is chosen) and matches(item,req)]
+        groups.append(dict(tag=f"vessel with exactly {req['water_ml']} mL water" +
+                           (' and heatproof' if req['heatproof'] else ''),min_tier=1,need=1,role='vessel'))
+        slots.append(dict(group=len(groups)-1,candidates=candidates,role='vessel'))
+
     matching = _match_ingredients(slots)
     if len(matching) != len(slots):
         # Keep the established missing-requirement shape for the crafting UI.
@@ -181,6 +191,7 @@ def plan_craft(recipe, inv, keyword_data=None, ambient_sources=None, chosen_item
                 selected.append(items[candidate])
                 if slot["role"] == "material":
                     selected.materials.append(items[candidate])
+                if slot['role'] == 'vessel': selected.vessel=items[candidate]
                 used.add(candidate)
                 physical_left -= 1
                 break
@@ -214,6 +225,8 @@ def commit_craft(engine, recipe, selected, ambient_sources=None, outputs=()):
                                  chosen_items=getattr(selected, 'choices', None))
     if missing:
         return False
+    # Vessel ownership belongs to placement, never an immediate inventory craft.
+    if checked.vessel is not None: return False
     committed = exchange(engine, checked.materials, outputs)
     if committed:
         engine._free_move_pending = False
@@ -228,6 +241,7 @@ def attempt_craft(recipe, inv, keyword_data=None, ambient_sources=None, chosen_i
     selected, missing = plan_craft(recipe, inv, keyword_data, ambient_sources, chosen_items)
     if missing:
         return False
+    if selected.vessel is not None: return False
     if any(item.equipped for item in selected.materials):
         return False  # This API has no actor with which to detach safely.
     for item in selected.materials:

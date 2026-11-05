@@ -137,10 +137,18 @@ def validate_block(record, schemas, label):
 
 
 def serialize_item(item):
-    return {"item_id": item.item_id, "item_state_version": 1, **snapshot(item, ITEM_STATE)}
+    return {"item_id": item.item_id, "item_state_version": 1, **snapshot(item, ITEM_STATE),
+            **({'vessel': copy.deepcopy(item.vessel)} if hasattr(item,'vessel') else {}),
+            **({'vessel_absent_version':item.vessel_absent_version} if hasattr(item,'vessel_absent_version') else {})}
 
 
 def validate_item(row, label):
+    if 'vessel_absent_version' in row and (type(row['vessel_absent_version']) is not int
+            or row['vessel_absent_version']!=1 or row.get('item_id')!='clay_pot' or 'vessel' in row):
+        raise ValueError(label + ': invalid explicit vessel absence')
+    if 'vessel' in row:
+        from engine.vessels import validate
+        validate(row['vessel'], row)
     if "item_state_version" in row:
         if type(row["item_state_version"]) is not int or row["item_state_version"] != 1:
             raise ValueError(label + ": supported item_state_version is integer 1")
@@ -161,6 +169,14 @@ def restore_item(item, row):
             if key == "temporary_essence" and value is None:
                 value = []
             setattr(item, key, copy.deepcopy(value))
+    if hasattr(item,'vessel'): del item.vessel
+    if hasattr(item,'vessel_absent_version'): del item.vessel_absent_version
+    if 'vessel_absent_version' in row:item.vessel_absent_version=row['vessel_absent_version']
+    if 'vessel' in row:
+        item.vessel=copy.deepcopy(row['vessel'])
+    else:
+        from engine.vessels import legacy
+        legacy(item)
     from engine.stock_prose import refresh
     refresh(item, item.item_id)
 

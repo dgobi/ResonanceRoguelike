@@ -7,7 +7,7 @@ export type FieldSchema = {
   title?: string; description?: string; default?: string | number | boolean; readOnly?: boolean;
   minimum?: number; maximum?: number; properties?: Record<string, FieldSchema>; required?: string[];
   items?: FieldSchema; additionalProperties?: boolean | FieldSchema;
-  "x-control"?: "scalar" | "multiline" | "ordered-table" | "ordered-records" | "keyed-number-map"; "x-reference"?: string; "x-view"?: string; "x-initial"?: string | number | boolean; "x-suggestions"?: string[];
+  "x-control"?: "scalar" | "multiline" | "ordered-table" | "ordered-records" | "keyed-number-map" | "bounded-record"; "x-reference"?: string; "x-view"?: string; "x-initial"?: string | number | boolean; "x-suggestions"?: string[];
 };
 export type Descriptor = {
   production_route?: string;
@@ -28,10 +28,11 @@ export function schemaProblem(value: unknown, path = "schema", depth = 0): strin
   if (!object(value) || depth > 4) return `${path}: expected bounded schema object`;
   for (const key of Object.keys(value)) if (!schemaKeys.has(key)) return `${path}: unsupported schema keyword ${key}`;
   if (!["string","number","integer","boolean","object","array"].includes(String(value.type))) return `${path}: unsupported type`;
-  if (value["x-control"] !== undefined && !["scalar","multiline","ordered-table","ordered-records","keyed-number-map"].includes(String(value["x-control"]))) return `${path}: unsupported control`;
+  if (value["x-control"] !== undefined && !["scalar","multiline","ordered-table","ordered-records","keyed-number-map","bounded-record"].includes(String(value["x-control"]))) return `${path}: unsupported control`;
   const keyedMap=value["x-control"]==="keyed-number-map";
+  if(value["x-control"]==="bounded-record" && (value.type!=="object" || depth!==1 || !object(value.properties) || Object.values(value.properties).some(v=>!object(v)||!["string","integer","number","boolean"].includes(String(v.type)))))return `${path}: bounded-record requires one root-field object of scalar settings`;
   if(keyedMap && (value.type!=="object" || depth!==1 || typeof value["x-reference"]!=="string" || !object(value.additionalProperties) || value.additionalProperties.type!=="number" || !object(value.properties) || Object.keys(value.properties).length))return `${path}: invalid keyed number map`;
-  if (value.type === "object" && depth !== 0 && depth !== 2 && !keyedMap) return `${path}: only root, keyed maps and table-row objects are supported`;
+  if (value.type === "object" && depth !== 0 && depth !== 2 && !keyedMap && !(depth===1 && value["x-control"]==="bounded-record")) return `${path}: only root, keyed maps and table-row objects are supported`;
   if (value.type === "array" && (depth !== 1 || !["ordered-table","ordered-records"].includes(String(value["x-control"])))) return `${path}: only registered ordered records are supported`;
   if (value["x-control"] === "multiline" && value.type !== "string") return `${path}: multiline requires a string`;
   if (["ordered-table","ordered-records"].includes(String(value["x-control"])) && (value.type!=="array" || !object(value.items) || value.items.type!=="object")) return `${path}: ordered controls require an array of objects`;
