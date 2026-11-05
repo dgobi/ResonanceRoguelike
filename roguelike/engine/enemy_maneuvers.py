@@ -84,6 +84,13 @@ def release(ai, engine, reason):
         ai.maneuvers['current'] = None
 
 
+def reconcile_position(ai, engine, actor):
+    """Mandatory host movement may leave a paid hold, never buy more travel."""
+    c = ai.maneuvers and ai.maneuvers['current']
+    if c and c['left'] <= 0 and [actor.x, actor.y] != c['goal']:
+        release(ai, engine, 'exhausted_hold_displaced')
+
+
 def refresh(ai, engine, actor, ambient):
     if ai.maneuvers is None:
         return
@@ -181,6 +188,8 @@ def _continue(ai, engine, actor, observed, ambient):
             if not c['hold_left']: release(ai,engine,'regroup_complete')
             return 'wait','regroup_hold',None
         release(ai,engine,'maneuver_arrived'); return None
+    if c['left'] <= 0:
+        release(ai,engine,'movement_exhausted'); return None
     if not actor.fighter.can_move():
         return 'wait','maneuver_movement_denied',None
     step,length = (lateral_route(ai,engine,actor,c['prey'],c['goal']) if kind==LATERAL else

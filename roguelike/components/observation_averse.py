@@ -341,6 +341,8 @@ def take_turn(ai, actor, engine, ambient):
             action, reason = 'investigate', 'anonymous_sound'
     if result and result.target_dead:
         ai.resolve_target(engine, actor)
+    from engine.enemy_maneuvers import reconcile_position
+    reconcile_position(ai, engine, actor)
     ai.trace.append(dict(opportunity=ai.opportunities, turn=now, phase_before=before,
         phase=ai.phase, observed=watched, observation_reason='normal_player_vision',
         action=action, reason=reason, result=asdict(result) if result else None,
