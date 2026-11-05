@@ -9,6 +9,25 @@ SOURCE=BASE+'hollow_revenant.json'
 
 
 class CompositeAuthoringTests(unittest.TestCase):
+    def test_five_family_expanded_alarms_and_independent_maneuvers(self):
+        recipes=['strike_and_withdraw','observation_averse','venom_strike_and_withdraw','patient_venom_hunt','territorial_guard']
+        for version,recipe in enumerate(recipes,1):
+            raw=self.draft();raw['ai_profile']={'version':version,'recipe':recipe}
+            raw['perception'].update(faction='hollow',hostile_to=['player'])
+            raw['enemy_responses']={'version':2,'modules':[{'id':'alarm_call_on_sight'},{'id':'investigate_allied_alarm'}]}
+            raw['enemy_maneuvers']={'version':1,'modules':[{'id':'seek_lateral_approach'},{'id':'regroup_when_wounded','wounded_percent':40}]}
+            r=self.validate(raw);self.assertTrue(r['valid'],r['diagnostics'])
+            record=r['family']['context']['records'][0]
+            self.assertEqual(recipes,record['capability']['maneuver_recipes'])
+            effective=record['factory']['instance']['effective_enemy_maneuvers']
+            self.assertEqual((40,75),(effective['modules'][1]['wounded_percent'],effective['modules'][1]['rearm_percent']))
+            for bad in (True,-1,101):
+                invalid=copy.deepcopy(raw);invalid['enemy_maneuvers']['modules'][1]['wounded_percent']=bad
+                self.assertFalse(self.validate(invalid)['valid'])
+            original=json.loads((ROOT/SOURCE).read_bytes())
+            self.assertEqual(original['tile'],raw['tile']);self.assertEqual(original.get('body_id'),raw.get('body_id'))
+            self.assertEqual(original.get('limbs'),raw.get('limbs'))
+
     def test_independent_enemy_responses_game_defaults_host_and_exact_metadata(self):
         raw=self.draft();raw['perception'].update(faction='hollow',hostile_to=['player'])
         for recipe,version in [('strike_and_withdraw',1),('territorial_guard',5)]:
@@ -71,7 +90,7 @@ class CompositeAuthoringTests(unittest.TestCase):
     def test_defaults_construct_same_contract_without_turns(self):
         r=self.validate(self.draft());self.assertTrue(r['valid'],r['diagnostics'])
         record=r['family']['context']['records'][0]
-        self.assertEqual('creature-composite-9',record['capability']['contract'])
+        self.assertEqual('creature-composite-10',record['capability']['contract'])
         self.assertEqual('CompositeAI',record['factory']['instance']['ai_class'])
         p=record['factory']['instance']['effective_ai_profile']
         self.assertEqual((2,1,6,12),(p['retreat_distance'],p['hold_opportunities'],p['withdrawal_budget'],p['pursuit_timeout']))

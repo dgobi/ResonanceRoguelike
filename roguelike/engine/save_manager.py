@@ -1149,7 +1149,13 @@ def _validate_escort_scene(rows, scene_name, world_data):
     """Escort/module bindings match the actual cache before staged installation."""
     for row in rows:
         c = row.get('composite', {})
-        if 'responses' in c:
+        if 'maneuvers' in c:
+            binding = c['maneuvers']['state']['owner']
+            other = c.get('responses',{}).get('state',{}).get('owner')
+            if other is not None and binding is not None and other != binding:
+                raise SaveFormatError('Attachment scene bindings disagree')
+            binding = binding or other
+        elif 'responses' in c:
             binding = c['responses']['state']['owner']
         elif c.get('profile', {}).get('recipe') == 'protective_escort':
             binding = c['state']['escort']['owner']
@@ -1238,7 +1244,8 @@ def _deserialize_entities(
         creature_id = d["id"]
         actor = factory.spawn(creature_id, d["x"], d["y"],
                               saved_composite_profile=d['composite']['profile'] if d.get('ai_type') == 'CompositeAI' else None,
-                              saved_response_config=d.get('composite',{}).get('responses',{}).get('config'))
+                              saved_response_config=d.get('composite',{}).get('responses',{}).get('config'),
+                              saved_maneuver_config=d.get('composite',{}).get('maneuvers',{}).get('config'))
 
         if actor is None:
             raise SaveFormatError(f"Cannot reconstruct creature {creature_id!r}")
@@ -1295,6 +1302,8 @@ def _deserialize_entities(
                 setattr(actor.ai, key, copy.deepcopy(value))
             if 'responses' in d['composite']:
                 actor.ai.responses = copy.deepcopy(d['composite']['responses']['state'])
+            if 'maneuvers' in d['composite']:
+                actor.ai.maneuvers = copy.deepcopy(d['composite']['maneuvers']['state'])
         restored.append(actor)
 
     return restored

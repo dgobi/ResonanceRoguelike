@@ -118,6 +118,11 @@ def effective_profile(raw):
         if raw['enemy_responses'] is None:
             raise ValueError('enemy_responses: omit an absent attachment')
         configuration(raw['enemy_responses'], result, raw.get('perception'))
+    if 'enemy_maneuvers' in raw:
+        from engine.enemy_maneuvers import configuration
+        if raw['enemy_maneuvers'] is None:
+            raise ValueError('enemy_maneuvers: omit an absent attachment')
+        configuration(raw['enemy_maneuvers'], result, raw.get('perception'))
     return result
 
 
@@ -163,6 +168,9 @@ def validate_saved(row, local_map=None):
     if isinstance(composite, dict) and 'responses' in composite:
         from engine.enemy_responses import validate_saved as validate_responses
         validate_responses(composite['responses'], row, composite['profile'], local_map)
+    if isinstance(composite, dict) and 'maneuvers' in composite:
+        from engine.enemy_maneuvers import validate_saved as validate_maneuvers
+        validate_maneuvers(composite['maneuvers'], row, composite['profile'], local_map)
 
 
 def _validate_recipe_saved(row, local_map=None):
@@ -174,7 +182,8 @@ def _validate_recipe_saved(row, local_map=None):
     from engine.creature_abilities import ABILITY_REGISTRY
     if isinstance(row.get('id'), str) and (row['id'].casefold() == 'player' or row['id'] in ABILITY_REGISTRY):
         raise ValueError('composite: saved binding cannot acquire player or ID-bound special behavior')
-    if not isinstance(composite, dict) or set(composite) not in ({'profile', 'state'}, {'profile','state','responses'}):
+    if (not isinstance(composite, dict) or not {'profile','state'} <= set(composite)
+            or set(composite)-{'profile','state','responses','maneuvers'}):
         raise ValueError('composite: profile and tactical state required')
     p = saved_profile(composite['profile'])
     s = composite['state']

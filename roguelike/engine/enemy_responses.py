@@ -39,11 +39,12 @@ def configuration(value, profile, perception, *, complete=False):
     if value is None:
         return None
     if (not isinstance(value, dict) or set(value) != {'version', 'modules'}
-            or type(value['version']) is not int or value['version'] != 1
+            or type(value['version']) is not int or value['version'] not in (1, 2)
             or not isinstance(value['modules'], list) or not 0 <= len(value['modules']) <= 2):
-        raise ValueError('enemy_responses: version 1 and at most two registered modules required')
-    if profile['recipe'] not in RECIPES:
-        raise ValueError('enemy_responses: supported only on strike_and_withdraw and territorial_guard')
+        raise ValueError('enemy_responses: version 1 or 2 and at most two registered modules required')
+    from engine.enemy_components import RECIPES as EXPANDED_RECIPES
+    if profile['recipe'] not in (RECIPES if value['version']==1 else EXPANDED_RECIPES):
+        raise ValueError('enemy_responses: v1 supports strike_and_withdraw/territorial_guard; v2 supports hostile recipes v1-v5')
     alignment(perception)
     result = []
     used = set()
@@ -59,7 +60,7 @@ def configuration(value, profile, perception, *, complete=False):
             if type(effective[k]) is not int or not lo <= effective[k] <= hi:
                 raise ValueError(f'enemy_responses.{key}.{k}: integer {lo}..{hi} required')
         used.add(key); result.append(effective)
-    return dict(version=1, modules=result)
+    return dict(version=value['version'], modules=result)
 
 
 def initial():
@@ -113,6 +114,14 @@ def refresh(ai, engine, actor, ambient):
         cancel(ai)
         return
     sight = ai.sees(engine, actor, engine.player, ambient)
+    if ai.response_config['version'] == 2:
+        from engine.enemy_components import windows
+        flags = windows(ai, engine, actor)
+        if s['prepared'] is not None and not flags['approach']:
+            s['prepared'] = None
+            note(ai, engine, flags['reason'], own_sight=sight)
+        if s['interest'] and not flags['idle']:
+            finish(ai, actor, 'host_priority')
     c = module(ai, CALL)
     if c:
         if sight:
@@ -147,6 +156,11 @@ def accepts(ai, actor, incident, engine):
     if incident['id'] in s['recent']: return 'duplicate'
     if s['interest'] or now < s['receipt_until']: return 'response_busy'
     if ai.target is not None: return 'own_commitment'
+    if ai.response_config['version'] == 2:
+        from engine.enemy_components import windows
+        flags = windows(ai, engine, actor)
+        if not flags['idle']: return flags['reason']
+        if ai.maneuvers and ai.maneuvers['current']: return 'maneuver_commitment'
     if ai.profile['recipe'] == 'territorial_guard':
         from components.territorial import distance
         t = ai.territory; anchor = t['anchor'] or [ai.home_x, ai.home_y]
@@ -241,11 +255,19 @@ def choose(ai, engine, actor, observed, ambient, *, call=False, idle=False):
         goal = (lambda x,y: abs(x-sx)+abs(y-sy)==1) if blocked else (lambda x,y: (x,y)==(sx,sy))
         step,length = ai._route(engine, actor, goal)
         i['left'] -= 1
-        moved = ai._move(engine, actor, step)
+        if ai.response_config['version'] == 2:
+            from engine.enemy_components import move
+            moved = move(ai, engine, actor, step)
+        else:
+            moved = ai._move(engine, actor, step)
         i['failures'] = 0 if moved else i['failures']+1
         reason = ('arrived' if length==0 or goal(actor.x,actor.y) else
                   'exhausted' if i['left']==0 else
                   'unreachable' if i['failures']>=module(ai,ANSWER)['failure_budget'] else 'investigating')
+        if ai.response_config['version']==2:
+            from engine.enemy_components import windows
+            if not windows(ai,engine,actor)['idle']:
+                reason = 'host_priority'
         note(ai,engine,reason,used_action=True,remaining=i['left'],origin=[sx,sy])
         if reason != 'investigating': finish(ai, actor, reason)
         return ('move' if moved else 'wait'), 'alarm_'+reason, None
@@ -275,7 +297,11 @@ def validate_saved(value, row, profile, local_map):
     if (CALL not in modules and any(s[k] != initial()[k] for k in ('prepared','called','unseen_since','cooldown_until','sequence'))
         or s['prepared'] is not None and (s['called'] or row['composite']['state']['target'] is None
                                         or row['composite']['state']['target']['role'] != 'player'
-                                        or row['composite']['state']['phase'] != 'approach'
+                                        or row['composite']['state']['phase'] not in (
+                                            ('approach',) if config['version']==1 else
+                                            ('pursue',) if profile['recipe']=='observation_averse' else
+                                            ('approach','return') if profile['recipe']!='patient_venom_hunt' else ('approach',))
+                                        or profile['recipe']=='patient_venom_hunt' and row['composite']['state']['hunt'] is not None
                                         or s['prepared'] > row['composite']['state']['target']['seen']
                                         or s['prepared'] < s['cooldown_until'])
         or bool(s['sequence']) != bool(s['cooldown_until']) or s['called'] and not s['sequence']):
@@ -292,6 +318,14 @@ def validate_saved(value, row, profile, local_map):
     if ANSWER not in modules and (s['interest'] is not None or s['recent'] or s['receipt_until']):
         raise ValueError('enemy_responses: response state without module')
     i=s['interest']
+    if config['version']==2 and profile['recipe']=='observation_averse':
+        base=row['composite']['state']
+        if (s['prepared'] is not None or i is not None) and base['phase']=='conceal':
+            raise ValueError('enemy_responses: concealment has priority')
+    if config['version']==2 and profile['recipe']=='patient_venom_hunt' and i is not None:
+        base=row['composite']['state']
+        if base['hunt'] is not None or base['suppressed'] is not None:
+            raise ValueError('enemy_responses: retained or retired hunt has priority')
     if i is None: return
     if not isinstance(i,dict) or set(i)!={'incident','received','deadline','left','failures'}:
         raise ValueError('enemy_responses: incomplete investigation')

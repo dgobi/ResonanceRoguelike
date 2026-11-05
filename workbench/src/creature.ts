@@ -43,16 +43,32 @@ export function creatureValue(text: string, field: string, value: string | numbe
 
 // Registry/defaults come from the game-owned source capability, never a TS schema.
 export function responseValue(text:string,id:string,value:boolean|{field:string;value:number},registry:Record<string,Record<string,number>>):string {
+  return attachmentValue(text,'enemy_responses',2,id,value,registry);
+}
+
+export function maneuverValue(text:string,id:string,value:boolean|{field:string;value:number},registry:Record<string,Record<string,number>>):string {
+  return attachmentValue(text,'enemy_maneuvers',1,id,value,registry);
+}
+
+export function responseVersion(text:string,version:number,versions:Record<string,string[]>):string {
+  if(!versions[String(version)])throw new Error('Unsupported response version.');
+  const {model,reason}=creatureModel(text);if(!model)throw new Error(reason);
+  const current=model.enemy_responses as {version:number}|undefined;
+  if(!current)return valueEdit(text,['enemy_responses'],{version,modules:[]});
+  return current.version===version?text:valueEdit(text,['enemy_responses','version'],version);
+}
+
+function attachmentValue(text:string,field:string,version:number,id:string,value:boolean|{field:string;value:number},registry:Record<string,Record<string,number>>):string {
   const {model,reason}=creatureModel(text);if(!model)throw new Error(reason);
   if(!registry[id])throw new Error('Game-owned response defaults unavailable.');
-  const attachment=model.enemy_responses as {version:number;modules:({id:string}&Record<string,unknown>)[]}|undefined;
+  const attachment=model[field] as {version:number;modules:({id:string}&Record<string,unknown>)[]}|undefined;
   const modules=attachment?.modules||[],index=modules.findIndex(m=>m.id===id);
   if(typeof value==='boolean'){
     if(value===(index>=0))return text;
     const next=value?[...modules,{id,...registry[id]}]:modules.filter(m=>m.id!==id);
-    return attachment?valueEdit(text,['enemy_responses','modules'],next):valueEdit(text,['enemy_responses'],{version:1,modules:next});
+    return attachment?valueEdit(text,[field,'modules'],next):valueEdit(text,[field],{version,modules:next});
   }
   if(index<0||!(value.field in registry[id]))throw new Error('Unsupported response field.');
   if(modules[index][value.field]===value.value)return text;
-  return valueEdit(text,['enemy_responses','modules',index,value.field],value.value);
+  return valueEdit(text,[field,'modules',index,value.field],value.value);
 }

@@ -5,6 +5,7 @@ from engine.ai_profiles import local_only
 
 def inspect(engine):
     from engine.venom import inspect as inspect_venom
+    from engine.enemy_components import windows
     actors = [a for a in engine.entities if local_only(a)]
     mask = engine.normal_player_vision()['visible'] if actors else None
     return dict(contract='composite-diagnostic-4', view='live saved instance', privileged=True,
@@ -20,6 +21,10 @@ def inspect(engine):
                              enemy_responses=copy.deepcopy(a.ai.response_config),
                              response_state=copy.deepcopy(a.ai.responses),
                              response_trace=copy.deepcopy(a.ai.response_trace),
+                             enemy_maneuvers=copy.deepcopy(a.ai.maneuver_config),
+                             maneuver_state=copy.deepcopy(a.ai.maneuvers),
+                             maneuver_trace=copy.deepcopy(a.ai.maneuver_trace),
+                             component_windows=windows(a.ai,engine,a),
                              condition=inspect_venom(a),
                              hunt_observation=copy.deepcopy(a.ai.hunt_evidence),
                              hunt_information='Own delivery provenance and timing are internal; only current direct sight supplies a symptom. Inspection does not refresh either.',

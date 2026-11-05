@@ -1,0 +1,248 @@
+{
+  "command": [
+    "node",
+    "scripts/run-ai-9.mjs"
+  ],
+  "cwd": "G:/GameDev/RoguelikeProject/workbench",
+  "entry": "workbench/Launch Workbench.vbs",
+  "boundary": "Genuine pre-freeze UI authoring; final packaged native gate reruns saved-room lifecycle. First run published all eleven new files before concurrent source capture rejection; later runs passed.",
+  "runs": [
+    {
+      "receipt": "evidence/ai-9/native-1793911341896.json.gz",
+      "sha256": "c634fac44ea7dcde8f6533016b87a9b3247fef18b3ec4eb47dff236db45d94f0",
+      "compressed_sha256": "bc94265d1c9d5381174658314b0bbc29eb871ca70a59f3fd0e0f86158211581a",
+      "passed": false,
+      "checks": [
+        "Create five independent family configurations through actual creature controls",
+        "Create further observation-averse recombination through the same controls",
+        "Place all families in saved rooms using actual canvas and placement controls",
+        "Packaged Test room, live actions and exact F5/F9 for every authored family"
+      ],
+      "package_sha256": "eeef48578776d7f93b8c97dbca5de5a7f7110c8cbb19685e02a3c643dd736916",
+      "publications": [
+        {
+          "path": "roguelike/data/entities/creatures/barrow_lane_revenant.json",
+          "sha256": "3b2e8e06b6394d1735af79d1afa208f594d073e82b1f4d8ca30d5aa181e0bca3",
+          "valid": true
+        },
+        {
+          "path": "roguelike/data/entities/creatures/barrow_shy_stalker.json",
+          "sha256": "4388521cd76471f116b1cb42944782c32b1806d7fde4703e9ca18b5c68cc4b6e",
+          "valid": true
+        },
+        {
+          "path": "roguelike/data/entities/creatures/barrow_nettle_guard.json",
+          "sha256": "a896d44e6a7299ba75396197a0c47f5f858f045ef3cc8bb101e1eecfd6db26be",
+          "valid": true
+        },
+        {
+          "path": "roguelike/data/entities/creatures/barrow_patient_weevil.json",
+          "sha256": "b2a9732d00a06de571cb8b4f740269b8bc115269bb79fe64294a59599e0e1fa2",
+          "valid": true
+        },
+        {
+          "path": "roguelike/data/entities/creatures/barrow_kin_sentinel.json",
+          "sha256": "3132444cc3422c4e621d5d29309adb7aa624b5117eb3f45e9544617ee808ea72",
+          "valid": true
+        },
+        {
+          "path": "roguelike/data/entities/creatures/barrow_shy_listener.json",
+          "sha256": "966ae26fc914c127d57312a0146d49f6244f949e9dbaa959c811690c58ce443f",
+          "valid": true
+        },
+        {
+          "path": "roguelike/data/layouts/ai9_lateral_lane.json",
+          "sha256": "f07a5088a2bdf50dd8959ca9901e7f2f1de37b1df7ae43f84285b01e136c336b",
+          "valid": true
+        },
+        {
+          "path": "roguelike/data/layouts/ai9_venom_lane.json",
+          "sha256": "8f45678d8999a185806cf2d10edc613f41eb4d2be9ee2e9514ab44e08a7f09b2",
+          "valid": true
+        },
+        {
+          "path": "roguelike/data/layouts/ai9_shadow_lane.json",
+          "sha256": "bac859ff62598bdd959c4a7844db3391043a9653bb0c0b8aee67019521e677cd",
+          "valid": true
+        },
+        {
+          "path": "roguelike/data/layouts/barrow_ward_store_d.json",
+          "sha256": "a6fc8894aba46ec39b0fc8084a09a519d120485b6fcca7a4c54772abad268866",
+          "valid": true
+        },
+        {
+          "path": "roguelike/data/layouts/barrow_ward_store_e.json",
+          "sha256": "64b6e01bcbfa13cb73244544ffc59abbec779483d6c730029d9a8f85112cbbfb",
+          "valid": true
+        }
+      ],
+      "reopened": [],
+      "behaviour_comparison": null,
+      "failure": "AssertionError [ERR_ASSERTION]: {\"status\":\"stopped\",\"last_action_error\":{\"code\":\"ROOM_TEST\",\"message\":\"Saved inputs changed during captured validation\",\"remedy\":\"Correct the saved room/resources or inspect test diagnostics, then retry. Existing drafts are retained.\"},\"diagnostics\":\"pygame 2.6.1 (SDL 2.28.4, Python 3.11.0)\\r\\nHello from the pygame community. https://www.pygame.org/contribute.html\\r\\n  Deep tongue loaded: 318 words\\r\\n  Loot pools loaded: 19\\r\\n  Deep tongue loaded: 318 words\\r\\n  Loot pools loaded: 19\\r\\n  Loaded sheet 'amber_insect': assets/sprites/amber_insect.png\\r\\n  Loaded sheet 'urizen': assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png\\r\\n  Loaded sheet 'pixel': assets/sprites/PixelAsciiSpritesheet.png\\r\\n  Loaded sheet 'hexany_creatures': assets/sprites/HexanyCreatures.png\\r\\n  Loaded sheet 'terrain': assets/sprites/terrain.png\\r\\n  Loaded sheet 'objects': assets/sprites/objects.png\\r\\n  Loaded sheet 'creatures': assets/sprites/creatures.png\\r\\nSpriteRegistry: 264 tiles across 7 sheets\\r\\n\"}\n    at file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-ai-9.mjs:38:123\n    at async until (file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-ai-9.mjs:26:79)\n    at async start (file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-ai-9.mjs:38:10)\n    at async witness (file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-ai-9.mjs:99:51)\n    at async file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-ai-9.mjs:130:37",
+      "receipt_format": "AI-9 receipt with captured file maps deduplicated and repeated validation summaries reduced"
+    },
+    {
+      "receipt": "evidence/ai-9/native-1793911691915.json.gz",
+      "sha256": "6540600e21be96de8317a975d1f37416ba5c554cce39f6a60b0830233016f79e",
+      "compressed_sha256": "84fbd27485a1c157fdba19b12423dcd886cf18109dcf6d0b1e458f1bc8e3ef3f",
+      "passed": true,
+      "checks": [
+        "Create five independent family configurations through actual creature controls",
+        "Create further observation-averse recombination through the same controls",
+        "Place all families in saved rooms using actual canvas and placement controls",
+        "Packaged Test room, live actions and exact F5/F9 for every authored family",
+        "Movement participation edit, undo/redo, captured Reset versus latest saved and parked dirty draft",
+        "AI-9 packaged authoring and saved-room lifecycle passed"
+      ],
+      "package_sha256": "eeef48578776d7f93b8c97dbca5de5a7f7110c8cbb19685e02a3c643dd736916",
+      "publications": [
+        {
+          "path": "roguelike/data/entities/creatures/barrow_lane_revenant.json",
+          "sha256": "3fa5e0254e1123d54ef2c03963d5ed90175db1664590f4c5d02a569440f71354",
+          "valid": true
+        },
+        {
+          "path": "roguelike/data/entities/creatures/barrow_lane_revenant.json",
+          "sha256": "e2275cb29d67f74ee99ac556a2cc058af0d07e1d88f2a2d8ff254a77295b2605",
+          "valid": true
+        }
+      ],
+      "reopened": [
+        {
+          "path": "roguelike/data/entities/creatures/barrow_lane_revenant.json",
+          "sha256": "3b2e8e06b6394d1735af79d1afa208f594d073e82b1f4d8ca30d5aa181e0bca3"
+        },
+        {
+          "path": "roguelike/data/entities/creatures/barrow_shy_stalker.json",
+          "sha256": "4388521cd76471f116b1cb42944782c32b1806d7fde4703e9ca18b5c68cc4b6e"
+        },
+        {
+          "path": "roguelike/data/entities/creatures/barrow_nettle_guard.json",
+          "sha256": "a896d44e6a7299ba75396197a0c47f5f858f045ef3cc8bb101e1eecfd6db26be"
+        },
+        {
+          "path": "roguelike/data/entities/creatures/barrow_patient_weevil.json",
+          "sha256": "b2a9732d00a06de571cb8b4f740269b8bc115269bb79fe64294a59599e0e1fa2"
+        },
+        {
+          "path": "roguelike/data/entities/creatures/barrow_kin_sentinel.json",
+          "sha256": "3132444cc3422c4e621d5d29309adb7aa624b5117eb3f45e9544617ee808ea72"
+        },
+        {
+          "path": "roguelike/data/entities/creatures/barrow_shy_listener.json",
+          "sha256": "966ae26fc914c127d57312a0146d49f6244f949e9dbaa959c811690c58ce443f"
+        },
+        {
+          "path": "roguelike/data/layouts/ai9_lateral_lane.json",
+          "sha256": "f07a5088a2bdf50dd8959ca9901e7f2f1de37b1df7ae43f84285b01e136c336b"
+        },
+        {
+          "path": "roguelike/data/layouts/ai9_venom_lane.json",
+          "sha256": "8f45678d8999a185806cf2d10edc613f41eb4d2be9ee2e9514ab44e08a7f09b2"
+        },
+        {
+          "path": "roguelike/data/layouts/ai9_shadow_lane.json",
+          "sha256": "bac859ff62598bdd959c4a7844db3391043a9653bb0c0b8aee67019521e677cd"
+        },
+        {
+          "path": "roguelike/data/layouts/barrow_ward_store_d.json",
+          "sha256": "a6fc8894aba46ec39b0fc8084a09a519d120485b6fcca7a4c54772abad268866"
+        },
+        {
+          "path": "roguelike/data/layouts/barrow_ward_store_e.json",
+          "sha256": "64b6e01bcbfa13cb73244544ffc59abbec779483d6c730029d9a8f85112cbbfb"
+        }
+      ],
+      "behaviour_comparison": null,
+      "failure": null,
+      "receipt_format": "AI-9 receipt with captured file maps deduplicated and repeated validation summaries reduced"
+    },
+    {
+      "receipt": "evidence/ai-9/native-1793912666519.json.gz",
+      "sha256": "b965ad610e1b09ed6663ac0fff6d8002b1917fad03e07ee552ce003ebd6f51d8",
+      "compressed_sha256": "680f1e13bd79ab277704f55e27716526f4b080bc597a5fa0c628abffc1f2e08a",
+      "passed": true,
+      "checks": [
+        "Create five independent family configurations through actual creature controls",
+        "Create further observation-averse recombination through the same controls",
+        "Place all families in saved rooms using actual canvas and placement controls",
+        "Packaged Test room, live actions and exact F5/F9 for every authored family",
+        "Movement participation edit, undo/redo, captured Reset versus latest saved and parked dirty draft",
+        "AI-9 packaged authoring and saved-room lifecycle passed"
+      ],
+      "package_sha256": "eeef48578776d7f93b8c97dbca5de5a7f7110c8cbb19685e02a3c643dd736916",
+      "publications": [
+        {
+          "path": "roguelike/data/entities/creatures/barrow_kin_sentinel.json",
+          "sha256": "9781003aca1520bcaaace3d80a0c9bbb638eda131e4b4e41da945f0a68085621",
+          "valid": true
+        },
+        {
+          "path": "roguelike/data/entities/creatures/barrow_lane_revenant.json",
+          "sha256": "3fa5e0254e1123d54ef2c03963d5ed90175db1664590f4c5d02a569440f71354",
+          "valid": true
+        },
+        {
+          "path": "roguelike/data/entities/creatures/barrow_lane_revenant.json",
+          "sha256": "e2275cb29d67f74ee99ac556a2cc058af0d07e1d88f2a2d8ff254a77295b2605",
+          "valid": true
+        }
+      ],
+      "reopened": [
+        {
+          "path": "roguelike/data/entities/creatures/barrow_lane_revenant.json",
+          "sha256": "e2275cb29d67f74ee99ac556a2cc058af0d07e1d88f2a2d8ff254a77295b2605"
+        },
+        {
+          "path": "roguelike/data/entities/creatures/barrow_shy_stalker.json",
+          "sha256": "4388521cd76471f116b1cb42944782c32b1806d7fde4703e9ca18b5c68cc4b6e"
+        },
+        {
+          "path": "roguelike/data/entities/creatures/barrow_nettle_guard.json",
+          "sha256": "a896d44e6a7299ba75396197a0c47f5f858f045ef3cc8bb101e1eecfd6db26be"
+        },
+        {
+          "path": "roguelike/data/entities/creatures/barrow_patient_weevil.json",
+          "sha256": "b2a9732d00a06de571cb8b4f740269b8bc115269bb79fe64294a59599e0e1fa2"
+        },
+        {
+          "path": "roguelike/data/entities/creatures/barrow_shy_listener.json",
+          "sha256": "966ae26fc914c127d57312a0146d49f6244f949e9dbaa959c811690c58ce443f"
+        },
+        {
+          "path": "roguelike/data/layouts/ai9_lateral_lane.json",
+          "sha256": "f07a5088a2bdf50dd8959ca9901e7f2f1de37b1df7ae43f84285b01e136c336b"
+        },
+        {
+          "path": "roguelike/data/layouts/ai9_venom_lane.json",
+          "sha256": "8f45678d8999a185806cf2d10edc613f41eb4d2be9ee2e9514ab44e08a7f09b2"
+        },
+        {
+          "path": "roguelike/data/layouts/ai9_shadow_lane.json",
+          "sha256": "bac859ff62598bdd959c4a7844db3391043a9653bb0c0b8aee67019521e677cd"
+        },
+        {
+          "path": "roguelike/data/layouts/barrow_ward_store_d.json",
+          "sha256": "a6fc8894aba46ec39b0fc8084a09a519d120485b6fcca7a4c54772abad268866"
+        },
+        {
+          "path": "roguelike/data/layouts/barrow_ward_store_e.json",
+          "sha256": "64b6e01bcbfa13cb73244544ffc59abbec779483d6c730029d9a8f85112cbbfb"
+        }
+      ],
+      "behaviour_comparison": {
+        "turn": 486,
+        "enabled": [
+          34,
+          21
+        ],
+        "disabled": [
+          34,
+          20
+        ]
+      },
+      "failure": null,
+      "receipt_format": "AI-9 receipt with captured file maps deduplicated and repeated validation summaries reduced"
+    }
+  ]
+}

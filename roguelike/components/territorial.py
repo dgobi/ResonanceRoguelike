@@ -181,10 +181,10 @@ def take_turn(ai, actor, engine, ambient):
                     t.update(phase='engaged',pursuit_left=ai.profile['pursuit_budget'],investigation_left=0,reason=None)
                     clear_interest(ai)
                     break
-            from engine.enemy_responses import choose
-            reaction = choose(ai, engine, actor, observed, ambient,
-                call=t['phase']=='engaged' and ai.target is not None and ai.target['role']=='player' and ai.phase=='approach',
-                idle=t['phase']=='guard' and ai.target is None)
+            if t['phase']=='engaged' and not t['pursuit_left']:
+                ai.cancel(actor,'pursuit_exhausted')
+            from engine.enemy_components import choose
+            reaction = choose(ai, engine, actor, observed, ambient)
             if reaction:
                 action,reason,result = reaction
                 if t['phase']=='engaged':

@@ -82,6 +82,10 @@ def evidence_key(t):
 
 
 def retire_prey(ai, actor, reason, *, keep_sound=False):
+    from engine.enemy_maneuvers import cancel
+    cancel(ai)
+    from engine.enemy_responses import cancel
+    cancel(ai)
     from engine.local_rivals import retire_player
     from engine.sound import clear_interest
     ai.retired_evidence = evidence_key(ai.target) or ai.retired_evidence
@@ -216,8 +220,18 @@ def take_turn(ai, actor, engine, ambient):
         ai.no_progress, ai.best_distance, ai.failed_entries = 0, None, []
     if ai.target is not None:
         clear_interest(ai)
+    from engine.enemy_components import choose, windows
+    flags = windows(ai, engine, actor)
+    if flags['approach']:
+        ai.phase = 'pursue'
+    reaction = choose(ai, engine, actor, perceived, ambient)
     # Reaching cover commits the remainder of this charged phase, including fast AI.
-    if not watched and ai.covered_phase == now:
+    if reaction:
+        # The adapter may have entered concealment after its single safe step.
+        # That is next opportunity's obligation, never another move this time.
+        action, reason, result = reaction
+        steps.extend(ai.attachment_steps)
+    elif not watched and ai.covered_phase == now:
         reason = 'covered_this_phase'
     elif watched or ai.phase == 'conceal':
         nxt, goal = route_to_cover(ai, engine, actor, mask)

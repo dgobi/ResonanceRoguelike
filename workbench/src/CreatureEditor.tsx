@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { creatureModel, creatureValue, responseValue } from "./creature";
+import { creatureModel, creatureValue, responseValue, responseVersion, maneuverValue } from "./creature";
 import { request, asFailure, type Inspection } from "./protocol";
 import type { ContentProps } from "./ContentEditor";
 import { CreatureHarvest } from "./CreatureHarvest";
@@ -70,8 +70,11 @@ export function CreatureEditor(p: ContentProps) {
       </fieldset>
       {composite&&<label>Registered behaviour recipe<select aria-label="Behaviour recipe" disabled={!!reason||!p.variant||!cap.composite_variant} value={recipe} onChange={e=>edit('ai_profile.recipe',e.target.value)}><option value="strike_and_withdraw">Strike and withdraw</option><option value="observation_averse">Observation-averse pursuit</option><option value="venom_strike_and_withdraw">Venom strike and withdraw</option><option value="patient_venom_hunt">Patient venom hunt</option><option value="territorial_guard">Fixed territorial post</option><option value="protective_escort">Protective escort</option></select><small>Changing recipe requires a new ID. Selection installs the game's legal recipe defaults in one undoable edit.</small></label>}
       {composite&&cap.response_defaults&&<fieldset className="item-properties" disabled={!!reason||!(cap.response_editable||(p.variant&&cap.composite_variant))}><legend>Enemy response components</legend>
-        <p>Version 1 attachments · supported recipes: {cap.response_recipes?.join(', ')}. Requires an explicit non-player faction hostile to player. First attachment requires a new ID. Base recipe remains independently selected; saved actors retain their effective components.</p>
-        {!cap.response_recipes?.includes(recipe)&&<p className="notice warning">This recipe cannot host enemy response components. Remove attachments before saving, or choose a supported recipe on a new variant.</p>}
+        <p>Independent alarms require an explicit non-player faction hostile to player. First attachment requires a new ID. Saved actors retain their effective components.</p>
+        <label>Alarm compatibility<select aria-label="Alarm compatibility" value={Number(get('enemy_responses.version',2))} onChange={e=>p.onEdit(s=>responseVersion(s,Number(e.target.value),cap.response_versions!), 'Alarm compatibility')}>
+          {Object.keys(cap.response_versions||{}).map(v=><option key={v} value={v}>{v==='1'?'Legacy v1: strike/withdraw and territorial':'Expanded v2: all five hostile recipes'}</option>)}
+        </select></label>
+        {!(cap.response_versions?.[String(get('enemy_responses.version',2))]||cap.response_recipes)?.includes(recipe)&&<p className="notice warning">This recipe cannot host the selected alarm compatibility. Choose expanded v2 for hostile recipes v1–v5; escort remains unsupported.</p>}
         {Object.entries(cap.response_defaults).map(([id,registered])=>{
           const rows=get('enemy_responses.modules',[]) as ({id:string}&Record<string,unknown>)[],row=rows.find(m=>m.id===id);
           const change=(value:boolean|{field:string;value:number})=>p.onEdit(s=>responseValue(s,id,value,cap.response_defaults!),`Enemy response ${id}`);
@@ -82,6 +85,21 @@ export function CreatureEditor(p: ContentProps) {
             })}</div>;
         })}
         <p>A visible call has a paid tell, then a paid cry on a later charged phase. A receiver hears only the call site and moves no earlier than the following phase. Own threats, withdrawal and territorial return have priority. Hearing or arrival never relays a call. Walls block; closed doors attenuate; investigation and recurrence are finite. Anonymous sounds remain separate.</p>
+      </fieldset>}
+      {composite&&cap.maneuver_defaults&&<fieldset className="item-properties" disabled={!!reason||!(cap.maneuver_editable||(p.variant&&cap.composite_variant))}><legend>Enemy movement components</legend>
+        <p>Optional lateral approach and wounded regroup. Supported recipes: {cap.maneuver_recipes?.join(', ')}. First attachment requires a new ID; empty enrolled attachments remain editable.</p>
+        {!cap.maneuver_recipes?.includes(recipe)&&<p className="notice warning">This recipe cannot host enemy movement components.</p>}
+        {Object.entries(cap.maneuver_defaults).map(([id,registered])=>{
+          const rows=get('enemy_maneuvers.modules',[]) as ({id:string}&Record<string,unknown>)[],row=rows.find(m=>m.id===id);
+          const change=(value:boolean|{field:string;value:number})=>p.onEdit(s=>maneuverValue(s,id,value,cap.maneuver_defaults!),`Enemy movement ${id}`);
+          const title=id==='seek_lateral_approach'?'Seek lateral approach':'Regroup when wounded';
+          return <div key={id}><label>{title}<input type="checkbox" aria-label={title} checked={!!row} onChange={e=>change(e.target.checked)}/></label>
+            {row&&Object.entries(registered).map(([key,fallback])=>{const bounds=cap.maneuver_bounds?.[id]?.[key]||[0,0],unit=key.endsWith('_phases')?'charged phases':key.endsWith('_percent')?'percent HP':'ordinary opportunities',label=`${title}: ${key.replaceAll('_',' ')} (${unit})`;
+              return <label key={key}>{label}<input aria-label={label} type="number" min={bounds[0]} max={bounds[1]} step={1} value={Number(row[key]??fallback)} onChange={e=>{if(e.target.value!=='')change({field:key,value:Number(e.target.value)});}}/><small>{row[key]===undefined?'Defaulted':'Explicit'}; effective {String(row[key]??fallback)} {unit}. Integer {bounds[0]}–{bounds[1]}.</small></label>;
+            })}</div>;
+        })}
+        <p>Both need a living ally in the actor's own current sight. Lateral approach requires fresh prey sight and yields to legal melee. Regroup provides no healing or bonuses. One attempt per encounter; rearm needs sustained quiet or actual recovery above the higher threshold. Save/load, supporter changes and departure retain spent credit.</p>
+        <p>Concealment, required withdrawal/hold and territorial return win. Unseen pursuit attachments move one safe step. Patient regroup retires its old hunt; victim venom remains. Calls precede lateral movement. See live tactic inspection in Test room for phase, support, goal, remaining credit and yield reasons.</p>
       </fieldset>}
       {composite&&recipe==='protective_escort'&&<fieldset className="item-properties" disabled={!!reason||!(cap.profile_editable||(p.variant&&cap.composite_variant))}><legend>Protective escort</legend>
         <p>Version 6 · ordinary melee · player ward in the active owning scene only. Requires faction player and explicit hostile factions excluding player. Enemies hostile to player may lawfully target this escort through their own perception and AI. No recruitment, stairs, chunk travel or automatic population placement.</p>

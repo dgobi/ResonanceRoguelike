@@ -8,12 +8,14 @@ from engine.spatial import melee_contact, melee_attack_legal
 
 
 class CompositeAI(AI):
-    def __init__(self, wander_radius=8, *, profile, responses=None):
+    def __init__(self, wander_radius=8, *, profile, responses=None, maneuvers=None):
         super().__init__(wander_radius=wander_radius)
         from engine.ai_profiles import saved_profile
         self.profile = saved_profile(profile)
         from engine.enemy_responses import initialize
         initialize(self, responses)
+        from engine.enemy_maneuvers import initialize
+        initialize(self, maneuvers)
         self.phase = 'idle'
         self.target = None
         self.withdraw_left = self.hold_left = self.approach_left = self.no_progress = 0
@@ -37,6 +39,14 @@ class CompositeAI(AI):
             initialize(self)
 
     def snapshot(self):
+        result = self._host_snapshot()
+        if self.response_config is not None:
+            result['responses'] = dict(config=copy.deepcopy(self.response_config), state=copy.deepcopy(self.responses))
+        if self.maneuver_config is not None:
+            result['maneuvers'] = dict(config=copy.deepcopy(self.maneuver_config), state=copy.deepcopy(self.maneuvers))
+        return result
+
+    def _host_snapshot(self):
         if self.profile['recipe'] == 'protective_escort':
             return dict(profile=copy.deepcopy(self.profile), state=dict(
                 escort=copy.deepcopy(self.escort), target=copy.deepcopy(self.target),
@@ -53,12 +63,12 @@ class CompositeAI(AI):
         if self.withdrawal_told:
             keys += ('withdrawal_told',)
         result = dict(profile=copy.deepcopy(self.profile), state={k: copy.deepcopy(getattr(self, k)) for k in keys})
-        if self.response_config:
-            result['responses'] = dict(config=copy.deepcopy(self.response_config), state=copy.deepcopy(self.responses))
         return result
 
     def cancel(self, actor, reason, *, keep_sound=False):
         from engine.enemy_responses import cancel
+        cancel(self)
+        from engine.enemy_maneuvers import cancel
         cancel(self)
         from engine.local_rivals import retire_player
         from engine.sound import clear_interest
@@ -158,6 +168,8 @@ class CompositeAI(AI):
         """
         from engine.enemy_responses import refresh
         refresh(self, engine, actor, ambient_light)
+        from engine.enemy_maneuvers import refresh
+        refresh(self, engine, actor, ambient_light)
         if self.profile['recipe'] == 'protective_escort':
             from components.protective_escort import refresh
             return refresh(self, engine, actor, ambient_light)
@@ -245,6 +257,8 @@ class CompositeAI(AI):
                 or not active(engine, actor) or not living(actor) or disrupted(actor, local_map)):
             from engine.enemy_responses import cancel
             cancel(self)
+            from engine.enemy_maneuvers import cancel
+            cancel(self)
             return
         from engine.venom import fully_paralysed
         if fully_paralysed(actor):
@@ -297,10 +311,8 @@ class CompositeAI(AI):
                 self._remember(engine, target)
                 self.phase, self.approach_left = 'approach', 32
                 self.no_progress, self.best_distance = 0, None
-        from engine.enemy_responses import choose
-        reaction = choose(self, engine, actor, observed, ambient_light,
-                          call=self.target is not None and self.target['role']=='player' and self.phase=='approach',
-                          idle=self.target is None)
+        from engine.enemy_components import choose
+        reaction = choose(self, engine, actor, observed, ambient_light)
         if reaction:
             action, reason, result = reaction
         elif self.target is not None:

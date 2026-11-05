@@ -1,10 +1,26 @@
 import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
-import { creatureModel, creatureValue, responseValue } from "./creature";
+import { creatureModel, creatureValue, responseValue, responseVersion, maneuverValue } from "./creature";
 import { CanvasHistory } from "./layout";
 import { sourceDiff } from "./draft";
 
 describe("ordinary creature exact draft", () => {
+  it('keeps movement and legacy alarm contracts independent through tune/remove/undo',()=>{
+    const original='{"id":"sample","tile":"existing","metadata":{"keep":true},"enemy_responses":{"version":1,"modules":[]}}';
+    const registry={seek_lateral_approach:{opportunity_budget:8,expiry_phases:16},regroup_when_wounded:{wounded_percent:50,rearm_percent:75}};
+    const flank=maneuverValue(original,'seek_lateral_approach',true,registry);
+    const both=maneuverValue(flank,'regroup_when_wounded',true,registry);
+    const tuned=maneuverValue(both,'regroup_when_wounded',{field:'wounded_percent',value:40},registry);
+    expect(JSON.parse(tuned).enemy_responses.version).toBe(1);
+    expect(JSON.parse(tuned).metadata).toEqual({keep:true});
+    expect(maneuverValue(tuned,'regroup_when_wounded',true,registry)).toBe(tuned);
+    const history=new CanvasHistory();history.record(both,tuned,'Tune injury');expect(history.undo(tuned)).toBe(both);expect(history.redo(both)).toBe(tuned);
+    const empty=maneuverValue(maneuverValue(tuned,'regroup_when_wounded',false,registry),'seek_lateral_approach',false,registry);
+    expect(JSON.parse(empty).enemy_maneuvers).toEqual({version:1,modules:[]});
+    const expanded=responseVersion(empty,2,{'1':['strike_and_withdraw'],'2':['observation_averse']});
+    expect(JSON.parse(expanded).enemy_responses.version).toBe(2);
+    expect(()=>maneuverValue(flank,'seek_lateral_approach',{field:'code',value:1},registry)).toThrow('Unsupported');
+  });
   it('independently attaches and tunes registered responses with exact history and preserved metadata',()=>{
     const text='\uFEFF'+readFileSync(new URL('../../roguelike/data/entities/creatures/grave_skirmisher.json',import.meta.url),'utf8').replace(/\r?\n/g,'\r\n');
     const registry={alarm_call_on_sight:{cooldown_phases:24},investigate_allied_alarm:{opportunity_budget:12}};
