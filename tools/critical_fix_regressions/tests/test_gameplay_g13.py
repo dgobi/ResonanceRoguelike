@@ -61,6 +61,7 @@ class G13Shed(unittest.TestCase):
         validate(data.settlement_profiles, data)
         expected = historical_profiles()
         for form in ('grid', 'roadside'):
+            expected['profiles'][form]['id'] += '-sys3'
             for row in expected['profiles'][form]['roles']['support']:
                 if row['asset']=='tool_shed_a':
                     self.assertEqual(row, dict(asset='tool_shed_a',weight=1.0,max_per_settlement=3))
@@ -68,7 +69,7 @@ class G13Shed(unittest.TestCase):
             for row in expected['profiles'][form]['roles']['commercial']:
                 if row['asset']=='apothecary_a':
                     self.assertEqual(row, dict(asset='apothecary_a',weight=1.0,max_per_settlement=5))
-                    row['asset']='apothecary_c'  # SYS-1 successor retains weight/cap and old selections.
+                    row['asset']='apothecary_d'  # SYS-3 successor retains weight/cap and old selections.
                 if row['asset']=='workshop_a':
                     self.assertEqual(row, dict(asset='workshop_a',weight=1.0,max_per_settlement=5))
                     row['asset']='workshop_d'  # G22 single dressing successor; same weight/cap.

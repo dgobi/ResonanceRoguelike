@@ -82,27 +82,37 @@ class BridgeTests(unittest.TestCase):
         self.assertEqual(a["terrain"][42][0], "wall")
         self.assertTrue(a["passed"])
         self.assertIn((26, 17), [(r["x"], r["y"]) for r in a["containers"]])
-        # Fresh previews construct distinct physical vessel owners. Validate full
-        # state, omit only random identity for generation-semantic comparison.
+        # Catalogue identity participates in preview RNG. Optional laboratory
+        # stock need not contain a pot; its geometry/repeatability stays checked.
+        # The existing SYS-1 room explicitly places four distinct vessels, so
+        # positive owner coverage does not depend on an incidental loot roll.
+        explicit = [invoke("preview", asset="roguelike/data/layouts/sys1_preparation_room.json",
+                           seed=20261023)["result"] for _ in range(2)]
         sys.path.insert(0, str(ROOT / "roguelike"))
         from engine.save_components import validate_item
-        identities = []
-        for preview in (a, b):
-            seen = set()
-            for group in (preview["items"], preview["containers"]):
-                for owner in group:
-                    for item in owner["items"]:
-                        if "vessel" in item:
-                            validate_item(item, "preview vessel")
-                            identity = item["vessel"]["id"]
-                            self.assertNotIn(identity, seen)
-                            seen.add(identity)
-                            item["vessel"].pop("id")
-            self.assertTrue(seen)
-            identities.append(seen)
-        self.assertTrue(identities[0].isdisjoint(identities[1]))
-        for key in ("terrain_sha256", "terrain", "items", "containers", "actors", "decor", "scene_seed"):
-            self.assertEqual(a[key], b[key], key)
+        for left, right, required in ((a, b, False), (*explicit, True)):
+            identities = []
+            for preview in (left, right):
+                self.assertTrue(preview["passed"])
+                seen = set(); vessel_items = []
+                for group in (preview["items"], preview["containers"]):
+                    for owner in group:
+                        for item in owner["items"]:
+                            if "vessel" in item:
+                                validate_item(item, "preview vessel")
+                                identity = item["vessel"]["id"]
+                                self.assertNotIn(identity, seen)
+                                seen.add(identity); vessel_items.append(item["item_id"])
+                                item["vessel"].pop("id")
+                if required:
+                    self.assertTrue(seen)
+                    self.assertEqual(len(seen), 4)
+                    self.assertEqual(sorted(vessel_items), ["clay_pot", "copper_steeping_kettle",
+                                                           "small_steeping_cup", "waxed_water_flask"])
+                identities.append(seen)
+            self.assertTrue(identities[0].isdisjoint(identities[1]))
+            for key in ("terrain_sha256", "terrain", "items", "containers", "actors", "decor", "scene_seed"):
+                self.assertEqual(left[key], right[key], key)
 
     def test_malformed_protocol_and_unsupported_requests(self):
         cases = [("not json", "MALFORMED_REQUEST"), ("[]", "MALFORMED_REQUEST"),

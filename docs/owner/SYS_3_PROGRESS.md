@@ -29,7 +29,26 @@ independent remote readback. Stop at SYS-3; no wiki or SYS-4 work.
   return to depleted stock, F5/F9 and independent cold loads.
 - Preflight completed. Source-change refusals and stale catalogue expectations
   retained accurately; final affected checks pass. Read-only alias review fixed.
-- M5 next: commit/freeze this implementation, run applicable unfiltered gates,
-  retain results, deliver SYS_3.md, publish main/tags and verify remote identities.
+- M5 frozen input: `c0c0c83349384d0afc2d78f77b764e3906f0dd53`, annotated
+  `checkpoint/sys-3-implementation-20261105-a`. Driver
+  `tools/verify_sys_3.py --evidence .baseline/sys-3/final-a` finished with all inputs
+  unchanged. Its original `passed:false` is retained.
+  Ordinary outings, all Workbench frontend/host/build/bundle/lifecycle gates and
+  SYS-3/SYS-2/SYS-1 native gates pass with unchanged inputs. Unfiltered production
+  passes 3,704 checks / 159 workers. Focused ran 675 tests with six stale assertions
+  in four methods. All 27 worker modules / 136 tests ran: 133 passed, two stale
+  expectations failed, one intentional dependency-control skip. Separate control
+  passed. No runtime/content/editor failure was found.
+  A narrow plan in `evidence/sys-3/expectation-recheck-plan.json` updates six tests:
+  current profile/catalogue/room expectations and moves positive vessel coverage
+  from optional lab loot to the existing explicit SYS-1 room. Read-only review
+  confirmed unchanged fixed locations and retained treatment stock. One guide
+  clarification adds the existing water-source submenu. The report discloses
+  deterministic combat and AI seeds. No runtime/data/editor change. Applied the
+  declared changes after full completion; commit and execute the witness for all four
+  affected focused modules, both affected worker modules and dependency control.
+  Results are in `.baseline/sys-3/final-a/release.json`; delivery report draft is
+  `docs/owner/SYS_3.md`. Finish evidence, verified-input/complete checkpoints,
+  scoped delivery commit, main/tag push and independent remote readback.
 - Blockers: none. Final values begin at strength .4, 6/12 contacts, 125 mL,
   one primary + one fixative, 15 charged turns.

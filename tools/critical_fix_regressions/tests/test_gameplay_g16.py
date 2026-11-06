@@ -75,11 +75,12 @@ class WorkshopPreparation(unittest.TestCase):
         from engine.creature_factory import CreatureFactory
         expected=historical_profiles()
         for form in ('grid','roadside'):
+            expected['profiles'][form]['id'] += '-sys3'
             for rows in expected['profiles'][form]['roles'].values():
                 for row in rows:
                     if row['asset'] in ('tool_shed_a','apothecary_a','workshop_a'):
                         if row['asset']=='workshop_a':self.assertEqual(dict(asset='workshop_a',weight=1.0,max_per_settlement=5),row)
-                        row['asset']={'workshop_a':'workshop_d','apothecary_a':'apothecary_c','tool_shed_a':'tool_shed_c'}[row['asset']]
+                        row['asset']={'workshop_a':'workshop_d','apothecary_a':'apothecary_d','tool_shed_a':'tool_shed_c'}[row['asset']]
         self.assertEqual(expected,self.data.settlement_profiles)
         for form in ('grid','roadside'):
             selected=copy.deepcopy(self.data.settlement_profiles)

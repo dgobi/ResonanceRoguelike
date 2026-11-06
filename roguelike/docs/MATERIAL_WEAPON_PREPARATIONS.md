@@ -13,7 +13,7 @@ Coldbell cutting / briar sap and sulphur-cap fragment / crow bile demonstrate
 the two respective bands. Dried bitter or dried aromatic herb supplies fixative.
 An existing finished coating cannot be used as a primary.
 
-In Inventory, select the actual vessel, **E → Fill → 125 mL** beside reachable
+In Inventory, select the actual vessel, **E → Fill → choose water source → 125 mL** beside reachable
 water. At a stationary fire supplying burning tier two, press **C**, choose the
 wash, then choose the exact primary, fixative and vessel. The primary prompt
 shows tier and resulting contacts, including different instances of the same ID.
