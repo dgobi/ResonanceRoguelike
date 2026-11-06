@@ -43,6 +43,10 @@ profile, Begin edit, change controls or Source, Validate draft, review and apply
 one file. Reopen verifies saved bytes. Original-source entitlement, identity,
 stale review, protected metadata, recovery and independent host path checks
 apply. Removing unsupported original fields cannot confer write permission.
+Invalid supported values and salvage dependencies remain inspectable for repair.
+Their source diagnostics survive a rejected catalogue; a partial inspection
+snapshot cannot authorize publication or a Test capture. Corrected candidates
+must pass the complete strict loader and their family validator.
 
 Version-one scalar settings are `host_container`, `host_screen`, `allow_careful`,
 `cutting_tier` (1–5), `work_steps` (1–12), `allow_force`, `allow_dissolution`,

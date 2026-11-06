@@ -39,6 +39,8 @@ G17_ACCESS = "roguelike/docs/examples/g17_authored_creature_room.access.json"
 DEPENDENCIES = {"pygame": "2.6.1", "tcod": "19.3.0", "numpy": "2.4.6",
                 "cffi": "2.1.1", "pycparser": "3.11", "typing_extensions": "4.16.0"}
 MAX_REQUEST = 4 * 1024 * 1024
+# Snapshots diagnose original sources; failed candidate loads remain rejected.
+REPAIR_FAMILIES = {"pool", "building", "item", "recipe", "room", "access"}
 
 
 class BridgeError(Exception):
@@ -247,7 +249,7 @@ def family_validation(family, request, root, scratch, identity):
         reader = getattr(family.module, "read_source", read_document)
         original_raw = reader(original)
         from engine.pool_authoring import load_authoring_data
-        original_data = family.module.load_authoring_data(root / "roguelike/data") if family.id == "selection" else load_authoring_data(root / "roguelike/data") if family.id in ("pool","building") else DataLoader(str(root / "roguelike/data"))
+        original_data = family.module.load_authoring_data(root / "roguelike/data") if family.id == "selection" else load_authoring_data(root / "roguelike/data") if family.id in REPAIR_FAMILIES else DataLoader(str(root / "roguelike/data"))
         original_context = family.context(original_raw, original_data, source_asset, root / "roguelike/data", identity, hashlib.sha256(original.read_bytes()).hexdigest(), resource_root=root)
         original_operations = family.operations_for(original_context)
         unchanged_inspection = getattr(family.module, "READONLY_CONSTRUCTION", False) and source_asset == request["asset"] and draft.encode("utf-8") == original.read_bytes()
@@ -283,6 +285,14 @@ def family_validation(family, request, root, scratch, identity):
                                 observed_at_utc=datetime.now(timezone.utc).isoformat())
     except StructureError as error:
         diagnostics += [d.json() for d in error.diagnostics]
+        if syntax and family.id in REPAIR_FAMILIES:
+            # Retain the strict catalogue rejection, then report this source's
+            # precise fields/entitlement from already-loaded dependencies. This
+            # snapshot cannot produce a successful publication or Test capture.
+            partial = load_authoring_data(copied)
+            if not unchanged_inspection:
+                diagnostics += family.authorize(original_raw, raw, source_asset, request["asset"], partial)
+            diagnostics += family.validate(raw, partial, request["asset"], copied, resource_root=root)
         if isinstance(error.__cause__, json.JSONDecodeError):
             for d in diagnostics: d.update(line=error.__cause__.lineno, column=error.__cause__.colno)
     for d in diagnostics: d["path"] = d["path"].replace(str(copied), "roguelike/data").replace("\\", "/")
@@ -359,9 +369,10 @@ def run(request, root, scratch):
         # Erasing it would misreport unchanged malformed input as SOURCE_CHANGED
         # and prevent the existing inspect-only repair/diagnostic path.
         selected_family=family_for(request.get("asset", ""))
-        if op=="inspect" and selected_family and selected_family.id in ("pool","building"):
+        if op=="inspect" and selected_family and selected_family.id in REPAIR_FAMILIES:
             from engine.pool_authoring import load_authoring_data
-            data=load_authoring_data(root / "roguelike/data");catalog_error=None
+            data=load_authoring_data(root / "roguelike/data")
+            if selected_family.id in ("pool","building"): catalog_error=None
     if op == "identify":
         return {"worker_version": WORKER_VERSION, "worker_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                 "protocol": PROTOCOL, "source": identity, "runtime": runtime, "contract": CONTRACT_VERSION,
@@ -396,9 +407,9 @@ def run(request, root, scratch):
         if request.get("invalid_fixture"):
             if not spatial or op != "inspect": fail("UNSUPPORTED_OPERATION", "Invalid fixture requires a spatial inspection.", "Inspect the room.")
             raw = dict(raw, width=len(raw["layers"][0])+1)
-        context = family.context(raw, data, request["asset"], root / "roguelike/data", identity, hashlib.sha256(source).hexdigest(), observe=getattr(family.module, "OBSERVE_INSPECTION", False), resource_root=root, seed=request.get("seed")) if data and not raw_error else None
-        diagnostics = ([d.json() for d in (raw_error or catalog_error).diagnostics] if raw_error or catalog_error else
-                       [d for r in context["records"] for d in r["diagnostics"]])
+        context = family.context(raw, data, request["asset"], root / "roguelike/data", identity, hashlib.sha256(source).hexdigest(), observe=getattr(family.module, "OBSERVE_INSPECTION", False) and not catalog_error, resource_root=root, seed=request.get("seed")) if data and not raw_error else None
+        diagnostics = [d.json() for d in (raw_error or catalog_error).diagnostics] if raw_error or catalog_error else []
+        if context: diagnostics += [d for r in context["records"] for d in r["diagnostics"]]
         envelope = family.envelope(context)
         diagnostics += capability_diagnostics(envelope, request["asset"])
         after = source_identity(root)

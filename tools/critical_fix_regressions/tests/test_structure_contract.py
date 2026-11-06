@@ -42,9 +42,9 @@ class StructureContractTests(unittest.TestCase):
 
     def test_complete_inventory_and_immutable_defaults(self):
         entries=self.data.structure_catalog.entries
-        self.assertEqual(len(entries),103)  # SYS-3: wash Test room and apothecary successor
+        self.assertEqual(len(entries),106)  # SYS-4: workshop successor, selected barrow and reusable Test room
         self.assertEqual({r:sum(e.route==r for e in entries) for r in self.data.structure_catalog.by_route},
-                         {'ordinary_building':63,'plaza':2,'interior_entrance':6,'authored_submap':32})
+                         {'ordinary_building':64,'plaza':2,'interior_entrance':6,'authored_submap':34})
         self.assertIn('sys3_wash_room',self.data.layouts)
         self.assertTrue({'barrow_lamplit_store','sys2_light_room'} <= set(self.data.layouts))
         self.assertTrue({'ai9_lateral_lane','ai9_venom_lane','ai9_shadow_lane','barrow_ward_store_d','barrow_ward_store_e'} <= set(self.data.layouts))

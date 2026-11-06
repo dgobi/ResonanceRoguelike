@@ -369,7 +369,7 @@ def authoring_context(raw, data, path, data_root, identity, digest, *, observe=F
                 observed = {**factory_preview(definition, data), "definition_sha256": digest,
                             "source": identity, "path": path, "pointer": pointer,
                             "observed_at_utc": datetime.now(timezone.utc).isoformat(),
-                            "loaded_catalog_sha256": data.structure_catalog.identity}
+                            "loaded_catalog_sha256": getattr(getattr(data, "structure_catalog", None), "identity", None)}
             except (ValueError, TypeError, KeyError) as error:
                 diagnostics.append(dict(severity="error", code="ITEM_FACTORY", path=path, asset=str(definition.get("id", "")),
                                         field="", message=str(error), correction="Correct invalid factory fields before publication."))
