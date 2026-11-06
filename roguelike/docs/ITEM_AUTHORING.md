@@ -239,3 +239,12 @@ Save/reopen supplies before recipe references and room placements. Preparation
 completion constructs the recorded output ID, except material-sensitive wash jobs
 retain their resolved output snapshot. Already acquired outputs retain
 this guide's copied-value and dynamic-reference policy.
+
+## SYS-5 loose flesh
+
+The registered `flesh` keyword accepts exactly tier 1 on supported loose raw
+items. Fresh instances capture the capability and a narrow resource identity;
+editing saved tags does not migrate owned items. Inventory **P** offers placement
+of exactly one portion on the current tile for one successful action. Historical
+items remain inert. See [Local scavenging](LOCAL_SCAVENGING.md) for ownership,
+rollback, corpse designations and save boundaries.

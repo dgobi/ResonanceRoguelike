@@ -84,14 +84,7 @@ def refresh(ai, engine, actor, ambient):
     if disrupted(actor,engine.local_map) or fully_paralysed(actor):
         retire(ai,'action_denied');return
     if not s['current']:return
-    from engine.enemy_components import windows
-    from engine.sound import current_interest
-    sound=current_interest(ai,engine.world_time.turn)
-    sound=sound and in_domain(ai,(sound['x'],sound['y']))
-    if (not windows(ai,engine,actor)['idle'] or ai.target is not None or sound
-            or ai.responses and ai.responses['interest']
-            or ai.maneuvers and ai.maneuvers['current']
-            or any(in_domain(ai,(a.x,a.y)) for a in ai._observed(engine,actor,ambient))):
+    if not idle_allowed(ai,engine,actor,ambient):
         retire(ai,'higher_priority');return
     item=current_item(ai,engine)
     c=s['current']
@@ -101,8 +94,25 @@ def refresh(ai, engine, actor, ambient):
         retire(ai,'contact_lost')
 
 
+def idle_allowed(ai,engine,actor,ambient):
+    """The same admission predicate governs acquisition and retained work."""
+    from engine.enemy_components import windows
+    from engine.sound import current_interest
+    from engine.local_rivals import active,living
+    from engine.effect_lifecycle import disrupted
+    from engine.venom import fully_paralysed
+    sound=current_interest(ai,engine.world_time.turn)
+    return (active(engine,actor) and living(actor)
+            and not disrupted(actor,engine.local_map) and not fully_paralysed(actor)
+            and windows(ai,engine,actor)['idle'] and ai.target is None
+            and not (sound and in_domain(ai,(sound['x'],sound['y'])))
+            and not (ai.responses and ai.responses['interest'])
+            and not (ai.maneuvers and ai.maneuvers['current'])
+            and not any(in_domain(ai,(a.x,a.y)) for a in ai._observed(engine,actor,ambient)))
+
+
 def signature(engine,actor,xy):
-    """Small local route-change discriminator, independent of the eater's steps."""
+    """Local route-change discriminator; mandatory return cannot rearm it."""
     m=engine.local_map;x,y=xy;r=16
     occupied={(a.x,a.y) for a in engine.entities if a is not actor and getattr(a,'blocks_movement',False)}
     cells=[(px,py,str(m.tiles[px,py]['terrain']),bool(m.walkable[px,py]),
@@ -122,9 +132,8 @@ def choose(ai,engine,actor,ambient):
     if ai.scavenging_state is None:return None
     from engine.local_rivals import owner,allocate
     from components.ai import creature_can_see_point
-    from engine.enemy_components import windows
     refresh(ai,engine,actor,ambient)
-    if not windows(ai,engine,actor)['idle']:return None
+    if not idle_allowed(ai,engine,actor,ambient):return None
     s=ai.scavenging_state
     if s['owner'] is None:
         allocate(engine,[actor]);s['owner']=owner(engine)
@@ -138,7 +147,8 @@ def choose(ai,engine,actor,ambient):
                 uid=item.flesh_resource['uid']
                 sig=signature(engine,actor,xy)
                 old=next((r for r in s['retired'] if r['uid']==uid),None)
-                if old and (old['x'],old['y'],old['route'])==(*xy,sig):continue
+                if (old and (old['x'],old['y'],old['route'])==(*xy,sig)
+                        and not food.contact(engine,actor,xy)):continue
                 step,length=route(ai,engine,actor,xy)
                 if length is None:
                     s['retired']=[r for r in s['retired'] if r['uid']!=uid][-15:]+[dict(uid=uid,x=xy[0],y=xy[1],route=sig)]

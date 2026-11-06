@@ -29,6 +29,7 @@ class ResourceTests(unittest.TestCase):
         self.saves = Path(self.tmp.name)/'saves'
         p = patch('engine.save_manager.SAVE_DIR',self.saves);p.start();self.addCleanup(p.stop)
         self.e = make_engine(copy.deepcopy(self.original))
+        self.e.reality_bubble.update(self.e.world_x,self.e.world_y,self.e.world_map)
         self.e.debug = False
         self.e.local_map.visible[:] = True
         self.a = self.e.creature_factory.spawn('grave_skirmisher',13,12)
@@ -243,19 +244,80 @@ class ResourceTests(unittest.TestCase):
         self.assertTrue(self.e.save_manager.save(self.e),self.e.save_manager.last_error)
         self.assertTrue(self.e.save_manager.load(self.e),self.e.save_manager.last_error)
 
+    def test_native_legacy_malformed_recipe_and_unsupported_authored_sources(self):
+        self.e.data.entities['sewer_thing']['butcher_yield']={'tiers':None}
+        corpse=flesh.create_corpse(self.e.data,self.e.item_factory,'sewer_thing',13,13)
+        self.assertFalse(flesh.eligible(corpse))
+        recipe=copy.deepcopy(self.e.data.entities['plague_crow']['butcher_yield'])
+        for key in ('vine_network','player'):
+            self.e.data.entities[key]['butcher_yield']=recipe
+            with self.assertRaises(ValueError):flesh.resolve_source(self.e.data,key)
+
+    def test_genuine_b1_serializer_absence_without_modern_field_deletion(self):
+        fixture=json.loads((GAME_ROOT.parent/'evidence/sys-5/b1-serializer.json').read_text())
+        self.assertEqual(fixture['revision'],'9bb0db884b989bb9a21f25387b5772e3246ba978')
+        for row in fixture['emitted_unchanged']:
+            self.assertNotIn('keywords',row)
+            fresh=self.e.item_factory.create(row['item_id']);self.assertTrue(flesh.eligible(fresh))
+            restore_item(fresh,row);self.assertFalse(flesh.eligible(fresh));validate_item(serialize_item(fresh),'B1 meat')
+
+    def test_rehashed_malformed_modern_checkpoints_refuse_before_installation(self):
+        import pickle
+        from engine.save_manager import SaveManager
+        from engine.checkpoints import encoded
+        a=ScavengingTests.eater(self);self.portion(2,xy=(19,12));ScavengingTests.decision(self,a)
+        self.corpse();self.e.player.inventory.add(self.e.item_factory.create('crow_meat'))
+        self.assertTrue(self.e.save_manager.save(self.e),self.e.save_manager.last_error)
+        source=self.e.save_manager.checkpoint_path();manifest=json.loads((source/'manifest.json').read_text())
+        payloads={name:(source/name).read_bytes() for name in manifest['files']}
+        original=(self.e.player,self.e.local_map,self.e.world_map,self.e.entities,self.e.world_time.turn)
+        for n,kind in enumerate(('missing_item_payload','missing_recipe','null_actor_config')):
+            bad=dict(payloads)
+            if kind=='missing_item_payload':
+                row=json.loads(bad['player.json']);del row['inventory']['items'][0]['flesh_resource'];bad['player.json']=encoded(row)
+            else:
+                name=next(k for k in bad if k.startswith('chunks/'));chunk=pickle.loads(bad[name])
+                if kind=='missing_recipe':
+                    corpse=next(i for rows in chunk.local_map.floor_objects.values() for i in rows if i.item_id=='corpse')
+                    del corpse.flesh_resource['recipe']
+                else:chunk.entities[0]['composite']['scavenging']['config']=None
+                bad[name]=pickle.dumps(chunk)
+            candidate=SaveManager(save_root=Path(self.tmp.name)/('bad-'+str(n)))
+            candidate.store.publish(bad,None,None)  # Valid hashes; malformed semantic state.
+            self.assertFalse(candidate.load(self.e),kind)
+            self.assertIn('flesh' if kind!='null_actor_config' else 'scavenging',candidate.last_error)
+            self.assertEqual(original,(self.e.player,self.e.local_map,self.e.world_map,self.e.entities,self.e.world_time.turn))
+
+    def test_final_harvest_removal_failure_rolls_back_exact_source_and_outputs(self):
+        self.cutter();corpse=self.corpse();corpse.flesh_resource['state']='stripped'
+        before={xy:list(rows) for xy,rows in self.e.local_map.floor_objects.items()}
+        debt=self.e._move_debt;native=floor.remove_floor_object
+        def partial(m,x,y,item):native(m,x,y,item);raise ValueError('after removal')
+        for remove in (partial,lambda *args:None):
+            with patch.object(floor,'remove_floor_object',remove):self.assertFalse(butcher(self.e,13,13,corpse))
+            self.assertEqual(self.e.local_map.floor_objects,before);self.assertEqual(self.e._move_debt,debt)
+
+    def test_forged_nonitem_is_not_exposed_food(self):
+        from types import SimpleNamespace
+        item=self.portion();fake=SimpleNamespace(**item.__dict__)
+        self.e.local_map.floor_objects[(13,13)]=[fake]
+        self.assertFalse(flesh.exposed(self.e,fake,(13,13)))
+
 
 class ScavengingTests(unittest.TestCase):
     setUpClass=classmethod(ResourceTests.setUpClass.__func__)
     setUp=ResourceTests.setUp
     portion=ResourceTests.portion
     corpse=ResourceTests.corpse
-    def eater(self,host='strike_and_withdraw',xy=(18,12),**tuning):
+    def eater(self,host='strike_and_withdraw',xy=(18,12),responses=None,maneuvers=None,**tuning):
         from engine.ai_profiles import DEFAULTS,TERRITORY_DEFAULTS
         definition=copy.deepcopy(self.e.data.entities['sewer_thing'])
         definition.update(id='test_scavenger',ai_type='composite',can_cross_chunks=False,can_use_stairs=False,
                           ai_profile=copy.deepcopy(DEFAULTS if host=='strike_and_withdraw' else TERRITORY_DEFAULTS),
                           enemy_scavenging={**dict(version=1,approach_opportunities=8,feed_opportunities=3),**tuning})
         definition['perception'].update(sees_in_dark=False,sight_radius=10,hostile_to=['player'])
+        if responses is not None:definition['enemy_responses']=dict(version=2,modules=[dict(id=k) for k in responses])
+        if maneuvers is not None:definition['enemy_maneuvers']=dict(version=1,modules=[dict(id=k) for k in maneuvers])
         self.e.data.entities['test_scavenger']=definition
         a=self.e.creature_factory.spawn('test_scavenger',*xy)
         self.e.entities=[self.e.player,a];self.e.player.x=40
@@ -263,6 +325,95 @@ class ScavengingTests(unittest.TestCase):
 
     def decision(self,a):
         a.ai.take_turn(a,self.e.local_map,self.e.entities,self.e.player,self.e.log,random.Random(42),1,engine=self.e)
+
+    def tick(self):
+        e=self.e
+        e.ai_system.process(e.entities,e.player,e.local_map,e.world_map,e.world_x,e.world_y,e.log,e.world_time,e.data,engine=e)
+
+    def test_real_speed_scheduler_and_free_refresh_do_not_grant_work(self):
+        from engine.enemy_scavenging import refresh
+        for speed,phases,completed,feeding in ((.5,7,1,None),(2,2,1,1)):
+            self.e.local_map.floor_objects.clear();a=self.eater();a.perception.sees_in_dark=True
+            self.e.data.entities['test_scavenger']['speed']=speed;a.ai.move_accumulator=0
+            meat=self.portion(3,xy=(19,12))
+            for _ in range(20):refresh(a.ai,self.e,a,1)
+            self.assertIsNone(a.ai.scavenging_state['current'])
+            for _ in range(phases):self.tick()
+            self.assertEqual(a.ai.scavenging_state['completed'],completed)
+            self.assertEqual(meat.count,2)
+            current=a.ai.scavenging_state['current']
+            self.assertEqual(current['feeding'] if current else None,feeding)
+
+    def test_slow_denial_retires_before_next_opportunity(self):
+        a=self.eater();a.perception.sees_in_dark=True;meat=self.portion(2,xy=(19,12));self.decision(a)
+        self.e.data.entities['test_scavenger']['speed']=.5;a.ai.move_accumulator=0
+        self.e.local_map.disruption_zones.append(dict(x=a.x,y=a.y,radius=1,turns_remaining=3))
+        self.tick();self.assertIsNone(a.ai.scavenging_state['current']);self.assertEqual(meat.count,2)
+        self.e.local_map.disruption_zones.clear();self.decision(a)
+        from engine import venom
+        from types import SimpleNamespace
+        source=self.e.creature_factory.spawn('patient_amber_hunter',21,12);self.e.entities.append(source)
+        result=venom.deliver(self.e,source,a,SimpleNamespace(committed=True,hit=True,damage=1,target_dead=False))
+        self.assertTrue(result.accepted)
+        for _ in range(3):self.e.world_time.turn+=1;venom.age(self.e,a)
+        self.assertTrue(venom.fully_paralysed(a));self.e.entities.remove(source);a.ai.move_accumulator=0
+        self.tick();self.assertIsNone(a.ai.scavenging_state['current']);self.assertEqual(meat.count,2)
+
+    def test_visible_suppressed_hostile_cannot_reacquire_food(self):
+        a=self.eater();meat=self.portion(2,xy=(19,12));self.decision(a)
+        self.e.player.x,self.e.player.y=20,12;a.ai.target=None;a.ai.suppressed='player'
+        for _ in range(4):
+            self.decision(a);self.assertIsNone(a.ai.scavenging_state['current'])
+        self.assertEqual(meat.count,2)
+
+    def test_exhaustion_does_not_loop_after_territorial_return_and_contact_rearms(self):
+        a=self.eater('territorial_guard',approach_opportunities=1);a.perception.sees_in_dark=True
+        meat=self.portion(2,xy=(22,12));self.decision(a)
+        self.assertIsNone(a.ai.scavenging_state['current']);self.assertEqual(len(a.ai.scavenging_state['retired']),1)
+        for _ in range(12):self.decision(a)
+        self.assertEqual((a.x,a.y),(18,12));self.assertEqual(meat.count,2)
+        from engine.sound import emit
+        emit(self.e,21,12,'dismantle',maker=self.e.player)
+        for _ in range(6):self.decision(a)
+        # A direct sound commitment is still higher priority; legal contact is
+        # independently tested against its unchanged retired resource record.
+        from engine.enemy_scavenging import choose
+        a.x,a.y=21,12;a.ai.sound_interest=None;a.ai.territory['phase']='guard'
+        self.assertIsNotNone(choose(a.ai,self.e,a,1));self.assertIsNotNone(a.ai.scavenging_state['current'])
+
+    def test_two_scheduler_feeders_strip_one_corpse_once(self):
+        a=self.eater();a.perception.sees_in_dark=True
+        b=self.e.creature_factory.spawn('test_scavenger',20,12);b.perception.sees_in_dark=True;self.e.entities.append(b)
+        self.e.data.entities['test_scavenger']['speed']=1
+        corpse=self.corpse(xy=(19,12))
+        for _ in range(3):self.tick()
+        self.assertEqual(corpse.flesh_resource['state'],'stripped')
+        self.assertEqual(a.ai.scavenging_state['completed']+b.ai.scavenging_state['completed'],1)
+        self.assertIsNone(b.ai.scavenging_state['current'])
+
+    def test_attributed_alarm_and_wounded_regroup_interrupt_food_in_both_hosts(self):
+        from engine.enemy_responses import CALL,ANSWER
+        from engine.enemy_maneuvers import REGROUP
+        for host in ('strike_and_withdraw','territorial_guard'):
+            self.e.local_map.floor_objects.clear();a=self.eater(host,responses=[ANSWER])
+            a.perception.sight_radius=1;a.perception.sees_in_dark=True
+            meat=self.portion(2,xy=(19,12));self.decision(a)
+            raw=copy.deepcopy(self.e.data.entities['test_scavenger'])
+            raw.update(id='test_caller',enemy_responses=dict(version=2,modules=[dict(id=CALL)]))
+            raw['perception'].update(sight_radius=8,sees_in_dark=True)
+            self.e.data.entities['test_caller']=raw
+            caller=self.e.creature_factory.spawn('test_caller',14,12);self.e.entities.append(caller)
+            self.e.player.x,self.e.player.y=12,12
+            self.decision(caller);self.e.world_time.turn+=1;self.decision(caller)
+            self.assertIsNotNone(a.ai.responses['interest'])
+            self.e.world_time.turn+=1;self.decision(a)
+            self.assertTrue(a.ai.trace[-1]['reason'].startswith('alarm_'));self.assertIsNone(a.ai.scavenging_state['current']);self.assertEqual(meat.count,2)
+            self.e.local_map.floor_objects.clear();a=self.eater(host,maneuvers=[REGROUP]);a.perception.sees_in_dark=True
+            meat=self.portion(2,xy=(19,12));self.decision(a)
+            ally=self.e.creature_factory.spawn('test_scavenger',20,13);ally.perception.sees_in_dark=True;self.e.entities.append(ally)
+            a.fighter.hp=a.fighter.max_hp//2;self.e.player.x,self.e.player.y=15,12
+            self.decision(a)
+            self.assertEqual(a.ai.trace[-1]['reason'],'wounded_regroup');self.assertIsNone(a.ai.scavenging_state['current']);self.assertEqual(meat.count,2)
 
     def test_both_hosts_approach_and_three_paid_feed_decisions(self):
         for host in ('strike_and_withdraw','territorial_guard'):

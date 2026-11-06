@@ -118,3 +118,12 @@ share each). Only fresh assignments use this mixture; A/B source definitions
 and existing assignments/constructed rooms remain owned. Ward-store reports
 recognize C under the same information policy. See
 [Enemy response components](ENEMY_RESPONSE_COMPONENTS.md).
+
+## SYS-5 additive ordinary contexts
+
+`barrow_scavenger_store` and `barrow_carrion_sump` append two weight-1 rows to
+the existing seven rows, preserving their order/weights and the overall **0.35**
+authored-barrow chance. There are nine equally weighted candidates. Fresh worlds
+use this mixture; saved assignments and already constructed scenes retain their
+ownership. Both rooms reuse the two published ordinary scavenger variants. See
+[Local scavenging](LOCAL_SCAVENGING.md) for resource and encounter behavior.

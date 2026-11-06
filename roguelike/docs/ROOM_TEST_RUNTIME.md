@@ -146,3 +146,14 @@ pool/item bytes and actual container population inputs. Reset keeps old contents
 latest saved captures revisions. Ordinary generated containers retain physical
 contents/state across new catalogues while pending scenes consume current saved
 definitions. See [pool activation](POOL_AUTHORING.md).
+
+## SYS-5 captured food work
+
+Test room uses saved creature attachments, saved flesh declarations and native
+authored remains from its immutable capture. Reset retains that capture; latest
+saved captures revised definitions and excludes parked drafts. Each fresh Actor
+retains effective approach/feed tuning; real corpses retain complete recipes and
+strip state. Actual F5/F9 retains valid partial feeding without advancing it.
+The privileged observation adds scavenger state, host trace and territorial post;
+these unseen-actor diagnostics are not player perception or an ordinary safety
+claim. See [Local scavenging](LOCAL_SCAVENGING.md).

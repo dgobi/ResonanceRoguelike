@@ -1081,3 +1081,12 @@ controls with game-owned defaults/bounds and explicit hostile alignment.
 First attachment requires a new ID; enrolled variants can tune participation
 and budgets for fresh actors. See [the feature/authoring contract](../roguelike/docs/ENEMY_RESPONSE_COMPONENTS.md).
 Current creature authoring contract: **creature-composite-9**.
+
+### SYS-5 contested remains
+
+Creature controls support the shared local scavenging attachment on the two
+ordinary melee hosts, Harvest controls expose explicit flesh outputs, and authored
+rooms place real remains from supported saved creature sources. Item variants can
+reuse the flesh keyword. See [Local scavenging](../roguelike/docs/LOCAL_SCAVENGING.md)
+and `scripts/run-sys-5.mjs` for packaged publication, Reset/latest/dirty isolation
+and actual living-host use. Final verification is `tools/verify_sys_5.py`.

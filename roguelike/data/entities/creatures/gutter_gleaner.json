@@ -1,0 +1,47 @@
+{
+  "id": "gutter_gleaner",
+  "name": "Gutter Gleaner",
+  "description": "A lean sewer scavenger noses along the shelving, following exposed flesh when light reaches it.",
+  "tile": "sewer_thing",
+  "blocks_movement": true,
+  "base_hp": 10,
+  "armour_value": 0,
+  "fighter": {
+    "max_hp": 10,
+    "power": 3,
+    "defense": 0
+  },
+  "perception": {
+    "sight_radius": 8,
+    "hearing_radius": 8,
+    "sees_in_dark": false,
+    "faction": "predator",
+    "hostile_to": [
+      "player"
+    ]
+  },
+  "ai_type": "composite",
+  "wander_radius": 6,
+  "pursuit_timeout": 15,
+  "spawn_zones": [
+    "undercroft"
+  ],
+  "damage_dice": "1d4",
+  "damage_bonus": 0,
+  "attack_verb": "lurches toward thee",
+  "blood_type": "red",
+  "limbs": [
+    {
+      "id": "body",
+      "size": 3,
+      "damage_multiplier": 1.0
+    }
+  ],
+  "corpse_sprite": {
+    "col": 2055,
+    "row": 0,
+    "sheet": "urizen"
+  },
+  "can_cross_chunks": false,
+  "speed": 0.7
+,"ai_profile":{"capability":"melee","cornered":"defensive_melee","hold_opportunities":1,"recipe":"strike_and_withdraw","retreat_distance":2,"scene_scope":"active_scene","trigger":"hit","version":1,"withdrawal_budget":6},"can_use_stairs":false,"enemy_scavenging":{"approach_opportunities":8,"feed_opportunities":5,"version":1},"butcher_yield":{"decay_turns":150,"tiers":[{"yields":[{"item_id":"gleaner_flesh","quantity_min":1,"quantity_max":2,"flesh":true},{"item_id":"animal_bone","quantity_min":1}]}]}}

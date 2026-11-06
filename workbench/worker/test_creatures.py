@@ -33,9 +33,9 @@ class CreatureTests(unittest.TestCase):
     def test_loaded_catalog_noop_player_and_advanced_read_only(self):
         described = invoke("describe")["result"]["assets"]
         rows = [r for r in described if r["route"] == "creature_definition"]
-        self.assertEqual(len(rows), 37)  # AI-9: five families and one further recombination
-        self.assertEqual(len([r for r in rows if r["category"] == "creatures"]), 36)
-        self.assertEqual(len([r for r in rows if r["editable"]]), 35)
+        self.assertEqual(len(rows), 39)  # AI-9: five families and one further recombination
+        self.assertEqual(len([r for r in rows if r["category"] == "creatures"]), 38)
+        self.assertEqual(len([r for r in rows if r["editable"]]), 37)
         self.assertTrue({'barrow_lane_revenant','barrow_shy_stalker','barrow_nettle_guard','barrow_patient_weevil','barrow_kin_sentinel','barrow_shy_listener'} <= {r['id'] for r in rows})
         for path, editable in ((CREATURE, True), (CREATURE.replace("hollow_revenant", "hollow_knight"), True),
                                (CREATURE.replace("hollow_revenant", "vine_network"), False), ("roguelike/data/entities/player.json", False)):

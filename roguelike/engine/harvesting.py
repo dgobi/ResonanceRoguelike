@@ -192,6 +192,7 @@ def butcher(engine, x, y, corpse=None, *, scene=None, address=None):
     preexisting += list(getattr(engine.player.inventory, "items", [])) + list(engine.entities)
     preexisting += [item for entry in getattr(engine.local_map, "container_state", {}).values() for item in entry.get("items", [])]
     staged, quantities = [], []
+    before_floor = {xy:list(rows) for xy,rows in engine.local_map.floor_objects.items()}
     try:
         # Even a zero roll must reference a valid, constructible item.
         for row in best.get("yields", []):
@@ -211,13 +212,13 @@ def butcher(engine, x, y, corpse=None, *, scene=None, address=None):
                 raise ValueError("Floor placement refused a harvest output.")
             if not any(owned is item for owned in floor.get_floor_objects(engine.local_map, x, y)):
                 raise ValueError("Floor placement did not publish its output.")
+        floor.remove_floor_object(engine.local_map, x, y, corpse)
+        if any(owned is corpse for rows in engine.local_map.floor_objects.values() for owned in rows):
+            raise ValueError("Floor removal did not consume the exact remains.")
     except Exception as error:
-        # A failing placement may have written before returning/raising. Remove
-        # only attempt-owned instances, wherever that boundary published them.
-        for xy in list(engine.local_map.floor_objects):
-            for item in staged: floor.remove_floor_object(engine.local_map, *xy, item)
+        # Placement and final source removal are one ownership transaction.
+        floor.restore_floor_objects(engine.local_map,before_floor)
         return refuse(f"Harvest failed; the remains are intact: {error}")
-    floor.remove_floor_object(engine.local_map, x, y, corpse)
     cost = max(1, 5 - (actual - best.get("min_cutting_tier", 1)))
     engine._move_debt += cost - 1
     tools = " and ".join(item.name for item, _ in cutters) or "bare hands"

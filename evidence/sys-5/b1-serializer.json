@@ -1,0 +1,115 @@
+{
+  "passed": true,
+  "revision": "9bb0db884b989bb9a21f25387b5772e3246ba978",
+  "sources": {
+    "roguelike/engine/item_factory.py": "d6ac5b0424113595bc6c46bdb69a7983a1c55f53cfa6b8be75ef1a8752b960dc",
+    "roguelike/engine/save_manager.py": "0f60e783c88c3643bb891af2d70325e30f2d86c427f79811fd98d869661ccd7c",
+    "roguelike/data/items/butchery/crow_meat.json": "74cbc54da52ef4bd6e0042c536f8c4c18a026889ae7357bcb4a0d36a907f5959",
+    "roguelike/data/items/butchery/stalker_meat.json": "b413071657b73dfe5a23de8d1cd5754563a9a51b40be3030ee993f1ab34ea0a6"
+  },
+  "emitted_unchanged": [
+    {
+      "item_id": "crow_meat",
+      "name": "Crow Meat",
+      "on_use": null,
+      "turns_lit": 0,
+      "liquid": null,
+      "liquid_volume": 0.0,
+      "text_id": "",
+      "temporary_essence": null
+    },
+    {
+      "item_id": "stalker_meat",
+      "name": "Stalker Meat",
+      "on_use": null,
+      "turns_lit": 0,
+      "liquid": null,
+      "liquid_volume": 0.0,
+      "text_id": "",
+      "temporary_essence": null
+    }
+  ],
+  "restored": [
+    {
+      "item_id": "crow_meat",
+      "item_state_version": 1,
+      "name": "Crow Meat",
+      "tile": "generic_item",
+      "weight": 0.2,
+      "stackable": true,
+      "count": 1,
+      "on_use": null,
+      "text_id": "",
+      "nutrition": null,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": null,
+      "drink_message": null,
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": null,
+      "liquid_volume": 0.0,
+      "qualities": {},
+      "description": "Dark and stringy. The smell is wrong in a specific way. Something has accumulated here that ordinary meat does not carry.",
+      "harvest_from": null,
+      "keywords": [
+        {
+          "tag": "edible",
+          "tier": 1
+        },
+        {
+          "tag": "vital",
+          "tier": 1
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": true,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0
+    },
+    {
+      "item_id": "stalker_meat",
+      "item_state_version": 1,
+      "name": "Stalker Meat",
+      "tile": "generic_item",
+      "weight": 0.5,
+      "stackable": true,
+      "count": 1,
+      "on_use": null,
+      "text_id": "",
+      "nutrition": null,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": null,
+      "drink_message": null,
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": null,
+      "liquid_volume": 0.0,
+      "qualities": {},
+      "description": "Dense and close-fibred. The animal was efficient. The meat reflects this. High in something the body can use immediately.",
+      "harvest_from": null,
+      "keywords": [
+        {
+          "tag": "edible",
+          "tier": 1
+        },
+        {
+          "tag": "vital",
+          "tier": 1
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": true,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0
+    }
+  ],
+  "limits": "Complete unmodified historical factory/serializer modules and historical meat definitions. Current dependency classes, palette and disposable harness engine; not a full historical-game run. No deleted modern fields."
+}

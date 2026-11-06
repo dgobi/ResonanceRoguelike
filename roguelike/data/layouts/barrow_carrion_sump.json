@@ -1,0 +1,76 @@
+{
+  "id": "barrow_carrion_sump",
+  "description": "A pale beetle guards the eastern drain. A bound timber screen hides a fallen stalker. An open southern aisle circles the screen, and the western coffer is outside the guarded bay.",
+  "width": 27,
+  "height": 17,
+  "layers": [
+    "###########################",
+    "#.........................#",
+    "#.............#...........#",
+    "#.........................#",
+    "#...........##.#..........#",
+    "#.........................#",
+    "#.............#...........#",
+    "#.............#...........#",
+    "#.............#...........#",
+    "#.........................#",
+    "#.........................#",
+    "#.........................#",
+    "#..<......................#",
+    "#.........................#",
+    "#.........................#",
+    "#.........................#",
+    "###########################"
+  ],
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "<": "stairs_up"
+  },
+  "player_start": {
+    "x": 3,
+    "y": 12
+  },
+  "special_tiles": [
+    {
+      "type": "creature",
+      "x": 16,
+      "y": 5,
+      "creature_id": "pale_carrion_beetle"
+    },
+    {
+      "type": "remains",
+      "x": 12,
+      "y": 5,
+      "creature_id": "heath_stalker"
+    },
+    {
+      "type": "screen",
+      "x": 14,
+      "y": 5,
+      "access_profile": "pale_lashings"
+    },
+    {
+      "type": "container",
+      "x": 10,
+      "y": 6,
+      "decor_id": "bound_coffer",
+      "loot_pools": [
+        "bound_coffer_stores"
+      ],
+      "access_profile": "pale_lashings"
+    },
+    {
+      "type": "item",
+      "x": 5,
+      "y": 11,
+      "item_id": "stalker_meat"
+    },
+    {
+      "type": "item",
+      "x": 22,
+      "y": 5,
+      "item_id": "resonant_bone_fragment"
+    }
+  ]
+}

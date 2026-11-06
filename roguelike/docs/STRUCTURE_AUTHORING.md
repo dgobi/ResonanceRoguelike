@@ -1708,3 +1708,14 @@ room AI selects a solution. New-world selection is documented in
 `AUTHORED_SUBMAP_SELECTION.md`; existing assignments/scenes are not regenerated.
 G20's source-bound evidence and disclosed route assistance belong in
 `docs/owner/GAMEPLAY_G20.md`. This is not a second editor family or H1 completion.
+
+## SYS-5 direct authored remains
+
+Authored submaps additionally accept
+`{"type":"remains","x":10,"y":5,"creature_id":"plague_crow"}`. The remains
+placement control lists unique supported non-ephemeral Actor sources with an
+explicit flesh harvest recipe. This constructs a real intact corpse through the
+same native death producer, with no Actor or kill hooks. Preview checks exact
+placement, arrival/return access and references before publishing the trial map.
+This record is not a surface/weighted spawn or a deferred `body` special. See
+[Local scavenging](LOCAL_SCAVENGING.md) for source admission and captured recipes.

@@ -49,9 +49,34 @@ fallback, sealed-corner contact, null saved config, and authoritative final
 denial checks. Running decay validation was strengthened. Historical B1 evidence
 can be produced from the genuine serializer at `9bb0db8`, never by field deletion.
 
-Next: complete denial/speed/alarm/regroup and real save/cold-load evidence;
-authoring authority/UI/placement tests, packaged creation of one of the two
-eaters plus new meat and reusable room; additive ordinary store/sump layouts and
-selector enrollment; ordinary comparisons/tuning/rendering; final gates and
-source-bound docs/evidence; push and independent remote main/tag readback.
-No production variants/layouts or ordinary enrollment yet. No blocker.
+M2-M4 core checkpoint: `909c8d6`; named tag
+`checkpoint/sys-5-m4-core-20261106-a`. `2884033` restores original mixed line
+endings after normalization; final source diff is narrow.
+
+M5 packaged publication passed in `workbench/.artifacts/sys-5/native-1793982968286`.
+Earlier retained attempts contain original new meat/eater/room publication receipts
+and UI rejection/undo evidence. Final witness: both living hosts, one-portion P,
+partial F5/F9, corpse strips, saved feeding 3 -> 5, Reset 3, dirty 7 excluded.
+Published exactly two eaters (`gutter_gleaner`, `pale_carrion_beetle`), one meat
+(`gleaner_flesh`), reusable room and two ordinary barrows. Selector appends two
+weight-1 rows to the untouched seven at chance .35. Gleaner feed 5 / speed .7;
+Beetle feed 3 / speed 1. Genuine source-bound B1 witness captured separately.
+
+Additional writer repairs from read-only review: legacy malformed native recipe
+fallback, supported Actor-only remains sources, exact Item exposure, final harvest
+removal rollback, shared idle admission, bounded contact-only suppression rearm,
+keyed remains control proposal. 31 SYS-5 focused tests pass, including real speed
+scheduler, competition, denial and rehashed malformed preinstall-load refusal.
+
+M6 ordinary replay is in progress using genuine assignments at seed 20261023,
+normal gear/actions, actual living AI and F5 replay/cold readback. Store already
+shows cooked food from conserved flesh, one paid placed portion consumed, corpse
+stripping and positional displacement; finishing harvest/revisit and sump quiet/
+force comparison. Failed preflights remain in .baseline/sys-5. No safety fixtures.
+Full focused and affected worker preflights running; new membership count changes
+reconcile only expected catalogue totals. Final frozen matrix is still pending.
+Authoritative guides updated; no wiki files touched.
+
+Next: finish M6, final review/repairs, commit checkpoints, run complete M7 gates,
+source-bound delivery evidence and preservation, push and independent main/tag
+readback. No blocker. Stop at SYS-5.

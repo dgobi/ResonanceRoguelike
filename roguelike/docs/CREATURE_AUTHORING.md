@@ -226,12 +226,12 @@ handling drains debt. A valid zero-roll result is still successful consumption.
 | --- | --- |
 | Actor death | Current session definition controls corpse eligibility and initial decay; normal death records stable `source_creature`. |
 | Existing saved corpse | Retains source ID, copied name and remaining `decay_timer`; catalogue changes never reset the timer or regenerate an Actor. |
-| Butchery | Uses the current session's table through `source_creature`. An old corpse can use a revised table after fresh-catalogue restore. Removing the profile can make it unharvestable while retaining stored decay. |
+| Butchery | Historical/non-flesh corpses use the current session's table through `source_creature`. SYS-5 explicit flesh corpses retain their complete effective recipe and per-output designations; stripping suppresses only designated outputs at every tier. |
 | Existing tool / harvested item | Retains copied physical fields, keywords and existing dynamic references. Fresh construction uses current definitions. |
 | Running game / Reset / latest saved | Running catalogue stays loaded. Reset reuses the immutable capture; latest saved makes a new capture from saved dependencies. |
 | Scene / decay | Active-map floor ticking and saved ownership/depletion remain authoritative. No offscreen catch-up, extra processing-map corpse ticks or respawn is added. |
 
-No save schema/migration, yield-table snapshot, natural spawn registration or
+W5N introduced no save schema/migration, yield-table snapshot, natural spawn registration or
 global transfer framework is introduced. See [W5N delivery](../../workbench/docs/W5N_DELIVERY.md)
 for the capability inventory, controlled authored-room provenance and separate
 ordinary-save fresh-catalogue proof.
@@ -390,3 +390,12 @@ and allied-alarm investigation to new-ID v1/v5 hostile melee variants. Base
 recipe selection stays separate. [Fields, timing, information, examples and
 saves](ENEMY_RESPONSE_COMPONENTS.md) define the game-owned two-entry registry
 and contract `creature-composite-9`.
+
+
+## SYS-5 captured flesh and local scavenging
+
+New ordinary hostile melee variants may enable the shared scavenging attachment
+on strike-and-withdraw or territorial hosts. Harvest controls expose per-output
+flesh designations. Fresh eligible corpses capture the whole effective recipe;
+existing historical corpses retain the W5N policy above. See
+[Local scavenging](LOCAL_SCAVENGING.md) for admission, controls and persistence.

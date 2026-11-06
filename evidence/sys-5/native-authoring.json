@@ -1,0 +1,70 @@
+{
+  "final_pass": "native-1793982968286",
+  "attempts": [
+    {
+      "directory": "workbench\\.artifacts\\sys-5\\native-1793982489157",
+      "sha256": "292650547fee53f4f19cf434a9f90db180027662f3299b2fd1be6b8daea4f43f",
+      "passed": false,
+      "failure": "locator.fill: Timeout 25000ms exceeded.",
+      "publications": [
+        {
+          "path": "roguelike/data/items/butchery/gleaner_flesh.json",
+          "sha256": "c435fdae115ede334919e3781457c05b2f3262f5c3b8782f6e45ce81c047db6a"
+        }
+      ]
+    },
+    {
+      "directory": "workbench\\.artifacts\\sys-5\\native-1793982563354",
+      "sha256": "152e00d5a2b404332f8ab1f0ed6d07c4c4ce437b2e7c24a32d7baacb0d19a908",
+      "passed": false,
+      "failure": "AssertionError [ERR_ASSERTION]: [{\"asset\":\"\",\"code\":\"PRODUCTION_PLACEMENT\",\"correction\":\"Correct this source field or choose a unique saved dependency, then validate again.\",\"field\":\"special_tiles[4]\",\"layer\":\"specials\",\"message\":\"sys5_scavenging_room special[4] at realized (34,19): final furnishing/access failure: [{'target': 'sys5_scavenging_room@27,13,0:special[2]', 'kind': 'remains', 'source_xy': [7, 4], 'xy': [34, 17], 'receipt_owned': True, 'relocated': False, 'passed': False, 'approaches': [], 'access_note': 'Ordinary access.'}, {'target': 'sys5_scavenging_room@27,13,0:special[4]', 'kind': 'decor', 'source_xy': [7, 6], 'xy': [34, 19], 'receipt_owned': True, 'relocated': False, 'passed': False, 'approaches': [], 'access_note': 'Ordinary access.'}]\",\"path\":\"roguelike/data/layouts/sys5_scavenging_room.json\",\"severity\":\"error\",\"source_xy\":[7,6]}]",
+      "publications": [
+        {
+          "path": "roguelike/data/entities/creatures/gutter_gleaner.json",
+          "sha256": "ef844226e49b1d794f2c558d4d92e415573af7528e6dcdcf7d2d8a5edbbda274"
+        },
+        {
+          "path": "roguelike/data/entities/creatures/pale_carrion_beetle.json",
+          "sha256": "5761700990e457e5c0c3ae685a71ba031fc8688231806de84de73a6f186f6131"
+        }
+      ]
+    },
+    {
+      "directory": "workbench\\.artifacts\\sys-5\\native-1793982648677",
+      "sha256": "71f2155681e6034c4a33745d8b2a58ae703bebff6a8d257978decde8996ec916",
+      "passed": false,
+      "failure": "locator.click: Timeout 25000ms exceeded.",
+      "publications": [
+        {
+          "path": "roguelike/data/layouts/sys5_scavenging_room.json",
+          "sha256": "5e762161b4793b55b4a062e0b20a9bfc4c8ab3bc4efa654e62eacb55251c108e"
+        }
+      ]
+    },
+    {
+      "directory": "workbench\\.artifacts\\sys-5\\native-1793982826766",
+      "sha256": "b48f8277cbece85adccd13f61759cc1781eedc3e9be37632a369478438c49a16",
+      "passed": false,
+      "failure": "AssertionError [ERR_ASSERTION]: gleaner_flesh",
+      "publications": []
+    },
+    {
+      "directory": "workbench\\.artifacts\\sys-5\\native-1793982968286",
+      "sha256": "e357867e1a97150a645e9b4127ed110164a0f6399bfbe091b852a89a6e148b91",
+      "passed": true,
+      "failure": "",
+      "publications": [
+        {
+          "path": "roguelike/data/layouts/sys5_scavenging_room.json",
+          "sha256": "84758802180a4f6c5b6f466cd4a732afc58ecb0289f426e5074ea67bdc9e2bec"
+        },
+        {
+          "path": "roguelike/data/entities/creatures/gutter_gleaner.json",
+          "sha256": "b023aba9e6c85e318b198ea2aaf14de0a8d2dbf2f832040fc4a7e024dd675745"
+        }
+      ]
+    }
+  ],
+  "archive_sha256": "3eae007441a07ab5c73c74e674ef79c1eb2119cb9eb6638637e2a7fec21cd598",
+  "note": "Original new-ID publications and control rejection/undo were in retained preliminary attempts; final pass reopens those saved assets, repairs missing authored test items through Source, and proves living use plus Reset/latest/dirty isolation. No gameplay fixture commands used."
+}

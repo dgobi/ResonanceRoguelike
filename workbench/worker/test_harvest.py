@@ -22,8 +22,8 @@ class HarvestAuthoring(unittest.TestCase):
             raw=json.loads(path.read_bytes());cap=capability(raw,path.relative_to(ROOT).as_posix())
             rows.append(dict(id=raw["id"],harvest=cap["harvest_editable"],variant=cap["duplicable"]))
         # The reviewed AI-9 catalogue already contains these admitted sources.
-        self.assertEqual(sum(r["harvest"] for r in rows),34)
-        self.assertEqual(sum(r["variant"] for r in rows),29)
+        self.assertEqual(sum(r["harvest"] for r in rows),36)
+        self.assertEqual(sum(r["variant"] for r in rows),31)
         self.assertFalse(next(r["harvest"] for r in rows if r["id"]=="bog_wraith"))
         self.assertFalse(next(r["harvest"] for r in rows if r["id"]=="vine_network"))
         opened=invoke("inspect",asset=SOURCE)["result"]

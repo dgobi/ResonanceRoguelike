@@ -1,0 +1,82 @@
+{
+  "id": "barrow_scavenger_store",
+  "description": "A lean scavenger noses among the burial shelves. A fallen crow lies beyond the coals; a long aisle passes behind the partition. The far store still holds useful goods.",
+  "width": 27,
+  "height": 17,
+  "layers": [
+    "###########################",
+    "#.........................#",
+    "#.........................#",
+    "#.........................#",
+    "#.........................#",
+    "#.........................#",
+    "#...........#########.....#",
+    "#.........................#",
+    "#.........................#",
+    "#.........................#",
+    "#.........................#",
+    "#.........................#",
+    "#..<......................#",
+    "#.........................#",
+    "#.........................#",
+    "#.........................#",
+    "###########################"
+  ],
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "<": "stairs_up"
+  },
+  "player_start": {
+    "x": 3,
+    "y": 12
+  },
+  "special_tiles": [
+    {
+      "type": "creature",
+      "x": 16,
+      "y": 5,
+      "creature_id": "gutter_gleaner"
+    },
+    {
+      "type": "remains",
+      "x": 10,
+      "y": 5,
+      "creature_id": "plague_crow"
+    },
+    {
+      "type": "item",
+      "x": 4,
+      "y": 11,
+      "item_id": "gleaner_flesh"
+    },
+    {
+      "type": "item",
+      "x": 5,
+      "y": 12,
+      "item_id": "gleaner_flesh"
+    },
+    {
+      "type": "decor",
+      "x": 5,
+      "y": 10,
+      "decor_id": "campfire_lit"
+    },
+    {
+      "type": "container",
+      "x": 23,
+      "y": 4,
+      "decor_id": "bound_coffer",
+      "loot_pools": [
+        "bound_coffer_stores"
+      ],
+      "access_profile": "pale_lashings"
+    },
+    {
+      "type": "item",
+      "x": 23,
+      "y": 5,
+      "item_id": "resonant_bone_fragment"
+    }
+  ]
+}

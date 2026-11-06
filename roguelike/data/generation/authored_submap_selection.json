@@ -32,6 +32,14 @@
     {
       "layout_id": "barrow_bound_store",
       "weight": 1
+    },
+    {
+      "layout_id": "barrow_scavenger_store",
+      "weight": 1
+    },
+    {
+      "layout_id": "barrow_carrion_sump",
+      "weight": 1
     }
   ]
 }

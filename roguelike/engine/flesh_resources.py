@@ -95,6 +95,13 @@ def resolve_source(data, source):
     if matches != [source] or paths is not None and len(paths) != 1:
         raise ValueError(f'remains: missing or ambiguous source {source!r}')
     creature = data.entities[source]
+    from engine.creature_factory import AI_TYPES
+    if (not isinstance(creature,dict) or source=='player'
+            or creature.get('ai_type') not in AI_TYPES
+            or not isinstance(creature.get('fighter',{}),dict)
+            or type(creature.get('base_hp',creature.get('fighter',{}).get('max_hp',10))) is not int
+            or creature.get('base_hp',creature.get('fighter',{}).get('max_hp',10))<1):
+        raise ValueError(f'remains: unsupported living Actor source {source!r}')
     from engine.harvesting import profile_errors, construct_output
     from engine.item_factory import ItemFactory
     errors = profile_errors(creature, lambda key: construct_output(data, ItemFactory(data), key))
@@ -119,10 +126,16 @@ def create_corpse(data, factory, source, x, y, *, authored=False, name=None, own
     corpse.source_creature = source
     corpse.decay_timer = decay_turns(creature)
     recipe = creature.get('butcher_yield', {})
-    if isinstance(recipe, dict) and any(r.get('flesh') is True for t in recipe.get('tiers', []) for r in t.get('yields', [])):
+    tiers=recipe.get('tiers',[]) if isinstance(recipe,dict) else []
+    declared=any(isinstance(r,dict) and 'flesh' in r
+                 for t in (tiers if isinstance(tiers,list) else []) if isinstance(t,dict)
+                 for r in (t.get('yields',[]) if isinstance(t.get('yields',[]),list) else []))
+    if declared:
         errors = profile_errors(creature, lambda key: construct_output(data, factory, key))
         if errors:
             raise ValueError(f'corpse: invalid flesh declaration: {errors}')
+        if not any(r.get('flesh') is True for t in tiers for r in t.get('yields',[])):
+            return corpse
         corpse.flesh_resource_version = 1
         effective = dict(decay_turns=decay_turns(creature), tiers=[dict(
             min_cutting_tier=t.get('min_cutting_tier',1), yields=[dict(
@@ -184,6 +197,8 @@ def exposed(engine, item, xy=None):
 
 def floor_owned(engine,item,xy=None):
     """Exact identity and owner, also usable for a stripped harvestable corpse."""
+    from entities.item import Item
+    if not isinstance(item,Item):return False
     try:
         if not validate(item):return False
     except (ValueError,TypeError,KeyError,AttributeError):return False

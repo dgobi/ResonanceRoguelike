@@ -240,3 +240,10 @@ world seed **20261027** selects D at **(80,97)** and E at **(69,92)**. This is n
 selection, separate from Test room; witnesses stage the player at those genuine
 entrances and do not establish unaided travel from the laboratory or universal
 balance. Existing A/B/C assignments and visited scenes remain intact.
+
+## SYS-5 food priority
+
+The optional local scavenging attachment is subordinate to wounded regroup,
+attributed alarm work and applicable anonymous sound, as well as hostile and
+mandatory host commitments. Interrupting a feed abandons that creature's partial
+work without consuming flesh. See [Local scavenging](LOCAL_SCAVENGING.md).

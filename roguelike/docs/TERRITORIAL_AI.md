@@ -90,3 +90,13 @@ Privileged room diagnostics expose original home, objective/engagement phase,
 lawful evidence, counters, retirement/return reason, fallback and actual action.
 Inspection never selects an action. Normal logs use short sensory movement cues
 after movement under normal player vision.
+
+## SYS-5 optional local scavenging
+
+An enrolled ordinary hostile melee territorial host can acquire visible exposed
+flesh inside its original defended domain. Its valid food attempt is a narrow
+idle activity, so displacement does not immediately cancel it as uncommitted
+wandering. Existing excursion, hostile engagement, required return/blocked state
+and budgets still govern every step. Completion/interruption restores ordinary
+return behavior; bait never moves the post. The shared attachment and captured
+state are documented in [Local scavenging](LOCAL_SCAVENGING.md).
