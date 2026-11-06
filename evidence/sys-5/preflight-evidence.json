@@ -1,0 +1,7 @@
+{
+  "path": "preflight-evidence.zip",
+  "sha256": "e8fcd2d081b9b2fe7488e6c4133a0866e6b1bc21413419c58677fd015ada26bf",
+  "files": 50,
+  "bytes": 268139,
+  "note": "Unfrozen preflights, including failed tuning, baseline count mismatches and source-edit/cached catalogue rejections; not final verification. Full final source-bound matrix will supersede these results. Earlier native failures remain in the separate authoring archives."
+}

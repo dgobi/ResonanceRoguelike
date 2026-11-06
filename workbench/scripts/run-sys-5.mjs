@@ -43,14 +43,20 @@ async function key(key,capture=false){const id=++eventId,path=resolve(session.st
 async function walk(x,y){
  const directions=[[1,0,'right'],[-1,0,'left'],[0,1,'down'],[0,-1,'up']];
  for(let n=0;n<100;n++){
-  const o=await observe();if(o.player[0]===x&&o.player[1]===y)return o;
+  const o=await observe();assert(!o.dead,'living native journey');
+  const hostile=o.actors.find(a=>a.hp>0&&['AIState.HUNTING','AIState.ATTACKING'].includes(a.ai)&&Math.max(Math.abs(a.x-o.player[0]),Math.abs(a.y-o.player[1]))<=1);
+  if(hostile){await key(direction(Math.sign(hostile.x-o.player[0]),Math.sign(hostile.y-o.player[1])));continue;}
+  if(o.player[0]===x&&o.player[1]===y)return o;
   const q=[[...o.player,[]]],seen=new Set([o.player.join(',')]);let route;
-  for(let j=0;j<q.length;j++){const [a,c,p]=q[j];if(a===x&&c===y){route=p;break;}for(const [dx,dy,k] of directions){const nx=a+dx,ny=c+dy,id=`${nx},${ny}`;if(seen.has(id)||!o.walkable[ny]?.[nx]||o.actors.some(a=>a.x===nx&&a.y===ny)||o.containers.some(a=>a.x===nx&&a.y===ny))continue;seen.add(id);q.push([nx,ny,[...p,k]]);}}
+  for(let j=0;j<q.length;j++){const [a,c,p]=q[j];if(a===x&&c===y){route=p;break;}for(const [dx,dy,k] of directions){const nx=a+dx,ny=c+dy,id=`${nx},${ny}`;if(seen.has(id)||!o.walkable[ny]?.[nx]||o.actors.some(a=>a.x===nx&&a.y===ny)||o.containers.some(a=>a.x===nx&&a.y===ny)||o.decor.some(a=>a.x===nx&&a.y===ny))continue;seen.add(id);q.push([nx,ny,[...p,k]]);}}
   assert(route?.length,`No route to ${x},${y}`);await key(route[0]);
  }throw Error('bounded walk exhausted');
 }
 async function selectInventory(id){let o=await observe();if(!o.inventory_open)o=await key('i');const n=o.inventory_rows.findIndex(r=>!r.header&&r.item_id===id);assert(n>=0,id);while(o.inventory_selected!==n)o=await key(o.inventory_selected<n?'down':'up');return o;}
 async function menu(n){for(let i=0;i<n;i++)await key('down');return key('return');}
+function direction(dx,dy){return ({'-1,-1':'[7]','0,-1':'up','1,-1':'[9]','-1,0':'left','1,0':'right','-1,1':'[1]','0,1':'down','1,1':'[3]'})[`${dx},${dy}`];}
+async function use(id){await selectInventory(id);await key('e');await key('escape');}
+async function interact(x,y){let o=await key('e');while(o.interaction.cursor[0]!==x)o=await key(o.interaction.cursor[0]<x?'right':'left');while(o.interaction.cursor[1]!==y)o=await key(o.interaction.cursor[1]<y?'down':'up');return key('return');}
 
 
 const eater=base+'gutter_gleaner.json',guard=base+'pale_carrion_beetle.json',meat='roguelike/data/items/butchery/gleaner_flesh.json',room='roguelike/data/layouts/sys5_scavenging_room.json';
@@ -59,11 +65,10 @@ async function source(value){await eb('Source').click();await editor().locator('
 async function invalid(){await eb('Validate draft').click();await idle();const r=JSON.parse(await editor().getByTestId('draft-receipt').textContent());assert(!r.valid,JSON.stringify(r));(receipt.rejections??=[]).push(r.diagnostics);}
 async function undoCreature(){await b('Supported fields').click();await b('Undo creature').click();await editIdle();}
 async function makeMeat(){
- if(await exists(meat)){await open(meat);return;}
  const fresh=!(await exists(meat));await open(fresh?'roguelike/data/items/butchery/crow_meat.json':meat);await begin();
  if(fresh){await eb('Save as new variant').click();await fill('New variant ID','gleaner_flesh');}
  await page.getByTestId('item-editor').filter({visible:true}).getByRole('button',{name:'Properties',exact:true}).click();
- await fill('Item name','Gleaner Flesh');await fill('Item description','Pale strips of scavenger flesh. Kept whole, they can feed a fire or distract a hungry creature.');await fill('Item weight (kg)',0.2);
+ await fill('Item name','Gleaner Flesh');await fill('Item description','Pale strips of scavenger flesh. Kept whole, they can cook over a fire or distract a hungry creature.');await fill('Item weight (kg)',0.2);
  await apply(meat);await begin();await fill('Keyword tier 1',2);await invalid();await b('Undo item').click();await editIdle();
  await page.screenshot({path:resolve(output,'flesh-item-controls.png')});
 }
@@ -85,15 +90,17 @@ async function makeEater(path,original,id,name,territorial){
 async function makeRoom(){
  if(await exists(room)){
   await open(room);const raw=JSON.parse(await readFile(resolve(root,room),'utf8'));
-  if(!raw.special_tiles.some(r=>r.item_id==='gleaner_flesh')){
-   await begin();raw.special_tiles.push({type:'item',x:3,y:13,item_id:'gleaner_flesh'},{type:'item',x:4,y:13,item_id:'crude_blade'});await source(raw);await apply(room);
-  }return;
+  // Publish a shorter harvest approach and exposed loose food via the editor.
+  const line=[...raw.layers[10]];line[7]='.';raw.layers[10]=line.join('');
+  for(const [item_id,x,y] of [['gleaner_flesh',3,13],['crude_blade',4,13],['gleaner_flesh',6,4],['crow_meat',19,4]])
+   if(!raw.special_tiles.some(r=>r.item_id===item_id&&r.x===x&&r.y===y))raw.special_tiles.push({type:'item',x,y,item_id});
+  await begin();await source(raw);await apply(room);return;
  }
  await open(template);await begin();await eb('Save as new variant').click();await fill('New variant ID','sys5_scavenging_room');
  const grid=Array.from({length:17},(_,y)=>Array.from({length:27},(_,x)=>x===0||y===0||x===26||y===16?'#':'.'));
- for(let x=1;x<23;x++)grid[10][x]='#';for(let y=1;y<10;y++)grid[y][13]='#';grid[8][13]='.';grid[13][3]='<';
+ for(let x=1;x<23;x++)grid[10][x]='#';grid[10][7]='.';for(let y=1;y<10;y++)grid[y][13]='#';grid[8][13]='.';grid[13][3]='<';
  await source({id:'sys5_scavenging_room',width:27,height:17,layers:grid.map(r=>r.join('')),legend:{'#':'wall','.':'floor','<':'stairs_up'},player_start:{x:3,y:13},special_tiles:[]});await b('Authored layout').click();
- for(const [kind,id,x,y] of [['item','gleaner_flesh',3,13],['item','crude_blade',4,13],['creature','gutter_gleaner',5,4],['creature','pale_carrion_beetle',18,4],['remains','plague_crow',7,4],['remains','heath_stalker',20,4],['decor','campfire_lit',7,6]]){
+ for(const [kind,id,x,y] of [['item','gleaner_flesh',3,13],['item','crude_blade',4,13],['item','gleaner_flesh',6,4],['item','crow_meat',19,4],['creature','gutter_gleaner',5,4],['creature','pale_carrion_beetle',18,4],['remains','plague_crow',7,4],['remains','heath_stalker',20,4],['decor','campfire_lit',7,6]]){
   await select('Placement kind',kind);await select('Placement '+kind,id);await b('Place '+kind).click();await cell(x,y);
  }
  // Two mounted proposals must rebase to the selected source record.
@@ -104,17 +111,27 @@ async function makeRoom(){
 }
 async function witness(feed){
  await phase(`Actual living hosts, captured feeding ${feed}`);let o=await observe();const first=o.scavengers;assert.equal(first.find(a=>a.id==='gutter_gleaner').config.feed_opportunities,feed);
+ const offset=[o.player[0]-3,o.player[1]-13],at=(x,y)=>[x+offset[0],y+offset[1]];
  assert.equal(first.find(a=>a.id==='pale_carrion_beetle').host.recipe,'territorial_guard');
  o=await key(',');await selectInventory('gleaner_flesh');const turn=o.turn;await key('p');o=await key('escape');assert.equal(o.turn,turn);
  await key('p');o=await key('return');assert.equal(o.turn,turn+1);await key('escape');
- const placed=o.floor.flatMap(r=>r.items).find(i=>i.item_id==='gleaner_flesh');assert(placed?.flesh_resource?.uid);assert(!o.inventory.some(i=>i.item_id==='gleaner_flesh'));
+ const placed=o.floor.find(r=>r.x===o.player[0]&&r.y===o.player[1]).items.find(i=>i.item_id==='gleaner_flesh');assert(placed?.flesh_resource?.uid);assert(!o.inventory.some(i=>i.item_id==='gleaner_flesh'));
+ const loose=o.floor.filter(r=>r.y===at(0,4)[1]).flatMap(r=>r.items).filter(i=>['gleaner_flesh','crow_meat'].includes(i.item_id));assert.equal(loose.length,2);
  const partial=structuredClone(o.scavengers);await key('f5');o=await key('f9');assert.deepEqual(o.scavengers.map(a=>a.state),partial.map(a=>a.state));
- for(let n=0;n<20&&!o.scavengers.every(a=>a.state.completed===1);n++)o=await key('.');
- assert(o.scavengers.every(a=>a.state.completed===1),JSON.stringify(o.scavengers));
+ for(let n=0;n<25&&!o.scavengers.every(a=>a.state.completed===2);n++)o=await key('.');
+ assert(o.scavengers.every(a=>a.state.completed===2),JSON.stringify(o.scavengers));
+ assert(!o.floor.flatMap(r=>r.items).some(i=>loose.some(l=>l.flesh_resource.uid===i.flesh_resource?.uid)));
  const corpses=o.floor.flatMap(r=>r.items).filter(i=>i.item_id==='corpse');assert.equal(corpses.length,2);assert(corpses.every(i=>i.flesh_resource.state==='stripped'));
  const end=structuredClone(o);await key('f5');o=await key('f9');assert.deepEqual(o.floor.flatMap(r=>r.items).map(i=>i.flesh_resource),end.floor.flatMap(r=>r.items).map(i=>i.flesh_resource));
+ await use('crude_blade');await use('leather_jack');await walk(...at(7,5));
+ // Ordinary movement/combat keeps living host hostility. Only actual key input
+ // and source-authored equipment are used to reach the remaining harvest.
+ o=await interact(...at(7,4));await key('escape');await walk(...at(7,4));o=await key(',');
+ if(o.interaction.selection){const n=o.interaction.selection.items.findIndex(i=>i.item_id==='animal_bone');assert(n>=0);while(o.interaction.selection.selected!==n)o=await key(o.interaction.selection.selected<n?'down':'up');o=await key('return');}
+ await key('escape');o=await observe();assert(o.inventory.some(i=>i.item_id==='animal_bone'));assert(!o.floor.find(r=>r.x===at(7,4)[0]&&r.y===at(7,4)[1])?.items.some(i=>i.item_id==='crow_meat'));
+ assert(!o.fixture_applied&&!o.dead);const harvested=structuredClone(o);
  await key(undefined,true);await copyFile(resolve(session.state_root,'frame.png'),resolve(output,`feeding-${feed}-${Date.now()}.png`));
- return {feed,captured:(await status()).captured,partial,end,setup:'Published reusable room; living AI, ordinary inventory placement, paid waits and F5/F9. Diagnostic observations include unseen actors; this is not ordinary-world balance proof.'};
+ return {feed,captured:(await status()).captured,partial,end,harvested,consumed_loose:loose,setup:'Published reusable room; living AI, ordinary inventory placement, loose meat consumed before corpse stripping, equipped blade and remaining bone harvest, paid waits and F5/F9. Diagnostic observations include unseen actors; this is not ordinary-world balance proof.'};
 }
 async function stop(){await b('Stop').click();await until(async()=>(await status()).status==='stopped');}
 try{
@@ -127,6 +144,7 @@ try{
 
  if(process.env.SYS5_RUNTIME_ONLY!=='1'){
   await phase('Publish new flesh, both host variants, explicit harvest and native remains controls');await makeMeat();await makeEater(eater,'sewer_thing','gutter_gleaner','Gutter Gleaner',false);await makeEater(guard,'amber_sting_beetle','pale_carrion_beetle','Pale Carrion Beetle',true);await makeRoom();
+  await open(eater);await begin();await b('Supported fields').click();await fill('Scavenging feeding opportunities',3);await apply(eater);
   await open(room);await start('latest');const captured=(await status()).captured.manifest_sha256;receipt.initial=await witness(3);
   await open(eater);await begin();await b('Supported fields').click();await fill('Scavenging feeding opportunities',5);await apply(eater);
   await open(room);await start('reset');assert.equal((await status()).captured.manifest_sha256,captured);receipt.reset=await witness(3);

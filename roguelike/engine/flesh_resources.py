@@ -54,6 +54,7 @@ def validate(owner):
         rows=[r for r in value(owner,'keywords',[]) if isinstance(r,dict) and r.get('tag')==TAG]
         if (not declared(owner) or value(owner, 'source_creature') is not None
                 or value(owner, 'item_id') == 'corpse' or value(owner, 'on_use') not in (None, 'eat')
+                or value(owner, 'vessel') is not None
                 or rows != [dict(tag=TAG,tier=1)] or type(rows[0]['tier']) is not int):
             raise ValueError('flesh: contradictory loose portion')
     else:
@@ -96,12 +97,35 @@ def resolve_source(data, source):
         raise ValueError(f'remains: missing or ambiguous source {source!r}')
     creature = data.entities[source]
     from engine.creature_factory import AI_TYPES
-    if (not isinstance(creature,dict) or source=='player'
+    if (not isinstance(creature,dict) or source=='player' or creature.get('name')=='Player'
             or creature.get('ai_type') not in AI_TYPES
             or not isinstance(creature.get('fighter',{}),dict)
             or type(creature.get('base_hp',creature.get('fighter',{}).get('max_hp',10))) is not int
             or creature.get('base_hp',creature.get('fighter',{}).get('max_hp',10))<1):
         raise ValueError(f'remains: unsupported living Actor source {source!r}')
+    # Validate the effective ordinary constructor inputs without instantiating a
+    # living Actor, invoking authoring policy, or reading definitions from disk.
+    from engine.save_components import validate_fields
+    from engine.local_rivals import TOKEN
+    fighter,perception=creature.get('fighter',{}),creature.get('perception',{})
+    if not isinstance(perception,dict):raise ValueError('remains: invalid source perception')
+    numbers=dict(hp=creature.get('base_hp',fighter.get('max_hp',10)),power=fighter.get('power',3),
+                 defense=fighter.get('defense',0),sight=perception.get('sight_radius',8),
+                 hearing=perception.get('hearing_radius',5),wander=creature.get('wander_radius',8))
+    validate_fields(numbers,{key:(0,'count') for key in numbers},'remains source')
+    validate_fields(dict(dark=perception.get('sees_in_dark',False)),{'dark':(False,'bool')},'remains source')
+    faction,hostile=perception.get('faction','hostile'),perception.get('hostile_to')
+    if (not isinstance(faction,str) or not TOKEN.fullmatch(faction)
+            or hostile is not None and (not isinstance(hostile,list) or len(hostile)>16
+                or any(not isinstance(v,str) or not TOKEN.fullmatch(v) for v in hostile)
+                or len(set(hostile))!=len(hostile))):
+        raise ValueError('remains: invalid source relationships')
+    from engine.ai_profiles import effective_profile
+    if creature['ai_type']=='composite':effective_profile(creature)
+    elif any(k in creature for k in ('ai_profile','enemy_responses','enemy_maneuvers','enemy_scavenging')):
+        raise ValueError('remains: attachment requires a composite source')
+    from engine.venom import trait
+    trait(creature.get('numbing_venom_trait','susceptible'))
     from engine.harvesting import profile_errors, construct_output
     from engine.item_factory import ItemFactory
     errors = profile_errors(creature, lambda key: construct_output(data, ItemFactory(data), key))

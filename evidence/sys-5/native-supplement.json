@@ -1,0 +1,118 @@
+{
+  "final_pass": "native-1793985612110",
+  "harness_sha256": "7391c1f1255970efc32129c23c00bc221f0d0b4c97db5d627a1cd5fa1420fc50",
+  "attempts": [
+    {
+      "directory": "workbench/.artifacts/sys-5/native-1793985386714",
+      "receipt_sha256": "8e139df5c3fdef060b50b5918952790b3acbe36bbeb9074b198c605c4ce60e4e",
+      "passed": false,
+      "failure": "TypeError: Cannot read properties of undefined (reading 'items')",
+      "publications": [
+        {
+          "path": "roguelike/data/items/butchery/gleaner_flesh.json",
+          "sha256": "a39956166046a1d9d333e5e89f2e0a0c90083bcb9b25bcabef050feb2449bc0e"
+        },
+        {
+          "path": "roguelike/data/layouts/sys5_scavenging_room.json",
+          "sha256": "5b19dd2fe3ffaa3468638c0c9652c39960a5804b726b93a02844a1f5daa6ba2f"
+        },
+        {
+          "path": "roguelike/data/entities/creatures/gutter_gleaner.json",
+          "sha256": "ef844226e49b1d794f2c558d4d92e415573af7528e6dcdcf7d2d8a5edbbda274"
+        }
+      ]
+    },
+    {
+      "directory": "workbench/.artifacts/sys-5/native-1793985514762",
+      "receipt_sha256": "506e0db96f5b5e1cd0aa6ed945b332b3f82aea2fe62c1d322f62fce911489dbb",
+      "passed": false,
+      "failure": "Error: bounded walk exhausted",
+      "publications": []
+    },
+    {
+      "directory": "workbench/.artifacts/sys-5/native-1793985612110",
+      "receipt_sha256": "6f990bfd0e564a2175edc2a6a329d24085a947cbed2520743053076ea35caecf",
+      "passed": true,
+      "failure": "",
+      "publications": [
+        {
+          "path": "roguelike/data/entities/creatures/gutter_gleaner.json",
+          "sha256": "b023aba9e6c85e318b198ea2aaf14de0a8d2dbf2f832040fc4a7e024dd675745"
+        }
+      ],
+      "witnesses": [
+        {
+          "name": "initial",
+          "feed": 3,
+          "completed": [
+            2,
+            2
+          ],
+          "consumed_loose": [
+            "gleaner_flesh",
+            "crow_meat"
+          ],
+          "remaining_bone": true,
+          "fixture_applied": false,
+          "hp": 57,
+          "capture": "d77d48da6bd589f7d9237cb9a2ceb0416073ae343e9aa5ab3c8dd85df9df18a0"
+        },
+        {
+          "name": "reset",
+          "feed": 3,
+          "completed": [
+            2,
+            2
+          ],
+          "consumed_loose": [
+            "gleaner_flesh",
+            "crow_meat"
+          ],
+          "remaining_bone": true,
+          "fixture_applied": false,
+          "hp": 57,
+          "capture": "d77d48da6bd589f7d9237cb9a2ceb0416073ae343e9aa5ab3c8dd85df9df18a0"
+        },
+        {
+          "name": "latest",
+          "feed": 5,
+          "completed": [
+            2,
+            2
+          ],
+          "consumed_loose": [
+            "gleaner_flesh",
+            "crow_meat"
+          ],
+          "remaining_bone": true,
+          "fixture_applied": false,
+          "hp": 57,
+          "capture": "553d79e20ec9efab699d91a09e36c45e8772f149bbffb1c42d8bd36887dc09a5"
+        },
+        {
+          "name": "dirtyExcluded",
+          "feed": 5,
+          "completed": [
+            2,
+            2
+          ],
+          "consumed_loose": [
+            "gleaner_flesh",
+            "crow_meat"
+          ],
+          "remaining_bone": true,
+          "fixture_applied": false,
+          "hp": 57,
+          "capture": "553d79e20ec9efab699d91a09e36c45e8772f149bbffb1c42d8bd36887dc09a5"
+        }
+      ]
+    }
+  ],
+  "archive": {
+    "path": "native-supplement.zip",
+    "sha256": "0ef636da2e9e1eef440faad53b6a22b45de7abd58b803b00125d8eeaab35ad29",
+    "bytes": 3193619,
+    "files": 12
+  },
+  "relationship": "Supplement to retained native-authoring.zip creation evidence; actual UI publication corrects meat prose and adds loose resource witnesses/harvest access. No gameplay fixture. Separate runtime-only final gate still required."
+}

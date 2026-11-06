@@ -75,6 +75,14 @@ class ResourceTests(unittest.TestCase):
         self.assertFalse(self.feed(meat));self.assertEqual(replacement.count,1)
         self.assertTrue(self.feed(replacement));self.assertFalse(self.feed(replacement))
 
+    def test_captured_portion_cannot_also_be_a_vessel(self):
+        item=self.portion()
+        item.stackable=False;item.on_use=None;item.consumed_on_use=False
+        item.vessel=copy.deepcopy(self.e.item_factory.create('clay_pot').vessel)
+        with self.assertRaisesRegex(ValueError,'contradictory loose portion'):flesh.validate(item)
+        with self.assertRaises(ValueError):validate_item(serialize_item(item),'contradictory portion')
+        self.assertFalse(self.feed(item));self.assertEqual(item.count,1)
+
     def test_nonfloor_and_aliased_owners_reject(self):
         item=self.portion()
         self.e.player.inventory.items.append(item)
@@ -260,6 +268,23 @@ class ResourceTests(unittest.TestCase):
             self.assertNotIn('keywords',row)
             fresh=self.e.item_factory.create(row['item_id']);self.assertTrue(flesh.eligible(fresh))
             restore_item(fresh,row);self.assertFalse(flesh.eligible(fresh));validate_item(serialize_item(fresh),'B1 meat')
+
+    def test_remains_source_rejects_invalid_constructor_inputs_without_spawning_actor(self):
+        original=copy.deepcopy(self.e.data.entities['plague_crow'])
+        for edit in (dict(ai_type='composite'),dict(fighter={'power':'bad'}),dict(perception={'sight_radius':True}),dict(perception=[])):
+            self.e.data.entities['plague_crow']={**original,**edit}
+            with patch.object(self.e.creature_factory,'spawn',side_effect=AssertionError('no live source Actor')):
+                with self.assertRaises(ValueError):flesh.resolve_source(self.e.data,'plague_crow')
+
+    def test_captured_stripped_bone_reader_equal_threshold_and_empty_harvest(self):
+        self.cutter(1);self.e.player.perks.acquire('bone_reader')
+        raw=self.e.data.entities['plague_crow'];raw['butcher_yield']['tiers']=[
+            dict(min_cutting_tier=2,yields=[dict(item_id='crow_meat',quantity_min=2,quantity_max=2,flesh=True)]),
+            dict(min_cutting_tier=2,yields=[dict(item_id='animal_bone',quantity_min=1,quantity_max=1)])]
+        corpse=self.corpse();self.assertTrue(self.feed(corpse));debt=self.e._move_debt
+        self.assertTrue(butcher(self.e,13,13,corpse))
+        self.assertFalse(floor.get_floor_objects(self.e.local_map,13,13))
+        self.assertEqual(self.e._move_debt-debt,5)  # actual tier 1, selected threshold 2 => six total phases.
 
     def test_rehashed_malformed_modern_checkpoints_refuse_before_installation(self):
         import pickle

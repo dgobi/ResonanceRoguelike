@@ -62,13 +62,20 @@ def stage(which,out,save_root):
  candidates=[(x,y,sub) for (x,y),c in e.world_map.chunks.items() for sub in c.submaps if sub.layout_id==name]
  # A deterministic genuine assignment, chosen near the earlier public town.
  wx,wy,sub=min(candidates,key=lambda row:abs(row[0]-75)+abs(row[1]-100))
+ sample=[]
+ for sx,sy,assigned in [r for r in candidates if r[2].submap_id!=sub.submap_id][:2]:
+  local,native=e._ensure_submap_scene(sx,sy,assigned.submap_id)
+  bodies=[serialize_item(i) for rows in local.floor_objects.values() for i in rows if i.item_id=='corpse']
+  eaters=[dict(id=a._creature_id,config=a.ai.scavenging_config) for a in native if getattr(getattr(a,'ai',None),'scavenging_config',None)]
+  assert len(bodies)==len(eaters)==1 and bodies[0]['flesh_resource']['state']=='intact'
+  sample.append(dict(chunk=[sx,sy],submap=assigned.submap_id,layout=assigned.layout_id,remains=bodies,scavengers=eaters))
  prepared=e._ensure_surface_scene(wx,wy);SceneAddress(e.world_x,e.world_y,e.current_submap_id).store(e.save_manager.cache,e.local_map,e.entities)
  e.local_map,natives=prepared;e.world_x,e.world_y,e.current_submap_id=wx,wy,None;e.entities=[e.player]+natives
  entrance=next(xy for xy,sid in e.local_map.submap_links.items() if sid==sub.submap_id)
  from generation.access import enterable
  approach=next((entrance[0]+dx,entrance[1]+dy) for dx,dy in ((-3,0),(3,0),(0,3),(0,-3),(-1,0),(1,0)) if e.local_map.in_bounds(entrance[0]+dx,entrance[1]+dy) and enterable(e.local_map,(entrance[0]+dx,entrance[1]+dy),e.data) and not any((a.x,a.y)==(entrance[0]+dx,entrance[1]+dy) for a in natives))
  e.player.x,e.player.y=approach;e.world_map.get(wx,wy).visited=True;e.reality_bubble.update(wx,wy,e.world_map);e._update_fov();display(e)
- s=Journey(e,out);s.receipt.update(controls=__doc__,seed=20261023,layout=name,assignment=dict(chunk=[wx,wy],submap=sub.submap_id,entrance=entrance,staged_surface_approach=approach),sounds=[],comparisons=[])
+ s=Journey(e,out);s.receipt.update(controls=__doc__,seed=20261023,layout=name,native_sample=sample,assignment_counts={key:sum(sm.layout_id==key for c in e.world_map.chunks.values() for sm in c.submaps) for key in sorted({sm.layout_id for c in e.world_map.chunks.values() for sm in c.submaps if sm.layout_id})},assignment=dict(chunk=[wx,wy],submap=sub.submap_id,entrance=entrance,staged_surface_approach=approach),sounds=[],comparisons=[])
  s.mark('selected ordinary surface approach');capture(e,out/'surface-approach.png')
  s.item('crude_blade');s.close();s.item('leather_jack');s.close();s.light(False)
  s.move([entrance]);e._handle_key(pygame.K_GREATER,'>');s.receipt['events']+=1
@@ -101,8 +108,23 @@ def store(s,at,entrance):
  s.move([at(5,11)]);s.recipe('cook_meat',{0:'gleaner_flesh'});s.place(at(5,10))
  for _ in range(8):s.key(pygame.K_PERIOD)
  s.approach(at(5,10));s.interact(at(5,10));s.close();assert e.player.inventory.has('cooked_meat');s.mark('conserved flesh becomes useful cooked food')
- s.move([at(22,8)]);s.light(True);s.key(pygame.K_PERIOD);s.mark('conserved route exposes player to original guard position')
+ s.move([at(22,8)]);s.light(True);s.move([at(23,5)]);s.pick('resonant_bone_fragment')
+ assert next(a for a in e.entities if getattr(a,'_creature_id','')=='gutter_gleaner').ai.target is not None
+ s.mark('conserved route reaches objective but draws hostile pursuit')
  s.receipt['comparisons'].append(dict(branch='conserve',state=s.state()))
+ # A separate real replay harvests the exact body after its discovery, before
+ # the approach can finish. No replacement resource or actor fixture is used.
+ restore(s,'choice');s.move([at(10,6)]);s.light(True)
+ actor=next(a for a in e.entities if getattr(a,'_creature_id','')=='gutter_gleaner')
+ for _ in range(3):
+  if actor.ai.scavenging_state['current']:break
+  s.key(pygame.K_PERIOD)
+ assert actor.ai.scavenging_state['current']['uid']==crow_uid,s.state()
+ s.mark('ordinary corpse discovered before player harvest')
+ s.harvest(at(10,5));assert actor.ai.scavenging_state['completed']==0
+ assert actor.ai.scavenging_state['current'] is None
+ assert not any(getattr(i,'flesh_resource',{}).get('uid')==crow_uid for rows in e.local_map.floor_objects.values() for i in rows)
+ s.mark('ordinary pending corpse reclaimed by intact harvest')
  restore(s,'choice');s.move([at(12,5)]);bait=s.portion('gleaner_flesh');bait_uid=bait.flesh_resource['uid'];s.move([at(10,8)])
  actor=next(a for a in e.entities if getattr(a,'_creature_id','')=='gutter_gleaner')
  assert actor.ai.scavenging_state['completed']==0;s.mark('one portion placed while dark; food not yet discovered')
@@ -112,6 +134,24 @@ def store(s,at,entrance):
   s.key(pygame.K_PERIOD)
  assert actor.ai.scavenging_state['current']['uid']==bait_uid
  s.move([at(11,8)]);s.move([at(13,8)])
+ for _ in range(6):
+  if actor.ai.scavenging_state['current'] and actor.ai.scavenging_state['current']['feeding']>0:break
+  s.key(pygame.K_PERIOD)
+ assert actor.ai.scavenging_state['current'] and actor.ai.scavenging_state['current']['feeding']>0
+ s.mark('partial paid feeding before save');s.checkpoint('feeding')
+ # Replaying this checkpoint exposes the player during an actual partial feed.
+ # The ordinary host must abandon food for the newly seen hostile target.
+ s.move([at(11,6)])
+ actor=next(a for a in e.entities if getattr(a,'_creature_id','')=='gutter_gleaner')
+ for _ in range(2):
+  if actor.ai.target is not None:break
+  s.key(pygame.K_PERIOD)
+ assert actor.ai.target is not None and actor.ai.scavenging_state['current'] is None,s.state()
+ assert actor.ai.scavenging_state['completed']==0
+ assert any(getattr(i,'flesh_resource',{}).get('uid')==bait_uid and i.count==1 for rows in e.local_map.floor_objects.values() for i in rows)
+ s.mark('visible hostile interrupts an existing ordinary feeding attempt')
+ restore(s,'feeding')
+ actor=next(a for a in e.entities if getattr(a,'_creature_id','')=='gutter_gleaner')
  for _ in range(15):
   if actor.ai.scavenging_state['completed']>=1:break
   s.key(pygame.K_PERIOD)
@@ -130,10 +170,15 @@ def store(s,at,entrance):
  assert not any(getattr(i,'flesh_resource',{}).get('uid')==bait_uid for rows in e.local_map.floor_objects.values() for i in rows)
  s.mark('loose portion gone and corpse stripped; eater displaced');s.checkpoint('stripped')
  s.move([at(22,8)]);s.move([at(23,5)]);s.pick('resonant_bone_fragment');s.mark('spent-flesh route reaches far-store objective')
+ assert next(a for a in e.entities if getattr(a,'_creature_id','')=='gutter_gleaner').ai.target is None
  s.receipt['comparisons'].append(dict(branch='spend',state=s.state(),bait_uid=bait_uid))
  # Hostility remains real. Ordinary combat is the cost of approaching the body.
- s.move([at(11,7)]);s.light(True);s.fight(actor);s.mark('hostile interruption and ordinary combat near contested remains')
+ s.move([at(11,7)]);s.light(True);s.fight(actor);s.mark('retained hostility and ordinary combat near contested remains')
  before=sum(i.count for i in e.player.inventory.items if i.item_id=='animal_bone')
+ s.approach(at(10,5));s.key(pygame.K_x)
+ while e.look_mode.cursor_x!=at(10,5)[0]:s.key(pygame.K_RIGHT if e.look_mode.cursor_x<at(10,5)[0] else pygame.K_LEFT)
+ while e.look_mode.cursor_y!=at(10,5)[1]:s.key(pygame.K_DOWN if e.look_mode.cursor_y<at(10,5)[1] else pygame.K_UP)
+ s.key(pygame.K_RETURN);capture(e,s.out/'stripped-inspection.png');s.close()
  s.harvest(at(10,5));s.move([at(10,5)]);s.pick('animal_bone')
  assert sum(i.count for i in e.player.inventory.items if i.item_id=='animal_bone')>before
  assert not any(i.item_id=='crow_meat' for i in e.local_map.floor_objects.get(at(10,5),[]))
@@ -144,7 +189,9 @@ def store(s,at,entrance):
 
 
 def sump(s,at,entrance):
- e=s.e;s.move([at(5,11)]);s.pick('stalker_meat');s.move([at(11,8)]);s.move([at(11,3)]);s.move([at(14,3)]);s.move([at(14,4)])
+ e=s.e;s.move([at(5,11)]);s.pick('stalker_meat');s.move([at(11,8)]);s.move([at(11,3)]);s.move([at(13,3)]);s.move([at(13,4)]);s.light(True)
+ actor=next(a for a in e.entities if getattr(a,'_creature_id','')=='pale_carrion_beetle')
+ assert (actor.x,actor.y)==at(16,5) and actor.ai.target is None,s.state()
  screen=at(14,5);s.mark('screen intact; darkvision beetle cannot see through timber');s.checkpoint('choice')
  s.move([at(11,3)]);s.move([at(11,10)]);s.move([at(22,10)]);s.move([at(22,5)]);s.pick('resonant_bone_fragment')
  assert e.local_map.access_objects[screen]['completed_by'] is None;s.mark('intact southern bypass reaches east objective')
@@ -153,9 +200,11 @@ def sump(s,at,entrance):
   restore(s,'choice');turn=e.world_time.turn
   steps=e.local_map.access_objects[screen]['profile']['work_steps'] if method=='Careful' else 1
   for n in range(steps):s.method(screen,method if n==0 else 'Continue')
-  s.mark(method+' opening');s.move([at(14,3)]);s.move([at(13,3)]);s.move([at(12,3)]);s.move([at(11,3)]);s.move([at(9,3)])
+  s.mark(method+' opening');s.move([at(12,3)]);s.move([at(11,3)]);s.move([at(10,3)]);s.move([at(9,3)])
   for _ in range(6):s.key(pygame.K_PERIOD)
   s.mark(method+' aftermath');s.receipt['comparisons'].append(dict(branch=method,elapsed=e.world_time.turn-turn,state=s.state()))
+  actor=next(a for a in e.entities if getattr(a,'_creature_id','')=='pale_carrion_beetle')
+  assert actor.ai.scavenging_state['completed']==(1 if method=='Careful' else 0),s.state()
   capture(e,s.out/(method.replace(' ','-')+'.png'))
  # Preserve one real final branch and remaining harvest/access on revisit.
  corpse=next(i for i in e.local_map.floor_objects.get(at(12,5),[]) if i.item_id=='corpse')
@@ -171,9 +220,33 @@ def sump(s,at,entrance):
  revisit(s,at,entrance,check)
 
 
+def remaining_stack(out):
+ """Disclosed focused fixture, separate from the ordinary-world comparisons."""
+ from test_effect_persistence import load_data,make_engine
+ from generation.floor_object_utils import place_floor_object
+ out.mkdir(exist_ok=True)
+ with tempfile.TemporaryDirectory(prefix='sys5-remaining-stack-') as tmp,patch('engine.save_manager.SAVE_DIR',Path(tmp)/'saves'):
+  e=make_engine(load_data());e.player.x=e.player.y=35
+  e.reality_bubble.update(e.world_x,e.world_y,e.world_map);e.debug=False
+  actor=e.creature_factory.spawn('pale_carrion_beetle',18,12);e.entities.append(actor)
+  item=e.item_factory.create('crow_meat');item.count=3;assert place_floor_object(e.local_map,19,12,item)
+  s=Journey(e,out);s.receipt['controls']='Focused flat-map fixture, fresh shipped beetle and crow meat count 3. Real paid waits, F5/F9 and separate-process cold load; not ordinary availability evidence.'
+  before=serialize_item(item)
+  for _ in range(10):
+   if actor.ai.scavenging_state['completed']==1:break
+   s.key(pygame.K_PERIOD)
+  assert actor.ai.scavenging_state['completed']==1 and item.count==2
+  uid=item.flesh_resource['uid'];s.checkpoint('remaining-stack')
+  after=next(i for rows in e.local_map.floor_objects.values() for i in rows if getattr(i,'flesh_resource',{}).get('uid')==uid)
+  assert after.count==2 and serialize_item(after)==serialize_item(item)
+  s.receipt.update(passed=True,before=before,after=serialize_item(after))
+  (out/'persistence.json').write_text(json.dumps(s.receipt,indent=2),encoding='utf8')
+  return s.receipt
+
+
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--evidence',type=Path,required=True);ap.add_argument('--which',choices=['store','sump','both'],default='both');args=ap.parse_args();out=args.evidence.resolve();out.mkdir(parents=True,exist_ok=True)
- pygame.init();os.chdir(GAME);results=[]
+ pygame.init();os.chdir(GAME);results=[];persistence=remaining_stack(out/'persistence')
  for which in (['store','sump'] if args.which=='both' else [args.which]):
   target=out/which;target.mkdir(exist_ok=True);s=None
   with tempfile.TemporaryDirectory(prefix='sys5-ordinary-') as tmp,patch('engine.save_manager.SAVE_DIR',Path(tmp)/'saves'):
@@ -192,6 +265,6 @@ def main():
    finally:
     if s:
      s.receipt['final']=s.state();(target/'journey.json').write_text(json.dumps(s.receipt,indent=2),encoding='utf8');results.append(s.receipt)
- (out/'play.json').write_text(json.dumps(dict(passed=True,journeys=results),indent=2),encoding='utf8');print(json.dumps(dict(passed=True,evidence=str(out))))
+ (out/'play.json').write_text(json.dumps(dict(passed=True,persistence=persistence,journeys=results),indent=2),encoding='utf8');print(json.dumps(dict(passed=True,evidence=str(out))))
 
 if __name__=='__main__':main()

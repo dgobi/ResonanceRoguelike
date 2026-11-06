@@ -232,7 +232,7 @@ handling drains debt. A valid zero-roll result is still successful consumption.
 | Scene / decay | Active-map floor ticking and saved ownership/depletion remain authoritative. No offscreen catch-up, extra processing-map corpse ticks or respawn is added. |
 
 W5N introduced no save schema/migration, yield-table snapshot, natural spawn registration or
-global transfer framework is introduced. See [W5N delivery](../../workbench/docs/W5N_DELIVERY.md)
+global transfer framework. See [W5N delivery](../../workbench/docs/W5N_DELIVERY.md)
 for the capability inventory, controlled authored-room provenance and separate
 ordinary-save fresh-catalogue proof.
 

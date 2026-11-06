@@ -1,7 +1,7 @@
 {
   "id": "gleaner_flesh",
   "name": "Gleaner Flesh",
-  "description": "Pale strips of scavenger flesh. Kept whole, they can feed a fire or distract a hungry creature.",
+  "description": "Pale strips of scavenger flesh. Kept whole, they can cook over a fire or distract a hungry creature.",
   "tile": "generic_item",
   "category": "butchery",
   "weight": 0.2,

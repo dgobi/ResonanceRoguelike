@@ -95,7 +95,7 @@ with patch('engine.save_manager.SAVE_DIR',Path(sys.argv[1])):
         self.assertTrue(registration(doc,self.data,'residential')['passed'])
         from generation.floor_object_utils import place_floor_object
         def substitute(m,x,y,value):
-            place_floor_object(m,x,y,copy.deepcopy(value))
+            return place_floor_object(m,x,y,copy.deepcopy(value))
         with patch('generation.floor_object_utils.place_floor_object',substitute):
             with self.assertRaisesRegex(GenerationError,'missing realized item'):
                 registration(doc,self.data,'residential')

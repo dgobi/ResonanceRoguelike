@@ -16,8 +16,8 @@ configurations and scene/cache states through existing constructors/F5.
 Implementation decisions: one optional captured scavenging attachment on the
 two ordinary melee hosts; explicit loose-flesh capability and per-yield corpse
 flesh designation; narrow resource identities only; common corpse constructor.
-Initial tuning: eight approach and three feeding opportunities. Final values
-remain subject to the ordinary comparisons. Historical absence stays absent.
+Final tuning: eight approach opportunities; Gleaner five feeding at speed .7,
+Beetle three at speed 1. Historical absence stays absent.
 
 Gates: derive from `tools/verify_sys_4.py`: unfiltered production D and focused
 suites; complete worker/frontend/Rust/static/build/package/startup/lifecycle;
@@ -25,7 +25,7 @@ SYS-1–4 retained native integration plus new SYS-5 authoring/play/persistence.
 Use existing Python 3.11 baseline venv for dependencies only, bundled Workbench
 Python for workers, dummy SDL and disposable saves, app-local native events.
 
-M2–M4 core implemented; packaged/ordinary evidence still pending: explicit tier-1 flesh keyword on fresh crow
+M2–M4 complete: explicit tier-1 flesh keyword on fresh crow
 and stalker meat; per-output flesh booleans on crow/heath-stalker harvest;
 captured effective recipes, exact physical IDs, one-time strip and remaining
 harvest; common native/authored remains producer; exact one-portion transfer and
@@ -68,15 +68,36 @@ removal rollback, shared idle admission, bounded contact-only suppression rearm,
 keyed remains control proposal. 31 SYS-5 focused tests pass, including real speed
 scheduler, competition, denial and rehashed malformed preinstall-load refusal.
 
-M6 ordinary replay is in progress using genuine assignments at seed 20261023,
-normal gear/actions, actual living AI and F5 replay/cold readback. Store already
-shows cooked food from conserved flesh, one paid placed portion consumed, corpse
-stripping and positional displacement; finishing harvest/revisit and sump quiet/
-force comparison. Failed preflights remain in .baseline/sys-5. No safety fixtures.
-Full focused and affected worker preflights running; new membership count changes
-reconcile only expected catalogue totals. Final frozen matrix is still pending.
+M6 ordinary comparisons pass at seed 20261023 with actual gear, living AI and
+normal inputs. Store: conserved flesh cooks; spending one portion displaces the
+eater and permits the same far objective without pursuit; discovered corpse
+harvest cancels approach; visible player interrupts partial feeding; stripped
+crow still yields bone. Sump: intact bypass; three quiet cuts versus one loud
+force action; real sound delays feeding, both routes retain HP60. Both changed
+revisits persist. Map knowledge and initial surface staging are disclosed.
+Whole-plan timing includes cooking; no survival or universal balance claim.
+Final preflight-o passes both contexts, four additional native generated scenes
+plus the two walked assignments, 11 F5/F9/cold checkpoints including the focused
+remaining stack, and production-rendered stripped inspection.
+
+Read-only reviews integrated strict source constructor validation, contradictory
+vessel/portion rejection and captured bone-reader/empty-tier evidence. 35 focused
+SYS-5 tests pass; a real count3 -> count2 feed survives F5/F9 and cold load. Native
+supplement consumes both new/existing loose meats before both corpse strips,
+then uses equipped blade for surviving bone; saved3/Reset3/latest5/dirty7-excluded
+repetitions all pass in native-1793985612110 (HP57, no fixture, both completions2).
+Earlier native creation receipts remain separate. Supplemental receipts and
+preflight failures are archived with hashes in evidence/sys-5.
+
+Unfrozen full preflight: 721 tests, 3 failures/11 errors. Ten errors were loaded
+catalogue versus concurrently tuned sump source; two count assertions had already
+changed after the test process imported them. Remaining material count and G3
+identity-substitution test return were corrected; four affected checks pass.
+No admission negative was removed. Full logs remain under .baseline/sys-5.
+Final M7 requires a fresh complete frozen 19-gate run, not this preflight.
+Latest preservation check: all 280 owner files and seven saves unchanged.
 Authoritative guides updated; no wiki files touched.
 
-Next: finish M6, final review/repairs, commit checkpoints, run complete M7 gates,
-source-bound delivery evidence and preservation, push and independent main/tag
-readback. No blocker. Stop at SYS-5.
+Next: M6 checkpoint, freeze/run M7, assemble scoped evidence, commit/push and
+independently verify main/tag objects and targets.
+No blocker. Stop at SYS-5.
