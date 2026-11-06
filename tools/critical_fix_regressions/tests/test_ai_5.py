@@ -166,7 +166,7 @@ class FullParalysisTests(unittest.TestCase):
         e.local_map.container_state[(13,12)]=dict(state='open',items=[remedy])
         path=self.root/'prose-scene.pkl';path.parent.mkdir(parents=True,exist_ok=True)
         path.write_bytes(pickle.dumps(CachedChunk(e.local_map,[])))
-        loaded_map=ChunkCache._read(path).local_map
+        loaded_map=ChunkCache(self.root,data=e.data)._read(path).local_map
         self.assertEqual(e.data.items['venom_treatment']['description'],loaded_map.floor_objects[(12,12)][0].description)
         self.assertEqual('Owner-written draught',loaded_map.container_state[(13,12)]['items'][0].description)
         a=e.creature_factory.spawn('timed_amber_hunter',14,12);saved=_serialize_entity(a)

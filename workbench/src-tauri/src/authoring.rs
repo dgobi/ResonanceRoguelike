@@ -2245,7 +2245,7 @@ mod tests {
                 baseline:String::from_utf8(doc.original.clone()).unwrap(),draft:"{invalid".into(),variant:false,variant_id:String::new(),target:doc.relative.clone(),generation:1,captured_ms:1,published:None};
             assert!(record.validate().is_ok());
         }
-        for source in ["roguelike/data/items/equipment/other/sample.json","roguelike/data/items/tools/sample.json","roguelike/data/items/consumables/empty_water_skin.json"] {
+        for source in ["roguelike/data/items/equipment/other/sample.json","roguelike/data/items/special/sample.json","roguelike/data/items/consumables/empty_water_skin.json"] {
             doc.relative=source.into();doc.writable=true;
             assert!(!item_authoring_path(source));
             assert!(FamilyPolicy::from_result(&family_result(&doc,"item",json!(["edit","variant"])),source).is_none());

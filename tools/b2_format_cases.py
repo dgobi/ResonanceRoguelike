@@ -49,7 +49,7 @@ def run_case(e, ev):
     variants.append(("missing new item field", p, "weight", False))
     p = copy.deepcopy(original)
     p["inventory"]["items"][p["equipment"]["offhand"]["inventory_index"]]["light_data"] = None
-    variants.append(("active light with absent instance light", p, "light_data", True))
+    variants.append(("active light with absent instance light", p, "held_light", True))
     for key, value in (("perks", []), ("needs", {"hunger": True, "thirst": 0.1}), ("fighter", None)):
         p = copy.deepcopy(original)
         p[key] = value

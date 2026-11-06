@@ -80,6 +80,7 @@ class LocalRivalTests(unittest.TestCase):
         clear(a);a.x,a.y=12,12;e.local_map.set_tile(14,12,'wall',False,False)
         self.decision(a);self.assertIsNone(a.ai.local_target)
         e.local_map.set_tile(14,12,'grass',True,True)
+        e.world_time.turn=0  # Actual scene darkness; caller scalar no longer owns illumination.
         a.ai.take_turn(a,e.local_map,e.entities,e.player,e.log,random.Random(1),0,engine=e)
         self.assertIsNone(a.ai.local_target)
         a.perception.sees_in_dark=True;self.decision(a);self.assertIsNotNone(a.ai.local_target)

@@ -97,7 +97,9 @@ class PatientHuntTests(unittest.TestCase):
         self.assertEqual(480,e.world_time.turn)
         self.assertEqual(3,dose(e.player)['remaining'])
         e.player.x=19;a.perception.sight_radius=12;a.perception.sees_in_dark=False
-        self.assertIsNone(observe(a.ai,e,a,e.player,0.01)['cue'])
+        # Shared sight reads actual scene time, not the old caller scalar.
+        with patch.object(e.world_time, 'turn', 0):
+            self.assertIsNone(observe(a.ai,e,a,e.player,0.01)['cue'])
 
     def test_self_cure_between_close_and_attack_rejected_then_attack_remains_legal(self):
         e=self.e;a=self.source;self.sting()
