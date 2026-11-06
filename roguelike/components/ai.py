@@ -624,6 +624,15 @@ def _creature_can_see_player(entity, player, local_map, ambient_light: float = 1
     if dist > sight:
         return False
 
+    transparency = local_map.transparent
+    if engine is not None:
+        from engine.illumination import scene_light
+        field = scene_light(engine, local_map, fallback_ambient=ambient_light)
+        if not local_map.in_bounds(player.x, player.y):
+            return False
+        ambient_light = 1.0 if field.lit[player.x, player.y] else 0.0
+        transparency = field.transparency
+
     # Darkvision: creatures without it have sharply reduced range in darkness
     if perception and not perception.sees_in_dark and ambient_light < 0.1:
         if dist > max(1, sight // 4):
@@ -656,7 +665,7 @@ def _creature_can_see_player(entity, player, local_map, ambient_light: float = 1
             y   += sy
         if x == x1 and y == y1:
             break
-        if not local_map.in_bounds(x, y) or not local_map.transparent[x, y]:
+        if not local_map.in_bounds(x, y) or not transparency[x, y]:
             return False
 
     return True

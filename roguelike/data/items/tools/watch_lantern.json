@@ -1,0 +1,35 @@
+{
+  "id": "watch_lantern",
+  "name": "Watch Lantern",
+  "description": "A heavy broad-wicked lantern. Its bright pool reaches far; the oil goes quickly.",
+  "tile": "oil_lantern",
+  "category": "tool",
+  "weight": 0.8,
+  "stackable": false,
+  "on_use": "equip_light",
+  "consumed_on_use": false,
+  "_essence_note": "Refined oil burns with more intent than tallow. The Quickening is more concentrated — controlled combustion rather than animal fat catching.",
+  "keywords": [
+    {
+      "tag": "waxy",
+      "tier": 1
+    },
+    {
+      "tag": "fuel",
+      "tier": 2
+    }
+  ],
+  "provides_burning": 2,
+  "burn_turns": 420,
+  "light_radius": 9,
+  "light": {
+    "radius": 10,
+    "color": [
+      220,
+      200,
+      120
+    ],
+    "falloff": 1.5,
+    "flicker": false
+  }
+}

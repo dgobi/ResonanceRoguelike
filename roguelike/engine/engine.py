@@ -277,6 +277,7 @@ class Engine:
         self.look_mode          = LookMode()
         self.interaction_cursor = InteractionCursor()
         self.save_manager     = SaveManager(slot=0) if save_manager is None else save_manager
+        self.save_manager.cache.data = data
         self.item_factory     = ItemFactory(data)
         self.item_system      = ItemSystem()
         self.inventory_screen = InventoryScreen()
@@ -1507,11 +1508,12 @@ class Engine:
             corrupt.tick(self.log, zone_tags, self.world_time.turn)
 
         light = getattr(self.player, "light_source", None)
+        from engine.held_light import active_item, fuel_limit
+        item_ref = active_item(self.player)
         if light and light.active:
-            item_ref = getattr(light, "_item_ref", None)
             if item_ref is not None:
                 item_ref.turns_lit += 1
-                burn_turns = getattr(light, "_burn_turns", 600)
+                burn_turns = fuel_limit(item_ref)
                 remaining  = burn_turns - item_ref.turns_lit
                 if remaining <= 0:
                     light.active = False
@@ -4992,28 +4994,10 @@ class Engine:
             return 40  # safe surface default
 
     def _get_equipped_light_radius(self) -> int:
-        """Return light_radius from equipped light item JSON. 0 if none or inactive."""
-        light = getattr(self.player, "light_source", None)
-        if not (light and light.active):
-            return 0
-        # item_system stores a reference to the lighting item on the LightSource component
-        item_ref = getattr(light, "_item_ref", None)
-        if item_ref is not None:
-            item_def = self.data.items.get(getattr(item_ref, "item_id", ""), {})
-            lr = item_def.get("light_radius", 0)
-            if lr > 0:
-                return lr
-        # Fallback: scan all equipment slots for any item with light_data
-        equip = getattr(self.player, "equipment", None)
-        if not equip:
-            return 0
-        for slot_item in equip.slots.values():
-            if slot_item and getattr(slot_item, "light_data", None):
-                item_def = self.data.items.get(getattr(slot_item, "item_id", ""), {})
-                lr = item_def.get("light_radius", 0)
-                if lr > 0:
-                    return lr
-        return 0
+        """Captured mechanical reach of the exact active carried offhand."""
+        from engine.held_light import active_item
+        item = active_item(self.player)
+        return item.held_light['radius'] if item else 0
 
     def normal_player_vision(self):
         """Pure current direct-vision query; no publication, clocks or identity work.
@@ -5058,90 +5042,24 @@ class Engine:
                 _fov_cap = int(_fov_cap_val)
                 active_radius = min(active_radius, _fov_cap)
 
-        # ── Zone ambient for lighting (still needed for light_map) ───
-        chunk        = self.world_map.get(self.world_x, self.world_y)
-        zone_ambient = 0.0
-        is_outdoor   = True
-        if chunk:
-            for zone_id, _ in chunk.zones:
-                zone = self.data.zones.get(zone_id)
-                if zone:
-                    zone_ambient = zone.get("ambient_light", 1.0)
-                    if zone.get("category") == "dungeon":
-                        is_outdoor = False
-                    break
-        ambient_intensity, _ = self.world_time.get_ambient_light(
-            zone_ambient, is_outdoor
-        )
-
-        # ── Active visible mask (circle) ─────────────────────────────
-        raw_fov = tcod.map.compute_fov(
-            self.local_map.transparent,
-            (self.player.x, self.player.y),
-            radius=active_radius,
-        )
-
-        w  = self.local_map.width
-        h  = self.local_map.height
-        xs = np.arange(w).reshape(w, 1)
-        ys = np.arange(h).reshape(1, h)
-        dist_sq     = (xs - self.player.x)**2 + (ys - self.player.y)**2
-        circle_mask = dist_sq <= (active_radius ** 2)
-
-        visible = raw_fov & circle_mask
-
-        # ── Light source FOV contribution ───────────────────────────
-        # For each light source the player can see, compute a secondary
-        # FOV from that source and union it with the visible mask.
-        _light_sources: list[tuple[int, int, int, float]] = []  # (lx, ly, radius, dist_to_player)
-        _max_light_radius = 0
-
-        # Terrain light sources (street lamps etc.)
-        _search_r = active_radius + 10  # generous search radius
-        _px, _py = self.player.x, self.player.y
-        _lm_w, _lm_h = self.local_map.width, self.local_map.height
-        for _slx in range(max(0, _px - _search_r), min(_lm_w, _px + _search_r + 1)):
-            for _sly in range(max(0, _py - _search_r), min(_lm_h, _py + _search_r + 1)):
-                if not bool(visible[_slx, _sly]):
-                    continue
-                _sterrain = str(self.local_map.tiles[_slx, _sly]["terrain"])
-                _std = self.data.terrain.get(_sterrain, {})
-                _semit = _std.get("light_emit", 0)
-                if _semit > 0:
-                    _sdist = abs(_slx - _px) + abs(_sly - _py)
-                    _light_sources.append((_slx, _sly, int(_semit), _sdist))
-                    _max_light_radius = max(_max_light_radius, int(_semit))
-
-        # Decor light sources (campfire_lit etc.)
-        _decor = getattr(self.local_map, "decor", {})
-        for (_dlx, _dly), _did in _decor.items():
-            if not (0 <= _dlx < _lm_w and 0 <= _dly < _lm_h):
-                continue
-            if not bool(visible[_dlx, _dly]):
-                continue
-            _dentry = self.data.decoratives.get(_did, {})
-            _demit = _dentry.get("light_emit", 0)
-            if _demit > 0:
-                _ddist = abs(_dlx - _px) + abs(_dly - _py)
-                _light_sources.append((_dlx, _dly, int(_demit), _ddist))
-                _max_light_radius = max(_max_light_radius, int(_demit))
-
-        # Cap at 20 nearest, then compute secondary FOVs
-        if _light_sources:
-            _light_sources.sort(key=lambda t: t[3])
-            for _llx, _lly, _lrad, _ in _light_sources[:20]:
-                _lfov = tcod.map.compute_fov(
-                    self.local_map.transparent,
-                    (_llx, _lly),
-                    radius=_lrad,
-                    light_walls=True,
-                    algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,
-                )
-                visible |= _lfov
-
+        from engine.illumination import scene_light, footprint
+        field = scene_light(self)
+        # Ordinary near/moon vision retains its existing reach. Only actual local
+        # sources extend it; moon ambient does not become 40-tile daylight.
+        extension = self._DAY_FOV
+        if exposures:
+            extension = min(extension, active_radius)
+        if _fov_cap is not None:
+            extension = min(extension, _fov_cap)
+        direct = footprint(field.transparency, self.player.x, self.player.y,
+                           max(1, max(active_radius, extension)))
+        xs, ys = np.ogrid[:self.local_map.width, :self.local_map.height]
+        dist_sq = (xs-self.player.x)**2 + (ys-self.player.y)**2
+        visible = direct & ((dist_sq <= active_radius**2)
+                            | (field.emitted & (dist_sq <= extension**2)))
         return dict(visible=visible, radius=active_radius, base=base,
                     light_radius=light_radius, fov_cap=_fov_cap,
-                    ambient_intensity=ambient_intensity)
+                    ambient_intensity=field.ambient)
 
     def _update_fov(self) -> None:
         # Revalidate absolute interest on scene return/F9 without a move or turn.
@@ -5164,23 +5082,6 @@ class Engine:
 
             self._update_last_known_positions()
             return
-        # ── Unconditional surface guard ───────────────────────────────
-        # If current_submap_id is set but no matching submap exists in the
-        # current chunk, the ID is stale (e.g. from a debug teleport that
-        # skipped _ascend_from_submap). Clear it and log so the root cause
-        # can be traced. Generation functions must never write this field.
-        if self.current_submap_id is not None:
-            _guard_chunk = self.world_map.get(self.world_x, self.world_y) if hasattr(self, "world_map") else None
-            _chunk_subs  = getattr(_guard_chunk, "submaps", []) or []
-            if not any(getattr(s, "submap_id", None) == self.current_submap_id for s in _chunk_subs):
-                print(
-                    f"[FOV WARNING] current_submap_id={self.current_submap_id!r} has no matching "
-                    f"submap in chunk ({self.world_x},{self.world_y}) "
-                    f"biome={getattr(_guard_chunk, 'biome_id', '?')}. "
-                    f"Forcing surface. Check generation/debug teleport code for stale writes."
-                )
-                self.current_submap_id = None
-
         from engine.effect_lifecycle import refresh_wraith_aura
         refresh_wraith_aura(self)
         vision = self.normal_player_vision()
@@ -5197,7 +5098,7 @@ class Engine:
         # In well-lit areas, cast sightlines to map edge and commit
         # everything reachable to explored (memory) even beyond active FOV.
         # Tiles are remembered but not live — entities won't show there.
-        if ambient_intensity > 0.4:
+        if self.current_submap_id is None and ambient_intensity > 0.4:
             # In fog/forgetting_fog, cap passive memory to active_radius so tiles
             # beyond the fog cap don't render as dim memory tiles (making fog appear broken).
             _passive_radius = active_radius if _fov_cap is not None else 0
@@ -5229,85 +5130,8 @@ class Engine:
                 entity.last_known_y = entity.y
 
     def _update_light_map(self) -> None:
-        lm    = self.local_map.light_map
-        lm[:] = 0.0
-
-        fov          = self.local_map.tiles["visible"]
-        chunk        = self.world_map.get(self.world_x, self.world_y)
-        is_outdoor   = True
-        zone_ambient = 1.0
-
-        if chunk:
-            for zone_id, _ in chunk.zones:
-                zone = self.data.zones.get(zone_id)
-                if zone:
-                    zone_ambient = zone.get("ambient_light", 1.0)
-                    if zone.get("category") == "dungeon":
-                        is_outdoor = False
-                    break
-
-        intensity, amb_color = self.world_time.get_ambient_light(
-            zone_ambient, is_outdoor
-        )
-
-        lm[fov, 0] = amb_color[0] * intensity
-        lm[fov, 1] = amb_color[1] * intensity
-        lm[fov, 2] = amb_color[2] * intensity
-
-        for entity in self.entities:
-            light = getattr(entity, "light_source", None)
-            if light and getattr(light, "is_dominant", True):
-                light.apply_to_light_map(lm, entity.x, entity.y, fov)
-
-        # Terrain light sources — any terrain tile with light_emit > 0 participates.
-        # Data-driven: add light_emit + light_mode fields to terrain.json, no code changes needed.
-        import math as _lm_math
-        _now_s = pygame.time.get_ticks() / 1000.0
-        for _lx in range(self.local_map.width):
-            for _ly in range(self.local_map.height):
-                if not bool(fov[_lx, _ly]):
-                    continue
-                _terrain = str(self.local_map.tiles[_lx, _ly]["terrain"])
-                _td = self.data.terrain.get(_terrain, {})
-                _emit = _td.get("light_emit", 0)
-                if _emit <= 0:
-                    continue
-                _mode      = _td.get("light_mode", "steady")
-                _lc_raw    = _td.get("light_color", [255, 220, 150])
-                _lc_r = _lc_raw[0] / 255.0
-                _lc_g = _lc_raw[1] / 255.0
-                _lc_b = _lc_raw[2] / 255.0
-                # Determine effective radius for this frame
-                if _mode == "pulse":
-                    _pmin  = float(_td.get("light_pulse_min", _emit // 2))
-                    _pmax  = float(_td.get("light_pulse_max", _emit))
-                    _prate = float(_td.get("light_pulse_rate", 0.5))
-                    # Per-tile phase offset so lamps don't all pulse in sync
-                    _phase = (_lx * 0.37 + _ly * 0.59) % 1.0
-                    _sine  = _lm_math.sin(
-                        2.0 * _lm_math.pi * (_prate * _now_s + _phase)
-                    )
-                    # sine in [-1, 1] → radius in [pmin, pmax]
-                    _radius = int(round(_pmin + (_pmax - _pmin) * (_sine * 0.5 + 0.5)))
-                else:  # "steady"
-                    _radius = int(_emit)
-                if _radius <= 0:
-                    continue
-                for _dx2 in range(-_radius, _radius + 1):
-                    for _dy2 in range(-_radius, _radius + 1):
-                        _nx, _ny = _lx + _dx2, _ly + _dy2
-                        if not self.local_map.in_bounds(_nx, _ny):
-                            continue
-                        if not bool(fov[_nx, _ny]):
-                            continue
-                        _dist = (_dx2 * _dx2 + _dy2 * _dy2) ** 0.5
-                        if _dist > _radius:
-                            continue
-                        # Same falloff as LightSource.apply_to_light_map (linear, falloff=1)
-                        _strength = max(0.0, 1.0 - _dist / _radius)
-                        lm[_nx, _ny, 0] = min(1.0, lm[_nx, _ny, 0] + _lc_r * _strength)
-                        lm[_nx, _ny, 1] = min(1.0, lm[_nx, _ny, 1] + _lc_g * _strength)
-                        lm[_nx, _ny, 2] = min(1.0, lm[_nx, _ny, 2] + _lc_b * _strength)
+        from engine.illumination import render
+        render(self)
 
     # ------------------------------------------------------------------ #
     #  Combat

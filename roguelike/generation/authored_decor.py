@@ -18,7 +18,7 @@ def properties(identifier, definition):
                 cosmetic_fx=definition.get('visual_fx'),
                 interaction=CAMPFIRES.get(identifier),
                 stationary_fire=identifier == 'campfire_lit',
-                sight_note='Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid.')
+                sight_note='Direct sight and shared illumination use terrain transparency and declared decor blocks_sight. Light reach is finite and obstructed.')
 
 
 def admission(data, identifier):
@@ -54,9 +54,11 @@ def admission(data, identifier):
                 reason = f'{key} must be boolean.'
         for key in ('light_emit', 'warmth_radius'):
             value = definition.get(key, 0)
-            limit = 2**31-1 if key == 'light_emit' else 2**53-1
+            limit = 40 if key == 'light_emit' else 2**53-1
             if type(value) not in (int, float) or not 0 <= value <= limit or not math.isfinite(value):
                 reason = f'{key} must be a finite nonnegative supported number.'
+            elif key=='light_emit' and type(value) is not int:
+                reason = 'light_emit must be an integer tile reach from 1 to 40, or zero for no source.'
         if 'visual_fx' in definition and not isinstance(definition['visual_fx'], str):
             reason = 'visual_fx must be an existing static effect name.'
     return dict(supported=not reason, reason=reason,

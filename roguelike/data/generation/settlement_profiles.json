@@ -55,7 +55,7 @@
             "max_per_settlement": 3
           },
           {
-            "asset": "tool_shed_b",
+            "asset": "tool_shed_c",
             "weight": 1.0,
             "max_per_settlement": 3
           },
@@ -142,7 +142,7 @@
             "max_per_settlement": 3
           },
           {
-            "asset": "tool_shed_b",
+            "asset": "tool_shed_c",
             "weight": 1.0,
             "max_per_settlement": 3
           },

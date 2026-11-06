@@ -187,7 +187,8 @@ class ItemSystem:
         """
         from components.light_source import LightSource
 
-        if not item.light_data:
+        from engine.held_light import unspent
+        if not item.light_data or not unspent(item):
             return False
 
         self.last_use_committed = True
@@ -235,13 +236,13 @@ class ItemSystem:
         light._burn_turns = item.burn_turns or 600
         light._turns_used = item.turns_lit
 
-        engine.player.light_source = light
-        engine._update_fov()
-
         # Equip to off-hand slot
         if equipment:
             equipment.equip(item, "offhand")
             _recompute_effective_av(engine.player, engine.data)
+
+        engine.player.light_source = light
+        engine._update_fov()
 
         engine.log.add(
             f"You light the {item.name}.",
@@ -534,7 +535,8 @@ def _remove_armor_from_fighter(player, item_def: dict, data=None) -> None:
 def _activate_light(item, engine) -> None:
     """Activate a light-slot item's LightSource on the player."""
     from components.light_source import LightSource
-    if not item.light_data:
+    from engine.held_light import unspent
+    if not item.light_data or not unspent(item):
         return
     ld = item.light_data
     light = LightSource(

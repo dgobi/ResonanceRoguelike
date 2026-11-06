@@ -34,6 +34,9 @@ class Item(Entity):
         self.__dict__.update(values)
         from engine.vessels import legacy
         legacy(self)
+        if 'held_light' in values:
+            from engine.held_light import validate
+            validate(self.held_light, self)
 
     def __init__(
         self,

@@ -362,7 +362,10 @@ class ContactAndCoverTests(unittest.TestCase):
         for _ in range(30): a.ai._update_state(a,e.local_map,e.player,1,engine=e)
         self.assertIsNone(a._last_known_px); self.assertEqual(AIState.WANDERING,a.ai.state)
         crow=self.actor('plague_crow',19,12)
-        self.assertTrue(self.seen(crow)); self.assertFalse(self.seen(crow,light=0))
+        self.assertTrue(self.seen(crow))
+        # SYS-2 resolves the actual scene, not a contradictory caller scalar.
+        e.world_time.turn=0
+        self.assertFalse(self.seen(crow,light=0))
         a.x=13; self.assertTrue(self.seen(a,light=0))  # Revenant darkvision
 
     def test_perception_uses_supplied_map_and_phantom_is_not_physical_player(self):

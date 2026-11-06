@@ -41,12 +41,15 @@ class G11Lifecycle(unittest.TestCase):
         with patch('generation.world_plan.build_plan',side_effect=AssertionError('replanned')):
             self.assertTrue(e.save_manager.load(e),e.save_manager.last_error)
             self.assertEqual(e.world_map.surface_policy,b['policy'])
-            self.assertEqual(digest(_serialize_player(e)),b['player'])
+            from g1_support import semantic_item_state
+            historical_player=_serialize_player(e)
+            historical_player['inventory']['items']=[semantic_item_state(i,historical=True) for i in historical_player['inventory']['items']]
+            self.assertEqual(digest(historical_player),b['player'])
             self.assertEqual(digest(e.world_map.plan),b['plan_identity'])
             for row in b['scenes']+b['pending']:
                 m,actors=(historical_pending_scene(e,row,b) if row in b['pending']
                           else e._prepare_destination(*row['chunk']))
-                self.assertEqual(fingerprint(m,actors),row['fingerprint'])
+                self.assertEqual(fingerprint(m,actors,historical=True),row['fingerprint'])
                 self.assertFalse(hasattr(m,'wilderness_access'))
             m,_=e._prepare_destination(*b['scenes'][0]['chunk'])
             self.assertIn(tuple(b['mutation']['waystone']),m.interacted_waystones)
@@ -55,7 +58,7 @@ class G11Lifecycle(unittest.TestCase):
             e.debug=False;e._handle_key_local(pygame.K_F9)
             for owner in (e,reader):
                 for row in b['scenes']+b['pending']:
-                    self.assertEqual(fingerprint(*owner._prepare_destination(*row['chunk'])),row['fingerprint'])
+                    self.assertEqual(fingerprint(*owner._prepare_destination(*row['chunk']),historical=True),row['fingerprint'])
         self.evidence('g11-genuine-g10.json',dict(passed=True,creator=b['head'],visited=b['scenes'],pending=b['pending'],
             mutable_waystone_preserved=True,ordinary_load_and_F9=True,known_old_access_defect_retained=True))
 

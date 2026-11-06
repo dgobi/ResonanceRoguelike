@@ -28,7 +28,7 @@ pub const SELECTION: &str = "roguelike/data/generation/settlement_profiles.json"
 pub fn item_authoring_path(source:&str)->bool {
     let p:Vec<_>=source.split('/').collect();
     p.len()>=5 && p[..3]==["roguelike","data","items"]
-        && (["components","butchery","consumables","weapons","armor","shields"].contains(&p[3]) || (p.len()>=6 && p[3]=="equipment" && p[4]=="satchel"))
+        && (["components","butchery","consumables","weapons","armor","shields","tools"].contains(&p[3]) || (p.len()>=6 && p[3]=="equipment" && p[4]=="satchel"))
         && p[4..p.len()-1].iter().all(|s|valid_id(s)) && valid_filename(p[p.len()-1])
         && !p[p.len()-1].eq_ignore_ascii_case("empty_water_skin.json")
 }
@@ -2233,7 +2233,7 @@ mod tests {
     #[test]
     fn supplies_routes_are_independent_of_worker_permissions_and_recovery() {
         let (root,mut doc,_) = fixture();
-        for route in ["components","butchery","consumables","weapons","armor","shields","equipment/satchel"] {
+        for route in ["components","butchery","consumables","weapons","armor","shields","tools","equipment/satchel"] {
             doc.relative=format!("roguelike/data/items/{route}/sample.json");doc.writable=true;
             assert!(item_authoring_path(&doc.relative));
             doc.family=FamilyPolicy::from_result(&family_result(&doc,"item",json!(["edit","variant"])),&doc.relative);

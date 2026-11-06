@@ -25,6 +25,12 @@ def semantic_item_state(row, *, historical=False):
         else:v.pop('id')
     if historical and 'vessel_absent_version' in row:
         validate_item(row,'historical item');row.pop('vessel_absent_version')
+    if historical and row.get('item_id') in ('tallow_torch','oil_lantern') and 'held_light' in row:
+        # Exact pre-SYS-2 mechanical reach, not the 8/10 cosmetic radius.
+        # Current comparisons retain all effective state; only genuine historical
+        # projections omit this validated additive capture, never custom reach.
+        validate_item(row,'historical light')
+        if row['held_light']==dict(version=1,radius=6):row.pop('held_light')
     return row
 
 

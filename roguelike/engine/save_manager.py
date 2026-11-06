@@ -116,10 +116,11 @@ class ChunkCache:
     Every hot entry is considered potentially dirty: map layers can mutate in
     place without going through store_hot_only. Full saves serialize all of them.
     """
-    def __init__(self, save_path: Path, base_path=None) -> None:
+    def __init__(self, save_path: Path, base_path=None, data=None) -> None:
         from engine.checkpoints import CheckpointStore, no_links
         import uuid
         self.save_path = no_links(Path(save_path))
+        self.data = data
         if base_path is None:
             store = CheckpointStore(self.save_path)
             candidates = store.candidates()
@@ -159,8 +160,7 @@ class ChunkCache:
     def _cached(local_map, entities):
         return CachedChunk(local_map, [_serialize_entity(e) for e in entities if not _is_player(e)])
 
-    @staticmethod
-    def _read(path):
+    def _read(self, path):
         cached = pickle.loads(path.read_bytes())
         from world.local_map import LocalMap
         if not isinstance(cached, CachedChunk) or not isinstance(cached.local_map, LocalMap):
@@ -169,6 +169,8 @@ class ChunkCache:
         refresh_map(cached.local_map)
         from engine.vessels import validate_map
         validate_map(cached.local_map)
+        from engine.held_light import prepare_map
+        prepare_map(cached.local_map, self.data)
         return cached
 
     def _write(self, path, cached):
@@ -240,6 +242,8 @@ class ChunkCache:
             _claim_individuals(cached.entities, identities)
             from engine.vessels import validate_map
             validate_map(cached.local_map)
+            from engine.held_light import prepare_map
+            prepare_map(cached.local_map, data)
         return payloads
 
 
@@ -354,7 +358,7 @@ class SaveManager:
         world_data, player_data, address = self._records(path)
         _validate_player_references(player_data, engine.data)
         _validate_pending_arrivals(player_data, world_data)
-        cold_cache = ChunkCache(self.save_path, base_path=path)
+        cold_cache = ChunkCache(self.save_path, base_path=path, data=engine.data)
         # All scenes belong to the checkpoint: validate even inactive owners
         # before installing any player/world/cache reference.
         identities = set()
@@ -513,7 +517,7 @@ class SaveManager:
 
     def delete_slot(self):
         self.store.delete()
-        self.cache = ChunkCache(self.save_path)
+        self.cache = ChunkCache(self.save_path, data=self.cache.data)
         self.generation = self._head_token = None
         self._needs_load = False
 
@@ -896,9 +900,11 @@ def _validate_player_references(saved: dict, data) -> None:
             raise SaveFormatError("light_source must be null or a light object with boolean active")
         if light["active"]:
             offhand = equipment.get("offhand")
-            if offhand is None or not data.items[offhand["item_id"]].get("light"):
+            if offhand is None:
                 raise SaveFormatError("Active item light requires an equipped offhand light")
             row = inv["items"][offhand["inventory_index"]]
+            if 'held_light' not in row and not data.items[offhand['item_id']].get('light'):
+                raise SaveFormatError('Legacy active light requires its supported definition')
             if "light_data" in row and not row["light_data"]:
                 raise SaveFormatError("Active item light requires restored offhand light_data")
 
@@ -1083,6 +1089,9 @@ def _restore_equipment(player, saved_equipment: dict, data) -> None:
         light._item_id = offhand.item_id
         light._burn_turns = offhand.burn_turns or 600
         light._turns_used = offhand.turns_lit
+        from engine.held_light import unspent
+        if not unspent(offhand):
+            light.active = False
     _recompute_effective_av(player, data)
 
 

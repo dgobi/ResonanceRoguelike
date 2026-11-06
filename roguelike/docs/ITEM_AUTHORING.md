@@ -1,6 +1,6 @@
 # Expedition item authoring (W5M)
 
-The registered item family uses `expedition-items-4`. Begin edit changes the same
+The registered item family uses `expedition-items-5`. Begin edit changes the same
 ID; **Save as new variant** creates a distinct ID beside a verified source.
 IDs are machine identities. Display-name edits never redirect references.
 
@@ -19,11 +19,12 @@ One unique single-object source under `data/items/components`, `butchery` or
 and it is an ordinary inert material, `eat` food, `drink` drink or `heal_minor`
 HP treatment, plus the registered `cure_numbing_venom` remedy seed class. The original category and use identity stay fixed for both operations.
 Raw Source, recovery and descriptor flags cannot promote unsupported originals.
-Arrays, ambiguous/case-colliding IDs, corpses, lights,
+Arrays, ambiguous/case-colliding IDs, corpses, unsupported special lights,
 readable items, effects and special preparations remain inspect-only. Rules admit
 47 shipped supplies: 33 materials, nine foods, two drinks, one HP treatment and two venom remedies.
-Equipment adds six ordinary weapons, two armour definitions, one shield and three
-satchels: 59 of 85 total sources. Run `workbench/scripts/equipment-inventory.py`
+Equipment originally added six ordinary weapons, two armour definitions, one shield
+and three satchels. Those historical inventory counts precede later variants.
+Run `workbench/scripts/equipment-inventory.py`
 with an output JSON path for operation/class eligibility and exclusion reasons.
 This is an executable inventory, not an ID allowlist.
 
@@ -42,6 +43,12 @@ capability; explicit nonempty instance handlers win, and a new-ID material varia
 does not inherit it. This does not enable general material throwing or effect editing.
 
 ## Controls and source fidelity
+
+SYS-2 adds ordinary nonstackable `equip_light` tools under `items/tools`, with
+bounded mechanical radius/endurance and cosmetic falloff/flicker. Use identity,
+heat, offhand role and consumption metadata remain locked. Saved owned objects
+retain effective reach and spent fuel after source edits. See
+[Shared light](SHARED_LIGHT.md) for the exact limits and publish/Test workflow.
 
 SYS-1 adds bounded water-vessel controls for supported inert materials: capacity
 in integral mL and actual heatproof suitability. Enable water vessel also makes
@@ -146,7 +153,7 @@ recovery or a descriptor label cannot promote an unsupported original or edit
 locked behavior. Singular essence/strength and well-formed inherited movesets are
 retained read-only; new IDs retain their action IDs and shared cooldown identity.
 The base-attack check does not certify every move. Multi-essence debug equipment,
-held lights, talismans, effects, coatings, corpses and special-use items remain
+special held lights, talismans, effects, coatings, corpses and special-use items remain
 inspect-only. Unedited metadata is preserved; it is not an active control.
 
 Ordinary equipment requires `equip_toggle`. Four exact shipped IDs have a legacy

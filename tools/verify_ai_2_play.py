@@ -83,7 +83,9 @@ def run(room, response, allowance=None):
                      reasons=sorted({r['reason'] for r in recent}),
                      accelerated=any(len(r['steps'])==2 for r in recent),
                      committed_melee=any(r['result'] and r['result']['committed'] for r in recent),
-                     tells=sorted({m for row in trace for m in row['logs'] if 'seeks shadow' in m}),
+                     # Current restrained sensory wording; preserve the visible
+                     # tell obligation rather than the retired AI-2 prose.
+                     tells=sorted({m for row in trace for m in row['logs'] if 'shudders in the light' in m}),
                      safe_response_inputs=sum(row['hp']==opening['hp'] for row in trace if row['turn']>opening['turn']))
         if response=='sealed':
             passed=summary['actor_final']==initial['actor'] and not summary['committed_melee']

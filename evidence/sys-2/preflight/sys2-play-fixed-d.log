@@ -1,0 +1,98 @@
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 21
+selected tool-shed approach 480
+[harvest] tile=(61,13) terrain=floor harvestable=False decor=crate decor_harvestable=False
+acquired native lantern 490
+[LP-CHECK] Plague Crow state=ATTACKING dist=2 can_cross=True acd=0 -> EXTRACTED
+[LIVE-EXTRACT] Plague Crow from (97,29) lk=(71,42)
+[LP-STORED] 1 live pursuers: ['Plague Crow']
+[CHUNK] S player=(69,42) dest=(69,43) -> entry=(69,0) world (97,29)->(97,30)
+[LP-TICK] Plague Crow at (71,40) in chunk(97,29) virtual_player=(-999,-999) state=ATTACKING lkx=71
+[LP-POST] Plague Crow now at (71,40) state=ATTACKING lkx=71
+[LP-CROSS-CHECK] Plague Crow pos=(71,40) lkx=71 lky=42 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Plague Crow at (71,40) in chunk(97,29) virtual_player=(-999,-999) state=ATTACKING lkx=71
+[LP-POST] Plague Crow now at (71,40) state=ATTACKING lkx=71
+[LP-CROSS-CHECK] Plague Crow pos=(71,40) lkx=71 lky=42 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Plague Crow at (71,40) in chunk(97,29) virtual_player=(-999,-999) state=ATTACKING lkx=71
+[LP-POST] Plague Crow now at (71,40) state=ATTACKING lkx=71
+[LP-CROSS-CHECK] Plague Crow pos=(71,40) lkx=71 lky=42 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Plague Crow at (71,40) in chunk(97,29) virtual_player=(-999,-999) state=ATTACKING lkx=71
+[LP-POST] Plague Crow now at (71,40) state=ATTACKING lkx=71
+[LP-CROSS-CHECK] Plague Crow pos=(71,40) lkx=71 lky=42 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Plague Crow at (71,40) in chunk(97,29) virtual_player=(-999,-999) state=ATTACKING lkx=71
+[LP-POST] Plague Crow now at (71,40) state=ATTACKING lkx=71
+[LP-CROSS-CHECK] Plague Crow pos=(71,40) lkx=71 lky=42 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Plague Crow at (71,40) in chunk(97,29) virtual_player=(-999,-999) state=ATTACKING lkx=71
+[LP-POST] Plague Crow now at (71,40) state=ATTACKING lkx=71
+[LP-CROSS-CHECK] Plague Crow pos=(71,40) lkx=71 lky=42 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Plague Crow at (71,40) in chunk(97,29) virtual_player=(-999,-999) state=ATTACKING lkx=71
+[LP-POST] Plague Crow now at (71,40) state=ATTACKING lkx=71
+[LP-CROSS-CHECK] Plague Crow pos=(71,40) lkx=71 lky=42 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Plague Crow at (71,40) in chunk(97,29) virtual_player=(-999,-999) state=ATTACKING lkx=71
+[LP-POST] Plague Crow now at (71,40) state=ATTACKING lkx=71
+[LP-CROSS-CHECK] Plague Crow pos=(71,40) lkx=71 lky=42 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Plague Crow at (71,40) in chunk(97,29) virtual_player=(-999,-999) state=ATTACKING lkx=71
+[LP-POST] Plague Crow now at (71,40) state=ATTACKING lkx=71
+[LP-CROSS-CHECK] Plague Crow pos=(71,40) lkx=71 lky=42 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Plague Crow at (71,40) in chunk(97,29) virtual_player=(-999,-999) state=ATTACKING lkx=71
+[LP-POST] Plague Crow now at (71,40) state=ATTACKING lkx=71
+[LP-CROSS-CHECK] Plague Crow pos=(71,40) lkx=71 lky=42 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Plague Crow at (71,40) in chunk(97,29) virtual_player=(-999,-999) state=ATTACKING lkx=71
+[LP-POST] Plague Crow now at (71,40) state=ATTACKING lkx=71
+[LP-CROSS-CHECK] Plague Crow pos=(71,40) lkx=71 lky=42 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-STORED] 1 live pursuers: ['Plague Crow']
+[CHUNK] E player=(79,0) dest=(80,0) -> entry=(0,0) world (97,30)->(98,30)
+[LP-TICK] Plague Crow at (71,40) in chunk(97,29) virtual_player=(-999,-999) state=ATTACKING lkx=71
+[LP-POST] Plague Crow now at (71,40) state=ATTACKING lkx=71
+[LP-CROSS-CHECK] Plague Crow pos=(71,40) lkx=71 lky=42 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Plague Crow at (71,40) in chunk(97,29) virtual_player=(-999,-999) state=ATTACKING lkx=71
+[LP-POST] Plague Crow now at (71,40) state=ATTACKING lkx=71
+[LP-CROSS-CHECK] Plague Crow pos=(71,40) lkx=71 lky=42 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Plague Crow at (71,40) in chunk(97,29) virtual_player=(-999,-999) state=ATTACKING lkx=71
+[LP-POST] Plague Crow now at (71,40) state=ATTACKING lkx=71
+[LP-CROSS-CHECK] Plague Crow pos=(71,40) lkx=71 lky=42 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Plague Crow at (71,40) in chunk(97,29) virtual_player=(-999,-999) state=ATTACKING lkx=71
+[LP-POST] Plague Crow now at (71,40) state=ATTACKING lkx=71
+[LP-CROSS-CHECK] Plague Crow pos=(71,40) lkx=71 lky=42 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Plague Crow at (71,40) in chunk(97,29) virtual_player=(-999,-999) state=ATTACKING lkx=71
+[LP-POST] Plague Crow now at (71,40) state=ATTACKING lkx=71
+[LP-CROSS-CHECK] Plague Crow pos=(71,40) lkx=71 lky=42 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Plague Crow at (71,40) in chunk(97,29) virtual_player=(-999,-999) state=ATTACKING lkx=71
+[LP-POST] Plague Crow now at (71,40) state=ATTACKING lkx=71
+[LP-CROSS-CHECK] Plague Crow pos=(71,40) lkx=71 lky=42 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Plague Crow at (71,40) in chunk(97,29) virtual_player=(-999,-999) state=ATTACKING lkx=71
+[LP-POST] Plague Crow now at (71,40) state=ATTACKING lkx=71
+[LP-CROSS-CHECK] Plague Crow pos=(71,40) lkx=71 lky=42 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Plague Crow at (71,40) in chunk(97,29) virtual_player=(-999,-999) state=ATTACKING lkx=71
+[LP-POST] Plague Crow now at (71,40) state=ATTACKING lkx=71
+[LP-CROSS-CHECK] Plague Crow pos=(71,40) lkx=71 lky=42 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Plague Crow at (71,40) in chunk(97,29) virtual_player=(-999,-999) state=ATTACKING lkx=71
+[LP-POST] Plague Crow now at (71,40) state=ATTACKING lkx=71
+[LP-CROSS-CHECK] Plague Crow pos=(71,40) lkx=71 lky=42 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Plague Crow at (71,40) in chunk(97,29) virtual_player=(-999,-999) state=ATTACKING lkx=71
+[LP-POST] Plague Crow now at (71,40) state=ATTACKING lkx=71
+[LP-CROSS-CHECK] Plague Crow pos=(71,40) lkx=71 lky=42 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Plague Crow at (71,40) in chunk(97,29) virtual_player=(-999,-999) state=ATTACKING lkx=71
+[LP-POST] Plague Crow now at (71,40) state=WANDERING lkx=71
+[LP-CROSS-CHECK] Plague Crow pos=(71,40) lkx=71 lky=42 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LIVE-TIMEOUT] Plague Crow abandoned pursuit
+[LP-STORED] 0 live pursuers: []
+[CHUNK] E player=(79,13) dest=(80,13) -> entry=(0,13) world (98,30)->(99,30)
+[TRANSFER-STAIR-DOWN] Heath Stalker -> submap (30,25)
+normal selected descent 798
+fixed pool with ward 801
+  Loaded sheet 'amber_insect': assets/sprites/amber_insect.png
+  Loaded sheet 'urizen': assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png
+  Loaded sheet 'pixel': assets/sprites/PixelAsciiSpritesheet.png
+  Loaded sheet 'hexany_creatures': assets/sprites/HexanyCreatures.png
+  Loaded sheet 'terrain': assets/sprites/terrain.png
+  Loaded sheet 'objects': assets/sprites/objects.png
+  Loaded sheet 'creatures': assets/sprites/creatures.png
+SpriteRegistry: 264 tiles across 7 sheets
+recovered grave material 819
+[harvest] tile=(40,24) terrain=floor harvestable=False decor=campfire_lit decor_harvestable=False
+extinguished before retreat 828
+[TRANSFER-STAIR-UP] Heath Stalker -> surface (42,9)
+[TRANSFER-STAIR-DOWN] Heath Stalker -> submap (30,25)
+same selected changed place revisited 837
+{"passed": true, "evidence": "G:\\GameDev\\RoguelikeProject\\.baseline\\sys-2\\play-d"}

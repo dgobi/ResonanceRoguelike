@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { itemModel, itemValue, keywordEntry } from "./item";
 import type { ItemContext, ItemTrail } from "./protocol";
 import { VesselFields } from './VesselFields';
+import { LightFields } from './LightFields';
 
 export function ItemEditor(p: {
   family: ContentFamily; variant:boolean; evidenceStale: boolean; draft: string; path: string; context?: ItemContext; selectedId?: string; dirty: boolean; validated: boolean;
@@ -42,7 +43,8 @@ export function ItemEditor(p: {
       <div className="edit-actions"><button onClick={p.onUndo} disabled={!!p.disabled || p.busy || !p.canUndo}>Undo item</button><button onClick={p.onRedo} disabled={!!p.disabled || p.busy || !p.canRedo}>Redo item</button><small>Raw source and variant-ID edits clear item history.</small></div>
       <p className="muted">{cap?.reason}. Category: {String(values.category ?? "not declared")} · appearance: {String(values.tile ?? "factory default")}</p>
       {cap?.editable ? <fieldset disabled={!!reason} className="item-properties"><legend>Common item properties · {cap.supply_class}</legend>
-        <ContractFields family={p.family} values={values} onChange={edit} />
+        <ContractFields family={p.family} values={values} disabledFields={cap.supply_class==='held light'?['stackable','consumed_on_use']:[]} onChange={edit} />
+        {cap.supply_class==='held light'&&<LightFields family={p.family} values={values} onChange={edit}/>}
         {cap.supply_class==='material'&&<VesselFields family={p.family} values={values} disabled={!!reason} onChange={edit}
           onEnable={()=>p.onEdit(s=>itemValue(itemValue(itemValue(s,['vessel'],{version:1,capacity_ml:500,contents:'water'}),['stackable'],false),['consumed_on_use'],false),'Enable water vessel')}/>}
         {cap.supply_class && cap.supply_class!=="material" && <><h3>{cap.supply_class} use</h3><ContractFields family={p.family} values={values} view={cap.supply_class} disabledFields={p.variant ? [] : ["slot"]} nullableFields={["nutrition","hydration","heal_amount","eat_message","drink_message","empty_form"]} onChange={edit}/></>}
@@ -53,7 +55,7 @@ export function ItemEditor(p: {
           <small>{record.equipment.scope}</small><details><summary>Retained behavior and definition evidence</summary><pre className="raw">{JSON.stringify(record.equipment,null,2)}</pre></details></section>}
         {record?.effective_use && <p className="notice" data-testid="effective-dose">{evidenceCurrent ? "Validated saved-input interpretation: " : "Opened-source interpretation; validate edits: "}{record.effective_use.explanation}</p>}
         {record?.return_item && <p className="notice">Saved return: <button disabled={p.busy || !evidenceCurrent} onClick={()=>p.onItem?.(record.return_item!.id,record.return_item!.path)}>Open return {record.return_item.id}</button><small>{record.return_item.label} · {record.return_item.editable ? "Editable source" : "Reference-only source"}</small></p>}
-        {p.family.descriptor.schema.properties?.keywords && <><h3>Keywords</h3><small>{cap.tier_note}</small>
+        {cap.supply_class!=='held light' && p.family.descriptor.schema.properties?.keywords && <><h3>Keywords</h3><small>{cap.tier_note}</small>
         {keywordShape ? <table className="pool-table"><thead><tr><th>Tag ID</th><th>Tier</th><th>Action</th></tr></thead><tbody>{keywords.map((kw, i) => <tr key={i}>
           {Object.entries(p.family.descriptor.schema.properties?.keywords.items?.properties || {}).map(([key,schema])=><td key={key}><ScalarControl schema={schema} value={kw[key]} references={p.family.references} label={`${schema.title} ${i+1}`} onChange={value=>edit(["keywords",i,key],value)} /></td>)}
           <td><button onClick={() => p.onEdit(s => keywordEntry(s, i), "Remove keyword")}>Remove keyword {i+1}</button></td></tr>)}</tbody></table> : <p className="notice warning">Repair keywords in Source; expected an array of records.</p>}

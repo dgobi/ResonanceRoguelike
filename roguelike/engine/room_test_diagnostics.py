@@ -50,10 +50,18 @@ class DiagnosticEvents:
         m=e.local_map
         inv=e.inventory_screen
         craft=e.craft_screen
+        from engine.illumination import scene_light
+        from components.ai import _creature_can_see_player
+        illumination=scene_light(e)
+        observers=[a for a in e.entities if a is not e.player and getattr(a,'perception',None)]
         observation=dict(applied=self.applied,pid=__import__('os').getpid(),player=[e.player.x,e.player.y],
             turn=e.world_time.turn,submap=e.current_submap_id,surface_return=[e.surface_return_x,e.surface_return_y],
             dead=e._player_is_dead,mode=e.mode.name,visible=int(m.tiles['visible'].sum()),
             light=bool(getattr(e.player,'light_source',None) and e.player.light_source.active),
+            illumination=dict(ambient=illumination.ambient,lit=illumination.lit.T.tolist(),
+                sources=[dict(kind=k,id=i,x=x,y=y,radius=r) for k,i,x,y,r,_,_ in illumination.sources],
+                sight=[dict(observer=creature_id(a),target='player' if t is e.player else creature_id(t),
+                    seen=_creature_can_see_player(a,t,m,engine=e)) for a in observers for t in [e.player]+observers if a is not t]),
             lighting=dict(active_radius=e._effective_fov_radius,
                 emitters=[dict(x=x,y=y,id=d,radius=e.data.decoratives.get(d,{}).get('light_emit',0),visible=bool(m.visible[x,y])) for (x,y),d in m.decor.items() if e.data.decoratives.get(d,{}).get('light_emit',0)>0],
                 visible_beyond_player_circle=[[x,y] for x in range(m.width) for y in range(m.height) if m.visible[x,y] and (x-e.player.x)**2+(y-e.player.y)**2>e._effective_fov_radius**2]),

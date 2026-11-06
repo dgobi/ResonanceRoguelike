@@ -1,0 +1,26 @@
+{
+  "id": "tool_shed_c_lights",
+  "description": "Finite tool-shed stock: ordinary tools, fuel and the occasional watch lantern.",
+  "roll_count": [
+    2,
+    3
+  ],
+  "items": [
+    {
+      "item_id": "crude_blade",
+      "weight": 2
+    },
+    {
+      "item_id": "tallow_torch",
+      "weight": 3
+    },
+    {
+      "item_id": "wood_bundle",
+      "weight": 3
+    },
+    {
+      "item_id": "watch_lantern",
+      "weight": 3
+    }
+  ]
+}

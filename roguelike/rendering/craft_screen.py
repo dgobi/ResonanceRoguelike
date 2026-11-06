@@ -149,19 +149,14 @@ class CraftScreen:
     def _build_ambient_sources(engine: "Engine") -> list:
         sources: list[dict] = []
 
-        equip = getattr(engine.player, "equipment", None)
-        if equip:
-            light_item = equip.slots.get("offhand")
-            light = getattr(engine.player, "light_source", None)
-            if (light_item is not None and light and light.active
-                    and getattr(light, "_item_ref", None) is light_item
-                    and engine.player.inventory.contains(light_item)
-                    and (not light_item.burn_turns or light_item.turns_lit < light_item.burn_turns)):
-                item_def = engine.data.items.get(getattr(light_item, "item_id", ""), {})
-                pb = item_def.get("provides_burning", False)
-                if pb:
-                    tier = int(pb) if isinstance(pb, (int, float)) else 1
-                    sources.append({"tag": "burning", "tier": tier})
+        from engine.held_light import active_item
+        light_item = active_item(engine.player)
+        if light_item is not None:
+            item_def = engine.data.items.get(light_item.item_id, {})
+            pb = item_def.get("provides_burning", False)
+            if pb:
+                tier = int(pb) if isinstance(pb, (int, float)) else 1
+                sources.append({"tag": "burning", "tier": tier})
 
         decor = getattr(getattr(engine, "local_map", None), "decor", {})
         px, py = engine.player.x, engine.player.y

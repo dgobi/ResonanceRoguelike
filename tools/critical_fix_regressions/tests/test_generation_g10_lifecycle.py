@@ -79,7 +79,7 @@ class G10Lifecycle(unittest.TestCase):
             for row in binding['scenes']+binding['pending']:
                 m,actors=(historical_pending_scene(e,row,binding) if row in binding['pending']
                           else e._prepare_destination(*row['chunk']))
-                self.assertEqual(fingerprint(m,actors),row['fingerprint']);self.assertIsNone(getattr(m,'surface_provenance',None))
+                self.assertEqual(fingerprint(m,actors,historical=True),row['fingerprint']);self.assertIsNone(getattr(m,'surface_provenance',None))
             m,_=e._prepare_destination(*binding['scenes'][0]['chunk'])
             self.assertIn(tuple(binding['mutation']['waystone']),m.interacted_waystones)
             self.assertTrue(e.save_manager.save(e));reader=make_engine(e.data)
@@ -87,7 +87,7 @@ class G10Lifecycle(unittest.TestCase):
             e.debug=False;e._handle_key_local(pygame.K_F9)
             for owner in (e,reader):
                 for row in binding['scenes']+binding['pending']:
-                    self.assertEqual(fingerprint(*owner._prepare_destination(*row['chunk'])),row['fingerprint'])
+                    self.assertEqual(fingerprint(*owner._prepare_destination(*row['chunk']),historical=True),row['fingerprint'])
         self.evidence('g10-genuine-g9.json',dict(passed=True,creator=binding['head'],visited=binding['scenes'],pending=binding['pending'],actual_waystone_mutation=True,cold_and_f9=True))
 
     def test_saved_policy_ignores_installed_edits_removal_and_restores_pending(self):

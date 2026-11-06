@@ -64,7 +64,7 @@ class G13Shed(unittest.TestCase):
             for row in expected['profiles'][form]['roles']['support']:
                 if row['asset']=='tool_shed_a':
                     self.assertEqual(row, dict(asset='tool_shed_a',weight=1.0,max_per_settlement=3))
-                    row['asset']='tool_shed_b'
+                    row['asset']='tool_shed_c'  # SYS-2 stock successor; same weight/cap.
             for row in expected['profiles'][form]['roles']['commercial']:
                 if row['asset']=='apothecary_a':
                     self.assertEqual(row, dict(asset='apothecary_a',weight=1.0,max_per_settlement=5))
@@ -76,7 +76,7 @@ class G13Shed(unittest.TestCase):
         w = WorldMap(128,128); w.seed=20261023
         with contextlib.redirect_stdout(io.StringIO()):
             generate_world(w,data,random.Random(w.seed))
-        selected = [p for p in w.plan['placements'] if p['asset']=='tool_shed_b']
+        selected = [p for p in w.plan['placements'] if p['asset']=='tool_shed_c']
         self.assertEqual(sorted((p['origin'][0]//80,p['origin'][1]//43) for p in selected), [(39,26),(75,99),(88,33)])
         checkpoint=Path(__file__).resolve().parents[3]/'evidence/gameplay-g12/final-b/journey/lab/lab-checkpoint.zip'
         with zipfile.ZipFile(checkpoint) as z:

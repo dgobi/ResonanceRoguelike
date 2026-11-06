@@ -54,6 +54,10 @@ class AISystem:
             zone_ambient, is_outdoor
         )
 
+        if engine is not None:
+            from engine.illumination import ambient
+            intensity, _ = ambient(engine)
+
         ACTIVE_RADIUS = 30   # fallback constant — kept for Tier 3 bubble radius use
 
         # Process each non-player actor with an AI component

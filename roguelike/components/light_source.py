@@ -40,11 +40,9 @@ class LightSource:
 
     def effective_radius(self) -> int:
         """Return radius with optional flicker variance."""
-        if not self.flicker:
-            return self.radius
-        import random
-        variance = random.uniform(-1.0, 1.0)
-        return max(1, int(self.radius + variance))
+        # Gameplay never consumes this cosmetic component. Keep legacy callers
+        # deterministic too: rendering must not consume the global gameplay RNG.
+        return self.radius
 
     def toggle(self) -> None:
         self.active = not self.active

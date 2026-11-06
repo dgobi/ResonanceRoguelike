@@ -1,0 +1,212 @@
+[
+  {
+    "output": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\sys-2\\native-1793929133719",
+    "started_utc": "2026-11-06T01:38:53.726Z",
+    "package_sha256": "2b7cd553f6e123bb5a520408937967b0ee2568cc6fbb1e69a97df29d64734076",
+    "checks": [
+      "Publish ordinary watch lantern and short-rush reuse configuration"
+    ],
+    "errors": [],
+    "passed": null,
+    "publications": [
+      {
+        "path": "roguelike/data/items/tools/watch_lantern.json",
+        "sha256": "1511609f69152cf9175fc7405c7e5f5c78900bbc9ff8c48eb15725cc67c046aa",
+        "definition": {
+          "id": "watch_lantern",
+          "name": "Watch Lantern",
+          "description": "A heavy broad-wicked lantern. Its bright pool reaches far; the oil goes quickly.",
+          "tile": "oil_lantern",
+          "category": "tool",
+          "weight": 0.8,
+          "stackable": false,
+          "on_use": "equip_light",
+          "consumed_on_use": false,
+          "_essence_note": "Refined oil burns with more intent than tallow. The Quickening is more concentrated \u2014 controlled combustion rather than animal fat catching.",
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 2
+            }
+          ],
+          "provides_burning": 2,
+          "burn_turns": 420,
+          "light_radius": 9,
+          "light": {
+            "radius": 10,
+            "color": [
+              220,
+              200,
+              120
+            ],
+            "falloff": 1.5,
+            "flicker": false
+          }
+        }
+      }
+    ]
+  },
+  {
+    "output": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\sys-2\\native-1793929237748",
+    "started_utc": "2026-11-06T01:40:37.754Z",
+    "package_sha256": "2b7cd553f6e123bb5a520408937967b0ee2568cc6fbb1e69a97df29d64734076",
+    "checks": [
+      "Publish ordinary watch lantern and short-rush reuse configuration",
+      "SYS-2 native flow passed"
+    ],
+    "errors": [],
+    "passed": true,
+    "publications": [
+      {
+        "path": "roguelike/data/items/tools/short_rushlight.json",
+        "sha256": "2c1569595d6b43fb7317f0d2951fe769c0acffc2a047d66bd5882c20999bc4aa",
+        "definition": {
+          "id": "short_rushlight",
+          "name": "Short Rushlight",
+          "description": "A short rush for testing a few breaths of light.",
+          "tile": "tallow_torch",
+          "category": "tool",
+          "weight": 0.1,
+          "stackable": false,
+          "on_use": "equip_light",
+          "consumed_on_use": false,
+          "_essence_note": "Fire is Quickening made visible. Tallow burns fast and hungrily \u2014 animal fat converting itself into light and heat.",
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 1
+            }
+          ],
+          "provides_burning": true,
+          "burn_turns": 8,
+          "light_radius": 3,
+          "light": {
+            "radius": 8,
+            "color": [
+              255,
+              180,
+              60
+            ],
+            "falloff": 1.8,
+            "flicker": true
+          }
+        }
+      },
+      {
+        "path": "roguelike/data/layouts/sys2_light_room.json",
+        "sha256": "cef32468c4041ab830ef77da7df4b0a53da2f5b39ccb619dd44e62f177aca5ce",
+        "definition": {
+          "id": "sys2_light_room",
+          "width": 25,
+          "height": 13,
+          "layers": [
+            "#########################",
+            "#.......................#",
+            "#.......................#",
+            "#.......................#",
+            "#.......................#",
+            "#.......~~~..~~~........#",
+            "#.......~.~..~.~........#",
+            "#.......~~~..~~~........#",
+            "#.......................#",
+            "#..<....................#",
+            "#.......................#",
+            "#.......................#",
+            "#########################"
+          ],
+          "legend": {
+            "#": "wall",
+            ".": "floor",
+            "<": "stairs_up",
+            "~": "deep_water"
+          },
+          "player_start": {
+            "x": 3,
+            "y": 6
+          },
+          "special_tiles": [
+            {
+              "type": "item",
+              "x": 3,
+              "y": 6,
+              "item_id": "short_rushlight"
+            },
+            {
+              "type": "item",
+              "x": 4,
+              "y": 6,
+              "item_id": "watch_lantern"
+            },
+            {
+              "type": "creature",
+              "x": 9,
+              "y": 6,
+              "creature_id": "heath_stalker"
+            },
+            {
+              "type": "creature",
+              "x": 14,
+              "y": 6,
+              "creature_id": "highland_bandit"
+            }
+          ]
+        }
+      },
+      {
+        "path": "roguelike/data/items/tools/short_rushlight.json",
+        "sha256": "a4a69154350e9163fb16b42f6aee6509cc8ec318ed5428e1714f94567e62e481",
+        "definition": {
+          "id": "short_rushlight",
+          "name": "Short Rushlight",
+          "description": "A short rush for testing a few breaths of light.",
+          "tile": "tallow_torch",
+          "category": "tool",
+          "weight": 0.1,
+          "stackable": false,
+          "on_use": "equip_light",
+          "consumed_on_use": false,
+          "_essence_note": "Fire is Quickening made visible. Tallow burns fast and hungrily \u2014 animal fat converting itself into light and heat.",
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 1
+            }
+          ],
+          "provides_burning": true,
+          "burn_turns": 5,
+          "light_radius": 6,
+          "light": {
+            "radius": 8,
+            "color": [
+              255,
+              180,
+              60
+            ],
+            "falloff": 1.8,
+            "flicker": true
+          }
+        }
+      }
+    ]
+  }
+]

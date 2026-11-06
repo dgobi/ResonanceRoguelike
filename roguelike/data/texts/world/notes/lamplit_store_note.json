@@ -1,0 +1,14 @@
+{
+  "id": "lamplit_store_note",
+  "title": "Beside the Coals",
+  "type": "note",
+  "condition": "stained",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [
+    {
+      "text": "Carry the flame, and the pale joints stay in sight as you move. Use the coals for light, and your other hand is free for the ward.\n\nKeep the thing before your eyes. A lit wall is still a wall; beyond it, nothing is held by your gaze.",
+      "damaged": false
+    }
+  ]
+}

@@ -1,5 +1,14 @@
 # Registered content authoring
 
+SYS-2 versions item authoring as `expedition-items-5`. Ordinary nonstackable
+`equip_light` tools gain mechanical radius/endurance and supported cosmetic
+falloff/flicker controls. The host independently admits the tools route, while
+the game-owned original-source contract protects heat, use identity, offhand,
+consumption and unrelated metadata through controls, Source and recovery.
+Saved effective light settings survive later definition edits. See
+[Shared light](../../roguelike/docs/SHARED_LIGHT.md) for bounds, ownership,
+compatibility and the captured/latest-saved Test workflow.
+
 SYS-1 versions recipe authoring as `item-preparation-2`: rules admit ordinary
 immediate and passive item output with components and/or either conjunction
 shape. Specialized conjunction controls preserve representation and metadata;

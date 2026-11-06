@@ -138,11 +138,15 @@ def validate_block(record, schemas, label):
 
 def serialize_item(item):
     return {"item_id": item.item_id, "item_state_version": 1, **snapshot(item, ITEM_STATE),
+            **({'held_light': copy.deepcopy(item.held_light)} if hasattr(item, 'held_light') else {}),
             **({'vessel': copy.deepcopy(item.vessel)} if hasattr(item,'vessel') else {}),
             **({'vessel_absent_version':item.vessel_absent_version} if hasattr(item,'vessel_absent_version') else {})}
 
 
 def validate_item(row, label):
+    if 'held_light' in row:
+        from engine.held_light import validate
+        validate(row['held_light'], row)
     if 'vessel_absent_version' in row and (type(row['vessel_absent_version']) is not int
             or row['vessel_absent_version']!=1 or row.get('item_id')!='clay_pot' or 'vessel' in row):
         raise ValueError(label + ': invalid explicit vessel absence')
@@ -163,6 +167,7 @@ def validate_item(row, label):
 
 
 def restore_item(item, row):
+    factory_light = copy.deepcopy(getattr(item, 'held_light', None))
     for key in ITEM_STATE:
         if key in row:
             value = row[key]
@@ -179,6 +184,15 @@ def restore_item(item, row):
         legacy(item)
     from engine.stock_prose import refresh
     refresh(item, item.item_id)
+    if hasattr(item, 'held_light'):
+        del item.held_light
+    if 'held_light' in row:
+        item.held_light = copy.deepcopy(row['held_light'])
+    elif item.on_use == 'equip_light' and item.stackable is False and isinstance(item.light_data, dict):
+        item.held_light = factory_light or dict(version=1, radius=0)
+    if hasattr(item, 'held_light'):
+        from engine.held_light import validate
+        validate(item.held_light, item)
 
 
 def serialize_runtime(engine):

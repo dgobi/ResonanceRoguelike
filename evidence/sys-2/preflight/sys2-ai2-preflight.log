@@ -1,0 +1,218 @@
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 21
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 21
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 21
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 21
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 21
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 21
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 21
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 21
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 21
+[
+  {
+    "room": "ai2_shadow_opening",
+    "response": "sealed",
+    "passed": true,
+    "allowance": null,
+    "summary": {
+      "hp_lost": 0,
+      "player_final": [
+        39,
+        21
+      ],
+      "actor_final": [
+        42,
+        21
+      ],
+      "reasons": [
+        "no_prey"
+      ],
+      "accelerated": false,
+      "committed_melee": false,
+      "tells": [],
+      "safe_response_inputs": 18
+    }
+  },
+  {
+    "room": "ai2_shadow_opening",
+Traceback (most recent call last):
+  File "G:\GameDev\RoguelikeProject\tools\verify_ai_2_play.py", line 120, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "G:\GameDev\RoguelikeProject\tools\verify_ai_2_play.py", line 117, in main
+    assert report['passed'],'AI-2 preflight failed: inspect exact observations'
+AssertionError: AI-2 preflight failed: inspect exact observations
+    "response": "lit",
+    "passed": false,
+    "allowance": null,
+    "summary": {
+      "hp_lost": 0,
+      "player_final": [
+        39,
+        21
+      ],
+      "actor_final": [
+        44,
+        20
+      ],
+      "reasons": [
+        "concealment_exhausted",
+        "seek_concealment",
+        "unseen_pursuit",
+        "watched"
+      ],
+      "accelerated": true,
+      "committed_melee": false,
+      "tells": [],
+      "safe_response_inputs": 18
+    }
+  },
+  {
+    "room": "ai2_shadow_opening",
+    "response": "dark",
+    "passed": true,
+    "allowance": null,
+    "summary": {
+      "hp_lost": 19,
+      "player_final": [
+        39,
+        21
+      ],
+      "actor_final": [
+        38,
+        22
+      ],
+      "reasons": [
+        "no_prey",
+        "seek_concealment",
+        "unseen_melee",
+        "unseen_pursuit",
+        "watched"
+      ],
+      "accelerated": true,
+      "committed_melee": true,
+      "tells": [],
+      "safe_response_inputs": 11
+    }
+  },
+  {
+    "room": "ai2_shadow_opening",
+    "response": "disengage",
+    "passed": true,
+    "allowance": null,
+    "summary": {
+      "hp_lost": 0,
+      "player_final": [
+        36,
+        18
+      ],
+      "actor_final": [
+        41,
+        20
+      ],
+      "reasons": [
+        "seek_concealment",
+        "watched"
+      ],
+      "accelerated": true,
+      "committed_melee": false,
+      "tells": [],
+      "safe_response_inputs": 6
+    }
+  },
+  {
+    "room": "ai2_mixed_opening",
+    "response": "disengage",
+    "passed": true,
+    "allowance": null,
+    "summary": {
+      "hp_lost": 7,
+      "player_final": [
+        36,
+        18
+      ],
+      "actor_final": [
+        41,
+        20
+      ],
+      "reasons": [
+        "seek_concealment",
+        "watched"
+      ],
+      "accelerated": true,
+      "committed_melee": false,
+      "tells": [],
+      "safe_response_inputs": 4
+    }
+  },
+  {
+    "room": "ai2_defensive_ground",
+    "response": "wait",
+    "passed": true,
+    "allowance": null,
+    "summary": {
+      "hp_lost": 14,
+      "player_final": [
+        38,
+        21
+      ],
+      "actor_final": [
+        39,
+        21
+      ],
+      "reasons": [
+        "no_cover_defensive"
+      ],
+      "accelerated": false,
+      "committed_melee": true,
+      "tells": [],
+      "safe_response_inputs": 0
+    }
+  },
+  {
+    "room": "ai2_cowering_ground",
+    "response": "wait",
+    "passed": true,
+    "allowance": null,
+    "summary": {
+      "hp_lost": 0,
+      "player_final": [
+        38,
+        21
+      ],
+      "actor_final": [
+        39,
+        21
+      ],
+      "reasons": [
+        "no_legal_cover"
+      ],
+      "accelerated": false,
+      "committed_melee": false,
+      "tells": [],
+      "safe_response_inputs": 5
+    }
+  },
+  {
+    "room": "ai2_shadow_opening",
+    "response": "dark",
+    "passed": true,
+    "allowance": 0,
+    "summary": null
+  },
+  {
+    "room": "ai2_shadow_opening",
+    "response": "dark",
+    "passed": true,
+    "allowance": 1,
+    "summary": null
+  }
+]

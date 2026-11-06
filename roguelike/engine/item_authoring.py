@@ -15,7 +15,7 @@ from engine.save_components import ITEM_STATE, snapshot, validate_fields
 from engine.crafting import _item_has_tag, _item_has_all_tags
 from rendering.tile_registry import TileRegistry
 
-CONTRACT = "expedition-items-4"
+CONTRACT = "expedition-items-5"
 SCHEMA = {
     "$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object", "required": ["id"],
     "properties": {
@@ -42,12 +42,14 @@ SCHEMA = {
 }
 VIEWS = ["item-properties", "references", "recipes", "use-binding", "factory"]
 from engine import equipment_authoring as equipment
+from engine import light_authoring as lights
 SCHEMA['properties'].update(equipment.SCHEMA)
+SCHEMA['properties'].update(lights.SCHEMA)
 SCHEMA['properties']['vessel'] = dict(type='object', title='Water vessel', **{'x-view':'Vessel','x-control':'bounded-record'},
     properties=dict(version=dict(type='integer',default=1,readOnly=True),
         capacity_ml=dict(type='integer',title='Capacity (mL)',minimum=1,maximum=10000),
         contents=dict(type='string',default='water',readOnly=True)))
-PUBLICATION_NOTE = "Save/reopen each item first, then reference its saved ID in a room or pool. Saving does not enroll it in loot, crafting, starting gear or world selection. Owned items retain copied physical fields; combat, armour and carrying use the loaded session definitions. Source saves do not hot-reload a running game. Reset keeps its capture; latest saved captures revisions."
+PUBLICATION_NOTE = "Save/reopen each item first, then reference its saved ID in a room or pool. Saving does not enroll it in loot, crafting, starting gear or world selection. Owned lights retain captured mechanical reach, fuel and copied visuals after supported definition edits. Other owned items retain copied physical fields; combat, armour and carrying use the loaded session definitions. Source saves do not hot-reload a running game. Reset keeps its capture; latest saved captures revisions."
 
 
 def reference_options(context):
@@ -97,9 +99,11 @@ def capability(raw, path, pointer=""):
                  and not raw.get("qualities"))
     equipment_class, equipment_reason = equipment.classify(raw,path,pointer,forbidden=ADVANCED | set(sum(CLASS_FIELDS.values(),[])) | {'qualities','text_id','liquid','liquid_volume','harvest_from'})
     if equipment_class: supported = True; kind = equipment_class
+    if lights.supported(raw,path,pointer,ADVANCED | set(sum(CLASS_FIELDS.values(),[])) | {'vessel','slot','liquid','liquid_volume','harvest_from'}):
+        supported=True;kind='held light'
     return {"contract": CONTRACT, "editable": bool(supported), "supply_class":kind,
             "equipment_class": equipment_class,
-            "fields": FIELDS + CLASS_FIELDS.get(kind,[]) + equipment.FIELDS.get(kind,[]),
+            "fields": lights.FIELDS if kind=='held light' else FIELDS + CLASS_FIELDS.get(kind,[]) + equipment.FIELDS.get(kind,[]),
             "reason": (equipment_reason if equipment_class or route in ('weapons','armor','shields','equipment') else "Canonical empty skin is reference-only: exact-ID filling creates canonical water_skin." if protected else
                 "Ordinary inert material" if supported and kind=="material" else "Ordinary "+kind if supported else
                 "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use."),
@@ -124,6 +128,9 @@ def authorize_candidate(original, candidate, source, target, *, data=None):
     if equip:
         for field,message in equipment.authorize(original,candidate,source,target,FIELDS):
             problems.append(dict(severity='error',code='EQUIPMENT_LOCK',path=target,asset=str(candidate.get('id','')),field=field,message=message,correction='Restore the locked source value or use a compatible new variant.'))
+    if cap.get('supply_class')=='held light':
+        for field,message in lights.authorize(original,candidate):
+            problems.append(dict(severity='error',code='LIGHT_LOCK',path=target,asset=str(candidate.get('id','')),field=field,message=message,correction='Restore the protected source value.'))
     return problems
 
 
@@ -208,6 +215,8 @@ def validate_definition(raw, data, path, sources, *, writable=False):
     try: validate_vessel(raw)
     except ValueError as error: issue('VESSEL_CONFIG','vessel',str(error))
     equipment_class = capability(raw,path).get('equipment_class')
+    if capability(raw,path).get('supply_class')=='held light':
+        for field,message in lights.validate(raw): issue('LIGHT_FIELD',field,message)
     if equipment_class:
         for field,message in equipment.validate(raw,equipment_class,data): issue('EQUIPMENT_FIELD',field,message)
     # Use the actual game instance validators, including bool-vs-number and
@@ -259,6 +268,7 @@ def factory_preview(raw, data):
     if item is None: raise ValueError("ItemFactory returned no instance")
     state = snapshot(item, ITEM_STATE)
     if getattr(item,'vessel',None): state['vessel']=item.vessel
+    if hasattr(item,'held_light'): state['held_light']=item.held_light
     validate_fields(state, ITEM_STATE, "factory instance")
     defaults=dict(name=raw['id'],description='',tile='generic_item',weight=0.1,stackable=False,keywords=[],consumed_on_use=True,on_use=None,
                   nutrition=None,hydration=None,heal_amount=None,eat_message=None,drink_message=None)
@@ -269,7 +279,7 @@ def factory_preview(raw, data):
         raise ValueError("Factory output differs from the supported definition fields")
     return {"item_id": item.item_id, "instance": state, "comparisons": comparisons,
             "consumer": "engine.data_loader.DataLoader -> engine.item_factory.ItemFactory.create -> entities.item.Item",
-            "scope": "Observed unowned factory instance: common copied fields only. Weapon damage, armour layers, shield block values and satchel reductions are not copied into ITEM_STATE. No inventory/use/turn, acquisition, world selection or save migration was executed."}
+            "scope": "Observed unowned factory instance: common copied fields, and effective held radius/fuel/visuals when supported. Weapon damage, armour layers, shield block values and satchel reductions remain definition-owned. No inventory/use/turn, acquisition, world selection or save migration was executed."}
 
 
 def references(raw, data, source_index):

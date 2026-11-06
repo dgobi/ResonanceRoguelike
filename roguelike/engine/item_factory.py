@@ -55,6 +55,8 @@ class ItemFactory:
         # Light source properties
         item.burn_turns  = defn.get("burn_turns",  None)
         item.light_data  = copy.deepcopy(defn.get("light", None))
+        from engine.held_light import capture
+        capture(item, defn)
 
         # Liquid container properties
         item.liquid        = defn.get("liquid",        None)
