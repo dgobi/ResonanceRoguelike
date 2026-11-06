@@ -1,0 +1,70 @@
+{
+  "passed": true,
+  "revision": "741d2575048fb52ce553200a987740257df67969",
+  "gate_count": 15,
+  "production": {
+    "checks": 3704,
+    "passed": 3704,
+    "failed": 0,
+    "workers": 159
+  },
+  "focused": {
+    "tests": 629,
+    "passed": true,
+    "full_run_passed": false,
+    "original_failed_expectations": [
+      "test_cottage_access_matches_actual_note_and_container_actions_both_mirrors",
+      "test_live_roles_preserve_membership_order_and_native_primary_selection"
+    ],
+    "repeated_modules": [
+      "test_gameplay_g16",
+      "test_structure_access"
+    ],
+    "repeated_module_tests": 8,
+    "retention_witness": "focused-retention-witness.py",
+    "recheck": "focused-recheck.json"
+  },
+  "worker": {
+    "modules": 26,
+    "tests": 132,
+    "passed": true,
+    "dependency_control": "Separate pinned development interpreter test passes; bundled negative control is the intentional skip.",
+    "skipped": 1
+  },
+  "frontend": {
+    "files": 21,
+    "tests": 97
+  },
+  "host": {
+    "tests": 71
+  },
+  "startup": {
+    "checks": 15,
+    "passed": true
+  },
+  "desktop": {
+    "passed": true,
+    "artifact": "G:\\GameDev\\RoguelikeProject\\.baseline\\sys-1\\final-b\\desktop.log"
+  },
+  "native": {
+    "passed": true,
+    "artifact": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\sys-1\\native-1793924091526",
+    "receipt_sha256": "ff14c8c47c60b9a7ae20c09de5150e383ce06d1a0163d0bd7338258dd97dcea0"
+  },
+  "ordinary": {
+    "journeys": 2,
+    "f5_f9_checkpoints": 8,
+    "cold_processes": 8,
+    "learned": [
+      [
+        "ghuurkh"
+      ],
+      [
+        "ghaetl"
+      ]
+    ]
+  },
+  "source_stable": true,
+  "runtime_content_editor_revision": "11554782ec260b4330431fcc277b7bb456c08870",
+  "verification_mode": "Frozen full run plus exact expectation-only affected-module repeat"
+}

@@ -1,0 +1,19 @@
+{
+  "before_revision": "11554782ec260b4330431fcc277b7bb456c08870",
+  "after_revision": "741d2575048fb52ce553200a987740257df67969",
+  "before_manifest_sha256": "7b9a893e0f192cebd73107bd574579a94ad06650a4bc745fbf7a010d66782ebc",
+  "after_manifest_sha256": "fe1fea15e4162777c1287d3d73336cb5251bfc9b7cd4948cefa04c5a49eb9a8d",
+  "changes": [
+    {
+      "path": "tools/critical_fix_regressions/tests/test_gameplay_g16.py",
+      "before": "cef02217b139278badafa5dc24a7c2b07de4bc9b1255214343467147cd29b30c",
+      "after": "926cc4f4530bf78054ec9a88e00c2cc242010f872135e2044d3713d4f65d7480"
+    },
+    {
+      "path": "tools/critical_fix_regressions/tests/test_structure_access.py",
+      "before": "9864947740a6dcd0d877a6f8ed1994c37f8a0dcd1b0be168814d0c372446bb05",
+      "after": "f8ff01b1dbd782d8ad8e04935bbf15e6e36005b0171587c1a633df726e05ae79"
+    }
+  ],
+  "retention": "Only the explicit current apothecary successor and preserved installed-candidate total changed. Both complete affected modules repeated; all remaining tests from the unfiltered suite and all other successful gates retain identical consumed inputs. No runtime, content, editor or verifier runner changed; all assertions remain, with only the two explicit expectations updated."
+}

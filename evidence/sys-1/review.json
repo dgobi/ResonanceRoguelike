@@ -1,0 +1,102 @@
+{
+  "source_revision": "11554782ec260b4330431fcc277b7bb456c08870",
+  "writer": "lead only; helpers read-only",
+  "review_scope": "Commissioned SYS-1 contracts and actual ordinary availability; no later roadmap work",
+  "repaired_findings": [
+    {
+      "issue": "Exhausted regroup held off goal after concealment",
+      "repair": "engine/enemy_maneuvers.py and components/observation_averse.py",
+      "proof": "test_sys_1.RegroupLifecycleTests; actual engine Wait, F5/F9 and separate cold continuation"
+    },
+    {
+      "issue": "Placement reach/occupancy and precommit marker validation",
+      "repair": "engine/vessel_jobs.py",
+      "proof": "focused atomic commitment and malformed-marker cases; native own-feet work"
+    },
+    {
+      "issue": "Historical dictionary container rows and null/malformed saved capability",
+      "repair": "engine/vessels.py and engine/save_components.py",
+      "proof": "legacy archive; strict malformed load before installation"
+    },
+    {
+      "issue": "Protected use identities and reusable saved-state consistency",
+      "repair": "engine/vessels.py",
+      "proof": "canonical flint/equipment rejection; new inert-ID variant accepted in real worker"
+    },
+    {
+      "issue": "Out-of-range saved job duration and failed delivery/marker loss",
+      "repair": "engine/vessels.py and engine/vessel_jobs.py",
+      "proof": "timer bound, partial-placement rollback, missing output and abandonment checks"
+    },
+    {
+      "issue": "Probe called the busy implement a retained tool and promised one floor object",
+      "repair": "engine/recipe_authoring.py and workbench/src/RecipeEditor.tsx",
+      "proof": "owned_vessel worker probe; packaged actual vessel plus dose completion"
+    },
+    {
+      "issue": "Invalid validated candidate hid/disabled safe history recovery",
+      "repair": "workbench/src/ItemEditor.tsx and RecipeEditor.tsx",
+      "proof": "final packaged invalid vessel capacity and recipe batch rejection followed by Undo"
+    },
+    {
+      "issue": "New descriptor-free clay could gain legacy capability on load",
+      "repair": "ItemFactory new-instance absence marker; load-only legacy initialization",
+      "proof": "new JSON/pickle absence regression and unchanged genuine legacy fixture"
+    },
+    {
+      "issue": "Legacy jobs inherited the new walkable two-output delivery rule",
+      "repair": "Use existing single-output place_floor_object only for jobs without vessel_job",
+      "proof": "New direct blocked-destination comparison; unmodified B2/B3 production cases and full focused rerun"
+    },
+    {
+      "issue": "New map validation attempted to serialize unrelated opaque historical owners",
+      "repair": "Only optional vessel/absence fields trigger additive map checks; explicit null presence remains strict",
+      "proof": "Opaque owner F5/F9 plus malformed-field denial; unchanged historical production cases"
+    },
+    {
+      "issue": "Edited original shop stock invalidated pending saved dependencies",
+      "repair": "Restore original pool/A/B, introduce alchemist_preparation and apothecary_c for new selections; pinned one-way approved clay dependency addition",
+      "proof": "Genuine G14/G15/G16 historical archives, old pending/visited scenes, full frozen macro comparisons; new C ordinary journeys"
+    },
+    {
+      "issue": "Random physical IDs polluted generation semantic comparisons",
+      "repair": "Only semantic comparisons normalize UUIDs; historical projection explicitly validates the approved empty clay addition",
+      "proof": "New test proves water/custom capacity differences remain significant; full save tests retain exact identities"
+    },
+    {
+      "issue": "Stale inventory counts and overloaded preview timeout",
+      "repair": "Exact new room/building/pool/item memberships and baseline-existing creature totals; workers run after heavy suites with original limits",
+      "proof": "catalogue-expectation.json and final input delta; no excluded worker module or reduced assertion"
+    }
+  ],
+  "development_evidence": {
+    "retained": "Raw development logs remain under .baseline/sys-1; initial creation-phase receipt is committed compressed.",
+    "notes": [
+      "Early native scripts required visible-locator/navigation corrections; final integrated capture passed.",
+      "An early worker run detected unsupported nested controls; a bounded scalar-record vocabulary was registered.",
+      "Early mixed source publication/check execution produced source-change rejection; final gates use an immutable input manifest.",
+      "Ordinary driver preflights corrected free-modal closure, canonical JSON equality and physically reachable gathering routes without game rule overrides.",
+      "Frozen final-a failed production compatibility and focused historical/determinism checks, plus stale inventory totals and a worker timeout. Complete receipts retained; all final gates rerun after scoped repair."
+    ]
+  },
+  "ordinary_limits": [
+    "One disclosed selected-public-join staging per journey; full-state route selection.",
+    "Native AI, visibility, survival and action costs active; no threats removed or supplies inserted.",
+    "Shows two found-vessel approaches, not a crafted-pot expedition or unaided start-to-site discovery.",
+    "Initial B-shop evidence is superseded by final C-successor journeys after preserving old pool/selection contracts."
+  ],
+  "endpoint": "Water only; fixed existing bone-tincture effect, existing cache/heat rules. No wiki, reference-pack gate, additional AI or later systems.",
+  "read_only_final_review": "No material issue remains after correcting the explicit post-F9 historical comparison. Original pool/A/B match baseline; dependency allowance is pinned and one-way; fixtures and expected hashes unchanged.",
+  "final_verification_input_revision": "741d2575048fb52ce553200a987740257df67969",
+  "focused_expectation_recheck": {
+    "full_run_tests": 629,
+    "full_run_failures": 2,
+    "complete_repeated_modules": [
+      "test_gameplay_g16",
+      "test_structure_access"
+    ],
+    "repeated_tests": 8,
+    "passed": true,
+    "delta": "Exactly current apothecary successor and installed-candidate count; see focused-recheck.json."
+  }
+}

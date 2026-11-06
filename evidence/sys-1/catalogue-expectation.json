@@ -1,0 +1,344 @@
+{
+  "baseline": "09cc1e5f560857cca4a54450839d69ca9119a658",
+  "all_catalogue_and_capability_git_blobs_match_baseline": true,
+  "checked_files": 38,
+  "harvest": 34,
+  "variant": 29,
+  "rows": [
+    {
+      "id": "amber_sting_beetle",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "ash_escort",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "barrow_alarm_runner",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "barrow_alarm_sentinel",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "barrow_alarm_skirmisher",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "barrow_alarm_watch",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "barrow_kin_sentinel",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "barrow_lane_revenant",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "barrow_nettle_guard",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "barrow_patient_weevil",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "barrow_sentinel",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "barrow_shy_listener",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "barrow_shy_stalker",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "barrow_watcher",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "barrow_wight",
+      "harvest": true,
+      "variant": false
+    },
+    {
+      "id": "bog_wraith",
+      "harvest": false,
+      "variant": false
+    },
+    {
+      "id": "briar_lurker",
+      "harvest": true,
+      "variant": false
+    },
+    {
+      "id": "drowned_revenant",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "drowsing_stalker",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "gloam_shudder",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "gloam_stalker",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "grave_harrier",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "grave_skirmisher",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "grave_thing",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "heath_stalker",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "highland_bandit",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "hollow_knight",
+      "harvest": true,
+      "variant": false
+    },
+    {
+      "id": "hollow_revenant",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "nettle_stalker",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "patient_amber_hunter",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "plague_crow",
+      "harvest": true,
+      "variant": false
+    },
+    {
+      "id": "sewer_thing",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "stone_escort",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "stone_lurker",
+      "harvest": true,
+      "variant": false
+    },
+    {
+      "id": "timed_amber_hunter",
+      "harvest": true,
+      "variant": true
+    },
+    {
+      "id": "vine_network",
+      "harvest": false,
+      "variant": false
+    }
+  ],
+  "provenance": {
+    "roguelike/engine/creature_authoring.py": {
+      "git_blob": "16dfebb9fef4204264c896e5b78c3737ea4b9390",
+      "working_sha256": "e55e97fb2357c5c4c600b07649bd23919310a364612577a34a8f6d6d84f7fa17"
+    },
+    "roguelike/data/entities/creatures/amber_sting_beetle.json": {
+      "git_blob": "4cb9ccfe3e81b851d6869e128f00a886a6c67b36",
+      "working_sha256": "a15d1f9750f909775ee5c494632c7329d1923d61ee1ddfc5904eefd08b802c2a"
+    },
+    "roguelike/data/entities/creatures/ash_escort.json": {
+      "git_blob": "5752bc806b250774bd12c2c782afb05e5aeff83d",
+      "working_sha256": "acd2d5d6ffd91afc0fcc4b17e400afb53a2c8c8accf4cd066d329831c6d12a8b"
+    },
+    "roguelike/data/entities/creatures/barrow_alarm_runner.json": {
+      "git_blob": "07cde86997b9ae1d75df739d92b9a4d504e6e949",
+      "working_sha256": "5d0e9bee6b4e418e8b30e8e06bdab8f1040243bdedffa44487dd3f6888aa0028"
+    },
+    "roguelike/data/entities/creatures/barrow_alarm_sentinel.json": {
+      "git_blob": "fd7f1691921c95a9fb5076e45563db5b5e4fdb75",
+      "working_sha256": "62b8676b8b77fbbb3accf49ab949b0a8e9e643a99b881823edff6126174fb8cd"
+    },
+    "roguelike/data/entities/creatures/barrow_alarm_skirmisher.json": {
+      "git_blob": "7e19a3bbfe438021163a29f3927297e1fb3907cb",
+      "working_sha256": "92b1c6ae1f133306a0c087230dbdf02977fca3b4ca35fb3d7d2b177336875fb2"
+    },
+    "roguelike/data/entities/creatures/barrow_alarm_watch.json": {
+      "git_blob": "6edaa8126eefd628fe82a09b2f206060944e1229",
+      "working_sha256": "ad66cbce4418b21153974169bfa24e1ef5eb9212d71176611442ef11e39f833e"
+    },
+    "roguelike/data/entities/creatures/barrow_kin_sentinel.json": {
+      "git_blob": "422a66b055c1dca375c983b0487714887c47d3b5",
+      "working_sha256": "9781003aca1520bcaaace3d80a0c9bbb638eda131e4b4e41da945f0a68085621"
+    },
+    "roguelike/data/entities/creatures/barrow_lane_revenant.json": {
+      "git_blob": "31d15184866b162493bac9fe616aac8036b1d3cd",
+      "working_sha256": "e2275cb29d67f74ee99ac556a2cc058af0d07e1d88f2a2d8ff254a77295b2605"
+    },
+    "roguelike/data/entities/creatures/barrow_nettle_guard.json": {
+      "git_blob": "32950f047fd7f362aef89e62cff1cd7a177e8243",
+      "working_sha256": "a896d44e6a7299ba75396197a0c47f5f858f045ef3cc8bb101e1eecfd6db26be"
+    },
+    "roguelike/data/entities/creatures/barrow_patient_weevil.json": {
+      "git_blob": "088dd5221e9d237a3e3e1d132e4e37c6ce8801ad",
+      "working_sha256": "b2a9732d00a06de571cb8b4f740269b8bc115269bb79fe64294a59599e0e1fa2"
+    },
+    "roguelike/data/entities/creatures/barrow_sentinel.json": {
+      "git_blob": "5515249d624235e7a8ae95caccc2b11a6b109a62",
+      "working_sha256": "54f885f84b844ff8c63eae8aa4dfe3be626aeddaa7a1f8eeb14f68e984b144af"
+    },
+    "roguelike/data/entities/creatures/barrow_shy_listener.json": {
+      "git_blob": "92695fd612d4bdf5210ee287ec7c9b469890b8cf",
+      "working_sha256": "966ae26fc914c127d57312a0146d49f6244f949e9dbaa959c811690c58ce443f"
+    },
+    "roguelike/data/entities/creatures/barrow_shy_stalker.json": {
+      "git_blob": "9dc5d20d9e425782db5b7f133441d1300ea322b1",
+      "working_sha256": "4388521cd76471f116b1cb42944782c32b1806d7fde4703e9ca18b5c68cc4b6e"
+    },
+    "roguelike/data/entities/creatures/barrow_watcher.json": {
+      "git_blob": "e7399ae55e398892dc05ad8cdc535bc2c13d49a3",
+      "working_sha256": "312af7f4b37632e9672cd3489bbfce2d93284d634a7dbdc0c2aad81f9879f21b"
+    },
+    "roguelike/data/entities/creatures/barrow_wight.json": {
+      "git_blob": "2427317bfef7d935e0d3da8a27ff3c4dd4aa3bca",
+      "working_sha256": "c5381df7fdbee8178bc532ae19c5ff84e5cde893a0a2ac7e1fac0aaf675cbb48"
+    },
+    "roguelike/data/entities/creatures/bog_wraith.json": {
+      "git_blob": "1d67d64f601bc8df5628f13551977c739d1ba3a6",
+      "working_sha256": "fc83080b77ee1d869b2748f9205ef11c438fa44e0da237c668f348a28c9e9b43"
+    },
+    "roguelike/data/entities/creatures/briar_lurker.json": {
+      "git_blob": "dae664d0840f46ba6e27e91e51495a32485f9f65",
+      "working_sha256": "bf65f061929c1589bf3b66011546e5548255f28dc0342b387050af6abb75ffdb"
+    },
+    "roguelike/data/entities/creatures/drowned_revenant.json": {
+      "git_blob": "0fef812916f6ac7e54411b573822ea63d3052d16",
+      "working_sha256": "99df18d80d0b0fdf7bf4bb68cbbcc5591d637a984e7d79aa145815c179b48995"
+    },
+    "roguelike/data/entities/creatures/drowsing_stalker.json": {
+      "git_blob": "37f736198f4a5f4c51587b6268742032df9e1fc6",
+      "working_sha256": "9de6bfdbe0ef49d34bfdad0095c8b0dc2b77092c51509c3d072164ad49770158"
+    },
+    "roguelike/data/entities/creatures/gloam_shudder.json": {
+      "git_blob": "0e4182fa6d6c716e30bbeb600a96f20cd3314fc6",
+      "working_sha256": "a1243872cb2734796dd222976d958bf5c81897961ea568a49f1f961db00a9c95"
+    },
+    "roguelike/data/entities/creatures/gloam_stalker.json": {
+      "git_blob": "51ba70f8d4384538e588ea876b684b923dac6fb8",
+      "working_sha256": "d4432a0a2d7137bbc2cffbfe564065a928f6dc765ac235c554d76f3aa94ddf01"
+    },
+    "roguelike/data/entities/creatures/grave_harrier.json": {
+      "git_blob": "e29da1788c834d00a37d7f4c85521ff8123b145e",
+      "working_sha256": "63f4e602b4cdede679dbc27d0bb406210218f5fec765c5294ed5abd0a2c2e417"
+    },
+    "roguelike/data/entities/creatures/grave_skirmisher.json": {
+      "git_blob": "f7083eb3d18cdc8a6ea61456dce5e75089ef1507",
+      "working_sha256": "07a685466563f14c26cf4099beac1f6a049d5be5240b440e31862711631e8442"
+    },
+    "roguelike/data/entities/creatures/grave_thing.json": {
+      "git_blob": "63870bd8406c76e1b0b6897aad4734b9a4abbf4d",
+      "working_sha256": "0f35f4f48279961fcd79f19c696c568c467ccd282d1f0d6040ae1da2de5176ff"
+    },
+    "roguelike/data/entities/creatures/heath_stalker.json": {
+      "git_blob": "2b0ff9a8a3224adab99a222ef1cccbb1507e1f76",
+      "working_sha256": "09c66a44f64e38373f7f26d1575c3c66a32f5e9f021c2619320b1a59f242f015"
+    },
+    "roguelike/data/entities/creatures/highland_bandit.json": {
+      "git_blob": "ee0c3d885f0f2b550120c8a1f1b07050994d13b1",
+      "working_sha256": "a1cc37c24832794e7dee1e45f5f7572614ac16a65dcaebefc2378d085e3fcd91"
+    },
+    "roguelike/data/entities/creatures/hollow_knight.json": {
+      "git_blob": "cb3616d8da826ed8b1bc3a78df5c755dcf87a5b6",
+      "working_sha256": "f2cc9fc657a7bb9e47ff01b1d7c8ad864bd03ec8d8968e89b7f1fc035f9353de"
+    },
+    "roguelike/data/entities/creatures/hollow_revenant.json": {
+      "git_blob": "3b5e59e20bedff36115c9b1716d3a139ba4585d4",
+      "working_sha256": "44b2ee0fb49ab1f172791bf1775ea9c3a707942e2adbfd9e9fb5e176fad80a3b"
+    },
+    "roguelike/data/entities/creatures/nettle_stalker.json": {
+      "git_blob": "5280bed84d95a3607ffcaa1af86de7dd308c3bea",
+      "working_sha256": "d19d052980301b518367e0fca91bf38f4b494368c5afe7c9e15fe2cdb8e76920"
+    },
+    "roguelike/data/entities/creatures/patient_amber_hunter.json": {
+      "git_blob": "d5b1d09c511d23c3b6e100e77306785dba447827",
+      "working_sha256": "2c97abf1a305d98da9f7ba89508fa8d9b7efd2e728155c65e477f3be54a8ce6d"
+    },
+    "roguelike/data/entities/creatures/plague_crow.json": {
+      "git_blob": "88c6500f00d6f97d43d1c3dd5721d1e75057897d",
+      "working_sha256": "fb3f48326dd8a1dfc801e35e66a065252265ebfae67636d411ba8f27af82155c"
+    },
+    "roguelike/data/entities/creatures/sewer_thing.json": {
+      "git_blob": "2b77faac41221b4b70a1d599764c90fe5bc1a3df",
+      "working_sha256": "86d7c23ba3e4386b134bc209076e09eb21f1264f905bcc384541bc3e30a00b1d"
+    },
+    "roguelike/data/entities/creatures/stone_escort.json": {
+      "git_blob": "96e8f34b13d7a6170ca959b6e926412da6a608a3",
+      "working_sha256": "0eaf3f2f8174e4f7006496452333e07c59ade3112351b2c3e184eedccc6284f2"
+    },
+    "roguelike/data/entities/creatures/stone_lurker.json": {
+      "git_blob": "2b15c6c2aed75bfccf4cf79c09e1657770d734c1",
+      "working_sha256": "621ecc583ac9c9f404a0b695b4fcbd06d997f3fd40aa1dbc611be2986400a03d"
+    },
+    "roguelike/data/entities/creatures/timed_amber_hunter.json": {
+      "git_blob": "fd4489b6397574f6dd5396672df6cdb25dc22b3b",
+      "working_sha256": "91b12cb9592c6606971b3c1a094ff79eeabe02320ff0b840cd6ca8b1bdf19832"
+    },
+    "roguelike/data/entities/creatures/vine_network.json": {
+      "git_blob": "10edba3a347f80db9aa88830352c2593c84c4925",
+      "working_sha256": "77395c1193ca15e28f81ab83fb241a7a71b9d6ea08889d6b3870b1c95aaf890a"
+    },
+    "roguelike/data/entities/player.json": {
+      "git_blob": "46e0cf8c5207cb6cf046c80feeaba6566ee571fb",
+      "working_sha256": "e335eb5a444cf7f379c6b9242a12f486ca89a76b1e0d04e246652142d6a2ccd7"
+    }
+  },
+  "correction": "Only stale test_harvest aggregate counts; protected-source and item-reference assertions retained. Git attributes normalize checkout line endings for baseline comparison."
+}

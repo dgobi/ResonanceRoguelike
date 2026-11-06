@@ -1,59 +1,40 @@
 # SYS-1 progress
 
-Commission: Practical vessels and resonant preparation, five internal milestones,
-one final delivery; sole writer on production `main`. Commit/push and checkpoint
-publication are authorized. No wiki or later roadmap work.
+Complete commissioned package: Practical vessels and resonant preparation,
+five internal milestones and one final delivery. Sole writer on production main;
+helpers were read-only. No task branch, worktree or development copy was created.
 
-- Reconciled local/remote `09cc1e5f560857cca4a54450839d69ca9119a658`;
-  no intervening tracked changes. Start: `checkpoint/sys-1-start-20261105-a`.
-- Read Compass v1.0 (retained repository reference), Downloads Decisions v3.0,
-  Workflow v1.2, repository AGENTS and commissioned SYS-1 v1.0 brief. Decisions'
-  AI-8 status is historical; actual source is delivered AI-9.
-- 278 pre-existing untracked owner files hashed in preservation-start.json;
-  excluded from task commits. Personal saves remain unopened.
-- M1 complete: `e8268cf3cfed8407da48fee0c3b97a6d5af7309a`; checkpoint
-  `checkpoint/sys-1-m1-20261105-a`. Genuine baseline archive captured from
-  unchanged 09cc1e5. 19 M1/AI-9 checks passed, including real Wait/F5/F9 and
-  separate-process cold continuation with normal visibility (staged position).
-- M2/M3 implemented and focused checks pass: additive effective water state,
-  physical inventory handling, exact conjunction/batch/vessel allocation,
-  single-owner busy work, recovery, hot/cold timing and old-format compatibility.
-  Twenty-four SYS-1 tests pass, including strict malformed-load preflight and two
-  menu sizes. Read-only review fixes include protected special uses, timer bound,
-  reusable state, marker/delivery recovery, reach and historical container rows.
-- M4 complete: packaged Item/Recipe controls created/published kettle/flask/cup
-  and a Test room. Final integrated capture passed (`native-1793921061419`),
-  including invalid-item/recipe Undo, no-ops, 125 mL small-cup work, old 250 mL
-  Reset behavior, latest saved inputs and excluded dirty 200 mL. The capture
-  exposed and prompted repair of invalid-candidate Undo availability. Explicit
-  modern clay absence now stays inert across JSON/pickle; legacy migration is
-  load-only. Full receipts and initial creation phase are in evidence/sys-1.
-- Both ordinary selected-world journeys pass in `.baseline/sys-1/ordinary-dev7`:
-  found kettle at (17,55) then plains preparation; found clay/flask and optional
-  note at (16,56) then forest preparation. Seed 20261024; one public-join staging
-  each, subsequent normal controls/AI/costs/survival. Flask rejection, transfer,
-  native fuel/fire, real knowledge payoff, four F5/F9/cold checkpoints per journey
-  and depleted-source revisits pass. No campaign edits or threat removals.
-- M5 active: guidance written; `tools/verify_sys_1.py` schedules unfiltered
-  production/focused suites, all 26 worker modules, frontend/host/build/bundle,
-  native lifecycle and SYS-1 play. Then concise evidence, SYS_1.md, commit/push
-  and independent remote main/tag-object/peeled readback.
-- Implementation checkpoint: `a4c127991610f017f10a52074c03bdfbcd1d4842`,
-  `checkpoint/sys-1-implementation-20261105-a`. Frozen run `final-a` completed;
-  frontend/host/build/package/startup/desktop/native and both ordinary journeys
-  passed. Full production exposed two narrow legacy regressions: old single-output
-  jobs inherited vessel delivery constraints, and vessel map validation inspected
-  unrelated opaque container payloads. Both boundaries repaired with direct
-  regressions; new two-output recovery and strict vessel checks remain intact.
-  Worker harvest counts predate the already-present AI catalogue (34/29); preserve
-  all assertions while correcting counts. One worker preview hit its unchanged
-  20-second limit under concurrent heavy suites; separate the worker phase on
-  the full rerun. Focused suite exposed generation UUID comparison noise and real
-  pending-shop dependency drift. Original shop pool/A/B restored; new pool and C
-  successor are selected only by current profiles. Exact one-way old clay upgrade;
-  new plans keep full descriptor hashes. Historical comparisons explicitly project
-  only the approved empty clay addition; current semantics omit only random IDs.
-  Genuine G14/15/16 archives and generation-content preflights pass. Both actual C
-  ordinary journeys pass in `ordinary-successor`; prior B receipts are superseded.
-  Read-only review found no remaining material issue. Finish compatibility
-  preflight, commit repairs, freeze final-b, then all gates and publication.
+- Baseline reconciled at `09cc1e5f560857cca4a54450839d69ca9119a658`; no intervening
+  tracked work. All 278 pre-existing owner files remain unchanged and uncommitted.
+  Personal campaigns were not opened. Compass v1.0, Decisions v3.0, Workflow v1.2,
+  repository guidance and the commissioned brief governed the package.
+- M1: `e8268cf3cfed8407da48fee0c3b97a6d5af7309a`. Exhausted regroup/concealment
+  repaired with actual engine F5/F9 and separate cold continuation; genuine old
+  item/job archive captured from baseline before serializer changes.
+- M2/M3: versioned water vessels, actual handling, exact measured preparation,
+  busy ownership/recovery, strict persistence and existing knowledge payoff.
+- M4: packaged authoring/undo/redo/publish/Reset/latest-saved flows demonstrated.
+  Three representative vessels plus small-cup authoring example. Current
+  apothecary C/pool successor preserves original A/B and pending old stock.
+  Both ordinary C journeys pass with native actors/survival, one disclosed
+  public-join staging each, eight F5/F9 and eight independent cold comparisons.
+- Implementation checkpoint: `a4c127991610f017f10a52074c03bdfbcd1d4842`.
+  Scoped compatibility repair: `11554782ec260b4330431fcc277b7bb456c08870`.
+  Final verification inputs: `741d2575048fb52ce553200a987740257df67969`.
+- M5: 15 applicable gates established. Production 3,704 checks / 159 workers;
+  full focused 629 cases followed by an exact two-expectation correction and
+  both complete affected modules (8 tests) passing. Worker 132 cases / 26 modules
+  with one intentional skip and separate passing dependency control. Frontend97,
+  host71, startup15, builds/package/desktop/native and both ordinary journeys pass.
+  Original failures, exact deltas and retained results remain explicit in evidence.
+- Final manifest: `fe1fea15e4162777c1287d3d73336cb5251bfc9b7cd4948cefa04c5a49eb9a8d`.
+  All 1,222 consumed files are tracked; none are preserved owner files.
+- Checkpoints use `checkpoint/sys-1-` / `20261105-a`: start, m1, implementation,
+  verified-input and complete. First four published objects/peeled revisions are
+  independently read back in evidence/sys-1/publication.json. The reporting commit
+  is the completion checkpoint; final main/complete readback is in the handoff.
+
+Detailed outcomes, executed commands, ordinary setup, evidence and limits:
+[SYS_1.md](SYS_1.md). No implementation work remains. Endpoint is this water-only
+preparation package and its prerequisite repair; no further AI, wiki maintenance,
+reference-pack refresh or later roadmap stage is included.

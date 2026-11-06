@@ -1,0 +1,164 @@
+{
+  "before_revision": "a4c127991610f017f10a52074c03bdfbcd1d4842",
+  "after_revision": "11554782ec260b4330431fcc277b7bb456c08870",
+  "before_manifest_sha256": "3f6ddce5716f7511a254c0b538e20f68330ea25c5fd70e002cae28005976f78d",
+  "after_manifest_sha256": "7b9a893e0f192cebd73107bd574579a94ad06650a4bc745fbf7a010d66782ebc",
+  "changes": [
+    {
+      "path": "roguelike/data/buildings/commercial/apothecary_c.json",
+      "before": null,
+      "after": "7cfdc530feef34aad159b6a66210c5abec84eb1891038fbc5e6692be0cc4c6f1"
+    },
+    {
+      "path": "roguelike/data/generation/settlement_profiles.json",
+      "before": "22c231e3ff3ddb5f1fe428ee513d4cdcaf4c184b315c033e6a994b280e095c53",
+      "after": "7c065abeeb1bae2739ba4992c71475d6cfb1a18182359902efb2e123cb5d7a50"
+    },
+    {
+      "path": "roguelike/data/loot_pools/alchemist_preparation.json",
+      "before": null,
+      "after": "6ed31ff5c8b9ee1a865ce098d808fa586dd6e0cea860ea99726d1c7cca9ef607"
+    },
+    {
+      "path": "roguelike/data/loot_pools/alchemist_shop.json",
+      "before": "cdac852f547f9678936392162438f08d24b7a9590a5cefb0b7bf0bb071b8fd06",
+      "after": "69b05bcd0c009955744ae451d25fc16fdd266e093461c44c08e6c733d2864960"
+    },
+    {
+      "path": "roguelike/docs/PRACTICAL_VESSELS.md",
+      "before": "f465c5caace04494889fb6d0663b9d04bc688642aa4cfb79b904a41be70a1f6e",
+      "after": "48e0da1d0b13a15ccd6ec19792536866bda6a97a4d4af4c90c2919f7c0fd835a"
+    },
+    {
+      "path": "roguelike/engine/engine.py",
+      "before": "c1b409d962c7d33ebeb8842c10575cc930b55888ec9a0ce5d5428c417b59ffee",
+      "after": "56451456e340f6e8a6babe66db9ea542c111c6a7b764094f0ae486d4ce13d60d"
+    },
+    {
+      "path": "roguelike/engine/vessels.py",
+      "before": "949d5b1162a4e7a3687b8f17cf7fadbf587d181e86d8e4e8a2b925526965c095",
+      "after": "95fa478e64f7fe4831d2fd84d1c0eb08cbe3765fd66c958bb1027f1d712bea12"
+    },
+    {
+      "path": "roguelike/generation/placement.py",
+      "before": "2fb1d1c815d042041d63e971a08564dda0337aaae51c0d6a49234a2d11e679ee",
+      "after": "0f72aa1a6b5487f11e3e27e3cea9dd5c4389ffb6b00c79eda26ba525fb838d9f"
+    },
+    {
+      "path": "tools/critical_fix_regressions/fixtures/sys1/pre-sys1-clay.json",
+      "before": null,
+      "after": "de984e71a817a89dc5f0d6a7c837908542c8b032753997372be40613d55bafda"
+    },
+    {
+      "path": "tools/critical_fix_regressions/fixtures/sys1/provenance.json",
+      "before": null,
+      "after": "c2c90415a81a3bf57ea9a8d12553661aebc22274abe161dd95ea7bd89d9f1511"
+    },
+    {
+      "path": "tools/critical_fix_regressions/tests/g1_support.py",
+      "before": "83587292b48180ce1ebce2724b880841a20b3e0b9b6ce3c3b7e33faefc1d787a",
+      "after": "3911aeccbbde7faac12bcd22e1cfc9ebe93c6a1f8b6f7ef462b56c341312d839"
+    },
+    {
+      "path": "tools/critical_fix_regressions/tests/historical_selection.py",
+      "before": "e2585caf001eaf79778b30822a1a7f4031547aaea88fc7987ebb3e7aacb98efc",
+      "after": "2e2080d22f73e0868e47fb054ff56c46e2429464e50a079d0a6f1ec2c0e7a3fe"
+    },
+    {
+      "path": "tools/critical_fix_regressions/tests/test_gameplay_g13.py",
+      "before": "0f25db22676545d4ad6e21a596954e201118edd19bce098128bffc311852f38f",
+      "after": "3ca986d2d2ef73ef9d97b1b78ce3c10a8d7449f0f04255f0a5276a787f610b9f"
+    },
+    {
+      "path": "tools/critical_fix_regressions/tests/test_gameplay_g15.py",
+      "before": "959fe3f21a31b6025bfa49913fd2af1463adf0373e4d568df90ee0427eb24ce2",
+      "after": "a59e9a923135ec1a511315ef1589ef5fc8ff1b83a8fd3eb2ad853a442d1b16a3"
+    },
+    {
+      "path": "tools/critical_fix_regressions/tests/test_gameplay_g17.py",
+      "before": "ff0a38de104fbb9d3aaa8976ce332705d5ce189b81e3f016516af2f65d205fab",
+      "after": "fcc2a87fade77c91408f55a31dafc45383d53b893f9d3e443986d53623292616"
+    },
+    {
+      "path": "tools/critical_fix_regressions/tests/test_generation_content.py",
+      "before": "45213383d7df22d280519233eb38e781909da85cae5ce6c9175a22825cf25a11",
+      "after": "e6dcf8e9353e2ec4b28af50fea0512ca6ba5cde36a0cb9895e4be01537d4f27b"
+    },
+    {
+      "path": "tools/critical_fix_regressions/tests/test_generation_g6_sites.py",
+      "before": "42c2cf827b4dfdbcf84ae7de9d31a926ea2ad55cdba85fce7ab01663045ef621",
+      "after": "d5787988a713809c688e16a13fcb5ee2a48df777ec86b78b2c0a1ce1738d83db"
+    },
+    {
+      "path": "tools/critical_fix_regressions/tests/test_generation_g8_lifecycle.py",
+      "before": "8cfd48011b0339aa7d055df3497eba925e1e022d226ed22b8a97f956515cd4a1",
+      "after": "25707d9e5797fc29fccd13f5fc8111a9e83771718b8650cb9078afcfa08264bf"
+    },
+    {
+      "path": "tools/critical_fix_regressions/tests/test_generation_g9_lifecycle.py",
+      "before": "5c56cd54fe4af3a58494a5e656abfe057a33e067fa0c22f2a348f4b1267a65b7",
+      "after": "7944a67c03450d8fb58118c6cd9e83eae4f593d9b1498befaba4bb38932681c7"
+    },
+    {
+      "path": "tools/critical_fix_regressions/tests/test_structure_contract.py",
+      "before": "3fd967bf22c7fd899461b8c9c7e722082aa5ab75441ec4b616b6615d9f5f63fd",
+      "after": "b7cd7cdd64f423808a386ef46509060a026526c3ac0b7be8096f1cb4687c99eb"
+    },
+    {
+      "path": "tools/critical_fix_regressions/tests/test_sys_1.py",
+      "before": "63b210f0dec7977c1e3ba5cc37f10ddc1735da516dac8d8eeb287346b3473bac",
+      "after": "3815f7ad96bc792276f7f0d82f843ab9e04e634615b09ec6d991a2d958d8fbeb"
+    },
+    {
+      "path": "tools/critical_fix_regressions/tests/test_usable_supplies.py",
+      "before": "dad67ed634718a1bcd15a006a2f59d93a203b2e3c9630e0860ff7d471e3d86d4",
+      "after": "6e85114c8027360f62c3a3ab1888574eae30ef762c8e33b21abb15bb273c4df5"
+    },
+    {
+      "path": "tools/g12_journey.py",
+      "before": "883d834884fc25bea891ab400949e9b2fd7a5c661f24dec8685a0844be4b3787",
+      "after": "c8429a0b3e7822b62ebc77a6e8c8c1b6a9c1b96fb9d83349172209488c405b63"
+    },
+    {
+      "path": "tools/g15_historical.py",
+      "before": "59850677c413a6f2db5df3ce43119cfe559a864bc596297a9e5a12f1a99590e1",
+      "after": "d56503ad4d0f51288a46374243f85b651b8d49da31acaf92dbf5a23aaf7c5f13"
+    },
+    {
+      "path": "tools/g16_historical.py",
+      "before": "0eb8c27bcbfd86e41e85bd542283627fab33f92125a22c1d0d3112bf543452a1",
+      "after": "5042cc8cc2734895a096162735252b95c60c2ae6456a24179f101eb6257c52e2"
+    },
+    {
+      "path": "tools/g17_historical.py",
+      "before": "f661a365ca072b90a0e4248b96340e290c971be85f1b7a0b657a936ec0b81bd4",
+      "after": "8c26b6bf3be0b1ede0a3b1aa61fb7f69e533d5ff5fb010b212dfa76ef1219acf"
+    },
+    {
+      "path": "tools/verify_sys_1.py",
+      "before": "c4d052d9bd1e10cd972eacbfbd9f014a72d2b114736ff69c2a8a3a4afef884d6",
+      "after": "d2bd3a66bddec88a1fd8f59f56331fc4fb4f2c9c9aad48713f528187735c10c5"
+    },
+    {
+      "path": "tools/verify_sys_1_play.py",
+      "before": "1e906f7bd204d3d883828febccb34e7c6a1eec602044587f81f479e34b985275",
+      "after": "ad136892bdeed20837eef2ee30da7d9cb2e6a2a87a7b8534200ea78775c0ff28"
+    },
+    {
+      "path": "workbench/worker/test_buildings_w5p.py",
+      "before": "866c9d783d373ed789dd07ac97fc93910ab73c148c4c6c19a09390cf53ac3272",
+      "after": "05ecb4dfc9f33151b124a28e30753c32df0ebc60f2c72690cdca8071dfae0707"
+    },
+    {
+      "path": "workbench/worker/test_harvest.py",
+      "before": "b78a84c5269aca7171cf3559bbb171514dc033ca7b143779e2504283de00d451",
+      "after": "6b711ad8c1d7e59e00b82fdbcf90b0896c578be826b708a63fccab9a6087557c"
+    },
+    {
+      "path": "workbench/worker/test_pools_w5o.py",
+      "before": "6263defe99fed79ce73163022086a19d7feeaf47b5af929ede9ff8014c9accc1",
+      "after": "3b6641b187f879f2590373f74c3b2673ca79816d86cd53595fff1706c47c1aea"
+    }
+  ],
+  "rerun": "All current unfiltered gates repeated on final-b after runtime/content compatibility repair."
+}

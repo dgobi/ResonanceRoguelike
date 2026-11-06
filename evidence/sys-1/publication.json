@@ -1,0 +1,36 @@
+{
+  "repository": "dgobi/ResonanceRoguelike",
+  "branch": "main",
+  "runtime_content_editor_revision": "11554782ec260b4330431fcc277b7bb456c08870",
+  "final_verification_input_revision": "741d2575048fb52ce553200a987740257df67969",
+  "checkpoints": [
+    {
+      "tag": "checkpoint/sys-1-start-20261105-a",
+      "object_sha": "3875838243171e150486f714a9a89d74cd5afc6c",
+      "peeled_revision": "09cc1e5f560857cca4a54450839d69ca9119a658",
+      "independent_readback": "GitHub REST connector GET ref and annotated tag object"
+    },
+    {
+      "tag": "checkpoint/sys-1-m1-20261105-a",
+      "object_sha": "efe5c5f89c4a476f731606d65645cb0dfe1ff9bb",
+      "peeled_revision": "e8268cf3cfed8407da48fee0c3b97a6d5af7309a",
+      "independent_readback": "GitHub REST connector GET ref and annotated tag object"
+    },
+    {
+      "tag": "checkpoint/sys-1-implementation-20261105-a",
+      "object_sha": "e285e2dad0096c5ef33be739a737e72cea10f615",
+      "peeled_revision": "a4c127991610f017f10a52074c03bdfbcd1d4842",
+      "independent_readback": "GitHub REST connector GET ref and annotated tag object"
+    },
+    {
+      "tag": "checkpoint/sys-1-verified-input-20261105-a",
+      "object_sha": "f37af997f140706b10c9d8da5dbf4dfb7819d4a3",
+      "peeled_revision": "741d2575048fb52ce553200a987740257df67969",
+      "independent_readback": "GitHub REST connector GET ref and annotated tag object"
+    }
+  ],
+  "git_transport_readback": "git ls-remote origin refs/heads/main refs/tags/checkpoint/sys-1-* matched these annotated objects and peeled revisions.",
+  "main_at_checkpoint_publication": "09cc1e5f560857cca4a54450839d69ca9119a658",
+  "completion_tag": "checkpoint/sys-1-complete-20261105-a",
+  "completion": "Completed main and complete checkpoint are published atomically after the reporting commit. Their exact final main, annotated object and peeled SHA are supplied by independent Git/GitHub readback in the final handoff; a commit cannot self-embed its own SHA."
+}

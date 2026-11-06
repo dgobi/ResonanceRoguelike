@@ -1,0 +1,3360 @@
+{
+  "passed": true,
+  "journeys": [
+    {
+      "controls": "Two selected-world SYS-1 journeys. One disclosed initial public-join staging each.\nAll later travel, acquisition, fire construction, water, work and use are game inputs.\nDisposable saves; no supplies inserted, threats removed, costs or rules overridden.\n",
+      "events": 412,
+      "checkpoints": [
+        {
+          "label": "acquired",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 33048,
+            "state_equal": true
+          },
+          "archive_sha256": "df17fa9440f03fe17d68b2316e16d5e50759fe9470c1242c7040f1ffd22f2e5b"
+        },
+        {
+          "label": "busy",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 25100,
+            "state_equal": true
+          },
+          "archive_sha256": "c7b522356d4398f8a0cf147a6b8d1b63920d07aa52bf350138f1a480cf69a16e"
+        },
+        {
+          "label": "learned",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 15648,
+            "state_equal": true
+          },
+          "archive_sha256": "d423922de5ea2e4745e2bdd8b159d920689795ac5277dacf95797bc600e33ce5"
+        },
+        {
+          "label": "returned",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 23300,
+            "state_equal": true
+          },
+          "archive_sha256": "b1ca554000eabbf35c4abd7003e127a9037d9732ce642e383b5da250ec7c4668"
+        }
+      ],
+      "stages": [
+        {
+          "label": "selected public approach",
+          "state": {
+            "chunk": [
+              17,
+              55
+            ],
+            "submap": null,
+            "position": [
+              10,
+              21
+            ],
+            "turn": 480,
+            "hp": 60,
+            "hunger": 0.0,
+            "thirst": 0.0,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble"
+            ],
+            "actors": [
+              {
+                "id": "grave_thing",
+                "name": "Grave Thing",
+                "x": 46,
+                "y": 10,
+                "hp": 18
+              },
+              {
+                "id": "plague_crow",
+                "name": "Plague Crow",
+                "x": 2,
+                "y": 33,
+                "hp": 8
+              },
+              {
+                "id": "grave_thing",
+                "name": "Grave Thing",
+                "x": 35,
+                "y": 28,
+                "hp": 18
+              },
+              {
+                "id": "plague_crow",
+                "name": "Plague Crow",
+                "x": 54,
+                "y": 37,
+                "hp": 8
+              },
+              {
+                "id": "hollow_revenant",
+                "name": "Hollow Revenant",
+                "x": 37,
+                "y": 26,
+                "hp": 14
+              }
+            ]
+          },
+          "logs": [
+            "You light the Tallow Torch."
+          ]
+        },
+        {
+          "label": "acquired native bone and vessel",
+          "state": {
+            "chunk": [
+              17,
+              55
+            ],
+            "submap": null,
+            "position": [
+              14,
+              13
+            ],
+            "turn": 500,
+            "hp": 60,
+            "hunger": 0.02000000000000001,
+            "thirst": 0.025000000000000005,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble",
+              "resonant_bone_fragment",
+              "copper_steeping_kettle"
+            ],
+            "actors": [
+              {
+                "id": "grave_thing",
+                "name": "Grave Thing",
+                "x": 48,
+                "y": 8,
+                "hp": 18
+              },
+              {
+                "id": "plague_crow",
+                "name": "Plague Crow",
+                "x": 8,
+                "y": 41,
+                "hp": 8
+              },
+              {
+                "id": "grave_thing",
+                "name": "Grave Thing",
+                "x": 31,
+                "y": 26,
+                "hp": 18
+              },
+              {
+                "id": "plague_crow",
+                "name": "Plague Crow",
+                "x": 57,
+                "y": 33,
+                "hp": 8
+              },
+              {
+                "id": "hollow_revenant",
+                "name": "Hollow Revenant",
+                "x": 34,
+                "y": 25,
+                "hp": 14
+              }
+            ]
+          },
+          "logs": [
+            "Stone. Cold stone, and the smell of old air. Thy eyes open to darkness.",
+            "Thou art beneath the ground. Something is wrong with the world above.",
+            "Thou takest up a crude blade.",
+            "Thou takest up a leather jack.",
+            "It opens.",
+            "Thou takest the Resonant Bone Fragment.",
+            "It opens.",
+            "Thou takest the copper steeping kettle."
+          ]
+        },
+        {
+          "label": "measured native water and gathered fuel",
+          "state": {
+            "chunk": [
+              18,
+              54
+            ],
+            "submap": null,
+            "position": [
+              14,
+              7
+            ],
+            "turn": 709,
+            "hp": 60,
+            "hunger": 0.22900000000000018,
+            "thirst": 0.3029999999999995,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble",
+              "resonant_bone_fragment",
+              "copper_steeping_kettle",
+              "wood_bundle",
+              "wood_bundle"
+            ],
+            "actors": []
+          },
+          "logs": [
+            "Progress preserved.",
+            "The world reassembles itself around you.",
+            "You move into Palewater Plain.",
+            "You take bundle of wood from the dead branch.",
+            "You take bundle of wood from the dead branch.",
+            "A dryness in the throat.",
+            "The cold seeps in.",
+            "Water fills the vessel."
+          ]
+        },
+        {
+          "label": "ordinary preparation busy",
+          "state": {
+            "chunk": [
+              18,
+              54
+            ],
+            "submap": null,
+            "position": [
+              14,
+              7
+            ],
+            "turn": 712,
+            "hp": 60,
+            "hunger": 0.23200000000000018,
+            "thirst": 0.30712499999999954,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble"
+            ],
+            "actors": []
+          },
+          "logs": [
+            "Stone. Cold stone, and the smell of old air. Thy eyes open to darkness.",
+            "Thou art beneath the ground. Something is wrong with the world above.",
+            "Where will you set the fire?",
+            "The wood is set. A spark is still needed.",
+            "The fire takes.",
+            "The fire takes the edge off.",
+            "Where will you set it to work?",
+            "The bone steeps. The vessel must stay with the work."
+          ]
+        },
+        {
+          "label": "dose consumed and lexicon read",
+          "state": {
+            "chunk": [
+              18,
+              54
+            ],
+            "submap": null,
+            "position": [
+              14,
+              7
+            ],
+            "turn": 749,
+            "hp": 60,
+            "hunger": 0.2690000000000002,
+            "thirst": 0.3580000000000001,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble",
+              "copper_steeping_kettle"
+            ],
+            "actors": []
+          },
+          "logs": [
+            "The tincture is ready. Something stirs in the liquid.",
+            "Thou takest the copper steeping kettle.",
+            "Thou takest the resonant bone tincture.",
+            "A word rises from the marrow. It was always there.",
+            "  [ghuurkh]: the elder.",
+            "Press [L] to open the Lexicon.",
+            "Stone. Cold stone, and the smell of old air. Thy eyes open to darkness.",
+            "Thou art beneath the ground. Something is wrong with the world above."
+          ]
+        },
+        {
+          "label": "returned to depleted native owners",
+          "state": {
+            "chunk": [
+              17,
+              55
+            ],
+            "submap": null,
+            "position": [
+              14,
+              13
+            ],
+            "turn": 909,
+            "hp": 60,
+            "hunger": 0.4290000000000003,
+            "thirst": 0.5667499999999988,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble",
+              "copper_steeping_kettle"
+            ],
+            "actors": [
+              {
+                "id": "grave_thing",
+                "name": "Grave Thing",
+                "x": 53,
+                "y": 9,
+                "hp": 18
+              },
+              {
+                "id": "plague_crow",
+                "name": "Plague Crow",
+                "x": 11,
+                "y": 37,
+                "hp": 8
+              },
+              {
+                "id": "grave_thing",
+                "name": "Grave Thing",
+                "x": 41,
+                "y": 28,
+                "hp": 18
+              },
+              {
+                "id": "plague_crow",
+                "name": "Plague Crow",
+                "x": 61,
+                "y": 36,
+                "hp": 8
+              },
+              {
+                "id": "hollow_revenant",
+                "name": "Hollow Revenant",
+                "x": 42,
+                "y": 27,
+                "hp": 14
+              }
+            ]
+          },
+          "logs": [
+            "The world reassembles itself around you.",
+            "The cold seeps in.",
+            "The cold returns.",
+            "The chill passes.",
+            "Something gnaws at the edge of attention.",
+            "Thou enterest Graveiss.",
+            "Something accumulates in the silence here.",
+            "The thirst is becoming difficult to ignore."
+          ]
+        }
+      ],
+      "seed": 20261024,
+      "placement": {
+        "id": "settlement-0-cross-market-lot-81-3-S-0-building",
+        "asset": "apothecary_c",
+        "context": "grid",
+        "rotation": 0,
+        "mirror": false,
+        "origin": [
+          1366,
+          2375
+        ],
+        "footprint": [
+          1366,
+          2375,
+          1377,
+          2383
+        ],
+        "clearance": [
+          1365,
+          2374,
+          1378,
+          2384
+        ],
+        "approach": [
+          1370,
+          2382,
+          1371,
+          2387
+        ],
+        "road": "settlement-0-street-east-west-0",
+        "join": [
+          1370,
+          2386
+        ],
+        "entrances": [
+          {
+            "id": "main",
+            "x": 1370,
+            "y": 2382,
+            "normal": "S",
+            "width": 1,
+            "role": "main",
+            "required": true
+          }
+        ],
+        "targets": [
+          {
+            "x": 1372,
+            "y": 2381,
+            "kind": "floor",
+            "required": true
+          },
+          {
+            "x": 1368,
+            "y": 2378,
+            "kind": "floor",
+            "required": true
+          },
+          {
+            "x": 1367,
+            "y": 2376,
+            "kind": "container",
+            "required": true
+          },
+          {
+            "x": 1375,
+            "y": 2378,
+            "kind": "container",
+            "required": true
+          },
+          {
+            "x": 1371,
+            "y": 2380,
+            "kind": "container",
+            "required": true
+          }
+        ],
+        "required": true,
+        "dependency": "apothecary_c",
+        "role": "commercial",
+        "frontage_entrance": "main"
+      },
+      "native_stock": {
+        "(7, 11)": [
+          {
+            "item_id": "wight_essence_residue",
+            "item_state_version": 1,
+            "name": "Wight Essence Residue",
+            "tile": "generic_item",
+            "weight": 0.05,
+            "stackable": true,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A crystalline deposit found in the chest cavity. The thing that inhabited the body left this behind when it departed. What inhabited it is unclear. What it wanted is less clear still.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "resonant",
+                "tier": 3
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "murk_violet_stem",
+            "item_state_version": 1,
+            "name": "murk violet stem",
+            "tile": "generic_item",
+            "weight": 0.03,
+            "stackable": true,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 10,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Faintly sweet and then sour. Something in it pulls at the back of the jaw.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A dark stem from the murk violet. The petals have been stripped. The remaining stalk is fibrous, faintly damp, and smells of marsh water.",
+            "harvest_from": "flower_murk_violet",
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "soporific",
+                "tier": 1
+              },
+              {
+                "tag": "aromatic",
+                "tier": 1
+              },
+              {
+                "tag": "volatile",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "resonant_bone_fragment",
+            "item_state_version": 1,
+            "name": "Resonant Bone Fragment",
+            "tile": "generic_item",
+            "weight": 0.1,
+            "stackable": true,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A splinter of something old. The tone in it is audible if you press it against your skull and hold still. Do not hold it near bells.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "resonant",
+                "tier": 2
+              },
+              {
+                "tag": "bony",
+                "tier": 2
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "prophets_eye_cap",
+            "item_state_version": 1,
+            "name": "prophet's eye cap",
+            "tile": "generic_item",
+            "weight": 0.03,
+            "stackable": true,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 15,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Tasteless. Something shifts at the edge of sight for a moment, then is gone.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A pale, watery mushroom cap. The alchemists prized it. The cap alone is worthless \u2014 the liquid inside is what they wanted.",
+            "harvest_from": "shroom_prophets_eye",
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "resonant",
+                "tier": 2
+              },
+              {
+                "tag": "volatile",
+                "tier": 2
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "herbal_dressing",
+            "item_state_version": 1,
+            "name": "Herbal Dressing",
+            "tile": "generic_item",
+            "weight": 0.1,
+            "stackable": false,
+            "count": 1,
+            "on_use": "heal_minor",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": 12,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A prepared herbal dressing bound in clean linen. Restores up to 12 HP when injured; consumed after one use.",
+            "harvest_from": null,
+            "keywords": [],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ],
+        "(15, 13)": [
+          {
+            "item_id": "copper_steeping_kettle",
+            "item_state_version": 1,
+            "name": "copper steeping kettle",
+            "tile": "generic_item",
+            "weight": 0.9,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A broad copper kettle. Heavy empty, roomy over a fire.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "vessel",
+                "tier": 1
+              },
+              {
+                "tag": "heatproof",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "vessel": {
+              "config": {
+                "version": 1,
+                "capacity_ml": 1000,
+                "contents": "water"
+              },
+              "id": "2a04452d3ac746bca8d4dcff7b081df3",
+              "water_ml": 0,
+              "contents": null
+            }
+          },
+          {
+            "item_id": "dried_soporific_herb",
+            "item_state_version": 1,
+            "name": "dried soporific herb",
+            "tile": "generic_item",
+            "weight": 0.02,
+            "stackable": true,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Dried violet stem. The sedative quality persists.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "soporific",
+                "tier": 2
+              },
+              {
+                "tag": "aromatic",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "clay_pot",
+            "item_state_version": 1,
+            "name": "clay pot",
+            "tile": "generic_item",
+            "weight": 0.6,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "vessel",
+                "tier": 1
+              },
+              {
+                "tag": "heatproof",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "vessel": {
+              "config": {
+                "version": 1,
+                "capacity_ml": 500,
+                "contents": "water"
+              },
+              "id": "ad0c5408f62348719ba4cf1f1ad1a749",
+              "water_ml": 0,
+              "contents": null
+            }
+          }
+        ],
+        "(11, 15)": [
+          {
+            "item_id": "crow_jerky",
+            "item_state_version": 1,
+            "name": "Crow Jerky",
+            "tile": "food_item",
+            "weight": 0.2,
+            "stackable": true,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 0.35,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Strips of dried crow meat. It tastes exactly as you would expect. It sustains you regardless.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "dried_provisions",
+            "item_state_version": 1,
+            "name": "dried provisions",
+            "tile": "generic_item",
+            "weight": 0.3,
+            "stackable": false,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 300,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Dry and tasteless. It does what it needs to.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A cloth parcel of preserved travel rations. Salt-stiff, dense, neutral. Someone prepared this for a journey they did not finish.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              },
+              {
+                "tag": "binding",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ],
+        "(30, 12)": [
+          {
+            "item_id": "crow_jerky",
+            "item_state_version": 1,
+            "name": "Crow Jerky",
+            "tile": "food_item",
+            "weight": 0.2,
+            "stackable": true,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 0.35,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Strips of dried crow meat. It tastes exactly as you would expect. It sustains you regardless.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "dried_provisions",
+            "item_state_version": 1,
+            "name": "dried provisions",
+            "tile": "generic_item",
+            "weight": 0.3,
+            "stackable": false,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 300,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Dry and tasteless. It does what it needs to.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A cloth parcel of preserved travel rations. Salt-stiff, dense, neutral. Someone prepared this for a journey they did not finish.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              },
+              {
+                "tag": "binding",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ],
+        "(62, 26)": [
+          {
+            "item_id": "clay_lump",
+            "item_state_version": 1,
+            "name": "clay lump",
+            "tile": "generic_item",
+            "weight": 0.5,
+            "stackable": true,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A handful of river clay, dense and slightly damp. Takes any shape pressed into it. Dries hard near heat.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "malleable",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "wood_bundle",
+            "item_state_version": 1,
+            "name": "bundle of wood",
+            "tile": "generic_item",
+            "weight": 1.0,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A loose bundle of dry branches. Snapped from dead fall.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "fuel",
+                "tier": 1
+              },
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "flint_shard",
+            "item_state_version": 1,
+            "name": "flint shard",
+            "tile": "generic_item",
+            "weight": 0.2,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A sharp-edged chip knocked from a larger piece of flint.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "cutting",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "dried_provisions",
+            "item_state_version": 1,
+            "name": "dried provisions",
+            "tile": "generic_item",
+            "weight": 0.3,
+            "stackable": false,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 300,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Dry and tasteless. It does what it needs to.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A cloth parcel of preserved travel rations. Salt-stiff, dense, neutral. Someone prepared this for a journey they did not finish.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              },
+              {
+                "tag": "binding",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "animal_bone",
+            "item_state_version": 1,
+            "name": "Bone",
+            "tile": "generic_item",
+            "weight": 0.2,
+            "stackable": true,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Clean or close to it. The resonance content varies by source. A craftsman would weigh it before deciding what to do with it.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "bony",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ],
+        "(55, 11)": [
+          {
+            "item_id": "pilgrims_woe_petals",
+            "item_state_version": 1,
+            "name": "pilgrim's woe petals",
+            "tile": "generic_item",
+            "weight": 0.02,
+            "stackable": true,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 25,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Dry and slightly chalky. A faint warmth follows.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Dried petals from the pilgrim's woe flower, stripped from the dark fronds. Pale as old linen. The smell is faintly medicinal.",
+            "harvest_from": "flower_pilgrims_woe",
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "fibrous",
+                "tier": 1
+              },
+              {
+                "tag": "aromatic",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ],
+        "(64, 15)": [
+          {
+            "item_id": "water_skin",
+            "item_state_version": 1,
+            "name": "water skin",
+            "tile": "generic_item",
+            "weight": 0.5,
+            "stackable": false,
+            "count": 1,
+            "on_use": "drink",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": 400,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": "Cold and flat. The thirst retreats.",
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A leather skin, filled with water. The hide is old but the stitching holds. Something alive is in it still.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "drinkable",
+                "tier": 2
+              },
+              {
+                "tag": "vessel",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "dried_provisions",
+            "item_state_version": 1,
+            "name": "dried provisions",
+            "tile": "generic_item",
+            "weight": 0.3,
+            "stackable": false,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 300,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Dry and tasteless. It does what it needs to.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A cloth parcel of preserved travel rations. Salt-stiff, dense, neutral. Someone prepared this for a journey they did not finish.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              },
+              {
+                "tag": "binding",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "bitter_herb",
+            "item_state_version": 1,
+            "name": "bitter herb",
+            "tile": "generic_item",
+            "weight": 0.05,
+            "stackable": true,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 80,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A dried sprig of something that grows near water and stone. Hedge practitioners harvest it. It is edible in the way that most things are edible \u2014 with consequences.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "bitter",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "wood_bundle",
+            "item_state_version": 1,
+            "name": "bundle of wood",
+            "tile": "generic_item",
+            "weight": 1.0,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A loose bundle of dry branches. Snapped from dead fall.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "fuel",
+                "tier": 1
+              },
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ]
+      },
+      "initial": {
+        "chunk": [
+          17,
+          55
+        ],
+        "submap": null,
+        "position": [
+          10,
+          21
+        ],
+        "turn": 480,
+        "hp": 60,
+        "hunger": 0.0,
+        "thirst": 0.0,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 46,
+            "y": 10,
+            "hp": 18
+          },
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 2,
+            "y": 33,
+            "hp": 8
+          },
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 35,
+            "y": 28,
+            "hp": 18
+          },
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 54,
+            "y": 37,
+            "hp": 8
+          },
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 37,
+            "y": 26,
+            "hp": 14
+          }
+        ]
+      },
+      "harvested_native_wood": [
+        [
+          34,
+          13
+        ],
+        [
+          37,
+          14
+        ]
+      ],
+      "learned": [
+        {
+          "id": "ghuurkh",
+          "definition": {
+            "id": "ghuurkh",
+            "deep": "ghuurkh",
+            "common": "the elder",
+            "concept": "one whose age has made them a stratum",
+            "category": "people",
+            "tier": 1,
+            "glyph_seed": 1126,
+            "learn_sources": [
+              "waystone",
+              "text",
+              "corruption"
+            ]
+          }
+        }
+      ],
+      "passed": true,
+      "final": {
+        "chunk": [
+          17,
+          55
+        ],
+        "submap": null,
+        "position": [
+          14,
+          13
+        ],
+        "turn": 909,
+        "hp": 60,
+        "hunger": 0.4290000000000003,
+        "thirst": 0.5667499999999988,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "copper_steeping_kettle"
+        ],
+        "actors": [
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 53,
+            "y": 9,
+            "hp": 18
+          },
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 11,
+            "y": 37,
+            "hp": 8
+          },
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 41,
+            "y": 28,
+            "hp": 18
+          },
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 61,
+            "y": 36,
+            "hp": 8
+          },
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 42,
+            "y": 27,
+            "hp": 14
+          }
+        ]
+      }
+    },
+    {
+      "controls": "Two selected-world SYS-1 journeys. One disclosed initial public-join staging each.\nAll later travel, acquisition, fire construction, water, work and use are game inputs.\nDisposable saves; no supplies inserted, threats removed, costs or rules overridden.\n",
+      "events": 446,
+      "checkpoints": [
+        {
+          "label": "acquired",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 38748,
+            "state_equal": true
+          },
+          "archive_sha256": "aeb4c12a7b5d406b0d18d37feea3870d2ff580adb503e7eec89ef777812fa8e9"
+        },
+        {
+          "label": "busy",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 23308,
+            "state_equal": true
+          },
+          "archive_sha256": "00a3a4f91f85a75b6f7a0355ead21c4c6a5ca8fab76380958fb71d65b5166438"
+        },
+        {
+          "label": "learned",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 39128,
+            "state_equal": true
+          },
+          "archive_sha256": "ccb833af08f815b188a7693eb747944bbc667b84fbf226cbfc13465eab051c92"
+        },
+        {
+          "label": "returned",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 6456,
+            "state_equal": true
+          },
+          "archive_sha256": "b31c4ae3efd0b63827e6f409fc15e304ba8a9550836d2a7a4e1b2cf1c19e1c41"
+        }
+      ],
+      "stages": [
+        {
+          "label": "selected public approach",
+          "state": {
+            "chunk": [
+              16,
+              56
+            ],
+            "submap": null,
+            "position": [
+              61,
+              21
+            ],
+            "turn": 480,
+            "hp": 60,
+            "hunger": 0.0,
+            "thirst": 0.0,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble"
+            ],
+            "actors": [
+              {
+                "id": "hollow_revenant",
+                "name": "Hollow Revenant",
+                "x": 44,
+                "y": 30,
+                "hp": 14
+              },
+              {
+                "id": "grave_thing",
+                "name": "Grave Thing",
+                "x": 33,
+                "y": 30,
+                "hp": 18
+              },
+              {
+                "id": "hollow_revenant",
+                "name": "Hollow Revenant",
+                "x": 53,
+                "y": 6,
+                "hp": 14
+              }
+            ]
+          },
+          "logs": [
+            "You light the Tallow Torch."
+          ]
+        },
+        {
+          "label": "acquired native bone and vessel",
+          "state": {
+            "chunk": [
+              16,
+              56
+            ],
+            "submap": null,
+            "position": [
+              57,
+              29
+            ],
+            "turn": 503,
+            "hp": 60,
+            "hunger": 0.023000000000000013,
+            "thirst": 0.028750000000000008,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble",
+              "resonant_bone_fragment",
+              "clay_pot",
+              "waxed_water_flask",
+              "steeping_note"
+            ],
+            "actors": [
+              {
+                "id": "hollow_revenant",
+                "name": "Hollow Revenant",
+                "x": 46,
+                "y": 31,
+                "hp": 14
+              },
+              {
+                "id": "grave_thing",
+                "name": "Grave Thing",
+                "x": 30,
+                "y": 27,
+                "hp": 18
+              },
+              {
+                "id": "hollow_revenant",
+                "name": "Hollow Revenant",
+                "x": 52,
+                "y": 7,
+                "hp": 14
+              }
+            ]
+          },
+          "logs": [
+            "It opens.",
+            "Thou takest the Resonant Bone Fragment.",
+            "It opens.",
+            "Thou takest the clay pot.",
+            "Thou takest the waxed water flask.",
+            "Thou takest the a steeping note.",
+            "Stone. Cold stone, and the smell of old air. Thy eyes open to darkness.",
+            "Thou art beneath the ground. Something is wrong with the world above."
+          ]
+        },
+        {
+          "label": "measured native water and gathered fuel",
+          "state": {
+            "chunk": [
+              15,
+              57
+            ],
+            "submap": null,
+            "position": [
+              50,
+              21
+            ],
+            "turn": 606,
+            "hp": 60,
+            "hunger": 0.12600000000000008,
+            "thirst": 0.1575000000000001,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble",
+              "resonant_bone_fragment",
+              "clay_pot",
+              "waxed_water_flask",
+              "steeping_note",
+              "wood_bundle",
+              "wood_bundle"
+            ],
+            "actors": [
+              {
+                "id": "briar_lurker",
+                "name": "Briar Lurker",
+                "x": 42,
+                "y": 38,
+                "hp": 12
+              },
+              {
+                "id": "plague_crow",
+                "name": "Plague Crow",
+                "x": 13,
+                "y": 38,
+                "hp": 8
+              }
+            ]
+          },
+          "logs": [
+            "Stone. Cold stone, and the smell of old air. Thy eyes open to darkness.",
+            "Thou art beneath the ground. Something is wrong with the world above.",
+            "Progress preserved.",
+            "The world reassembles itself around you.",
+            "You move into Coldholm Wood.",
+            "You take bundle of wood from the dead branch.",
+            "You take bundle of wood from the dead branch.",
+            "Water fills the vessel."
+          ]
+        },
+        {
+          "label": "transferred the batch to suitable found clay pot",
+          "state": {
+            "chunk": [
+              15,
+              57
+            ],
+            "submap": null,
+            "position": [
+              50,
+              21
+            ],
+            "turn": 609,
+            "hp": 60,
+            "hunger": 0.1290000000000001,
+            "thirst": 0.16125000000000012,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble",
+              "resonant_bone_fragment",
+              "clay_pot",
+              "waxed_water_flask",
+              "steeping_note"
+            ],
+            "actors": [
+              {
+                "id": "briar_lurker",
+                "name": "Briar Lurker",
+                "x": 42,
+                "y": 38,
+                "hp": 12
+              },
+              {
+                "id": "plague_crow",
+                "name": "Plague Crow",
+                "x": 13,
+                "y": 37,
+                "hp": 8
+              }
+            ]
+          },
+          "logs": [
+            "Where will you set the fire?",
+            "The wood is set. A spark is still needed.",
+            "The fire takes.",
+            "The fire takes the edge off.",
+            "Missing: vessel with exactly 250 mL water and heatproof. Passive work needs a stationary fire.",
+            "Stone. Cold stone, and the smell of old air. Thy eyes open to darkness.",
+            "Thou art beneath the ground. Something is wrong with the world above.",
+            "The water passes between vessels."
+          ]
+        },
+        {
+          "label": "ordinary preparation busy",
+          "state": {
+            "chunk": [
+              15,
+              57
+            ],
+            "submap": null,
+            "position": [
+              50,
+              21
+            ],
+            "turn": 610,
+            "hp": 60,
+            "hunger": 0.1300000000000001,
+            "thirst": 0.16250000000000012,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble",
+              "waxed_water_flask",
+              "steeping_note"
+            ],
+            "actors": [
+              {
+                "id": "briar_lurker",
+                "name": "Briar Lurker",
+                "x": 42,
+                "y": 38,
+                "hp": 12
+              },
+              {
+                "id": "plague_crow",
+                "name": "Plague Crow",
+                "x": 13,
+                "y": 37,
+                "hp": 8
+              }
+            ]
+          },
+          "logs": [
+            "The fire takes.",
+            "The fire takes the edge off.",
+            "Missing: vessel with exactly 250 mL water and heatproof. Passive work needs a stationary fire.",
+            "Stone. Cold stone, and the smell of old air. Thy eyes open to darkness.",
+            "Thou art beneath the ground. Something is wrong with the world above.",
+            "The water passes between vessels.",
+            "Where will you set it to work?",
+            "The bone steeps. The vessel must stay with the work."
+          ]
+        },
+        {
+          "label": "dose consumed and lexicon read",
+          "state": {
+            "chunk": [
+              15,
+              57
+            ],
+            "submap": null,
+            "position": [
+              50,
+              21
+            ],
+            "turn": 647,
+            "hp": 60,
+            "hunger": 0.16700000000000012,
+            "thirst": 0.20875000000000016,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble",
+              "waxed_water_flask",
+              "steeping_note",
+              "clay_pot"
+            ],
+            "actors": [
+              {
+                "id": "briar_lurker",
+                "name": "Briar Lurker",
+                "x": 42,
+                "y": 38,
+                "hp": 12
+              },
+              {
+                "id": "plague_crow",
+                "name": "Plague Crow",
+                "x": 12,
+                "y": 39,
+                "hp": 8
+              }
+            ]
+          },
+          "logs": [
+            "The tincture is ready. Something stirs in the liquid.",
+            "Thou takest the clay pot.",
+            "Thou takest the resonant bone tincture.",
+            "A word rises from the marrow. It was always there.",
+            "  [ghaetl]: the change.",
+            "Press [L] to open the Lexicon.",
+            "Stone. Cold stone, and the smell of old air. Thy eyes open to darkness.",
+            "Thou art beneath the ground. Something is wrong with the world above."
+          ]
+        },
+        {
+          "label": "returned to depleted native owners",
+          "state": {
+            "chunk": [
+              16,
+              56
+            ],
+            "submap": null,
+            "position": [
+              57,
+              29
+            ],
+            "turn": 781,
+            "hp": 60,
+            "hunger": 0.3010000000000002,
+            "thirst": 0.3768749999999975,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble",
+              "waxed_water_flask",
+              "steeping_note",
+              "clay_pot"
+            ],
+            "actors": [
+              {
+                "id": "hollow_revenant",
+                "name": "Hollow Revenant",
+                "x": 66,
+                "y": 25,
+                "hp": 14
+              },
+              {
+                "id": "grave_thing",
+                "name": "Grave Thing",
+                "x": 31,
+                "y": 25,
+                "hp": 18
+              },
+              {
+                "id": "hollow_revenant",
+                "name": "Hollow Revenant",
+                "x": 54,
+                "y": 6,
+                "hp": 14
+              }
+            ]
+          },
+          "logs": [
+            "Progress preserved.",
+            "The world reassembles itself around you.",
+            "The cold returns.",
+            "You move into Eisss Flats.",
+            "A dryness in the throat.",
+            "Thou enterest Graveiss.",
+            "Something accumulates in the silence here.",
+            "Something gnaws at the edge of attention."
+          ]
+        }
+      ],
+      "seed": 20261024,
+      "placement": {
+        "id": "settlement-0-cross-market-lot-42-66-N-0-building",
+        "asset": "apothecary_c",
+        "context": "grid",
+        "rotation": 180,
+        "mirror": false,
+        "origin": [
+          1335,
+          2433
+        ],
+        "footprint": [
+          1335,
+          2433,
+          1346,
+          2441
+        ],
+        "clearance": [
+          1334,
+          2432,
+          1347,
+          2442
+        ],
+        "approach": [
+          1341,
+          2429,
+          1342,
+          2434
+        ],
+        "road": "settlement-0-street-east-west-1",
+        "join": [
+          1341,
+          2429
+        ],
+        "entrances": [
+          {
+            "id": "main",
+            "x": 1341,
+            "y": 2433,
+            "normal": "N",
+            "width": 1,
+            "role": "main",
+            "required": true
+          }
+        ],
+        "targets": [
+          {
+            "x": 1339,
+            "y": 2434,
+            "kind": "floor",
+            "required": true
+          },
+          {
+            "x": 1343,
+            "y": 2437,
+            "kind": "floor",
+            "required": true
+          },
+          {
+            "x": 1344,
+            "y": 2439,
+            "kind": "container",
+            "required": true
+          },
+          {
+            "x": 1336,
+            "y": 2437,
+            "kind": "container",
+            "required": true
+          },
+          {
+            "x": 1340,
+            "y": 2435,
+            "kind": "container",
+            "required": true
+          }
+        ],
+        "required": false,
+        "dependency": "apothecary_c",
+        "role": "commercial",
+        "frontage_entrance": "main"
+      },
+      "native_stock": {
+        "(18, 11)": [
+          {
+            "item_id": "crow_bile",
+            "item_state_version": 1,
+            "name": "Crow Bile",
+            "tile": "generic_item",
+            "weight": 0.1,
+            "stackable": true,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A small dark sac. What the crow has processed through it is unclear. The fluid inside is extremely bitter and faintly luminous.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "corrosive",
+                "tier": 1
+              },
+              {
+                "tag": "bitter",
+                "tier": 2
+              },
+              {
+                "tag": "caustic",
+                "tier": 2
+              },
+              {
+                "tag": "viscous",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "sulphur_cap_fragment",
+            "item_state_version": 1,
+            "name": "sulphur cap fragment",
+            "tile": "generic_item",
+            "weight": 0.04,
+            "stackable": true,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 20,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Bitter. Leaves a faint chemical taste at the back of the throat.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A wedge of orange fungus cut from the cap. The bitter oil beneath is the useful part. The smell lingers on the hands for days.",
+            "harvest_from": "shroom_sulphur_cap",
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "corrosive",
+                "tier": 1
+              },
+              {
+                "tag": "caustic",
+                "tier": 1
+              },
+              {
+                "tag": "aromatic",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "wight_essence_residue",
+            "item_state_version": 1,
+            "name": "Wight Essence Residue",
+            "tile": "generic_item",
+            "weight": 0.05,
+            "stackable": true,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A crystalline deposit found in the chest cavity. The thing that inhabited the body left this behind when it departed. What inhabited it is unclear. What it wanted is less clear still.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "resonant",
+                "tier": 3
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "prophets_eye_cap",
+            "item_state_version": 1,
+            "name": "prophet's eye cap",
+            "tile": "generic_item",
+            "weight": 0.03,
+            "stackable": true,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 15,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Tasteless. Something shifts at the edge of sight for a moment, then is gone.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A pale, watery mushroom cap. The alchemists prized it. The cap alone is worthless \u2014 the liquid inside is what they wanted.",
+            "harvest_from": "shroom_prophets_eye",
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "resonant",
+                "tier": 2
+              },
+              {
+                "tag": "volatile",
+                "tier": 2
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "herbal_dressing",
+            "item_state_version": 1,
+            "name": "Herbal Dressing",
+            "tile": "generic_item",
+            "weight": 0.1,
+            "stackable": false,
+            "count": 1,
+            "on_use": "heal_minor",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": 12,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A prepared herbal dressing bound in clean linen. Restores up to 12 HP when injured; consumed after one use.",
+            "harvest_from": null,
+            "keywords": [],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ],
+        "(26, 13)": [
+          {
+            "item_id": "dried_soporific_herb",
+            "item_state_version": 1,
+            "name": "dried soporific herb",
+            "tile": "generic_item",
+            "weight": 0.02,
+            "stackable": true,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Dried violet stem. The sedative quality persists.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "soporific",
+                "tier": 2
+              },
+              {
+                "tag": "aromatic",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "copper_steeping_kettle",
+            "item_state_version": 1,
+            "name": "copper steeping kettle",
+            "tile": "generic_item",
+            "weight": 0.9,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A broad copper kettle. Heavy empty, roomy over a fire.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "vessel",
+                "tier": 1
+              },
+              {
+                "tag": "heatproof",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "vessel": {
+              "config": {
+                "version": 1,
+                "capacity_ml": 1000,
+                "contents": "water"
+              },
+              "id": "be5b9d28d7e1403a822816e9a8647cde",
+              "water_ml": 0,
+              "contents": null
+            }
+          },
+          {
+            "item_id": "clay_pot",
+            "item_state_version": 1,
+            "name": "clay pot",
+            "tile": "generic_item",
+            "weight": 0.6,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "vessel",
+                "tier": 1
+              },
+              {
+                "tag": "heatproof",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "vessel": {
+              "config": {
+                "version": 1,
+                "capacity_ml": 500,
+                "contents": "water"
+              },
+              "id": "ea320acb0723447ebaa0920107eff26e",
+              "water_ml": 0,
+              "contents": null
+            }
+          },
+          {
+            "item_id": "steeping_note",
+            "item_state_version": 1,
+            "name": "a steeping note",
+            "tile": "document",
+            "weight": 0.05,
+            "stackable": false,
+            "count": 1,
+            "on_use": "read",
+            "text_id": "practical_steeping_note",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "An alchemist's practical notes, stained at the bottom by a water ring.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "herbalist_pouch",
+            "item_state_version": 1,
+            "name": "Herbalist's Pouch",
+            "tile": "herbalist_pouch",
+            "weight": 0.4,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Waxed cloth, many pockets. Smells of dried things.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "vessel",
+                "tier": 1
+              },
+              {
+                "tag": "aromatic",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ],
+        "(22, 15)": [
+          {
+            "item_id": "dried_provisions",
+            "item_state_version": 1,
+            "name": "dried provisions",
+            "tile": "generic_item",
+            "weight": 0.3,
+            "stackable": false,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 300,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Dry and tasteless. It does what it needs to.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A cloth parcel of preserved travel rations. Salt-stiff, dense, neutral. Someone prepared this for a journey they did not finish.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              },
+              {
+                "tag": "binding",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "crow_jerky",
+            "item_state_version": 1,
+            "name": "Crow Jerky",
+            "tile": "food_item",
+            "weight": 0.2,
+            "stackable": true,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 0.35,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Strips of dried crow meat. It tastes exactly as you would expect. It sustains you regardless.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ],
+        "(25, 31)": [
+          {
+            "item_id": "pilgrims_woe_petals",
+            "item_state_version": 1,
+            "name": "pilgrim's woe petals",
+            "tile": "generic_item",
+            "weight": 0.02,
+            "stackable": true,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 25,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Dry and slightly chalky. A faint warmth follows.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Dried petals from the pilgrim's woe flower, stripped from the dark fronds. Pale as old linen. The smell is faintly medicinal.",
+            "harvest_from": "flower_pilgrims_woe",
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "fibrous",
+                "tier": 1
+              },
+              {
+                "tag": "aromatic",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ],
+        "(16, 27)": [
+          {
+            "item_id": "crow_jerky",
+            "item_state_version": 1,
+            "name": "Crow Jerky",
+            "tile": "food_item",
+            "weight": 0.2,
+            "stackable": true,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 0.35,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Strips of dried crow meat. It tastes exactly as you would expect. It sustains you regardless.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "dried_provisions",
+            "item_state_version": 1,
+            "name": "dried provisions",
+            "tile": "generic_item",
+            "weight": 0.3,
+            "stackable": false,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 300,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Dry and tasteless. It does what it needs to.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A cloth parcel of preserved travel rations. Salt-stiff, dense, neutral. Someone prepared this for a journey they did not finish.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              },
+              {
+                "tag": "binding",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "water_skin",
+            "item_state_version": 1,
+            "name": "water skin",
+            "tile": "generic_item",
+            "weight": 0.5,
+            "stackable": false,
+            "count": 1,
+            "on_use": "drink",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": 400,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": "Cold and flat. The thirst retreats.",
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A leather skin, filled with water. The hide is old but the stitching holds. Something alive is in it still.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "drinkable",
+                "tier": 2
+              },
+              {
+                "tag": "vessel",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ],
+        "(64, 31)": [
+          {
+            "item_id": "sulphur_cap_fragment",
+            "item_state_version": 1,
+            "name": "sulphur cap fragment",
+            "tile": "generic_item",
+            "weight": 0.04,
+            "stackable": true,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 20,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Bitter. Leaves a faint chemical taste at the back of the throat.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A wedge of orange fungus cut from the cap. The bitter oil beneath is the useful part. The smell lingers on the hands for days.",
+            "harvest_from": "shroom_sulphur_cap",
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "corrosive",
+                "tier": 1
+              },
+              {
+                "tag": "caustic",
+                "tier": 1
+              },
+              {
+                "tag": "aromatic",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "prophets_eye_cap",
+            "item_state_version": 1,
+            "name": "prophet's eye cap",
+            "tile": "generic_item",
+            "weight": 0.03,
+            "stackable": true,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 15,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Tasteless. Something shifts at the edge of sight for a moment, then is gone.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A pale, watery mushroom cap. The alchemists prized it. The cap alone is worthless \u2014 the liquid inside is what they wanted.",
+            "harvest_from": "shroom_prophets_eye",
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "resonant",
+                "tier": 2
+              },
+              {
+                "tag": "volatile",
+                "tier": 2
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "crow_bile",
+            "item_state_version": 1,
+            "name": "Crow Bile",
+            "tile": "generic_item",
+            "weight": 0.1,
+            "stackable": true,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A small dark sac. What the crow has processed through it is unclear. The fluid inside is extremely bitter and faintly luminous.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "corrosive",
+                "tier": 1
+              },
+              {
+                "tag": "bitter",
+                "tier": 2
+              },
+              {
+                "tag": "caustic",
+                "tier": 2
+              },
+              {
+                "tag": "viscous",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "resonant_bone_fragment",
+            "item_state_version": 1,
+            "name": "Resonant Bone Fragment",
+            "tile": "generic_item",
+            "weight": 0.1,
+            "stackable": true,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A splinter of something old. The tone in it is audible if you press it against your skull and hold still. Do not hold it near bells.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "resonant",
+                "tier": 2
+              },
+              {
+                "tag": "bony",
+                "tier": 2
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "herbal_dressing",
+            "item_state_version": 1,
+            "name": "Herbal Dressing",
+            "tile": "generic_item",
+            "weight": 0.1,
+            "stackable": false,
+            "count": 1,
+            "on_use": "heal_minor",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": 12,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A prepared herbal dressing bound in clean linen. Restores up to 12 HP when injured; consumed after one use.",
+            "harvest_from": null,
+            "keywords": [],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ],
+        "(56, 29)": [
+          {
+            "item_id": "clay_pot",
+            "item_state_version": 1,
+            "name": "clay pot",
+            "tile": "generic_item",
+            "weight": 0.6,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "vessel",
+                "tier": 1
+              },
+              {
+                "tag": "heatproof",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "vessel": {
+              "config": {
+                "version": 1,
+                "capacity_ml": 500,
+                "contents": "water"
+              },
+              "id": "437bc4904d964fe98f7e8750eae382ac",
+              "water_ml": 0,
+              "contents": null
+            }
+          },
+          {
+            "item_id": "coldbell_cutting",
+            "item_state_version": 1,
+            "name": "coldbell cutting",
+            "tile": "generic_item",
+            "weight": 0.05,
+            "stackable": true,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 40,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Faintly metallic. A small resonance moves through the teeth.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A stem of coldbell flower, harvested near grey stone. The petals have gone. The stem is pale, faintly waxy, and cold to the touch in ways the temperature does not explain.",
+            "harvest_from": "coldbell_flower",
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "resonant",
+                "tier": 1
+              },
+              {
+                "tag": "binding",
+                "tier": 1
+              },
+              {
+                "tag": "aromatic",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "steeping_note",
+            "item_state_version": 1,
+            "name": "a steeping note",
+            "tile": "document",
+            "weight": 0.05,
+            "stackable": false,
+            "count": 1,
+            "on_use": "read",
+            "text_id": "practical_steeping_note",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "An alchemist's practical notes, stained at the bottom by a water ring.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "waxed_water_flask",
+            "item_state_version": 1,
+            "name": "waxed water flask",
+            "tile": "generic_item",
+            "weight": 0.2,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A light waxed carrier. Holds water; keep it away from fire.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "vessel",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "vessel": {
+              "config": {
+                "version": 1,
+                "capacity_ml": 2000,
+                "contents": "water"
+              },
+              "id": "e89a33701570429ab761c6bd1ecae031",
+              "water_ml": 0,
+              "contents": null
+            }
+          }
+        ],
+        "(60, 27)": [
+          {
+            "item_id": "dried_provisions",
+            "item_state_version": 1,
+            "name": "dried provisions",
+            "tile": "generic_item",
+            "weight": 0.3,
+            "stackable": false,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 300,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Dry and tasteless. It does what it needs to.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A cloth parcel of preserved travel rations. Salt-stiff, dense, neutral. Someone prepared this for a journey they did not finish.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              },
+              {
+                "tag": "binding",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "component_satchel",
+            "item_state_version": 1,
+            "name": "Component Satchel",
+            "tile": "component_satchel",
+            "weight": 0.6,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Heavy canvas with reinforced base. Built for bulk materials.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "vessel",
+                "tier": 1
+              },
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "leather_satchel",
+            "item_state_version": 1,
+            "name": "Leather Satchel",
+            "tile": "leather_satchel",
+            "weight": 0.8,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Worn leather, stitched at the seams. Carries more than it looks.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "vessel",
+                "tier": 1
+              },
+              {
+                "tag": "fibrous",
+                "tier": 2
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ]
+      },
+      "initial": {
+        "chunk": [
+          16,
+          56
+        ],
+        "submap": null,
+        "position": [
+          61,
+          21
+        ],
+        "turn": 480,
+        "hp": 60,
+        "hunger": 0.0,
+        "thirst": 0.0,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 44,
+            "y": 30,
+            "hp": 14
+          },
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 33,
+            "y": 30,
+            "hp": 18
+          },
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 53,
+            "y": 6,
+            "hp": 14
+          }
+        ]
+      },
+      "harvested_native_wood": [
+        [
+          75,
+          5
+        ],
+        [
+          70,
+          5
+        ]
+      ],
+      "unsuitable_rejected_without_cost": true,
+      "learned": [
+        {
+          "id": "ghaetl",
+          "definition": {
+            "id": "ghaetl",
+            "deep": "ghaetl",
+            "common": "the change",
+            "concept": "transformation of tissue under resonance",
+            "category": "body",
+            "tier": 1,
+            "glyph_seed": 1086,
+            "learn_sources": [
+              "waystone",
+              "text",
+              "corruption"
+            ]
+          }
+        }
+      ],
+      "passed": true,
+      "final": {
+        "chunk": [
+          16,
+          56
+        ],
+        "submap": null,
+        "position": [
+          57,
+          29
+        ],
+        "turn": 781,
+        "hp": 60,
+        "hunger": 0.3010000000000002,
+        "thirst": 0.3768749999999975,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "waxed_water_flask",
+          "steeping_note",
+          "clay_pot"
+        ],
+        "actors": [
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 66,
+            "y": 25,
+            "hp": 14
+          },
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 31,
+            "y": 25,
+            "hp": 18
+          },
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 54,
+            "y": 6,
+            "hp": 14
+          }
+        ]
+      }
+    }
+  ]
+}

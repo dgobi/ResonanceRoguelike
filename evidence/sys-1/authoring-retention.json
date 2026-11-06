@@ -1,0 +1,110 @@
+{
+  "authoring_revision": "a4c127991610f017f10a52074c03bdfbcd1d4842",
+  "final_source_revision": "11554782ec260b4330431fcc277b7bb456c08870",
+  "unchanged_authoring_controls_and_content": [
+    {
+      "path": "workbench/src/ItemEditor.tsx",
+      "git_blob": "09cbe002dc989636383c395a8d905018f3ec2aa1",
+      "working_sha256": "158f703adb3d896a4336e8f4ff1d42101a8fe364c3beb4d4425176c235747970"
+    },
+    {
+      "path": "workbench/src/RecipeEditor.tsx",
+      "git_blob": "01809c1c366656d4bc650dce20a3d4d494cb6165",
+      "working_sha256": "c563cdc31fa5b8b8a1b5e5ffd65c9ab3a1114532fbcbf968e40527828a0b4d40"
+    },
+    {
+      "path": "workbench/src/VesselFields.tsx",
+      "git_blob": "20710a062e1a9cf4e9bd53543105a8c9eec0d59e",
+      "working_sha256": "a3f52490c52ee4950b06388bf99e5d126c7c4ce356ebb1ff5421b6fdf111444d"
+    },
+    {
+      "path": "workbench/src/Authoring.tsx",
+      "git_blob": "3f78207d8c9b12e534054854440d29ca5e7ba53f",
+      "working_sha256": "264cf88049e2f66b2cf8ee864c60214d05bd6cb70bbecb91298c9e7db40ee706"
+    },
+    {
+      "path": "workbench/src/familyData.ts",
+      "git_blob": "e20456df826505d41f38e38760ecf690651d5291",
+      "working_sha256": "b26f51ceb8b51ba88e5a96b16afba59a2bd5ca030ca9c90147ac9577d7b3d6fb"
+    },
+    {
+      "path": "workbench/worker/bridge.py",
+      "git_blob": "5326d997af9f0b79bcb53e03977966f5de84658c",
+      "working_sha256": "d971a429e2efad6729eeadb4fd4a3dddaaec89a5d27ac8d3d31218ec07374f95"
+    },
+    {
+      "path": "workbench/scripts/run-sys-1.mjs",
+      "git_blob": "e8c3efe859e257d913cc48064388dbc842656795",
+      "working_sha256": "c47194a13b8c455df17ed3bc1136fe73508e00813523b6e7d60bee073a92ea5d"
+    },
+    {
+      "path": "roguelike/engine/item_authoring.py",
+      "git_blob": "c826b4cccda915e01a09e440bf7580faa8c92a32",
+      "working_sha256": "f9884ff921b3cbb528ee39bdbe6720e1ce2f805cf06a6c996345fbc7d5520cd0"
+    },
+    {
+      "path": "roguelike/engine/recipe_authoring.py",
+      "git_blob": "f669613ee89afcc81ea94711364d55eb0eb95978",
+      "working_sha256": "2c46de6955b89602a5eb3adbc3c02088af5c147f67817c9c387b1db8fe9e5323"
+    },
+    {
+      "path": "roguelike/engine/vessel_jobs.py",
+      "git_blob": "ad84601e715cf930962951a4a8dafb6afd714eee",
+      "working_sha256": "ef74f368480c0589f5052483ff944d3b1e06fbd09e2e36de068c4aaff3bbf544"
+    },
+    {
+      "path": "roguelike/engine/vessel_menu.py",
+      "git_blob": "e6f147d8c1860f619e0fd54f89bd7dadc539eb40",
+      "working_sha256": "903196b8b807922ae7fbf1be89dde4452170c9669c67d7a6810a6d2f1b41a775"
+    },
+    {
+      "path": "roguelike/engine/crafting.py",
+      "git_blob": "722425ba26b17c1bed04dc1ce0e3059b45b7301a",
+      "working_sha256": "2bf09dd55b5ce339de327ba929304ef41c732d09884022d49ff6d882028083a3"
+    },
+    {
+      "path": "roguelike/engine/save_components.py",
+      "git_blob": "95896d49e1e2958d48a463d477cb1d519d3c5ddd",
+      "working_sha256": "7970448878f5d29af9aaad8b19c8cfbc67f64979be7be0a1752e01978b7ab071"
+    },
+    {
+      "path": "roguelike/engine/item_factory.py",
+      "git_blob": "882d67dfb64924b7501e44ea6a7424354e39deef",
+      "working_sha256": "9209262fee0e6a60fe546eaf20884b7df04c1f9c66e4c762db8a83b7ce826610"
+    },
+    {
+      "path": "roguelike/data/recipes/resonant_bone_tincture.json",
+      "git_blob": "878056582d2f79d125ae9f45cac8f09b27963f6d",
+      "working_sha256": "22f1048858f7dcbbab92f121490136c22de9db3c8d114dda09c45185f42d1cc4"
+    },
+    {
+      "path": "roguelike/data/layouts/sys1_preparation_room.json",
+      "git_blob": "c595ee06210e7ae7b7c08cde529d4c2450b3ff73",
+      "working_sha256": "06df6be033f0951884b8851e7cfd9deb648373a4ab790a2a9a28ee94643edba7"
+    },
+    {
+      "path": "roguelike/data/items/components/clay_pot.json",
+      "git_blob": "55331d7285534880623b1a988b7e249deda9aa91",
+      "working_sha256": "0cffe6b61136add50d0887f54f58d9f12da8b79d0cd932d5186883a43f2abad5"
+    },
+    {
+      "path": "roguelike/data/items/components/copper_steeping_kettle.json",
+      "git_blob": "d4df22c95239b0cdbea284819ca0a55b13442a74",
+      "working_sha256": "9ba804f074eb06911521dbbc09f6ff74b01fdde668fe13cd931f9842570861b0"
+    },
+    {
+      "path": "roguelike/data/items/components/waxed_water_flask.json",
+      "git_blob": "7b89f7acf09b94095cc20f73e8e4999364a6db17",
+      "working_sha256": "6638d44493e9409e54387d2c39a6e98ffc2bb073926edaa83bc3fd3bc5498e31"
+    },
+    {
+      "path": "roguelike/data/items/components/small_steeping_cup.json",
+      "git_blob": "cc118fe5658f2d21e7993e051debf982b9a08463",
+      "working_sha256": "6a2aa70db8f1fa566d6b6a76a5aef4f3d7f68521ac80fc0118ea7b5cbeb12aae"
+    }
+  ],
+  "scope": "Full packaged authoring receipt retained for unchanged controls, authored IDs, recipe, room and process consumers. Later compatibility edits affect legacy delivery/map payload validation and saved placement dependencies; final-b repeats packaged runtime, unfiltered suites and current ordinary C journeys.",
+  "authoring_receipt": "authoring-summary.json",
+  "final_runtime_receipt": "native-runtime.json.gz",
+  "final_verification_input_revision": "741d2575048fb52ce553200a987740257df67969"
+}

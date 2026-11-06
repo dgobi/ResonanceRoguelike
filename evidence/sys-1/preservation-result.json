@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "original_owner_files": 278,
+  "changed": [],
+  "owner_paths_tracked": [],
+  "consumed_files": 1222,
+  "untracked_consumed_files": [],
+  "owner_files_consumed": [],
+  "baseline": "09cc1e5f560857cca4a54450839d69ca9119a658",
+  "personal_campaigns": "Not opened or edited; all verification used disposable state.",
+  "wiki": "No wiki work or reference-refresh gate.",
+  "branch": "main",
+  "source_inputs_still_match_frozen": true
+}
