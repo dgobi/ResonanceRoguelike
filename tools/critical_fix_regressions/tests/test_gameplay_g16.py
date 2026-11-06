@@ -79,7 +79,7 @@ class WorkshopPreparation(unittest.TestCase):
                 for row in rows:
                     if row['asset'] in ('tool_shed_a','apothecary_a','workshop_a'):
                         if row['asset']=='workshop_a':self.assertEqual(dict(asset='workshop_a',weight=1.0,max_per_settlement=5),row)
-                        row['asset']='workshop_d' if row['asset']=='workshop_a' else row['asset'][:-1]+'b'
+                        row['asset']={'workshop_a':'workshop_d','apothecary_a':'apothecary_c','tool_shed_a':'tool_shed_b'}[row['asset']]
         self.assertEqual(expected,self.data.settlement_profiles)
         for form in ('grid','roadside'):
             selected=copy.deepcopy(self.data.settlement_profiles)
