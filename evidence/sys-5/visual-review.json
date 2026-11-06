@@ -1,0 +1,16 @@
+{
+  "boundary": "25159337712158762f5d6b19b1bd4363465f8997",
+  "reviewed": [
+    {
+      "path": "store/stripped-inspection.png",
+      "sha256": "8d96e8569ddfa19db66f15738df08b9f3f7563c74ac7a466f83bb07f236f3baa",
+      "finding": "Production Look popup names the exact crow remains and clearly states stripped flesh with other harvestable material remaining; text fits without clipping."
+    },
+    {
+      "path": "sump/Quick-force.png",
+      "sha256": "46a88dc84497b4e76dbb03527729131842da514671dc5d94e4082f8074ca53ec",
+      "finding": "Production frame shows the cleared screen, corpse and living beetle within normal lighting and geometry; disturbance feedback is visible. State/timing claims use the accompanying event observations, not the image alone."
+    }
+  ],
+  "archive": "ordinary-final.zip"
+}

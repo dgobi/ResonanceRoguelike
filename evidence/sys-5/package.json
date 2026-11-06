@@ -1,0 +1,21 @@
+{
+  "executable": {
+    "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+    "sha256": "3a3fc5fcf25991e564002c7f6f90c9d4ea246bae1d9a0b9a71b9904005246867"
+  },
+  "installers": [
+    {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "87404dec7477c9442b422f20a8ffd3a41ce88d16d3085791a84678da23d2168c",
+      "size": 28503651
+    }
+  ],
+  "build_revision": "591cacc207e1271c67ae93a53ce4f4ae4665f3b3",
+  "selected_game_revision": "25159337712158762f5d6b19b1bd4363465f8997",
+  "native": {
+    "path": "native-final.zip",
+    "sha256": "ba987296ae8980a6963c27e10e76ce3e92fa8215277ab2e5f8adc1a0d2d28557",
+    "bytes": 210489,
+    "files": 2
+  }
+}

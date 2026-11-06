@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "output": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\sys-5\\native-1793990959020",
+  "receipt_sha256": "82730eed2d136822b3237e1621dab23e8535428840f45c824304b3773ad706a2",
+  "package_sha256": "3a3fc5fcf25991e564002c7f6f90c9d4ea246bae1d9a0b9a71b9904005246867",
+  "capture": "6b7d3c573d602ae61d3d7cd75d1a493afcae2d526141a5cc203c346ba330e7e2",
+  "feed": 5,
+  "completed": [
+    2,
+    2
+  ],
+  "consumed_loose": [
+    "gleaner_flesh",
+    "crow_meat"
+  ],
+  "remaining_bone": true,
+  "hp": 57,
+  "publications": [],
+  "archive": {
+    "path": "native-final.zip",
+    "sha256": "ba987296ae8980a6963c27e10e76ce3e92fa8215277ab2e5f8adc1a0d2d28557",
+    "bytes": 210489,
+    "files": 2
+  }
+}

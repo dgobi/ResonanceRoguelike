@@ -1,0 +1,1592 @@
+{
+  "passed": true,
+  "controls": "SYS-5 ordinary selected-world comparisons with living AI and real controls.\nOne disclosed initial surface-entrance approach staging per destination. Full-map\nroute knowledge is used, never debug vision; all later travel, acquisition,\nplacement, cooking, combat, work, harvest and F5/F9 are ordinary input handlers.\nReplay branches install the same genuine F5. Personal saves are never opened.\n",
+  "journeys": [
+    {
+      "layout": "barrow_scavenger_store",
+      "seed": 20261023,
+      "assignment": {
+        "chunk": [
+          75,
+          114
+        ],
+        "submap": "submap_75_114_0",
+        "entrance": [
+          67,
+          9
+        ],
+        "staged_surface_approach": [
+          64,
+          9
+        ]
+      },
+      "assignment_counts": {
+        "barrow_bound_store": 22,
+        "barrow_carrion_sump": 32,
+        "barrow_lamplit_store": 31,
+        "barrow_scavenger_store": 31,
+        "barrow_ward_store_a": 34,
+        "barrow_ward_store_b": 36,
+        "barrow_ward_store_c": 17,
+        "barrow_ward_store_d": 30,
+        "barrow_ward_store_e": 26,
+        "starting_lab_b": 1
+      },
+      "native_sample": [
+        {
+          "chunk": [
+            0,
+            66
+          ],
+          "submap": "submap_0_66_0",
+          "layout": "barrow_scavenger_store",
+          "remains": [
+            {
+              "item_id": "corpse",
+              "item_state_version": 1,
+              "name": "remains of Plague Crow",
+              "tile": "corpse",
+              "weight": 0,
+              "stackable": false,
+              "count": 1,
+              "on_use": null,
+              "text_id": "",
+              "nutrition": null,
+              "hydration": null,
+              "heal_amount": null,
+              "eat_message": null,
+              "drink_message": null,
+              "burn_turns": null,
+              "turns_lit": 0,
+              "light_data": null,
+              "liquid": null,
+              "liquid_volume": 0.0,
+              "qualities": {},
+              "description": "Something that was a creature. Already cooling.",
+              "harvest_from": null,
+              "keywords": [],
+              "decay_timer": 80,
+              "source_creature": "plague_crow",
+              "temporary_essence": [],
+              "consumed_on_use": true,
+              "_temp_av_bonus": 0,
+              "_temp_av_hits": 0,
+              "flesh_resource_version": 1,
+              "flesh_resource": {
+                "version": 1,
+                "kind": "corpse",
+                "uid": "680d65fd06c642ef8dbcc9ee91020437",
+                "source": "plague_crow",
+                "recipe": {
+                  "decay_turns": 80,
+                  "tiers": [
+                    {
+                      "min_cutting_tier": 1,
+                      "yields": [
+                        {
+                          "item_id": "crow_meat",
+                          "quantity_min": 1,
+                          "quantity_max": 2,
+                          "flesh": true
+                        },
+                        {
+                          "item_id": "animal_bone",
+                          "quantity_min": 1,
+                          "quantity_max": 1,
+                          "flesh": false
+                        },
+                        {
+                          "item_id": "crow_bile",
+                          "quantity_min": 0,
+                          "quantity_max": 1,
+                          "flesh": false
+                        }
+                      ]
+                    },
+                    {
+                      "min_cutting_tier": 2,
+                      "yields": [
+                        {
+                          "item_id": "crow_meat",
+                          "quantity_min": 2,
+                          "quantity_max": 3,
+                          "flesh": true
+                        },
+                        {
+                          "item_id": "animal_bone",
+                          "quantity_min": 1,
+                          "quantity_max": 2,
+                          "flesh": false
+                        },
+                        {
+                          "item_id": "crow_bile",
+                          "quantity_min": 1,
+                          "quantity_max": 1,
+                          "flesh": false
+                        },
+                        {
+                          "item_id": "crow_flight_membrane",
+                          "quantity_min": 0,
+                          "quantity_max": 1,
+                          "flesh": false
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "state": "intact"
+              }
+            }
+          ],
+          "scavengers": [
+            {
+              "id": "gutter_gleaner",
+              "config": {
+                "version": 1,
+                "approach_opportunities": 8,
+                "feed_opportunities": 5
+              }
+            }
+          ]
+        },
+        {
+          "chunk": [
+            2,
+            79
+          ],
+          "submap": "submap_2_79_0",
+          "layout": "barrow_scavenger_store",
+          "remains": [
+            {
+              "item_id": "corpse",
+              "item_state_version": 1,
+              "name": "remains of Plague Crow",
+              "tile": "corpse",
+              "weight": 0,
+              "stackable": false,
+              "count": 1,
+              "on_use": null,
+              "text_id": "",
+              "nutrition": null,
+              "hydration": null,
+              "heal_amount": null,
+              "eat_message": null,
+              "drink_message": null,
+              "burn_turns": null,
+              "turns_lit": 0,
+              "light_data": null,
+              "liquid": null,
+              "liquid_volume": 0.0,
+              "qualities": {},
+              "description": "Something that was a creature. Already cooling.",
+              "harvest_from": null,
+              "keywords": [],
+              "decay_timer": 80,
+              "source_creature": "plague_crow",
+              "temporary_essence": [],
+              "consumed_on_use": true,
+              "_temp_av_bonus": 0,
+              "_temp_av_hits": 0,
+              "flesh_resource_version": 1,
+              "flesh_resource": {
+                "version": 1,
+                "kind": "corpse",
+                "uid": "e1b3822bf59d4aebbaf9614bf26ef51b",
+                "source": "plague_crow",
+                "recipe": {
+                  "decay_turns": 80,
+                  "tiers": [
+                    {
+                      "min_cutting_tier": 1,
+                      "yields": [
+                        {
+                          "item_id": "crow_meat",
+                          "quantity_min": 1,
+                          "quantity_max": 2,
+                          "flesh": true
+                        },
+                        {
+                          "item_id": "animal_bone",
+                          "quantity_min": 1,
+                          "quantity_max": 1,
+                          "flesh": false
+                        },
+                        {
+                          "item_id": "crow_bile",
+                          "quantity_min": 0,
+                          "quantity_max": 1,
+                          "flesh": false
+                        }
+                      ]
+                    },
+                    {
+                      "min_cutting_tier": 2,
+                      "yields": [
+                        {
+                          "item_id": "crow_meat",
+                          "quantity_min": 2,
+                          "quantity_max": 3,
+                          "flesh": true
+                        },
+                        {
+                          "item_id": "animal_bone",
+                          "quantity_min": 1,
+                          "quantity_max": 2,
+                          "flesh": false
+                        },
+                        {
+                          "item_id": "crow_bile",
+                          "quantity_min": 1,
+                          "quantity_max": 1,
+                          "flesh": false
+                        },
+                        {
+                          "item_id": "crow_flight_membrane",
+                          "quantity_min": 0,
+                          "quantity_max": 1,
+                          "flesh": false
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "state": "intact"
+              }
+            }
+          ],
+          "scavengers": [
+            {
+              "id": "gutter_gleaner",
+              "config": {
+                "version": 1,
+                "approach_opportunities": 8,
+                "feed_opportunities": 5
+              }
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "label": "choice",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 35712,
+            "state_equal": true
+          },
+          "archive_sha256": "fbb4a226596865d2d5e0cc08538741d255fbba24b9de55048ca82200fdb4f990"
+        },
+        {
+          "label": "feeding",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 39364,
+            "state_equal": true
+          },
+          "archive_sha256": "44ba1985066323dfc36790f1ecd4989e4a4b4f3d0eacedda838635c6446c3bc9"
+        },
+        {
+          "label": "stripped",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 17756,
+            "state_equal": true
+          },
+          "archive_sha256": "8e7ca5fb26a2b6576fa2486176023a1c36112c55dd2d9234630078ccc1878584"
+        },
+        {
+          "label": "harvested",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 37420,
+            "state_equal": true
+          },
+          "archive_sha256": "c272a6540835826c67d291189f6a4610b8dd2cac8e405b34c9f1078b82de4f7c"
+        },
+        {
+          "label": "inactive",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 28004,
+            "state_equal": true
+          },
+          "archive_sha256": "d920f457920bb6695098bd1db65e286e394ff96a72a5b1eb47c55fc2481cf076"
+        },
+        {
+          "label": "returned",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 26080,
+            "state_equal": true
+          },
+          "archive_sha256": "45487ad268823e3d983ec1eb05662f56243cb0ee7588168a9ffe1519f7882430"
+        }
+      ],
+      "comparisons": [
+        {
+          "branch": "conserve",
+          "state": {
+            "player": {
+              "chunk": [
+                75,
+                114
+              ],
+              "submap": "submap_75_114_0",
+              "position": [
+                50,
+                18
+              ],
+              "turn": 542,
+              "hp": 60,
+              "hunger": 0.06200000000000005,
+              "thirst": 0.07750000000000004,
+              "inventory": [
+                "tallow_torch",
+                "crow_jerky",
+                "water_flask",
+                "crude_blade",
+                "leather_jack",
+                "moist_pebble",
+                "gleaner_flesh",
+                "crow_meat",
+                "cooked_meat",
+                "resonant_bone_fragment"
+              ],
+              "actors": [
+                {
+                  "id": "gutter_gleaner",
+                  "name": "Gutter Gleaner",
+                  "x": 45,
+                  "y": 18,
+                  "hp": 10
+                }
+              ]
+            },
+            "floor": [
+              {
+                "xy": [
+                  37,
+                  18
+                ],
+                "items": [
+                  {
+                    "item_id": "animal_bone",
+                    "count": 1,
+                    "source": null,
+                    "uid": null,
+                    "flesh_kind": null,
+                    "flesh_state": null,
+                    "decay": null
+                  }
+                ]
+              }
+            ],
+            "scavengers": [
+              {
+                "id": "gutter_gleaner",
+                "xy": [
+                  45,
+                  18
+                ],
+                "hp": 10,
+                "recipe": "strike_and_withdraw",
+                "config": {
+                  "version": 1,
+                  "approach_opportunities": 8,
+                  "feed_opportunities": 5
+                },
+                "completed": 0,
+                "feeding": null,
+                "last_reason": null,
+                "last_decision": {
+                  "opportunity": 39,
+                  "turn": 542,
+                  "phase_before": "approach",
+                  "phase": "approach",
+                  "action": "move",
+                  "reason": "approach",
+                  "result": null
+                },
+                "territory_phase": null
+              }
+            ],
+            "access": [
+              {
+                "xy": [
+                  50,
+                  17
+                ],
+                "host": "container",
+                "progress": 0,
+                "completed_by": null
+              }
+            ]
+          }
+        },
+        {
+          "branch": "spend",
+          "state": {
+            "player": {
+              "chunk": [
+                75,
+                114
+              ],
+              "submap": "submap_75_114_0",
+              "position": [
+                50,
+                18
+              ],
+              "turn": 537,
+              "hp": 60,
+              "hunger": 0.057000000000000044,
+              "thirst": 0.07125000000000004,
+              "inventory": [
+                "tallow_torch",
+                "crow_jerky",
+                "water_flask",
+                "crude_blade",
+                "leather_jack",
+                "moist_pebble",
+                "gleaner_flesh",
+                "resonant_bone_fragment"
+              ],
+              "actors": [
+                {
+                  "id": "gutter_gleaner",
+                  "name": "Gutter Gleaner",
+                  "x": 38,
+                  "y": 18,
+                  "hp": 10
+                }
+              ]
+            },
+            "floor": [
+              {
+                "xy": [
+                  37,
+                  18
+                ],
+                "items": [
+                  {
+                    "item_id": "corpse",
+                    "count": 1,
+                    "source": "plague_crow",
+                    "uid": "7c8da4ce3ef140ef93b49fbcae59cda3",
+                    "flesh_kind": "corpse",
+                    "flesh_state": "stripped",
+                    "decay": 29
+                  }
+                ]
+              }
+            ],
+            "scavengers": [
+              {
+                "id": "gutter_gleaner",
+                "xy": [
+                  38,
+                  18
+                ],
+                "hp": 10,
+                "recipe": "strike_and_withdraw",
+                "config": {
+                  "version": 1,
+                  "approach_opportunities": 8,
+                  "feed_opportunities": 5
+                },
+                "completed": 2,
+                "feeding": null,
+                "last_reason": "completed",
+                "last_decision": {
+                  "opportunity": 35,
+                  "turn": 537,
+                  "phase_before": "idle",
+                  "phase": "idle",
+                  "action": "wait",
+                  "reason": "idle",
+                  "result": null
+                },
+                "territory_phase": null
+              }
+            ],
+            "access": [
+              {
+                "xy": [
+                  50,
+                  17
+                ],
+                "host": "container",
+                "progress": 0,
+                "completed_by": null
+              }
+            ]
+          },
+          "bait_uid": "478a4a1a345b48a98392d8a585cc6ed2"
+        }
+      ],
+      "bypass": null,
+      "stages": [
+        {
+          "label": "selected ordinary surface approach",
+          "turn": 480,
+          "hp": 60
+        },
+        {
+          "label": "unlit shelf approach with two acquired portions",
+          "turn": 495,
+          "hp": 60
+        },
+        {
+          "label": "conserved flesh becomes useful cooked food",
+          "turn": 520,
+          "hp": 60
+        },
+        {
+          "label": "conserved route reaches objective but draws hostile pursuit",
+          "turn": 542,
+          "hp": 60
+        },
+        {
+          "label": "ordinary corpse discovered before player harvest",
+          "turn": 498,
+          "hp": 60
+        },
+        {
+          "label": "ordinary pending corpse reclaimed by intact harvest",
+          "turn": 503,
+          "hp": 60
+        },
+        {
+          "label": "one portion placed while dark; food not yet discovered",
+          "turn": 502,
+          "hp": 60
+        },
+        {
+          "label": "partial paid feeding before save",
+          "turn": 508,
+          "hp": 60
+        },
+        {
+          "label": "visible hostile interrupts an existing ordinary feeding attempt",
+          "turn": 511,
+          "hp": 60
+        },
+        {
+          "label": "loose portion gone and corpse stripped; eater displaced",
+          "turn": 524,
+          "hp": 60
+        },
+        {
+          "label": "spent-flesh route reaches far-store objective",
+          "turn": 537,
+          "hp": 60
+        },
+        {
+          "label": "retained hostility and ordinary combat near contested remains",
+          "turn": 555,
+          "hp": 48
+        },
+        {
+          "label": "stripped crow still yields useful bone through ordinary equipped blade",
+          "turn": 562,
+          "hp": 48
+        },
+        {
+          "label": "ordinary revisit retains depletion and access",
+          "turn": 578,
+          "hp": 48
+        }
+      ],
+      "final": {
+        "player": {
+          "chunk": [
+            75,
+            114
+          ],
+          "submap": "submap_75_114_0",
+          "position": [
+            30,
+            25
+          ],
+          "turn": 578,
+          "hp": 48,
+          "hunger": 0.09800000000000007,
+          "thirst": 0.12250000000000008,
+          "inventory": [
+            "tallow_torch",
+            "crow_jerky",
+            "water_flask",
+            "crude_blade",
+            "leather_jack",
+            "moist_pebble",
+            "gleaner_flesh",
+            "resonant_bone_fragment",
+            "animal_bone"
+          ],
+          "actors": []
+        },
+        "floor": [
+          {
+            "xy": [
+              37,
+              18
+            ],
+            "items": [
+              {
+                "item_id": "crow_bile",
+                "count": 1,
+                "source": null,
+                "uid": null,
+                "flesh_kind": null,
+                "flesh_state": null,
+                "decay": null
+              }
+            ]
+          },
+          {
+            "xy": [
+              38,
+              17
+            ],
+            "items": [
+              {
+                "item_id": "corpse",
+                "count": 1,
+                "source": "gutter_gleaner",
+                "uid": "9687799340784fa79a7e82824c33bfc0",
+                "flesh_kind": "corpse",
+                "flesh_state": "intact",
+                "decay": 134
+              }
+            ]
+          }
+        ],
+        "scavengers": [],
+        "access": [
+          {
+            "xy": [
+              50,
+              17
+            ],
+            "host": "container",
+            "progress": 0,
+            "completed_by": null
+          }
+        ]
+      }
+    },
+    {
+      "layout": "barrow_carrion_sump",
+      "seed": 20261023,
+      "assignment": {
+        "chunk": [
+          68,
+          98
+        ],
+        "submap": "submap_68_98_0",
+        "entrance": [
+          50,
+          10
+        ],
+        "staged_surface_approach": [
+          47,
+          10
+        ]
+      },
+      "assignment_counts": {
+        "barrow_bound_store": 22,
+        "barrow_carrion_sump": 32,
+        "barrow_lamplit_store": 31,
+        "barrow_scavenger_store": 31,
+        "barrow_ward_store_a": 34,
+        "barrow_ward_store_b": 36,
+        "barrow_ward_store_c": 17,
+        "barrow_ward_store_d": 30,
+        "barrow_ward_store_e": 26,
+        "starting_lab_b": 1
+      },
+      "native_sample": [
+        {
+          "chunk": [
+            1,
+            19
+          ],
+          "submap": "submap_1_19_0",
+          "layout": "barrow_carrion_sump",
+          "remains": [
+            {
+              "item_id": "corpse",
+              "item_state_version": 1,
+              "name": "remains of Heath Stalker",
+              "tile": "corpse",
+              "weight": 0,
+              "stackable": false,
+              "count": 1,
+              "on_use": null,
+              "text_id": "",
+              "nutrition": null,
+              "hydration": null,
+              "heal_amount": null,
+              "eat_message": null,
+              "drink_message": null,
+              "burn_turns": null,
+              "turns_lit": 0,
+              "light_data": null,
+              "liquid": null,
+              "liquid_volume": 0.0,
+              "qualities": {},
+              "description": "Something that was a creature. Already cooling.",
+              "harvest_from": null,
+              "keywords": [],
+              "decay_timer": 150,
+              "source_creature": "heath_stalker",
+              "temporary_essence": [],
+              "consumed_on_use": true,
+              "_temp_av_bonus": 0,
+              "_temp_av_hits": 0,
+              "flesh_resource_version": 1,
+              "flesh_resource": {
+                "version": 1,
+                "kind": "corpse",
+                "uid": "137b272bd1a14df8af2f1f499cdf02a8",
+                "source": "heath_stalker",
+                "recipe": {
+                  "decay_turns": 150,
+                  "tiers": [
+                    {
+                      "min_cutting_tier": 1,
+                      "yields": [
+                        {
+                          "item_id": "stalker_meat",
+                          "quantity_min": 1,
+                          "quantity_max": 3,
+                          "flesh": true
+                        },
+                        {
+                          "item_id": "animal_sinew",
+                          "quantity_min": 1,
+                          "quantity_max": 2,
+                          "flesh": false
+                        },
+                        {
+                          "item_id": "animal_bone",
+                          "quantity_min": 1,
+                          "quantity_max": 2,
+                          "flesh": false
+                        },
+                        {
+                          "item_id": "crude_viscera",
+                          "quantity_min": 0,
+                          "quantity_max": 1,
+                          "flesh": false
+                        }
+                      ]
+                    },
+                    {
+                      "min_cutting_tier": 2,
+                      "yields": [
+                        {
+                          "item_id": "stalker_meat",
+                          "quantity_min": 2,
+                          "quantity_max": 4,
+                          "flesh": true
+                        },
+                        {
+                          "item_id": "animal_sinew",
+                          "quantity_min": 2,
+                          "quantity_max": 3,
+                          "flesh": false
+                        },
+                        {
+                          "item_id": "animal_bone",
+                          "quantity_min": 2,
+                          "quantity_max": 3,
+                          "flesh": false
+                        },
+                        {
+                          "item_id": "crude_viscera",
+                          "quantity_min": 1,
+                          "quantity_max": 1,
+                          "flesh": false
+                        },
+                        {
+                          "item_id": "stalker_musk_gland",
+                          "quantity_min": 0,
+                          "quantity_max": 1,
+                          "flesh": false
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "state": "intact"
+              }
+            }
+          ],
+          "scavengers": [
+            {
+              "id": "pale_carrion_beetle",
+              "config": {
+                "version": 1,
+                "approach_opportunities": 8,
+                "feed_opportunities": 3
+              }
+            }
+          ]
+        },
+        {
+          "chunk": [
+            11,
+            93
+          ],
+          "submap": "submap_11_93_0",
+          "layout": "barrow_carrion_sump",
+          "remains": [
+            {
+              "item_id": "corpse",
+              "item_state_version": 1,
+              "name": "remains of Heath Stalker",
+              "tile": "corpse",
+              "weight": 0,
+              "stackable": false,
+              "count": 1,
+              "on_use": null,
+              "text_id": "",
+              "nutrition": null,
+              "hydration": null,
+              "heal_amount": null,
+              "eat_message": null,
+              "drink_message": null,
+              "burn_turns": null,
+              "turns_lit": 0,
+              "light_data": null,
+              "liquid": null,
+              "liquid_volume": 0.0,
+              "qualities": {},
+              "description": "Something that was a creature. Already cooling.",
+              "harvest_from": null,
+              "keywords": [],
+              "decay_timer": 150,
+              "source_creature": "heath_stalker",
+              "temporary_essence": [],
+              "consumed_on_use": true,
+              "_temp_av_bonus": 0,
+              "_temp_av_hits": 0,
+              "flesh_resource_version": 1,
+              "flesh_resource": {
+                "version": 1,
+                "kind": "corpse",
+                "uid": "0624fe68659249939ddf036f51b64909",
+                "source": "heath_stalker",
+                "recipe": {
+                  "decay_turns": 150,
+                  "tiers": [
+                    {
+                      "min_cutting_tier": 1,
+                      "yields": [
+                        {
+                          "item_id": "stalker_meat",
+                          "quantity_min": 1,
+                          "quantity_max": 3,
+                          "flesh": true
+                        },
+                        {
+                          "item_id": "animal_sinew",
+                          "quantity_min": 1,
+                          "quantity_max": 2,
+                          "flesh": false
+                        },
+                        {
+                          "item_id": "animal_bone",
+                          "quantity_min": 1,
+                          "quantity_max": 2,
+                          "flesh": false
+                        },
+                        {
+                          "item_id": "crude_viscera",
+                          "quantity_min": 0,
+                          "quantity_max": 1,
+                          "flesh": false
+                        }
+                      ]
+                    },
+                    {
+                      "min_cutting_tier": 2,
+                      "yields": [
+                        {
+                          "item_id": "stalker_meat",
+                          "quantity_min": 2,
+                          "quantity_max": 4,
+                          "flesh": true
+                        },
+                        {
+                          "item_id": "animal_sinew",
+                          "quantity_min": 2,
+                          "quantity_max": 3,
+                          "flesh": false
+                        },
+                        {
+                          "item_id": "animal_bone",
+                          "quantity_min": 2,
+                          "quantity_max": 3,
+                          "flesh": false
+                        },
+                        {
+                          "item_id": "crude_viscera",
+                          "quantity_min": 1,
+                          "quantity_max": 1,
+                          "flesh": false
+                        },
+                        {
+                          "item_id": "stalker_musk_gland",
+                          "quantity_min": 0,
+                          "quantity_max": 1,
+                          "flesh": false
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "state": "intact"
+              }
+            }
+          ],
+          "scavengers": [
+            {
+              "id": "pale_carrion_beetle",
+              "config": {
+                "version": 1,
+                "approach_opportunities": 8,
+                "feed_opportunities": 3
+              }
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "label": "choice",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 25848,
+            "state_equal": true
+          },
+          "archive_sha256": "e268f72f16ca23f2093f8b18dd5aff04c6a61161ca448fab17b6469ee2226b8b"
+        },
+        {
+          "label": "sump-final",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 32604,
+            "state_equal": true
+          },
+          "archive_sha256": "4c02d6dea89acdfd6f8f150aca8905fdb5ce9ba0d73102ecf0b656b74828d6ae"
+        },
+        {
+          "label": "inactive",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 948,
+            "state_equal": true
+          },
+          "archive_sha256": "6160ccd46adb919f80d69bb1b8d8e0d7078087e6e49451de14e2d4815e9c5696"
+        },
+        {
+          "label": "returned",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 6680,
+            "state_equal": true
+          },
+          "archive_sha256": "14d20b4e5b4b658aa054e34ec66b274fb98bf326373b74af3de9f886c5a79698"
+        }
+      ],
+      "comparisons": [
+        {
+          "branch": "Careful",
+          "elapsed": 13,
+          "state": {
+            "player": {
+              "chunk": [
+                68,
+                98
+              ],
+              "submap": "submap_68_98_0",
+              "position": [
+                36,
+                16
+              ],
+              "turn": 517,
+              "hp": 60,
+              "hunger": 0.037000000000000026,
+              "thirst": 0.050875000000000024,
+              "inventory": [
+                "tallow_torch",
+                "crow_jerky",
+                "water_flask",
+                "crude_blade",
+                "leather_jack",
+                "moist_pebble",
+                "stalker_meat"
+              ],
+              "actors": [
+                {
+                  "id": "pale_carrion_beetle",
+                  "name": "Pale Carrion Beetle",
+                  "x": 43,
+                  "y": 18,
+                  "hp": 16
+                }
+              ]
+            },
+            "floor": [
+              {
+                "xy": [
+                  39,
+                  18
+                ],
+                "items": [
+                  {
+                    "item_id": "corpse",
+                    "count": 1,
+                    "source": "heath_stalker",
+                    "uid": "f1c0bb7ab74f45c39ad42bd24beb9350",
+                    "flesh_kind": "corpse",
+                    "flesh_state": "stripped",
+                    "decay": 119
+                  }
+                ]
+              },
+              {
+                "xy": [
+                  49,
+                  18
+                ],
+                "items": [
+                  {
+                    "item_id": "resonant_bone_fragment",
+                    "count": 1,
+                    "source": null,
+                    "uid": null,
+                    "flesh_kind": null,
+                    "flesh_state": null,
+                    "decay": null
+                  }
+                ]
+              },
+              {
+                "xy": [
+                  41,
+                  18
+                ],
+                "items": [
+                  {
+                    "item_id": "wood_bundle",
+                    "count": 1,
+                    "source": null,
+                    "uid": null,
+                    "flesh_kind": null,
+                    "flesh_state": null,
+                    "decay": null
+                  }
+                ]
+              }
+            ],
+            "scavengers": [
+              {
+                "id": "pale_carrion_beetle",
+                "xy": [
+                  43,
+                  18
+                ],
+                "hp": 16,
+                "recipe": "territorial_guard",
+                "config": {
+                  "version": 1,
+                  "approach_opportunities": 8,
+                  "feed_opportunities": 3
+                },
+                "completed": 1,
+                "feeding": null,
+                "last_reason": "completed",
+                "last_decision": {
+                  "opportunity": 31,
+                  "turn": 517,
+                  "phase_before": "guard",
+                  "phase": "guard",
+                  "engagement": "idle",
+                  "action": "wait",
+                  "reason": "guarding",
+                  "result": null
+                },
+                "territory_phase": "guard"
+              }
+            ],
+            "access": [
+              {
+                "xy": [
+                  37,
+                  19
+                ],
+                "host": "container",
+                "progress": 0,
+                "completed_by": null
+              },
+              {
+                "xy": [
+                  41,
+                  18
+                ],
+                "host": "screen",
+                "progress": 3,
+                "completed_by": "careful"
+              }
+            ]
+          }
+        },
+        {
+          "branch": "Quick force",
+          "elapsed": 11,
+          "state": {
+            "player": {
+              "chunk": [
+                68,
+                98
+              ],
+              "submap": "submap_68_98_0",
+              "position": [
+                36,
+                16
+              ],
+              "turn": 515,
+              "hp": 60,
+              "hunger": 0.035000000000000024,
+              "thirst": 0.04812500000000002,
+              "inventory": [
+                "tallow_torch",
+                "crow_jerky",
+                "water_flask",
+                "crude_blade",
+                "leather_jack",
+                "moist_pebble",
+                "stalker_meat"
+              ],
+              "actors": [
+                {
+                  "id": "pale_carrion_beetle",
+                  "name": "Pale Carrion Beetle",
+                  "x": 40,
+                  "y": 18,
+                  "hp": 16
+                }
+              ]
+            },
+            "floor": [
+              {
+                "xy": [
+                  39,
+                  18
+                ],
+                "items": [
+                  {
+                    "item_id": "corpse",
+                    "count": 1,
+                    "source": "heath_stalker",
+                    "uid": "f1c0bb7ab74f45c39ad42bd24beb9350",
+                    "flesh_kind": "corpse",
+                    "flesh_state": "intact",
+                    "decay": 121
+                  }
+                ]
+              },
+              {
+                "xy": [
+                  49,
+                  18
+                ],
+                "items": [
+                  {
+                    "item_id": "resonant_bone_fragment",
+                    "count": 1,
+                    "source": null,
+                    "uid": null,
+                    "flesh_kind": null,
+                    "flesh_state": null,
+                    "decay": null
+                  }
+                ]
+              }
+            ],
+            "scavengers": [
+              {
+                "id": "pale_carrion_beetle",
+                "xy": [
+                  40,
+                  18
+                ],
+                "hp": 16,
+                "recipe": "territorial_guard",
+                "config": {
+                  "version": 1,
+                  "approach_opportunities": 8,
+                  "feed_opportunities": 3
+                },
+                "completed": 0,
+                "feeding": 2,
+                "last_reason": null,
+                "last_decision": {
+                  "opportunity": 29,
+                  "turn": 515,
+                  "phase_before": "guard",
+                  "phase": "guard",
+                  "engagement": "idle",
+                  "action": "feed",
+                  "reason": "scavenging_feeding",
+                  "result": null
+                },
+                "territory_phase": "guard"
+              }
+            ],
+            "access": [
+              {
+                "xy": [
+                  37,
+                  19
+                ],
+                "host": "container",
+                "progress": 0,
+                "completed_by": null
+              },
+              {
+                "xy": [
+                  41,
+                  18
+                ],
+                "host": "screen",
+                "progress": 0,
+                "completed_by": "force"
+              }
+            ]
+          }
+        }
+      ],
+      "bypass": {
+        "player": {
+          "chunk": [
+            68,
+            98
+          ],
+          "submap": "submap_68_98_0",
+          "position": [
+            49,
+            18
+          ],
+          "turn": 530,
+          "hp": 60,
+          "hunger": 0.05000000000000004,
+          "thirst": 0.06875000000000003,
+          "inventory": [
+            "tallow_torch",
+            "crow_jerky",
+            "water_flask",
+            "crude_blade",
+            "leather_jack",
+            "moist_pebble",
+            "stalker_meat",
+            "resonant_bone_fragment"
+          ],
+          "actors": [
+            {
+              "id": "pale_carrion_beetle",
+              "name": "Pale Carrion Beetle",
+              "x": 43,
+              "y": 18,
+              "hp": 16
+            }
+          ]
+        },
+        "floor": [
+          {
+            "xy": [
+              39,
+              18
+            ],
+            "items": [
+              {
+                "item_id": "corpse",
+                "count": 1,
+                "source": "heath_stalker",
+                "uid": "f1c0bb7ab74f45c39ad42bd24beb9350",
+                "flesh_kind": "corpse",
+                "flesh_state": "intact",
+                "decay": 106
+              }
+            ]
+          }
+        ],
+        "scavengers": [
+          {
+            "id": "pale_carrion_beetle",
+            "xy": [
+              43,
+              18
+            ],
+            "hp": 16,
+            "recipe": "territorial_guard",
+            "config": {
+              "version": 1,
+              "approach_opportunities": 8,
+              "feed_opportunities": 3
+            },
+            "completed": 0,
+            "feeding": null,
+            "last_reason": null,
+            "last_decision": {
+              "opportunity": 44,
+              "turn": 530,
+              "phase_before": "guard",
+              "phase": "guard",
+              "engagement": "idle",
+              "action": "wait",
+              "reason": "guarding",
+              "result": null
+            },
+            "territory_phase": "guard"
+          }
+        ],
+        "access": [
+          {
+            "xy": [
+              37,
+              19
+            ],
+            "host": "container",
+            "progress": 0,
+            "completed_by": null
+          },
+          {
+            "xy": [
+              41,
+              18
+            ],
+            "host": "screen",
+            "progress": 0,
+            "completed_by": null
+          }
+        ]
+      },
+      "stages": [
+        {
+          "label": "selected ordinary surface approach",
+          "turn": 480,
+          "hp": 60
+        },
+        {
+          "label": "screen intact; darkvision beetle cannot see through timber",
+          "turn": 504,
+          "hp": 60
+        },
+        {
+          "label": "intact southern bypass reaches east objective",
+          "turn": 530,
+          "hp": 60
+        },
+        {
+          "label": "Careful opening",
+          "turn": 507,
+          "hp": 60
+        },
+        {
+          "label": "Careful aftermath",
+          "turn": 517,
+          "hp": 60
+        },
+        {
+          "label": "Quick force opening",
+          "turn": 505,
+          "hp": 60
+        },
+        {
+          "label": "Quick force aftermath",
+          "turn": 515,
+          "hp": 60
+        },
+        {
+          "label": "sump final remaining resources",
+          "turn": 516,
+          "hp": 60
+        },
+        {
+          "label": "ordinary revisit retains depletion and access",
+          "turn": 533,
+          "hp": 60
+        }
+      ],
+      "final": {
+        "player": {
+          "chunk": [
+            68,
+            98
+          ],
+          "submap": "submap_68_98_0",
+          "position": [
+            30,
+            25
+          ],
+          "turn": 533,
+          "hp": 60,
+          "hunger": 0.05300000000000004,
+          "thirst": 0.07287500000000004,
+          "inventory": [
+            "tallow_torch",
+            "crow_jerky",
+            "water_flask",
+            "crude_blade",
+            "leather_jack",
+            "moist_pebble",
+            "stalker_meat"
+          ],
+          "actors": [
+            {
+              "id": "pale_carrion_beetle",
+              "name": "Pale Carrion Beetle",
+              "x": 43,
+              "y": 18,
+              "hp": 16
+            }
+          ]
+        },
+        "floor": [
+          {
+            "xy": [
+              39,
+              18
+            ],
+            "items": [
+              {
+                "item_id": "corpse",
+                "count": 1,
+                "source": "heath_stalker",
+                "uid": "f1c0bb7ab74f45c39ad42bd24beb9350",
+                "flesh_kind": "corpse",
+                "flesh_state": "stripped",
+                "decay": 111
+              }
+            ]
+          },
+          {
+            "xy": [
+              49,
+              18
+            ],
+            "items": [
+              {
+                "item_id": "resonant_bone_fragment",
+                "count": 1,
+                "source": null,
+                "uid": null,
+                "flesh_kind": null,
+                "flesh_state": null,
+                "decay": null
+              }
+            ]
+          }
+        ],
+        "scavengers": [
+          {
+            "id": "pale_carrion_beetle",
+            "xy": [
+              43,
+              18
+            ],
+            "hp": 16,
+            "recipe": "territorial_guard",
+            "config": {
+              "version": 1,
+              "approach_opportunities": 8,
+              "feed_opportunities": 3
+            },
+            "completed": 1,
+            "feeding": null,
+            "last_reason": "completed",
+            "last_decision": null,
+            "territory_phase": "return"
+          }
+        ],
+        "access": [
+          {
+            "xy": [
+              37,
+              19
+            ],
+            "host": "container",
+            "progress": 0,
+            "completed_by": null
+          },
+          {
+            "xy": [
+              41,
+              18
+            ],
+            "host": "screen",
+            "progress": 0,
+            "completed_by": "force"
+          }
+        ]
+      }
+    }
+  ],
+  "persistence": {
+    "controls": "Focused flat-map fixture, fresh shipped beetle and crow meat count 3. Real paid waits, F5/F9 and separate-process cold load; not ordinary availability evidence.",
+    "events": 5,
+    "checkpoints": [
+      {
+        "label": "remaining-stack",
+        "f5_f9_equal": true,
+        "cold": {
+          "passed": true,
+          "pid": 31888,
+          "state_equal": true
+        },
+        "archive_sha256": "15b8218c34d4debb175e0e27bda0d2ec048bd1e8923ea6e94371a7452446ccec"
+      }
+    ],
+    "stages": [],
+    "passed": true,
+    "before": {
+      "item_id": "crow_meat",
+      "count": 3,
+      "source": null,
+      "uid": "8e244a8de0bc4bb4862aa335f2ea9588",
+      "flesh_kind": "portion",
+      "flesh_state": null,
+      "decay": null
+    },
+    "after": {
+      "item_id": "crow_meat",
+      "count": 2,
+      "source": null,
+      "uid": "8e244a8de0bc4bb4862aa335f2ea9588",
+      "flesh_kind": "portion",
+      "flesh_state": null,
+      "decay": null
+    }
+  },
+  "archive": {
+    "path": "ordinary-final.zip",
+    "sha256": "a2b67735edc5ef26425f4dc036bacbc259f845058d6f0ca8f9791c81ac18ebc2",
+    "bytes": 16260487,
+    "files": 35
+  },
+  "limits": "Two disclosed initial surface approaches; full-map route knowledge; no safety/stock fixtures. Remaining-stack flat map and four additional generated scenes are separate focused evidence. Whole-plan store timing includes cooking. No damage-avoidance, all-seed balance or unaided-discovery claim.",
+  "full_observations": "ordinary-final.zip / play.json and per-journey progress.json retain full events, captured recipes/state, screenshots, genuine F5 archives and cold-load observations."
+}

@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "checked_utc": "2026-11-06T19:12:52.340694+00:00",
+  "baseline": "aea1d565097982a699230dcc7e4210b8106fbbe1",
+  "verified_revision": "25159337712158762f5d6b19b1bd4363465f8997",
+  "files": {
+    "owner-files": {
+      "files": 280,
+      "unchanged": true
+    },
+    "personal-saves": {
+      "files": 7,
+      "unchanged": true
+    }
+  },
+  "untouched_historical_blobs": {
+    "roguelike/data/entities/creatures/sewer_thing.json": "2b77faac41221b4b70a1d599764c90fe5bc1a3df",
+    "roguelike/data/entities/creatures/amber_sting_beetle.json": "4cb9ccfe3e81b851d6869e128f00a886a6c67b36",
+    "roguelike/docs/examples/g17_authored_creature_room.json": "52eb7cda851849d9454e7f78bb7c6547438b142e",
+    "roguelike/data/layouts/barrow_ward_store_a.json": "de2d7f993bed2959b5f2bc97ba871cde282cf4e7",
+    "roguelike/data/layouts/barrow_ward_store_b.json": "3d8e64d5f8767c690f4f6f9183c687baa1102337",
+    "roguelike/data/layouts/barrow_ward_store_c.json": "4ba4a644f3ff36bfb771eb7ee8fbd2a634c19e66",
+    "roguelike/data/layouts/barrow_ward_store_d.json": "6a2a22ea22767bce68ad89814e9397a82eec619f",
+    "roguelike/data/layouts/barrow_ward_store_e.json": "4fc0fd275c35ab302413b39937942f2785222d9f",
+    "roguelike/data/layouts/barrow_lamplit_store.json": "98f6d471502098ce933836e1a0a7f86d3aa4f45b",
+    "roguelike/data/layouts/barrow_bound_store.json": "15d393ecdb50cf3163a80bf9ca671013cc214541"
+  },
+  "wiki_changes": [],
+  "branch": "main",
+  "personal_campaigns_loaded": false
+}

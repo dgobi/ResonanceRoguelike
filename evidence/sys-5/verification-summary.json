@@ -1,0 +1,178 @@
+{
+  "passed": true,
+  "revision": "25159337712158762f5d6b19b1bd4363465f8997",
+  "input_files": 1303,
+  "inputs_sha256": "4182143475973fe9b1ceb2f6de2ee266f12223bd1c6cbe0b1d23301fcbfc2c38",
+  "source_stable": true,
+  "applicable_gates": 19,
+  "counts": {
+    "production_checks": 3704,
+    "production_workers": 159,
+    "focused_tests": 726,
+    "focused_affected_tests": 98,
+    "worker_tests": 145,
+    "worker_modules": 29,
+    "worker_intentional_skips": 1,
+    "worker_dependency_control_tests": 1,
+    "frontend_tests": 100,
+    "frontend_files": 21,
+    "host_tests": 73,
+    "startup_cases": 15,
+    "ordinary_save_comparisons": 10,
+    "focused_remaining_stack_save_comparisons": 1
+  },
+  "interpretation": "Retained complete frozen final-a execution plus complete affected rechecks after exactly three changed consumed inputs. The original full run failed its worker gate (assignment timeouts and stale37/39 corpus count); its logs and outcomes remain unchanged. Exact inverse reconstruction, unchanged file set/environment/package and original log hashes support retaining15 unaffected gates. All29 worker modules, dependency control, five complete affected focused modules, ordinary play and packaged SYS5 reran successfully. This is not a fresh clean full execution. Counts overlap and must not be added. One intentional bundled-worker dependency-absence skip is exercised with development Python.",
+  "started_utc": "2026-11-06T17:25:52.285428+00:00",
+  "finished_utc": "2026-11-06T19:12:20.802886+00:00",
+  "assembled_utc": "2026-11-06T19:12:52.364058+00:00",
+  "archives": [
+    {
+      "path": "gate-evidence.zip",
+      "sha256": "d809909daeeae37a5f506b33ab0ce7012b25fea515d05a9d8d370d7feb226fd0",
+      "bytes": 2682229,
+      "files": 106
+    },
+    {
+      "path": "affected-evidence.zip",
+      "sha256": "964fc7339453dc3bc87301d0e0ab53676ac00e0a015862461f755da8a063430f",
+      "bytes": 92083,
+      "files": 37
+    },
+    {
+      "path": "ordinary-final.zip",
+      "sha256": "a2b67735edc5ef26425f4dc036bacbc259f845058d6f0ca8f9791c81ac18ebc2",
+      "bytes": 16260487,
+      "files": 35
+    },
+    {
+      "path": "native-final.zip",
+      "sha256": "ba987296ae8980a6963c27e10e76ce3e92fa8215277ab2e5f8adc1a0d2d28557",
+      "bytes": 210489,
+      "files": 2
+    }
+  ],
+  "environment": "environment.json",
+  "ordinary": "ordinary-summary.json",
+  "native": "native-final.json",
+  "package": "package.json",
+  "preservation": "preservation.json",
+  "execution": "release.json",
+  "affected_execution": "verification-recheck.json",
+  "retention_plan": "validation-recheck-plan.json",
+  "retention_witness": "verification-retention-witness.py",
+  "full_revision": "591cacc207e1271c67ae93a53ce4f4ae4665f3b3",
+  "retained_gates": [
+    "frontend",
+    "typecheck",
+    "host",
+    "clippy",
+    "debug-build",
+    "build",
+    "bundle",
+    "startup",
+    "desktop",
+    "retained-sys4-native",
+    "retained-sys3-native",
+    "retained-sys2-native",
+    "retained-sys1-native",
+    "production-d",
+    "focused"
+  ],
+  "effective_gates": [
+    {
+      "gate": "frontend",
+      "passed": true,
+      "disposition": "retained with exact-delta proof"
+    },
+    {
+      "gate": "typecheck",
+      "passed": true,
+      "disposition": "retained with exact-delta proof"
+    },
+    {
+      "gate": "host",
+      "passed": true,
+      "disposition": "retained with exact-delta proof"
+    },
+    {
+      "gate": "clippy",
+      "passed": true,
+      "disposition": "retained with exact-delta proof"
+    },
+    {
+      "gate": "debug-build",
+      "passed": true,
+      "disposition": "retained with exact-delta proof"
+    },
+    {
+      "gate": "play",
+      "passed": true,
+      "disposition": "affected recheck"
+    },
+    {
+      "gate": "build",
+      "passed": true,
+      "disposition": "retained with exact-delta proof"
+    },
+    {
+      "gate": "bundle",
+      "passed": true,
+      "disposition": "retained with exact-delta proof"
+    },
+    {
+      "gate": "startup",
+      "passed": true,
+      "disposition": "retained with exact-delta proof"
+    },
+    {
+      "gate": "desktop",
+      "passed": true,
+      "disposition": "retained with exact-delta proof"
+    },
+    {
+      "gate": "native",
+      "passed": true,
+      "disposition": "affected recheck"
+    },
+    {
+      "gate": "retained-sys4-native",
+      "passed": true,
+      "disposition": "retained with exact-delta proof"
+    },
+    {
+      "gate": "retained-sys3-native",
+      "passed": true,
+      "disposition": "retained with exact-delta proof"
+    },
+    {
+      "gate": "retained-sys2-native",
+      "passed": true,
+      "disposition": "retained with exact-delta proof"
+    },
+    {
+      "gate": "retained-sys1-native",
+      "passed": true,
+      "disposition": "retained with exact-delta proof"
+    },
+    {
+      "gate": "production-d",
+      "passed": true,
+      "disposition": "retained with exact-delta proof"
+    },
+    {
+      "gate": "focused",
+      "passed": true,
+      "disposition": "retained with exact-delta proof"
+    },
+    {
+      "gate": "worker",
+      "passed": true,
+      "disposition": "affected recheck"
+    },
+    {
+      "gate": "worker-dependency-control",
+      "passed": true,
+      "disposition": "affected recheck"
+    }
+  ]
+}
