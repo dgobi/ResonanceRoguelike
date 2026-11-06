@@ -1,0 +1,269 @@
+{
+  "passed": true,
+  "revision": "cf818e0f526bec6cf13fc775db3e0191168210e7",
+  "original_manifest_sha256": "7ecabe4fe7eb38d7e52d9ef9d82671974aa0dece48c54debdd83a2e109a08738",
+  "original_production_result_sha256": "18389260479e58b3c853269e54452468600cc208144bdfa032a4542df5a4d13b",
+  "input_manifest_sha256": "3aa950e53ddd0923ace43f63cea72eed715f49d434c1552fb03fd16294c1aaee",
+  "source_stable": true,
+  "script_sha256": "8d8f790cceabaf36a02242aaab92fb20f0ee556038442ca92988f699360a7bd9",
+  "plan_sha256": "ac26e6cd5f18a50736d107a30ca6bc88c99749d9086a3a38d471cdda2b3f2152",
+  "commands": [
+    {
+      "gate": "host",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--manifest-path",
+        "src-tauri/Cargo.toml"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "seconds": 55.54605160001665,
+      "source_stable": true,
+      "log_sha256": "f78cd72c871c2d4e11264be7eedc40d08898cb1af79330346f12d5e7481c18d0",
+      "passed": true
+    },
+    {
+      "gate": "production-format",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_d.py",
+        "--only",
+        "b2",
+        "--case",
+        "format",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\sys-2\\expectation-final\\production-format"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "seconds": 53.7510246001184,
+      "source_stable": true,
+      "log_sha256": "3b90a2f4cd5a756a74cbd1a90392218287119c30271d9915e42961449f551513",
+      "passed": true
+    },
+    {
+      "gate": "focused-affected",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "unittest",
+        "-v",
+        "test_ai_4",
+        "test_ai_5",
+        "test_gameplay_g17",
+        "test_gameplay_g21",
+        "test_usable_supplies"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "seconds": 17.97958240006119,
+      "source_stable": true,
+      "log_sha256": "a3620e0ee6a9c20661126f76ecab4f45ca467869d53e4c6445e075ea1065079a",
+      "passed": true
+    },
+    {
+      "gate": "worker-affected",
+      "command": [
+        "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+        "-X",
+        "utf8",
+        "-I",
+        "-B",
+        "-c",
+        "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_bridge','test_buildings_w5p','test_content_contracts','test_items','test_pools_w5o']));sys.exit(not r.wasSuccessful())"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "seconds": 288.7821017000824,
+      "source_stable": true,
+      "log_sha256": "e6b2fbe793bccc63995d1c2eb05332470b89f9be4b13d146d788ef5a661dc773",
+      "passed": true
+    },
+    {
+      "gate": "worker-dependency-control",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-c",
+        "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromName('test_bridge.BridgeTests.test_dependency_absence_structured'));sys.exit(not r.wasSuccessful())"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "seconds": 0.7325720000080764,
+      "source_stable": true,
+      "log_sha256": "4429278a830554e182facf8d2c5c6a9b4763a02646f61e35c3023536f08eed76",
+      "passed": true
+    }
+  ],
+  "format_totals": {
+    "checks": 219,
+    "passed": 219,
+    "failed": 0,
+    "workers": 1
+  },
+  "format_worker_assertions": 213,
+  "changes": {
+    "workbench/src-tauri/src/authoring.rs": {
+      "before": "4397d215d91d2156f82a67541381c78ff9fb0bc45b8842aa1b91075a8814dbec",
+      "after": "fa0d4755f1873838830a67ad01b421146171e2ca028a5af8dc00367904128c9c",
+      "edits": [
+        {
+          "before": "for source in [\"roguelike/data/items/equipment/other/sample.json\",\"roguelike/data/items/tools/sample.json\",\"roguelike/data/items/consumables/empty_water_skin.json\"]",
+          "after": "for source in [\"roguelike/data/items/equipment/other/sample.json\",\"roguelike/data/items/special/sample.json\",\"roguelike/data/items/consumables/empty_water_skin.json\"]",
+          "reason": "Use an unsupported category in negative test; retain positive tools and all confinement assertions."
+        }
+      ]
+    },
+    "tools/b2_format_cases.py": {
+      "before": "dad8cd6d2610a1729d216f4b0211f54ccc4f4329c68f533b8627077b64b76373",
+      "after": "c3560aaf25d295c591bcaf07b4ade4fdcb8722e24dc49d53a5ca1aad76aadd93",
+      "edits": [
+        {
+          "before": "(\"active light with absent instance light\", p, \"light_data\", True)",
+          "after": "(\"active light with absent instance light\", p, \"held_light\", True)",
+          "reason": "Modern malformed owner now rejects in earlier held-light validator; retain all rejection/owner/no-write/bootstrap checks."
+        }
+      ]
+    },
+    "tools/critical_fix_regressions/tests/test_ai_4.py": {
+      "before": "e6ffef0bc631d74dbd0a1adddf84a679144fce99a69d1789c376729d61f7b2ce",
+      "after": "5562c93a113f0ccfd348c51075eda5942e239b1b813e2c0c60c0ca358f9a3bb5",
+      "edits": [
+        {
+          "before": "        self.assertIsNone(observe(a.ai,e,a,e.player,0.01)['cue'])",
+          "after": "        # Shared sight reads actual scene time, not the old caller scalar.\n        with patch.object(e.world_time, 'turn', 0):\n            self.assertIsNone(observe(a.ai,e,a,e.player,0.01)['cue'])",
+          "reason": "Scope actual midnight to pure final observation probe; hunt state/deadlines are not advanced or refreshed."
+        }
+      ]
+    },
+    "tools/critical_fix_regressions/tests/test_ai_5.py": {
+      "before": "e916b326f5e363e57f0bcfc974937dc6dc6d82bc43a894745b23292b328a628b",
+      "after": "73985e6806e531ba3633118e14ecc3922bc3f0f7422796307afd1699e5f25c60",
+      "edits": [
+        {
+          "before": "loaded_map=ChunkCache._read(path).local_map",
+          "after": "loaded_map=ChunkCache(self.root,data=e.data)._read(path).local_map",
+          "reason": "Use the data-bound cache instance; preserve stock/custom prose and strict actor restoration checks."
+        }
+      ]
+    },
+    "tools/critical_fix_regressions/tests/test_gameplay_g17.py": {
+      "before": "fcc2a87fade77c91408f55a31dafc45383d53b893f9d3e443986d53623292616",
+      "after": "ba09a27e8aeccadd339d068a2f237938a5c54ad7e78203e708389ca4cb962278",
+      "edits": [
+        {
+          "before": "self.assertEqual(len(self.data.structure_catalog.entries), 98)  # SYS-1: Test room and apothecary successor.",
+          "after": "self.assertEqual(len(self.data.structure_catalog.entries), 101)  # SYS-2: two rooms and shed successor.",
+          "reason": "Current catalogue admits exactly three added definitions; historical content unchanged."
+        }
+      ]
+    },
+    "tools/critical_fix_regressions/tests/test_gameplay_g21.py": {
+      "before": "a67bf5fb1d929292733ed80af30df03d757f698b90fbc043bc7ff3e187637e76",
+      "after": "de326c70a6bb9e13d787dcf8a1820588f4745985c0d138f29e4ff8b46bfee873",
+      "edits": [
+        {
+          "before": "        e.local_map.set_tile(14,12,'grass',True,True)\n        a.ai.take_turn",
+          "after": "        e.local_map.set_tile(14,12,'grass',True,True)\n        e.world_time.turn=0  # Actual scene darkness; caller scalar no longer owns illumination.\n        a.ai.take_turn",
+          "reason": "Use actual midnight after clearing old target; retain darkvision, concealment, wall and player-mask controls."
+        }
+      ]
+    },
+    "tools/critical_fix_regressions/tests/test_usable_supplies.py": {
+      "before": "6e85114c8027360f62c3a3ab1888574eae30ef762c8e33b21abb15bb273c4df5",
+      "after": "2925dfe337040675d3518a08338070334ed2518bf4a5a9c5a323481a974b7317",
+      "edits": [
+        {
+          "before": "**{'venom treatment':2}))",
+          "after": "**{'venom treatment':2,'held light':4}))",
+          "reason": "Add exactly four supported light definitions to class inventory."
+        },
+        {
+          "before": "        for iid in ('empty_water_skin','resonant_tincture','debug_blade','corpse','tallow_torch','lab_note'):",
+          "after": "        self.assertEqual({iid for iid,c in admitted if c['supply_class']=='held light'},\n                         {'tallow_torch','oil_lantern','watch_lantern','short_rushlight'})\n        for iid in ('empty_water_skin','resonant_tincture','debug_blade','corpse','lab_note'):",
+          "reason": "Replace obsolete torch exclusion with exact positive light inventory; keep separate inert-return rejection."
+        }
+      ]
+    },
+    "workbench/worker/test_buildings_w5p.py": {
+      "before": "05ecb4dfc9f33151b124a28e30753c32df0ebc60f2c72690cdca8071dfae0707",
+      "after": "b3492e4e4b71053a3245df24741a6906b8d05534d32e49f05d3dfb160f344caf",
+      "edits": [
+        {
+          "before": "self.assertEqual(len(ordinary),61);",
+          "after": "self.assertEqual(len(ordinary),62);",
+          "reason": "Admit shed C while preserving original-authority, plaza and publication controls."
+        }
+      ]
+    },
+    "workbench/worker/test_content_contracts.py": {
+      "before": "0ad197761f8b5f4bf9e8b4c4a2bad95e46e81f729a65fb40fb5dfa3f5747e6dc",
+      "after": "2e9a99d0a454b4c569f7cfa6259802050385d9e6a4b468fcc46199fcfd09cbb5",
+      "edits": [
+        {
+          "before": "((\"roguelike/data/items/tools/tallow_torch.json\", ITEM),",
+          "after": "((\"roguelike/data/items/consumables/resonant_tincture.json\", ITEM),",
+          "reason": "Use still-unsupported effect-bearing original for source-entitlement promotion refusal; preserve all checks."
+        }
+      ]
+    },
+    "workbench/worker/test_bridge.py": {
+      "before": "b3c9a57ecc7ea0a1602fb2e613533d57958f15d939dfea83fde3a9b006d2611f",
+      "after": "3caeb31953bdec5cbef4c0c942259e3e85ba19c62014a8ae58cd4c002b207fa2",
+      "edits": [
+        {
+          "before": "        for key in (\"terrain_sha256\", \"terrain\", \"items\", \"containers\", \"actors\", \"decor\", \"scene_seed\"):\n            self.assertEqual(a[key], b[key], key)",
+          "after": "        # Fresh previews construct distinct physical vessel owners. Validate full\n        # state, omit only random identity for generation-semantic comparison.\n        sys.path.insert(0, str(ROOT / \"roguelike\"))\n        from engine.save_components import validate_item\n        identities = []\n        for preview in (a, b):\n            seen = set()\n            for group in (preview[\"items\"], preview[\"containers\"]):\n                for owner in group:\n                    for item in owner[\"items\"]:\n                        if \"vessel\" in item:\n                            validate_item(item, \"preview vessel\")\n                            identity = item[\"vessel\"][\"id\"]\n                            self.assertNotIn(identity, seen)\n                            seen.add(identity)\n                            item[\"vessel\"].pop(\"id\")\n            self.assertTrue(seen)\n            identities.append(seen)\n        self.assertTrue(identities[0].isdisjoint(identities[1]))\n        for key in (\"terrain_sha256\", \"terrain\", \"items\", \"containers\", \"actors\", \"decor\", \"scene_seed\"):\n            self.assertEqual(a[key], b[key], key)",
+          "reason": "Validate complete vessel state and independent physical identities; omit only id for two fresh generation previews, preserving all remaining equality."
+        }
+      ]
+    },
+    "workbench/worker/test_items.py": {
+      "before": "db53db20e953b81d396e9ee34f306ed5ad4ba949036d1c809bb3859b6e92ac96",
+      "after": "8179269a41a3a4e323c81a3856fdd8fee4f61145d993ce4b4c8911bfcb1af250",
+      "edits": [
+        {
+          "before": "self.assertEqual(len(rows), 85)",
+          "after": "self.assertEqual(len(rows), 87)",
+          "reason": "Two new item definitions; exact catalogue retained."
+        },
+        {
+          "before": "self.assertEqual(len([r for r in rows if r[\"editable\"]]),59)",
+          "after": "self.assertEqual(len([r for r in rows if r[\"editable\"]]),63)",
+          "reason": "Two canonical and two new lights admitted."
+        },
+        {
+          "before": "dict(component=7,butchery=18,consumable=22,weapon=6,armor=2,shield=1,equipment=3))",
+          "after": "dict(component=7,butchery=18,consumable=22,weapon=6,armor=2,shield=1,equipment=3,tool=4))",
+          "reason": "Retain all previous category counts; add only four tools."
+        },
+        {
+          "before": "asset == ITEM or 'binding_knife' in asset)",
+          "after": "asset == ITEM or 'binding_knife' in asset or 'tallow_torch' in asset)",
+          "reason": "Torch is intentionally editable; byte-exact inspect/no-op and unsupported tincture checks retained."
+        }
+      ]
+    },
+    "workbench/worker/test_pools_w5o.py": {
+      "before": "3b6641b187f879f2590373f74c3b2673ca79816d86cd53595fff1706c47c1aea",
+      "after": "25a2f38822a2993fe3ecb4df1d7c23420c143bfbef933b1cf09489ae2f278164",
+      "edits": [
+        {
+          "before": "self.assertEqual(len(rows),20);",
+          "after": "self.assertEqual(len(rows),21);",
+          "reason": "One successor stock pool; preserve all original-source and repairability checks."
+        }
+      ]
+    }
+  }
+}

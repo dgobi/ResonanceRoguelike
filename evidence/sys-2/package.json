@@ -1,0 +1,16 @@
+{
+  "runtime_content_editor_revision": "513d2db5fdb7d01a14fd23db6ae4d53b5c5fe101",
+  "final_verified_input_revision": "cf818e0f526bec6cf13fc775db3e0191168210e7",
+  "retention": "The only host source change after build is inside cfg(test); the exact inverse-hash witness binds all twelve test-only changes. Runtime/content/editor behavior and packaged captures remain at the frozen implementation.",
+  "package": {
+    "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+    "sha256": "d8b546c75da804b1ac444ea4eb71a024118d51da43fbe90f18d71ab949e57b0a"
+  },
+  "installers": [
+    {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "52bafcd210c61a17390062ff7b4fb2b80b00dde3e44b6157cb962118e070880a",
+      "size": 28495927
+    }
+  ]
+}

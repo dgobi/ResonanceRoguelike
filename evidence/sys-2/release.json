@@ -1,0 +1,72 @@
+{
+  "passed": true,
+  "applicable_gate_count": 24,
+  "interpretation": "Applicable gates satisfied through the preserved unfiltered runs, unchanged-input UI continuation and bounded complete affected rechecks. No fresh clean unfiltered pass is claimed.",
+  "runtime_content_editor_revision": "513d2db5fdb7d01a14fd23db6ae4d53b5c5fe101",
+  "final_verified_input_revision": "cf818e0f526bec6cf13fc775db3e0191168210e7",
+  "original_full": {
+    "path": "release-full.json",
+    "sha256": "6f5f79b80efeaabdde5e0bc5837ab0e3b68140d631900d22b178981c740a1535",
+    "passed": false,
+    "focused": {
+      "tests": 654,
+      "passed": 649,
+      "failures": 4,
+      "errors": 1
+    },
+    "production": {
+      "checks": 3658,
+      "passed": 3655,
+      "failed": 3,
+      "workers": 159
+    },
+    "worker": {
+      "tests": 135,
+      "passed": 129,
+      "failed": 5,
+      "skipped": 1,
+      "modules": 27
+    }
+  },
+  "ui_continuation": {
+    "path": "ui-continuation.json",
+    "sha256": "f44d2cca4001c118dd3401eaa12d88ac8c201e8cb4d36a66f3142ed7383642d2",
+    "passed": true
+  },
+  "bounded_recheck": {
+    "path": "verification-recheck.json",
+    "sha256": "e562892c0a03d3b828f3293e7cdb47d9c5ce91516ff46dd3198b954f4f1c13f9",
+    "passed": true,
+    "host_tests": 71,
+    "focused_tests": 66,
+    "worker_tests": 30,
+    "worker_skipped": 1,
+    "development_control_tests": 1,
+    "format_harness_checks": 219,
+    "format_worker_assertions": 213,
+    "filtered_production_passed": false,
+    "selected_tests_passed": true
+  },
+  "input_manifests": {
+    "original": "7ecabe4fe7eb38d7e52d9ef9d82671974aa0dece48c54debdd83a2e109a08738",
+    "final": "3aa950e53ddd0923ace43f63cea72eed715f49d434c1552fb03fd16294c1aaee"
+  },
+  "gates": "gates.json",
+  "environment": {
+    "platform": "win32",
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+    "python_executable": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "dependencies": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6",
+      "cffi": "2.1.1",
+      "pycparser": "3.11",
+      "typing_extensions": "4.16.0"
+    },
+    "node": "v24.15.0",
+    "cargo": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)",
+    "rustc": "rustc 1.95.0 (59807616e 2026-04-14)"
+  },
+  "verified_utc": "2026-11-06T02:54:21.237792+00:00"
+}

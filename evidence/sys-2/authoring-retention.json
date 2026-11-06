@@ -1,0 +1,52 @@
+{
+  "passed": true,
+  "captured_files": 642,
+  "unchanged": 635,
+  "changes": {
+    "roguelike/engine/item_authoring.py": {
+      "kind": "publication guidance only",
+      "captured_sha256": "996c0e3c5b55ba1049226c5946b5f62f8828e3079a5ddb0fb2e3b922836251d9",
+      "final_sha256": "0a660bd3190aea56a9a7d531fb43fe60422777b43d3646fb10b26733662529f4",
+      "exact_old_hash": true
+    },
+    "roguelike/engine/engine.py": {
+      "kind": "line endings of added lines only",
+      "captured_sha256": "c09ce4bef4bf06ba9f5ade2dc7e62d37595923c514a836c73602515c742c320a",
+      "final_sha256": "0da80127a1bfbb81c0012ba0075af8fe3a3c9b76123c333c012569ffa8e2991c",
+      "exact_old_hash": true
+    },
+    "roguelike/engine/item_factory.py": {
+      "kind": "line endings of added lines only",
+      "captured_sha256": "bcd8f957e8b0181003b509d5dda0098081bb1f8f1bcead831b03e0b0442e7c54",
+      "final_sha256": "d28ea62683a57291af7ed296d21c13df6d77de214435ee88df963eaf8027ee7c",
+      "exact_old_hash": true
+    },
+    "roguelike/engine/item_system.py": {
+      "kind": "line endings of added lines only",
+      "captured_sha256": "c02cf506557fa59cf1b2ff8d4d59467c1bff85fbf3b35e5a0834bef2ded988d7",
+      "final_sha256": "22ae27254f116bfee0d96e0e8b8a8d934bb3e6af649f3ff7190df4e150817bd4",
+      "exact_old_hash": true
+    },
+    "roguelike/engine/held_light.py": {
+      "kind": "remove unused restore helper and import only",
+      "captured_sha256": "1377565e857b23f47dfc72f6540ca37d4a968930126860a26b96261af559d142",
+      "final_sha256": "71c3bfb9dc6dc27873cb00d1b80b99a6f503e4ab871f62b220ae134cdda92986",
+      "exact_old_hash": true
+    },
+    "roguelike/data/texts/world/notes/lamplit_store_note.json": {
+      "kind": "clue avoids implying dropped-light emission",
+      "captured_sha256": "6160841323c62c73486a87c0881cf8c36e425d2a0c309b3bd7d6441959ef2681",
+      "final_sha256": "f757deeeb2453c24ada07d596af4115ea1103953dc3407667e25dcb63a98f3d9",
+      "exact_old_hash": true
+    },
+    "roguelike/data/loot_pools/tool_shed_c_lights.json": {
+      "kind": "enroll published Watch Lantern in successor stock",
+      "captured_sha256": "858c7333e087009d8193252cc7241b7beacf1813ceec78a47caa5cc53a0ed58f",
+      "final_sha256": "cae67453579bed3b4a2e4f545e421caed8269cf9ca263fda5338991bdb7733ed",
+      "exact_old_hash": true
+    }
+  },
+  "captured_manifest_sha256": "f198d13597793fcc2fc502f474cec047061b1b5f821096980742f62ba17c1091",
+  "authoring_receipts_sha256": "411416e4acf09cf50bd56dfdf772e76ba048d83fc034a97c68556611cfe3c5d7",
+  "limitation": "This retains the executed authoring capture; rebuilt final native play and all worker tests are separate gates."
+}

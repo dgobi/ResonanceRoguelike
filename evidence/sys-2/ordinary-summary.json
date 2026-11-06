@@ -1,0 +1,179 @@
+{
+  "passed": true,
+  "source_revision": "513d2db5fdb7d01a14fd23db6ae4d53b5c5fe101",
+  "journeys": [
+    {
+      "journey": "held",
+      "events": 395,
+      "paid_phases": 348,
+      "observed_phases": 14,
+      "lit_ward_phases": 0,
+      "held_observation_outside_fixed": [
+        809,
+        810,
+        811,
+        812,
+        815,
+        816,
+        817,
+        818,
+        819,
+        820,
+        821
+      ],
+      "turn_start": 480,
+      "turn_end": 838,
+      "hp_end": 11,
+      "fuel_final": {
+        "tallow_torch": 317,
+        "watch_lantern": 28
+      },
+      "checkpoints": [
+        {
+          "label": "acquired",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 21704,
+            "state_equal": true
+          },
+          "archive_sha256": "468d2d5b91251c0d60afb591d31c8529cda578bc309aadd484b140fd735c408d"
+        },
+        {
+          "label": "approach",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 13484,
+            "state_equal": true
+          },
+          "archive_sha256": "49ec1ac4475180a63e2f6595cd493ec8f599ee01b31e1045aa647bcdb561c589"
+        },
+        {
+          "label": "changed_place",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 41944,
+            "state_equal": true
+          },
+          "archive_sha256": "03f557a7f39d669c92eefb11414c2b61669064b5150f86e0d1d51bf55e698bef"
+        },
+        {
+          "label": "revisited",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 17504,
+            "state_equal": true
+          },
+          "archive_sha256": "9c870b5c175517bf2cf7fd5d065fc8242100d56432917b4f73e5148621120c97"
+        }
+      ],
+      "exposure": {},
+      "held_observed_phases": 13,
+      "ward_lit_unobserved_phases": 0
+    },
+    {
+      "journey": "fixed",
+      "events": 387,
+      "paid_phases": 347,
+      "observed_phases": 13,
+      "lit_ward_phases": 12,
+      "held_observation_outside_fixed": [],
+      "turn_start": 480,
+      "turn_end": 837,
+      "hp_end": 10,
+      "fuel_final": {
+        "tallow_torch": 317,
+        "watch_lantern": 3
+      },
+      "checkpoints": [
+        {
+          "label": "acquired",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 31352,
+            "state_equal": true
+          },
+          "archive_sha256": "76c8ba7477b6a7c4ed335525acabc0044590be9d796babb96b5c65b865a1f29c"
+        },
+        {
+          "label": "approach",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 6816,
+            "state_equal": true
+          },
+          "archive_sha256": "26a3bad7ca46c47c00543d6bcfbce03376fe86490d066507890242819e7efdaf"
+        },
+        {
+          "label": "changed_place",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 30120,
+            "state_equal": true
+          },
+          "archive_sha256": "1234c27e5965b72635c117ff2075f6e1d9763ca7ea1a795b753acf8649c01e08"
+        },
+        {
+          "label": "revisited",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 7164,
+            "state_equal": true
+          },
+          "archive_sha256": "9e6e01ac166dfe59b9d0da2fba5fd6d7d1e5121af51895c30f3e1921d844e833"
+        }
+      ],
+      "exposure": {},
+      "held_observed_phases": 0,
+      "ward_lit_unobserved_phases": 7
+    },
+    {
+      "journey": "bandit",
+      "events": 35,
+      "paid_phases": 3,
+      "observed_phases": 0,
+      "lit_ward_phases": 0,
+      "held_observation_outside_fixed": [],
+      "turn_start": 1,
+      "turn_end": 3,
+      "hp_end": 60,
+      "fuel_final": {
+        "tallow_torch": 1
+      },
+      "checkpoints": [
+        {
+          "label": "night_exposure",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 27016,
+            "state_equal": true
+          },
+          "archive_sha256": "2340460ffec2f48f8b174844fc4393492cf24cc6c6654bc93f0556cca62223ba"
+        }
+      ],
+      "exposure": {
+        "dark_before": false,
+        "lit_after": true,
+        "dark_after": false,
+        "remembered_before": [
+          46,
+          33
+        ],
+        "remembered_after": [
+          46,
+          33
+        ]
+      },
+      "held_observed_phases": 0,
+      "ward_lit_unobserved_phases": 0
+    }
+  ]
+}

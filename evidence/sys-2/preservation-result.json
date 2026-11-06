@@ -1,0 +1,95 @@
+{
+  "passed": true,
+  "consumed_files": 1243,
+  "all_consumed_files_tracked": true,
+  "initial_owner_files": 278,
+  "all_initial_owner_hashes_unchanged": true,
+  "owner_files_untracked_and_disjoint_from_consumed_inputs": true,
+  "changed_consumed_files": [
+    "tools/b2_format_cases.py",
+    "tools/critical_fix_regressions/tests/test_ai_4.py",
+    "tools/critical_fix_regressions/tests/test_ai_5.py",
+    "tools/critical_fix_regressions/tests/test_gameplay_g17.py",
+    "tools/critical_fix_regressions/tests/test_gameplay_g21.py",
+    "tools/critical_fix_regressions/tests/test_usable_supplies.py",
+    "workbench/src-tauri/src/authoring.rs",
+    "workbench/worker/test_bridge.py",
+    "workbench/worker/test_buildings_w5p.py",
+    "workbench/worker/test_content_contracts.py",
+    "workbench/worker/test_items.py",
+    "workbench/worker/test_pools_w5o.py"
+  ],
+  "preserved_source_objects": [
+    {
+      "path": "roguelike/data/terrain.json",
+      "baseline_and_final_blob": "b0293a2e28fadba38645a30fa838f0b81b151ec9",
+      "working_sha256": "b3786eed3cbcb89facdbf7f1d4bf302df416c0008c1df95bc8dd6b5ee5d550a4"
+    },
+    {
+      "path": "roguelike/data/decoratives.json",
+      "baseline_and_final_blob": "407d25ee291faa0f5d74c7ad605c814c8c6d8673",
+      "working_sha256": "387466fed1e323d269ef3c9bcba1e3efb3cf691b97c48c7c08e736db99f697a5"
+    },
+    {
+      "path": "roguelike/data/items/tools/tallow_torch.json",
+      "baseline_and_final_blob": "ba6ac76116041e9e24f3656514ae72999bc27ad4",
+      "working_sha256": "35dce605a06573ffdcb48ac8b3968ed7fbf6af1d1b2d0b17021c75c735258f34"
+    },
+    {
+      "path": "roguelike/data/items/tools/oil_lantern.json",
+      "baseline_and_final_blob": "5ecb45d1c023421a802ee935246c3b6b5b041ffe",
+      "working_sha256": "038825ec331ea210f9726b44b64f49ef5524dbe5fa05b7bf6a08f027d015bfb4"
+    },
+    {
+      "path": "roguelike/data/buildings/storage/tool_shed_a.json",
+      "baseline_and_final_blob": "f5be44c72421ecce46fe5073c9808994be2f8829",
+      "working_sha256": "ba66f7a7b8e7f37438688c55c6dbab8b9fa249535d51d220a894e0dd269906fd"
+    },
+    {
+      "path": "roguelike/data/buildings/storage/tool_shed_b.json",
+      "baseline_and_final_blob": "eca49f431c5a59fe3c9efe06f6a6e1af411f5df8",
+      "working_sha256": "b7977d1241de9251ea249ec2fec5c4132655b14ae5b51455e081f1eb1740ece8"
+    },
+    {
+      "path": "roguelike/data/loot_pools/tool_shed_b_provisions.json",
+      "baseline_and_final_blob": "edbe4be3202f80cf741b8fcba4868be1113d7d62",
+      "working_sha256": "818b4ef65002da60834db7c96040b57eb9aa18697bbf1038135d2e423864e59c"
+    },
+    {
+      "path": "roguelike/data/loot_pools/tool_shed_b_satchel.json",
+      "baseline_and_final_blob": "77cf672f9fbfbd7d37f57efdf727178b13a5d434",
+      "working_sha256": "362725d087c70a51ee984019f633360d3c9861131509350aa6dd256be2328e01"
+    },
+    {
+      "path": "roguelike/data/loot_pools/tool_shed_b_tools.json",
+      "baseline_and_final_blob": "edea899bcd4d1cac9cdba989fba53dfac952ca91",
+      "working_sha256": "7c05f8536069ec78f5144910c08959ba811158e8cfbea86df105ada3928fad1a"
+    },
+    {
+      "path": "roguelike/data/layouts/barrow_ward_store_a.json",
+      "baseline_and_final_blob": "de2d7f993bed2959b5f2bc97ba871cde282cf4e7",
+      "working_sha256": "ae196c3ba45ab244ab472557c4cd1692a92bb8b5d4f5b4d1a1d5ec9623f7d553"
+    },
+    {
+      "path": "roguelike/data/layouts/barrow_ward_store_b.json",
+      "baseline_and_final_blob": "3d8e64d5f8767c690f4f6f9183c687baa1102337",
+      "working_sha256": "ff7f1369e503a30f72c1a77cdbbbf2d2a5f483f95e327c7a86b34c5fdb4d59cf"
+    },
+    {
+      "path": "roguelike/data/layouts/barrow_ward_store_c.json",
+      "baseline_and_final_blob": "4ba4a644f3ff36bfb771eb7ee8fbd2a634c19e66",
+      "working_sha256": "5774f6679b3ac182447b0cba22061bc7d45b5a0c4f9259cdd912af7bd2536223"
+    },
+    {
+      "path": "roguelike/data/layouts/barrow_ward_store_d.json",
+      "baseline_and_final_blob": "6a2a22ea22767bce68ad89814e9397a82eec619f",
+      "working_sha256": "a6fc8894aba46ec39b0fc8084a09a519d120485b6fcca7a4c54772abad268866"
+    },
+    {
+      "path": "roguelike/data/layouts/barrow_ward_store_e.json",
+      "baseline_and_final_blob": "4fc0fd275c35ab302413b39937942f2785222d9f",
+      "working_sha256": "64b6e01bcbfa13cb73244544ffc59abbec779483d6c730029d9a8f85112cbbfb"
+    }
+  ],
+  "personal_campaigns": "Not opened; all executed save roots disposable."
+}

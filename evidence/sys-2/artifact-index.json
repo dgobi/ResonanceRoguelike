@@ -1,0 +1,37 @@
+[
+  {
+    "path": "gate-evidence-full.zip",
+    "bytes": 6448778,
+    "sha256": "bd8c7995e4f72d0b917fd2f368c39546b77ac50e4663c1ca87f9bb8025e458d1"
+  },
+  {
+    "path": "gate-evidence-recheck.zip",
+    "bytes": 246921,
+    "sha256": "157e4ad30fe9c4f8adc81053c1c4a52de634d41a740e8941f0751e7b3bf37d3c"
+  },
+  {
+    "path": "ordinary-final.zip",
+    "bytes": 14009911,
+    "sha256": "acc7c9af2c7961db9a8de0f50b971176afc5ecef402929824bbb50031b06c4ea"
+  },
+  {
+    "path": "native-final-receipts.zip",
+    "bytes": 252299,
+    "sha256": "53dd9e802a6c15eccc59efd12c38c7a1d22cb2364a190bafc8e1bbeba1978a15"
+  },
+  {
+    "path": "preflight-logs.zip",
+    "bytes": 26623,
+    "sha256": "808b92ccb8fa1f668a79a4aad3585e97b303b2072094d6fa28f4d30d267f538a"
+  },
+  {
+    "path": "preflight/authoring-receipts.zip",
+    "bytes": 547618,
+    "sha256": "411416e4acf09cf50bd56dfdf772e76ba048d83fc034a97c68556611cfe3c5d7"
+  },
+  {
+    "path": "preflight/ordinary-preflight.zip",
+    "bytes": 196970,
+    "sha256": "300191e73721a1aaf3d27c860bf95147f5e7ec2935045185d95782f905279477"
+  }
+]

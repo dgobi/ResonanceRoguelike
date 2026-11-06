@@ -1,0 +1,134 @@
+[
+  {
+    "path": ".baseline/sys2-affected-preflight.log",
+    "sha256": "96a6d73422d923bd809f0b9272faae96451837a828348f1b0f9e14fea84b46e1"
+  },
+  {
+    "path": ".baseline/sys2-ai2-preflight.log",
+    "sha256": "c5e76f5a79d67a5f016737aa8237840ac32e4dd9f98054ce459a216708bc9cc7"
+  },
+  {
+    "path": ".baseline/sys2-catalogue-preflight.log",
+    "sha256": "f4e3e88ccb33c4f79c9d067fed7c958d9b0072fc10a63defc53fb1042e8f84bb"
+  },
+  {
+    "path": ".baseline/sys2-compat-preflight-b.log",
+    "sha256": "18cdd025b45dd9f61ce7116b77a5f0759078aa833438d8996ceda1058278f1b2"
+  },
+  {
+    "path": ".baseline/sys2-compat-preflight.log",
+    "sha256": "d9daf3b247a506b7e2e01988321a80437bb4ce3f70afd9bb890c84a960c50a70"
+  },
+  {
+    "path": ".baseline/sys2-focused-initial.log",
+    "sha256": "dc737d3b33ef4c19514ee014e644a08cb74b5ddde59f094b74e3195f0d871804"
+  },
+  {
+    "path": ".baseline/sys2-focused-runtime.log",
+    "sha256": "c09d6bd634e617ded201ef2ac639f4cf33247463d272145f35e07613bf5a830b"
+  },
+  {
+    "path": ".baseline/sys2-night-a.log",
+    "sha256": "b34132fbf23b0fcdc35cde885e387dce04f81c01afd2fe95e357fd974dab4ba8"
+  },
+  {
+    "path": ".baseline/sys2-night-b.log",
+    "sha256": "4a2c89ac6baa10721cfefd8bc44309a022208bb845fcf95368ab0877c886a32a"
+  },
+  {
+    "path": ".baseline/sys2-night-c.log",
+    "sha256": "d394abededc9388c94c70829a9b4ce61ddb64258cf4a3b217f8cc492df7514a8"
+  },
+  {
+    "path": ".baseline/sys2-night-d.log",
+    "sha256": "a761d5f1dcd46d4f9489d0fa135634cef4dae82aed005905cd50debf1b036385"
+  },
+  {
+    "path": ".baseline/sys2-night-e.log",
+    "sha256": "2057e5ac2ae33c0461f69a032f4ab13beb41b2e5919ffbae2dd6d111c15ba3e6"
+  },
+  {
+    "path": ".baseline/sys2-play-fixed-d.log",
+    "sha256": "76449425c7bb4519ccf8faec4e379d549d5dd665337fcec2108d2387af64efc7"
+  },
+  {
+    "path": ".baseline/sys2-play-held-a.log",
+    "sha256": "82c7ec1e794b7a9cce842a3e643e922b1d2ca0a445905134da7481c65392a4db"
+  },
+  {
+    "path": ".baseline/sys2-play-held-b.log",
+    "sha256": "deb99ba24f60792008cca40f4c3eab63539d6ce256b0c0ef255d492da0ab8907"
+  },
+  {
+    "path": ".baseline/sys2-play-held-c.log",
+    "sha256": "9caae310645f15ee1dc2188057cb23f62ff8b393144070a2675fae8ac08e234f"
+  },
+  {
+    "path": ".baseline/sys2-preflight-ai2.log",
+    "sha256": "253a4a3eab0f586d07c9fad1a368648b1cf2a5b345c4e559bd20f5e1609a5d0a"
+  },
+  {
+    "path": ".baseline/sys2-preflight-ai7-passage.log",
+    "sha256": "09002d5f60e2f05d7ed4cc87baf7002886c87583c8ba2a2bed6c4c4767a38d4b"
+  },
+  {
+    "path": ".baseline/sys2-preflight-ai7-threat.log",
+    "sha256": "a955e08d510a86e0478dbf0f971816592d20f7b9cd86c4cd39f7c6f313cf3cd3"
+  },
+  {
+    "path": ".baseline/sys2-preflight-ai8-controlled.log",
+    "sha256": "7b1e3697eddf1b4361166620b1c613c795cdd05a80a21df0c3976917c2b20326"
+  },
+  {
+    "path": ".baseline/sys2-preflight-ai8-interrupt.log",
+    "sha256": "f87683ad01d2cf75223be203619b79bc1fcbe1340017dafe2394eb9bc4c7074f"
+  },
+  {
+    "path": ".baseline/sys2-preflight-ai8-stale.log",
+    "sha256": "2c470c0f9b559eaf74092994c0c49bb47c8b2245ae83558460925ef30fbe1d1f"
+  },
+  {
+    "path": ".baseline/sys2-preflight-ai9-natural.log",
+    "sha256": "7f1b447ac578eaa99d6e6021ee887d16fdd556e9361df4124cbb6b2320722674"
+  },
+  {
+    "path": ".baseline/sys2-preflight-ai9-rooms.log",
+    "sha256": "f326bf0043f857323b1e6b2e114461ca2322ba3e9be5e55dd30d65d2917e837a"
+  },
+  {
+    "path": ".baseline/sys2-runtime-recheck.log",
+    "sha256": "62e2a24b758b1d18aca85ec616a42468f48cfb3f9bd821e63cd2673f96792325"
+  },
+  {
+    "path": ".baseline/sys2-seed-search.log",
+    "sha256": "d634359f4c12196eab6184d892bbd331d1e4af15fe61caf6013e248f6a1266ea"
+  },
+  {
+    "path": "workbench/.artifacts/sys2-authoring-build-b.log",
+    "sha256": "81a77d5db07294ee934459ea98f26265d0dce6fb9ba86ab0ddef70f81ef1183f"
+  },
+  {
+    "path": "workbench/.artifacts/sys2-authoring-run-b.log",
+    "sha256": "186d5aea4ba8d628c8dffc482cfa4a4519ab6aafcc700a402a15b9ce50fe63b1"
+  },
+  {
+    "path": "workbench/.artifacts/sys2-authoring-run-c.log",
+    "sha256": "53635b999abea1d8bbe1a8c696ea2d020d95a0d8876d9bd8ff899daaeb82b30b"
+  },
+  {
+    "path": "workbench/.artifacts/sys2-authoring-run-d.log",
+    "sha256": "fe56b9697a9d4f72237e0803d52fc1b9b653a2bb866df6958678f76092a16065"
+  },
+  {
+    "path": "workbench/.artifacts/sys2-authoring-run-e.log",
+    "sha256": "8ed5f57bb64fbed0cf80585018a4af8bfd3d148f612c679362f35cd8c71b8886"
+  },
+  {
+    "path": "workbench/.artifacts/sys2-authoring-run-f.log",
+    "sha256": "92bfc460e2e316cf9e5d6b0a9524f56be766adb32c08807e977b05ab4e16ed81"
+  },
+  {
+    "path": "workbench/.artifacts/sys2-authoring-run.log",
+    "sha256": "6b37cee4b5d2aa18bf235aebe67d9638d2acce00d0d5c417ae235750aa1b4f25"
+  }
+]

@@ -1,0 +1,134 @@
+{
+  "passed": true,
+  "revision": "513d2db5fdb7d01a14fd23db6ae4d53b5c5fe101",
+  "inputs_sha256": "7ecabe4fe7eb38d7e52d9ef9d82671974aa0dece48c54debdd83a2e109a08738",
+  "script_sha256": "b0d8766ae001635e437f9107fa44857dfe3e47d06010629de089dc5883ba476e",
+  "commands": [
+    {
+      "gate": "clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "--manifest-path",
+        "src-tauri/Cargo.toml",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "seconds": 7.76855649985373,
+      "source_stable": true,
+      "log_sha256": "afb0fcbd2fc207164eda2338a675c34ee5cd75bd2acb6f77fb09ad5d86a48d82",
+      "passed": true
+    },
+    {
+      "gate": "debug-build",
+      "command": [
+        "cargo",
+        "build",
+        "--locked",
+        "--manifest-path",
+        "src-tauri/Cargo.toml"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "seconds": 13.345131000038236,
+      "source_stable": true,
+      "log_sha256": "c8dbba55a75fbed6c6876bd6cb4f80b3a3a2c3355d4a7a7d1b649afd3031a859",
+      "passed": true
+    },
+    {
+      "gate": "build",
+      "command": [
+        "npm.cmd",
+        "run",
+        "build"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "seconds": 50.2621194999665,
+      "source_stable": true,
+      "log_sha256": "d8874a8cf0bd6df310640380f8a355a064087692a74d3af9f925225a3c9e5171",
+      "passed": true
+    },
+    {
+      "gate": "bundle",
+      "command": [
+        "npm.cmd",
+        "run",
+        "bundle"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "seconds": 85.55092859989963,
+      "source_stable": true,
+      "log_sha256": "d6e0bd63bb3a7dd191e4b7fa4979226df687a1c0824a68bea2f8fbf79dc515c6",
+      "passed": true
+    },
+    {
+      "gate": "startup",
+      "command": [
+        "node",
+        "scripts/startup-test.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "seconds": 130.43368829996325,
+      "source_stable": true,
+      "log_sha256": "92e7390499cea17ad43364c523f0d6cb17f488919c3bbc29959d16c82cb20949",
+      "passed": true
+    },
+    {
+      "gate": "desktop",
+      "command": [
+        "node",
+        "scripts/desktop-test.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "seconds": 32.654780300101265,
+      "source_stable": true,
+      "log_sha256": "3a78073ae90d2ecfc3186123e0db839ddb6b7ad680341e6d81b851f22e0fd54f",
+      "passed": true
+    },
+    {
+      "gate": "native",
+      "command": [
+        "node",
+        "scripts/run-sys-2.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "seconds": 50.24658229993656,
+      "source_stable": true,
+      "log_sha256": "17a100259e98aace552185286c2e072f4261dbd7ecfb3d3d61b4b84b1944e37f",
+      "passed": true
+    },
+    {
+      "gate": "retained-native",
+      "command": [
+        "node",
+        "scripts/run-sys-1.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "seconds": 87.56496029999107,
+      "source_stable": true,
+      "log_sha256": "cd7753ca294a6bef31840bc54aa98f6300c85db06a5ba6f6431da399ca7a41e6",
+      "passed": true
+    }
+  ],
+  "package": {
+    "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+    "sha256": "d8b546c75da804b1ac444ea4eb71a024118d51da43fbe90f18d71ab949e57b0a"
+  },
+  "installers": [
+    {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "52bafcd210c61a17390062ff7b4fb2b80b00dde3e44b6157cb962118e070880a",
+      "size": 28495927
+    }
+  ]
+}

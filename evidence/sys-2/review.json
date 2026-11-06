@@ -1,0 +1,81 @@
+{
+  "scope": "SYS-2 v1.0 only; one implementation writer, read-only helpers",
+  "reviews": [
+    {
+      "reviewer": "light_contract_review",
+      "kind": "read-only source review, no executed gate",
+      "resolved": [
+        "Publish source after successful offhand claim; exact carried unspent owner for fuel and heat.",
+        "Validate malformed saved RGB before any JSON/pickle owner installation.",
+        "Bound furnishing emission admission and update obstruction diagnostics."
+      ],
+      "final": "No remaining material runtime blocker found."
+    },
+    {
+      "reviewer": "authoring_evidence_review",
+      "kind": "read-only source and receipt review, no executed gate",
+      "resolved": [
+        "Protect saved light reach/fuel in publication guidance.",
+        "Clue now recommends the fixed coals rather than implying floor-light emission.",
+        "Retain Watch Lantern creation from the earlier failed-locator attempt separately from the integrated passing receipt."
+      ],
+      "final": "Contrasted usefulness, source preservation and reuse are supported within the disclosed evidence limits."
+    },
+    {
+      "reviewer": "authoring_evidence_review",
+      "kind": "read-only final retention/report review; no edits or execution",
+      "final": "Exact inverse substitutions preserve runtime/content and all original semantic obligations. Full affected module and format worker repeats cover the failures. No further concrete coverage gap found."
+    }
+  ],
+  "preflight": [
+    {
+      "log": "sys2-focused-initial.log",
+      "result": "17/21; four failed",
+      "repair": "Pinned tcod excluded exact positive radius edge: use radius+1 then explicit inclusive circle. Set the controlled extinction fixture to the intended midnight turn instead of boot turn 480."
+    },
+    {
+      "log": "sys2-focused-runtime.log",
+      "result": "98/100; two failed",
+      "repair": "Use real midnight scene ambient in G19; skip unrelated opaque historical container payloads during light preparation. Complete affected recheck: 66 passed."
+    },
+    {
+      "log": "sys2-compat-preflight.log",
+      "result": "38 collected; one failed and one import error",
+      "repair": "Historical G11 digest validates/omits only canonical additive six-tile descriptor; include existing tools path for G16 historical import. SYS-2/G11/G16 complete preflight: 32 passed."
+    },
+    {
+      "log": "sys2-ai2-preflight.log",
+      "result": "8/9 scenarios passed",
+      "repair": "Retired text filter expected seeks shadow; current unchanged AI uses shudders in the light. Preserve visible-tell plus watched/concealment obligations. All selected AI preflights then passed."
+    },
+    {
+      "log": "workbench/.artifacts/sys2-authoring-run-a..f.log",
+      "result": "Earlier integration attempts failed; integrated f passed",
+      "repair": "Publish the new source before stock references it; admit tools in native route confinement; narrow ambiguous Properties/hidden retained-field locators. Preserve earlier successful lantern publication and later harness failure."
+    },
+    {
+      "log": "sys2-play-held-a/b.log",
+      "result": "Unavailable bounded stock pair, then impassable chosen route",
+      "repair": "Select seed 20261117 with actual stock; use ordinary south-first transitions. No world-generation repair or intermediate teleport."
+    },
+    {
+      "log": "sys2-night-a..d.log",
+      "result": "Starting torch made dark baseline lit; inventory UI needed initialization",
+      "repair": "Extinguish starting torch through paid inventory action before the single disclosed placement. Final false/true/false sight and retained memory passed."
+    }
+  ],
+  "final_execution": "Original frozen full executions retained: focused649/654 (all25SYS2passed), production3655/3658 with one incomplete format worker, host70/71, worker129passed+5failed+1skip of135. Exact twelve test-only corrections then passed full host71, complete focused modules66, complete worker modules30 with one skip, separate dependency control1, and full format worker213 assertions/219 harness checks. All24 applicable gates satisfied without claiming fresh clean unfiltered runs.",
+  "limitations": [
+    "Seeded ordinary usefulness is not unaided discovery or global balance.",
+    "Debug diagnostics and full route knowledge select the evidence path but never provide gameplay observation.",
+    "No floor lights, refills, shutters, new AI modules, wiki maintenance or reference refresh."
+  ],
+  "reviewed_final_fixture_changes": [
+    "AI4 scoped midnight and G21 actual scene midnight replace obsolete caller ambient-scalar authority, preserving cue/darkvision/concealment controls.",
+    "AI5 uses the data-bound cache instance API; only one class-static test caller existed.",
+    "G17/worker building, item and pool counts account only for commissioned additions; supplies assert the exact four ordinary lights.",
+    "Host negative uses genuinely unsupported items/special route, not nested tools (host permits nested admitted-category paths).",
+    "Worker source-entitlement test uses still-unsupported effect-bearing tincture; light-to-weapon rebinding remains independently rejected.",
+    "Fresh-preview comparison validates full vessel state and independent unique ids, then omits only vessel.id. Runtime identity generation and SYS1 contracts unchanged."
+  ]
+}

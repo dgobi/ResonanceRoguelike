@@ -1,0 +1,192 @@
+{
+  "readback_utc": "2026-11-06 02:55:12 UTC",
+  "scope": "First publication: implementation and verified inputs. Final reporting commit and completion checkpoint are published afterward.",
+  "methods": [
+    "git ls-remote origin refs/heads/main refs/tags/checkpoint/sys-2-*",
+    "Independent GitHub connector GET refs and annotated tag objects"
+  ],
+  "refs": [
+    {
+      "ref": "refs/heads/main",
+      "node_id": "REF_kwDORtpHo69yZWZzL2hlYWRzL21haW4",
+      "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/refs/heads/main",
+      "object": {
+        "sha": "cf818e0f526bec6cf13fc775db3e0191168210e7",
+        "type": "commit",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/commits/cf818e0f526bec6cf13fc775db3e0191168210e7"
+      }
+    },
+    {
+      "ref": "refs/tags/checkpoint/sys-2-implementation-20261105-a",
+      "node_id": "REF_kwDORtpHo9oANHJlZnMvdGFncy9jaGVja3BvaW50L3N5cy0yLWltcGxlbWVudGF0aW9uLTIwMjYxMTA1LWE",
+      "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/refs/tags/checkpoint/sys-2-implementation-20261105-a",
+      "object": {
+        "sha": "07ec2feebd380b298fd2d7e230c80c8631a29cc7",
+        "type": "tag",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/07ec2feebd380b298fd2d7e230c80c8631a29cc7"
+      }
+    },
+    {
+      "ref": "refs/tags/checkpoint/sys-2-m1-20261105-a",
+      "node_id": "REF_kwDORtpHo9oAKHJlZnMvdGFncy9jaGVja3BvaW50L3N5cy0yLW0xLTIwMjYxMTA1LWE",
+      "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/refs/tags/checkpoint/sys-2-m1-20261105-a",
+      "object": {
+        "sha": "d11ab2249a9f7f8fa82b49d3971dc16b65f97f6a",
+        "type": "tag",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/d11ab2249a9f7f8fa82b49d3971dc16b65f97f6a"
+      }
+    },
+    {
+      "ref": "refs/tags/checkpoint/sys-2-start-20261105-a",
+      "node_id": "REF_kwDORtpHo9oAK3JlZnMvdGFncy9jaGVja3BvaW50L3N5cy0yLXN0YXJ0LTIwMjYxMTA1LWE",
+      "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/refs/tags/checkpoint/sys-2-start-20261105-a",
+      "object": {
+        "sha": "42a57d0a6da30b5a439bd73c4af5fc1d8b1f211b",
+        "type": "tag",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/42a57d0a6da30b5a439bd73c4af5fc1d8b1f211b"
+      }
+    },
+    {
+      "ref": "refs/tags/checkpoint/sys-2-verified-input-20261105-a",
+      "node_id": "REF_kwDORtpHo9oANHJlZnMvdGFncy9jaGVja3BvaW50L3N5cy0yLXZlcmlmaWVkLWlucHV0LTIwMjYxMTA1LWE",
+      "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/refs/tags/checkpoint/sys-2-verified-input-20261105-a",
+      "object": {
+        "sha": "dcbdd2947b05e2a859ded77c772d72bbf6eeb097",
+        "type": "tag",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/dcbdd2947b05e2a859ded77c772d72bbf6eeb097"
+      }
+    },
+    {
+      "ref": "refs/tags/checkpoint/sys-2-verified-input-20261105-b",
+      "node_id": "REF_kwDORtpHo9oANHJlZnMvdGFncy9jaGVja3BvaW50L3N5cy0yLXZlcmlmaWVkLWlucHV0LTIwMjYxMTA1LWI",
+      "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/refs/tags/checkpoint/sys-2-verified-input-20261105-b",
+      "object": {
+        "sha": "89a509db478e9bea66f1d9435b21dd2d4af57fda",
+        "type": "tag",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/89a509db478e9bea66f1d9435b21dd2d4af57fda"
+      }
+    }
+  ],
+  "annotated_objects": [
+    {
+      "node_id": "TA_kwDORtpHo9oAKDA3ZWMyZmVlYmQzODBiMjk4ZmQyZDdlMjMwYzgwYzg2MzFhMjljYzc",
+      "sha": "07ec2feebd380b298fd2d7e230c80c8631a29cc7",
+      "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/07ec2feebd380b298fd2d7e230c80c8631a29cc7",
+      "tagger": {
+        "name": "Daniel",
+        "email": "dan.gobin@gmail.com",
+        "date": "2026-11-06T01:59:09Z"
+      },
+      "object": {
+        "sha": "513d2db5fdb7d01a14fd23db6ae4d53b5c5fe101",
+        "type": "commit",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/commits/513d2db5fdb7d01a14fd23db6ae4d53b5c5fe101"
+      },
+      "tag": "checkpoint/sys-2-implementation-20261105-a",
+      "message": "SYS-2 M2-M4 implementation, packaged authoring and ordinary preflight; final gates pending\n",
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    {
+      "node_id": "TA_kwDORtpHo9oAKGQxMWFiMjI0OWE5ZjdmOGZhODJiNDlkMzk3MWRjMTZiNjVmOTdmNmE",
+      "sha": "d11ab2249a9f7f8fa82b49d3971dc16b65f97f6a",
+      "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/d11ab2249a9f7f8fa82b49d3971dc16b65f97f6a",
+      "tagger": {
+        "name": "Daniel",
+        "email": "dan.gobin@gmail.com",
+        "date": "2026-11-06T01:30:22Z"
+      },
+      "object": {
+        "sha": "538561e7019c9d230d5cb1465d7e19f42596d049",
+        "type": "commit",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/commits/538561e7019c9d230d5cb1465d7e19f42596d049"
+      },
+      "tag": "checkpoint/sys-2-m1-20261105-a",
+      "message": "SYS-2 M1: baseline fixtures, preservation and contracts established\n",
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    {
+      "node_id": "TA_kwDORtpHo9oAKDQyYTU3ZDBhNmRhMzBiNWE0MzliZDczYzRhZjVmYzFkOGIxZjIxMWI",
+      "sha": "42a57d0a6da30b5a439bd73c4af5fc1d8b1f211b",
+      "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/42a57d0a6da30b5a439bd73c4af5fc1d8b1f211b",
+      "tagger": {
+        "name": "Daniel",
+        "email": "dan.gobin@gmail.com",
+        "date": "2026-11-06T01:22:04Z"
+      },
+      "object": {
+        "sha": "884b9c7cd03ae3168702839a04b82ba55b1397da",
+        "type": "commit",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/commits/884b9c7cd03ae3168702839a04b82ba55b1397da"
+      },
+      "tag": "checkpoint/sys-2-start-20261105-a",
+      "message": "SYS-2 start: reviewed baseline reconciled; owner work preserved\n",
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    {
+      "node_id": "TA_kwDORtpHo9oAKGRjYmRkMjk0N2IwNWUyYTg1OWRlZDc3Yzc3MmQ3MmJiZjZlZWIwOTc",
+      "sha": "dcbdd2947b05e2a859ded77c772d72bbf6eeb097",
+      "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/dcbdd2947b05e2a859ded77c772d72bbf6eeb097",
+      "tagger": {
+        "name": "Daniel",
+        "email": "dan.gobin@gmail.com",
+        "date": "2026-11-06T01:59:09Z"
+      },
+      "object": {
+        "sha": "513d2db5fdb7d01a14fd23db6ae4d53b5c5fe101",
+        "type": "commit",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/commits/513d2db5fdb7d01a14fd23db6ae4d53b5c5fe101"
+      },
+      "tag": "checkpoint/sys-2-verified-input-20261105-a",
+      "message": "SYS-2 frozen full-gate input; final execution results recorded separately\n",
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    {
+      "node_id": "TA_kwDORtpHo9oAKDg5YTUwOWRiNDc4ZTliZWE2NmYxZDk0MzViMjFkZDJkNGFmNTdmZGE",
+      "sha": "89a509db478e9bea66f1d9435b21dd2d4af57fda",
+      "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/89a509db478e9bea66f1d9435b21dd2d4af57fda",
+      "tagger": {
+        "name": "Daniel",
+        "email": "dan.gobin@gmail.com",
+        "date": "2026-11-06T02:54:40Z"
+      },
+      "object": {
+        "sha": "cf818e0f526bec6cf13fc775db3e0191168210e7",
+        "type": "commit",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/commits/cf818e0f526bec6cf13fc775db3e0191168210e7"
+      },
+      "tag": "checkpoint/sys-2-verified-input-20261105-b",
+      "message": "SYS-2 verified input: cf818e0; all24 applicable gates satisfied through retained frozen full executions, unchanged UI continuation and exact12 test-only complete affected rechecks. Final input SHA256 3aa950e53ddd0923ace43f63cea72eed715f49d434c1552fb03fd16294c1aaee. Runtime/content/editor remains513d2db. Original partial failures preserved.\n",
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    }
+  ]
+}
