@@ -195,6 +195,12 @@ def check_dependencies(placement,plan,data):
     if raw is None: raise GenerationError('missing selected asset '+placement['asset'])
     expected=plan['dependencies'][placement['dependency']]
     actual=dependencies(raw,data)
+    # A saved pre-SYS-1 selection may adopt only the approved empty clay-pot
+    # capability. New plans retain full hashes, including descriptor removal.
+    from engine.vessels import LEGACY_CLAY_DIGEST,approved_clay_upgrade
+    if ('items:clay_pot' in actual and expected.get('items:clay_pot')==LEGACY_CLAY_DIGEST
+            and approved_clay_upgrade(data.items.get('clay_pot',{}))):
+        actual['items:clay_pot']=LEGACY_CLAY_DIGEST
     changed=next((k for k in sorted(set(actual)|set(expected)) if actual.get(k)!=expected.get(k)),None)
     if changed:
         raise GenerationError(f"{placement['id']}: changed dependency {changed}; restore matching definitions or start a fresh world for edited generation content")

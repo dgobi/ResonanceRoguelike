@@ -120,7 +120,7 @@ def journey(which,out):
        dict(chunk=(16,56),suffix='42-66-N-0-building',bone=(64,31),vessel=(56,29),iid='clay_pot',corner=(0,42),cross=pygame.K_KP1,destination=(15,57),wood=[(75,5),(70,5)],water=(50,22)))
  with tempfile.TemporaryDirectory(prefix='sys1-ordinary-') as tmp,patch('engine.save_manager.SAVE_DIR',Path(tmp)/'saves'):
   e=boot(Path(tmp)/'saves',seed=20261024);e.rng=random.Random(20261020);e.ai_system._rng=random.Random(20261020)
-  p=next(p for p in e.world_map.plan['placements'] if p['asset']=='apothecary_b' and p['id'].endswith(spec['suffix']))
+  p=next(p for p in e.world_map.plan['placements'] if p['asset']=='apothecary_c' and p['id'].endswith(spec['suffix']))
   wx,wy=spec['chunk'];prepared=e._ensure_surface_scene(wx,wy);SceneAddress(e.world_x,e.world_y,e.current_submap_id).store(e.save_manager.cache,e.local_map,e.entities)
   e.local_map,natives=prepared;e.world_x,e.world_y,e.current_submap_id=wx,wy,None;e.entities=[e.player]+natives
   e.player.x,e.player.y=p['join'][0]%80,p['join'][1]%43;e.world_map.get(wx,wy).visited=True;e._update_fov();display(e)

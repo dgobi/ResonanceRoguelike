@@ -54,16 +54,19 @@ def main():
         def one(name):
             cmd=[WB/'worker/runtime/python.exe','-X','utf8','-I','-B','-c',"import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(["+repr(name)+"]));sys.exit(not r.wasSuccessful())"]
             return execute(name,cmd,WB)
-        with ThreadPoolExecutor(max_workers=4) as workers:rows=list(workers.map(one,names))
+        with ThreadPoolExecutor(max_workers=2) as workers:rows=list(workers.map(one,names))
         log=out/'worker.log';log.write_text(''.join((out/(name+'.log')).read_text(encoding='utf8') for name in names),encoding='utf8')
         row=dict(gate='worker',cohort=names,modules=rows,seconds=time.perf_counter()-began,tests=sum(map(int,re.findall(r'Ran (\d+) tests?',log.read_text(encoding='utf8')))),passed=all(r['passed'] for r in rows),source_stable=inputs()==frozen,log_sha256=digest(log))
         with lock:report['commands']=[r for r in report['commands'] if r['gate'] not in names]+[row];write()
         return row['passed']
-    with ThreadPoolExecutor(max_workers=4) as pool:
-        jobs=[pool.submit(execute,'focused',py+[ROOT/'tools/critical_fix_regressions/verify_fixes.py','--timeout','3600','--evidence',out/'focused']),pool.submit(execute,'production-d',py+[ROOT/'tools/verify_d.py','--evidence',out/'production-d']),pool.submit(worker_gate),pool.submit(ui_gates)]
+    with ThreadPoolExecutor(max_workers=3) as pool:
+        jobs=[pool.submit(execute,'focused',py+[ROOT/'tools/critical_fix_regressions/verify_fixes.py','--timeout','3600','--evidence',out/'focused']),pool.submit(execute,'production-d',py+[ROOT/'tools/verify_d.py','--evidence',out/'production-d']),pool.submit(ui_gates)]
         execute('play',py+[ROOT/'tools/verify_sys_1_play.py','--evidence',out/'play'])
-        execute('worker-dependency-control',py+['-c',"import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromName('test_bridge.BridgeTests.test_dependency_absence_structured'));sys.exit(not r.wasSuccessful())"],WB)
         for job in jobs:job.result()
+    # Preserve each worker's existing finite timeout without competing with full
+    # generation suites and native lifecycle/build processes on the same machine.
+    worker_gate()
+    execute('worker-dependency-control',py+['-c',"import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromName('test_bridge.BridgeTests.test_dependency_absence_structured'));sys.exit(not r.wasSuccessful())"],WB)
     expected={name for name,_ in ui}|{'focused','production-d','worker','play','worker-dependency-control'}
     report['source_stable']=inputs()==frozen
     report['passed']=report['source_stable'] and {r['gate'] for r in report['commands']}==expected and all(r['passed'] for r in report['commands'])

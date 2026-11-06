@@ -17,4 +17,10 @@ def historical_profiles():
 def historical_data(data):
     bound = copy.copy(data)
     bound.settlement_profiles = historical_profiles()
+    # Frozen macro comparisons consume the exact pre-SYS-1 item definition.
+    fixture=FIXTURE.parent/'sys1'
+    raw=(fixture/'pre-sys1-clay.json').read_bytes()
+    provenance=json.loads((fixture/'provenance.json').read_bytes())
+    assert hashlib.sha256(raw.replace(b'\r\n',b'\n')).hexdigest()==provenance['sha256']
+    bound.items=copy.deepcopy(data.items);bound.items['clay_pot']=json.loads(raw)
     return bound

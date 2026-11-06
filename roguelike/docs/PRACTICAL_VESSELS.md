@@ -50,11 +50,13 @@ existing processing rules; no continuous fire simulation has been introduced.
 
 ## Find and author alternatives
 
-Existing apothecary reagent stock can contain resonant bone. Alchemist shop stock
-can contain clay pots, copper kettles, waxed carriers and the optional **steeping
-note**. The existing clay-pot recipe remains another route. Stock is weighted
-and finite; visited shops do not refill. The note explains the relationship and
-does not unlock or gate the recipe. The same work can be done at another site.
+Existing apothecary reagent stock can contain resonant bone. Newly selected
+`apothecary_c` shops use the `alchemist_preparation` pool for clay pots, copper
+kettles, waxed carriers and the optional **steeping note**. Earlier selected
+apothecaries retain their original pool and stock rules, including pending shops.
+The existing clay-pot recipe remains another route. Stock is weighted and finite;
+visited shops do not refill. The note explains the relationship and does not
+unlock or gate the recipe. The same work can be done at another site.
 
 In Workbench, open a supported inert material such as `clay_pot`, **Begin edit**
 or **Save as new variant**, then use Properties' water-vessel capacity and
@@ -96,3 +98,8 @@ rain/refill routes, owned tinctures and old processing jobs retain their contrac
 old jobs do not invent a returned vessel. This feature supports water only: no
 mixtures, liquid effects, nested storage, rain filling of new vessels, purification,
 spoilage, continuous heat or global away-time simulation.
+
+Saved pre-SYS-1 placement dependencies accept only the exact shipped clay-pot
+definition plus its approved default capability. All other source changes still
+require matching definitions; new plans retain the complete descriptor hash and
+detect later capacity changes or removal. No saved selection is restocked or rerolled.

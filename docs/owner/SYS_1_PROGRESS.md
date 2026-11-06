@@ -18,7 +18,7 @@ publication are authorized. No wiki or later roadmap work.
 - M2/M3 implemented and focused checks pass: additive effective water state,
   physical inventory handling, exact conjunction/batch/vessel allocation,
   single-owner busy work, recovery, hot/cold timing and old-format compatibility.
-  Twenty SYS-1 tests pass, including strict malformed-load preflight and two
+  Twenty-four SYS-1 tests pass, including strict malformed-load preflight and two
   menu sizes. Read-only review fixes include protected special uses, timer bound,
   reusable state, marker/delivery recovery, reach and historical container rows.
 - M4 complete: packaged Item/Recipe controls created/published kettle/flask/cup
@@ -38,4 +38,22 @@ publication are authorized. No wiki or later roadmap work.
   production/focused suites, all 26 worker modules, frontend/host/build/bundle,
   native lifecycle and SYS-1 play. Then concise evidence, SYS_1.md, commit/push
   and independent remote main/tag-object/peeled readback.
-- No blocker. Implementation checkpoint and final frozen-input gates are next.
+- Implementation checkpoint: `a4c127991610f017f10a52074c03bdfbcd1d4842`,
+  `checkpoint/sys-1-implementation-20261105-a`. Frozen run `final-a` completed;
+  frontend/host/build/package/startup/desktop/native and both ordinary journeys
+  passed. Full production exposed two narrow legacy regressions: old single-output
+  jobs inherited vessel delivery constraints, and vessel map validation inspected
+  unrelated opaque container payloads. Both boundaries repaired with direct
+  regressions; new two-output recovery and strict vessel checks remain intact.
+  Worker harvest counts predate the already-present AI catalogue (34/29); preserve
+  all assertions while correcting counts. One worker preview hit its unchanged
+  20-second limit under concurrent heavy suites; separate the worker phase on
+  the full rerun. Focused suite exposed generation UUID comparison noise and real
+  pending-shop dependency drift. Original shop pool/A/B restored; new pool and C
+  successor are selected only by current profiles. Exact one-way old clay upgrade;
+  new plans keep full descriptor hashes. Historical comparisons explicitly project
+  only the approved empty clay addition; current semantics omit only random IDs.
+  Genuine G14/15/16 archives and generation-content preflights pass. Both actual C
+  ordinary journeys pass in `ordinary-successor`; prior B receipts are superseded.
+  Read-only review found no remaining material issue. Finish compatibility
+  preflight, commit repairs, freeze final-b, then all gates and publication.

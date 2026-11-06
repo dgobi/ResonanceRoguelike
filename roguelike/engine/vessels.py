@@ -11,6 +11,17 @@ import uuid
 MAX_ML = 10000
 SERVING_ML = 250
 CLAY = dict(version=1, capacity_ml=500, contents='water')
+LEGACY_CLAY_DIGEST = 'f6cd576fc5f78041f07aca4d7fddb52bacc8023a7b4431f8692ab3c5862f930d'
+
+
+def approved_clay_upgrade(raw):
+    """Only the exact shipped old definition plus its approved empty capability."""
+    import hashlib,json
+    original=copy.deepcopy(raw)
+    try:
+        if configuration(original.pop('vessel')) != CLAY:return False
+    except (ValueError,TypeError,KeyError):return False
+    return hashlib.sha256(json.dumps(original,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()==LEGACY_CLAY_DIGEST
 
 
 def configuration(raw):
@@ -179,7 +190,14 @@ def validate_map(local_map, identities=None):
     from engine.save_components import serialize_item, validate_item
     identities=set() if identities is None else identities
     def item(i):
-        row=i if isinstance(i,dict) else serialize_item(i)
+        # This additive contract must not reinterpret unrelated historical owners.
+        # Presence matters: explicitly malformed/null vessel fields still reject.
+        if isinstance(i,dict):
+            if 'vessel' not in i and 'vessel_absent_version' not in i:return
+            row=i
+        else:
+            if not hasattr(i,'vessel') and not hasattr(i,'vessel_absent_version'):return
+            row=serialize_item(i)
         validate_item(row,'map item');claim(row,identities)
     for rows in local_map.floor_objects.values():
         for i in rows:item(i)

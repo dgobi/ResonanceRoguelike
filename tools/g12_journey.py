@@ -16,13 +16,16 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def snapshot(e):
+def snapshot(e, *, historical=False):
     from engine.save_manager import _serialize_player, _serialize_world
     from generation.placement import digest
-    from g1_support import fingerprint
+    from g1_support import fingerprint,semantic_item_state
     m=e.local_map
-    return dict(player=digest(_serialize_player(e)), world=digest(_serialize_world(e.world_map)),
-        scene=fingerprint(m,[a for a in e.entities if a is not e.player]),
+    player=_serialize_player(e)
+    if historical and player.get('inventory'):
+        player['inventory']['items']=[semantic_item_state(r,historical=True) for r in player['inventory']['items']]
+    return dict(player=digest(player), world=digest(_serialize_world(e.world_map)),
+        scene=fingerprint(m,[a for a in e.entities if a is not e.player],historical=historical),
         processing=sorted([list(xy),copy.deepcopy(v)] for xy,v in m.processing_layer.items()),
         zones=copy.deepcopy(m.disruption_zones), load=e.player.inventory.current_weight,
         knowledge=copy.deepcopy(e.creature_knowledge),

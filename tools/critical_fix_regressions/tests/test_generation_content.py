@@ -160,8 +160,8 @@ class GenerationContentTests(unittest.TestCase):
             if draws:
                 specs.insert(0, dict(kind='item', x=7, y=7, item_id='flint_shard'))
             e._spawn_layout_entities(specs, local_map=m)
-            from engine.save_components import serialize_item
-            maps.append([serialize_item(i) for i in m.container_state[6, 6]['items']])
+            from g1_support import semantic_item
+            maps.append([semantic_item(i) for i in m.container_state[6, 6]['items']])
         self.assertEqual(maps[0], maps[1])
 
     def test_weighted_entrance_both_consumers_repeat(self):

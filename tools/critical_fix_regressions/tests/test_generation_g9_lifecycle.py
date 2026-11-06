@@ -52,13 +52,13 @@ class G9Lifecycle(unittest.TestCase):
         with patch('generation.country_network.augment',side_effect=AssertionError('reoptimized')),patch('generation.world_plan.build_plan',side_effect=AssertionError('replanned')):
             self.assertTrue(e.save_manager.load(e),e.save_manager.last_error);self.assertEqual(e.world_map.plan['version'],6);self.assertEqual(digest(e.world_map.plan),binding['plan_identity'])
             for scene in binding['scenes']:
-                m,actors=e._prepare_destination(*scene['chunk']);self.assertEqual(fingerprint(m,actors),scene['fingerprint']);self.assertEqual(m.generation_revision,'wg8');self.assertEqual(m.plan_provenance,scene['provenance'])
+                m,actors=e._prepare_destination(*scene['chunk']);self.assertEqual(fingerprint(m,actors,historical=True),scene['fingerprint']);self.assertEqual(m.generation_revision,'wg8');self.assertEqual(m.plan_provenance,scene['provenance'])
             pending=[]
             for xy in (binding['pending'],binding['country_pending']):
-                m,actors=e._prepare_destination(*xy);self.assertEqual(m.plan_provenance['adapter'],'g8-to-g9-v1');self.assertEqual(m.generation_revision,'wg9');pending.append(dict(chunk=xy,fingerprint=fingerprint(m,actors)))
+                m,actors=e._prepare_destination(*xy);self.assertEqual(m.plan_provenance['adapter'],'g8-to-g9-v1');self.assertEqual(m.generation_revision,'wg9');pending.append(dict(chunk=xy,fingerprint=fingerprint(m,actors,historical=True)))
             self.assertTrue(e.save_manager.save(e),e.save_manager.last_error);reader=make_engine(e.data);self.assertTrue(reader.save_manager.load(reader),reader.save_manager.last_error);e.debug=False;e._handle_key_local(pygame.K_F9)
             for owner in (e,reader):
-                for scene in binding['scenes']+pending:self.assertEqual(fingerprint(*owner._prepare_destination(*scene['chunk'])),scene['fingerprint'])
+                for scene in binding['scenes']+pending:self.assertEqual(fingerprint(*owner._prepare_destination(*scene['chunk']),historical=True),scene['fingerprint'])
                 self.assertEqual(digest(owner.world_map.plan),binding['plan_identity'])
         self.evidence('g9-genuine-g8-restore.json',dict(passed=True,creator=binding['head'],plan=binding['plan_identity'],visited_creator='wg8',pending_adapter='g8-to-g9-v1',mutations=binding['mutations'],pending=pending,cold_and_f9=True))
 

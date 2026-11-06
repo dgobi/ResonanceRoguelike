@@ -42,11 +42,11 @@ class G8Lifecycle(unittest.TestCase):
         with patch('generation.world_plan.build_plan',side_effect=AssertionError('replanning')),patch('generation.settlement_layout.compose',side_effect=AssertionError('recomposition')):
             self.assertTrue(e.save_manager.load(e),e.save_manager.last_error);self.assertEqual(digest(e.world_map.plan),binding['plan_identity'])
             for scene in binding['scenes']:
-                m,a=e._prepare_destination(*scene['chunk']);self.assertEqual(fingerprint(m,a),scene['fingerprint']);self.assertEqual(m.generation_revision,'wg7');self.assertEqual(m.plan_provenance,scene['provenance'])
+                m,a=e._prepare_destination(*scene['chunk']);self.assertEqual(fingerprint(m,a,historical=True),scene['fingerprint']);self.assertEqual(m.generation_revision,'wg7');self.assertEqual(m.plan_provenance,scene['provenance'])
             for xy in [binding['pending'],binding['rural_pending']]:
                 m,a=e._prepare_destination(*xy);self.assertEqual(m.plan_provenance['adapter'],'g7-to-g9-v1');self.assertEqual(m.plan_provenance['plan_version'],5);self.assertEqual(m.generation_revision,'wg9');observed.append(xy)
             self.assertTrue(e.save_manager.save(e),e.save_manager.last_error);e.debug=False;e._handle_key_local(pygame.K_F9)
-            for scene in binding['scenes']:self.assertEqual(fingerprint(*e._prepare_destination(*scene['chunk'])),scene['fingerprint'])
+            for scene in binding['scenes']:self.assertEqual(fingerprint(*e._prepare_destination(*scene['chunk']),historical=True),scene['fingerprint'])
             self.assertEqual(digest(e.world_map.plan),binding['plan_identity'])
         self.evidence('g8-genuine-g7-restore.json',dict(creator=binding['head'],original_plan=binding['plan_identity'],visited_creator='wg7',pending_adapter='g7-to-g9-v1',pending=observed,original_interaction_mutations=binding['mutations'],saved_bytes_unchanged=True))
 

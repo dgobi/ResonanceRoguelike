@@ -15,9 +15,12 @@ ARCHIVE = ROOT/'evidence/gameplay-g14/final-a/journey/shed/dismantled-checkpoint
 
 def inspect():
     from test_effect_persistence import load_data, make_engine
-    from g12_journey import install_checkpoint, snapshot
+    from g12_journey import install_checkpoint, snapshot as current_snapshot
+    from functools import partial
+    snapshot=partial(current_snapshot,historical=True)
     from generation.placement import check_dependencies, digest
-    from g1_support import fingerprint
+    from g1_support import fingerprint as current_fingerprint
+    fingerprint=partial(current_fingerprint,historical=True)
     import zipfile
     with zipfile.ZipFile(ARCHIVE) as z:
         assert z.testzip() is None

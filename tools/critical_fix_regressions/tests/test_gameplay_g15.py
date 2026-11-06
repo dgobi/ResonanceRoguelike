@@ -124,7 +124,7 @@ class FiniteTreatment(unittest.TestCase):
                 w=WorldMap(128,128);w.seed=seed
                 with contextlib.redirect_stdout(io.StringIO()):generate_world(w,self.data,random.Random(seed))
                 self.assertEqual(start,(w.start_wx,w.start_wy))
-                selected=[p for p in w.plan['placements'] if p['asset']=='apothecary_b']
+                selected=[p for p in w.plan['placements'] if p['asset']=='apothecary_c']  # SYS-1 successor retains this treatment.
                 self.assertTrue(any((p['origin'][0]//80,p['origin'][1]//43)==target for p in selected))
                 self.assertFalse(any(p['asset']=='apothecary_a' and p['context'] in ('grid','roadside') for p in w.plan['placements']))
                 scene=create_surface(w,w.get(*target),self.data,ItemFactory(self.data),CreatureFactory(self.data),80,43)

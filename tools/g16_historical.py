@@ -17,9 +17,12 @@ SHA256 = '503309d073b96139a84fc0769ad9eb89fe53b1f1b4c89230d0af318eb20037de'
 
 def inspect():
     from test_effect_persistence import load_data, make_engine
-    from g12_journey import install_checkpoint, snapshot
+    from g12_journey import install_checkpoint, snapshot as current_snapshot
+    from functools import partial
+    snapshot=partial(current_snapshot,historical=True)
     from generation.placement import check_dependencies, digest
-    from g1_support import fingerprint
+    from g1_support import fingerprint as current_fingerprint
+    fingerprint=partial(current_fingerprint,historical=True)
     assert hashlib.sha256(ARCHIVE.read_bytes()).hexdigest() == SHA256
     with zipfile.ZipFile(ARCHIVE) as z:
         assert z.testzip() is None

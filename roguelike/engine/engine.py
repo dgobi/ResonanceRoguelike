@@ -1644,9 +1644,12 @@ class Engine:
             template = record.get("completion_message") or messages.get(
                 record.get("source", ""), {}).get("complete", "{item_name} is ready.")
             message = completion_text(template, item.name)
-            from engine.vessel_jobs import deliver
-            outputs = [record['vessel_job']['vessel'], item] if 'vessel_job' in record else [item]
-            if not deliver(local_map, (x,y), outputs):
+            if 'vessel_job' in record:
+                from engine.vessel_jobs import deliver
+                if not deliver(local_map, (x,y), [record['vessel_job']['vessel'], item]):
+                    continue
+            elif not place_floor_object(local_map, x, y, item):
+                # Legacy jobs retain their single-output placement contract.
                 continue
             del local_map.processing_layer[(x, y)]
             failures.pop(failure_key, None)

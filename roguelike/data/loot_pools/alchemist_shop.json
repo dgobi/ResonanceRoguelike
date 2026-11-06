@@ -10,9 +10,6 @@
     {"item_id": "crow_bile", "weight": 30},
     {"item_id": "sulphur_cap_fragment", "weight": 25},
     {"item_id": "clay_pot", "weight": 120},
-    {"item_id": "herbalist_pouch", "weight": 15},
-    {"item_id": "copper_steeping_kettle", "weight": 70},
-    {"item_id": "waxed_water_flask", "weight": 45},
-    {"item_id": "steeping_note", "weight": 35}
+    {"item_id": "herbalist_pouch", "weight": 15}
   ]
 }

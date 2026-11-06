@@ -330,6 +330,72 @@ class VesselTests(unittest.TestCase):
         old=dict(row);old.pop('vessel_absent_version');restore_item(loaded,old)
         self.assertEqual(500,loaded.vessel['config']['capacity_ml'])
 
+    def test_legacy_single_output_destination_and_new_blocked_job_recovery(self):
+        e=self.e;a,bone=self.prep();job=self.start();job['turns_remaining']=0
+        for xy in ((5,5),(12,11)):e.local_map.set_tile(*xy,'wall',False,False)
+        e.local_map.processing_layer[(5,5)]=dict(item_id='dried_bitter_herb',turns_remaining=0,decor_id='',source='drying')
+        e._tick_processing_map(e.local_map,active=True)
+        self.assertNotIn((5,5),e.local_map.processing_layer)
+        self.assertEqual(['dried_bitter_herb'],[i.item_id for i in e.local_map.floor_objects[(5,5)]])
+        self.assertIs(job,e.local_map.processing_layer[(12,11)])
+        self.assertNotIn((12,11),e.local_map.floor_objects)
+        e.local_map.set_tile(12,11,'floor',True,True)
+        e._tick_processing_map(e.local_map,active=True)
+        self.assertFalse(e.local_map.processing_layer)
+        self.assertIs(a,e.local_map.floor_objects[(12,11)][0])
+        self.assertEqual(['clay_pot','resonant_bone_tincture'],[i.item_id for i in e.local_map.floor_objects[(12,11)]])
+
+    def test_historical_opaque_container_roundtrip_does_not_relax_vessel_validation(self):
+        e=self.e;owner=dict(items=['fixture',{'historical':'opaque'}],looted=True)
+        e.local_map.container_state[(8,8)]=copy.deepcopy(owner)
+        e._handle_key(pygame.K_F5);self.assertTrue(e.save_manager.save_exists(),e.save_manager.last_error)
+        e.local_map.container_state[(8,8)]['items'].clear();e._handle_key(pygame.K_F9)
+        self.assertEqual(owner,e.local_map.container_state[(8,8)])
+        for invalid in ({'vessel':None},{'vessel_absent_version':False}):
+            e.local_map.container_state[(8,8)]['items'].append(invalid)
+            self.assertFalse(e.save_manager.save(e));self.assertIn('vessel',e.save_manager.last_error)
+            e.local_map.container_state[(8,8)]['items'].pop()
+
+    def test_saved_clay_dependency_upgrade_is_exact_one_way_and_stock_is_versioned(self):
+        from generation.placement import dependencies,check_dependencies
+        from generation.context import GenerationError
+        e=self.e;old=copy.copy(e.data);old.items=copy.deepcopy(e.data.items)
+        original=Path(__file__).resolve().parents[1]/'fixtures/sys1/pre-sys1-clay.json'
+        old.items['clay_pot']=json.loads(original.read_bytes())
+        raw=e.data.structures['apothecary_b'];p=dict(id='saved-old-shop',asset='apothecary_b',dependency='shop')
+        plan=dict(dependencies=dict(shop=dependencies(raw,old)))
+        current=dict(dependencies=dict(shop=dependencies(raw,e.data)))
+        self.assertNotEqual(plan,current)
+        self.assertIs(raw,check_dependencies(p,plan,e.data))
+        self.assertIs(raw,check_dependencies(p,current,e.data))
+        for changed in (dict(e.data.items['clay_pot'],weight=.7),dict(e.data.items['clay_pot'],vessel=dict(vessels.CLAY,capacity_ml=501)),dict(e.data.items['clay_pot'],vessel=dict(vessels.CLAY,version=True))):
+            d=copy.copy(e.data);d.items=dict(e.data.items,clay_pot=changed)
+            with self.assertRaises(GenerationError):check_dependencies(p,plan,d)
+        # A new plan does not silently accept later removal of the descriptor.
+        with self.assertRaises(GenerationError):check_dependencies(p,current,old)
+        expected=copy.deepcopy(raw);expected['id']='apothecary_c'
+        expected['special_tiles'][1]['loot_pools']=['alchemist_preparation']
+        self.assertEqual(expected,e.data.structures['apothecary_c'])
+        additions={'copper_steeping_kettle','waxed_water_flask','steeping_note'}
+        self.assertFalse(additions & {r['item_id'] for r in e.data.loot_pools['alchemist_shop']['items']})
+        self.assertTrue(additions <= {r['item_id'] for r in e.data.loot_pools['alchemist_preparation']['items']})
+
+    def test_semantic_identity_projection_preserves_capability_and_water_differences(self):
+        from g1_support import semantic_item
+        a=self.pot();b=copy.deepcopy(a);b.vessel=vessels.create(vessels.CLAY)
+        self.assertNotEqual(serialize_item(a),serialize_item(b))
+        self.assertEqual(semantic_item(a),semantic_item(b))
+        historical=semantic_item(a,historical=True)
+        self.assertNotIn('vessel',historical)
+        self.assertIn('vessel',semantic_item(a))
+        vessels.set_water(b,1)
+        self.assertNotEqual(semantic_item(a),semantic_item(b))
+        self.assertNotEqual(historical,semantic_item(b,historical=True))
+        vessels.set_water(b,0);b.vessel['config']['capacity_ml']=501
+        self.assertNotEqual(historical,semantic_item(b,historical=True))
+        b.vessel['water_ml']=True
+        with self.assertRaises(ValueError):semantic_item(b,historical=True)
+
 
 class RegroupLifecycleTests(unittest.TestCase):
     setUpClass = classmethod(ai9.CompositionTests.setUpClass.__func__)
