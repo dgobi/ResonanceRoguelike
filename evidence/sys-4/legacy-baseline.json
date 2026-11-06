@@ -1,0 +1,164 @@
+{
+  "source_revision": "8c4cc267ef7c09837c1aac5fc5c22e8543d0d984",
+  "producer": "capture_sys_4_legacy.py",
+  "archive": "legacy-containers.zip",
+  "sha256": "e4757a228ec3f1c2fa6f17df36a4fcfcd05b30876d9f4486ab48fa8093180c56",
+  "turn": 480,
+  "setup": "Unmodified baseline constructors and container APIs; closed/open/looted owners, dismantled crate, distinct surface and submap caches, real F5. Disposable fixture; no fields stripped.",
+  "inventory": [
+    {
+      "item_id": "bile_coating",
+      "item_state_version": 1,
+      "name": "bile coating",
+      "tile": "generic_item",
+      "weight": 0.1,
+      "stackable": true,
+      "count": 1,
+      "on_use": "apply_to_weapon",
+      "text_id": "",
+      "nutrition": null,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": null,
+      "drink_message": null,
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": null,
+      "liquid_volume": 0.0,
+      "qualities": {},
+      "description": "A corrosive coating rendered from crow bile. The blade will itch to cut.",
+      "harvest_from": null,
+      "keywords": [
+        {
+          "tag": "caustic",
+          "tier": 2
+        },
+        {
+          "tag": "corrosive",
+          "tier": 1
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": true,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0,
+      "coating_dose": {
+        "version": 1,
+        "essence": "Dissolution",
+        "strength": 0.4,
+        "hits": 6
+      }
+    }
+  ],
+  "containers": {
+    "(10, 10)": {
+      "state": "closed",
+      "items": [
+        {
+          "item_id": "bile_coating",
+          "item_state_version": 1,
+          "name": "bile coating",
+          "tile": "generic_item",
+          "weight": 0.1,
+          "stackable": true,
+          "count": 1,
+          "on_use": "apply_to_weapon",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "A corrosive coating rendered from crow bile. The blade will itch to cut.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "caustic",
+              "tier": 2
+            },
+            {
+              "tag": "corrosive",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "coating_dose": {
+            "version": 1,
+            "essence": "Dissolution",
+            "strength": 0.4,
+            "hits": 6
+          }
+        }
+      ]
+    },
+    "(11, 10)": {
+      "state": "open",
+      "items": [
+        {
+          "item_id": "bile_coating",
+          "item_state_version": 1,
+          "name": "bile coating",
+          "tile": "generic_item",
+          "weight": 0.1,
+          "stackable": true,
+          "count": 1,
+          "on_use": "apply_to_weapon",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "A corrosive coating rendered from crow bile. The blade will itch to cut.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "caustic",
+              "tier": 2
+            },
+            {
+              "tag": "corrosive",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "coating_dose": {
+            "version": 1,
+            "essence": "Dissolution",
+            "strength": 0.4,
+            "hits": 6
+          }
+        }
+      ]
+    },
+    "(12, 10)": {
+      "state": "looted",
+      "items": []
+    }
+  }
+}
