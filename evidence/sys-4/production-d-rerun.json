@@ -1,0 +1,25 @@
+{
+  "reason": "The first production-D invocation was rejected before game workers by the established disposable-root guard. Full unfiltered retry uses .baseline; no source or test changes.",
+  "command": [
+    "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "tools/verify_d.py",
+    "--evidence",
+    ".baseline/sys-4/production-d-final-a"
+  ],
+  "revision": "7f59ee6a34812bf0f95084bcbc2a3984adc71d81",
+  "inputs_sha256": "19da5fd85cb3149a0ccf129371931392630a08d5a2908008602ebf79e0aa12f4",
+  "passed": true,
+  "source_stable": true,
+  "exit_code": 0,
+  "result": ".baseline\\sys-4\\production-d-final-a\\d-20261106-010449-5f953a51\\results.json",
+  "result_sha256": "1e4566a3cb30656dc3c495b60867691ca1234b46495b985f89a29ce953dde1db",
+  "totals": {
+    "checks": 3704,
+    "passed": 3704,
+    "failed": 0,
+    "workers": 159
+  }
+}

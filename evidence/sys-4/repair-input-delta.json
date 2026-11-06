@@ -1,0 +1,85 @@
+{
+  "original_revision": "7f59ee6a34812bf0f95084bcbc2a3984adc71d81",
+  "reason": "Final gates exposed current catalogue totals and authoring dependency repair/diagnostic regressions. Preserve negative item/recipe/pool tests; extend existing inspection-only snapshots while retaining strict candidate load rejection. Full fresh verification follows.",
+  "initial_edits": {
+    "tools/critical_fix_regressions/tests/test_gameplay_g17.py": {
+      "before": "67624a0a6905002b52439391dcb9c37e16e99f4c25f966cece692a3b922e9fd8",
+      "after": "2cfe38ac79f7edaefd0bc87c3949cb5214d5539b10f3613b1bc0485d80b5a009"
+    },
+    "tools/critical_fix_regressions/tests/test_structure_access.py": {
+      "before": "4b9aa72fbadde3a0d8ca308bdc80a3d1265e3d012329e4da6cfb9e3587dcb7f3",
+      "after": "67bac9ee0df5cbd03183aac5e89fd180092a2bfd4093f9192d6a60a4c65457e9"
+    },
+    "tools/critical_fix_regressions/tests/test_structure_contract.py": {
+      "before": "40e2df85f9491f7cc6e43c2cf7b42681a59467b6036bbb59061a045b17370a58",
+      "after": "d848028ce17885db4ca4f2f5bdd1a6d264140ad157c9f037217dbf72e08bec62"
+    },
+    "workbench/worker/test_buildings_w5p.py": {
+      "before": "d7429af3eca48741dac01803521ff84079fcf2aa6684bf9ec6a4815ff7817110",
+      "after": "a6752036a2bddf04db77a40f80654bcb6e0c043774598b550d77c7c1fc654dd0"
+    },
+    "workbench/worker/test_pools_w5o.py": {
+      "before": "a04949008d8295a23867bf8f69ea2a7635f88c0268ccb3aea76ac7e5b77819b4",
+      "after": "16e72faf00ce9e94763633748138d064812b645abe71429f3d9c70f53f1f5219"
+    },
+    "roguelike/engine/data_loader.py": {
+      "before": "7288fa9dc348a3bfb50e4c35cb99e0de2d0ab723b83d0750cd9a478b1911b880",
+      "after": "e813bf085d48fcd9230eae85258f6dbe538108090257df8c1d6d68030e5699c1"
+    },
+    "roguelike/engine/item_authoring.py": {
+      "before": "faa92e2b749d503c640287d83a0af0621c9a20022f54aa02c65aaabec1cc6195",
+      "after": "c9e7bc0583c255f6353ad94cca5bfe9bda466c74231130c69aa3a6680a4f0e99"
+    },
+    "workbench/worker/bridge.py": {
+      "before": "d971a429e2efad6729eeadb4fd4a3dddaaec89a5d27ac8d3d31218ec07374f95",
+      "after": "83c12bbbe8626867cb29caa43399e74f76713de41510554053d977fb14fa80be"
+    }
+  },
+  "repaired_revision": "4f1e41ebc3ca85cc0ac1b476693198b957d24fa3",
+  "final_inputs_sha256": "e2e291d71dac3b949c787708cb875a93624f087a4cea19b47807721749b60e6a",
+  "input_files": 1284,
+  "complete_changed_inputs": {
+    "roguelike/docs/WORKING_RUINS.md": {
+      "before": "9a3899df489860282c1cf411559e5e7640753c06a50a16ba26a881956d604e8d",
+      "after": "a3b046effde47a7773273cdb4600145e2d43d5f7d4f543d22718bfca42cd8ca9"
+    },
+    "roguelike/engine/data_loader.py": {
+      "before": "7288fa9dc348a3bfb50e4c35cb99e0de2d0ab723b83d0750cd9a478b1911b880",
+      "after": "e813bf085d48fcd9230eae85258f6dbe538108090257df8c1d6d68030e5699c1"
+    },
+    "roguelike/engine/item_authoring.py": {
+      "before": "faa92e2b749d503c640287d83a0af0621c9a20022f54aa02c65aaabec1cc6195",
+      "after": "c9e7bc0583c255f6353ad94cca5bfe9bda466c74231130c69aa3a6680a4f0e99"
+    },
+    "tools/critical_fix_regressions/tests/test_gameplay_g17.py": {
+      "before": "67624a0a6905002b52439391dcb9c37e16e99f4c25f966cece692a3b922e9fd8",
+      "after": "2cfe38ac79f7edaefd0bc87c3949cb5214d5539b10f3613b1bc0485d80b5a009"
+    },
+    "tools/critical_fix_regressions/tests/test_structure_access.py": {
+      "before": "4b9aa72fbadde3a0d8ca308bdc80a3d1265e3d012329e4da6cfb9e3587dcb7f3",
+      "after": "67bac9ee0df5cbd03183aac5e89fd180092a2bfd4093f9192d6a60a4c65457e9"
+    },
+    "tools/critical_fix_regressions/tests/test_structure_contract.py": {
+      "before": "40e2df85f9491f7cc6e43c2cf7b42681a59467b6036bbb59061a045b17370a58",
+      "after": "d848028ce17885db4ca4f2f5bdd1a6d264140ad157c9f037217dbf72e08bec62"
+    },
+    "workbench/worker/bridge.py": {
+      "before": "d971a429e2efad6729eeadb4fd4a3dddaaec89a5d27ac8d3d31218ec07374f95",
+      "after": "d38349de6cbd638930ed37cd7c54852a759f11c20b4541e74727b61aa35c3409"
+    },
+    "workbench/worker/test_access_profiles.py": {
+      "before": "c37e66e5ed96bfcbd9ecd6eb233a7d753d3bdce3043ef496db580de0be5aec32",
+      "after": "29a7a6e342985b62e605e73907d022147869af4e9ff5beeb7ce0069f1ad720e1"
+    },
+    "workbench/worker/test_buildings_w5p.py": {
+      "before": "d7429af3eca48741dac01803521ff84079fcf2aa6684bf9ec6a4815ff7817110",
+      "after": "a6752036a2bddf04db77a40f80654bcb6e0c043774598b550d77c7c1fc654dd0"
+    },
+    "workbench/worker/test_pools_w5o.py": {
+      "before": "a04949008d8295a23867bf8f69ea2a7635f88c0268ccb3aea76ac7e5b77819b4",
+      "after": "16e72faf00ce9e94763633748138d064812b645abe71429f3d9c70f53f1f5219"
+    }
+  },
+  "preflight_tests": 50,
+  "preflight_archive_sha256": "f0c02dc8557ca147e93d933158aa9ecc20cacd209e8fee14e46a44710770acab"
+}

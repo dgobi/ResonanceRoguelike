@@ -1,0 +1,24 @@
+{
+  "total": 106,
+  "routes": {
+    "ordinary_building": 64,
+    "plaza": 2,
+    "interior_entrance": 6,
+    "authored_submap": 34
+  },
+  "added": [
+    {
+      "id": "workshop_e",
+      "route": "ordinary_building"
+    },
+    {
+      "id": "barrow_bound_store",
+      "route": "authored_submap"
+    },
+    {
+      "id": "sys4_access_room",
+      "route": "authored_submap"
+    }
+  ],
+  "preserved_installed_candidates": 66
+}

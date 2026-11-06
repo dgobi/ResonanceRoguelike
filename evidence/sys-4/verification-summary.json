@@ -1,0 +1,57 @@
+{
+  "passed": true,
+  "revision": "fc376a4e148da3a659b7b7b9d966077ba88b12d5",
+  "input_files": 1284,
+  "inputs_sha256": "5d2eac80621b3801a472436c33f32b6626f9a22b6919de8ad6969744244667cf",
+  "source_stable": true,
+  "applicable_gates": 18,
+  "counts": {
+    "production_checks": 3704,
+    "production_workers": 159,
+    "focused_tests": 691,
+    "affected_focused_recheck_tests": 46,
+    "worker_tests": 141,
+    "worker_passed_tests": 140,
+    "worker_modules": 28,
+    "worker_intentional_skips": 1,
+    "worker_dependency_control_tests": 1,
+    "frontend_tests": 98,
+    "frontend_files": 21,
+    "host_tests": 73,
+    "startup_cases": 15,
+    "ordinary_save_comparisons": 9,
+    "ordinary_cold_processes": 9
+  },
+  "interpretation": "All 18 applicable gates are supported by complete final-b execution and complete affected rechecks. This is not a fresh clean unfiltered full execution. The only later consumed change is the compiled-catalogue guard in authoring placement preview, inverse-reconstructed to the exact original file. All 28 worker modules, SYS-4/G20 modules, ordinary play and packaged SYS-4 were rerun. Original failures are retained verbatim; overlapping test counts are not added. One intentional bundled-worker dependency-absence skip is exercised separately with development Python.",
+  "started_utc": "2026-11-06T08:04:06.605162+00:00",
+  "finished_utc": "2026-11-06T09:15:09.690995+00:00",
+  "assembled_utc": "2026-11-06T09:15:23.755786+00:00",
+  "raw_execution": "release-full.json",
+  "recheck": "verification-recheck.json",
+  "aggregate": "release.json",
+  "archives": [
+    {
+      "path": "gate-evidence.zip",
+      "sha256": "4afbd5708a015ca0026b85b6f37b42dfd0b0158c2974715bffa72f6b8d054d21",
+      "bytes": 5204470,
+      "files": 517
+    },
+    {
+      "path": "ordinary-final.zip",
+      "sha256": "2ba762dca9c51c7bc703a1c3d11a844a2486f220478d9700cf8f3cd5238021f3",
+      "bytes": 14885432,
+      "files": 25
+    },
+    {
+      "path": "native-final.zip",
+      "sha256": "5d28882fe12ffbe5dff9f2ff44f1abbb4525620ac8cb399f887e5a62a302eaa0",
+      "bytes": 1143447,
+      "files": 10
+    }
+  ],
+  "environment": "environment.json",
+  "ordinary": "ordinary-summary.json",
+  "authoring": "authoring-summary.json",
+  "package": "package.json",
+  "preservation": "preservation.json"
+}

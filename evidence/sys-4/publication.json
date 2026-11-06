@@ -1,0 +1,129 @@
+{
+  "package": "SYS-4",
+  "passed": true,
+  "checked_utc": "2026-11-06 09:16:39 UTC",
+  "origin": "https://github.com/dgobi/ResonanceRoguelike.git",
+  "published_main": "fc376a4e148da3a659b7b7b9d966077ba88b12d5",
+  "prior_main": "8c4cc267ef7c09837c1aac5fc5c22e8543d0d984",
+  "atomic_push": true,
+  "verified_input_files": 1284,
+  "verified_inputs_sha256": "5d2eac80621b3801a472436c33f32b6626f9a22b6919de8ad6969744244667cf",
+  "git_transport": {
+    "command": "git ls-remote origin refs/heads/main refs/tags/checkpoint/sys-4-*",
+    "refs": {
+      "refs/heads/main": "fc376a4e148da3a659b7b7b9d966077ba88b12d5",
+      "refs/tags/checkpoint/sys-4-implementation-20261106-a": "02349758f72d65f5f177ae91129e455c2cebc399",
+      "refs/tags/checkpoint/sys-4-implementation-20261106-a^{}": "7f59ee6a34812bf0f95084bcbc2a3984adc71d81",
+      "refs/tags/checkpoint/sys-4-m1-20261106-a": "adae1db956d738c5779b2f351b155b2ef2e6c5c3",
+      "refs/tags/checkpoint/sys-4-m1-20261106-a^{}": "132e3f867aad26526eb14ef21cead4e5d2526391",
+      "refs/tags/checkpoint/sys-4-start-20261106-a": "8107a86b3d7b9eeee7b4c34bc39b392764831e5a",
+      "refs/tags/checkpoint/sys-4-start-20261106-a^{}": "8c4cc267ef7c09837c1aac5fc5c22e8543d0d984",
+      "refs/tags/checkpoint/sys-4-verified-input-20261106-a": "55d7238454e49201dc00079468775ccea3ad9f3a",
+      "refs/tags/checkpoint/sys-4-verified-input-20261106-a^{}": "fc376a4e148da3a659b7b7b9d966077ba88b12d5"
+    }
+  },
+  "independent_github_api": {
+    "main": {
+      "name": "main",
+      "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/ref/heads/main",
+      "ref": "refs/heads/main",
+      "object": {
+        "sha": "fc376a4e148da3a659b7b7b9d966077ba88b12d5",
+        "type": "commit",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/commits/fc376a4e148da3a659b7b7b9d966077ba88b12d5"
+      }
+    },
+    "refs": [
+      {
+        "name": "checkpoint/sys-4-start-20261106-a",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/ref/tags/checkpoint/sys-4-start-20261106-a",
+        "ref": "refs/tags/checkpoint/sys-4-start-20261106-a",
+        "object": {
+          "sha": "8107a86b3d7b9eeee7b4c34bc39b392764831e5a",
+          "type": "tag",
+          "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/8107a86b3d7b9eeee7b4c34bc39b392764831e5a"
+        }
+      },
+      {
+        "name": "checkpoint/sys-4-m1-20261106-a",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/ref/tags/checkpoint/sys-4-m1-20261106-a",
+        "ref": "refs/tags/checkpoint/sys-4-m1-20261106-a",
+        "object": {
+          "sha": "adae1db956d738c5779b2f351b155b2ef2e6c5c3",
+          "type": "tag",
+          "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/adae1db956d738c5779b2f351b155b2ef2e6c5c3"
+        }
+      },
+      {
+        "name": "checkpoint/sys-4-implementation-20261106-a",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/ref/tags/checkpoint/sys-4-implementation-20261106-a",
+        "ref": "refs/tags/checkpoint/sys-4-implementation-20261106-a",
+        "object": {
+          "sha": "02349758f72d65f5f177ae91129e455c2cebc399",
+          "type": "tag",
+          "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/02349758f72d65f5f177ae91129e455c2cebc399"
+        }
+      },
+      {
+        "name": "checkpoint/sys-4-verified-input-20261106-a",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/ref/tags/checkpoint/sys-4-verified-input-20261106-a",
+        "ref": "refs/tags/checkpoint/sys-4-verified-input-20261106-a",
+        "object": {
+          "sha": "55d7238454e49201dc00079468775ccea3ad9f3a",
+          "type": "tag",
+          "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/55d7238454e49201dc00079468775ccea3ad9f3a"
+        }
+      }
+    ],
+    "annotated_tags": [
+      {
+        "name": "checkpoint/sys-4-start-20261106-a",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/8107a86b3d7b9eeee7b4c34bc39b392764831e5a",
+        "annotated_object": "8107a86b3d7b9eeee7b4c34bc39b392764831e5a",
+        "peeled_commit": "8c4cc267ef7c09837c1aac5fc5c22e8543d0d984",
+        "tagger": {
+          "name": "Daniel",
+          "email": "dan.gobin@gmail.com",
+          "date": "2026-11-06T06:08:38Z"
+        }
+      },
+      {
+        "name": "checkpoint/sys-4-m1-20261106-a",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/adae1db956d738c5779b2f351b155b2ef2e6c5c3",
+        "annotated_object": "adae1db956d738c5779b2f351b155b2ef2e6c5c3",
+        "peeled_commit": "132e3f867aad26526eb14ef21cead4e5d2526391",
+        "tagger": {
+          "name": "Daniel",
+          "email": "dan.gobin@gmail.com",
+          "date": "2026-11-06T06:09:24Z"
+        }
+      },
+      {
+        "name": "checkpoint/sys-4-implementation-20261106-a",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/02349758f72d65f5f177ae91129e455c2cebc399",
+        "annotated_object": "02349758f72d65f5f177ae91129e455c2cebc399",
+        "peeled_commit": "7f59ee6a34812bf0f95084bcbc2a3984adc71d81",
+        "tagger": {
+          "name": "Daniel",
+          "email": "dan.gobin@gmail.com",
+          "date": "2026-11-06T07:02:13Z"
+        }
+      },
+      {
+        "name": "checkpoint/sys-4-verified-input-20261106-a",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/55d7238454e49201dc00079468775ccea3ad9f3a",
+        "annotated_object": "55d7238454e49201dc00079468775ccea3ad9f3a",
+        "peeled_commit": "fc376a4e148da3a659b7b7b9d966077ba88b12d5",
+        "tagger": {
+          "name": "Daniel",
+          "email": "dan.gobin@gmail.com",
+          "date": "2026-11-06T09:16:05Z"
+        }
+      }
+    ]
+  },
+  "completion": {
+    "tag": "checkpoint/sys-4-complete-20261106-a",
+    "boundary": "This record covers the published verified-input revision. The final report/evidence commit and its annotated complete checkpoint follow. Their exact independent remote readback is reported in the final handoff because a commit cannot embed its own hash."
+  }
+}

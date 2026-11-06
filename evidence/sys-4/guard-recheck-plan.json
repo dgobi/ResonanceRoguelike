@@ -1,0 +1,7 @@
+{
+  "path": "roguelike/generation/authored_rooms.py",
+  "before_sha256": "e47088e732ecaf3f03f13bd3f7ef372a8c172e7c817d56d1a58ba9feeabd7a93",
+  "before": "    if (not any(d['severity']=='error' for d in diagnostics)",
+  "after": "    # Diagnostic snapshots cannot place scenes without a compiled catalogue.\n    if (hasattr(data, 'structure_catalog')\n            and not any(d['severity']=='error' for d in diagnostics)",
+  "reason": "The full worker cohort found a furnished protected-original rejection entering placement preview with an inspection-only DataLoader snapshot. Require its compiled catalogue before this optional preview. The existing strict candidate-load error and original-source entitlement remain authoritative. Complete production loaders already have structure_catalog; the successful gameplay branch is unchanged."
+}

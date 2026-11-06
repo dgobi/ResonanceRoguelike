@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "checked_utc": "2026-11-06T09:15:23.318005+00:00",
+  "owner_untracked_files": 278,
+  "personal_save_files": 7,
+  "personal_save_hashes_and_mtimes_unchanged": true,
+  "owner_hashes_unchanged": true,
+  "untouched_historical_blobs": {
+    "evidence/sys-3/legacy-baseline.json": "df8e600f30f0a274eadf5b673d4194828e252a9d",
+    "evidence/sys-3/legacy-coatings-job.zip": "3cc2a96b27c5c2635d045f25e24228efcdd890a9",
+    "roguelike/data/buildings/commercial/workshop_d.json": "f1a148dccea827cbde9239751c5cc9048132ed32",
+    "roguelike/data/layouts/barrow_lamplit_store.json": "98f6d471502098ce933836e1a0a7f86d3aa4f45b",
+    "roguelike/data/layouts/barrow_ward_store_a.json": "de2d7f993bed2959b5f2bc97ba871cde282cf4e7",
+    "roguelike/data/layouts/barrow_ward_store_b.json": "3d8e64d5f8767c690f4f6f9183c687baa1102337",
+    "roguelike/data/layouts/barrow_ward_store_c.json": "4ba4a644f3ff36bfb771eb7ee8fbd2a634c19e66",
+    "roguelike/data/layouts/barrow_ward_store_d.json": "6a2a22ea22767bce68ad89814e9397a82eec619f",
+    "roguelike/data/layouts/barrow_ward_store_e.json": "4fc0fd275c35ab302413b39937942f2785222d9f"
+  },
+  "wiki_changes": false,
+  "branch": "main",
+  "verified_revision": "fc376a4e148da3a659b7b7b9d966077ba88b12d5",
+  "frozen_inputs_unchanged": true
+}

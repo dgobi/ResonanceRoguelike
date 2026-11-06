@@ -1,0 +1,11 @@
+{
+  "original_revision": "7f59ee6a34812bf0f95084bcbc2a3984adc71d81",
+  "source_stable": true,
+  "inputs_sha256": "19da5fd85cb3149a0ccf129371931392630a08d5a2908008602ebf79e0aa12f4",
+  "release_sha256": "8beb67ee3b1ef7411c08a96963edf3d2935db73584ae4876ce2915d710960eaa",
+  "archive": "first-execution.zip",
+  "archive_sha256": "b963298d1f2736589141f5ed5ef59783fb4b158689e9f336ab50a13683c3814d",
+  "files": 610,
+  "bytes": 5750921,
+  "boundary": "First complete execution retained, including original focused/worker failures and rejected D invocation. Complete D retry succeeded on those sources. A new complete run follows scoped authoring repair and current catalogue totals; no failed result is replaced or called passed."
+}

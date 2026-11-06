@@ -1,0 +1,44 @@
+{
+  "executable": {
+    "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+    "sha256": "28d5a38613d7b02f13fedff3dba87f9955be47d8c40d5cc708921989770bb049"
+  },
+  "installers": [
+    {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "ac7feccd1242aa091af36831dd672751bdeb5d0b3187d0b19b5d3ecca8db196a",
+      "size": 28499270
+    }
+  ],
+  "native": [
+    {
+      "gate": "native",
+      "output": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\sys-4\\native-1793948816643",
+      "passed": true,
+      "publications": 0,
+      "package_sha256": "28d5a38613d7b02f13fedff3dba87f9955be47d8c40d5cc708921989770bb049"
+    },
+    {
+      "gate": "retained-sys3-native",
+      "output": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\sys-3\\native-1793948926634",
+      "passed": true,
+      "publications": 0,
+      "package_sha256": "28d5a38613d7b02f13fedff3dba87f9955be47d8c40d5cc708921989770bb049"
+    },
+    {
+      "gate": "retained-sys2-native",
+      "output": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\sys-2\\native-1793948979416",
+      "passed": true,
+      "publications": 0,
+      "package_sha256": "28d5a38613d7b02f13fedff3dba87f9955be47d8c40d5cc708921989770bb049"
+    },
+    {
+      "gate": "retained-sys1-native",
+      "output": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\sys-1\\native-1793949012599",
+      "passed": true,
+      "publications": 0,
+      "package_sha256": "28d5a38613d7b02f13fedff3dba87f9955be47d8c40d5cc708921989770bb049"
+    }
+  ],
+  "archive_sha256": "3c170761464fc331001c160bac85b288d497f393a36e2d43c524dea96325b5ab"
+}

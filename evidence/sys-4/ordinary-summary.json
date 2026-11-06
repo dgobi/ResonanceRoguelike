@@ -1,0 +1,1180 @@
+{
+  "passed": true,
+  "controls": "SYS-4 selected-world journey. One disclosed initial public-join staging.\nThereafter only ordinary game keys acquire, prepare, travel, work, retreat and save.\nComparison branches restore the same genuine F5; no stock/actor/safety fixtures.\n",
+  "seed": 20261023,
+  "placement": {
+    "id": "settlement-0-cross-market-lot-1-44-S-0-building",
+    "asset": "workshop_e",
+    "context": "grid",
+    "rotation": 0,
+    "mirror": false,
+    "origin": [
+      6016,
+      4309
+    ],
+    "footprint": [
+      6016,
+      4309,
+      6028,
+      4318
+    ],
+    "clearance": [
+      6015,
+      4308,
+      6029,
+      4319
+    ],
+    "approach": [
+      6021,
+      4317,
+      6023,
+      4322
+    ],
+    "road": "settlement-0-street-east-west-1",
+    "join": [
+      6021,
+      4321
+    ],
+    "entrances": [
+      {
+        "id": "main",
+        "x": 6021,
+        "y": 4317,
+        "normal": "S",
+        "width": 2,
+        "role": "main",
+        "required": true
+      }
+    ],
+    "targets": [
+      {
+        "x": 6020,
+        "y": 4314,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 6017,
+        "y": 4310,
+        "kind": "readable",
+        "required": true
+      },
+      {
+        "x": 6021,
+        "y": 4312,
+        "kind": "readable",
+        "required": true
+      },
+      {
+        "x": 6022,
+        "y": 4312,
+        "kind": "item",
+        "required": true
+      },
+      {
+        "x": 6018,
+        "y": 4311,
+        "kind": "container",
+        "required": true
+      },
+      {
+        "x": 6024,
+        "y": 4315,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 6024,
+        "y": 4316,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 6025,
+        "y": 4315,
+        "kind": "container",
+        "required": true
+      },
+      {
+        "x": 6025,
+        "y": 4311,
+        "kind": "container",
+        "required": true
+      },
+      {
+        "x": 6024,
+        "y": 4311,
+        "kind": "readable",
+        "required": true
+      }
+    ],
+    "required": false,
+    "dependency": "workshop_e",
+    "role": "commercial",
+    "frontage_entrance": "main"
+  },
+  "barrow": {
+    "entrance": [
+      64,
+      14
+    ],
+    "screen": [
+      40,
+      20
+    ],
+    "coffer": [
+      36,
+      19
+    ],
+    "native": [
+      {
+        "id": "hollow_revenant",
+        "name": "Hollow Revenant",
+        "x": 45,
+        "y": 22,
+        "hp": 14
+      }
+    ]
+  },
+  "bypass": {
+    "intact": true,
+    "from_position": [
+      39,
+      20
+    ],
+    "arrived": {
+      "chunk": [
+        78,
+        100
+      ],
+      "submap": "submap_78_100_0",
+      "position": [
+        41,
+        26
+      ],
+      "turn": 982,
+      "hp": 40,
+      "hunger": 0.44039999999999857,
+      "thirst": 0.6234999999999931,
+      "inventory": [
+        "tallow_torch",
+        "crude_blade",
+        "leather_jack",
+        "moist_pebble",
+        "water_flask",
+        "crow_jerky",
+        "herbal_dressing",
+        "tallow_torch",
+        "etching_wash",
+        "herbal_dressing",
+        "crow_jerky",
+        "empty_water_skin",
+        "clay_pot",
+        "etching_wash"
+      ],
+      "actors": [
+        {
+          "id": "hollow_revenant",
+          "name": "Hollow Revenant",
+          "x": 44,
+          "y": 21,
+          "hp": 14
+        }
+      ]
+    },
+    "note": "Actual keys around the southern end; restored the genuine initial checkpoint for comparisons."
+  },
+  "checkpoints": [
+    {
+      "label": "coffer-partial",
+      "f5_f9_equal": true,
+      "cold": {
+        "passed": true,
+        "pid": 14756,
+        "state_equal": true
+      },
+      "archive_sha256": "ef11e0e752814013c3b7204a41df1f0fa7c19aafe7dd19a4ed4594d3fa280023"
+    },
+    {
+      "label": "surface-looted",
+      "f5_f9_equal": true,
+      "cold": {
+        "passed": true,
+        "pid": 35696,
+        "state_equal": true
+      },
+      "archive_sha256": "6880b8aa9ad21529878bf0b775e6c429762229c66c6936929a368f213222baac"
+    },
+    {
+      "label": "wash-busy",
+      "f5_f9_equal": true,
+      "cold": {
+        "passed": true,
+        "pid": 6236,
+        "state_equal": true
+      },
+      "archive_sha256": "5441f688f44e2f91381332b247691339ed82cdf341be271558c6ba133a85ecbc"
+    },
+    {
+      "label": "wash-ready",
+      "f5_f9_equal": true,
+      "cold": {
+        "passed": true,
+        "pid": 16680,
+        "state_equal": true
+      },
+      "archive_sha256": "e3d97cba39052d6673cacf01f428fc5bbaff8a2f1c090d54fb29bd0b0c8d4609"
+    },
+    {
+      "label": "barrow-intact",
+      "f5_f9_equal": true,
+      "cold": {
+        "passed": true,
+        "pid": 34600,
+        "state_equal": true
+      },
+      "archive_sha256": "b9c3c9508cca7b9eb29300b09cd4d013c21d6b46a890cac84e619d9135769cf6"
+    },
+    {
+      "label": "careful-salvage-carried",
+      "f5_f9_equal": true,
+      "cold": {
+        "passed": true,
+        "pid": 12092,
+        "state_equal": true
+      },
+      "archive_sha256": "e5a3491a63ef9e41a9896534eb9cb08f3a9b9024129445199a664f1c15fe8da1"
+    },
+    {
+      "label": "barrow-looted",
+      "f5_f9_equal": true,
+      "cold": {
+        "passed": true,
+        "pid": 2724,
+        "state_equal": true
+      },
+      "archive_sha256": "164307f2e0f4814b55715f3f3b6109fc4a339162360d4b5bf5bc28ded68ccacf"
+    },
+    {
+      "label": "barrow-inactive",
+      "f5_f9_equal": true,
+      "cold": {
+        "passed": true,
+        "pid": 22512,
+        "state_equal": true
+      },
+      "archive_sha256": "7513ac78452afae33c216e781d3b683b36075ca401dae60235f0083ccdb12d8a"
+    },
+    {
+      "label": "returned",
+      "f5_f9_equal": true,
+      "cold": {
+        "passed": true,
+        "pid": 28048,
+        "state_equal": true
+      },
+      "archive_sha256": "9a61c9be1a2f18816016d213fb0867f1d067d817ed3d9b0d51db565f212beee7"
+    }
+  ],
+  "comparisons": [
+    {
+      "method": "Careful",
+      "before": {
+        "chunk": [
+          78,
+          100
+        ],
+        "submap": "submap_78_100_0",
+        "position": [
+          39,
+          20
+        ],
+        "turn": 975,
+        "hp": 40,
+        "hunger": 0.43269999999999864,
+        "thirst": 0.6129999999999934,
+        "inventory": [
+          "tallow_torch",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "water_flask",
+          "crow_jerky",
+          "herbal_dressing",
+          "tallow_torch",
+          "etching_wash",
+          "herbal_dressing",
+          "crow_jerky",
+          "empty_water_skin",
+          "clay_pot",
+          "etching_wash"
+        ],
+        "actors": [
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 43,
+            "y": 21,
+            "hp": 14
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          78,
+          100
+        ],
+        "submap": "submap_78_100_0",
+        "position": [
+          39,
+          20
+        ],
+        "turn": 978,
+        "hp": 40,
+        "hunger": 0.4359999999999986,
+        "thirst": 0.6174999999999933,
+        "inventory": [
+          "tallow_torch",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "water_flask",
+          "crow_jerky",
+          "herbal_dressing",
+          "tallow_torch",
+          "etching_wash",
+          "herbal_dressing",
+          "crow_jerky",
+          "empty_water_skin",
+          "clay_pot",
+          "etching_wash"
+        ],
+        "actors": [
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 43,
+            "y": 21,
+            "hp": 14
+          }
+        ]
+      },
+      "before_visible": false,
+      "after_visible": true,
+      "sounds": [
+        {
+          "turn": 975,
+          "x": 39,
+          "y": 20,
+          "event": "access_work",
+          "receivers": 0,
+          "actors": [
+            {
+              "id": "hollow_revenant",
+              "x": 43,
+              "y": 21,
+              "state": "AIState.WANDERING",
+              "interest": null
+            }
+          ]
+        },
+        {
+          "turn": 976,
+          "x": 39,
+          "y": 20,
+          "event": "access_work",
+          "receivers": 0,
+          "actors": [
+            {
+              "id": "hollow_revenant",
+              "x": 43,
+              "y": 21,
+              "state": "AIState.WANDERING",
+              "interest": null
+            }
+          ]
+        },
+        {
+          "turn": 977,
+          "x": 39,
+          "y": 20,
+          "event": "access_work",
+          "receivers": 0,
+          "actors": [
+            {
+              "id": "hollow_revenant",
+              "x": 43,
+              "y": 21,
+              "state": "AIState.WANDERING",
+              "interest": null
+            }
+          ]
+        }
+      ],
+      "dose_spent": false,
+      "salvage": [
+        "wood_bundle"
+      ],
+      "crossed_shortcut": {
+        "chunk": [
+          78,
+          100
+        ],
+        "submap": "submap_78_100_0",
+        "position": [
+          41,
+          20
+        ],
+        "turn": 980,
+        "hp": 40,
+        "hunger": 0.4381999999999986,
+        "thirst": 0.6204999999999932,
+        "inventory": [
+          "tallow_torch",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "water_flask",
+          "crow_jerky",
+          "herbal_dressing",
+          "tallow_torch",
+          "etching_wash",
+          "herbal_dressing",
+          "crow_jerky",
+          "empty_water_skin",
+          "clay_pot",
+          "etching_wash"
+        ],
+        "actors": [
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 42,
+            "y": 21,
+            "hp": 14
+          }
+        ]
+      }
+    },
+    {
+      "method": "Quick force",
+      "before": {
+        "chunk": [
+          78,
+          100
+        ],
+        "submap": "submap_78_100_0",
+        "position": [
+          39,
+          20
+        ],
+        "turn": 975,
+        "hp": 40,
+        "hunger": 0.43269999999999864,
+        "thirst": 0.6129999999999934,
+        "inventory": [
+          "tallow_torch",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "water_flask",
+          "crow_jerky",
+          "herbal_dressing",
+          "tallow_torch",
+          "etching_wash",
+          "herbal_dressing",
+          "crow_jerky",
+          "empty_water_skin",
+          "clay_pot",
+          "etching_wash"
+        ],
+        "actors": [
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 43,
+            "y": 21,
+            "hp": 14
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          78,
+          100
+        ],
+        "submap": "submap_78_100_0",
+        "position": [
+          39,
+          20
+        ],
+        "turn": 976,
+        "hp": 40,
+        "hunger": 0.43379999999999863,
+        "thirst": 0.6144999999999934,
+        "inventory": [
+          "tallow_torch",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "water_flask",
+          "crow_jerky",
+          "herbal_dressing",
+          "tallow_torch",
+          "etching_wash",
+          "herbal_dressing",
+          "crow_jerky",
+          "empty_water_skin",
+          "clay_pot",
+          "etching_wash"
+        ],
+        "actors": [
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 42,
+            "y": 21,
+            "hp": 14
+          }
+        ]
+      },
+      "before_visible": false,
+      "after_visible": true,
+      "sounds": [
+        {
+          "turn": 975,
+          "x": 39,
+          "y": 20,
+          "event": "dismantle",
+          "receivers": 1,
+          "actors": [
+            {
+              "id": "hollow_revenant",
+              "x": 43,
+              "y": 21,
+              "state": "AIState.WANDERING",
+              "interest": {
+                "x": 39,
+                "y": 20,
+                "deadline": 987,
+                "strength": 4,
+                "kind": "dismantle"
+              }
+            }
+          ]
+        }
+      ],
+      "dose_spent": false,
+      "salvage": [],
+      "crossed_shortcut": {
+        "chunk": [
+          78,
+          100
+        ],
+        "submap": "submap_78_100_0",
+        "position": [
+          41,
+          20
+        ],
+        "turn": 978,
+        "hp": 40,
+        "hunger": 0.4359999999999986,
+        "thirst": 0.6174999999999933,
+        "inventory": [
+          "tallow_torch",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "water_flask",
+          "crow_jerky",
+          "herbal_dressing",
+          "tallow_torch",
+          "etching_wash",
+          "herbal_dressing",
+          "crow_jerky",
+          "empty_water_skin",
+          "clay_pot",
+          "etching_wash"
+        ],
+        "actors": [
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 41,
+            "y": 21,
+            "hp": 14
+          }
+        ]
+      }
+    },
+    {
+      "method": "Dissolution",
+      "before": {
+        "chunk": [
+          78,
+          100
+        ],
+        "submap": "submap_78_100_0",
+        "position": [
+          39,
+          20
+        ],
+        "turn": 975,
+        "hp": 40,
+        "hunger": 0.43269999999999864,
+        "thirst": 0.6129999999999934,
+        "inventory": [
+          "tallow_torch",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "water_flask",
+          "crow_jerky",
+          "herbal_dressing",
+          "tallow_torch",
+          "etching_wash",
+          "herbal_dressing",
+          "crow_jerky",
+          "empty_water_skin",
+          "clay_pot",
+          "etching_wash"
+        ],
+        "actors": [
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 43,
+            "y": 21,
+            "hp": 14
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          78,
+          100
+        ],
+        "submap": "submap_78_100_0",
+        "position": [
+          39,
+          20
+        ],
+        "turn": 976,
+        "hp": 40,
+        "hunger": 0.43379999999999863,
+        "thirst": 0.6144999999999934,
+        "inventory": [
+          "tallow_torch",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "water_flask",
+          "crow_jerky",
+          "herbal_dressing",
+          "tallow_torch",
+          "etching_wash",
+          "herbal_dressing",
+          "crow_jerky",
+          "empty_water_skin",
+          "clay_pot"
+        ],
+        "actors": [
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 42,
+            "y": 21,
+            "hp": 14
+          }
+        ]
+      },
+      "before_visible": false,
+      "after_visible": true,
+      "sounds": [],
+      "dose_spent": true,
+      "salvage": [],
+      "crossed_shortcut": {
+        "chunk": [
+          78,
+          100
+        ],
+        "submap": "submap_78_100_0",
+        "position": [
+          41,
+          20
+        ],
+        "turn": 978,
+        "hp": 40,
+        "hunger": 0.4359999999999986,
+        "thirst": 0.6174999999999933,
+        "inventory": [
+          "tallow_torch",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "water_flask",
+          "crow_jerky",
+          "herbal_dressing",
+          "tallow_torch",
+          "etching_wash",
+          "herbal_dressing",
+          "crow_jerky",
+          "empty_water_skin",
+          "clay_pot"
+        ],
+        "actors": [
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 41,
+            "y": 21,
+            "hp": 14
+          }
+        ]
+      }
+    }
+  ],
+  "final": {
+    "chunk": [
+      78,
+      100
+    ],
+    "submap": "submap_78_100_0",
+    "position": [
+      32,
+      26
+    ],
+    "turn": 1006,
+    "hp": 23,
+    "hunger": 0.4667999999999983,
+    "thirst": 0.1594999999999921,
+    "inventory": [
+      "tallow_torch",
+      "crude_blade",
+      "leather_jack",
+      "moist_pebble",
+      "crow_jerky",
+      "herbal_dressing",
+      "tallow_torch",
+      "etching_wash",
+      "herbal_dressing",
+      "crow_jerky",
+      "empty_water_skin",
+      "clay_pot",
+      "wood_bundle",
+      "flint_shard",
+      "empty_water_skin"
+    ],
+    "actors": []
+  },
+  "stages": [
+    {
+      "label": "selected workshop public approach",
+      "state": {
+        "chunk": [
+          75,
+          100
+        ],
+        "submap": null,
+        "position": [
+          21,
+          21
+        ],
+        "turn": 480,
+        "hp": 60,
+        "hunger": 0.0,
+        "thirst": 0.0,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 13,
+            "y": 30,
+            "hp": 18
+          },
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 3,
+            "y": 38,
+            "hp": 18
+          },
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 32,
+            "y": 40,
+            "hp": 18
+          },
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 36,
+            "y": 12,
+            "hp": 14
+          },
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 14,
+            "y": 7,
+            "hp": 18
+          }
+        ]
+      }
+    },
+    {
+      "label": "one careful step; withdraw with progress retained",
+      "state": {
+        "chunk": [
+          75,
+          100
+        ],
+        "submap": null,
+        "position": [
+          25,
+          12
+        ],
+        "turn": 492,
+        "hp": 60,
+        "hunger": 0.012000000000000004,
+        "thirst": 0.014999999999999998,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 13,
+            "y": 32,
+            "hp": 18
+          },
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 4,
+            "y": 41,
+            "hp": 18
+          },
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 33,
+            "y": 37,
+            "hp": 18
+          },
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 36,
+            "y": 10,
+            "hp": 14
+          },
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 11,
+            "y": 4,
+            "hp": 18
+          }
+        ]
+      }
+    },
+    {
+      "label": "earned original coffer goods and acquired actual apothecary kit",
+      "state": {
+        "chunk": [
+          75,
+          100
+        ],
+        "submap": null,
+        "position": [
+          60,
+          26
+        ],
+        "turn": 595,
+        "hp": 60,
+        "hunger": 0.11500000000000009,
+        "thirst": 0.1437500000000001,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "dried_bitter_herb",
+          "wood_bundle",
+          "wood_bundle",
+          "water_flask",
+          "crow_jerky",
+          "herbal_dressing",
+          "tallow_torch",
+          "clay_pot",
+          "crow_bile",
+          "etching_wash",
+          "herbal_dressing",
+          "crow_jerky"
+        ],
+        "actors": [
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 17,
+            "y": 34,
+            "hp": 18
+          },
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 4,
+            "y": 41,
+            "hp": 18
+          },
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 29,
+            "y": 40,
+            "hp": 18
+          },
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 41,
+            "y": 9,
+            "hp": 14
+          },
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 15,
+            "y": 12,
+            "hp": 18
+          }
+        ]
+      }
+    },
+    {
+      "label": "self-prepared twelve-contact wash, same vessel returned",
+      "state": {
+        "chunk": [
+          78,
+          100
+        ],
+        "submap": null,
+        "position": [
+          3,
+          37
+        ],
+        "turn": 900,
+        "hp": 40,
+        "hunger": 0.6101999999999993,
+        "thirst": 0.3504999999999961,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "water_flask",
+          "crow_jerky",
+          "herbal_dressing",
+          "tallow_torch",
+          "etching_wash",
+          "herbal_dressing",
+          "crow_jerky",
+          "empty_water_skin",
+          "clay_pot",
+          "etching_wash"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 5,
+            "y": 35,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "label": "living encounter after first cut",
+      "state": {
+        "chunk": [
+          78,
+          100
+        ],
+        "submap": "submap_78_100_0",
+        "position": [
+          39,
+          20
+        ],
+        "turn": 976,
+        "hp": 40,
+        "hunger": 0.43379999999999863,
+        "thirst": 0.6144999999999934,
+        "inventory": [
+          "tallow_torch",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "water_flask",
+          "crow_jerky",
+          "herbal_dressing",
+          "tallow_torch",
+          "etching_wash",
+          "herbal_dressing",
+          "crow_jerky",
+          "empty_water_skin",
+          "clay_pot",
+          "etching_wash"
+        ],
+        "actors": [
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 43,
+            "y": 21,
+            "hp": 14
+          }
+        ]
+      }
+    },
+    {
+      "label": "withdrew from partial work, returned and spent whole self-prepared wash",
+      "state": {
+        "chunk": [
+          78,
+          100
+        ],
+        "submap": "submap_78_100_0",
+        "position": [
+          39,
+          20
+        ],
+        "turn": 983,
+        "hp": 28,
+        "hunger": 0.44149999999999856,
+        "thirst": 0.624999999999993,
+        "inventory": [
+          "tallow_torch",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "water_flask",
+          "crow_jerky",
+          "herbal_dressing",
+          "tallow_torch",
+          "etching_wash",
+          "herbal_dressing",
+          "crow_jerky",
+          "empty_water_skin",
+          "clay_pot"
+        ],
+        "actors": [
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 41,
+            "y": 21,
+            "hp": 14
+          }
+        ]
+      }
+    },
+    {
+      "label": "second ordinary context opened and looted",
+      "state": {
+        "chunk": [
+          78,
+          100
+        ],
+        "submap": "submap_78_100_0",
+        "position": [
+          37,
+          19
+        ],
+        "turn": 998,
+        "hp": 23,
+        "hunger": 0.4579999999999984,
+        "thirst": 0.6474999999999922,
+        "inventory": [
+          "tallow_torch",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "water_flask",
+          "crow_jerky",
+          "herbal_dressing",
+          "tallow_torch",
+          "etching_wash",
+          "herbal_dressing",
+          "crow_jerky",
+          "empty_water_skin",
+          "clay_pot",
+          "wood_bundle",
+          "flint_shard"
+        ],
+        "actors": []
+      }
+    },
+    {
+      "label": "ordinary return retains cleared shortcut and depleted original coffer",
+      "state": {
+        "chunk": [
+          78,
+          100
+        ],
+        "submap": "submap_78_100_0",
+        "position": [
+          32,
+          26
+        ],
+        "turn": 1006,
+        "hp": 23,
+        "hunger": 0.4667999999999983,
+        "thirst": 0.1594999999999921,
+        "inventory": [
+          "tallow_torch",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "crow_jerky",
+          "herbal_dressing",
+          "tallow_torch",
+          "etching_wash",
+          "herbal_dressing",
+          "crow_jerky",
+          "empty_water_skin",
+          "clay_pot",
+          "wood_bundle",
+          "flint_shard",
+          "empty_water_skin"
+        ],
+        "actors": []
+      }
+    }
+  ],
+  "artifact": {
+    "path": "ordinary-final.zip",
+    "sha256": "2ba762dca9c51c7bc703a1c3d11a844a2486f220478d9700cf8f3cd5238021f3",
+    "bytes": 14885432,
+    "files": 25
+  }
+}

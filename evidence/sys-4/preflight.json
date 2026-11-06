@@ -1,0 +1,17 @@
+{
+  "packaged_authoring": {
+    "passed": true,
+    "path": "packaged-authoring.zip",
+    "sha256": "cf6103b7a3399b442a3636050f8b773a54bba425c7ab0fe0e1a99399bbd7c81c",
+    "package_sha256": "8deff2a420c1d7b5bcc091a37c1edafc9e2590864d2e461388d218c44882ad4b",
+    "source_output": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\sys-4\\native-1793948268027"
+  },
+  "ordinary_preflight": "preflight-play-h",
+  "preflight_archive_sha256": "083725e6e693d3aacb25b6b962bb31b497e3479a0303283d2010a2fca2cf6b86",
+  "notes": [
+    "Preflight assertions corrected Undo canvas selector, route around blocking coffer, initial held torch, reloaded object comparison and ordinary route/supply policy.",
+    "The app correctly rejected capture during a concurrent source-line-ending change; stable rerun passed.",
+    "Final h journey includes actual far-side shortcut crossing, intact bypass, carried salvage, same-save comparison, self-prepared dose and nine cold checkpoints.",
+    "Controlled packaged actor fixture is disclosed; ordinary witness leaves AI/stock/costs unchanged."
+  ]
+}

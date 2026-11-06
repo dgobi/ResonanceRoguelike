@@ -38,9 +38,6 @@ No branches, worktrees, desktop control, personal-save loads, SYS-5 or wiki work
   partial inspection never claims a compiled catalogue or successful capture.
   Complete repair preflight: 20 engine tests + 30 worker tests pass. Rebuilt
   packaged authoring passes. A fresh complete final cycle follows this repair.
-- Final repaired implementation committed: 4f1e41ebc3ca85cc0ac1b476693198b957d24fa3.
-  Fresh full run active: .baseline/sys-4/final-b. Frozen 1284 files,
-  manifest e2e291d71dac3b949c787708cb875a93624f087a4cea19b47807721749b60e6a. Do not edit consumed sources during this run.
 - Full final-b completed on 4f1e41e: production 3,704/3,704; focused 691/691;
   frontend/host/static/build/package/lifecycle, all native flows and ordinary play
   passed. Worker cohort: 141 tests, one furnished-room rejection failure and one
@@ -50,8 +47,20 @@ No branches, worktrees, desktop control, personal-save loads, SYS-5 or wiki work
   test passes unchanged. Only this consumed source file differs from final-b;
   an inverse byte/hash witness will enforce that boundary. No test expectation,
   gameplay rule, content, editor bridge or package binary changed in this step.
-- Next: commit the guard, run the complete 28-module worker cohort plus full SYS-4/
-  G20 modules, ordinary journey, packaged SYS-4 and dependency control. Retain
-  applicable full final-b gates using the exact one-file scope; do not label this
-  a clean full rerun. Then archive/report, publish main/checkpoints and read back
-  remote main and annotated objects/peeled revisions. No new permission needed.
+- Guard committed: fc376a4e148da3a659b7b7b9d966077ba88b12d5. Recheck passed at
+  .baseline/sys-4/guard-final-a; 1,284-file manifest
+  5d2eac80621b3801a472436c33f32b6626f9a22b6919de8ad6969744244667cf.
+  Complete SYS-4/G20 modules (46), ordinary journey and packaged SYS-4 pass.
+  All 28 worker modules pass: 140 passed, one intentional skip; separate dependency
+  control 1/1. The previously failing furnished-room module passes unchanged.
+  All 18 gates supported by full execution plus complete affected rechecks.
+- Evidence archived and audited; all 278 owner-file hashes and seven personal-save
+  hashes/mtimes remain unchanged. No consumed input changed during verification.
+- Verified source fc376a4 and start/M1/implementation/verified-input checkpoints
+  atomically published. Independent Git and GitHub API reads confirm main, all
+  four annotated objects and peeled commits; evidence/sys-4/publication.json.
+- Final delivery: docs/owner/SYS_4.md and evidence/sys-4; all M1–M7 outcomes are
+  complete. This report/evidence completion commit uses annotated checkpoint
+  checkpoint/sys-4-complete-20261106-a; its exact commit/object and final remote
+  readback are reported in the handoff. No consumed input changes in this commit.
+  No blocker or further implementation remains. Stop at SYS-4.

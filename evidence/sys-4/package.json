@@ -1,0 +1,56 @@
+{
+  "executable": {
+    "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+    "sha256": "efc88c14a362b4aa7cb9feb0fd240759ce8f9007cbf5631fb6ef4a1f7723b4c2"
+  },
+  "installers": [
+    {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "d2cc3507cd7e57ee5ed9ef9da993ab47fd95d7e335c0fa49c131e10facbc2fdf",
+      "size": 28499791
+    }
+  ],
+  "native": [
+    {
+      "gate": "native",
+      "output": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\sys-4\\native-1793955348815",
+      "passed": true,
+      "publications": 0,
+      "package_sha256": "efc88c14a362b4aa7cb9feb0fd240759ce8f9007cbf5631fb6ef4a1f7723b4c2",
+      "input_revision": "fc376a4e148da3a659b7b7b9d966077ba88b12d5"
+    },
+    {
+      "gate": "retained-sys3-native",
+      "output": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\sys-3\\native-1793952707201",
+      "passed": true,
+      "publications": 0,
+      "package_sha256": "efc88c14a362b4aa7cb9feb0fd240759ce8f9007cbf5631fb6ef4a1f7723b4c2",
+      "input_revision": "4f1e41ebc3ca85cc0ac1b476693198b957d24fa3"
+    },
+    {
+      "gate": "retained-sys2-native",
+      "output": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\sys-2\\native-1793952801527",
+      "passed": true,
+      "publications": 0,
+      "package_sha256": "efc88c14a362b4aa7cb9feb0fd240759ce8f9007cbf5631fb6ef4a1f7723b4c2",
+      "input_revision": "4f1e41ebc3ca85cc0ac1b476693198b957d24fa3"
+    },
+    {
+      "gate": "retained-sys1-native",
+      "output": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\sys-1\\native-1793952842196",
+      "passed": true,
+      "publications": 0,
+      "package_sha256": "efc88c14a362b4aa7cb9feb0fd240759ce8f9007cbf5631fb6ef4a1f7723b4c2",
+      "input_revision": "4f1e41ebc3ca85cc0ac1b476693198b957d24fa3"
+    }
+  ],
+  "archive": {
+    "path": "native-final.zip",
+    "sha256": "5d28882fe12ffbe5dff9f2ff44f1abbb4525620ac8cb399f887e5a62a302eaa0",
+    "bytes": 1143447,
+    "files": 10
+  },
+  "build_revision": "4f1e41ebc3ca85cc0ac1b476693198b957d24fa3",
+  "selected_game_revision": "fc376a4e148da3a659b7b7b9d966077ba88b12d5",
+  "scope": "Compiled frontend, host and bundled worker unchanged. SYS-4 native recheck captures the final selected game sources."
+}

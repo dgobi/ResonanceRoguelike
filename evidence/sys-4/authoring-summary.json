@@ -1,0 +1,93 @@
+{
+  "passed": true,
+  "started_utc": "2026-11-06T07:58:45.867Z",
+  "package_sha256": "016321d2edeaa96fed5ccd12c3aef6a13252a80003f9cadd8e1f4d8be7e53003",
+  "checks": [
+    "Packaged create/edit/publish profile and both host placements",
+    "Actual game witness: Careful, captured 2 steps",
+    "Actual game witness: Careful, captured 2 steps",
+    "Actual game witness: Careful, captured 3 steps",
+    "Actual game witness: Careful, captured 3 steps",
+    "Actual game witness: Quick force, captured 2 steps",
+    "Actual game witness: Dissolution, captured 2 steps",
+    "SYS-4 packaged authoring/runtime passed"
+  ],
+  "reopened": [
+    {
+      "path": "roguelike/data/access_profiles/woven_lashings.json",
+      "sha256": "eb2aa6926f2aa4d9fb5f5d22937b96a68ad3ca8a94a2c9e4cdaa8c95c7c24c12"
+    },
+    {
+      "path": "roguelike/data/layouts/sys4_access_room.json",
+      "sha256": "1ef653b2489da4386ff6ab037be89514d5d64891ffeba732613eef47202c0775"
+    }
+  ],
+  "unchanged_sources": {
+    "roguelike/data/entities/creatures/hollow_revenant.json": "44b2ee0fb49ab1f172791bf1775ea9c3a707942e2adbfd9e9fb5e176fad80a3b",
+    "roguelike/data/layouts/barrow_ward_store_a.json": "ae196c3ba45ab244ab472557c4cd1692a92bb8b5d4f5b4d1a1d5ec9623f7d553",
+    "roguelike/docs/examples/g17_authored_creature_room.json": "c44f9c5e3dd5c01ffc9e7fd112fc37942b008ec142773fb079086a86ccb4a665"
+  },
+  "artifact": "packaged-authoring-final.zip",
+  "artifact_sha256": "02571fdfd1a0eec210c0c5bef6f23743b4c96a91d77d15563897165eea21ee42",
+  "source_output": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\sys-4\\native-1793951925861",
+  "publications": [
+    {
+      "path": "roguelike/data/access_profiles/woven_lashings.json",
+      "sha256": "cac3a232e73b5324e1d84e40aaa55f48cea2ec1ffea2a2e987934f9048e8224c",
+      "definition": {
+        "id": "woven_lashings",
+        "version": 1,
+        "name": "Woven lashings",
+        "description": "Tight pale cord holds the timber. A blade can part it, a hard pull can break it, or a Dissolution wash can soften the seam.",
+        "host_container": true,
+        "host_screen": true,
+        "allow_careful": true,
+        "cutting_tier": 1,
+        "work_steps": 3,
+        "allow_force": true,
+        "allow_dissolution": true,
+        "dissolution_threshold": 0.4,
+        "screen_careful_yield": "wood_bundle"
+      }
+    },
+    {
+      "path": "roguelike/data/access_profiles/woven_lashings.json",
+      "sha256": "eb2aa6926f2aa4d9fb5f5d22937b96a68ad3ca8a94a2c9e4cdaa8c95c7c24c12",
+      "definition": {
+        "id": "woven_lashings",
+        "version": 1,
+        "name": "Woven lashings",
+        "description": "Tight pale cord holds the timber. A blade can part it, a hard pull can break it, or a Dissolution wash can soften the seam.",
+        "host_container": true,
+        "host_screen": true,
+        "allow_careful": true,
+        "cutting_tier": 1,
+        "work_steps": 2,
+        "allow_force": true,
+        "allow_dissolution": true,
+        "dissolution_threshold": 0.4,
+        "screen_careful_yield": "wood_bundle"
+      }
+    }
+  ],
+  "scope": "Rebuilt package after the scoped authoring repair. Actual controls, publication/reopen, Reset/latest/draft boundaries, all three runtime methods and F5/F9. Inert actor diagnostic is disclosed; living ordinary play is separately verified.",
+  "variant_creation": {
+    "archive": "preflight-evidence.zip",
+    "entry": "native-1793946775020/receipt.json",
+    "later_run_failed": true,
+    "later_failure": "locator.click: Timeout 25000ms exceeded.",
+    "published": [
+      {
+        "path": "roguelike/data/access_profiles/woven_lashings.json",
+        "source_asset": "roguelike/data/access_profiles/pale_lashings.json",
+        "sha256": "eb2aa6926f2aa4d9fb5f5d22937b96a68ad3ca8a94a2c9e4cdaa8c95c7c24c12"
+      },
+      {
+        "path": "roguelike/data/layouts/sys4_access_room.json",
+        "source_asset": "roguelike/docs/examples/g17_authored_creature_room.json",
+        "sha256": "fb0b51fc8316e92f6906df1463e2a22bd43ada8f8bb0033931d8dbad37ba125f"
+      }
+    ],
+    "boundary": "Both new IDs were successfully reviewed, published and reopened in the first preflight. Its later witness failure is retained. Subsequent successful packaged runs reopened/revised the same IDs and completed every runtime/reset/revision/draft branch."
+  }
+}
