@@ -11,7 +11,7 @@ CONTRACT = "authored-room-2"
 TEMPLATE = "roguelike/docs/examples/g17_authored_creature_room.json"
 ROOT = "roguelike/data/layouts/"
 PRODUCTION_ROUTE = "authored_submap"
-RECORD_FIELDS = {'creature': {'x', 'creature_id', 'y'}, 'item': {'x', 'item_id', 'text_id', 'y'}, 'container': {'x', 'loot_pools', 'y', 'decor_id'}, 'decor': {'x', 'y', 'decor_id'}}
+RECORD_FIELDS = {'creature': {'x', 'creature_id', 'y'}, 'item': {'x', 'item_id', 'text_id', 'y'}, 'container': {'x', 'loot_pools', 'y', 'decor_id','access_profile'}, 'decor': {'x', 'y', 'decor_id'}, 'screen': {'x','y','access_profile'}}
 
 def matches(path):
     return path == TEMPLATE or (PurePosixPath(path).parent.as_posix() == ROOT.rstrip("/") and path.endswith(".json"))
@@ -83,7 +83,9 @@ def catalog(data, data_root):
     decor_rows=json.loads((data_root/"decoratives.json").read_text(encoding="utf-8"))
     from generation.authored_decor import admission
     decor={k:dict(name=str(v.get("name",k.replace('_',' '))),description=v.get('description',''),container=v.get("container") is True,blocks_movement=bool(v.get("blocks_movement",False)),path="roguelike/data/decoratives.json",resolved=sum(1 for r in decor_rows if isinstance(r,dict) and str(r.get("id","")).casefold()==k.casefold())==1,**admission(data,k)) for k,v in data.decoratives.items()}
-    return dict(terrain={k:dict(walkable=bool(v.get("walkable",True)),transparent=bool(v.get("transparent",True))) for k,v in data.terrain.items()},decor=decor,
+    for k,v in decor.items():v['access_host']=data.decoratives[k].get('access_host')
+    return dict(terrain={k:dict(walkable=bool(v.get("walkable",True)),transparent=bool(v.get("transparent",True))) for k,v in data.terrain.items() if k!='access_screen'},decor=decor,
+        access_profiles=[dict(id=k,name=p['name'],path=f'roguelike/data/access_profiles/{k}.json',host_container=p['host_container'],host_screen=p['host_screen']) for k,p in getattr(data,'access_profiles',{}).items()],
         loot_pools=[r["id"] for r in choices["pools"] if r["resolved"]], **choices)
 
 
@@ -137,7 +139,7 @@ def authoring_validate(raw,data,path,data_root):
             except (ValueError,KeyError,TypeError,AttributeError) as error:
                 diagnostics.append(issue(path,'ROOM_FACTORY',f+'.creature_id',f'Saved creature cannot be constructed: {error}'))
     if (not any(d['severity']=='error' for d in diagnostics)
-            and any(isinstance(r,dict) and r.get('type',r.get('kind'))=='decor' for r in raw.get('special_tiles',[]))):
+            and any(isinstance(r,dict) and (r.get('type',r.get('kind')) in ('decor','screen') or 'access_profile' in r) for r in raw.get('special_tiles',[]))):
         # Admission for saved assignment candidates uses the same staged native
         # construction/access checks as the editor and lazy submap consumer.
         from generation.structure_preview import preview

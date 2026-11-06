@@ -55,7 +55,7 @@ def preview(raw, route, data, *, category=None, seed=20261023, flip_v=False, pat
                                for d, items in receipt['objects']] if receipt['kind'] == 'container'
                               else [serialize_item(i) for i in receipt['objects']])
             row['actors'] = [_serialize_entity(a) for a in receipt.get('actors', [])]
-            row['actual_count'] = (1 if receipt['kind']=='decor' and receipt_owned(receipt,m) else len(row['actors']) if receipt['kind']=='creature' else len(row['objects']))
+            row['actual_count'] = (1 if receipt['kind'] in ('decor','screen') and receipt_owned(receipt,m) else len(row['actors']) if receipt['kind']=='creature' else len(row['objects']))
             row['actor_classes'] = [type(a).__name__ for a in receipt.get('actors', [])]
             receipts.append(row)
     m.generation_revision=GENERATION_REVISION
@@ -89,9 +89,9 @@ def direct_access(m,data,receipts,spawn):
         m.visible[:]=True
         for receipt in receipts:
             kind=receipt['kind']
-            if kind not in ('item','container','decor'): continue
+            if kind not in ('item','container','decor','screen'): continue
             xy=tuple(receipt['xy']); approaches=[]; owned=receipt_owned(receipt,m)
-            if kind in ('container','decor'):
+            if kind in ('container','decor','screen'):
                 for point in sorted(reached):
                     if max(abs(point[0]-xy[0]),abs(point[1]-xy[1]))>1: continue
                     proxy=SimpleNamespace(local_map=m,player=SimpleNamespace(x=point[0],y=point[1]))
@@ -102,7 +102,8 @@ def direct_access(m,data,receipts,spawn):
                 if receipt.get('text_id'):
                     passed=passed and all(getattr(i,'on_use',None)=='read' and getattr(i,'text_id',None)==receipt['text_id'] for i in receipt['objects'])
             results.append(dict(target=receipt['record_id'],kind=kind,source_xy=receipt['source_xy'],xy=list(xy),receipt_owned=owned,
-                                relocated=receipt.get('relocated',False),passed=passed,approaches=approaches))
+                                relocated=receipt.get('relocated',False),passed=passed,approaches=approaches,
+                                access_note='Reachable approach only; fastening remains secured.' if receipt.get('access_profile') else 'Ordinary access.'))
         stairs=[(x,y) for x in range(m.width) for y in range(m.height) if str(m.tiles[x,y]['terrain'])=='stairs_up']
         results.append(dict(target='usable return stair',kind='stairs_up',passed=any(xy in reached for xy in stairs),stairs=[list(xy) for xy in stairs]))
     finally: m.visible[:]=visible
@@ -112,7 +113,8 @@ def direct_access(m,data,receipts,spawn):
 def snapshot(m,actors,data):
     from engine.save_components import serialize_item
     floor=[{'x':x,'y':y,'items':[serialize_item(i) for i in items]} for (x,y),items in sorted(m.floor_objects.items())]
-    containers=[{'x':x,'y':y,'decor_id':state['decor_id'],'state':state['state'],
+    from engine.access_objects import secured, objects
+    containers=[{'x':x,'y':y,'decor_id':state['decor_id'],'state':state['state'],'secured':secured(m,(x,y)),
                  'items':[serialize_item(i) for i in state['items']]} for (x,y),state in sorted(m.container_state.items())]
     diagnostics=[]; occupied={}
     for actor in actors:
@@ -125,6 +127,7 @@ def snapshot(m,actors,data):
     return {'terrain':[[str(m.tiles[x,y]['terrain']) for x in range(m.width)] for y in range(m.height)],
             'decor':[{'x':x,'y':y,'id':d,'blocking':bool(data.decoratives.get(d,{}).get('blocks_movement'))} for (x,y),d in sorted(m.decor.items())],
             'items':floor,'containers':containers,'actors':[{'x':a.x,'y':a.y,'id':a._creature_id} for a in actors],
+            'access_objects':[dict(x=x,y=y,**{k:v for k,v in r.items() if k!='identity'}) for (x,y),r in sorted(objects(m).items())],
             'stairs':[{'x':x,'y':y,'terrain':str(m.tiles[x,y]['terrain']),'link':m.submap_links.get((x,y))}
                       for x in range(m.width) for y in range(m.height) if str(m.tiles[x,y]['terrain']) in ('stairs_up','stairs_down')],
             'occupant_diagnostics':diagnostics,'generation_revision':GENERATION_REVISION}
@@ -185,6 +188,11 @@ def receipt_owned(receipt,m):
     xy=tuple(receipt['xy']); values=receipt['objects']
     if kind=='decor':
         return m.decor.get(xy)==receipt['decor_id'] and xy not in m.container_state
+    if kind=='screen':
+        from engine.access_objects import at, SCREEN_TERRAIN
+        row=at(m,xy)
+        return bool(row and row['host']=='screen' and row['profile']['id']==receipt['access_profile']
+                    and str(m.tiles[xy]['terrain'])==SCREEN_TERRAIN)
     if kind=='container':
         state=m.container_state.get(xy)
         return bool(state is not None and len(values)==1 and state['decor_id']==values[0][0]

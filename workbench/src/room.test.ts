@@ -3,6 +3,16 @@ import {addRecord,deleteRecord,editItem,editDecor,resizeRoom,valueEdit,paint,Can
 import {sceneProblem} from "./content";
 const source='{\r\n "id":"room", "unknown":{"exact":[1e2,"\\u03bb",null]},\r\n "layers":["#####","#λ .#","#.<.#","#####"], "legend":{"#":"wall","λ":"floor"," ":null,".":"floor","<":"stairs_up"},\r\n "player_start":{"x":2,"y":2,"retained":true}, "special_tiles":[{"type":"item","x":1,"y":1,"item_id":"letter","metadata":{"n":1e2}}]\r\n}';
 describe("registered room exact-source operations",()=>{
+ it('places both access hosts with one shared saved profile and preserves exact undo/no-op bytes',()=>{
+  const coffer=addRecord(source,[3,1],'container','bound_coffer','pale_lashings');
+  const screen=addRecord(coffer,[3,2],'screen','pale_lashings');
+  expect(JSON.parse(screen).special_tiles.slice(1)).toEqual([{type:'container',x:3,y:1,decor_id:'bound_coffer',loot_pools:[],access_profile:'pale_lashings'},{type:'screen',x:3,y:2,access_profile:'pale_lashings'}]);
+  const history=new CanvasHistory();history.record(coffer,screen,'Place screen');
+  expect(history.undo(screen)).toBe(coffer);expect(history.redo(coffer)).toBe(screen);
+  expect(valueEdit(screen,['special_tiles',2,'access_profile'],'pale_lashings')).toBe(screen);
+  expect(deleteRecord(screen,2)).toBe(coffer);
+  expect(()=>resizeRoom(screen,3,4,'#')).toThrow(/strands/);
+ });
  it("keeps direct furnishings in ordered exact source across add/edit/move/remove/history and resize",()=>{
   const added=addRecord(source,[3,1],"decor","campfire_unlit");
   const moved=editDecor(added,1,{x:3,y:2,decor_id:"street_lamp_working"});

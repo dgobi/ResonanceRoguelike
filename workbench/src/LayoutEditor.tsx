@@ -3,7 +3,7 @@ import {entranceCells,matchingGoals,type Placement} from "./building";
 import { useMemo, useState } from "react";
 import { LayoutCanvas, type Tool } from "./LayoutCanvas";
 import { MapView } from "./MapView";
-import {RoomGeometry,ItemFields,DecorFields,DecorSummary} from "./RoomControls";
+import {RoomGeometry,ItemFields,DecorFields,DecorSummary,AccessFields} from "./RoomControls";
 import {
   containerEditable,
   creatureEditable, addCreature, editCreature, removeCreature,
@@ -63,8 +63,10 @@ export function LayoutEditor(p: LayoutProps) {
     [decor, setDecor] = useState("");
   const [runtimeCell, setRuntimeCell] = useState<Cell | null>(null);
   const [placing, setPlacing] = useState(false), [creatureId, setCreatureId] = useState("");
-  const [placementKind,setPlacementKind]=useState<"creature"|"item"|"container"|"decor">(p.authoredSubmap?"creature":"item"),[itemId,setItemId]=useState(""),[containerId,setContainerId]=useState("crate");
-  const placementId=placementKind==="creature"?creatureId:placementKind==="item"?itemId:placementKind==="decor"?decor:containerId;
+  const [placementKind,setPlacementKind]=useState<"creature"|"item"|"container"|"decor"|"screen">(p.authoredSubmap?"creature":"item"),[itemId,setItemId]=useState(""),[containerId,setContainerId]=useState("crate");
+  const [accessProfile,setAccessProfile]=useState('');
+  const accessHost=placementKind==='screen'||placementKind==='container'&&p.catalog?.decor[containerId]?.access_host==='container';
+  const placementId=placementKind==="creature"?creatureId:placementKind==="item"?itemId:placementKind==="decor"?decor:placementKind==='screen'?accessProfile:containerId;
   const [overlay,setOverlay]=useState("");
   const [orientation,setOrientation]=useState(0);
   const [lastFocus, setLastFocus] = useState(p.focus);
@@ -111,7 +113,7 @@ export function LayoutEditor(p: LayoutProps) {
   function select(c: Cell) {
     setSelected(c);
     if (placing && !disabled && placementId) {
-      p.onEdit(source => placementKind==="creature"?addCreature(source,c,placementId):addRecord(source,c,placementKind,placementId), `Add ${placementKind}`);
+      p.onEdit(source => placementKind==="creature"?addCreature(source,c,placementId):addRecord(source,c,placementKind,placementId,accessHost?accessProfile:undefined), `Add ${placementKind}`);
       setSpecialIndex(specials.length); setPlacing(false); return;
     }
     if(!p.authoredSubmap){const profile=m?.placement as Placement|undefined;const ei=profile?.entrances?.findIndex(e=>e&&entranceCells(e).some(([x,y])=>x===c[0]&&y===c[1]));const ti=profile?.targets?.findIndex(t=>t&&t.x===c[0]&&t.y===c[1]);setOverlay(ei!==undefined&&ei>=0?`entrances:${ei}`:ti!==undefined&&ti>=0?`targets:${ti}`:"");}
@@ -269,11 +271,13 @@ export function LayoutEditor(p: LayoutProps) {
             </button>
           </div>
           {<div className="layout-toolbar">
-            <label>Record kind<select aria-label="Placement kind" value={placementKind} onChange={e=>{setPlacementKind(e.target.value as typeof placementKind);setPlacing(false);}}>{(p.authoredSubmap?["creature","item","container","decor"]:["item","container"]).map(k=><option key={k}>{k}</option>)}</select></label>
+            <label>Record kind<select aria-label="Placement kind" value={placementKind} onChange={e=>{setPlacementKind(e.target.value as typeof placementKind);setPlacing(false);}}>{(p.authoredSubmap?["creature","item","container","decor","screen"]:["item","container","screen"]).map(k=><option key={k}>{k}</option>)}</select></label>
             {placementKind==="creature"?<label>Existing creature<select aria-label="Placement creature" value={creatureId} disabled={!!disabled} onChange={e=>setCreatureId(e.target.value)}>
               <option value="">Choose creature…</option>{p.catalog?.creatures?.map(c=><option key={c.id} value={c.id} disabled={c.resolved===false}>{c.id} · {c.name} · {c.path}{c.resolved===false?" · ambiguous / unsupported":""}</option>)}
-            </select></label>:placementKind==="item"?<label>Existing item<select aria-label="Placement item" value={itemId} disabled={!!disabled} onChange={e=>setItemId(e.target.value)}><option value="">Choose item…</option>{p.catalog?.items?.map(c=><option key={c.id} value={c.id} disabled={!c.resolved}>{c.id} · {c.name} · {c.path}{c.readable?" · readable":""}{!c.resolved?" · ambiguous / unsupported":""}</option>)}</select></label>:placementKind==="decor"?<label>Saved decor<select aria-label="Placement decor" value={decor} disabled={!!disabled} onChange={e=>{setDecor(e.target.value);setPlacing(false);}}><option value="">Choose furnishing…</option>{Object.entries(p.catalog?.decor??{}).map(([id,r])=><option key={id} value={id}>{id} · {r.name}{!r.supported?" · unavailable":""}</option>)}</select></label>:<label>Container decor<select aria-label="Placement container" value={containerId} disabled={!!disabled} onChange={e=>setContainerId(e.target.value)}>{Object.entries(p.catalog?.decor??{}).filter(([,r])=>r.container).map(([id,r])=><option key={id} value={id} disabled={r.resolved===false}>{id} · {r.path}{r.resolved===false?" · ambiguous":""}</option>)}</select></label>}
-            <button disabled={!!disabled || !placementId || placementKind==="decor" && !p.catalog?.decor[decor]?.supported} className={placing ? "active" : ""} onClick={()=>{setPlacing(!placing);setTool("select");setLayer("specials");setVisible(v=>({...v,specials:true}));}}>{placing ? "Cancel placement" : `Place ${placementKind}`}</button>
+            </select></label>:placementKind==="item"?<label>Existing item<select aria-label="Placement item" value={itemId} disabled={!!disabled} onChange={e=>setItemId(e.target.value)}><option value="">Choose item…</option>{p.catalog?.items?.map(c=><option key={c.id} value={c.id} disabled={!c.resolved}>{c.id} · {c.name} · {c.path}{c.readable?" · readable":""}{!c.resolved?" · ambiguous / unsupported":""}</option>)}</select></label>:placementKind==="decor"?<label>Saved decor<select aria-label="Placement decor" value={decor} disabled={!!disabled} onChange={e=>{setDecor(e.target.value);setPlacing(false);}}><option value="">Choose furnishing…</option>{Object.entries(p.catalog?.decor??{}).map(([id,r])=><option key={id} value={id}>{id} · {r.name}{!r.supported?" · unavailable":""}</option>)}</select></label>:placementKind==="container"?<label>Container decor<select aria-label="Placement container" value={containerId} disabled={!!disabled} onChange={e=>setContainerId(e.target.value)}>{Object.entries(p.catalog?.decor??{}).filter(([,r])=>r.container).map(([id,r])=><option key={id} value={id} disabled={r.resolved===false}>{id} · {r.path}{r.resolved===false?" · ambiguous":""}</option>)}</select></label>:null}
+            {accessHost&&<label>Saved fastening profile<select aria-label="Placement fastening profile" value={accessProfile} onChange={e=>{setAccessProfile(e.target.value);setPlacing(false);}}><option value="">Choose saved fastening…</option>{p.catalog?.access_profiles?.filter(v=>placementKind==='screen'?v.host_screen:v.host_container).map(v=><option key={v.id} value={v.id}>{v.id} · {v.name}</option>)}</select></label>}
+            <button disabled={!!disabled || !placementId || accessHost&&!accessProfile || placementKind==="decor" && !p.catalog?.decor[decor]?.supported} className={placing ? "active" : ""} onClick={()=>{setPlacing(!placing);setTool("select");setLayer("specials");setVisible(v=>({...v,specials:true}));}}>{placing ? "Cancel placement" : `Place ${placementKind}`}</button>
+            {accessHost&&<small>Secured contents remain hidden. Intact screens are opaque obstacles; all required access must work around them.</small>}
             {placementKind==="decor"&&p.catalog&&<DecorSummary id={decor} catalog={p.catalog}/>}
             {placing && <span>Click a source cell. Validate to check admission.</span>}
           </div>}
@@ -446,6 +450,8 @@ export function LayoutEditor(p: LayoutProps) {
                   <code>
                     {p.sourcePath} · special_tiles[{specialIndex}] · {s.type ?? s.kind}
                   </code>
+                  {(recordKind(s)==='screen'||p.catalog.decor[s.decor_id??'']?.access_host==='container')&&<AccessFields key={`access:${specialIndex}:${JSON.stringify(s)}`} record={s} catalog={p.catalog} disabled={!!disabled} index={specialIndex} onEdit={p.onEdit} onDelete={recordKind(s)==='screen'?()=>{p.onEdit(source=>deleteRecord(source,specialIndex),'Delete screen');setSpecialIndex(null);}:undefined}/>}
+                  {typeof s.access_profile==='string'&&<button onClick={()=>p.onLinked?.('access',String(s.access_profile),p.catalog?.access_profiles?.find(v=>v.id===s.access_profile)?.path)}>Open fastening {s.access_profile}</button>}
                   {containerEditable(s) && <div className="source-links">
                     {(s.loot_pools || []).map((id, i) => <button key={i} disabled={p.previewBusy}
                       onClick={() => p.onPool?.(id, specialIndex, s)}>Open pool {id}</button>)}
@@ -470,7 +476,7 @@ export function LayoutEditor(p: LayoutProps) {
                         )
                       }
                     />
-                  ) : (
+                  ) : recordKind(s)==='screen' ? null : (
                     <p className="notice">
                       Inspect-only record. Fields and nested values are
                       preserved; edit supported details in Source.

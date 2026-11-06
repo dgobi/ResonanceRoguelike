@@ -1,0 +1,15 @@
+{
+  "id": "pale_lashings",
+  "version": 1,
+  "name": "Pale lashings",
+  "description": "Tight pale cord holds the timber. A blade can part it, a hard pull can break it, or a Dissolution wash can soften the seam.",
+  "host_container": true,
+  "host_screen": true,
+  "allow_careful": true,
+  "cutting_tier": 1,
+  "work_steps": 3,
+  "allow_force": true,
+  "allow_dissolution": true,
+  "dissolution_threshold": 0.4,
+  "screen_careful_yield": "wood_bundle"
+}

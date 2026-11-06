@@ -1,4 +1,13 @@
 {
+  "access_screen": {
+    "tile": "access_screen",
+    "display_name": "Lashed Timber Screen",
+    "walkable": false,
+    "transparent": false,
+    "description": "Close-set timber slats, held by pale cuttable bindings. A worn path runs around them.",
+    "interactable": "access_object",
+    "move_cost": 1.0
+  },
   "wall": {
     "tile": "wall",
     "display_name": "Crumbling Wall",

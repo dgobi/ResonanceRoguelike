@@ -220,11 +220,22 @@ class Validator:
                 ok=self.reference(row['text_id'],'texts',field+'.text_id')
                 if ok and self.data is not None and self.route != 'authored_submap':
                     self.reference(self.data.text_item_map.get(row['text_id'],'letter'),'items',field+'.text_item_map')
+        elif kind == 'screen':
+            if parent is not None or self.route not in (None,'ordinary_building','authored_submap'):
+                self.issue('SCREEN_ROUTE',field,'Screens require direct building or room placement.','Use a top-level screen record.')
+            for key in set(row)-{'type','kind','x','y','access_profile','record_id','source','source_xy'}:
+                self.issue('SCREEN_FIELD',field+'.'+key,'Unsupported screen field.','Use coordinates and access_profile only.')
+            self.access_profile(row.get('access_profile'), 'screen', field)
         elif kind == 'container':
             identifier=row.get('decor_id','crate')
             ok=self.reference(identifier,'decoratives',field+'.decor_id')
             if ok and self.data is not None and self.data.decoratives[identifier].get('container') is not True:
                 self.issue('CONTAINER_CAPABILITY',field+'.decor_id',f'{identifier!r} is not container decor.','Choose a catalog container, such as crate.')
+            modern = ok and self.data is not None and self.data.decoratives[identifier].get('access_host') == 'container'
+            if modern or 'access_profile' in row:
+                if not modern:
+                    self.issue('ACCESS_HOST',field+'.decor_id','Only declared secured-container decor accepts an access profile.','Choose a supported bound coffer.')
+                self.access_profile(row.get('access_profile'), 'container', field)
             pools=row.get('loot_pools',[])
             if not isinstance(pools,list): self.issue('POOL_LIST',field+'.loot_pools','Expected a list.','Use [] for no loot.')
             else:
@@ -249,6 +260,13 @@ class Validator:
             if kind == 'stele' and 'text_id' in row: self.reference(row['text_id'],'texts',field+'.text_id')
         elif kind != 'empty':
             self.issue('SPECIAL_KIND',field,f'Unsupported special kind {kind!r}.','Use item/container/scene/empty or one-level weighted; body/stele only at top level.')
+
+    def access_profile(self, identifier, host, field):
+        if self.data is None: return
+        from engine.access_profiles import resolve
+        try: resolve(self.data,identifier,host)
+        except (ValueError,TypeError,KeyError) as error:
+            self.issue('ACCESS_PROFILE',field+'.access_profile',str(error),'Choose a saved compatible fastening profile.')
 
 
 def compile_structure(raw, route, data=None, *, path='<memory>', category=None):

@@ -5,11 +5,12 @@ import type { Diagnostic } from "./protocol";
 export type Cell = [number, number];
 export type Layer = "terrain" | "decor" | "specials";
 export type Catalog = {
+  access_profiles?: {id:string;name:string;path:string;host_container:boolean;host_screen:boolean}[];
   text_item_map?: Record<string,string>;
   terrain: Record<string, { walkable: boolean; transparent: boolean }>;
   decor: Record<
     string,
-    { name: string; description?:string; container: boolean; blocks_movement: boolean; path?:string; resolved?:boolean; supported?:boolean; reason?:string; properties?:{blocks_movement:boolean;declared_blocks_sight:boolean;light_emit:number;cosmetic_fx?:string|null;interaction?:string|null;stationary_fire:boolean;sight_note:string} }
+    { name: string; description?:string; container: boolean; access_host?:string|null; blocks_movement: boolean; path?:string; resolved?:boolean; supported?:boolean; reason?:string; properties?:{blocks_movement:boolean;declared_blocks_sight:boolean;light_emit:number;cosmetic_fx?:string|null;interaction?:string|null;stationary_fire:boolean;sight_note:string} }
   >;
   loot_pools: string[];
   creatures?: ReferenceChoice[];
@@ -155,11 +156,11 @@ export function removeValue(source:string,path:(string|number)[]):string {
   return source.slice(0,start+bom)+source.slice(end+bom);
 }
 export const recordKind=(s:Special)=>String(s.type??s.kind);
-export const directEditable=(s:Special)=>["item","container","creature","decor"].includes(recordKind(s)) && !(s.type && s.kind && s.type!==s.kind);
-export function addRecord(source:string,cell:Cell,kind:"item"|"container"|"creature"|"decor",id:string):string {
+export const directEditable=(s:Special)=>["item","container","creature","decor","screen"].includes(recordKind(s)) && !(s.type && s.kind && s.type!==s.kind);
+export function addRecord(source:string,cell:Cell,kind:"item"|"container"|"creature"|"decor"|"screen",id:string,profile?:string):string {
   const {model,reason}=layoutModel(source);if(!model)throw Error(reason);
   if(cell[0]<0||cell[1]<0||cell[0]>=model.width||cell[1]>=model.height)throw Error("Choose a source cell within the room.");
-  return appendValue(source,["special_tiles"],{type:kind,x:cell[0],y:cell[1],...({item:{item_id:id},creature:{creature_id:id},container:{decor_id:id,loot_pools:[]},decor:{decor_id:id}}[kind])});
+  return appendValue(source,["special_tiles"],{type:kind,x:cell[0],y:cell[1],...({item:{item_id:id},creature:{creature_id:id},container:{decor_id:id,loot_pools:[],...(profile?{access_profile:profile}:{})},decor:{decor_id:id},screen:{access_profile:id}}[kind])});
 }
 export function editDecor(source:string,index:number,update:{x:number;y:number;decor_id:string}):string {
   const {model,reason}=layoutModel(source);if(!model)throw Error(reason);

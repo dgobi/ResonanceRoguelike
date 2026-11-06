@@ -111,6 +111,8 @@ class LocalMap:
         # Never write directly — use generation.floor_object_utils container API.
         # Serialised with the local_map via pickle (CachedChunk).
         self.container_state: dict[tuple[int, int], dict] = {}
+        # Captured fastening instances. Historical maps acquire no new hosts.
+        self.access_objects: dict[tuple[int, int], dict] = {}
 
         # Vine networks — growing terrain/decor patterns managed by vine_system.py.
         # Each entry: {tiles, eyestalks, spore_vents, origin, age}
@@ -129,6 +131,8 @@ class LocalMap:
 
     def __setstate__(self, state):
         self.__dict__.update({k: v for k, v in state.items() if k != 'structure_data'})
+        from engine.access_objects import validate_map
+        validate_map(self)
 
     def set_tile(self, x: int, y: int, terrain: str,
                  walkable: bool, transparent: bool) -> None:

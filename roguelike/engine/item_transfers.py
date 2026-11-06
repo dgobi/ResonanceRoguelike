@@ -109,7 +109,8 @@ def take_container(engine, x, y, item):
             or sum(i is item for i in entry['items']) != 1):
         return False
     # Source and capacity are now validated; neither operation yields control.
-    take_from_container(engine.local_map, x, y, item)
+    if not take_from_container(engine.local_map, x, y, item):
+        return False
     inv.add(item)
     item.x, item.y = engine.player.x, engine.player.y
     item.equipped = False

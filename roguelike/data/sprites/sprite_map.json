@@ -1329,6 +1329,12 @@
       "col": 1,
       "row": 7
     },
+    "bound_coffer": {
+      "sheet": "terrain", "col": 6, "row": 7
+    },
+    "access_screen": {
+      "sheet": "terrain", "col": 0, "row": 4
+    },
     "sprite_placeholder": {
       "sheet": "terrain",
       "col": 1,

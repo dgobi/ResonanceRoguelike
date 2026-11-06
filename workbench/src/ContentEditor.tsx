@@ -1,4 +1,5 @@
 import {SelectionEditor} from "./SelectionEditor";
+import {AccessEditor} from "./AccessEditor";
 import {PoolEditor} from "./PoolEditor";
 import {AssignmentEditor} from "./AssignmentEditor";
 import { CreatureEditor } from "./CreatureEditor";
@@ -24,6 +25,7 @@ type Props = ContentProps;
 // Specialist views receive the same document commands as ordinary controls.
 // This registration contains presentation only, never mutable review authority.
 export const contentViews = {
+  access:{label:'fastening',sourceId:'access-draft-json',hint:'Shared finite fastening responses; captured by each new placed host.',render:(p:Props)=><AccessEditor {...p}/>},
   building:{label:"building",sourceId:"building-draft-json",hint:"Ordinary surface geometry, active decor, direct contents and explicit placement share Source, history and recovery.",render:(p:Props)=><section data-testid="building-editor"><p className="notice">{p.family.descriptor.publication_note}</p><button onClick={p.onSource}>Show building source</button><p>Saved building{p.dirty?" · independent parked definition draft; links use saved bytes":""}.</p><button disabled={p.variant} onClick={()=>p.navigation.onOpen("selection","settlement_profiles","roguelike/data/generation/settlement_profiles.json")}>Settlement membership</button>{p.variant&&<p>Save and reopen this variant before referencing its new ID.</p>}{p.spatial&&<LayoutEditor {...p.spatial}/>}</section>},
   pool:{label:"pool",sourceId:"pool-draft-json",hint:"Ordered native pools share Source, history, recovery and publication. Saved dependencies only; validation creates no loot.",render:(p:Props)=>p.family.id==="pool"&&<PoolEditor {...p} context={p.family.context || undefined} diagnostics={p.family.context?.records[0]?.diagnostics || []} trail={p.navigation.poolTrail} onItem={(id,index)=>p.navigation.onPoolItem?.(id,index,p.draft,p.path)} returnLocation={p.navigation.returnLocation} onUsage={(id,path,route)=>p.navigation.onOpen(route==="authored_submap"?"room":"building",id,path)}/>},
   selection:{label:"selection",sourceId:"selection-draft-json",hint:"Fixed saved settlement membership; new-world selection and actual production construction.",render:(p:Props)=><SelectionEditor {...p}/>},

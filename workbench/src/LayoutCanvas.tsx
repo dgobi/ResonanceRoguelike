@@ -175,6 +175,11 @@ export function LayoutCanvas(props: Props) {
             specials.circle(s.x*TILE+8,s.y*TILE+8,5).fill(0xc6a2e7);
             return;
           }
+          if ((s.type ?? s.kind) === 'screen') {
+            specials.rect(s.x*TILE+3,s.y*TILE+3,TILE-6,TILE-6).fill(0x876044);
+            for(const dx of [7,12,17])specials.moveTo(s.x*TILE+dx,s.y*TILE+4).lineTo(s.x*TILE+dx,s.y*TILE+20).stroke({width:2,color:0xf3d59b});
+            return;
+          }
           const container = (s.type ?? s.kind) === "container";
           specials
             .rect(s.x * TILE + 2, s.y * TILE + 2, 12, 12)

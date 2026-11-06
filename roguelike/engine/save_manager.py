@@ -158,6 +158,8 @@ class ChunkCache:
 
     @staticmethod
     def _cached(local_map, entities):
+        from engine.access_objects import validate_map
+        validate_map(local_map)
         return CachedChunk(local_map, [_serialize_entity(e) for e in entities if not _is_player(e)])
 
     def _read(self, path):

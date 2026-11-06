@@ -1,5 +1,16 @@
 [
   {
+    "id": "bound_coffer",
+    "name": "Bound Coffer",
+    "ascii": "{",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A coffer closed with pale, cuttable bindings. The contents are hidden.",
+    "container": true,
+    "interactable": "container",
+    "access_host": "container"
+  },
+  {
     "id": "decor_candle",
     "ascii": "*",
     "blocks_movement": false,

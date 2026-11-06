@@ -1,5 +1,7 @@
 # Registered content authoring
 
+SYS-4 registers `access_authoring.py`, family `access`, contract `access-profile-1`, route `access_profile`: edit/variant operations confined to immediate `roguelike/data/access_profiles/<id>.json` files. Controls, Source, history, references, original-source entitlement, validation/review, recovery and independent Rust host checks share the ordinary transaction. Room/building placement selects saved profiles for bound coffer or screen records. See [Working ruins](../../roguelike/docs/WORKING_RUINS.md).
+
 SYS-2 versions item authoring as `expedition-items-5`. Ordinary nonstackable
 `equip_light` tools gain mechanical radius/endurance and supported cosmetic
 falloff/flicker controls. The host independently admits the tools route, while

@@ -17,6 +17,7 @@ const CATEGORIES: &[&str] = &[
 // Host-owned filesystem registration. Descriptors cannot enlarge these roots.
 // (source root, publication root, reserved basenames)
 const CONTENT_ROOTS: &[(&str, &str, &[&str])] = &[
+    ("roguelike/data/access_profiles/", "roguelike/data/access_profiles/", &[]),
     ("roguelike/data/entities/", "roguelike/data/entities/creatures/", &[]),
     ("roguelike/data/items/", "roguelike/data/items/", &[]),
     ("roguelike/data/recipes/", "roguelike/data/recipes/", &[]),
@@ -81,6 +82,7 @@ impl FamilyPolicy {
         { return None; }
         let effective = f["effective_operations"].as_array()?.iter().map(|v|v.as_str().map(str::to_owned)).collect::<Option<Vec<_>>>()?;
         if effective.iter().any(|op| !operations.contains(op))
+            || ((id=="access" || source.starts_with("roguelike/data/access_profiles/")) && (id!="access" || !source.starts_with("roguelike/data/access_profiles/") || route!="access_profile" || contract!="access-profile-1" || (!effective.is_empty() && source.split('/').count()!=4)))
             || (source.starts_with("roguelike/data/items/") && (id!="item" || route!="item_definition" || (!effective.is_empty() && !item_authoring_path(source))))
             || (pool_inspection_path(source) && (id!="pool" || route!="contextual_loot_pool" || contract!="contextual-loot-1" || (!is_pool(source) && !effective.is_empty())))
             || (relative_building(source).is_ok() && (id!="building" || route!="ordinary_building" || contract!="surface-building-1"))
@@ -1871,6 +1873,25 @@ mod tests {
             altered=result.clone(); altered["family"]["compatible"]=json!(false);
             assert!(FamilyPolicy::from_result(&altered,&doc.relative).is_none());
         }
+    }
+    #[test]
+    fn access_profile_entitlement_cannot_cross_family_or_nested_source() {
+        let (_,mut doc,_) = fixture();
+        doc.relative="roguelike/data/access_profiles/sample.json".into();
+        let mut result=family_result(&doc,"access",json!(["edit","variant"]));
+        result["route"]=json!("access_profile");result["family"]["descriptor"]["production_route"]=json!("access_profile");
+        result["family"]["contract"]=json!("access-profile-1");
+        doc.family=FamilyPolicy::from_result(&result,&doc.relative);
+        assert!(family_evidence(&doc,&result,false));assert!(family_evidence(&doc,&result,true));
+        for source in ["roguelike/data/access_profiles/nested/sample.json","roguelike/data/recipes/sample.json"] {
+            let mut forged=result.clone();forged["source_asset"]=json!(source);
+            forged["family"]["descriptor"]["policy"]["root"]=json!(content_root(source).unwrap());
+            assert!(FamilyPolicy::from_result(&forged,source).is_none());
+        }
+        let mut forged=result.clone();forged["family"]["id"]=json!("recipe");
+        assert!(FamilyPolicy::from_result(&forged,&doc.relative).is_none());
+        forged=result.clone();forged["family"]["effective_operations"]=json!([]);
+        assert!(!family_evidence(&doc,&forged,false));
     }
     #[test]
     fn registered_text_confinement_cancellation_and_resource_freshness() {

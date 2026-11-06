@@ -48,7 +48,11 @@ impl Record {
             || self.project.to_string_lossy().len()>4096 || self.generation==0 || self.generation>9_007_199_254_740_990
             || self.baseline.len()>MAX_DRAFT || self.draft.len()>MAX_DRAFT || self.variant_id.len()>128
             || self.contract.len()>100 || self.contract.is_empty() || self.descriptor_sha256.len()!=64
-            || !["building","pool","item","recipe","text","typography","creature","room","assignment","selection"].contains(&self.family.as_str())
+            || !["building","pool","item","recipe","text","typography","creature","room","assignment","selection","access"].contains(&self.family.as_str())
+            || ((self.family=="access" || self.source.starts_with("roguelike/data/access_profiles/")) &&
+                (self.family!="access" || !self.source.starts_with("roguelike/data/access_profiles/") || self.source.split('/').count()!=4
+                 || self.contract!="access-profile-1" || !self.target.starts_with("roguelike/data/access_profiles/")
+                 || self.published.as_ref().is_some_and(|p|!p.path.starts_with("roguelike/data/access_profiles/") || p.path.split('/').count()!=4)))
             || ((self.family=="building" || self.source.starts_with("roguelike/data/buildings/")) &&
                 (self.family!="building" || crate::authoring::relative_building(&self.source).is_err()
                  || self.published.as_ref().is_some_and(|p|crate::authoring::relative_building(&p.path).is_err())))
@@ -232,6 +236,17 @@ mod tests {
         let store=Store::new(dir.path().into()).unwrap();let (rows,notices)=store.list().unwrap();assert_eq!(rows.len(),3);assert_eq!(notices.len(),1);
         for r in [a,b,c]{assert_eq!(store.read(&r.key()).unwrap(),r);}
         assert!(store.read("../outside").is_err());
+    }
+    #[test]
+    fn access_recovery_preserves_bytes_but_rejects_forged_family_and_publication() {
+        let dir=tempfile::tempdir().unwrap();let project=tempfile::tempdir().unwrap();let mut store=Store::new(dir.path().into()).unwrap();
+        let mut record=sample(project.path());record.family="access".into();record.contract="access-profile-1".into();
+        record.source="roguelike/data/access_profiles/sample.json".into();record.target="roguelike/data/access_profiles/letter.json".into();
+        store.write(&record).unwrap();assert_eq!(store.read(&record.key()).unwrap(),record);
+        let mut bad=record.clone();bad.family="recipe".into();assert!(bad.validate().is_err());
+        bad=record.clone();bad.source="roguelike/data/access_profiles/nested/sample.json".into();bad.target="roguelike/data/access_profiles/nested/letter.json".into();assert!(bad.validate().is_err());
+        bad=record.clone();bad.published=Some(Published{path:"roguelike/data/recipes/letter.json".into(),after_sha256:"a".repeat(64),generation:1});assert!(bad.validate().is_err());
+        assert_eq!(store.read(&record.key()).unwrap(),record);
     }
     #[test]
     fn checkpoint_child_process(){

@@ -3,6 +3,18 @@ import {useEffect,useState} from "react";
 import {editItem, editDecor, resizeRoom, valueEdit, type Catalog, type Layout, type Special} from "./layout";
 
 type Edit=(operation:(source:string)=>string,label:string)=>void;
+export function AccessFields({record,catalog,disabled,index,onEdit,onDelete}:{record:Special;catalog:Catalog;disabled:boolean;index:number;onEdit:Edit;onDelete?:()=>void}) {
+ const screen=(record.type??record.kind)==='screen';
+ const [x,X]=useState(String(record.x)),[y,Y]=useState(String(record.y)),[profile,P]=useState(String(record.access_profile??''));
+ const options=(catalog.access_profiles??[]).filter(p=>screen?p.host_screen:p.host_container);
+ return <fieldset disabled={disabled}><legend>{screen?'Removable timber screen':'Secured container fastening'}</legend>
+ <label>Saved fastening<select aria-label="Record fastening profile" value={profile} onChange={e=>P(e.target.value)}><option value="">Choose saved profile…</option>{options.map(p=><option key={p.id} value={p.id}>{p.id} · {p.name}</option>)}</select></label>
+ {screen&&<><label>X<input aria-label="Screen X" type="number" value={x} onChange={e=>X(e.target.value)}/></label><label>Y<input aria-label="Screen Y" type="number" value={y} onChange={e=>Y(e.target.value)}/></label></>}
+ <p>{screen?'Intact screen blocks movement, sight and light. Use unoccupied ordinary floor with an independent longer route.':'The existing container owns its contents. A reachable approach does not expose secured contents.'} Each generated instance captures its saved fastening.</p>
+ <button disabled={!options.some(p=>p.id===profile)||![Number(x),Number(y)].every(Number.isInteger)} onClick={()=>onEdit(s=>{s=valueEdit(s,['special_tiles',index,'access_profile'],profile);if(screen){s=valueEdit(s,['special_tiles',index,'x'],Number(x));s=valueEdit(s,['special_tiles',index,'y'],Number(y));}return s;},'Edit access host')}>Apply fastening edit</button>
+ {onDelete&&<button onClick={onDelete}>Delete screen</button>}
+ </fieldset>;
+}
 export function RoomGeometry({model:m,draft,catalog,disabled,onEdit}:{model:Layout;draft:string;catalog:Catalog;disabled:boolean;onEdit:Edit}) {
  const [width,setWidth]=useState(String(m.width)),[height,setHeight]=useState(String(m.height)),[fill,setFill]=useState(Object.keys(m.legend)[0]);
  const [glyph,setGlyph]=useState(""),[terrain,setTerrain]=useState("__null__");

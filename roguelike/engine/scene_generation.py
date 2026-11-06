@@ -33,7 +33,7 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
     if route:
         decor_slots = {xy: 'existing decor' for xy in local_map.decor}
         for source, spec in resolved:
-            if spec['kind'] not in ('decor', 'container'):
+            if spec['kind'] not in ('decor', 'container', 'screen'):
                 continue
             xy = spec['x'], spec['y']
             if xy in decor_slots or xy in containers:
@@ -43,8 +43,9 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
                    if data.decoratives.get(decor, {}).get('blocks_movement', False)}
         blocked.update((s['x'], s['y']) for _, s in resolved if s['kind'] in ('container', 'decor')
                        and data.decoratives[s.get('decor_id', 'crate')].get('blocks_movement', False))
+        blocked.update((s['x'],s['y']) for _,s in resolved if s['kind']=='screen')
         for source, spec in resolved:
-            if spec['kind'] == 'decor' and (spec['x'], spec['y']) in blocked:
+            if spec['kind'] in ('decor','screen') and (spec['x'], spec['y']) in blocked:
                 xy = spec['x'], spec['y']
                 if xy == tuple(authored_arrival) or str(local_map.tiles[xy]['terrain']) in ('stairs_up', 'stairs_down'):
                     raise GenerationError(f'{source}: blocking decor at realized {xy} invalidates actual arrival or usable return')
@@ -61,6 +62,15 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
             if xy in occupied or xy == tuple(authored_arrival) or terrain in ('stairs_up', 'stairs_down'):
                 raise GenerationError(f'{source}: creature at {xy} overlaps an actor, player arrival or physical stair')
             occupied.add(xy)
+
+    # A screen exclusively owns one floor cell. Reject overlap before any item
+    # relocation, actor construction or tile mutation can disguise it.
+    for source,spec in resolved:
+        if spec['kind']!='screen':continue
+        xy=spec['x'],spec['y']
+        if (sum((s['x'],s['y'])==xy and s['kind']!='empty' for _,s in resolved)!=1
+                or xy == (tuple(authored_arrival) if authored_arrival is not None else None)):
+            raise GenerationError(f'{source}: screen overlaps another direct owner or arrival at {xy}')
 
     def item(item_id, x, y, source, text_id=''):
         if text_id and map_text:
@@ -79,7 +89,8 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
         observation = dict(record_id=spec.get('record_id', f'spawn[{index}]'), source=source,
                            kind=kind, source_xy=spec.get('source_xy', [x,y]), selected_branch=spec.get('selected_branch'), objects=[])
         observation.update(source_index=index, item_id=spec.get('item_id'), text_id=spec.get('text_id'),
-                           text_override_present='text_id' in spec, decor_id=spec.get('decor_id'), loot_pools=spec.get('loot_pools'))
+                           text_override_present='text_id' in spec, decor_id=spec.get('decor_id'), loot_pools=spec.get('loot_pools'),
+                           access_profile=spec.get('access_profile'))
         observations.append(observation)
         if kind in ('body', 'stele'):
             deferred.append(dict(source=source, kind=kind, x=x, y=y))
@@ -109,6 +120,11 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
             decor = spec['decor_id']
             observation['realized_decor'] = dict(id=decor, xy=[x,y], **admission(data,decor)['properties'])
             plans.append(('decor', x, y, decor))
+        elif kind == 'screen':
+            from engine.access_profiles import resolve
+            plans.append(('screen',x,y,resolve(data,spec['access_profile'],'screen')))
+            observation['realized_screen'] = dict(xy=[x,y],opaque=True,walkable=False,
+                access_profile=spec['access_profile'],note='Intact obstacle; approach access does not imply removal.')
         elif kind == 'container':
             if (x, y) in containers:
                 raise GenerationError(f'{source}: duplicate container at ({x},{y})')
@@ -137,6 +153,9 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
             except Exception as error:
                 raise GenerationError(f'{source}: container item construction failed: {error}') from error
             plans.append(('container', x, y, (decor, contents)))
+            if 'access_profile' in spec:
+                from engine.access_profiles import resolve
+                plans.append(('access_container',x,y,(decor,resolve(data,spec['access_profile'],'container'))))
             containers.add((x, y))
         elif kind == 'scene':
             scene_id = spec.get('scene_id', '')
@@ -157,22 +176,36 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
             observation['actors'] = [actor]
             from generation.placement import digest
             observation['creature_definition'] = dict(id=creature_id, sha256=digest(data.entities[creature_id]))
-        observation['objects'] = [p[3] for p in plans[first_plan:] if p[0] != 'decor']
-    if route and any(s['kind'] == 'decor' for _, s in resolved):
+        observation['objects'] = [p[3] for p in plans[first_plan:] if p[0] in ('item','container')]
+    has_access = any(s['kind']=='screen' or 'access_profile' in s for _,s in resolved)
+    if has_access or (route and any(s['kind'] == 'decor' for _, s in resolved)):
         # Evaluate the complete final layers before any ownership API touches the
         # candidate. Factories have already succeeded; no scene is published yet.
-        trial = copy.copy(local_map)
-        trial.decor = dict(local_map.decor)
-        trial.container_state = dict(local_map.container_state)
-        trial.floor_objects = {xy:list(items) for xy,items in local_map.floor_objects.items()}
-        apply_plans(trial, plans)
+        from engine.access_objects import trial_map, validate_map
+        trial = trial_map(local_map)
+        try:
+            apply_plans(trial, plans)
+            validate_map(trial)
+            if has_access:
+                _optional_screens(trial,data,resolved)
+        except (ValueError,TypeError,KeyError) as error:
+            raise GenerationError(f'Access-object placement: {error}') from error
         from generation.structure_preview import direct_access
-        failed = [r for r in direct_access(trial,data,observations,authored_arrival) if not r['passed']]
+        failed = [r for r in direct_access(trial,data,observations,authored_arrival) if not r['passed']] if route else []
         if failed:
-            anchors = '; '.join(f"{source} at realized ({s['x']},{s['y']})" for source,s in resolved if s['kind']=='decor')
+            anchors = '; '.join(f"{source} at realized ({s['x']},{s['y']})" for source,s in resolved if s['kind'] in ('decor','screen','container'))
             raise GenerationError(f'{anchors}: final furnishing/access failure: {failed}')
-    # These ownership APIs are reached only after every record and factory succeeds.
-    apply_plans(local_map, plans)
+    # Publish the fully constructed new-host layers without running factories or
+    # placement a second time. Existing unrelated owners retain their identity.
+    if has_access:
+        for xy,entry in local_map.container_state.items():trial.container_state[xy]=entry
+        for xy,row in getattr(local_map,'access_objects',{}).items():trial.access_objects[xy]=row
+        for layer in ('tiles','decor','container_state','floor_objects','access_objects','access_manifest'):
+            if hasattr(trial,layer):setattr(local_map,layer,getattr(trial,layer))
+    else:
+        apply_plans(local_map, plans)
+    from engine.access_objects import validate_map as validate_access
+    validate_access(local_map)
     if deferred:
         local_map.deferred_generation_records = deferred
     if receipts is not None:
@@ -188,8 +221,32 @@ def apply_plans(local_map, plans):
             place_floor_object(local_map, x, y, value)
         elif kind == 'decor':
             place_decor(local_map, x, y, value)
-        else:
+        elif kind == 'container':
             place_container(local_map, x, y, *value)
+        elif kind == 'screen':
+            from engine.access_objects import install
+            install(local_map,(x,y),'screen',value)
+        elif kind == 'access_container':
+            from engine.access_objects import install
+            decor, profile = value
+            install(local_map,(x,y),'container',profile,decor_id=decor)
+        else:
+            raise ValueError(f'Unknown population plan {kind!r}')
+
+
+def _optional_screens(m,data,resolved):
+    from generation.access import reachable, enterable
+    from engine.access_objects import at
+    for source,s in resolved:
+        if s['kind']!='screen':continue
+        x,y=s['x'],s['y']
+        # All intact screens participate. Opening one never supplies a required
+        # connection for another. The existing movement graph defines reach.
+        sides=[(x+dx,y+dy) for dx,dy in ((1,0),(-1,0),(0,1),(0,-1))
+               if enterable(m,(x+dx,y+dy),data)]
+        if len(sides)<2 or not all(p in reachable(m,sides[0],data) for p in sides[1:]):
+            raise ValueError(f'{source}: screen needs an independent longer route between its sides.')
+        if at(m,(x,y)) is None:raise ValueError(f'{source}: missing screen owner')
 
 
 @dataclass
@@ -271,6 +328,8 @@ def _enterable(local_map, xy, data):
 
 
 def validate_scene(local_map, submaps, data):
+    from engine.access_objects import validate_map as validate_access
+    validate_access(local_map)
     from generation.access import validate_required_access
     for submap in submaps:
         xy = submap.surface_x, submap.surface_y

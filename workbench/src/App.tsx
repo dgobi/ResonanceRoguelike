@@ -589,7 +589,7 @@ export default function App() {
               Content definitions <span className="count">{assets.length}</span>
             </h2>
             <p className="muted">
-              Buildings, pools, items, recipes, texts and creatures
+              Buildings, pools, items, recipes, texts, creatures and fastenings
             </p>
             <button className="full" onClick={()=>{setCategory("creatures");setSearch("");}}>Creatures</button>
             <label>
@@ -658,7 +658,7 @@ export default function App() {
             <span className="eyebrow">THIS WORKSPACE</span>
             <p>Draft → validate → review → apply</p>
             <small>
-              Building, pool, room, creature, item, recipe, text and typography drafts share tabs and recovery. Campaigns are never opened.
+              Building, pool, room, creature, item, recipe, fastening, text and typography drafts share tabs and recovery. Campaigns are never opened.
             </small>
           </section>
         </aside>

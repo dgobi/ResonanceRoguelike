@@ -268,6 +268,9 @@ class InteractionCursor:
             return
 
         from engine.vessel_menu import offer_job
+        from engine.access_actions import offer as offer_access
+        if offer_access(engine,(cx,cy)):
+            return
         if offer_job(engine,(cx,cy)):
             return
 
@@ -341,6 +344,10 @@ class InteractionCursor:
                 return
             acted = False
             if is_container:
+                if (prompt.get('scene',engine.local_map) is not engine.local_map
+                        or prompt.get('address',(engine.world_x,engine.world_y,engine.current_submap_id)) != (engine.world_x,engine.world_y,engine.current_submap_id)
+                        or prompt.get('owner',engine.local_map.container_state.get((lx,ly))) is not engine.local_map.container_state.get((lx,ly))):
+                    return
                 acted = self._handle_container_take(sel, items, lx, ly, engine)
             elif 0 <= sel < len(items):
                 # A prompt owns no item: it can only take an instance still here.

@@ -72,7 +72,7 @@ class G13Shed(unittest.TestCase):
                     row['asset']='apothecary_d'  # SYS-3 successor retains weight/cap and old selections.
                 if row['asset']=='workshop_a':
                     self.assertEqual(row, dict(asset='workshop_a',weight=1.0,max_per_settlement=5))
-                    row['asset']='workshop_d'  # G22 single dressing successor; same weight/cap.
+                    row['asset']='workshop_e'  # SYS-4 optional bound coffer successor; same weight/cap.
         self.assertEqual(data.settlement_profiles, expected)
         w = WorldMap(128,128); w.seed=20261023
         with contextlib.redirect_stdout(io.StringIO()):

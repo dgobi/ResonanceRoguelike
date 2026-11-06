@@ -1,5 +1,7 @@
 # Resonance Workbench · W5K
 
+SYS-4 adds saved fastening profiles and coffer/screen placement through the ordinary authoring, publication and captured Test workflow. See [Working ruins](../roguelike/docs/WORKING_RUINS.md). The package witness is `node scripts/run-sys-4.mjs`; set `SYS4_RUNTIME_ONLY=1` for saved-source runtime verification after authoring.
+
 An independent, local Tauri 2 desktop application for inspecting Resonance and
 safely editing ordinary buildings, contextual loot pools, materials and usable supplies,
 ordinary immediate and passive item-output recipes, common Actor fields and ordinary creature variants,

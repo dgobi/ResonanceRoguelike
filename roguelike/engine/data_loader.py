@@ -48,6 +48,8 @@ class DataLoader:
         self.decorative_sources = _decor_list
         self.decoratives: dict = {e["id"]: e for e in _decor_list if "id" in e}
         self.loot_pools: dict = self._load_dir("loot_pools")
+        from engine.access_profiles import load as load_access_profiles
+        self.access_profiles = load_access_profiles(self.root, self)
         print(f"  Loot pools loaded: {len(self.loot_pools)}")
         self.scenes:     dict = self._load("scenes.json")
         self.text_item_map: dict = self._load("texts/text_item_map.json")

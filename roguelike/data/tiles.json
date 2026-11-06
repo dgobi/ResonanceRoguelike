@@ -132,6 +132,14 @@
     "dark_color_note": "color_fg_dark and color_bg_dark are intentionally near-black. Use [10,12,18] fg and [4,5,9] bg as defaults for dark versions unless the tile needs a specific dark hue."
   },
   "tiles": {
+    "access_screen": {
+      "ascii": "#", "color_fg": [168, 121, 70], "color_bg": [7, 12, 29],
+      "color_fg_dark": [14, 10, 6], "color_bg_dark": [4, 5, 9]
+    },
+    "bound_coffer": {
+      "ascii": "{", "color_fg": [183, 161, 113], "color_bg": [0, 0, 0],
+      "color_fg_dark": [14, 10, 6], "color_bg_dark": [4, 5, 9]
+    },
     "amber_sting_beetle": {"ascii": "b", "color_fg": [226, 181, 112], "color_bg": [0, 0, 0], "color_fg_dark": [18, 14, 10], "color_bg_dark": [0, 0, 0], "sprite": [0, 0]},
     "floor": {
       "ascii": ".",

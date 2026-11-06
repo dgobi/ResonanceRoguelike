@@ -1,0 +1,32 @@
+{
+  "id": "sys4_access_room",
+  "width": 23,
+  "height": 15,
+  "layers": [
+    "#######################",
+    "#..........#..........#",
+    "#..........#..........#",
+    "#..........#..........#",
+    "#..........#..........#",
+    "#..........#..........#",
+    "#.....................#",
+    "#..........#..........#",
+    "#..........#..........#",
+    "#..........#..........#",
+    "#..........#..........#",
+    "#..........#..........#",
+    "#..<..................#",
+    "#.....................#",
+    "#######################"
+  ],
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "<": "stairs_up"
+  },
+  "player_start": {
+    "x": 3,
+    "y": 12
+  },
+  "special_tiles": [{"type":"item","x":4,"y":12,"item_id":"crude_blade"},{"type":"item","x":5,"y":12,"item_id":"etching_wash"},{"type":"item","x":6,"y":12,"item_id":"bile_coating"},{"type":"container","x":7,"y":5,"decor_id":"bound_coffer","loot_pools":["bound_coffer_stores"],"access_profile":"woven_lashings"},{"type":"screen","x":11,"y":6,"access_profile":"woven_lashings"},{"type":"decor","x":14,"y":6,"decor_id":"campfire_lit"},{"type":"creature","x":18,"y":2,"creature_id":"hollow_revenant"}]
+}

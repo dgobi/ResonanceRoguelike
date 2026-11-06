@@ -142,7 +142,7 @@ def dependencies(raw,data):
     consumed=('id','layers','legend','decor_layer','special_tiles','placement')
     definition={k:copy.deepcopy(raw[k]) for k in consumed if k in raw}
     def consumed_special(s):
-        keys=('type','kind','x','y','item_id','text_id','scene_id','decor_id','loot_pools','weight')
+        keys=('type','kind','x','y','item_id','text_id','scene_id','decor_id','loot_pools','weight','access_profile')
         row={k:s[k] for k in keys if k in s}
         if 'spawn_table' in s: row['spawn_table']=[consumed_special(r) for r in s['spawn_table']]
         return row
@@ -160,7 +160,9 @@ def dependencies(raw,data):
             semantic={'roll_count':value.get('roll_count',[1,1]),'items':[{'item_id':r['item_id'],'weight':r.get('weight',1)} for r in value.get('items',[])]}
         elif table=='scenes': semantic={'floor_objects':[r['item_id'] for r in value.get('floor_objects',[])]}
         elif table=='terrain': semantic={'walkable':value.get('walkable',True),'transparent':value.get('transparent',True)}
-        elif table=='decoratives': semantic={k:value.get(k,False) for k in ('blocks_movement','blocks_sight','container')}
+        elif table=='decoratives':
+            semantic={k:value.get(k,False) for k in ('blocks_movement','blocks_sight','container')}
+            if 'access_host' in value:semantic['access_host']=value['access_host']
         else: semantic=value
         result[name]=digest(semantic)
         if table=='items' and value.get('body_id'): add('bodies',value['body_id'])
@@ -175,6 +177,10 @@ def dependencies(raw,data):
             if d: add('decoratives',d)
     def special(s):
         kind=s.get('type',s.get('kind'))
+        if 'access_profile' in s:
+            add('access_profiles',s['access_profile'])
+            profile=data.access_profiles[s['access_profile']]
+            if kind=='screen' and profile['screen_careful_yield']:add('items',profile['screen_careful_yield'])
         if kind=='weighted':
             for row in s['spawn_table']: special(row)
         elif kind=='item':

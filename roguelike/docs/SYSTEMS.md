@@ -1,5 +1,7 @@
 > **Arc A status:** Historical source retained below. Creative intent remains a design reference; technical claims need the [current implementation and authority map](owner/STATUS.md). This banner does not resolve open design decisions.
 
+Current SYS-4 coffer security, screen geometry, work and whole-dose use follow [Working ruins](WORKING_RUINS.md). Its map-owned state has no autonomous clock.
+
 # Engine Systems Reference
 
 Current SYS-1 vessel and preparation behavior is specified in

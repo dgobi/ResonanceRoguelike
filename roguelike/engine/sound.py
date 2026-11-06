@@ -16,7 +16,7 @@ CLOSED_DOOR_COST = 4
 REFERENCE_HEARING = 6
 MAX_COST = 48
 INTEREST_TURNS = 12
-STRENGTH = dict(combat=8, dismantle=8, flint=6, musk=6,
+STRENGTH = dict(combat=8, dismantle=8, access_work=2, flint=6, musk=6,
                 bell_cracked=10, bell_intact=18)
 CARDINAL = ((0, -1), (-1, 0), (1, 0), (0, 1))
 

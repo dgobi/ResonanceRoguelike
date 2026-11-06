@@ -28,6 +28,10 @@
     {
       "layout_id": "barrow_lamplit_store",
       "weight": 1
+    },
+    {
+      "layout_id": "barrow_bound_store",
+      "weight": 1
     }
   ]
 }

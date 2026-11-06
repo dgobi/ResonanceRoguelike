@@ -108,6 +108,9 @@ def place_container(
 def open_container(local_map: "LocalMap", lx: int, ly: int) -> bool:
     """Transition container from closed to open. Returns True if opened.
     Visual does not change — container state is tracked in container_state."""
+    from engine.access_objects import secured
+    if secured(local_map, (lx, ly)):
+        return False
     entry = local_map.container_state.get((lx, ly))
     if not entry or entry["state"] != "closed":
         return False
@@ -117,6 +120,9 @@ def open_container(local_map: "LocalMap", lx: int, ly: int) -> bool:
 
 def take_from_container(local_map: "LocalMap", lx: int, ly: int, item) -> bool:
     """Remove the exact live item from an open container."""
+    from engine.access_objects import secured
+    if secured(local_map, (lx, ly)):
+        return False
     entry = local_map.container_state.get((lx, ly))
     if not entry or entry.get("state") != "open":
         return False
@@ -131,6 +137,9 @@ def take_from_container(local_map: "LocalMap", lx: int, ly: int, item) -> bool:
 
 def get_container_items(local_map: "LocalMap", lx: int, ly: int, item_factory) -> list:
     """Return current items in an open container as Item objects."""
+    from engine.access_objects import secured
+    if secured(local_map, (lx, ly)):
+        return []
     entry = local_map.container_state.get((lx, ly))
     if not entry or entry["state"] not in ("open", "closed"):
         return []

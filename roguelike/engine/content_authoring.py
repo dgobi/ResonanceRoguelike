@@ -173,7 +173,9 @@ class Family:
 def families():
     # The sole trusted registration point. No renderer or descriptor imports.
     from engine import building_authoring, pool_authoring, item_authoring, recipe_authoring, text_authoring, typography_authoring, creature_authoring, room_authoring, assignment_authoring, selection_authoring
+    from engine import access_authoring
     return (
+        Family('access', 'access_profiles', access_authoring, ('edit','variant'), access_authoring.ROOT),
         Family("building", "buildings", building_authoring, ("edit", "variant"), building_authoring.ROOT),
         Family("pool", "loot_pools", pool_authoring, ("edit", "variant"), "roguelike/data/loot_pools/"),
         Family("assignment", "generation", assignment_authoring, ("edit",), assignment_authoring.PROFILE, assignment_authoring.PROFILE),

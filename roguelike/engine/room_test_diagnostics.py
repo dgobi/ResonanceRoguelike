@@ -87,6 +87,8 @@ class DiagnosticEvents:
             reader=dict(open=e.text_reader.open,text_id=getattr(e.text_reader,'_text_id',None),definition=getattr(e.text_reader,'_def',None)),
             floor=[dict(x=x,y=y,items=[observed_item(i) for i in rows]) for (x,y),rows in m.floor_objects.items()],
             containers=[dict(x=x,y=y,state=c['state'],items=[observed_item(i) for i in c['items']]) for (x,y),c in m.container_state.items()],
+            access_objects=[dict(x=x,y=y,**r) for (x,y),r in getattr(m,'access_objects',{}).items()],
+            visible_tiles=m.visible.T.tolist(),
             actors=[dict(id=creature_id(a),x=a.x,y=a.y,hp=a.fighter.hp if a.fighter else None,ai=str(getattr(getattr(a,'ai',None),'state',None))) for a in e.entities if a is not e.player],
             terrain=[[str(m.tiles[x,y]['terrain']) for x in range(m.width)] for y in range(m.height)],
             walkable=m.walkable.T.tolist(),

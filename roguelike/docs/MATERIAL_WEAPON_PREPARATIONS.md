@@ -1,5 +1,10 @@
 # Material-sensitive weapon washes (SYS-3)
 
+SYS-4 also allows one unused Dissolution dose to release a compatible coffer or
+screen. Environmental use spends the entire selected dose, regardless of its
+six/twelve-contact budget; weapon application remains unchanged. See
+[Working ruins](WORKING_RUINS.md) for target requirements and controls.
+
 Binding wash carries Binding; Etching wash carries Dissolution. Both have strength
 0.4. One tier-one primary makes a six-contact dose; tier two or higher makes a
 twelve-contact dose of the same strength and item ID. A richer material changes

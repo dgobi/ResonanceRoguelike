@@ -1,5 +1,7 @@
 # Start here — production main, B3
 
+SYS-4: use E beside a Bound Coffer or Lashed Timber Screen. Choose careful cutting (equipped cutting 1, three separate quiet actions), force (one loud action), or one whole Dissolution dose (strength >=0.4, one action). Continue after withdrawing; only careful screen completion yields one wood bundle. See [Working ruins](../WORKING_RUINS.md).
+
 Expedition provisions: beside observed surface shallows, use `E`, select the
 water tile and press Enter. Each action fills one carried empty skin; with no
 empty skin it drinks directly. Select a filled skin or flask in `I` and press

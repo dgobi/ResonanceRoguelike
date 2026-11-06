@@ -1,0 +1,10 @@
+{
+  "id": "bound_coffer_stores",
+  "description": "Two finite remnants of practical work, kept dry under cord.",
+  "roll_count": [2, 2],
+  "items": [
+    {"item_id": "wood_bundle", "weight": 3},
+    {"item_id": "dried_bitter_herb", "weight": 2},
+    {"item_id": "flint_shard", "weight": 2}
+  ]
+}

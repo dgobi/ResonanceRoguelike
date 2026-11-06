@@ -4023,6 +4023,11 @@ class Engine:
         from engine.venom import fully_paralysed
         if fully_paralysed(self.player):
             return False
+        from engine.access_objects import secured
+        if secured(self.local_map, (x,y)):
+            from engine.access_actions import offer
+            offer(self, (x,y))
+            return False
         from generation.floor_object_utils import open_container, get_container_items
         entry = self.local_map.container_state.get((x, y))
         if not entry:
@@ -4049,12 +4054,20 @@ class Engine:
             return False
 
         self.interaction_cursor._selection_prompt = {
+            "scene": self.local_map,
+            "address": (self.world_x, self.world_y, self.current_submap_id),
+            "owner": entry,
             "items": items,
             "selected": 0,
             "lx": x, "ly": y,
             "source": "container",
         }
         return False  # prompt takes over — no turn yet
+
+    def _interactable_access_object(self, x: int, y: int) -> bool:
+        from engine.access_actions import offer
+        offer(self, (x,y))
+        return False
 
     # ------------------------------------------------------------------ #
     #  Deep tongue learning interactables

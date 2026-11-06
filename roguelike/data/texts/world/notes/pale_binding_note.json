@@ -1,0 +1,12 @@
+{
+  "id": "pale_binding_note",
+  "title": "A Cordworker's Scrap",
+  "type": "note",
+  "condition": "stained",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{
+    "text": "Cut the pale cord patiently and the slats will come away whole. Break it in haste and the dry crack runs through the rooms.\n\nThe etching wash loosens the same cord without a blow. A whole wash for one fastening. I kept mine for the blade and took the passage around.",
+    "damaged": false
+  }]
+}

@@ -16,7 +16,7 @@ export type Descriptor = {
 };
 export type References = Record<string, {id: string; label: string}[]>;
 type CommonFamily = {contract: string; descriptor_sha256: string; descriptor: Descriptor; compatible: boolean; problems: string[]; references: References; effective_operations?: ("edit" | "variant")[]};
-export type ContentFamily = CommonFamily & ({id:"building";context:RoomContext|null} | {id:"pool";context:PoolContext|null} | {id:"assignment";context:AssignmentContext|null} | {id:"selection";context:SelectionContext|null} | {id: "item"; context: ItemContext | null} | {id: "recipe"; context: RecipeContext | null} | {id: "text"; context: TextContext | null} | {id:"typography";context:TypographyContext|null} | {id:"creature";context:CreatureContext|null} | {id:"room";context:RoomContext|null});
+export type ContentFamily = CommonFamily & ({id:'access';context:{records:AssignmentContext['records'];references:{id:string;path:string;field:string;family:string}[]}|null} | {id:"building";context:RoomContext|null} | {id:"pool";context:PoolContext|null} | {id:"assignment";context:AssignmentContext|null} | {id:"selection";context:SelectionContext|null} | {id: "item"; context: ItemContext | null} | {id: "recipe"; context: RecipeContext | null} | {id: "text"; context: TextContext | null} | {id:"typography";context:TypographyContext|null} | {id:"creature";context:CreatureContext|null} | {id:"room";context:RoomContext|null});
 export type AssignmentContext={records:{id:string;definition:Record<string,unknown>;capability:{editable:boolean;reason:string};diagnostics:Diagnostic[]}[];rooms:{id:string;label:string;path:string;eligible:boolean;reason:string}[]};
 export type SavedBuilding={id:string;label:string;path:string;pointer:string;contexts:string[];eligible_profiles:string[];placement_weight:number|null;resolved:boolean;reason:string};
 export type SelectionContext={records:AssignmentContext["records"];buildings:SavedBuilding[];editable_tables:Record<string,string[]>};
@@ -53,7 +53,7 @@ export function schemaProblem(value: unknown, path = "schema", depth = 0): strin
   return "";
 }
 export function familyProblem(value: unknown): string {
-  if (!object(value) || !["building","pool","item","recipe","text","typography","creature","room","assignment","selection"].includes(String(value.id))) return "Unregistered content family";
+  if (!object(value) || !["building","pool","item","recipe","text","typography","creature","room","assignment","selection","access"].includes(String(value.id))) return "Unregistered content family";
   if (typeof value.contract !== "string" || typeof value.descriptor_sha256 !== "string" || !/^[a-f0-9]{64}$/.test(value.descriptor_sha256)) return "Malformed family identity";
   if (!object(value.descriptor)) return "Missing descriptor";
   const d = value.descriptor;
@@ -61,6 +61,7 @@ export function familyProblem(value: unknown): string {
   if (!object(d.policy) || d.policy.identity !== (value.id === "selection" ? "fixed-file" : "id") || typeof d.policy.root !== "string" || !Array.isArray(d.policy.operations) || d.policy.operations.some(op=>op!=="edit" && op!=="variant")) return "Unsupported publication policy";
   if(value.id==="building"&&d.production_route!=="ordinary_building")return "Building requires ordinary_building";
   if(value.id==="pool"&&d.production_route!=="contextual_loot_pool")return "Pool requires its native production route";
+  if(value.id==='access'&&(d.production_route!=='access_profile'||value.contract!=='access-profile-1'))return 'Fastening requires the registered access-profile contract';
   if(value.id==="room"&&d.production_route!=="authored_submap")return "Room requires its registered authored_submap production route";
   if ((value.id === "building" || value.id === "pool" || value.id === "creature" || value.id === "room") && (!Array.isArray(value.effective_operations) || value.effective_operations.some(op=>!(d.policy as {operations:unknown[]}).operations.includes(op)))) return "Missing or invalid original-source operations";
   if (!Array.isArray(d.views) || d.views.some(v=>typeof v!=="string") || typeof d.publication_note !== "string") return "Malformed view registration";

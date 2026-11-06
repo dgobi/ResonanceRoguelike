@@ -1,5 +1,7 @@
 # Make a building or layout for Resonance
 
+SYS-4 adds bound-coffer profile references and explicit one-cell screen records to building and authored-room placement. See [Working ruins](WORKING_RUINS.md) for controls, supported floors, intact-route validation and capture semantics.
+
 ## W5L: furnish an underground room
 
 The `authored-room-2` contract and `g2-3` route capability add one ordered,
