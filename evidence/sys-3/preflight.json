@@ -1,0 +1,29 @@
+{
+  "interpretation": "Development preflight, not frozen full-suite certification. Logs retain failures and exact assertions. Final applicable suites are run unfiltered after source freeze.",
+  "passed_checks": {
+    "sys3_focused": 21,
+    "sys1_sys2_sys3_earlier_review": 69,
+    "frontend": 97,
+    "host": 71,
+    "typecheck": true,
+    "b2_format": {
+      "checks": 219,
+      "selected_tests_passed": true,
+      "passed": false
+    },
+    "structure_contract_final": 8,
+    "ordinary_outings": 2,
+    "worker_response": 1
+  },
+  "material_failures": [
+    "Early affected preflight: two stale counts and missing tools PYTHONPATH; corrected and affected module reruns passed.",
+    "Catalogue preflight: one structure route-count assertion lagged the total update; complete structure module then passed all eight.",
+    "36-test worker preflight: 34 passed; two SOURCE_CHANGED refusals while root edited source. Both exact tests separately reran successfully after edits. No validation policy weakened.",
+    "Four packaged development attempts: hidden/duplicate locator ambiguity; output publication order with dependent pool references; transient confirmation. Actual failure receipts retained. Final authoring flow passed."
+  ],
+  "review": {
+    "writer": "root only",
+    "helper": "read-only",
+    "defect_fixed": "Reject a physical dose aliased across independently serialized scene addresses; retain same-address active/hot alias. Expanded no-partial-load matrix and cold distinct-dose coverage pass."
+  }
+}

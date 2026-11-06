@@ -11,8 +11,9 @@ from engine.save_components import serialize_item
 def semantic_item_state(row, *, historical=False):
     """Generation semantics exclude random identity; save tests keep full state.
 
-    Historical receipts may omit only the validated, approved empty clay addition.
-    Other capability, water and item fields remain part of the comparison.
+    Historical receipts omit only exact validated canonical additive defaults
+    (empty clay, old light reach and ordinary oils). Current comparisons keep
+    them; changed capability, water, dose and spent weapon fields always remain.
     """
     from engine.save_components import validate_item
     from engine.vessels import CLAY
@@ -31,6 +32,14 @@ def semantic_item_state(row, *, historical=False):
         # projections omit this validated additive capture, never custom reach.
         validate_item(row,'historical light')
         if row['held_light']==dict(version=1,radius=6):row.pop('held_light')
+    if historical and 'coating_dose' in row:
+        validate_item(row,'historical dose')
+        defaults={'bile_coating':('Dissolution',.4,6),'briar_binding_oil':('Binding',.5,8),
+                  'hungering_oil':('Consumption',.8,5)}
+        if row.get('item_id') in defaults:
+            essence,strength,hits=defaults[row['item_id']]
+            if row['coating_dose']==dict(version=1,essence=essence,strength=strength,hits=hits):
+                row.pop('coating_dose')  # only exact pre-SYS-3 live-definition defaults
     return row
 
 

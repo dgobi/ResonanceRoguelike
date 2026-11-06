@@ -1,0 +1,17 @@
+{
+  "id": "weapon_wash_note",
+  "name": "a blade-washer’s note",
+  "description": "Two recipes share a margin with sketches of a fraying shade and a stone shell.",
+  "tile": "document",
+  "category": "consumable",
+  "weight": 0.05,
+  "stackable": false,
+  "on_use": "read",
+  "text_id": "weapon_washes",
+  "keywords": [
+    {
+      "tag": "fibrous",
+      "tier": 1
+    }
+  ]
+}

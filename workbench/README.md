@@ -7,6 +7,11 @@ direct creature placement in authored underground layouts, found-text variants
 and game typography. The game remains the
 validation authority. No campaign, running game or Internet service is required.
 
+SYS-3 adds ordinary weapon-coating dose controls and two-band material responses
+for supported vessel preparations. Save/reopen the dose, then recipe, then its
+room or pool references. See [Material-sensitive washes](../roguelike/docs/MATERIAL_WEAPON_PREPARATIONS.md)
+for exact controls, captured output and the ordinary acquisition/use loop.
+
 SYS-1 adds water-vessel capacity/heat controls and a measured vessel requirement
 for resonant bone tincture. See [Practical vessels](../roguelike/docs/PRACTICAL_VESSELS.md)
 for the player loop, authoring workflow and saved-state boundaries.
@@ -345,8 +350,8 @@ variant and receipt remain historical construction evidence outside active data.
 
 ## Author material preparation
 
-The registered `item-preparation-1` recipe contract admits 15 of 18 shipped
-sources: two immediate, two cooking, five drying, four steeping and two rendering.
+The registered `item-preparation-3` recipe contract admits 17 of 20 shipped
+sources: two immediate, two cooking, five drying, six steeping and two rendering.
 Open a supported original, **Begin edit**, and either revise its same ID or
 choose **Save as new variant**. **Validate draft → Diff → Review & apply →
 Confirm apply one file** uses the shared source/dependency checks, exact-byte
@@ -800,7 +805,7 @@ CPython runtime without the game dependency wheels.
 ## Contract and limits
 
 The protocol is **8**, worker/app **0.9.0**, game structure contract **g2-3**,
-item contract **expedition-items-3**, recipe contract **item-preparation-1**,
+item contract **expedition-items-6**, recipe contract **item-preparation-3**,
 found-text contract **ordinary-found-text-1**, and
 creature contract **creature-composite-8**, with Workbench layout capability
 **authored-room-2** on the existing `authored_submap` route (game structure contract g2-3).

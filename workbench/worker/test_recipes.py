@@ -13,7 +13,7 @@ RECIPE = "roguelike/data/recipes/bile_coating.json"
 class RecipeTests(unittest.TestCase):
     def test_source_classes_noop_relationships_and_production_ambient_registry(self):
         rows = [r for r in invoke("describe")["result"]["assets"] if r["route"] == "recipe_definition"]
-        self.assertEqual(len(rows), 18)
+        self.assertEqual(len(rows), 20)
         for name, kind, writable in (("bile_coating", "Immediate item output", True), ("cook_meat", "Passive processing", True),
                                      ("campfire", "World placement", False), ("coldbell_extract_deprecated", "Deprecated / legacy", False)):
             path = f"roguelike/data/recipes/{name}.json"; before = (ROOT/path).read_bytes()

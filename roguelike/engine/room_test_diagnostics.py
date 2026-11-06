@@ -77,7 +77,8 @@ class DiagnosticEvents:
             inventory_rows=[dict(item_id=getattr(item,'item_id',None),instance=str(id(item)) if item else None,header=header,label=label) for item,header,label in inv._flat],
             craft=dict(open=craft.open,selected=craft.selected,choosing=craft._choosing,
                 choice_selected=craft._choice_selected,choice_index=craft._choice_index,
-                prompts=[dict(comp_index=p['comp_index'],options=[dict(item_id=o['item_id'],count=o['count'],name=o['name']) for o in p['options']]) for p in craft._choice_prompts],
+                prompts=[dict(comp_index=p['comp_index'],options=[dict(item_id=o['item_id'],count=o['count'],name=o['name'],
+                    instance=str(id(o['instance'])) if 'instance' in o else None,properties=o.get('kw_display','')) for o in p['options']]) for p in craft._choice_prompts],
                 rows=[dict(type=r['type'],id=r.get('recipe',{}).get('id'),category=r.get('category')) for r in craft._build_flat_items(craft._get_recipes(e))]),
             placement=dict(mode=e._placement_mode,cursor=[e._placement_cursor_x,e._placement_cursor_y]),
             processing=[dict(x=x,y=y,**observed_job(r)) for (x,y),r in m.processing_layer.items()],
@@ -111,6 +112,16 @@ class DiagnosticEvents:
             place_decor(e.local_map,e.player.x,e.player.y-1,'campfire_lit')
             e.player.needs.hunger=e.player.needs.thirst=.8
             e.player.fighter.hp=max(1,e.player.fighter.max_hp-15)
+            self.fixture_applied=True
+        if (command.get('fixture')=='coating-contact-targets' and not self.fixture_applied
+                or command.get('fixture')=='coating-contact-targets-reset'):
+            # Disclosed packaged contact/expiry fixture only. Keep real attack,
+            # essence, armour and body consumers; remove target movement and
+            # extend life so every contact can be observed without replacing RNG.
+            for actor in e.entities:
+                if actor is not e.player and actor.fighter:
+                    actor.ai=None
+                    actor.fighter.max_hp=actor.fighter.hp=1000
             self.fixture_applied=True
         if command.get('capture'):
             pygame.image.save(screen,str(self.root/'frame.png'))

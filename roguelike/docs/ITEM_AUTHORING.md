@@ -1,6 +1,6 @@
 # Expedition item authoring (W5M)
 
-The registered item family uses `expedition-items-5`. Begin edit changes the same
+The registered item family uses `expedition-items-6`. Begin edit changes the same
 ID; **Save as new variant** creates a distinct ID beside a verified source.
 IDs are machine identities. Display-name edits never redirect references.
 
@@ -17,11 +17,11 @@ stages, recipients, reapplication, actual room inputs and persistence policies.
 One unique single-object source under `data/items/components`, `butchery` or
 `consumables` may author common properties when its category matches its route
 and it is an ordinary inert material, `eat` food, `drink` drink or `heal_minor`
-HP treatment, plus the registered `cure_numbing_venom` remedy seed class. The original category and use identity stay fixed for both operations.
+HP treatment, the registered `cure_numbing_venom` remedy seed class, or a supported ordinary weapon coating. The original category and use identity stay fixed for both operations.
 Raw Source, recovery and descriptor flags cannot promote unsupported originals.
 Arrays, ambiguous/case-colliding IDs, corpses, unsupported special lights,
-readable items, effects and special preparations remain inspect-only. Rules admit
-47 shipped supplies: 33 materials, nine foods, two drinks, one HP treatment and two venom remedies.
+readable items, other effects and special preparations remain inspect-only. The original supply cohort admitted
+47 supplies: 33 materials, nine foods, two drinks, one HP treatment and two venom remedies.
 Equipment originally added six ordinary weapons, two armour definitions, one shield
 and three satchels. Those historical inventory counts precede later variants.
 Run `workbench/scripts/equipment-inventory.py`
@@ -43,6 +43,16 @@ capability; explicit nonempty instance handlers win, and a new-ID material varia
 does not inherit it. This does not enable general material throwing or effect editing.
 
 ## Controls and source fidelity
+
+SYS-3 admits ordinary `apply_to_weapon` consumables containing exactly one
+supported `temporary_essence` record. The three existing oils and two washes
+share **Weapon coating** controls: essence, strength (greater than zero through
+1), and base contact budget (1..100). Common identity/mass/keywords remain
+editable. Category, use binding, extra effects and unsupported metadata stay
+protected; deleting fields from an unsupported source never grants entitlement.
+A material-sensitive recipe replaces the base contact budget at commitment.
+Owned doses retain captured values; applied weapons retain their separate spent
+contacts. See [Material-sensitive washes](MATERIAL_WEAPON_PREPARATIONS.md).
 
 SYS-2 adds ordinary nonstackable `equip_light` tools under `items/tools`, with
 bounded mechanical radius/endurance and cosmetic falloff/flicker. Use identity,
@@ -153,7 +163,7 @@ recovery or a descriptor label cannot promote an unsupported original or edit
 locked behavior. Singular essence/strength and well-formed inherited movesets are
 retained read-only; new IDs retain their action IDs and shared cooldown identity.
 The base-attack check does not certify every move. Multi-essence debug equipment,
-special held lights, talismans, effects, coatings, corpses and special-use items remain
+unsupported held lights, talismans, other effects, corpses and special-use items remain
 inspect-only. Unedited metadata is preserved; it is not an active control.
 
 Ordinary equipment requires `equip_toggle`. Four exact shipped IDs have a legacy
@@ -222,9 +232,10 @@ carrying rules are changed by authoring.
 ## Preparation references
 
 Saved materials and usable supplies can be referenced by ordinary item-output
-recipes under `item-preparation-1`; see [recipe authoring](RECIPE_AUTHORING.md).
+recipes under `item-preparation-3`; see [recipe authoring](RECIPE_AUTHORING.md).
 Automatic eligibility remains distinct from a tag match. Components can request
 an affirmative protected-material choice; conjunctions remain automatic-only.
 Save/reopen supplies before recipe references and room placements. Preparation
-completion constructs the recorded output ID; already acquired outputs retain
+completion constructs the recorded output ID, except material-sensitive wash jobs
+retain their resolved output snapshot. Already acquired outputs retain
 this guide's copied-value and dynamic-reference policy.

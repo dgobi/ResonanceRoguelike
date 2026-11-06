@@ -37,6 +37,9 @@ class Item(Entity):
         if 'held_light' in values:
             from engine.held_light import validate
             validate(self.held_light, self)
+        if 'coating_dose' in values:
+            from engine.coating_doses import validate
+            validate(self.coating_dose, self)
 
     def __init__(
         self,

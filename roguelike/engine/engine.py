@@ -1620,7 +1620,7 @@ class Engine:
         from generation.floor_object_utils import place_floor_object
         from generation.decor_utils import clear_decor
         from engine.processing_text import completion_text
-        from engine.save_components import ITEM_STATE, snapshot, validate_fields
+        from engine.save_components import serialize_item, validate_item, restore_item
         failures = getattr(self, "_processing_completion_failures", None)
         if failures is None:
             failures = self._processing_completion_failures = {}
@@ -1635,7 +1635,12 @@ class Engine:
                 item = self.item_factory.create(item_id, x, y) if item_id in self.data.items else None
                 if item is None:
                     raise ValueError("output definition is unavailable")
-                validate_fields(snapshot(item, ITEM_STATE), ITEM_STATE, "processing output")
+                batch=record.get('vessel_job',{})
+                if batch.get('version')==2:
+                    from engine.coating_doses import defined
+                    defined(self.data.items[item_id])
+                    restore_item(item,batch['output'])
+                validate_item(serialize_item(item), "processing output")
             except (ValueError, TypeError, KeyError, OverflowError) as error:
                 problem = (id(record), item_id, str(error))
                 if active and failures.get(failure_key) != problem:

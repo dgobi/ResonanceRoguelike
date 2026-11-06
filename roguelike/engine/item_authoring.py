@@ -15,7 +15,7 @@ from engine.save_components import ITEM_STATE, snapshot, validate_fields
 from engine.crafting import _item_has_tag, _item_has_all_tags
 from rendering.tile_registry import TileRegistry
 
-CONTRACT = "expedition-items-5"
+CONTRACT = "expedition-items-6"
 SCHEMA = {
     "$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object", "required": ["id"],
     "properties": {
@@ -45,15 +45,22 @@ from engine import equipment_authoring as equipment
 from engine import light_authoring as lights
 SCHEMA['properties'].update(equipment.SCHEMA)
 SCHEMA['properties'].update(lights.SCHEMA)
+SCHEMA['properties']['temporary_essence']=dict(type='array',title='Weapon coating',**{'x-control':'ordered-records','x-view':'weapon coating'},
+    items=dict(type='object',required=['essence','strength','hits'],properties=dict(
+        essence=dict(type='string',title='Essence',**{'x-reference':'essences'}),
+        strength=dict(type='number',title='Strength',minimum=0.01,maximum=1),
+        hits=dict(type='integer',title='Base contacts',minimum=1,maximum=100))))
 SCHEMA['properties']['vessel'] = dict(type='object', title='Water vessel', **{'x-view':'Vessel','x-control':'bounded-record'},
     properties=dict(version=dict(type='integer',default=1,readOnly=True),
         capacity_ml=dict(type='integer',title='Capacity (mL)',minimum=1,maximum=10000),
         contents=dict(type='string',default='water',readOnly=True)))
-PUBLICATION_NOTE = "Save/reopen each item first, then reference its saved ID in a room or pool. Saving does not enroll it in loot, crafting, starting gear or world selection. Owned lights retain captured mechanical reach, fuel and copied visuals after supported definition edits. Other owned items retain copied physical fields; combat, armour and carrying use the loaded session definitions. Source saves do not hot-reload a running game. Reset keeps its capture; latest saved captures revisions."
+PUBLICATION_NOTE = "Save/reopen each item first, then reference its saved ID in a room or pool. Saving does not enroll it in loot, crafting, starting gear or world selection. Owned lights retain captured reach, fuel and visuals; owned coating doses retain essence, strength and contacts. Other owned items retain copied physical fields; combat, armour and carrying use the loaded session definitions. Source saves do not hot-reload a running game. Reset keeps its capture; latest saved captures revisions."
 
 
 def reference_options(context):
+    from engine.coating_doses import ESSENCES
     return {"keywords": [dict(id=k, label=k) for k in sorted(context["keywords"])],
+            "essences": [dict(id=k,label=k) for k in ESSENCES],
             "tiles": [dict(id=k,label=k) for k in context["tiles"]],
             "return-items": [dict(id="",label="No replacement")] + context["return_items"],
             "armour-slots": [dict(id=k,label=k) for k in equipment.ARMOR_SLOTS],
@@ -72,7 +79,8 @@ def authoring_evidence(context):
 LIMITATIONS = "Exact staged bytes loaded and an unowned item instantiated by the actual factory. No use action, pool sampling, world selection or saved instance changed."
 FIELDS = ["name", "description", "tile", "weight", "stackable", "keywords", "consumed_on_use", "vessel"]
 CLASS_FIELDS = {"material": [], "food": ["nutrition", "eat_message"],
-                "drink": ["hydration", "drink_message", "empty_form"], "treatment": ["heal_amount"], "venom treatment": []}
+                "drink": ["hydration", "drink_message", "empty_form"], "treatment": ["heal_amount"], "venom treatment": [],
+                "weapon coating": ['temporary_essence']}
 # Known runtime-bearing fields outside an ordinary inert component. Unknown
 # metadata is retained; none is promoted to a supported mechanical control.
 ADVANCED = (set(ITEM_STATE) - set(FIELDS) - {
@@ -101,6 +109,11 @@ def capability(raw, path, pointer=""):
     if equipment_class: supported = True; kind = equipment_class
     if lights.supported(raw,path,pointer,ADVANCED | set(sum(CLASS_FIELDS.values(),[])) | {'vessel','slot','liquid','liquid_volume','harvest_from'}):
         supported=True;kind='held light'
+    if (not pointer and isinstance(raw,dict) and parts[:3]==('roguelike','data','items')
+            and route=='consumables' and raw.get('category')=='consumable' and raw.get('on_use')=='apply_to_weapon'
+            and isinstance(raw.get('temporary_essence'),list) and len(raw['temporary_essence'])==1
+            and not raw.keys() & ((ADVANCED-{'temporary_essence'}) | {'vessel','text_id','qualities','liquid','liquid_volume','harvest_from','nutrition','hydration','heal_amount','on_use_effects'})):
+        supported=True;kind='weapon coating'
     return {"contract": CONTRACT, "editable": bool(supported), "supply_class":kind,
             "equipment_class": equipment_class,
             "fields": lights.FIELDS if kind=='held light' else FIELDS + CLASS_FIELDS.get(kind,[]) + equipment.FIELDS.get(kind,[]),
@@ -131,6 +144,12 @@ def authorize_candidate(original, candidate, source, target, *, data=None):
     if cap.get('supply_class')=='held light':
         for field,message in lights.authorize(original,candidate):
             problems.append(dict(severity='error',code='LIGHT_LOCK',path=target,asset=str(candidate.get('id','')),field=field,message=message,correction='Restore the protected source value.'))
+    if cap.get('supply_class')=='weapon coating':
+        allowed=(set(FIELDS)-{'vessel'})|{'id','temporary_essence'}
+        for field in (set(original)|set(candidate))-allowed:
+            if (field in original)!=(field in candidate) or original.get(field)!=candidate.get(field):
+                problems.append(dict(severity='error',code='COATING_LOCK',path=target,asset=str(candidate.get('id','')),field=field,
+                    message='Keep unsupported metadata and the use binding unchanged.',correction='Restore the original field.'))
     return problems
 
 
@@ -159,6 +178,9 @@ def return_definition(identifier, data, sources, *, owner=None):
 
 def effective_use(raw, data):
     handler=raw.get('on_use')
+    if handler=='apply_to_weapon':
+        from engine.coating_doses import defined
+        return dict(payload=defined(raw),explanation='One owned dose and one action coat the actual equipped weapon. Captured settings persist; same-essence application replaces its remaining contacts. Each landed nondodged contact spends all active coatings. A material-sensitive batch replaces base contacts.')
     if handler == 'cure_numbing_venom':
         return dict(explanation='Clears player numbing venom during warning at any HP; self-use is rejected during full paralysis; no healing. One owned unit and one charged phase. Recovery uses the accepted dose snapshot and the paid phase counts first. No active impairment, existing recovery, death or stale ownership rejects without item/time cost. Duplicate this seed to author a new ID; use identity is protected.')
     if handler not in ('eat','drink','heal_minor'): return None
@@ -215,6 +237,10 @@ def validate_definition(raw, data, path, sources, *, writable=False):
     try: validate_vessel(raw)
     except ValueError as error: issue('VESSEL_CONFIG','vessel',str(error))
     equipment_class = capability(raw,path).get('equipment_class')
+    if raw.get('on_use')=='apply_to_weapon':
+        from engine.coating_doses import defined
+        try:defined(raw)
+        except ValueError as error:issue('COATING_FIELD','temporary_essence',str(error))
     if capability(raw,path).get('supply_class')=='held light':
         for field,message in lights.validate(raw): issue('LIGHT_FIELD',field,message)
     if equipment_class:
@@ -269,6 +295,7 @@ def factory_preview(raw, data):
     state = snapshot(item, ITEM_STATE)
     if getattr(item,'vessel',None): state['vessel']=item.vessel
     if hasattr(item,'held_light'): state['held_light']=item.held_light
+    if hasattr(item,'coating_dose'): state['coating_dose']=item.coating_dose
     validate_fields(state, ITEM_STATE, "factory instance")
     defaults=dict(name=raw['id'],description='',tile='generic_item',weight=0.1,stackable=False,keywords=[],consumed_on_use=True,on_use=None,
                   nutrition=None,hydration=None,heal_amount=None,eat_message=None,drink_message=None)

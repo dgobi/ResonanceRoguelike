@@ -15,7 +15,7 @@ from engine.crafting import _item_has_tag, _item_has_all_tags, _tag_tier_on_item
 from engine.item_factory import ItemFactory
 from engine.save_components import ITEM_STATE, snapshot, validate_fields
 
-CONTRACT = "item-preparation-2"
+CONTRACT = "item-preparation-3"
 PROCESSING_SOURCES = ("cooking", "drying", "steeping", "rendering")
 PROCESSING_DECOR = ("drying_herb", "cooking_meat")
 def requirement_schema(title, reference, physical=True):
@@ -47,12 +47,13 @@ SCHEMA = {"$schema": "https://json-schema.org/draft/2020-12/schema", "type": "ob
     "completion_message": {"type": "string", "title": "Completion template", "x-view": "Preparation", "description": "Literal text, {item_name}, and escaped braces only. Absent/empty uses the source message fallback."},
 }}
 VIEWS = ["recipe-requirements", "recipe-processing", "output", "production-receipt"]
-PUBLICATION_NOTE = "Saved edits/variants enter fresh session catalogues. Existing sessions retain their catalogue; confirmed work retains captured parameters and output ID. known:false blocks crafting, not publication. Transactions publish one file independently."
+PUBLICATION_NOTE = "Saved edits/variants enter fresh session catalogues. Confirmed work retains its parameters and output ID; material-sensitive wash jobs also retain the resolved dose snapshot. Their response replaces the output's base contacts. known:false blocks crafting, not publication. Transactions publish one file independently."
 LIMITATIONS = "Recipe contract and output factory checked. Probe cases separately report actual eligibility and isolated production exchange; validation is not a claim of ordinary player crafting or acquisition."
 
 
 def reference_options(context):
     return {**{name: [dict(id=k, label=k) for k in sorted(context[name])] for name in ("keywords", "ambient_tags", "categories")},
+            'material-roles': [dict(id='',label='Ordinary component'),dict(id='primary',label='Primary material')],
             "processing_sources": [dict(id=k, label=k) for k in PROCESSING_SOURCES],
             "processing_decor": [dict(id="", label="No marker")] + [dict(id=k, label=k) for k in context["processing_decor"]],
             "items": [dict(id=r["id"], label=r["id"] + " · " + r["name"]) for r in context["items"]]}
@@ -65,7 +66,16 @@ def authoring_validate(raw, data, path, data_root):
 def authoring_evidence(context):
     return dict(semantic_verified=bool(context and context["records"][0]["probe"]))
 FIELDS = ["name", "description", "category", "known", "components", "tools", "requires_ambient", "requires_single_item", "result_item"]
-PROCESSING_FIELDS = ["processing_turns", "processing_source", "processing_decor", "placement_message", "completion_message", "vessel_process"]
+PROCESSING_FIELDS = ["processing_turns", "processing_source", "processing_decor", "placement_message", "completion_message", "vessel_process", "material_response"]
+SCHEMA['properties']['components']['items']['properties']['role']=dict(type='string',title='Material role',**{'x-reference':'material-roles'})
+SCHEMA['properties']['material_response']=dict(type='object',title='Material contact response',
+    **{'x-view':'Vessel','x-control':'bounded-record'},properties=dict(
+        version=dict(type='integer',default=1,readOnly=True),
+        primary_role=dict(type='string',default='primary',readOnly=True),
+        tag=dict(type='string',title='Primary tag',**{'x-reference':'keywords'}),
+        high_tier=dict(type='integer',title='Longer-life minimum tier',minimum=2,maximum=100),
+        low_hits=dict(type='integer',title='Lower-band contacts',minimum=1,maximum=100),
+        high_hits=dict(type='integer',title='Higher-band contacts',minimum=1,maximum=100)))
 SCHEMA['properties']['vessel_process']=dict(type='object',title='Vessel-backed preparation',
     **{'x-view':'Vessel','x-control':'bounded-record'},properties=dict(version=dict(type='integer',default=1,readOnly=True),
         water_ml=dict(type='integer',title='Batch water (mL)',minimum=1,maximum=10000),
@@ -166,8 +176,10 @@ def validate_definition(raw, data, path, sources, item_sources, *, writable=Fals
         issue("UNSUPPORTED_RECIPE", "", capability(raw, path)["reason"])
     if 'vessel_process' in raw:
         from engine.vessel_jobs import validate_recipe
-        try: validate_recipe(raw)
+        try: validate_recipe(raw,data)
         except ValueError as error: issue('VESSEL_PROCESS','vessel_process',str(error))
+    elif 'material_response' in raw:
+        issue('MATERIAL_RESPONSE','material_response','A material response requires a supported vessel process.')
     for field in ("name", "description", "category"):
         if field in raw and not isinstance(raw[field], str): issue("RECIPE_FIELD", field, "Expected a string.")
     for field in ("known", "passive_processing", "places_in_world", "_deprecated"):
@@ -262,6 +274,9 @@ def candidates(raw, data, item_sources):
                 try:
                     match = (_item_has_all_tags(item, req["tags"]) if role == "requires_single_item" else
                              _item_has_tag(item, req["tag"], req.get("min_tier", 1)))
+                    if role=='components' and req.get('role')=='primary' and 'material_response' in raw:
+                        from engine.material_response import eligible
+                        match=eligible(item,req['tag'],req.get('min_tier',1))
                     if match: matched.append(dict(id=item.item_id, path=location["path"], pointer=location["pointer"],
                                                   automatic_material=bool(material_candidate(item))))
                 except (KeyError, TypeError, ValueError): continue
@@ -353,6 +368,9 @@ def probe(raw, data, item_sources, path, digest, identity):
         if not missing:
             created = factory.create(raw["result_item"])
             state = snapshot(created, ITEM_STATE); validate_fields(state, ITEM_STATE, "probe output")
+            if 'material_response' in raw:
+                from engine.material_response import output as resolved_output
+                state=resolved_output(raw,selected,factory)
             engine = SimpleNamespace(player=SimpleNamespace(inventory=inv, equipment=Equipment(), light_source=None), data=data)
             # Passive probing constructs an unowned output only. Placement,
             # captured jobs, time, floor output and pickup belong to Test room.
@@ -366,6 +384,7 @@ def probe(raw, data, item_sources, path, digest, identity):
         cases.append(dict(preset=preset, eligible=not missing, missing=missing, inventory=[record for _, record in physical],
                           ambient=ambient_case, selected=selected_ids, materials=materials, owned_vessel=selected_vessel,
                           retained_tools=[i for i in selected_ids if i not in materials and i!=selected_vessel] if not missing else [],
+                          primary=getattr(selected,'primary_state',None),
                           before=before, after=[ids[id(i)] for i in inv.items], committed=committed, output=output,
                           capacity=inv.capacity, weight_after=inv.current_weight,
                           execution="passive allocation and unowned construction only" if raw.get("passive_processing") else "immediate synthetic exchange"))

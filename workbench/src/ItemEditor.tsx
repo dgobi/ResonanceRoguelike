@@ -45,6 +45,7 @@ export function ItemEditor(p: {
       {cap?.editable ? <fieldset disabled={!!reason} className="item-properties"><legend>Common item properties · {cap.supply_class}</legend>
         <ContractFields family={p.family} values={values} disabledFields={cap.supply_class==='held light'?['stackable','consumed_on_use']:[]} onChange={edit} />
         {cap.supply_class==='held light'&&<LightFields family={p.family} values={values} onChange={edit}/>}
+        {cap.supply_class==='weapon coating'&&<><p>One supported essence. The physical dose captures strength and base contacts. A material response replaces contacts for a prepared batch.</p><OrderedRecords family={p.family} values={values} view="weapon coating" disabled={!!reason} onEdit={p.onEdit}/></>}
         {cap.supply_class==='material'&&<VesselFields family={p.family} values={values} disabled={!!reason} onChange={edit}
           onEnable={()=>p.onEdit(s=>itemValue(itemValue(itemValue(s,['vessel'],{version:1,capacity_ml:500,contents:'water'}),['stackable'],false),['consumed_on_use'],false),'Enable water vessel')}/>}
         {cap.supply_class && cap.supply_class!=="material" && <><h3>{cap.supply_class} use</h3><ContractFields family={p.family} values={values} view={cap.supply_class} disabledFields={p.variant ? [] : ["slot"]} nullableFields={["nutrition","hydration","heal_amount","eat_message","drink_message","empty_form"]} onChange={edit}/></>}

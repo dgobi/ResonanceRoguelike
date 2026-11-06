@@ -1,4 +1,4 @@
-# Ordinary recipe authoring · item-preparation-2
+# Ordinary recipe authoring · item-preparation-3
 
 `engine/recipe_authoring.py` is the game-owned Workbench adapter. Gameplay uses
 `engine/crafting.py`, `rendering/craft_screen.py` and the engine's existing
@@ -12,8 +12,8 @@ retained tool. Saved jobs capture their requirement and effective vessel. See
 [Practical vessels](PRACTICAL_VESSELS.md) for the 250 mL/35-turn default, another
 authorable vessel, recovery, ordinary acquisition and compatibility.
 
-Rules admit 15 of 18 shipped, uniquely resolved single-object sources under
-`data/recipes/`: 2 immediate, 2 cooking, 5 drying, 4 steeping, 2 rendering.
+Rules admit 17 of 20 shipped, uniquely resolved single-object sources under
+`data/recipes/`: 2 immediate, 2 cooking, 5 drying, 6 steeping, 2 rendering.
 Each supports exact-source same-ID edits and deliberate safe new-ID variants.
 Execution class is fixed by the original. `campfire` remains gameplay-usable but
 authoring read-only; `hungering_oil` uses unsupported legacy `apply_turns`;
@@ -90,8 +90,10 @@ one object on the owning map floor, followed by ordinary pickup/capacity/use.
 Jobs capture output ID, remaining turns, marker, source, completion text and
 on-fire state. They store no recipe ID and never reread the recipe while ticking.
 Fresh catalogues load saved recipe revisions for later jobs; existing sessions
-retain their catalogue. Completion constructs the captured output ID from its
-current session catalogue. Acquired outputs keep saved copied instance values
+retain their catalogue. Ordinary work and version-one bone work construct the captured output ID from
+the current session catalogue. Version-two material-sensitive washes instead
+restore their validated captured output, including dose strength/contact budget;
+the current output reference must still be available and supported. Acquired outputs keep saved copied instance values
 and established dynamic references described in [item authoring](ITEM_AUTHORING.md).
 
 Output construction and instance validation precede destructive completion.
@@ -106,3 +108,29 @@ cold maps freeze. No wall-clock/offscreen catch-up is added.
 W5H Reset reuses immutable captured inputs; latest-saved tests capture revisions.
 Compatibility fixtures use separate ordinary saves and explicit disposable roots.
 See [W5K delivery](../../workbench/docs/W5K_DELIVERY.md) for source-bound evidence.
+
+## Material-sensitive vessel preparations (SYS-3)
+
+A supported passive source, including the bone tincture, can be duplicated into
+a wash after its output dose has been saved. Choose a supported coating output,
+steeping, stationary heat with burning tier at least two, and a heatproof vessel.
+**Requirements** exposes exact batch water and **Material response**. Assign one
+quantity-one component the `primary` role, choose its matching material tag,
+and set the higher-tier threshold and two contact bands. Threshold is 2..100;
+contacts are 1..100 with the high band strictly greater. The primary minimum
+is at least one and below the higher threshold. Other slots cannot claim that
+role. Base dose contacts are replaced, not added. **Preparation** edits duration.
+The shipped washes use one separate fixative, 125 mL and 15 charged turns.
+
+The ordinary chooser selects actual primary and fixative objects, including
+same-ID objects with different saved keywords. Highest valid integral matching
+tier determines the band. Duplicate rows never add tiers. A finished coating
+cannot supply the primary, even if its keywords match. Exact slot allocations
+and the resolved primary are rechecked at confirmation; stale choices are free.
+The requirement probe displays a synthetic resolved dose and role only. Use a
+saved Test room for actual acquisition, work, use and combat. Save dose, recipe,
+then room/pool in that order; Reset/latest/dirty rules remain unchanged.
+
+See [Material-sensitive washes](MATERIAL_WEAPON_PREPARATIONS.md) for ownership,
+ordinary supply and compatibility. `hungering_oil` recipe execution remains
+inspect-only; admitting its ordinary dose does not admit its legacy recipe.

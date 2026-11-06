@@ -1,0 +1,70 @@
+{
+  "id": "alchemist_washes",
+  "description": "Finite practical stock: vessels, dried fixative, suitable materials and prepared weapon washes.",
+  "roll_count": [
+    5,
+    7
+  ],
+  "items": [
+    {
+      "item_id": "dried_resonant_herb",
+      "weight": 40
+    },
+    {
+      "item_id": "dried_soporific_herb",
+      "weight": 40
+    },
+    {
+      "item_id": "dried_bitter_herb",
+      "weight": 50
+    },
+    {
+      "item_id": "coldbell_cutting",
+      "weight": 35
+    },
+    {
+      "item_id": "crow_bile",
+      "weight": 30
+    },
+    {
+      "item_id": "sulphur_cap_fragment",
+      "weight": 25
+    },
+    {
+      "item_id": "clay_pot",
+      "weight": 120
+    },
+    {
+      "item_id": "herbalist_pouch",
+      "weight": 15
+    },
+    {
+      "item_id": "copper_steeping_kettle",
+      "weight": 70
+    },
+    {
+      "item_id": "waxed_water_flask",
+      "weight": 45
+    },
+    {
+      "item_id": "steeping_note",
+      "weight": 35
+    },
+    {
+      "item_id": "briar_sap",
+      "weight": 25
+    },
+    {
+      "item_id": "weapon_wash_note",
+      "weight": 40
+    },
+    {
+      "item_id": "binding_wash",
+      "weight": 55
+    },
+    {
+      "item_id": "etching_wash",
+      "weight": 55
+    }
+  ]
+}

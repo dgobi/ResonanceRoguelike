@@ -4,6 +4,18 @@ from test_bridge import ROOT, invoke
 from test_authoring import data_fixture
 
 class PreparationWorker(unittest.TestCase):
+    def test_material_response_actual_probe_and_narrow_output_class(self):
+        for iid,essence in [('binding_wash','Binding'),('etching_wash','Dissolution')]:
+            r=self.preview(iid);self.assertTrue(r['valid'],r['diagnostics'])
+            record=r['family']['context']['records'][0]
+            case=record['probe']['cases'][0];self.assertTrue(case['eligible'])
+            self.assertEqual(case['before'],case['after']);self.assertIsNone(case['committed'])
+            self.assertEqual(essence,case['output']['properties']['coating_dose']['essence'])
+            raw=json.loads((ROOT/f'roguelike/data/recipes/{iid}.json').read_bytes())
+            raw['material_response']['low_hits']=True
+            self.assertFalse(self.preview(iid,dict(material_response=raw['material_response']))['valid'])
+            self.assertFalse(self.preview(iid,dict(result_item='resonant_tincture'))['valid'])
+
     def test_vessel_batch_probe_distinguishes_busy_implement_from_retained_tools(self):
         r=self.preview('resonant_bone_tincture',dict(vessel_process=dict(version=1,water_ml=125,heatproof=True)))
         self.assertTrue(r['valid'],r['diagnostics'])
@@ -31,8 +43,8 @@ class PreparationWorker(unittest.TestCase):
             path=p.relative_to(ROOT).as_posix();response=invoke('inspect',asset=path)['result']
             if response['editable']:
                 admitted.append(response['id']);self.assertEqual(response['family']['effective_operations'],['edit','variant'])
-                self.assertEqual(response['family']['contract'],'item-preparation-2')
-        self.assertEqual(len(admitted),15);self.assertIn('dry_resonant_herb',admitted)
+                self.assertEqual(response['family']['contract'],'item-preparation-3')
+        self.assertEqual(len(admitted),17);self.assertIn('dry_resonant_herb',admitted)
         for source in ('cook_meat','dry_coldbell','briar_binding_oil'):
             for variant in (False,True):
                 r=self.preview(source,dict(name='Authored preparation'),variant=variant)

@@ -31,7 +31,7 @@ class SuppliesContract(unittest.TestCase):
     def test_executable_corpus_and_classes(self):
         rows=[(iid,a.capability(row['definition'],row['path'])) for iid,ss in self.sources.items() for row in ss if len(ss)==1]
         admitted=[(iid,c) for iid,c in rows if c['editable']]
-        self.assertEqual(Counter(c['supply_class'] for _,c in admitted),dict(material=33,food=9,drink=2,treatment=1,weapon=6,armour=2,shield=1,satchel=3,**{'venom treatment':2,'held light':4}))
+        self.assertEqual(Counter(c['supply_class'] for _,c in admitted),dict(material=33,food=9,drink=2,treatment=1,weapon=6,armour=2,shield=1,satchel=3,**{'venom treatment':2,'held light':4,'weapon coating':5}))
         for iid,c in admitted:
             self.assertFalse(self.valid(iid),iid)
         self.assertEqual({iid for iid,c in admitted if c['supply_class']=='held light'},

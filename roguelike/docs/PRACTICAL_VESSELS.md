@@ -4,7 +4,7 @@ Carry a registered vessel, open Inventory, select its physical row and press **E
 The row shows a short instance identity and current/capacity mL. Choose **Fill**
 beside visible, reachable drinking-water terrain; **Transfer** chooses another
 carried vessel; **Drink** uses up to 250 mL; **Empty** asks before discarding water.
-Amount choices include the saved catalogue's preparation batch, 250 mL, available
+Amount choices include the saved catalogue's supported preparation batches (currently 125 and 250 mL), 250 mL, available
 room/water and, for transfer, all source water. Oversized choices are refused.
 Esc cancels freely. One successful handling action pays one ordinary charged
 phase through the existing action scheduler. Denial, inspection and cancellation
@@ -15,7 +15,7 @@ spend neither water nor time. Full paralysis prevents handling.
 | Clay pot | 500 mL | 0.6 kg | Yes |
 | Copper steeping kettle | 1,000 mL | 0.9 kg | Yes |
 | Waxed water flask | 2,000 mL | 0.2 kg | No |
-| Small steeping cup, authoring example | 150 mL | 0.25 kg | Yes; too small for the default batch |
+| Small steeping cup, authoring example | 150 mL | 0.25 kg | Yes; fits washes, too small for 250 mL bone work |
 
 Water adds 1 kg per litre to the actual object's empty weight. Existing satchel
 reductions apply once to the combined load. Filled-vessel pickup and filling obey
@@ -50,8 +50,7 @@ existing processing rules; no continuous fire simulation has been introduced.
 
 ## Find and author alternatives
 
-Existing apothecary reagent stock can contain resonant bone. Newly selected
-`apothecary_c` shops use the `alchemist_preparation` pool for clay pots, copper
+Existing apothecary reagent stock can contain resonant bone. SYS-1 `apothecary_c` shops use the `alchemist_preparation` pool for clay pots, copper
 kettles, waxed carriers and the optional **steeping note**. Earlier selected
 apothecaries retain their original pool and stock rules, including pending shops.
 The existing clay-pot recipe remains another route. Stock is weighted and finite;
@@ -103,3 +102,13 @@ Saved pre-SYS-1 placement dependencies accept only the exact shipped clay-pot
 definition plus its approved default capability. All other source changes still
 require matching definitions; new plans retain the complete descriptor hash and
 detect later capacity changes or removal. No saved selection is restocked or rerolled.
+
+## Material-sensitive washes (SYS-3)
+
+New selections use successor `apothecary_d` and `alchemist_washes`, retaining the
+useful preparation stock while offering finite finished washes and their inputs.
+Existing selected C shops and depleted containers remain unchanged. The new
+[weapon washes](MATERIAL_WEAPON_PREPARATIONS.md) consume exactly 125 mL and return
+the same empty vessel. Their additive version-two job captures the chosen primary
+and a validated output snapshot. Version-one bone work keeps its exact historical
+shape and completion behavior; no material response is invented for it.

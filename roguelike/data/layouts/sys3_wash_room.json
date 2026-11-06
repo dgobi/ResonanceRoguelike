@@ -1,0 +1,29 @@
+{
+  "id": "sys3_wash_room",
+  "width": 17,
+  "height": 11,
+  "layers": [
+    "#################",
+    "#...............#",
+    "#...............#",
+    "#...............#",
+    "#.......~.......#",
+    "#...............#",
+    "#...............#",
+    "#...............#",
+    "#.<.............#",
+    "#...............#",
+    "#################"
+  ],
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "<": "stairs_up",
+    "~": "shallow_water"
+  },
+  "player_start": {
+    "x": 3,
+    "y": 6
+  },
+  "special_tiles": [{"type":"item","x":2,"y":2,"item_id":"small_steeping_cup"},{"type":"item","x":3,"y":2,"item_id":"coldbell_cutting"},{"type":"item","x":4,"y":2,"item_id":"briar_sap"},{"type":"item","x":5,"y":2,"item_id":"sulphur_cap_fragment"},{"type":"item","x":6,"y":2,"item_id":"crow_bile"},{"type":"item","x":7,"y":2,"item_id":"dried_bitter_herb"},{"type":"item","x":8,"y":2,"item_id":"dried_bitter_herb"},{"type":"item","x":9,"y":2,"item_id":"dried_bitter_herb"},{"type":"item","x":10,"y":2,"item_id":"dried_bitter_herb"},{"type":"item","x":11,"y":2,"item_id":"crude_blade"},{"type":"decor","x":9,"y":6,"decor_id":"campfire_lit"},{"type":"creature","x":13,"y":7,"creature_id":"hollow_revenant"},{"type":"creature","x":13,"y":4,"creature_id":"stone_lurker"}]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "binding_wash",
+  "name": "binding wash",
+  "category": "alchemy",
+  "description": "Steep one suitable material with dried fixative. Richer material makes the wash last longer.",
+  "known": true,
+  "requires_ambient": [
+    {
+      "tag": "burning",
+      "min_tier": 2
+    }
+  ],
+  "result_item": "binding_wash",
+  "passive_processing": true,
+  "processing_turns": 15,
+  "processing_source": "steeping",
+  "processing_decor": "drying_herb",
+  "completion_message": "{item_name} is ready. The empty vessel can be used again.",
+  "vessel_process": {
+    "version": 1,
+    "water_ml": 125,
+    "heatproof": true
+  },
+  "components": [
+    {
+      "tag": "binding",
+      "min_tier": 1,
+      "quantity": 1,
+      "role": "primary"
+    },
+    {
+      "tag": "fixative",
+      "min_tier": 1,
+      "quantity": 1
+    }
+  ]
+,"material_response":{"version":1,"primary_role":"primary","tag":"binding","high_tier":2,"low_hits":6,"high_hits":12}}

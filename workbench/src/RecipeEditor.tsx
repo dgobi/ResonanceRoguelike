@@ -5,6 +5,7 @@ import { recipeModel, recipeRow, recipeValue } from "./recipe";
 import type { RecipeContext } from "./protocol";
 import { ConjunctionEditor } from "./ConjunctionEditor";
 import { VesselFields } from './VesselFields';
+import { MaterialResponseFields } from './MaterialResponseFields';
 
 export function RecipeEditor(p: {
   family: ContentFamily; draft: string; path: string; context?: RecipeContext; selectedId?: string; dirty: boolean; validated: boolean;
@@ -52,7 +53,7 @@ export function RecipeEditor(p: {
         const validRows = Array.isArray(rows) && rows.every(r=>r && typeof r === "object" && !Array.isArray(r));
         return <section key={field}><h3>{title}</h3>
           <p className="muted small">{field === "requires_ambient" ? "Conditions, not automatically consumed item inputs. Any matching ambient source satisfies a row; quantity is not consumed." : field === "tools" ? "Distinct physical instances fill tool slots and remain in inventory. Defaults: minimum tier 1, quantity 1." : "Ordered physical requirements. Each instance fills one slot. Repeated requirements stay separate. Defaults: minimum tier 1, quantity 1."}</p>
-          {validRows ? <div className="recipe-table-scroll"><table className="pool-table"><thead><tr><th>Row</th><th>Tag</th><th>Minimum tier</th>{field !== "requires_ambient" && <th>Quantity</th>}<th>{cap?.editable ? "Edit / potential tag matches" : "Potential tag matches"}</th></tr></thead><tbody>
+          {validRows ? <div className="recipe-table-scroll"><table className="pool-table"><thead><tr><th>Row</th>{Object.entries(schema.items?.properties || {}).map(([key,s])=><th key={key}>{s.title}</th>)}<th>{cap?.editable ? "Edit / potential tag matches" : "Potential tag matches"}</th></tr></thead><tbody>
             {rows.map((row,i)=><tr key={i}><td>{i+1}</td>
               {Object.entries(schema.items?.properties || {}).map(([key,cell])=><td key={key}>{cap?.editable ? <ScalarControl schema={cell} value={row[key]} references={p.family.references} disabled={!!reason} label={`${field} ${key === "min_tier" ? "tier" : key} ${i+1}`} onChange={value=>edit([field,i,key],value)} /> : String(row[key] ?? cell.default ?? "Absent")}</td>)}
               <td>{cap?.editable && <div className="edit-actions">{(["up","down","remove"] as const).map(action=><button key={action} disabled={!!reason || action === "up" && i === 0 || action === "down" && i === rows.length-1} aria-label={`${action} ${field} ${i+1}`} onClick={()=>p.onEdit(s=>recipeRow(s,field,action,i),`${action} requirement`)}>{action === "up" ? "↑" : action === "down" ? "↓" : "Remove"}</button>)}</div>}
@@ -62,12 +63,13 @@ export function RecipeEditor(p: {
         </section>;
       })}
       <ConjunctionEditor family={p.family} value={values.requires_single_item} record={record} disabled={!!reason} current={evidenceCurrent} busy={p.busy} onItem={p.onItem} onEdit={p.onEdit}/>
-      {passive&&values.result_item==='resonant_bone_tincture'&&<VesselFields family={p.family} values={values} process disabled={!!reason} onChange={edit}
+      {passive&&<VesselFields family={p.family} values={values} process disabled={!!reason} onChange={edit}
         onEnable={()=>edit(['vessel_process'],{version:1,water_ml:250,heatproof:true})}/>}
+      {passive&&!!values.vessel_process&&<MaterialResponseFields family={p.family} values={values} disabled={!!reason} onChange={edit}/>}
     </>}
     {view === "Preparation" && (passive ? <><p>Requires a stationary fire in addition to the declared conditions. Placement must pass the ordinary map, occupancy and warmth checks. Confirmation spends materials and advances the first processing turn. {values.vessel_process ? "The selected vessel stays with the work. Completion returns that empty vessel and one dose on the floor; abandonment recovers the vessel and loses the committed ingredients and water." : "Tools stay carried. Finished output is one floor object to collect."}</p><fieldset disabled={!!reason}>
       {Object.entries(p.family.descriptor.schema.properties || {}).filter(([,s])=>s["x-view"]==="Preparation").map(([key,s])=><label key={key}>{s.title}<ScalarControl schema={s} references={p.family.references} value={values[key]} disabled={key==="processing_decor"&&(values.processing_source || "drying")==="cooking"} onChange={v=>edit([key],v)}/>{values[key]===undefined&&<small>Absent in source{s.default!==undefined?` · effective default: ${s.default}`:""}</small>}<small>{s.description}</small>{key==="processing_decor"&&(values.processing_source || "drying")==="cooking"&&<small>Inactive for cooking: the fire is preserved and this marker is ignored.</small>}</label>)}
-      </fieldset><p>Confirmed work captures its output ID, duration, source, marker and completion text. Recipe revisions apply to later work in a fresh catalogue. Completion constructs the recorded output ID from that session's item catalogue.</p></> : <p>Immediate exchange uses the current inventory and advances no turn. This source has no passive preparation parameters.</p>)}
+      </fieldset><p>Confirmed work captures its output ID, duration, source, marker and completion text. Material-sensitive wash work also captures the resolved dose: its response replaces the output's base contact budget. Other work constructs the recorded output ID from the session catalogue. Recipe revisions apply to later work in a fresh catalogue.</p></> : <p>Immediate exchange uses the current inventory and advances no turn. This source has no passive preparation parameters.</p>)}
     {view === "Output" && <>
       <h3>Declared output</h3><code>{values.result_item !== undefined ? `result_item = ${JSON.stringify(values.result_item)}` : `result_tile = ${JSON.stringify(values.result_tile)}`}</code>
       {cap?.editable && <fieldset disabled={!!reason}><ContractFields family={p.family} values={values} view="Output" onChange={edit} /></fieldset>}

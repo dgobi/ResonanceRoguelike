@@ -1,0 +1,17 @@
+{
+  "id": "binding_wash",
+  "name": "binding wash",
+  "description": "A water-steeped wash for a weapon. Its chosen material determines how many contacts it lasts.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.1,
+  "stackable": false,
+  "on_use": "apply_to_weapon",
+  "apply_message": "The binding takes. The blade holds.",
+  "temporary_essence": [
+    {"essence": "Binding", "strength": 0.4, "hits": 6}
+  ],
+  "keywords": [
+
+  ]
+}

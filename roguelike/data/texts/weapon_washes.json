@@ -1,0 +1,18 @@
+{
+  "id": "weapon_washes",
+  "title": "What the Blade Carries",
+  "type": "document",
+  "condition": "intact",
+  "reads_as": "pages",
+  "lacunae": false,
+  "pages": [
+    {
+      "text": "Measure 125 mL of water into a heat-safe pot. Add one dried bitter or aromatic herb to fix the wash. For Binding, choose coldbell or sinew; briar sap will hold through twice as many strikes. For an etching wash, use sulphur cap; crow bile lasts longer. Steep beside a strong fire for fifteen turns, then recover the empty pot and the dose.",
+      "damaged": false
+    },
+    {
+      "text": "Spread the dose on the weapon in thy hand. Binding lends the blade purchase on fraying dead forms. Dissolution bites certain stubborn shells and structures. The richer wash endures longer, but strikes no harder: attend to what thou strikest. A ready-made oil or another weapon may serve as well.",
+      "damaged": false
+    }
+  ]
+}

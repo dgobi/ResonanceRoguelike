@@ -340,37 +340,9 @@ class ItemSystem:
         return True  # consumed
 
     def _use_apply_to_weapon(self, item: "Item", engine: "Engine") -> bool:
-        """Coat the equipped weapon with temporary essence charges."""
-        equip = getattr(engine.player, "equipment", None)
-        if equip is None:
-            engine.log.add("Nothing to apply it to.", WORN_STONE)
-            return False
-        weapon = equip.slots.get("weapon")
-        if weapon is None:
-            engine.log.add("No weapon equipped.", WORN_STONE)
-            return False
-
-        item_def  = engine.data.items.get(getattr(item, "item_id", ""), {})
-        temp_ess  = item_def.get("temporary_essence", [])
-        if not temp_ess:
-            engine.log.add("The preparation has no effect on the blade.", WORN_STONE)
-            return False
-
-        # Merge onto weapon's temporary_essence list, replacing matching essences
-        existing = getattr(weapon, "temporary_essence", [])
-        for te in temp_ess:
-            ess = te.get("essence", "")
-            existing = [e for e in existing if e.get("essence") != ess]
-            existing.append({
-                "essence":        ess,
-                "strength":       float(te.get("strength", 0.5)),
-                "hits_remaining": int(te.get("hits", 5)),
-            })
-        weapon.temporary_essence = existing
-
-        apply_msg = item_def.get("apply_message", f"The blade is coated.")
-        engine.log.add(apply_msg, RESONANCE_MID)
-        return True  # consumed
+        """Consume one exact dose before installing its captured coating."""
+        from engine.coating_doses import apply
+        return apply(item, engine)
 
     def _use_learn_deep_word(self, item: "Item", engine: "Engine") -> bool:
         """Consume tincture to learn a random tier-1 deep tongue word."""

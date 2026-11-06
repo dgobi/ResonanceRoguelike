@@ -1,0 +1,57 @@
+{
+  "tools/critical_fix_regressions/tests/g1_support.py": {
+    "reason": "Historical fingerprints omit only exact validated canonical added dose defaults for the three pre-existing oils; modified doses, all current comparisons and spent weapon coatings remain. Genuine archives unchanged.",
+    "before_sha256": "91cafe7a35bec4770baf4df0b2191130490aa7831fabdb5b3b2e4565632affc4",
+    "after_sha256": "312741f12bf33b69c4b309645fe7848dd0d8214c6a467d3c5bbe71980e04f3fe"
+  },
+  "tools/critical_fix_regressions/tests/test_gameplay_g17.py": {
+    "reason": "Two new valid structures: successor apothecary and saved wash Test room; 101 to 103.",
+    "before_sha256": "c0e862b2e2517ea1d4b06dfb64f6e002936eb4ec368192e6f705b7af0fe2f082",
+    "after_sha256": "67624a0a6905002b52439391dcb9c37e16e99f4c25f966cece692a3b922e9fd8"
+  },
+  "tools/critical_fix_regressions/tests/test_structure_contract.py": {
+    "reason": "Two new valid structures; ordinary buildings 62 to 63 and authored submaps 31 to 32, plus positive room membership.",
+    "before_sha256": "4a6c2a20dfd528ef113c43cf1ce9ed6ce377665f5a023e2285513517c2d351f7",
+    "after_sha256": "40e2df85f9491f7cc6e43c2cf7b42681a59467b6036bbb59061a045b17370a58"
+  },
+  "tools/critical_fix_regressions/tests/test_usable_supplies.py": {
+    "reason": "Three existing ordinary oil sources plus two washes now form five supported weapon-coating items.",
+    "before_sha256": "2925dfe337040675d3518a08338070334ed2518bf4a5a9c5a323481a974b7317",
+    "after_sha256": "6af5b4089648eff5945f70dc1cc1bc7f5993ab4b93d91f9bf7e579087d20d547"
+  },
+  "workbench/worker/test_items.py": {
+    "reason": "Two wash items and one optional readable clue: 87 to 90. Three old oils and two washes admitted: 63 to 68 editable, consumable 22 to 27.",
+    "before_sha256": "c05187c82371927eb4d8de34f76935a4deecca8a03ae0dd4a795f9c161eff2c2",
+    "after_sha256": "975273d7395ec8261a582d9e34e58a657a35dd636c1634ae55c4c7d31b87089c"
+  },
+  "workbench/worker/test_recipes.py": {
+    "reason": "Two saved wash recipes: 18 to 20.",
+    "before_sha256": "f6fb63706c54c893a8301b9b57818e71d117ffc02c4882f85502a264e82c435b",
+    "after_sha256": "12da40c9a98d24bc4fe9433580f577a13388f257b72eea68d56adcda4a3406f2"
+  },
+  "workbench/worker/test_preparation.py": {
+    "reason": "Recipe contract v3 and two new supported preparations: 15 to 17; additional actual resolved-dose/invalid-output worker coverage.",
+    "before_sha256": "262c6dcc72f9d6a867d9cba9ce569e6dbadec1247f06c98611aab695ebd81379",
+    "after_sha256": "cecdb2ec592b55ffaf7725f474dd7818ab1467fa0a748ef5b287db9e513e1152"
+  },
+  "workbench/worker/test_equipment.py": {
+    "reason": "Registered shared item contract v6; equipment policy unchanged.",
+    "before_sha256": "1c20e344c10696e95b70435cec0b18b580980c43a520380de2b4412c9bf020ac",
+    "after_sha256": "92b544957cb6714605ec7cea942726e97666e48d0a82bbb46f0a868ef55d901e"
+  },
+  "workbench/worker/test_supplies.py": {
+    "reason": "Registered shared item contract v6; supply policy unchanged.",
+    "before_sha256": "55796724124cad9ba61a1d7f73c940631f3f1946f83102815cf33dcef5088d06",
+    "after_sha256": "13f699249565860c2cc71566ef1cf7427c1327421879b3f194fd3c01ae37b660"
+  },
+  "workbench/worker/test_pools_w5o.py": {
+    "reason": "One successor stock pool: 21 to 22.",
+    "before_sha256": "25a2f38822a2993fe3ecb4df1d7c23420c143bfbef933b1cf09489ae2f278164",
+    "after_sha256": "a04949008d8295a23867bf8f69ea2a7635f88c0268ccb3aea76ac7e5b77819b4"
+  },
+  "workbench/worker/test_buildings_w5p.py": {
+    "reason": "One successor ordinary building: 62 to 63.",
+    "before_sha256": "5ddd61955f45417100ae4007b14f8c24049764d65fa03f0c81f2cfe9c353da32",
+    "after_sha256": "d7429af3eca48741dac01803521ff84079fcf2aa6684bf9ec6a4815ff7817110"
+  }
+}

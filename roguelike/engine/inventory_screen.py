@@ -143,7 +143,8 @@ def _flat_list(groups: dict[str, list], collapsed: "set[str] | None" = None) -> 
         seen: dict[str, list] = {}
         for item in items:
             if getattr(item, "stackable", False):
-                iid = getattr(item, "item_id", "") or str(id(item))
+                from engine.coating_doses import grouping_key
+                iid = grouping_key(item)
                 seen.setdefault(iid, []).append(item)
             else:
                 # Non-stackable: each item is its own entry
@@ -317,7 +318,9 @@ class InventoryScreen:
                     if consumed:
                         from engine.item_transfers import consume, consume_throw_unit
                         from entities.item import use_capability
-                        if use_capability(row_item) == 'cure_numbing_venom':
+                        if use_capability(row_item) == 'apply_to_weapon':
+                            pass  # Dose and effect committed together in the handler.
+                        elif use_capability(row_item) == 'cure_numbing_venom':
                             consume_throw_unit(engine, row_item)
                         else:
                             consume(engine, row_item)
@@ -643,6 +646,9 @@ class InventoryScreen:
             name_str = getattr(item, "name", "?")
             from engine.vessels import label as vessel_label
             name_str = vessel_label(item)
+            if hasattr(item,'coating_dose'):
+                from engine.coating_doses import label as dose_label
+                name_str = dose_label(item)
             if label:
                 name_str += f" ({label})"
             elif getattr(item, "stackable", False) and getattr(item, "count", 1) > 1:
@@ -722,6 +728,12 @@ class InventoryScreen:
 
         # Description
         desc = getattr(item, "description", "") or item_def.get("description", "")
+        if hasattr(item,'coating_dose'):
+            from engine.coating_doses import label as dose_label
+            weapon=engine.player.equipment.slots.get('weapon')
+            desc=dose_label(item)+'. Apply to '+(weapon.name if weapon else 'an equipped weapon')+'. '+desc
+        if getattr(item,'temporary_essence',[]):
+            desc+=' Coatings: '+', '.join(f"{r['essence']} {r['strength']:g}: {r['hits_remaining']} contacts" for r in item.temporary_essence)+'.'
         from entities.item import use_capability
         if item.on_use is None and use_capability(item) == 'throw_flint_shard':
             desc += " Use: throw one for a clatter; the shard is lost."

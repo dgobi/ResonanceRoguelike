@@ -17,8 +17,19 @@ independent remote readback. Stop at SYS-3; no wiki or SYS-4 work.
 - Decisions: additive owned dose payload; version-two wash jobs capture validated
   output state; explicit primary component role/identity with two finite bands.
   Keep existing coating combat/contact and bone-job clock/semantics.
-- Next: M2/M3 runtime, exact UI, persistence and authoring contracts; M4 packaged
-  authoring and two ordinary outings; catalogue/compatibility preflight before
-  M5 final source freeze and applicable unfiltered gates.
+- M2/M3 implemented: exact instance/role allocation, captured doses and version-two
+  wash work, transactional application, cache/JSON compatibility, supported item
+  and recipe controls. Focused runtime development checks pass.
+- M4 packaged authoring passed in `workbench/.artifacts/sys-3/native-1793937791664`:
+  both recipes/items, four low/high batches, real contact/expiry, saved revision,
+  Reset/latest/dirty capture and restored final values. Controlled target fixtures
+  are disclosed. Two normal-AI ordinary journeys are running separately.
+- M4 ordinary outings passed: self-prepared Etching against native Briar Lurker;
+  finite finished Binding against native Hollow Revenant; normal AI/costs and
+  return to depleted stock, F5/F9 and independent cold loads.
+- Preflight completed. Source-change refusals and stale catalogue expectations
+  retained accurately; final affected checks pass. Read-only alias review fixed.
+- M5 next: commit/freeze this implementation, run applicable unfiltered gates,
+  retain results, deliver SYS_3.md, publish main/tags and verify remote identities.
 - Blockers: none. Final values begin at strength .4, 6/12 contacts, 125 mL,
   one primary + one fixative, 15 charged turns.

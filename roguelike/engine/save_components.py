@@ -138,12 +138,16 @@ def validate_block(record, schemas, label):
 
 def serialize_item(item):
     return {"item_id": item.item_id, "item_state_version": 1, **snapshot(item, ITEM_STATE),
+            **({'coating_dose': copy.deepcopy(item.coating_dose)} if hasattr(item, 'coating_dose') else {}),
             **({'held_light': copy.deepcopy(item.held_light)} if hasattr(item, 'held_light') else {}),
             **({'vessel': copy.deepcopy(item.vessel)} if hasattr(item,'vessel') else {}),
             **({'vessel_absent_version':item.vessel_absent_version} if hasattr(item,'vessel_absent_version') else {})}
 
 
 def validate_item(row, label):
+    if 'coating_dose' in row:
+        from engine.coating_doses import validate
+        validate(row['coating_dose'], row)
     if 'held_light' in row:
         from engine.held_light import validate
         validate(row['held_light'], row)
@@ -167,6 +171,8 @@ def validate_item(row, label):
 
 
 def restore_item(item, row):
+    validate_item(row, 'restored item')
+    factory_dose = copy.deepcopy(getattr(item, 'coating_dose', None))
     factory_light = copy.deepcopy(getattr(item, 'held_light', None))
     for key in ITEM_STATE:
         if key in row:
@@ -184,6 +190,14 @@ def restore_item(item, row):
         legacy(item)
     from engine.stock_prose import refresh
     refresh(item, item.item_id)
+    if hasattr(item, 'coating_dose'):del item.coating_dose
+    if 'coating_dose' in row:
+        item.coating_dose=copy.deepcopy(row['coating_dose'])
+    elif item.on_use=='apply_to_weapon' and factory_dose is not None:
+        item.coating_dose=factory_dose
+    if hasattr(item,'coating_dose'):
+        from engine.coating_doses import validate
+        validate(item.coating_dose,item)
     if hasattr(item, 'held_light'):
         del item.held_light
     if 'held_light' in row:

@@ -1,0 +1,255 @@
+{
+  "passed": true,
+  "receipt": "workbench/.artifacts/sys-3/native-1793937791664/receipt.json",
+  "receipt_sha256": "2bc5fb9a28d45b910a13556fecf82f849d30b8897a318610cd120d365dbce85a",
+  "package_sha256": "f7c5e8ca9b839fd70816ad339079e91c29e7b44aeea22cc8016e77b71e052c3d",
+  "publication_count": 8,
+  "publications": [
+    {
+      "path": "roguelike/data/items/consumables/etching_wash.json",
+      "sha256": "737b12a3def3f351f288e20e4bf9d9e596770424747544e0013003fd92f758fa"
+    },
+    {
+      "path": "roguelike/data/recipes/binding_wash.json",
+      "sha256": "6ec1ae150a4821be7bfe46d4e6b02224875caeea1080cc3ce84f0c8b3c2b6ebe"
+    },
+    {
+      "path": "roguelike/data/recipes/etching_wash.json",
+      "sha256": "4d770c6477b378d6295d3ca5a5b87e23f1c30673969ca6f6c3105ccdf69a6a4d"
+    },
+    {
+      "path": "roguelike/data/layouts/sys3_wash_room.json",
+      "sha256": "f8ff4d7d16ed2471a04b65cb0117b37a1897673e7503df89a991df8ad9d403e4"
+    },
+    {
+      "path": "roguelike/data/items/consumables/binding_wash.json",
+      "sha256": "8715b44b84c21f2e5f01b60311edd7213ce9e99f172eb03b5f5b7e848189d07e"
+    },
+    {
+      "path": "roguelike/data/recipes/binding_wash.json",
+      "sha256": "0a59194751e778c94bea300f45ae8b2c45963e4b3aaf245aca43318a261592cc"
+    },
+    {
+      "path": "roguelike/data/recipes/binding_wash.json",
+      "sha256": "6ec1ae150a4821be7bfe46d4e6b02224875caeea1080cc3ce84f0c8b3c2b6ebe"
+    },
+    {
+      "path": "roguelike/data/items/consumables/binding_wash.json",
+      "sha256": "8cc9de5936ee1935252f99e30b0a20353d616ae4d7e774802d543f0563fecfad"
+    }
+  ],
+  "first_binding_creation_receipt": "native-1793937722977/receipt.json",
+  "scenarios": {
+    "original": {
+      "fixture": "Targets inert, extended HP; real resolver/contact paths. Not an ordinary survival outing.",
+      "batches": [
+        {
+          "primary": {
+            "role": "primary",
+            "item_id": "coldbell_cutting",
+            "tag": "binding",
+            "tier": 1,
+            "hits": 6
+          },
+          "output": "binding_wash",
+          "dose": {
+            "version": 1,
+            "essence": "Binding",
+            "strength": 0.4,
+            "hits": 6
+          }
+        },
+        {
+          "primary": {
+            "role": "primary",
+            "item_id": "briar_sap",
+            "tag": "binding",
+            "tier": 2,
+            "hits": 12
+          },
+          "output": "binding_wash",
+          "dose": {
+            "version": 1,
+            "essence": "Binding",
+            "strength": 0.4,
+            "hits": 12
+          }
+        },
+        {
+          "primary": {
+            "role": "primary",
+            "item_id": "sulphur_cap_fragment",
+            "tag": "caustic",
+            "tier": 1,
+            "hits": 6
+          },
+          "output": "etching_wash",
+          "dose": {
+            "version": 1,
+            "essence": "Dissolution",
+            "strength": 0.4,
+            "hits": 6
+          }
+        },
+        {
+          "primary": {
+            "role": "primary",
+            "item_id": "crow_bile",
+            "tag": "caustic",
+            "tier": 2,
+            "hits": 12
+          },
+          "output": "etching_wash",
+          "dose": {
+            "version": 1,
+            "essence": "Dissolution",
+            "strength": 0.4,
+            "hits": 12
+          }
+        }
+      ],
+      "capture_manifest": "77b91b39fd9c9c5f16f2067e33f619c404c7c1965ccfc9158157c93c22546c9e",
+      "remaining_coatings": []
+    },
+    "reset": {
+      "fixture": "Targets inert, extended HP; real resolver/contact paths. Not an ordinary survival outing.",
+      "batches": [
+        {
+          "primary": {
+            "role": "primary",
+            "item_id": "coldbell_cutting",
+            "tag": "binding",
+            "tier": 1,
+            "hits": 6
+          },
+          "output": "binding_wash",
+          "dose": {
+            "version": 1,
+            "essence": "Binding",
+            "strength": 0.4,
+            "hits": 6
+          }
+        },
+        {
+          "primary": {
+            "role": "primary",
+            "item_id": "briar_sap",
+            "tag": "binding",
+            "tier": 2,
+            "hits": 12
+          },
+          "output": "binding_wash",
+          "dose": {
+            "version": 1,
+            "essence": "Binding",
+            "strength": 0.4,
+            "hits": 12
+          }
+        }
+      ],
+      "capture_manifest": "77b91b39fd9c9c5f16f2067e33f619c404c7c1965ccfc9158157c93c22546c9e",
+      "remaining_coatings": []
+    },
+    "edited": {
+      "fixture": "Targets inert, extended HP; real resolver/contact paths. Not an ordinary survival outing.",
+      "batches": [
+        {
+          "primary": {
+            "role": "primary",
+            "item_id": "coldbell_cutting",
+            "tag": "binding",
+            "tier": 1,
+            "hits": 7
+          },
+          "output": "binding_wash",
+          "dose": {
+            "version": 1,
+            "essence": "Binding",
+            "strength": 0.5,
+            "hits": 7
+          }
+        },
+        {
+          "primary": {
+            "role": "primary",
+            "item_id": "briar_sap",
+            "tag": "binding",
+            "tier": 2,
+            "hits": 12
+          },
+          "output": "binding_wash",
+          "dose": {
+            "version": 1,
+            "essence": "Binding",
+            "strength": 0.5,
+            "hits": 12
+          }
+        }
+      ],
+      "capture_manifest": "23dbaae867927228cf565956a22f1ab441021dc3106457c163f81963c9567272",
+      "remaining_coatings": []
+    },
+    "dirtyExcluded": {
+      "fixture": "Targets inert, extended HP; real resolver/contact paths. Not an ordinary survival outing.",
+      "batches": [
+        {
+          "primary": {
+            "role": "primary",
+            "item_id": "coldbell_cutting",
+            "tag": "binding",
+            "tier": 1,
+            "hits": 7
+          },
+          "output": "binding_wash",
+          "dose": {
+            "version": 1,
+            "essence": "Binding",
+            "strength": 0.5,
+            "hits": 7
+          }
+        },
+        {
+          "primary": {
+            "role": "primary",
+            "item_id": "briar_sap",
+            "tag": "binding",
+            "tier": 2,
+            "hits": 12
+          },
+          "output": "binding_wash",
+          "dose": {
+            "version": 1,
+            "essence": "Binding",
+            "strength": 0.5,
+            "hits": 12
+          }
+        }
+      ],
+      "capture_manifest": "23dbaae867927228cf565956a22f1ab441021dc3106457c163f81963c9567272",
+      "remaining_coatings": []
+    }
+  },
+  "limits": "Development packaged witness. Later ownership repair and final source boundary are separately exercised by final runtime-only native gate. Controlled target AI/HP disclosed; ordinary survival outings remain separate.",
+  "earlier_attempts": [
+    {
+      "receipt": "workbench/.artifacts/sys-3/native-1793937500492/receipt.json",
+      "sha256": "fc70f3c998470e71b1ff9bedce19080c392809758a89232ed9e354419deb9344",
+      "failure": "locator.click: Error: strict mode violation: getByRole('button', { name: 'Properties', exact: true }).filter({ visible: true }) resolved to 2 elements:\n    1) <button class=\"active\">Properties</button> aka getByTestId('item-editor').getByRole('button', { name: 'Properties' })\n    2) <button class=\"active\">Properties</button> aka getByTestId('authoring').getByRole('button', { name: 'Properties' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Properties', exact: true }).filter({ visible: true })\u001b[22m\n\n    at dose (G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-sys-3.mjs:61:24)\n    at async file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-sys-3.mjs:147:94"
+    },
+    {
+      "receipt": "workbench/.artifacts/sys-3/native-1793937534704/receipt.json",
+      "sha256": "ce0bae792cbf931ef612c1cdbf3eb6b4b6c55e8c20a3e3b45998e428fee7d75b",
+      "failure": "locator.click: Timeout 25000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"authoring\"]:visible').getByRole('button', { name: 'Begin edit', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button disabled class=\"primary full\">Begin edit</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 \u00d7 waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 \u00d7 waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    49 \u00d7 waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at begin (G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-sys-3.mjs:30:81)\n    at async dose (G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-sys-3.mjs:59:92)\n    at async file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-sys-3.mjs:147:94"
+    },
+    {
+      "receipt": "workbench/.artifacts/sys-3/native-1793937640141/receipt.json",
+      "sha256": "a0eb672ecf2c07d52a6f671e255cee773709a2f22a419bf43aff0f0ab090aaf3",
+      "failure": "locator.click: Timeout 25000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Confirm apply one file', exact: true }).filter({ visible: true })\u001b[22m\n\n    at apply (G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-sys-3.mjs:31:357)\n    at async dose (G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-sys-3.mjs:66:2)\n    at async file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-sys-3.mjs:147:94"
+    },
+    {
+      "receipt": "workbench/.artifacts/sys-3/native-1793937722977/receipt.json",
+      "sha256": "b0836794b27c026ddef05629a1fb6f5ee590a21a4bfd5a9bfd5322c486538c56",
+      "failure": "locator.setChecked: Error: strict mode violation: getByLabel('Group in inventory', { exact: true }) resolved to 2 elements:\n    1) <input type=\"checkbox\" aria-invalid=\"false\" aria-label=\"Group in inventory\"/> aka getByLabel('Group in inventory').first()\n    2) <input checked type=\"checkbox\" aria-invalid=\"false\" aria-label=\"Group in inventory\"/> aka getByRole('checkbox', { name: 'Group in inventory' })\n\nCall log:\n\u001b[2m  - waiting for getByLabel('Group in inventory', { exact: true })\u001b[22m\n\n    at dose (G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-sys-3.mjs:63:59)\n    at async file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-sys-3.mjs:147:94"
+    }
+  ]
+}

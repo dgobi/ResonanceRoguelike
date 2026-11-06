@@ -55,6 +55,9 @@ class CraftPlan(list):
         self.choices = dict(chosen_items or {})
         self.materials = []
         self.vessel = None
+        self.roles = {}
+        self.primary_state = None
+        self.allocations = {}
 
 
 def conditions_for(recipe):
@@ -67,7 +70,7 @@ def conditions_for(recipe):
 
 def material_candidate(item, preferred=None):
     # Reusable valuables require an explicit ingredient choice before spending.
-    return getattr(item, "consumed_on_use", True) or getattr(item, "item_id", None) == preferred
+    return getattr(item, "consumed_on_use", True) or item is preferred or getattr(item, "item_id", None) == preferred
 
 
 def _match_ingredients(slots, unavailable=()):
@@ -108,6 +111,11 @@ def plan_craft(recipe, inv, keyword_data=None, ambient_sources=None, chosen_item
     if len({id(i) for i in items}) != len(items):
         return [], [{"tag": "duplicate instance", "min_tier": 1, "have": 0, "need": 1}]
     selected, missing = CraftPlan(chosen_items), []
+    response = None
+    primary_component = None
+    if 'material_response' in recipe:
+        from engine.material_response import configuration
+        response, primary_component = configuration(recipe)
     for req in conditions_for(recipe):
         if not _ambient_satisfies(ambient_sources, req["tag"], req.get("min_tier", 1)):
             missing.append(dict(tag=req["tag"], min_tier=req.get("min_tier", 1), have=0, need=1, ambient=True))
@@ -117,16 +125,21 @@ def plan_craft(recipe, inv, keyword_data=None, ambient_sources=None, chosen_item
     def add_requirement(tags, quantity, details, *, role="material", component=None):
         has_choice = component is not None and component in selected.choices
         preferred = selected.choices.get(component)
+        primary = response is not None and component == primary_component
+        def chosen(item):
+            return item is preferred if not isinstance(preferred,str) else item.item_id == preferred
 
         def preference(index):
             item = items[index]
-            tiers = tuple(_tag_tier_on_item(item, req["tag"]) for req in tags)
+            from engine.material_response import tier
+            tiers = tuple((tier if primary else _tag_tier_on_item)(item, req["tag"]) for req in tags)
             item_id = getattr(item, "item_id", "")
             # Definition order is stable across inventory permutations. Identity
             # only breaks ties between otherwise equivalent live instances.
-            return (has_choice and item_id != preferred, sum(tiers), tiers, item_id, id(item))
+            return (has_choice and not chosen(item), sum(tiers), tiers, item_id, id(item))
 
-        matches = sorted((n for n, item in enumerate(items) if _item_has_all_tags(item, tags)
+        from engine.material_response import eligible
+        matches = sorted((n for n, item in enumerate(items) if (eligible(item,tags[0]['tag'],tags[0]['min_tier']) if primary else _item_has_all_tags(item, tags))
                           and (role == "tool" or material_candidate(item, preferred))),
                          key=preference)
         group = len(groups)
@@ -136,9 +149,9 @@ def plan_craft(recipe, inv, keyword_data=None, ambient_sources=None, chosen_item
             # use the chosen definition preserves the UI choice without forcing
             # the entire quantity to come from that definition.
             requires_choice = has_choice and unit == 0
-            candidates = ([n for n in matches if items[n].item_id == preferred]
+            candidates = ([n for n in matches if chosen(items[n])]
                           if requires_choice else matches)
-            slots.append(dict(group=group, candidates=candidates, role=role))
+            slots.append(dict(group=group, candidates=candidates, role=role, primary=primary))
 
     rsi = recipe.get("requires_single_item")
     if rsi:
@@ -189,9 +202,14 @@ def plan_craft(recipe, inv, keyword_data=None, ambient_sources=None, chosen_item
             remainder = _match_ingredients(suffix, reserved)
             if len(remainder) == physical_left - 1:
                 selected.append(items[candidate])
+                selected.allocations[n]=items[candidate]
                 if slot["role"] == "material":
                     selected.materials.append(items[candidate])
                 if slot['role'] == 'vessel': selected.vessel=items[candidate]
+                if slot.get('primary'):
+                    from engine.material_response import resolution
+                    selected.roles['primary']=items[candidate]
+                    selected.primary_state=resolution(recipe,items[candidate])
                 used.add(candidate)
                 physical_left -= 1
                 break

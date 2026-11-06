@@ -171,6 +171,8 @@ class ChunkCache:
         validate_map(cached.local_map)
         from engine.held_light import prepare_map
         prepare_map(cached.local_map, self.data)
+        from engine.coating_doses import prepare_map as prepare_doses
+        prepare_doses(cached.local_map, self.data)
         return cached
 
     def _write(self, path, cached):
@@ -244,6 +246,8 @@ class ChunkCache:
             validate_map(cached.local_map)
             from engine.held_light import prepare_map
             prepare_map(cached.local_map, data)
+            from engine.coating_doses import prepare_map as prepare_doses
+            prepare_doses(cached.local_map, data)
         return payloads
 
 
@@ -321,6 +325,8 @@ class SaveManager:
             if self._needs_load:
                 raise SaveFormatError('Load the existing slot before saving; checkpoint ownership is not established')
             world_data = _serialize_world(engine.world_map)
+            from engine.coating_doses import validate_live_owners
+            validate_live_owners(engine)
             player_data = _serialize_player(engine)
             _validate_player_references(player_data, engine.data)
             address = SceneAddress.from_player(player_data, world_data)

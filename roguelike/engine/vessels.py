@@ -189,16 +189,20 @@ def validate_map(local_map, identities=None):
     """All pickled owners, including busy implements; no partial installation."""
     from engine.save_components import serialize_item, validate_item
     identities=set() if identities is None else identities
+    dose_owners=set()
     def item(i):
         # This additive contract must not reinterpret unrelated historical owners.
         # Presence matters: explicitly malformed/null vessel fields still reject.
         if isinstance(i,dict):
-            if 'vessel' not in i and 'vessel_absent_version' not in i:return
+            if not any(k in i for k in ('vessel','vessel_absent_version','coating_dose')):return
             row=i
         else:
-            if not hasattr(i,'vessel') and not hasattr(i,'vessel_absent_version'):return
+            if not any(hasattr(i,k) for k in ('vessel','vessel_absent_version','coating_dose')):return
             row=serialize_item(i)
         validate_item(row,'map item');claim(row,identities)
+        if 'coating_dose' in row:
+            if id(i) in dose_owners:raise ValueError('coating dose: duplicate ownership')
+            dose_owners.add(id(i))
     for rows in local_map.floor_objects.values():
         for i in rows:item(i)
     for owner in local_map.container_state.values():
@@ -206,15 +210,29 @@ def validate_map(local_map, identities=None):
     for xy,job in local_map.processing_layer.items():
         if 'vessel_job' not in job:continue
         b=job['vessel_job']
-        if (not isinstance(b,dict) or set(b)!={'version','requirement','vessel'}
-                or type(b['version']) is not int or b['version']!=1
+        version=b.get('version') if isinstance(b,dict) else None
+        fields={'version','requirement','vessel'} | ({'output','primary'} if version==2 else set())
+        if (not isinstance(b,dict) or set(b)!=fields
+                or type(version) is not int or version not in (1,2)
                 or type(job.get('turns_remaining')) is not int or not 0<=job['turns_remaining']<=10000
-                or job.get('item_id')!='resonant_bone_tincture'
+                or (version==1 and job.get('item_id')!='resonant_bone_tincture')
                 or job.get('source')!='steeping' or job.get('on_fire') is not False
                 or not isinstance(job.get('decor_id'),str)
                 or not isinstance(job.get('completion_message'),str)
                 or not local_map.in_bounds(*xy)):
             raise ValueError('vessel job: invalid captured preparation')
+        if version==2:
+            out=b['output'];primary=b['primary']
+            if isinstance(out,dict):validate_item(out,'vessel job output')
+            if (not isinstance(out,dict) or out.get('item_id')!=job.get('item_id')
+                    or out.get('count')!=1 or 'coating_dose' not in out
+                    or not isinstance(primary,dict) or set(primary)!={'role','item_id','tag','tier','hits'}
+                    or primary['role']!='primary' or not isinstance(primary['item_id'],str)
+                    or not isinstance(primary['tag'],str) or not primary['tag']
+                    or type(primary['tier']) is not int or primary['tier']<1
+                    or type(primary['hits']) is not int or primary['hits']!=out['coating_dose'].get('hits')):
+                raise ValueError('vessel job: invalid captured wash result')
+            validate_item(out,'vessel job output')
         from engine.processing_text import validate_completion_template
         validate_completion_template(job['completion_message'])
         req=process_configuration(b['requirement']);v=b['vessel'];item(v)

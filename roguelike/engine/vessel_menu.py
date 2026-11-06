@@ -33,6 +33,14 @@ def amounts(e,item,action,*,destination=None,xy=None,captured=None):
     rows=[(f'One preparation batch: {batch} mL',batch),('250 mL',250),
           (f'Available room and water: {available} mL',available)]
     if action=='transfer':rows.append((f"All source water: {s['water_ml']} mL",s['water_ml']))
+    # Keep the historical bone-batch/available choices in place, then add
+    # distinct supported preparation measures from this session's catalogue.
+    from engine.vessel_jobs import validate_recipe
+    for recipe in e.data.recipes.values():
+        if 'vessel_process' not in recipe:continue
+        try:req=validate_recipe(recipe,e.data)
+        except (ValueError,TypeError,KeyError):continue
+        rows.append((f"Preparation batch: {req['water_ml']} mL",req['water_ml']))
     options=[];seen=set()
     for title,n in rows:
         if n in seen:continue

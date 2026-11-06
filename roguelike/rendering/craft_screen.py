@@ -288,6 +288,10 @@ class CraftScreen:
         elif recipe.get("passive_processing"):
             # Do NOT consume items yet -- placement cursor will craft on ENTER
             self.open = False
+            if selected.primary_state:
+                r=selected.primary_state
+                primary=selected.roles['primary']
+                engine.log.add(f"{primary.name}: {r['tag']} tier {r['tier']}; {r['hits']} contacts. Confirm placement to spend these materials.",MSG_DEFAULT)
             engine._start_processing_placement(recipe, selected)
         else:
             result_id = recipe.get("result_item") or recipe.get("result_tile", "")
@@ -306,9 +310,26 @@ class CraftScreen:
         """
         from engine.crafting import _item_has_tag
         prompts = []
+        response=None
+        primary_component=None
+        if 'material_response' in recipe:
+            from engine.material_response import configuration
+            response,primary_component=configuration(recipe)
         for ci, comp in enumerate(recipe.get("components", [])):
             tag      = comp["tag"]
             min_tier = comp.get("min_tier", 1)
+            if response is not None:
+                from engine.material_response import eligible,tier,contacts
+                options=[]
+                for item in sorted(inv.items,key=lambda i:(tier(i,tag),i.item_id,id(i))):
+                    primary=ci==primary_component
+                    if not (eligible(item,tag,min_tier) if primary else _item_has_tag(item,tag,min_tier)):continue
+                    t=tier(item,tag)
+                    display=f"[{tag}: {t}]"+(f" -> {contacts(response,t)} contacts" if primary else '')
+                    options.append(dict(item_id=item.item_id,instance=item,name=item.name+' (spent)',count=1,
+                                        kw_display=display,kw_color=UI_TEXT_MID))
+                if options:prompts.append(dict(comp_index=ci,header='Choose exact '+('primary' if ci==primary_component else tag),options=options))
+                continue
             # Collect all qualifying items grouped by item_id
             by_id: dict[str, list] = {}
             for item in (inv.items if inv else []):
