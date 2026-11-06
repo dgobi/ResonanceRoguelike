@@ -1,0 +1,71 @@
+{
+  "archive": "validation-preflight.zip",
+  "sha256": "7245397b134fed185d19911c542a5267e17da1e5f2e69e1893adc01f5fb9cb0b",
+  "files": 11,
+  "before": {
+    "phase": "before",
+    "source_sha256": "b80c6c0980cf82dbceeb55d32eeaddf1620a99c3bc1d1f83056eedbfac857270",
+    "python": "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+    "asset": "roguelike/data/generation/authored_submap_selection.json",
+    "original_timeout_seconds": 20,
+    "concurrent_verification_workers": 0,
+    "requests": [
+      {
+        "operation": "inspect",
+        "passed": true,
+        "request_seconds": 16.55187979992479
+      },
+      {
+        "operation": "preview_draft",
+        "passed": false,
+        "error": "TimeoutExpired: Command '['G:\\\\GameDev\\\\RoguelikeProject\\\\workbench\\\\worker\\\\runtime\\\\python.exe', '-I', '-B', 'G:\\\\GameDev\\\\RoguelikeProject\\\\workbench\\\\worker\\\\bridge.py', '--root', 'C:\\\\Users\\\\dango\\\\AppData\\\\Local\\\\Temp\\\\assignment-worker-g0zviecs']' timed out after 20 seconds",
+        "request_seconds": 20.020034399814904
+      }
+    ],
+    "passed": false
+  },
+  "unused_chooser_only": {
+    "phase": "after",
+    "source_sha256": "43dec494bed44119528ae644d6bb71d8d28737565c99e81a5c38ca272fdc5fc4",
+    "python": "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+    "asset": "roguelike/data/generation/authored_submap_selection.json",
+    "original_timeout_seconds": 20,
+    "concurrent_verification_workers": 0,
+    "requests": [
+      {
+        "operation": "inspect",
+        "passed": true,
+        "request_seconds": 15.743096200050786
+      },
+      {
+        "operation": "preview_draft",
+        "passed": false,
+        "error": "TimeoutExpired: Command '['G:\\\\GameDev\\\\RoguelikeProject\\\\workbench\\\\worker\\\\runtime\\\\python.exe', '-I', '-B', 'G:\\\\GameDev\\\\RoguelikeProject\\\\workbench\\\\worker\\\\bridge.py', '--root', 'C:\\\\Users\\\\dango\\\\AppData\\\\Local\\\\Temp\\\\assignment-worker-iralkxq_']' timed out after 20 seconds",
+        "request_seconds": 20.01933029992506
+      }
+    ],
+    "passed": false
+  },
+  "snapshot_reuse": {
+    "phase": "reuse",
+    "source_sha256": "51d4256fdfdcc3901694fa0f69e8fdc205573af892c33aa27da507d32be4276e",
+    "python": "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+    "asset": "roguelike/data/generation/authored_submap_selection.json",
+    "original_timeout_seconds": 20,
+    "concurrent_verification_workers": 0,
+    "requests": [
+      {
+        "operation": "inspect",
+        "passed": true,
+        "request_seconds": 4.39748220006004
+      },
+      {
+        "operation": "preview_draft",
+        "passed": true,
+        "request_seconds": 6.1798380999825895
+      }
+    ],
+    "passed": true
+  },
+  "diagnostic": "The first cProfile attempt could not write a stats file through the worker read-only boundary. The second printed stats through stdout without modifying that boundary; diagnostic only, not a verification gate. It found83 room catalogues and38166 file opens in one draft request. Reuse is confined to the authoring-context room list; no runtime selector or global/DataLoader cache change."
+}

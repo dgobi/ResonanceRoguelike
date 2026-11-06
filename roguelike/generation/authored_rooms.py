@@ -60,7 +60,7 @@ def issue(path, code, field, message, severity="error"):
     return dict(severity=severity,code=code,path=path,asset="",field=field,message=message,correction="Correct this source field or choose a unique saved dependency, then validate again.")
 
 
-def catalog(data, data_root):
+def catalog(data, data_root, *, remains_choices=True):
     indexes = {key:definition_sources(data_root, folder, ("text_item_map.json",) if key=="texts" else ()) for key,folder in (("items","items"),("texts","texts"),("creatures","entities"),("pools","loot_pools"))}
     choices = {}
     from engine.item_factory import ItemFactory
@@ -80,13 +80,14 @@ def catalog(data, data_root):
                 except (ValueError,KeyError,TypeError): supported=False
             rows.append(dict(id=identifier,name=str(entry["definition"].get("name",entry["definition"].get("title",identifier))),path=entry["path"],paths=[e["path"] for e in entries],resolved=supported,readable=readable))
         choices[key]=rows
-    from engine.flesh_resources import resolve_source
     choices['remains']=[]
-    for row in choices['creatures']:
-        try:
-            resolve_source(data,row['id'])
-            if row['resolved']:choices['remains'].append(row)
-        except (ValueError,TypeError,KeyError):pass
+    if remains_choices:
+        from engine.flesh_resources import resolve_source
+        for row in choices['creatures']:
+            try:
+                resolve_source(data,row['id'])
+                if row['resolved']:choices['remains'].append(row)
+            except (ValueError,TypeError,KeyError):pass
     # Decor is a list registry, not recursive object-file discovery.
     decor_rows=json.loads((data_root/"decoratives.json").read_text(encoding="utf-8"))
     from generation.authored_decor import admission
@@ -97,7 +98,7 @@ def catalog(data, data_root):
         loot_pools=[r["id"] for r in choices["pools"] if r["resolved"]], **choices)
 
 
-def authoring_validate(raw,data,path,data_root):
+def authoring_validate(raw,data,path,data_root, *, reference_catalog=None):
     diagnostics=[]; cap=capability(raw,path)
     from engine.pool_authoring import container_dependencies
     diagnostics += container_dependencies(raw,data,path,data_root)
@@ -108,7 +109,8 @@ def authoring_validate(raw,data,path,data_root):
     sources=locations(source_index(data_root),raw.get("id"))
     if len(sources)!=1 or sources[0]["path"] not in ([path, ROOT+Path(path).name] if path==TEMPLATE else [path]):
         diagnostics.append(issue(path,"DUPLICATE_ID","id","Room identity must resolve to this one immediate source, including case aliases."))
-    options=catalog(data,data_root)
+    # The compiler validates each placed remains source; this path needs no UI chooser.
+    options=reference_catalog if reference_catalog is not None else catalog(data,data_root,remains_choices=False)
     for n,record in enumerate(raw.get("special_tiles",[]) if isinstance(raw.get("special_tiles",[]),list) else []):
         if not isinstance(record,dict): continue
         kind=record.get("type",record.get("kind")); f=f"special_tiles[{n}]"

@@ -98,6 +98,51 @@ Final M7 requires a fresh complete frozen 19-gate run, not this preflight.
 Latest preservation check: all 280 owner files and seven saves unchanged.
 Authoritative guides updated; no wiki files touched.
 
-Next: M6 checkpoint, freeze/run M7, assemble scoped evidence, commit/push and
-independently verify main/tag objects and targets.
-No blocker. Stop at SYS-5.
+M6 checkpoint: `591cacc207e1271c67ae93a53ce4f4ae4665f3b3`, annotated
+`checkpoint/sys-5-m6-20261106-a`. M7 fresh matrix is running in
+`.baseline/sys-5/final-a` (root process session 56595), started 17:25:52 UTC.
+All 17 completed gates pass, including production D 3704/3704 across 159
+workers, focused 726/726, complete UI/build/startup/lifecycle and SYS-1–5 native.
+The complete 29-module worker cohort and dependency control are running next.
+Worker `test_assignment` has three 20-second subprocess timeouts; other first
+modules pass. Keep the frozen cohort running to completion and retain failures.
+Then measure/recheck assignment without concurrent workers before deciding any
+repair. Read-only authoring helper is inspecting the required validation cost.
+Do not call this a clean full pass unless that issue is resolved and recorded.
+Second worker failure: test_creatures_w5f expects 37 creatures; actual enrolled
+corpus is 39. Writer will update counts only after this frozen cohort finishes.
+Read-only cost diagnosis: assignment inspect performs 45 room validations and
+one-candidate draft 83; each rebuilds all reference choices, including 39 remains
+source checks although only 3 sources declare flesh. Consider avoiding UI-only
+remains choice construction in validation (actual remains still validate through
+compile_structure/resolve_source and native placement), then remeasure. Do not
+weaken source/placement checks or blindly increase the 20-second bound.
+Do not edit consumed source while it runs. Completion draft is docs/owner/SYS_5.md;
+archival helper .baseline/sys-5/assemble_evidence.py runs only after all 19 pass.
+Next: assemble scoped evidence, commit/push and independently verify main/tag
+objects and targets. No blocker. Stop at SYS-5.
+
+### M7 — frozen full run and scoped recheck
+
+The complete `final-a` finished on M6 with all inputs stable: 18/19 gates passed;
+production D 3,704/3,704, full focused 726/726, frontend100, host73, startup15,
+build/package/lifecycle, SYS1–5 native and ordinary11 checkpoint/cold proofs pass.
+The worker cohort ran all29 modules/145 tests;27 modules passed. Three assignment
+requests hit their original20-second timeout; one corpus assertion expected37
+creatures instead of39. Full logs remain unchanged.
+
+Isolated original inspect16.55s / draft timeout20s. Skipping unused remains-choice
+enumeration alone gave15.74s / timeout. Profiling identified repeated dependency
+catalogues; lazy reuse within one assignment-authoring snapshot gives4.40s /6.18s.
+No cross-snapshot cache or game-selector edit; compiler, source identity, pool/text
+dependencies, factories and native placement still execute for every room. UI
+choice defaults remain complete. The exact count correction preserves the full
+39-creature loop and negatives. Three consumed files change, inverse recorded in
+`validation-recheck-plan.json`; timing/profile failures are retained separately.
+
+Next boundary: retain unchanged full-run gates only with exact manifest delta,
+inverse source reconstruction, environment/package/log verification, then complete
+affected rechecks: five whole focused modules, ordinary play, packaged SYS5, all
+29 worker modules and dependency control. This is retained full execution plus
+affected rechecks, not a fresh clean full execution. Final documentation, source
+retention receipts, preservation audit and authorized publication/readback remain.

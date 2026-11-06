@@ -1,0 +1,62 @@
+{
+  "reason": "Reuse one lazily built reference catalogue within each saved assignment-authoring context, separately for original and staged snapshots. Keep every per-room compiler, provenance, dependency, factory and native placement check; default UI catalogues retain remains choices. Skip unused remains chooser enumeration in validation. Exact creature count37 to39 keeps the full corpus loop and negatives. No game selector/cache change; original20-second worker request limit stays unchanged.",
+  "changes": [
+    {
+      "path": "roguelike/generation/authored_rooms.py",
+      "before_sha256": "b80c6c0980cf82dbceeb55d32eeaddf1620a99c3bc1d1f83056eedbfac857270",
+      "after_sha256": "51d4256fdfdcc3901694fa0f69e8fdc205573af892c33aa27da507d32be4276e",
+      "replacements": [
+        {
+          "before": "def catalog(data, data_root):",
+          "after": "def catalog(data, data_root, *, remains_choices=True):"
+        },
+        {
+          "before": "    from engine.flesh_resources import resolve_source\n    choices['remains']=[]\n    for row in choices['creatures']:\n        try:\n            resolve_source(data,row['id'])\n            if row['resolved']:choices['remains'].append(row)\n        except (ValueError,TypeError,KeyError):pass",
+          "after": "    choices['remains']=[]\n    if remains_choices:\n        from engine.flesh_resources import resolve_source\n        for row in choices['creatures']:\n            try:\n                resolve_source(data,row['id'])\n                if row['resolved']:choices['remains'].append(row)\n            except (ValueError,TypeError,KeyError):pass"
+        },
+        {
+          "before": "    options=catalog(data,data_root)",
+          "after": "    # The compiler validates each placed remains source; this path needs no UI chooser.\n    options=catalog(data,data_root,remains_choices=False)"
+        },
+        {
+          "before": "def authoring_validate(raw,data,path,data_root):",
+          "after": "def authoring_validate(raw,data,path,data_root, *, reference_catalog=None):"
+        },
+        {
+          "before": "    options=catalog(data,data_root,remains_choices=False)",
+          "after": "    options=reference_catalog if reference_catalog is not None else catalog(data,data_root,remains_choices=False)"
+        }
+      ]
+    },
+    {
+      "path": "workbench/worker/test_creatures_w5f.py",
+      "before_sha256": "a7ec60ccecce128b253186719531dc31ec0dbc68343e7dea2dfd465e4f9e6be9",
+      "after_sha256": "cada3ce2a49dda9680b51deb47f7636b6c83ff0ee174451eec90d3de825c5eb1",
+      "replacements": [
+        {
+          "before": "self.assertEqual(len(rows), 37); self.assertEqual(len({r[\"path\"] for r in rows}), 37)  # six AI-9 variants",
+          "after": "self.assertEqual(len(rows), 39); self.assertEqual(len({r[\"path\"] for r in rows}), 39)  # six AI-9 and two SYS-5 variants"
+        }
+      ]
+    },
+    {
+      "path": "roguelike/engine/assignment_authoring.py",
+      "before_sha256": "7e4e7e88773a5dde166ecea7dd680b5174919e38be8396da83166761e4151352",
+      "replacements": [
+        {
+          "before": "capability as room_capability, authoring_validate as room_validate",
+          "after": "capability as room_capability, authoring_validate as room_validate, catalog"
+        },
+        {
+          "before": "    index=source_index(data_root); rooms=[]",
+          "after": "    index=source_index(data_root); rooms=[]; reference_catalog=None"
+        },
+        {
+          "before": "        if eligible:\n            errors=[d for d in room_validate(source['definition'],data,source['path'],data_root) if d['severity']=='error']",
+          "after": "        if eligible:\n            # Reuse only this saved snapshot's choices; every room still validates.\n            if reference_catalog is None: reference_catalog=catalog(data,data_root,remains_choices=False)\n            errors=[d for d in room_validate(source['definition'],data,source['path'],data_root,reference_catalog=reference_catalog) if d['severity']=='error']"
+        }
+      ],
+      "after_sha256": "54b8c9af8417e04071ceb49f570e964cc2c66176cfcee6bb872a91b9586c6bd5"
+    }
+  ]
+}

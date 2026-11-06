@@ -28,7 +28,7 @@ class CreatureCommonTests(unittest.TestCase):
 
     def test_entire_corpus_inspection_construction_and_operation_subset(self):
         rows = [r for r in invoke("describe")["result"]["assets"] if r.get("family_id") == "creature"]
-        self.assertEqual(len(rows), 37); self.assertEqual(len({r["path"] for r in rows}), 37)  # six AI-9 variants
+        self.assertEqual(len(rows), 39); self.assertEqual(len({r["path"] for r in rows}), 39)  # six AI-9 and two SYS-5 variants
         for row in rows:
             opened = invoke("inspect", asset=row["path"])["result"]
             record = opened["family"]["context"]["records"][0]; cap = record["capability"]

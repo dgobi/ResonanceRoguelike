@@ -38,14 +38,16 @@ def source_index(data_root):
 
 
 def authoring_context(raw,data,path,data_root,identity,digest,observe=False):
-    from generation.authored_rooms import source_index, locations, capability as room_capability, authoring_validate as room_validate
-    index=source_index(data_root); rooms=[]
+    from generation.authored_rooms import source_index, locations, capability as room_capability, authoring_validate as room_validate, catalog
+    index=source_index(data_root); rooms=[]; reference_catalog=None
     for identifier,entries in sorted(index.items()):
         source=entries[0]; cap=room_capability(source['definition'],source['path'])
         reason=cap['reason']
         eligible=len(locations(index,identifier))==1 and 'edit' in cap['operations'] and identifier in data.layouts
         if eligible:
-            errors=[d for d in room_validate(source['definition'],data,source['path'],data_root) if d['severity']=='error']
+            # Reuse only this saved snapshot's choices; every room still validates.
+            if reference_catalog is None: reference_catalog=catalog(data,data_root,remains_choices=False)
+            errors=[d for d in room_validate(source['definition'],data,source['path'],data_root,reference_catalog=reference_catalog) if d['severity']=='error']
             if errors: eligible=False; reason='; '.join(d['message'] for d in errors)
         if len(locations(index,identifier))!=1: reason='Ambiguous saved room identity.'
         if not eligible and not reason: reason='Publish the documentation template as an ordinary room first.'
