@@ -1,0 +1,350 @@
+{
+  "source_revision": "aea1d565097982a699230dcc7e4210b8106fbbe1",
+  "producer": "capture_sys_5_legacy.py",
+  "archive": "legacy-resources.zip",
+  "sha256": "f290e17d57f8406a6eb0004da0b233eea917cfd41cb9e5ceb0b65288a31a99ef",
+  "turn": 480,
+  "setup": "Unmodified baseline constructors, real native death, floor/container/inventory owners, both future host recipes, surface/submap caches and real F5. No fields stripped.",
+  "inventory": [
+    {
+      "item_id": "crow_meat",
+      "item_state_version": 1,
+      "name": "Crow Meat",
+      "tile": "generic_item",
+      "weight": 0.2,
+      "stackable": true,
+      "count": 3,
+      "on_use": null,
+      "text_id": "",
+      "nutrition": null,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": null,
+      "drink_message": null,
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": null,
+      "liquid_volume": 0.0,
+      "qualities": {},
+      "description": "Dark and stringy. The smell is wrong in a specific way. Something has accumulated here that ordinary meat does not carry.",
+      "harvest_from": null,
+      "keywords": [
+        {
+          "tag": "edible",
+          "tier": 1
+        },
+        {
+          "tag": "vital",
+          "tier": 1
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": true,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0
+    }
+  ],
+  "floor": {
+    "(13, 12)": [
+      {
+        "item_id": "stalker_meat",
+        "item_state_version": 1,
+        "name": "Stalker Meat",
+        "tile": "generic_item",
+        "weight": 0.5,
+        "stackable": true,
+        "count": 2,
+        "on_use": null,
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0.0,
+        "qualities": {},
+        "description": "Dense and close-fibred. The animal was efficient. The meat reflects this. High in something the body can use immediately.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      }
+    ],
+    "(15, 12)": [
+      {
+        "item_id": "corpse",
+        "item_state_version": 1,
+        "name": "remains of Plague Crow",
+        "tile": "corpse",
+        "weight": 0,
+        "stackable": false,
+        "count": 1,
+        "on_use": null,
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0.0,
+        "qualities": {},
+        "description": "Something that was a creature. Already cooling.",
+        "harvest_from": null,
+        "keywords": [],
+        "decay_timer": 80,
+        "source_creature": "plague_crow",
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      }
+    ],
+    "(16, 12)": [
+      {
+        "item_id": "corpse",
+        "item_state_version": 1,
+        "name": "remains of Heath Stalker",
+        "tile": "corpse",
+        "weight": 0,
+        "stackable": false,
+        "count": 1,
+        "on_use": null,
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0.0,
+        "qualities": {},
+        "description": "Something that was a creature. Already cooling.",
+        "harvest_from": null,
+        "keywords": [],
+        "decay_timer": 150,
+        "source_creature": "heath_stalker",
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      }
+    ]
+  },
+  "actors": [
+    {
+      "type": "actor",
+      "composite": {
+        "profile": {
+          "version": 1,
+          "recipe": "strike_and_withdraw",
+          "capability": "melee",
+          "trigger": "hit",
+          "retreat_distance": 2,
+          "hold_opportunities": 1,
+          "withdrawal_budget": 6,
+          "cornered": "defensive_melee",
+          "scene_scope": "active_scene",
+          "pursuit_timeout": 12
+        },
+        "state": {
+          "phase": "idle",
+          "target": null,
+          "withdraw_left": 0,
+          "hold_left": 0,
+          "approach_left": 0,
+          "no_progress": 0,
+          "best_distance": null,
+          "suppressed": null,
+          "route_blocked": false,
+          "opportunities": 0
+        }
+      },
+      "id": "grave_skirmisher",
+      "x": 18,
+      "y": 12,
+      "tile": "hollow_revenant",
+      "name": "Grave Skirmisher",
+      "is_alive": true,
+      "blocks_movement": true,
+      "fighter": {
+        "hp": 14,
+        "max_hp": 14,
+        "power": 3,
+        "defense": 1,
+        "body_id": "body_human",
+        "effective_av": 1
+      },
+      "component_state": {
+        "version": 1,
+        "actor": {
+          "chilled_turns": 0,
+          "_sickness_turns": 0,
+          "_last_known_px": null,
+          "_last_known_py": null,
+          "_arrival_cooldown": 0,
+          "_just_arrived": false,
+          "_pending_stair_use": null,
+          "_ability_suppressed_turns": 0,
+          "_disrupted_turns": 0,
+          "_wraith_exposure_turns": 0,
+          "_surface_exit_x": null,
+          "_surface_exit_y": null,
+          "_surface_exit_wx": null,
+          "_surface_exit_wy": null
+        },
+        "ai": {
+          "target_x": null,
+          "target_y": null,
+          "memory_turns": 0,
+          "alert_memory": 10
+        }
+      },
+      "ai_type": "CompositeAI",
+      "ai_state": "wandering",
+      "home_x": 18,
+      "home_y": 12,
+      "pursuit_turns_without_contact": 0,
+      "move_accumulator": 0.0,
+      "faction": "hollow",
+      "hostile_to": [
+        "player"
+      ],
+      "sight_radius": 7,
+      "hearing_radius": 6,
+      "sees_in_dark": true,
+      "wander_radius": 8,
+      "lurker": null
+    },
+    {
+      "type": "actor",
+      "composite": {
+        "profile": {
+          "version": 5,
+          "recipe": "territorial_guard",
+          "capability": "melee",
+          "trigger": "hit",
+          "retreat_distance": 2,
+          "hold_opportunities": 1,
+          "withdrawal_budget": 6,
+          "cornered": "defensive_melee",
+          "scene_scope": "active_scene",
+          "engagement": "direct_melee",
+          "defended_radius": 4,
+          "excursion_radius": 6,
+          "pursuit_budget": 32,
+          "pursuit_timeout": 12
+        },
+        "state": {
+          "phase": "idle",
+          "target": null,
+          "withdraw_left": 0,
+          "hold_left": 0,
+          "approach_left": 0,
+          "no_progress": 0,
+          "best_distance": null,
+          "suppressed": null,
+          "route_blocked": false,
+          "opportunities": 0,
+          "territory": {
+            "anchor": null,
+            "owner": null,
+            "phase": "guard",
+            "pursuit_left": 0,
+            "return_left": 0,
+            "failures": 0,
+            "retry": 0,
+            "resting": null,
+            "retired": [],
+            "route": null,
+            "reason": null,
+            "defence": false,
+            "investigation_left": 0,
+            "return_told": false
+          }
+        }
+      },
+      "id": "barrow_sentinel",
+      "x": 22,
+      "y": 12,
+      "tile": "hollow_revenant",
+      "name": "Barrow Sentinel",
+      "is_alive": true,
+      "blocks_movement": true,
+      "fighter": {
+        "hp": 14,
+        "max_hp": 14,
+        "power": 3,
+        "defense": 1,
+        "body_id": "body_human",
+        "effective_av": 1
+      },
+      "component_state": {
+        "version": 1,
+        "actor": {
+          "chilled_turns": 0,
+          "_sickness_turns": 0,
+          "_last_known_px": null,
+          "_last_known_py": null,
+          "_arrival_cooldown": 0,
+          "_just_arrived": false,
+          "_pending_stair_use": null,
+          "_ability_suppressed_turns": 0,
+          "_disrupted_turns": 0,
+          "_wraith_exposure_turns": 0,
+          "_surface_exit_x": null,
+          "_surface_exit_y": null,
+          "_surface_exit_wx": null,
+          "_surface_exit_wy": null
+        },
+        "ai": {
+          "target_x": null,
+          "target_y": null,
+          "memory_turns": 0,
+          "alert_memory": 10
+        }
+      },
+      "ai_type": "CompositeAI",
+      "ai_state": "wandering",
+      "home_x": 22,
+      "home_y": 12,
+      "pursuit_turns_without_contact": 0,
+      "move_accumulator": 0.0,
+      "faction": "hollow",
+      "hostile_to": [
+        "player"
+      ],
+      "sight_radius": 7,
+      "hearing_radius": 6,
+      "sees_in_dark": true,
+      "wander_radius": 8,
+      "lurker": null
+    }
+  ]
+}
