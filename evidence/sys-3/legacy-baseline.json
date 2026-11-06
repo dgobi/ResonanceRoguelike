@@ -1,0 +1,268 @@
+{
+  "source_revision": "3a73956fa2e1e50be3c93cf22fed9e1ed1b581d8",
+  "producer": "capture_sys_3_legacy.py",
+  "archive": "legacy-coatings-job.zip",
+  "sha256": "032d7de685c1e672b0b0c52b4f9c8c52d3b5937f057ec0cf3bf441ba583b215d",
+  "turn": 481,
+  "setup": "Disposable real pre-change constructors, application/contact consumer, vessel commitment and F5. Same-ID keyword variant explicitly staged; no fields stripped.",
+  "inventory": [
+    {
+      "item_id": "briar_binding_oil",
+      "item_state_version": 1,
+      "name": "briar binding oil",
+      "tile": "generic_item",
+      "weight": 0.1,
+      "stackable": true,
+      "count": 1,
+      "on_use": "apply_to_weapon",
+      "text_id": "",
+      "nutrition": null,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": null,
+      "drink_message": null,
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": null,
+      "liquid_volume": 0.0,
+      "qualities": {},
+      "description": "The sap of the briar lurker, rendered to a coating. What it binds, stays bound.",
+      "harvest_from": null,
+      "keywords": [
+        {
+          "tag": "viscous",
+          "tier": 2
+        },
+        {
+          "tag": "binding",
+          "tier": 2
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": true,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0
+    },
+    {
+      "item_id": "bile_coating",
+      "item_state_version": 1,
+      "name": "bile coating",
+      "tile": "generic_item",
+      "weight": 0.1,
+      "stackable": true,
+      "count": 1,
+      "on_use": "apply_to_weapon",
+      "text_id": "",
+      "nutrition": null,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": null,
+      "drink_message": null,
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": null,
+      "liquid_volume": 0.0,
+      "qualities": {},
+      "description": "A corrosive coating rendered from crow bile. The blade will itch to cut.",
+      "harvest_from": null,
+      "keywords": [
+        {
+          "tag": "caustic",
+          "tier": 2
+        },
+        {
+          "tag": "corrosive",
+          "tier": 1
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": true,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0
+    },
+    {
+      "item_id": "hungering_oil",
+      "item_state_version": 1,
+      "name": "hungering oil",
+      "tile": "generic_item",
+      "weight": 0.15,
+      "stackable": true,
+      "count": 1,
+      "on_use": "apply_to_weapon",
+      "text_id": "",
+      "nutrition": null,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": null,
+      "drink_message": null,
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": null,
+      "liquid_volume": 0.0,
+      "qualities": {},
+      "description": "Viscous and caustic in equal measure. The two properties do not cancel -- they compound. Apply quickly. It will eat the container.",
+      "harvest_from": null,
+      "keywords": [
+        {
+          "tag": "alchemical",
+          "tier": 2
+        },
+        {
+          "tag": "caustic",
+          "tier": 1
+        },
+        {
+          "tag": "viscous",
+          "tier": 2
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": true,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0
+    },
+    {
+      "item_id": "coldbell_cutting",
+      "item_state_version": 1,
+      "name": "coldbell cutting",
+      "tile": "generic_item",
+      "weight": 0.05,
+      "stackable": true,
+      "count": 1,
+      "on_use": "eat",
+      "text_id": "",
+      "nutrition": 40,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": "Faintly metallic. A small resonance moves through the teeth.",
+      "drink_message": null,
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": null,
+      "liquid_volume": 0.0,
+      "qualities": {},
+      "description": "A stem of coldbell flower, harvested near grey stone. The petals have gone. The stem is pale, faintly waxy, and cold to the touch in ways the temperature does not explain.",
+      "harvest_from": "coldbell_flower",
+      "keywords": [
+        {
+          "tag": "edible",
+          "tier": 1
+        },
+        {
+          "tag": "resonant",
+          "tier": 1
+        },
+        {
+          "tag": "binding",
+          "tier": 1
+        },
+        {
+          "tag": "aromatic",
+          "tier": 1
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": true,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0
+    },
+    {
+      "item_id": "coldbell_cutting",
+      "item_state_version": 1,
+      "name": "coldbell cutting",
+      "tile": "generic_item",
+      "weight": 0.05,
+      "stackable": true,
+      "count": 1,
+      "on_use": "eat",
+      "text_id": "",
+      "nutrition": 40,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": "Faintly metallic. A small resonance moves through the teeth.",
+      "drink_message": null,
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": null,
+      "liquid_volume": 0.0,
+      "qualities": {},
+      "description": "A stem of coldbell flower, harvested near grey stone. The petals have gone. The stem is pale, faintly waxy, and cold to the touch in ways the temperature does not explain.",
+      "harvest_from": "coldbell_flower",
+      "keywords": [
+        {
+          "tag": "binding",
+          "tier": 2
+        },
+        {
+          "tag": "binding",
+          "tier": 1
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": true,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0
+    },
+    {
+      "item_id": "binding_knife",
+      "item_state_version": 1,
+      "name": "a notched iron knife",
+      "tile": "generic_item",
+      "weight": 0.8,
+      "stackable": false,
+      "count": 1,
+      "on_use": "equip_toggle",
+      "text_id": "",
+      "nutrition": null,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": null,
+      "drink_message": null,
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": null,
+      "liquid_volume": 0.0,
+      "qualities": {},
+      "description": "The notches were cut at intervals someone calculated carefully. The iron holds something. It is not comfortable to carry.",
+      "harvest_from": null,
+      "keywords": [
+        {
+          "tag": "cutting",
+          "tier": 1
+        },
+        {
+          "tag": "binding",
+          "tier": 2
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [
+        {
+          "essence": "Binding",
+          "strength": 0.5,
+          "hits_remaining": 6
+        }
+      ],
+      "consumed_on_use": false,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0
+    }
+  ]
+}
