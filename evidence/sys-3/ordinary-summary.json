@@ -1,0 +1,968 @@
+{
+  "passed": true,
+  "source_revision": "c0c0c83349384d0afc2d78f77b764e3906f0dd53",
+  "limits": "Scripted selected-world routes and initial public-join staging; deterministically seeded combat and AI RNG, ordinary native AI, survival/carrying/actions. Local usability, not unaided discovery or global balance.",
+  "journeys": [
+    {
+      "route": "prepared",
+      "receipt_sha256": "a3889d2d83b2014df381160ea368afacf9a679c1a48c3f38744ae0618c2fd5dc",
+      "initial_staging": "Two selected-world SYS-3 journeys. One disclosed initial public-join staging each.\nAll later travel, acquisition, fire construction, water, work and use are game inputs.\nDisposable saves; no supplies inserted, threats removed, costs or rules overridden.\n",
+      "seed": 20261024,
+      "events": 348,
+      "charged_turns": 235,
+      "return_hp": 60,
+      "hunger": 0.23500000000000018,
+      "thirst": 0.29849999999999904,
+      "checkpoints": [
+        {
+          "label": "acquired",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 18956,
+            "state_equal": true
+          },
+          "archive_sha256": "763e602cfedc165922d9f2398c6322c7c06e8c19938033379fc40523128a0649"
+        },
+        {
+          "label": "busy",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 16316,
+            "state_equal": true
+          },
+          "archive_sha256": "73be755dd486441397245f315f56b462d55ba06b73a76e1ab68b7efc4e4e97f4"
+        },
+        {
+          "label": "completed",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 1772,
+            "state_equal": true
+          },
+          "archive_sha256": "6a6b154808e46d2cb96004eb9e377ac844190037b70aa71eac156b0499e10c23"
+        },
+        {
+          "label": "used",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 36976,
+            "state_equal": true
+          },
+          "archive_sha256": "81dd0ffd0b22b0ec3f7f21ee5d25034fa7cc1c78a1ae26ccd6993332e1b3ff23"
+        },
+        {
+          "label": "returned",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 14328,
+            "state_equal": true
+          },
+          "archive_sha256": "7d1ae405122c9ae078cf3c74628656cac6e8619ea32e74e03ba98d82e6359116"
+        }
+      ],
+      "stages": [
+        {
+          "label": "selected public approach",
+          "state": {
+            "chunk": [
+              16,
+              56
+            ],
+            "submap": null,
+            "position": [
+              21,
+              21
+            ],
+            "turn": 480,
+            "hp": 60,
+            "hunger": 0.0,
+            "thirst": 0.0,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble"
+            ],
+            "actors": [
+              {
+                "id": "hollow_revenant",
+                "name": "Hollow Revenant",
+                "x": 44,
+                "y": 30,
+                "hp": 14
+              },
+              {
+                "id": "grave_thing",
+                "name": "Grave Thing",
+                "x": 33,
+                "y": 30,
+                "hp": 18
+              },
+              {
+                "id": "hollow_revenant",
+                "name": "Hollow Revenant",
+                "x": 53,
+                "y": 6,
+                "hp": 14
+              }
+            ]
+          }
+        },
+        {
+          "label": "acquired actual primary, dried fixative and vessel",
+          "state": {
+            "chunk": [
+              16,
+              56
+            ],
+            "submap": null,
+            "position": [
+              19,
+              11
+            ],
+            "turn": 503,
+            "hp": 60,
+            "hunger": 0.023000000000000013,
+            "thirst": 0.028750000000000008,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble",
+              "weapon_wash_note",
+              "dried_bitter_herb",
+              "copper_steeping_kettle",
+              "crow_bile",
+              "herbal_dressing"
+            ],
+            "actors": [
+              {
+                "id": "hollow_revenant",
+                "name": "Hollow Revenant",
+                "x": 44,
+                "y": 30,
+                "hp": 14
+              },
+              {
+                "id": "grave_thing",
+                "name": "Grave Thing",
+                "x": 33,
+                "y": 26,
+                "hp": 18
+              },
+              {
+                "id": "hollow_revenant",
+                "name": "Hollow Revenant",
+                "x": 52,
+                "y": 6,
+                "hp": 14
+              }
+            ]
+          }
+        },
+        {
+          "label": "self-prepared wash busy",
+          "state": {
+            "chunk": [
+              15,
+              57
+            ],
+            "submap": null,
+            "position": [
+              50,
+              21
+            ],
+            "turn": 571,
+            "hp": 60,
+            "hunger": 0.09100000000000007,
+            "thirst": 0.11375000000000007,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble",
+              "weapon_wash_note",
+              "herbal_dressing"
+            ],
+            "actors": [
+              {
+                "id": "briar_lurker",
+                "name": "Briar Lurker",
+                "x": 42,
+                "y": 38,
+                "hp": 12
+              },
+              {
+                "id": "plague_crow",
+                "name": "Plague Crow",
+                "x": 12,
+                "y": 39,
+                "hp": 8
+              }
+            ]
+          }
+        },
+        {
+          "label": "self-prepared dose on ordinary blade",
+          "state": {
+            "chunk": [
+              15,
+              57
+            ],
+            "submap": null,
+            "position": [
+              50,
+              21
+            ],
+            "turn": 588,
+            "hp": 60,
+            "hunger": 0.10800000000000008,
+            "thirst": 0.1350000000000001,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble",
+              "weapon_wash_note",
+              "herbal_dressing",
+              "copper_steeping_kettle"
+            ],
+            "actors": [
+              {
+                "id": "briar_lurker",
+                "name": "Briar Lurker",
+                "x": 42,
+                "y": 38,
+                "hp": 12
+              },
+              {
+                "id": "plague_crow",
+                "name": "Plague Crow",
+                "x": 13,
+                "y": 37,
+                "hp": 8
+              }
+            ]
+          }
+        },
+        {
+          "label": "prepared blade used against native briar lurker",
+          "state": {
+            "chunk": [
+              15,
+              57
+            ],
+            "submap": null,
+            "position": [
+              43,
+              37
+            ],
+            "turn": 609,
+            "hp": 55,
+            "hunger": 0.1290000000000001,
+            "thirst": 0.16125000000000012,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble",
+              "weapon_wash_note",
+              "herbal_dressing",
+              "copper_steeping_kettle"
+            ],
+            "actors": [
+              {
+                "id": "plague_crow",
+                "name": "Plague Crow",
+                "x": 12,
+                "y": 39,
+                "hp": 8
+              }
+            ]
+          }
+        },
+        {
+          "label": "returned to depleted stock with owned coating state",
+          "state": {
+            "chunk": [
+              16,
+              56
+            ],
+            "submap": null,
+            "position": [
+              25,
+              13
+            ],
+            "turn": 715,
+            "hp": 60,
+            "hunger": 0.23500000000000018,
+            "thirst": 0.29849999999999904,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble",
+              "weapon_wash_note",
+              "copper_steeping_kettle"
+            ],
+            "actors": [
+              {
+                "id": "hollow_revenant",
+                "name": "Hollow Revenant",
+                "x": 38,
+                "y": 28,
+                "hp": 14
+              },
+              {
+                "id": "grave_thing",
+                "name": "Grave Thing",
+                "x": 30,
+                "y": 25,
+                "hp": 18
+              },
+              {
+                "id": "hollow_revenant",
+                "name": "Hollow Revenant",
+                "x": 46,
+                "y": 9,
+                "hp": 14
+              }
+            ]
+          }
+        }
+      ],
+      "contacts": [
+        {
+          "item": "crude_blade",
+          "remaining": [
+            {
+              "essence": "Dissolution",
+              "strength": 0.4,
+              "hits_remaining": 7
+            }
+          ]
+        }
+      ],
+      "player_attacks": [
+        {
+          "target": "Briar Lurker",
+          "contacts_before": [
+            {
+              "essence": "Dissolution",
+              "strength": 0.4,
+              "hits_remaining": 12
+            }
+          ],
+          "result": {
+            "hit": true,
+            "location_id": "core",
+            "location_name": "the core",
+            "damage_raw": 3,
+            "damage_dealt": 1,
+            "essence_applied": "Dissolution",
+            "essence_modifier": 1.4,
+            "attacker_dead": false,
+            "defender_dead": false,
+            "messages": [
+              "The strike finds the core.",
+              "Much is turned aside."
+            ],
+            "message_types": [
+              "hit",
+              "deflect"
+            ],
+            "damage_number": 1,
+            "is_player_hit": false,
+            "damage_raw_post_essence": 4,
+            "debug_formula": "[1d6 \u2192 3] \u2212 AV=3 \u2192 1 \u2192 1 (Dissolution +1)",
+            "is_crit": false,
+            "dodged": false,
+            "blocked": false,
+            "block_reduction": 0
+          }
+        },
+        {
+          "target": "Briar Lurker",
+          "contacts_before": [
+            {
+              "essence": "Dissolution",
+              "strength": 0.4,
+              "hits_remaining": 11
+            }
+          ],
+          "result": {
+            "hit": true,
+            "location_id": "core",
+            "location_name": "the core",
+            "damage_raw": 4,
+            "damage_dealt": 2,
+            "essence_applied": "Dissolution",
+            "essence_modifier": 1.4,
+            "attacker_dead": false,
+            "defender_dead": false,
+            "messages": [
+              "The strike finds the core."
+            ],
+            "message_types": [
+              "hit"
+            ],
+            "damage_number": 2,
+            "is_player_hit": false,
+            "damage_raw_post_essence": 5,
+            "debug_formula": "[1d6 \u2192 4] \u2212 AV=3 \u2192 2 \u2192 2 (Dissolution +1)",
+            "is_crit": false,
+            "dodged": false,
+            "blocked": false,
+            "block_reduction": 0
+          }
+        },
+        {
+          "target": "Briar Lurker",
+          "contacts_before": [
+            {
+              "essence": "Dissolution",
+              "strength": 0.4,
+              "hits_remaining": 10
+            }
+          ],
+          "result": {
+            "hit": true,
+            "location_id": "briars",
+            "location_name": "the briars",
+            "damage_raw": 6,
+            "damage_dealt": 4,
+            "essence_applied": "Dissolution",
+            "essence_modifier": 1.4,
+            "attacker_dead": false,
+            "defender_dead": false,
+            "messages": [
+              "The strike finds the briars."
+            ],
+            "message_types": [
+              "hit"
+            ],
+            "damage_number": 4,
+            "is_player_hit": false,
+            "damage_raw_post_essence": 8,
+            "debug_formula": "[1d6 \u2192 6] \u2212 AV=3 \u2192 5 \u00d70.8 \u2192 4 (Dissolution +2)",
+            "is_crit": false,
+            "dodged": false,
+            "blocked": false,
+            "block_reduction": 0
+          }
+        },
+        {
+          "target": "Briar Lurker",
+          "contacts_before": [
+            {
+              "essence": "Dissolution",
+              "strength": 0.4,
+              "hits_remaining": 9
+            }
+          ],
+          "result": {
+            "hit": true,
+            "location_id": "core",
+            "location_name": "the core",
+            "damage_raw": 4,
+            "damage_dealt": 2,
+            "essence_applied": "Dissolution",
+            "essence_modifier": 1.4,
+            "attacker_dead": false,
+            "defender_dead": false,
+            "messages": [
+              "The strike finds the core."
+            ],
+            "message_types": [
+              "hit"
+            ],
+            "damage_number": 2,
+            "is_player_hit": false,
+            "damage_raw_post_essence": 5,
+            "debug_formula": "[1d6 \u2192 4] \u2212 AV=3 \u2192 2 \u2192 2 (Dissolution +1)",
+            "is_crit": false,
+            "dodged": false,
+            "blocked": false,
+            "block_reduction": 0
+          }
+        },
+        {
+          "target": "Briar Lurker",
+          "contacts_before": [
+            {
+              "essence": "Dissolution",
+              "strength": 0.4,
+              "hits_remaining": 8
+            }
+          ],
+          "result": {
+            "hit": true,
+            "location_id": "briars",
+            "location_name": "the briars",
+            "damage_raw": 6,
+            "damage_dealt": 4,
+            "essence_applied": "Dissolution",
+            "essence_modifier": 1.4,
+            "attacker_dead": false,
+            "defender_dead": true,
+            "messages": [
+              "The strike finds the briars.",
+              "The Briar Lurker is destroyed."
+            ],
+            "message_types": [
+              "hit",
+              "death"
+            ],
+            "damage_number": 4,
+            "is_player_hit": false,
+            "damage_raw_post_essence": 8,
+            "debug_formula": "[1d6 \u2192 6] \u2212 AV=3 \u2192 5 \u00d70.8 \u2192 4 (Dissolution +2)",
+            "is_crit": false,
+            "dodged": false,
+            "blocked": false,
+            "block_reduction": 0
+          }
+        }
+      ]
+    },
+    {
+      "route": "finished",
+      "receipt_sha256": "c2bed3f418fc7f2c78d88a6a138a64c9e346d2e353b9ec56801876b5f1f02d41",
+      "initial_staging": "Two selected-world SYS-3 journeys. One disclosed initial public-join staging each.\nAll later travel, acquisition, fire construction, water, work and use are game inputs.\nDisposable saves; no supplies inserted, threats removed, costs or rules overridden.\n",
+      "seed": 20261024,
+      "events": 253,
+      "charged_turns": 204,
+      "return_hp": 57,
+      "hunger": 0.20410000000000014,
+      "thirst": 0.2552500000000001,
+      "checkpoints": [
+        {
+          "label": "acquired",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 16984,
+            "state_equal": true
+          },
+          "archive_sha256": "6c42a511de3d0ccac4c317f4c8f8038ef5a61132043e0f4df68846973db3d38f"
+        },
+        {
+          "label": "used",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 37968,
+            "state_equal": true
+          },
+          "archive_sha256": "d85b3383eea37f866eae35c9859b5d1f560633e44d6d7f336bee67184f1ccf62"
+        },
+        {
+          "label": "returned",
+          "f5_f9_equal": true,
+          "cold": {
+            "passed": true,
+            "pid": 33296,
+            "state_equal": true
+          },
+          "archive_sha256": "fe1f77bfebdb43d25cb7b8e612959c3457e58edc17667b67010b32a7a42f9b0e"
+        }
+      ],
+      "stages": [
+        {
+          "label": "selected public approach",
+          "state": {
+            "chunk": [
+              16,
+              56
+            ],
+            "submap": null,
+            "position": [
+              21,
+              21
+            ],
+            "turn": 480,
+            "hp": 60,
+            "hunger": 0.0,
+            "thirst": 0.0,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble"
+            ],
+            "actors": [
+              {
+                "id": "hollow_revenant",
+                "name": "Hollow Revenant",
+                "x": 44,
+                "y": 30,
+                "hp": 14
+              },
+              {
+                "id": "grave_thing",
+                "name": "Grave Thing",
+                "x": 33,
+                "y": 30,
+                "hp": 18
+              },
+              {
+                "id": "hollow_revenant",
+                "name": "Hollow Revenant",
+                "x": 53,
+                "y": 6,
+                "hp": 14
+              }
+            ]
+          }
+        },
+        {
+          "label": "finished dose acquired from another ordinary shop",
+          "state": {
+            "chunk": [
+              16,
+              56
+            ],
+            "submap": null,
+            "position": [
+              56,
+              28
+            ],
+            "turn": 544,
+            "hp": 60,
+            "hunger": 0.06400000000000004,
+            "thirst": 0.08000000000000004,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble",
+              "weapon_wash_note",
+              "binding_wash"
+            ],
+            "actors": [
+              {
+                "id": "hollow_revenant",
+                "name": "Hollow Revenant",
+                "x": 42,
+                "y": 28,
+                "hp": 14
+              },
+              {
+                "id": "grave_thing",
+                "name": "Grave Thing",
+                "x": 32,
+                "y": 28,
+                "hp": 18
+              },
+              {
+                "id": "hollow_revenant",
+                "name": "Hollow Revenant",
+                "x": 49,
+                "y": 1,
+                "hp": 14
+              }
+            ]
+          }
+        },
+        {
+          "label": "finished wash used beyond the clue shop",
+          "state": {
+            "chunk": [
+              16,
+              56
+            ],
+            "submap": null,
+            "position": [
+              47,
+              27
+            ],
+            "turn": 569,
+            "hp": 57,
+            "hunger": 0.08900000000000007,
+            "thirst": 0.11125000000000007,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble",
+              "weapon_wash_note"
+            ],
+            "actors": [
+              {
+                "id": "grave_thing",
+                "name": "Grave Thing",
+                "x": 29,
+                "y": 30,
+                "hp": 18
+              },
+              {
+                "id": "hollow_revenant",
+                "name": "Hollow Revenant",
+                "x": 50,
+                "y": 0,
+                "hp": 14
+              }
+            ]
+          }
+        },
+        {
+          "label": "returned to depleted stock with owned coating state",
+          "state": {
+            "chunk": [
+              16,
+              56
+            ],
+            "submap": null,
+            "position": [
+              56,
+              28
+            ],
+            "turn": 684,
+            "hp": 57,
+            "hunger": 0.20410000000000014,
+            "thirst": 0.2552500000000001,
+            "inventory": [
+              "tallow_torch",
+              "crow_jerky",
+              "water_flask",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble",
+              "weapon_wash_note"
+            ],
+            "actors": [
+              {
+                "id": "grave_thing",
+                "name": "Grave Thing",
+                "x": 35,
+                "y": 31,
+                "hp": 18
+              },
+              {
+                "id": "hollow_revenant",
+                "name": "Hollow Revenant",
+                "x": 53,
+                "y": 6,
+                "hp": 14
+              }
+            ]
+          }
+        }
+      ],
+      "contacts": [
+        {
+          "item": "crude_blade",
+          "remaining": [
+            {
+              "essence": "Binding",
+              "strength": 0.4,
+              "hits_remaining": 1
+            }
+          ]
+        }
+      ],
+      "player_attacks": [
+        {
+          "target": "Hollow Revenant",
+          "contacts_before": [
+            {
+              "essence": "Binding",
+              "strength": 0.4,
+              "hits_remaining": 6
+            }
+          ],
+          "result": {
+            "hit": true,
+            "location_id": "form",
+            "location_name": "the form",
+            "damage_raw": 6,
+            "damage_dealt": 7,
+            "essence_applied": "Binding",
+            "essence_modifier": 1.4,
+            "attacker_dead": false,
+            "defender_dead": false,
+            "messages": [
+              "The strike finds the form."
+            ],
+            "message_types": [
+              "hit"
+            ],
+            "damage_number": 7,
+            "is_player_hit": false,
+            "damage_raw_post_essence": 8,
+            "debug_formula": "[1d6 \u2192 6] \u2212 AV=1 \u2192 7 \u2192 7 (Binding +2)",
+            "is_crit": false,
+            "dodged": false,
+            "blocked": false,
+            "block_reduction": 0
+          }
+        },
+        {
+          "target": "Hollow Revenant",
+          "contacts_before": [
+            {
+              "essence": "Binding",
+              "strength": 0.4,
+              "hits_remaining": 5
+            }
+          ],
+          "result": {
+            "hit": true,
+            "location_id": "form",
+            "location_name": "the form",
+            "damage_raw": 1,
+            "damage_dealt": 0,
+            "essence_applied": "Binding",
+            "essence_modifier": 1.4,
+            "attacker_dead": false,
+            "defender_dead": false,
+            "messages": [
+              "The blow is turned aside."
+            ],
+            "message_types": [
+              "deflect"
+            ],
+            "damage_number": 0,
+            "is_player_hit": false,
+            "damage_raw_post_essence": 1,
+            "debug_formula": "[1d6 \u2192 1] \u2212 AV=1 \u2192 0 \u2192 0",
+            "is_crit": false,
+            "dodged": false,
+            "blocked": false,
+            "block_reduction": 0
+          }
+        },
+        {
+          "target": "Hollow Revenant",
+          "contacts_before": [
+            {
+              "essence": "Binding",
+              "strength": 0.4,
+              "hits_remaining": 4
+            }
+          ],
+          "result": {
+            "hit": true,
+            "location_id": "form",
+            "location_name": "the form",
+            "damage_raw": 5,
+            "damage_dealt": 6,
+            "essence_applied": "Binding",
+            "essence_modifier": 1.4,
+            "attacker_dead": false,
+            "defender_dead": false,
+            "messages": [
+              "The strike finds the form."
+            ],
+            "message_types": [
+              "hit"
+            ],
+            "damage_number": 6,
+            "is_player_hit": false,
+            "damage_raw_post_essence": 7,
+            "debug_formula": "[1d6 \u2192 5] \u2212 AV=1 \u2192 6 \u2192 6 (Binding +2)",
+            "is_crit": false,
+            "dodged": false,
+            "blocked": false,
+            "block_reduction": 0
+          }
+        },
+        {
+          "target": "Hollow Revenant",
+          "contacts_before": [
+            {
+              "essence": "Binding",
+              "strength": 0.4,
+              "hits_remaining": 3
+            }
+          ],
+          "result": {
+            "hit": true,
+            "location_id": "form",
+            "location_name": "the form",
+            "damage_raw": 1,
+            "damage_dealt": 0,
+            "essence_applied": "Binding",
+            "essence_modifier": 1.4,
+            "attacker_dead": false,
+            "defender_dead": false,
+            "messages": [
+              "The blow is turned aside."
+            ],
+            "message_types": [
+              "deflect"
+            ],
+            "damage_number": 0,
+            "is_player_hit": false,
+            "damage_raw_post_essence": 1,
+            "debug_formula": "[1d6 \u2192 1] \u2212 AV=1 \u2192 0 \u2192 0",
+            "is_crit": false,
+            "dodged": false,
+            "blocked": false,
+            "block_reduction": 0
+          }
+        },
+        {
+          "target": "Hollow Revenant",
+          "contacts_before": [
+            {
+              "essence": "Binding",
+              "strength": 0.4,
+              "hits_remaining": 2
+            }
+          ],
+          "result": {
+            "hit": true,
+            "location_id": "form",
+            "location_name": "the form",
+            "damage_raw": 6,
+            "damage_dealt": 7,
+            "essence_applied": "Binding",
+            "essence_modifier": 1.4,
+            "attacker_dead": false,
+            "defender_dead": true,
+            "messages": [
+              "The strike finds the form.",
+              "The Hollow Revenant is destroyed."
+            ],
+            "message_types": [
+              "hit",
+              "death"
+            ],
+            "damage_number": 7,
+            "is_player_hit": false,
+            "damage_raw_post_essence": 8,
+            "debug_formula": "[1d6 \u2192 6] \u2212 AV=1 \u2192 7 \u2192 7 (Binding +2)",
+            "is_crit": false,
+            "dodged": false,
+            "blocked": false,
+            "block_reduction": 0
+          }
+        }
+      ]
+    }
+  ]
+}

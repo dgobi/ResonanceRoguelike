@@ -1,0 +1,97 @@
+{
+  "passed": true,
+  "source_revision": "c0c0c83349384d0afc2d78f77b764e3906f0dd53",
+  "checks": [
+    {
+      "gate": "native",
+      "passed": true,
+      "receipt": "workbench/.artifacts/sys-3/native-1793939545854/receipt.json",
+      "receipt_sha256": "b31c485e53ba71b1cf58a376088e6998952a5631ebe95afbdc3a90d23929d93b",
+      "package_sha256": "cf80fb04ceb01fbb05a51c22ccd15e53d0c585b34e779d238b50c20902fd6c82",
+      "log_sha256": "228c6a7cdfc931bf883d763d29be386faa209e1f5b3af90c413a2c2c1c461f82",
+      "batches": [
+        {
+          "primary": {
+            "role": "primary",
+            "item_id": "coldbell_cutting",
+            "tag": "binding",
+            "tier": 1,
+            "hits": 6
+          },
+          "item_id": "binding_wash",
+          "dose": {
+            "version": 1,
+            "essence": "Binding",
+            "strength": 0.4,
+            "hits": 6
+          }
+        },
+        {
+          "primary": {
+            "role": "primary",
+            "item_id": "briar_sap",
+            "tag": "binding",
+            "tier": 2,
+            "hits": 12
+          },
+          "item_id": "binding_wash",
+          "dose": {
+            "version": 1,
+            "essence": "Binding",
+            "strength": 0.4,
+            "hits": 12
+          }
+        },
+        {
+          "primary": {
+            "role": "primary",
+            "item_id": "sulphur_cap_fragment",
+            "tag": "caustic",
+            "tier": 1,
+            "hits": 6
+          },
+          "item_id": "etching_wash",
+          "dose": {
+            "version": 1,
+            "essence": "Dissolution",
+            "strength": 0.4,
+            "hits": 6
+          }
+        },
+        {
+          "primary": {
+            "role": "primary",
+            "item_id": "crow_bile",
+            "tag": "caustic",
+            "tier": 2,
+            "hits": 12
+          },
+          "item_id": "etching_wash",
+          "dose": {
+            "version": 1,
+            "essence": "Dissolution",
+            "strength": 0.4,
+            "hits": 12
+          }
+        }
+      ]
+    },
+    {
+      "gate": "retained-sys2-native",
+      "passed": true,
+      "receipt": "workbench/.artifacts/sys-2/native-1793939624303/receipt.json",
+      "receipt_sha256": "77f862522020b72b51287991a0d2f8fe2e8abbfc58b86290518f02db942c4e54",
+      "package_sha256": "cf80fb04ceb01fbb05a51c22ccd15e53d0c585b34e779d238b50c20902fd6c82",
+      "log_sha256": "52644ddd17b3e8ac25f190d9eabe88a2b3d77497fad133e666a5dd87ae3dc136"
+    },
+    {
+      "gate": "retained-sys1-native",
+      "passed": true,
+      "receipt": "workbench/.artifacts/sys-1/native-1793939662698/receipt.json",
+      "receipt_sha256": "66bd08ceb4f5fab122b42a827215811cf53e34e28e2da990e8cb783a208d57b3",
+      "package_sha256": "cf80fb04ceb01fbb05a51c22ccd15e53d0c585b34e779d238b50c20902fd6c82",
+      "log_sha256": "e3ff033b7420c91dac067ef1e80fc1ee2870c813b153d1c6254751ef3772b6c1"
+    }
+  ],
+  "scope": "Final rebuilt package runtime-only SYS-3 plus retained SYS-2 held light/heat and SYS-1 vessel/preparation. All settings, saves and WebViews disposable; local game events only."
+}

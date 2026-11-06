@@ -1,0 +1,54 @@
+{
+  "baseline": "3a73956fa2e1e50be3c93cf22fed9e1ed1b581d8",
+  "scope": "SYS-3 sole active package. Explicit owner message commissions attached outcome and push; source attachment is not general authority for unrelated work.",
+  "sources": [
+    {
+      "name": "CODEX_SYS-3_MATERIAL_SENSITIVE_WEAPON_PREPARATIONS.md",
+      "path": "C:\\Users\\dango\\Downloads\\CODEX_SYS-3_MATERIAL_SENSITIVE_WEAPON_PREPARATIONS.md",
+      "sha256": "62b96ec1280d87cfb2f50bf98bfafa2f97e39c0a78399762af08b2cc2f54ac70",
+      "consulted_scope": "Commissioned bounded package; M1-M5 and publication authorized by owner message."
+    },
+    {
+      "name": "RESONANCE_DECISIONS_AND_STATE.md",
+      "path": "C:\\Users\\dango\\Downloads\\RESONANCE_DECISIONS_AND_STATE.md",
+      "sha256": "8036415bce3b509adfb7d53f8062cd27987a61fd695cece1eba9c4c6ea3ccf49",
+      "consulted_scope": "v3; older implementation baseline historical."
+    },
+    {
+      "name": "RESONANCE_WORKFLOW.md",
+      "path": "C:\\Users\\dango\\Downloads\\RESONANCE_WORKFLOW.md",
+      "sha256": "ef333c4238c29646c2e907b829dd9cbcab4f837f6ad119e95ec6988a64209416",
+      "consulted_scope": "v1.2 production-main finite package arrangement."
+    },
+    {
+      "name": "RESONANCE_IMPLEMENTATION_PROPOSAL.md",
+      "path": "C:\\Users\\dango\\Downloads\\RESONANCE_IMPLEMENTATION_PROPOSAL.md",
+      "sha256": "26093f38fb1a479d91819601395df184068de07ab52a25730d6089c95492dcd0",
+      "consulted_scope": "Relevant approved preparation/essence and horizon-two direction only."
+    },
+    {
+      "name": "RESONANCE_SYSTEMS_FIRST_EMERGENCE_REPORT_2026-11-01.md",
+      "path": "C:\\Users\\dango\\Downloads\\RESONANCE_SYSTEMS_FIRST_EMERGENCE_REPORT_2026-11-01.md",
+      "sha256": "a3a9603c34ca4ae05b5233fdb00740d0633b3771900b6a5b01e75498a879de43",
+      "consulted_scope": "Relevant material/process and authoring direction; other stages not commissioned."
+    },
+    {
+      "name": "AGENTS.md",
+      "path": "AGENTS.md",
+      "sha256": "a7d09e0c52a4016dea1dfbd3b61eccf366e10959603e476226e47f6d2a355626",
+      "consulted_scope": "Current project instructions."
+    },
+    {
+      "name": "RESONANCE_PROJECT_COMPASS.md",
+      "path": "evidence/worldgen-g11/before/review-package/references/RESONANCE_PROJECT_COMPASS.md",
+      "sha256": "66c2e37870591317aee376bd3a5529cc1537ac0edd429b7c47378aae2cb42c91",
+      "consulted_scope": "Supplied archived Compass v1.0."
+    },
+    {
+      "name": "UI_RULES.md",
+      "path": "roguelike/docs/UI_RULES.md",
+      "sha256": "5d36cd87d81acd0b6a2fa82a102321e0f28cf14a5005b34391d39011b27eff61",
+      "consulted_scope": "Current ordinary UI rules before CraftScreen edits."
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "readback_utc": "2026-11-06 05:24:18 UTC",
+  "scope": "Verified implementation/input publication; final report and completion tag follow.",
+  "methods": [
+    "git ls-remote origin",
+    "Independent GitHub connector refs and annotated tag objects"
+  ],
+  "main": {
+    "ref": "refs/heads/main",
+    "node_id": "REF_kwDORtpHo69yZWZzL2hlYWRzL21haW4",
+    "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/refs/heads/main",
+    "object": {
+      "sha": "62bfca41ed2fbfec22ad0bc93d6645c906af2df2",
+      "type": "commit",
+      "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/commits/62bfca41ed2fbfec22ad0bc93d6645c906af2df2"
+    }
+  },
+  "refs": [
+    {
+      "ref": "refs/tags/checkpoint/sys-3-implementation-20261105-a",
+      "node_id": "REF_kwDORtpHo9oANHJlZnMvdGFncy9jaGVja3BvaW50L3N5cy0zLWltcGxlbWVudGF0aW9uLTIwMjYxMTA1LWE",
+      "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/refs/tags/checkpoint/sys-3-implementation-20261105-a",
+      "object": {
+        "sha": "f4f7482eee37eeed166a74dcb5440b2293f8977d",
+        "type": "tag",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/f4f7482eee37eeed166a74dcb5440b2293f8977d"
+      }
+    },
+    {
+      "ref": "refs/tags/checkpoint/sys-3-m1-20261105-a",
+      "node_id": "REF_kwDORtpHo9oAKHJlZnMvdGFncy9jaGVja3BvaW50L3N5cy0zLW0xLTIwMjYxMTA1LWE",
+      "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/refs/tags/checkpoint/sys-3-m1-20261105-a",
+      "object": {
+        "sha": "22cd8d4b247d7155451a29d2867edbcfa5f561eb",
+        "type": "tag",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/22cd8d4b247d7155451a29d2867edbcfa5f561eb"
+      }
+    },
+    {
+      "ref": "refs/tags/checkpoint/sys-3-start-20261105-a",
+      "node_id": "REF_kwDORtpHo9oAK3JlZnMvdGFncy9jaGVja3BvaW50L3N5cy0zLXN0YXJ0LTIwMjYxMTA1LWE",
+      "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/refs/tags/checkpoint/sys-3-start-20261105-a",
+      "object": {
+        "sha": "9252dda410a3eb8b811f6fbfc70e8f4309a7ee39",
+        "type": "tag",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/9252dda410a3eb8b811f6fbfc70e8f4309a7ee39"
+      }
+    },
+    {
+      "ref": "refs/tags/checkpoint/sys-3-verified-input-20261105-a",
+      "node_id": "REF_kwDORtpHo9oANHJlZnMvdGFncy9jaGVja3BvaW50L3N5cy0zLXZlcmlmaWVkLWlucHV0LTIwMjYxMTA1LWE",
+      "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/refs/tags/checkpoint/sys-3-verified-input-20261105-a",
+      "object": {
+        "sha": "8acdbd7538d6678e149b5421192239a5b0e35b6a",
+        "type": "tag",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/8acdbd7538d6678e149b5421192239a5b0e35b6a"
+      }
+    }
+  ],
+  "git_ls_remote": "62bfca41ed2fbfec22ad0bc93d6645c906af2df2\trefs/heads/main\nf4f7482eee37eeed166a74dcb5440b2293f8977d\trefs/tags/checkpoint/sys-3-implementation-20261105-a\nc0c0c83349384d0afc2d78f77b764e3906f0dd53\trefs/tags/checkpoint/sys-3-implementation-20261105-a^{}\n22cd8d4b247d7155451a29d2867edbcfa5f561eb\trefs/tags/checkpoint/sys-3-m1-20261105-a\n6cb7296d7debb5086c002874d7caa212a48cbe1f\trefs/tags/checkpoint/sys-3-m1-20261105-a^{}\n9252dda410a3eb8b811f6fbfc70e8f4309a7ee39\trefs/tags/checkpoint/sys-3-start-20261105-a\n3a73956fa2e1e50be3c93cf22fed9e1ed1b581d8\trefs/tags/checkpoint/sys-3-start-20261105-a^{}\n8acdbd7538d6678e149b5421192239a5b0e35b6a\trefs/tags/checkpoint/sys-3-verified-input-20261105-a\n62bfca41ed2fbfec22ad0bc93d6645c906af2df2\trefs/tags/checkpoint/sys-3-verified-input-20261105-a^{}\n",
+  "annotated_objects": [
+    {
+      "node_id": "TA_kwDORtpHo9oAKGY0Zjc0ODJlZWUzN2VlZWQxNjZhNzRkY2I1NDQwYjIyOTNmODk3N2Q",
+      "sha": "f4f7482eee37eeed166a74dcb5440b2293f8977d",
+      "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/f4f7482eee37eeed166a74dcb5440b2293f8977d",
+      "tagger": {
+        "name": "Daniel",
+        "email": "dan.gobin@gmail.com",
+        "date": "2026-11-06T04:26:19Z"
+      },
+      "object": {
+        "sha": "c0c0c83349384d0afc2d78f77b764e3906f0dd53",
+        "type": "commit",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/commits/c0c0c83349384d0afc2d78f77b764e3906f0dd53"
+      },
+      "tag": "checkpoint/sys-3-implementation-20261105-a",
+      "message": "SYS-3 M2-M4 implementation; preflight completed, frozen input for M5\n",
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    {
+      "node_id": "TA_kwDORtpHo9oAKDIyY2Q4ZDRiMjQ3ZDcxNTU0NTFhMjlkMjg2N2VkYmNmYTVmNTYxZWI",
+      "sha": "22cd8d4b247d7155451a29d2867edbcfa5f561eb",
+      "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/22cd8d4b247d7155451a29d2867edbcfa5f561eb",
+      "tagger": {
+        "name": "Daniel",
+        "email": "dan.gobin@gmail.com",
+        "date": "2026-11-06T03:45:43Z"
+      },
+      "object": {
+        "sha": "6cb7296d7debb5086c002874d7caa212a48cbe1f",
+        "type": "commit",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/commits/6cb7296d7debb5086c002874d7caa212a48cbe1f"
+      },
+      "tag": "checkpoint/sys-3-m1-20261105-a",
+      "message": "SYS-3 M1: preserved genuine pre-change state and owner file manifest\n",
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    {
+      "node_id": "TA_kwDORtpHo9oAKDkyNTJkZGE0MTBhM2ViOGI4MTFmNmZiZmM3MGU4ZjQzMDlhN2VlMzk",
+      "sha": "9252dda410a3eb8b811f6fbfc70e8f4309a7ee39",
+      "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/9252dda410a3eb8b811f6fbfc70e8f4309a7ee39",
+      "tagger": {
+        "name": "Daniel",
+        "email": "dan.gobin@gmail.com",
+        "date": "2026-11-06T03:44:36Z"
+      },
+      "object": {
+        "sha": "3a73956fa2e1e50be3c93cf22fed9e1ed1b581d8",
+        "type": "commit",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/commits/3a73956fa2e1e50be3c93cf22fed9e1ed1b581d8"
+      },
+      "tag": "checkpoint/sys-3-start-20261105-a",
+      "message": "SYS-3 start: reconciled reviewed baseline; preserve owner files and personal saves\n",
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    {
+      "node_id": "TA_kwDORtpHo9oAKDhhY2RiZDc1MzhkNjY3OGUxNDliNTQyMTE5MjIzOWE1YjBlMzViNmE",
+      "sha": "8acdbd7538d6678e149b5421192239a5b0e35b6a",
+      "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/8acdbd7538d6678e149b5421192239a5b0e35b6a",
+      "tagger": {
+        "name": "Daniel",
+        "email": "dan.gobin@gmail.com",
+        "date": "2026-11-06T05:23:59Z"
+      },
+      "object": {
+        "sha": "62bfca41ed2fbfec22ad0bc93d6645c906af2df2",
+        "type": "commit",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/commits/62bfca41ed2fbfec22ad0bc93d6645c906af2df2"
+      },
+      "tag": "checkpoint/sys-3-verified-input-20261105-a",
+      "message": "SYS-3 verified inputs: all 17 applicable gates supported by the retained full run and complete affected rechecks. Original failures preserved. Runtime/content/editor remains c0c0c83349384d0afc2d78f77b764e3906f0dd53; six test corrections and one guide clarification only. Final input SHA256 3ca47639bf21cb4d91f50590ebb565ef4d054ec33ebe80cb7f0bd2d61f417821.\n",
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    }
+  ]
+}

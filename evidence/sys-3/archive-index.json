@@ -1,0 +1,44 @@
+[
+  {
+    "path": "authoring-development.zip",
+    "sha256": "f8d0c155dae59c198c1fc9afa1f8e5543ccd3b5b7195a0e06bb0c019f2d6bab9",
+    "bytes": 4840665,
+    "members": 18
+  },
+  {
+    "path": "gate-evidence-full.zip",
+    "sha256": "f268e11d01ace84c4cd5f38cf06b3ec96741743e810f3c4f60a49fb757287575",
+    "bytes": 5055532,
+    "members": 480
+  },
+  {
+    "path": "gate-evidence-recheck.zip",
+    "sha256": "8d922dbb654aa7d567dfe9e3ed334e04f46cdf7f7b88e6786567c5f13f45adbb",
+    "bytes": 67113,
+    "members": 5
+  },
+  {
+    "path": "legacy-coatings-job.zip",
+    "sha256": "032d7de685c1e672b0b0c52b4f9c8c52d3b5937f057ec0cf3bf441ba583b215d",
+    "bytes": 9013,
+    "members": 8
+  },
+  {
+    "path": "native-final.zip",
+    "sha256": "1a5e2d4d78734f693109b867cf43bde8865aad013b53251ef412688eb8569403",
+    "bytes": 583685,
+    "members": 6
+  },
+  {
+    "path": "ordinary-final.zip",
+    "sha256": "066ff123e0b9e99e031804d0480d5ab97f11fffdaf619d609f9145b92fcc1846",
+    "bytes": 12760965,
+    "members": 25
+  },
+  {
+    "path": "preflight-logs.zip",
+    "sha256": "eef50d4479c6bc77e098447a0fdcd62935c4fa5f17de45cb064779a5228debe1",
+    "bytes": 191231,
+    "members": 24
+  }
+]

@@ -1,54 +1,36 @@
 # SYS-3 progress
 
-Sole active package: material-sensitive Binding and Dissolution weapon washes,
-issued package v1.0. One writer on production `main`; helpers inspect read-only.
-Authorized through verification, scoped commit/push, checkpoint publication and
-independent remote readback. Stop at SYS-3; no wiki or SYS-4 work.
+SYS-3 is complete: material-sensitive Binding and Etching weapon washes through
+existing vessel, preparation, coating and Workbench systems. M1–M5 form one outcome.
+Stop at this package. No SYS-4 or wiki work is commissioned.
 
-- Baseline reconciled: local and freshly fetched remote main both
-  `3a73956fa2e1e50be3c93cf22fed9e1ed1b581d8`; no intervening tracked changes.
-- Start: `checkpoint/sys-3-start-20261105-a` (annotated).
-- M1: genuine pre-change F5 JSON/cache, loose pickled dose, partly spent coating,
-  same-ID keyword variants and pending version-one bone job captured in
-  `evidence/sys-3/legacy-coatings-job.zip`. Owner untracked files hashed separately.
-- Read Compass v1, supplied Decisions/State v3 (historical AI-8 baseline), Workflow
-  v1.2, relevant approved proposal and systems-first sections, current AGENTS and
-  full SYS-3 package. SYS-2 is the runtime baseline; no general lighting repair.
-- Decisions: additive owned dose payload; version-two wash jobs capture validated
-  output state; explicit primary component role/identity with two finite bands.
-  Keep existing coating combat/contact and bone-job clock/semantics.
-- M2/M3 implemented: exact instance/role allocation, captured doses and version-two
-  wash work, transactional application, cache/JSON compatibility, supported item
-  and recipe controls. Focused runtime development checks pass.
-- M4 packaged authoring passed in `workbench/.artifacts/sys-3/native-1793937791664`:
-  both recipes/items, four low/high batches, real contact/expiry, saved revision,
-  Reset/latest/dirty capture and restored final values. Controlled target fixtures
-  are disclosed. Two normal-AI ordinary journeys are running separately.
-- M4 ordinary outings passed: self-prepared Etching against native Briar Lurker;
-  finite finished Binding against native Hollow Revenant; normal AI/costs and
-  return to depleted stock, F5/F9 and independent cold loads.
-- Preflight completed. Source-change refusals and stale catalogue expectations
-  retained accurately; final affected checks pass. Read-only alias review fixed.
-- M5 frozen input: `c0c0c83349384d0afc2d78f77b764e3906f0dd53`, annotated
-  `checkpoint/sys-3-implementation-20261105-a`. Driver
-  `tools/verify_sys_3.py --evidence .baseline/sys-3/final-a` finished with all inputs
-  unchanged. Its original `passed:false` is retained.
-  Ordinary outings, all Workbench frontend/host/build/bundle/lifecycle gates and
-  SYS-3/SYS-2/SYS-1 native gates pass with unchanged inputs. Unfiltered production
-  passes 3,704 checks / 159 workers. Focused ran 675 tests with six stale assertions
-  in four methods. All 27 worker modules / 136 tests ran: 133 passed, two stale
-  expectations failed, one intentional dependency-control skip. Separate control
-  passed. No runtime/content/editor failure was found.
-  A narrow plan in `evidence/sys-3/expectation-recheck-plan.json` updates six tests:
-  current profile/catalogue/room expectations and moves positive vessel coverage
-  from optional lab loot to the existing explicit SYS-1 room. Read-only review
-  confirmed unchanged fixed locations and retained treatment stock. One guide
-  clarification adds the existing water-source submenu. The report discloses
-  deterministic combat and AI seeds. No runtime/data/editor change. Applied the
-  declared changes after full completion; commit and execute the witness for all four
-  affected focused modules, both affected worker modules and dependency control.
-  Results are in `.baseline/sys-3/final-a/release.json`; delivery report draft is
-  `docs/owner/SYS_3.md`. Finish evidence, verified-input/complete checkpoints,
-  scoped delivery commit, main/tag push and independent remote readback.
-- Blockers: none. Final values begin at strength .4, 6/12 contacts, 125 mL,
-  one primary + one fixative, 15 charged turns.
+- Production `main`, one implementation writer; helper inspection stayed read-only.
+- Reconciled reviewed and actual remote baseline:
+  `3a73956fa2e1e50be3c93cf22fed9e1ed1b581d8`. No intervening tracked owner work.
+- Named start and M1 checkpoints preserve genuine pre-change doses, spent coating
+  and version-one bone work. Personal campaigns were never loaded.
+- Runtime/content/editor: `c0c0c83349384d0afc2d78f77b764e3906f0dd53`.
+  Final values: strength 0.4, 6/12 contacts, 125 mL, one exact primary plus a
+  separate fixative, 15 charged turns, same vessel returned empty.
+- Both items/recipes were actually authored and reused in packaged Workbench.
+  Four low/high batches, real application/contact/expiry and saved-edit versus
+  Reset/latest/dirty boundaries passed. Ordinary self-prepared Etching and finite
+  finished Binding outings passed with normal AI/costs and eight cold checkpoints.
+- Full frozen run: 3,704 production checks pass; all builds/native/play gates pass.
+  675 focused tests exposed six stale assertions in four methods. All 27 worker
+  modules / 136 tests ran: 133 pass, two stale failures, one intentional skip.
+  Original failed full result is preserved; no fresh clean full pass is claimed.
+- Final verified inputs: `62bfca41ed2fbfec22ad0bc93d6645c906af2df2`.
+  Six test corrections plus one guide submenu clarification; unchanged runtime,
+  content and editor. Complete affected modules: 17 focused pass, 11 worker pass
+  plus the intentional skip, and separate dependency-absence control passes.
+  The retention witness inverse-reconstructs all seven original file hashes.
+- All 17 applicable gates satisfied. All 1,263 consumed inputs tracked; 278 owner
+  files and seven personal-save files retain hashes (save mtimes also unchanged).
+- Start/M1/implementation/verified-input tags and verified inputs are published;
+  independent GitHub ref/tag-object reads agree with Git remote readback.
+  Completion checkpoint `checkpoint/sys-3-complete-20261105-a` is published
+  atomically with the final report commit. Its exact final independent readback
+  is supplied in the handoff because the commit cannot contain its own identity.
+- Final report: `docs/owner/SYS_3.md`; exact results, archives, hashes, environment,
+  preservation and publication evidence: `evidence/sys-3/`. No remaining blocker.

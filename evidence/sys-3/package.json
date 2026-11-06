@@ -1,0 +1,14 @@
+{
+  "package": {
+    "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+    "sha256": "cf80fb04ceb01fbb05a51c22ccd15e53d0c585b34e779d238b50c20902fd6c82"
+  },
+  "installers": [
+    {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "3afc57a590cca05f382796984b4479298396b00c030049d63c420c58d8b0a33e",
+      "size": 28499114
+    }
+  ],
+  "note": "Built locally through required build/bundle gates; executable and NSIS outputs are generated artifacts, not additional source checkouts."
+}

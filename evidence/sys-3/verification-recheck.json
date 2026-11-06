@@ -1,0 +1,163 @@
+{
+  "passed": true,
+  "interpretation": "Retained original full execution plus complete affected modules; not a fresh clean unfiltered run.",
+  "revision": "62bfca41ed2fbfec22ad0bc93d6645c906af2df2",
+  "started_utc": "2026-11-06T05:22:15.571735+00:00",
+  "finished_utc": "2026-11-06T05:23:12.671890+00:00",
+  "original_manifest_sha256": "0da8bf97c9422df69232b95ef2c748de87bf3285d2887c1ccfa75eeb0de6f5b0",
+  "original_release_sha256": "7b8819f00c37335aeb16ad2c936bc59c6206cd82db0702ef416a086c9c39c667",
+  "original_production_result_sha256": "ba9a2df9a7c09dbedea5033dee929e209462b121fb1658163766f12acb7f28c3",
+  "input_manifest_sha256": "3ca47639bf21cb4d91f50590ebb565ef4d054ec33ebe80cb7f0bd2d61f417821",
+  "source_stable": true,
+  "script_sha256": "d48f1e2383c72815c328a79d87be39b0568bb6331808c8625def6109098830a0",
+  "plan_sha256": "0f0af768e73caa8026194e5df99f9f9ffb9fec61bd89b993beda58090f6e95fd",
+  "commands": [
+    {
+      "gate": "focused-affected",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "unittest",
+        "-v",
+        "test_gameplay_g13",
+        "test_gameplay_g15",
+        "test_gameplay_g16",
+        "test_structure_access"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "seconds": 35.860395499970764,
+      "source_stable": true,
+      "log_sha256": "a5ae8f1b38f973e8a7d02f8e8494f71c177e445acd2dbd66e698508d591d2538",
+      "passed": true,
+      "tests": 17
+    },
+    {
+      "gate": "worker-affected",
+      "command": [
+        "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+        "-X",
+        "utf8",
+        "-I",
+        "-B",
+        "-c",
+        "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_authoring','test_bridge']));sys.exit(not r.wasSuccessful())"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "seconds": 56.32530299993232,
+      "source_stable": true,
+      "log_sha256": "471406752ae5ec806fd7a9df1c9850012bf7865738ebd04b51bffcdf1a536d05",
+      "passed": true,
+      "tests": 12
+    },
+    {
+      "gate": "worker-dependency-control",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-c",
+        "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromName('test_bridge.BridgeTests.test_dependency_absence_structured'));sys.exit(not r.wasSuccessful())"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "seconds": 0.7418445001821965,
+      "source_stable": true,
+      "log_sha256": "bcb0d59bad035a6aef11ecbebc8ee942c9e31f8a88e021a170ceae96000bdeba",
+      "passed": true,
+      "tests": 1
+    }
+  ],
+  "changes": {
+    "tools/critical_fix_regressions/tests/test_gameplay_g13.py": {
+      "before": "a5f4fda76442a46635cf7fcf99938d5c4536a66dfe528adf24fa6acb78c1b1ed",
+      "after": "6f2ae9cc166abce08ecce2a7dbc775a0cb32ee555cf799c903153756d6a078af",
+      "reason": "Current selector has named SYS-3 profile identities and apothecary_d. Preserve all role order/weights/caps, fixed shed locations and exact comparison to the genuine G12 placement archive.",
+      "edits": [
+        {
+          "before": "        for form in ('grid', 'roadside'):\n            for row in expected",
+          "after": "        for form in ('grid', 'roadside'):\n            expected['profiles'][form]['id'] += '-sys3'\n            for row in expected"
+        },
+        {
+          "before": "row['asset']='apothecary_c'  # SYS-1 successor retains weight/cap and old selections.",
+          "after": "row['asset']='apothecary_d'  # SYS-3 successor retains weight/cap and old selections."
+        }
+      ]
+    },
+    "tools/critical_fix_regressions/tests/test_gameplay_g15.py": {
+      "before": "a59e9a923135ec1a511315ef1589ef5fc8ff1b83a8fd3eb2ad853a442d1b16a3",
+      "after": "f7224eff0e738e5663f4d6d3896cf70c3e961d692b1b496485211891340b3626",
+      "reason": "Current enrollment uses apothecary_d, which retains the treatment chest. Keep all three fixed starts/targets, one-dressing checks and genuine historical world assertions.",
+      "edits": [
+        {
+          "before": "p['asset']=='apothecary_c']  # SYS-1 successor retains this treatment.",
+          "after": "p['asset']=='apothecary_d']  # SYS-3 successor retains this treatment."
+        }
+      ]
+    },
+    "tools/critical_fix_regressions/tests/test_gameplay_g16.py": {
+      "before": "25891f719fd90297d7ac86e63c2ab4cbf56779b65db9af1507ddc490516c3801",
+      "after": "c2cdfd7d5439eaa676d93507b09c54d51a713c147e95a371707779ed507d0546",
+      "reason": "Current selector identities and successor membership only. Preserve exact workshop placement, ordinary materialization, ingredient ownership and historical fixture checks.",
+      "edits": [
+        {
+          "before": "        for form in ('grid','roadside'):\n            for rows in expected",
+          "after": "        for form in ('grid','roadside'):\n            expected['profiles'][form]['id'] += '-sys3'\n            for rows in expected"
+        },
+        {
+          "before": "'apothecary_a':'apothecary_c'",
+          "after": "'apothecary_a':'apothecary_d'"
+        }
+      ]
+    },
+    "tools/critical_fix_regressions/tests/test_structure_access.py": {
+      "before": "84796bf107f6a894368c7cf6283315e9975737263031156bc318d2377d1f7309",
+      "after": "4b9aa72fbadde3a0d8ca308bdc80a3d1265e3d012329e4da6cfb9e3587dcb7f3",
+      "reason": "Registration retains one additional installed ordinary building, apothecary_d: 64 to 65. All actual action/access and placement assertions stay.",
+      "edits": [
+        {
+          "before": "selected['preserved_installed_candidates'],64)",
+          "after": "selected['preserved_installed_candidates'],65)"
+        }
+      ]
+    },
+    "workbench/worker/test_authoring.py": {
+      "before": "efb6ac718171ec2679e6c83e1bb23882ab361156ac37d9bbbc85239da2bb20b4",
+      "after": "00ab74d6f013e9847b3ee2227ec8e122b8b53cb73096ff5b7544178bd5da7770",
+      "reason": "The actual saved SYS-3 Test room is another editable authored submap. Keep exact sorted list and all existing/read-only admission checks.",
+      "edits": [
+        {
+          "before": "\"roguelike/data/layouts/sys2_light_room.json\", \"roguelike/docs/examples/g17_authored_creature_room.json\"",
+          "after": "\"roguelike/data/layouts/sys2_light_room.json\", \"roguelike/data/layouts/sys3_wash_room.json\", \"roguelike/docs/examples/g17_authored_creature_room.json\""
+        }
+      ]
+    },
+    "workbench/worker/test_bridge.py": {
+      "before": "3caeb31953bdec5cbef4c0c942259e3e85ba19c62014a8ae58cd4c002b207fa2",
+      "after": "dc89dd77e75d36537e9add012103587a517122a8d817f2312c84b89b8c08affa",
+      "reason": "New catalogue identity changes optional starting-lab stock RNG. Preserve every coordinate and semantic-repeatability assertion; additionally preview the existing explicit four-vessel SYS-1 room twice and require exact vessel set, valid state, uniqueness, disjoint owners and full semantic equality after only ID omission.",
+      "edits": [
+        {
+          "before": "        # Fresh previews construct distinct physical vessel owners. Validate full\n        # state, omit only random identity for generation-semantic comparison.\n        sys.path.insert(0, str(ROOT / \"roguelike\"))\n        from engine.save_components import validate_item\n        identities = []\n        for preview in (a, b):\n            seen = set()\n            for group in (preview[\"items\"], preview[\"containers\"]):\n                for owner in group:\n                    for item in owner[\"items\"]:\n                        if \"vessel\" in item:\n                            validate_item(item, \"preview vessel\")\n                            identity = item[\"vessel\"][\"id\"]\n                            self.assertNotIn(identity, seen)\n                            seen.add(identity)\n                            item[\"vessel\"].pop(\"id\")\n            self.assertTrue(seen)\n            identities.append(seen)\n        self.assertTrue(identities[0].isdisjoint(identities[1]))\n        for key in (\"terrain_sha256\", \"terrain\", \"items\", \"containers\", \"actors\", \"decor\", \"scene_seed\"):\n            self.assertEqual(a[key], b[key], key)\n",
+          "after": "        # Catalogue identity participates in preview RNG. Optional laboratory\n        # stock need not contain a pot; its geometry/repeatability stays checked.\n        # The existing SYS-1 room explicitly places four distinct vessels, so\n        # positive owner coverage does not depend on an incidental loot roll.\n        explicit = [invoke(\"preview\", asset=\"roguelike/data/layouts/sys1_preparation_room.json\",\n                           seed=20261023)[\"result\"] for _ in range(2)]\n        sys.path.insert(0, str(ROOT / \"roguelike\"))\n        from engine.save_components import validate_item\n        for left, right, required in ((a, b, False), (*explicit, True)):\n            identities = []\n            for preview in (left, right):\n                self.assertTrue(preview[\"passed\"])\n                seen = set(); vessel_items = []\n                for group in (preview[\"items\"], preview[\"containers\"]):\n                    for owner in group:\n                        for item in owner[\"items\"]:\n                            if \"vessel\" in item:\n                                validate_item(item, \"preview vessel\")\n                                identity = item[\"vessel\"][\"id\"]\n                                self.assertNotIn(identity, seen)\n                                seen.add(identity); vessel_items.append(item[\"item_id\"])\n                                item[\"vessel\"].pop(\"id\")\n                if required:\n                    self.assertTrue(seen)\n                    self.assertEqual(len(seen), 4)\n                    self.assertEqual(sorted(vessel_items), [\"clay_pot\", \"copper_steeping_kettle\",\n                                                           \"small_steeping_cup\", \"waxed_water_flask\"])\n                identities.append(seen)\n            self.assertTrue(identities[0].isdisjoint(identities[1]))\n            for key in (\"terrain_sha256\", \"terrain\", \"items\", \"containers\", \"actors\", \"decor\", \"scene_seed\"):\n                self.assertEqual(left[key], right[key], key)\n"
+        }
+      ]
+    },
+    "roguelike/docs/MATERIAL_WEAPON_PREPARATIONS.md": {
+      "before": "52b23215186f5f174a237ecd3505d41fb798c9890b77640ef8acb00b82a82f9a",
+      "after": "c5a0c8d971ca522bc6cda00d794a74b70f8b9125fc6952aca2aabb63b97d6120",
+      "reason": "Clarify the existing intervening water-source selection in ordinary fill instructions; no game, content, editor or verification behavior changes.",
+      "edits": [
+        {
+          "before": "**E \u2192 Fill \u2192 125 mL**",
+          "after": "**E \u2192 Fill \u2192 choose water source \u2192 125 mL**"
+        }
+      ]
+    }
+  }
+}

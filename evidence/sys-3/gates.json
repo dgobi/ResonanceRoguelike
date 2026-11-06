@@ -1,0 +1,956 @@
+[
+  {
+    "gate": "frontend",
+    "applicable_result": true,
+    "original_passed": true,
+    "original": {
+      "gate": "frontend",
+      "command": [
+        "npm.cmd",
+        "test"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 3.1088161000516266,
+      "source_stable": true,
+      "log_sha256": "b3dc0abd5e56aa5a1819196a54cdb0daaf90ff1a4bf0398cc096525f3b94676d",
+      "passed": true
+    },
+    "resolution": null
+  },
+  {
+    "gate": "typecheck",
+    "applicable_result": true,
+    "original_passed": true,
+    "original": {
+      "gate": "typecheck",
+      "command": [
+        "npm.cmd",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 4.763591700000688,
+      "source_stable": true,
+      "log_sha256": "77783bf2ca9523ff1e6aa3f5a098f779a50fd8cade5fb2774a4da5c450761c89",
+      "passed": true
+    },
+    "resolution": null
+  },
+  {
+    "gate": "host",
+    "applicable_result": true,
+    "original_passed": true,
+    "original": {
+      "gate": "host",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--manifest-path",
+        "src-tauri/Cargo.toml"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 25.044954700162634,
+      "source_stable": true,
+      "log_sha256": "90416fe17a1686b4e8e0628a00102fc563c93f5e4278e94262511d4f40af82e2",
+      "passed": true
+    },
+    "resolution": null
+  },
+  {
+    "gate": "clippy",
+    "applicable_result": true,
+    "original_passed": true,
+    "original": {
+      "gate": "clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "--manifest-path",
+        "src-tauri/Cargo.toml",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 5.739662299863994,
+      "source_stable": true,
+      "log_sha256": "e473ed2895b0a1633b198132a97256fb0b15df4c47533726ccf9564dcc18d6cd",
+      "passed": true
+    },
+    "resolution": null
+  },
+  {
+    "gate": "debug-build",
+    "applicable_result": true,
+    "original_passed": true,
+    "original": {
+      "gate": "debug-build",
+      "command": [
+        "cargo",
+        "build",
+        "--locked",
+        "--manifest-path",
+        "src-tauri/Cargo.toml"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 14.854848899878561,
+      "source_stable": true,
+      "log_sha256": "37a9eeddca8902c3b3f11d0b30635248c13d0b75cadde75625ced0d7cfdb6b04",
+      "passed": true
+    },
+    "resolution": null
+  },
+  {
+    "gate": "play",
+    "applicable_result": true,
+    "original_passed": true,
+    "original": {
+      "gate": "play",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_sys_3_play.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\sys-3\\final-a\\play"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 99.42936339997686,
+      "source_stable": true,
+      "log_sha256": "a2548bb8130213bccb0c309e7e3b138ccead406cf0bebb838340a17d1f395bf0",
+      "passed": true
+    },
+    "resolution": null
+  },
+  {
+    "gate": "build",
+    "applicable_result": true,
+    "original_passed": true,
+    "original": {
+      "gate": "build",
+      "command": [
+        "npm.cmd",
+        "run",
+        "build"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 59.766292799962685,
+      "source_stable": true,
+      "log_sha256": "072c050bf12df0f3a6caf32a229cc743701cc03c12a430bba7548118f6a94380",
+      "passed": true
+    },
+    "resolution": null
+  },
+  {
+    "gate": "bundle",
+    "applicable_result": true,
+    "original_passed": true,
+    "original": {
+      "gate": "bundle",
+      "command": [
+        "npm.cmd",
+        "run",
+        "bundle"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 91.32286239997484,
+      "source_stable": true,
+      "log_sha256": "1e1f67776f0d7d0e5a3e5ba1fa8d4521f209507590b1bd38ea6e61f7821e585f",
+      "passed": true
+    },
+    "resolution": null
+  },
+  {
+    "gate": "startup",
+    "applicable_result": true,
+    "original_passed": true,
+    "original": {
+      "gate": "startup",
+      "command": [
+        "node",
+        "scripts/startup-test.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 115.0834385000635,
+      "source_stable": true,
+      "log_sha256": "a6e69515be30f42474fc064fb2b0bca206b85271e8d23a8cf4b4c700789636b3",
+      "passed": true
+    },
+    "resolution": null
+  },
+  {
+    "gate": "desktop",
+    "applicable_result": true,
+    "original_passed": true,
+    "original": {
+      "gate": "desktop",
+      "command": [
+        "node",
+        "scripts/desktop-test.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 28.801773199811578,
+      "source_stable": true,
+      "log_sha256": "498ccd69780d38d26420784e0634d4c7d2282ee0ea8ed6d353cf1a855d5f46c1",
+      "passed": true
+    },
+    "resolution": null
+  },
+  {
+    "gate": "native",
+    "applicable_result": true,
+    "original_passed": true,
+    "original": {
+      "gate": "native",
+      "command": [
+        "node",
+        "scripts/run-sys-3.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 77.8356193001382,
+      "source_stable": true,
+      "log_sha256": "228c6a7cdfc931bf883d763d29be386faa209e1f5b3af90c413a2c2c1c461f82",
+      "passed": true
+    },
+    "resolution": null
+  },
+  {
+    "gate": "retained-sys2-native",
+    "applicable_result": true,
+    "original_passed": true,
+    "original": {
+      "gate": "retained-sys2-native",
+      "command": [
+        "node",
+        "scripts/run-sys-2.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 37.856457100016996,
+      "source_stable": true,
+      "log_sha256": "52644ddd17b3e8ac25f190d9eabe88a2b3d77497fad133e666a5dd87ae3dc136",
+      "passed": true
+    },
+    "resolution": null
+  },
+  {
+    "gate": "retained-sys1-native",
+    "applicable_result": true,
+    "original_passed": true,
+    "original": {
+      "gate": "retained-sys1-native",
+      "command": [
+        "node",
+        "scripts/run-sys-1.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 77.38488449994475,
+      "source_stable": true,
+      "log_sha256": "e3ff033b7420c91dac067ef1e80fc1ee2870c813b153d1c6254751ef3772b6c1",
+      "passed": true
+    },
+    "resolution": null
+  },
+  {
+    "gate": "production-d",
+    "applicable_result": true,
+    "original_passed": true,
+    "original": {
+      "gate": "production-d",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_d.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\sys-3\\final-a\\production-d"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 841.5673615999985,
+      "source_stable": true,
+      "log_sha256": "7503bd78e8c966ab6b46bfe639f6c55c3433e32f4bce6e2be0c77ae903313360",
+      "passed": true
+    },
+    "resolution": null
+  },
+  {
+    "gate": "focused",
+    "applicable_result": true,
+    "original_passed": false,
+    "original": {
+      "gate": "focused",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\critical_fix_regressions\\verify_fixes.py",
+        "--timeout",
+        "3600",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\sys-3\\final-a\\focused"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 1,
+      "error": null,
+      "seconds": 2155.953171200119,
+      "source_stable": true,
+      "log_sha256": "e9f93caceb1fef851f1608ab61fe5a2d27b0e8cf58df264362b1d3d6d918edc9",
+      "passed": false
+    },
+    "resolution": {
+      "gate": "focused-affected",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "unittest",
+        "-v",
+        "test_gameplay_g13",
+        "test_gameplay_g15",
+        "test_gameplay_g16",
+        "test_structure_access"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "seconds": 35.860395499970764,
+      "source_stable": true,
+      "log_sha256": "a5ae8f1b38f973e8a7d02f8e8494f71c177e445acd2dbd66e698508d591d2538",
+      "passed": true,
+      "tests": 17
+    }
+  },
+  {
+    "gate": "worker",
+    "applicable_result": true,
+    "original_passed": false,
+    "original": {
+      "gate": "worker",
+      "cohort": [
+        "test_assignment",
+        "test_authoring",
+        "test_bridge",
+        "test_buildings_w5p",
+        "test_composite_ai",
+        "test_content_contracts",
+        "test_creatures",
+        "test_creatures_w5f",
+        "test_equipment",
+        "test_furnishings",
+        "test_harvest",
+        "test_items",
+        "test_lights",
+        "test_pools",
+        "test_pools_w5o",
+        "test_preparation",
+        "test_recipes",
+        "test_reports_g22",
+        "test_rivals_g21",
+        "test_rooms_w5g",
+        "test_selection_w5q",
+        "test_submaps",
+        "test_supplies",
+        "test_texts",
+        "test_typography",
+        "test_venom_treatment",
+        "test_visual"
+      ],
+      "modules": [
+        {
+          "gate": "test_assignment",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_assignment']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 102.69601429998875,
+          "source_stable": true,
+          "log_sha256": "921e32e8559e36df3e8235f467fab2fbefdecc30044db3bab2e9d54a232ba41f",
+          "passed": true
+        },
+        {
+          "gate": "test_authoring",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_authoring']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 1,
+          "error": null,
+          "seconds": 53.058191400021315,
+          "source_stable": true,
+          "log_sha256": "c9b17e8a8539d7a10ca595cb48ee16053ff939b911e566b3f3fafdb304036899",
+          "passed": false
+        },
+        {
+          "gate": "test_bridge",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_bridge']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 1,
+          "error": null,
+          "seconds": 15.937982500065118,
+          "source_stable": true,
+          "log_sha256": "ab34d4d55e5e06c6d051961b06fbcd9c4a02d79786b4285ac868005a36893b29",
+          "passed": false
+        },
+        {
+          "gate": "test_buildings_w5p",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_buildings_w5p']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 58.587661400204524,
+          "source_stable": true,
+          "log_sha256": "5bbf1176944a7e4223e158177018ac946c584b501981a4c636e183c8ab2d79bb",
+          "passed": true
+        },
+        {
+          "gate": "test_composite_ai",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_composite_ai']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 299.07008309988305,
+          "source_stable": true,
+          "log_sha256": "ac515a35c8102b034e9b4e1b460b5f23e72e55aee8e7109118f31208005e5033",
+          "passed": true
+        },
+        {
+          "gate": "test_content_contracts",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_content_contracts']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 43.97059980011545,
+          "source_stable": true,
+          "log_sha256": "7dc5a333723a2ef84b495b77cdb4fc0c093c9a14306dff47a41e809ee8111d51",
+          "passed": true
+        },
+        {
+          "gate": "test_creatures",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_creatures']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 122.993966500042,
+          "source_stable": true,
+          "log_sha256": "ab149c0ee397d7904c0a381aa5f663b6706a508bc5c340cf44abada100197294",
+          "passed": true
+        },
+        {
+          "gate": "test_creatures_w5f",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_creatures_w5f']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 85.00226349988952,
+          "source_stable": true,
+          "log_sha256": "32c81628a56087a3574e1e6cdbefbad2186b65b81de7a101f6d86a1d4c2cf7b6",
+          "passed": true
+        },
+        {
+          "gate": "test_equipment",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_equipment']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 221.90082160010934,
+          "source_stable": true,
+          "log_sha256": "2ef50b776791e83f6215597000259807386719b1f5bbad8f165201173407b1ad",
+          "passed": true
+        },
+        {
+          "gate": "test_furnishings",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_furnishings']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 87.2528989999555,
+          "source_stable": true,
+          "log_sha256": "cea72c4a82c07c7bf58c26403ff117caace89bb708ca676fdb9176e63d330cde",
+          "passed": true
+        },
+        {
+          "gate": "test_harvest",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_harvest']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 40.224187599960715,
+          "source_stable": true,
+          "log_sha256": "dd591fa98899496f4be99dfbd89896e2d66335792c28a00a88be3bade033422a",
+          "passed": true
+        },
+        {
+          "gate": "test_items",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_items']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 83.09556620009243,
+          "source_stable": true,
+          "log_sha256": "2065d15236e8a329c0ccd5ae00db3e9618bdaedb3daf7b8860833d61e7c9ba69",
+          "passed": true
+        },
+        {
+          "gate": "test_lights",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_lights']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 51.8932252000086,
+          "source_stable": true,
+          "log_sha256": "e4cad042fb95d4e7d0b9dab092e611c9e0089292f6764f86c579bf1eb59ef5c5",
+          "passed": true
+        },
+        {
+          "gate": "test_pools",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_pools']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 52.73740270012058,
+          "source_stable": true,
+          "log_sha256": "303d9843d07b1d8e4e65b93e338eef3c99c51a2892b4374272b66540d5342af2",
+          "passed": true
+        },
+        {
+          "gate": "test_pools_w5o",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_pools_w5o']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 28.153533600037917,
+          "source_stable": true,
+          "log_sha256": "0b37fea6e2a2dcd63e25fbea7fd3479c1e067f3bbdd3ca564c2570ae4beb9c5e",
+          "passed": true
+        },
+        {
+          "gate": "test_preparation",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_preparation']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 179.22324909991585,
+          "source_stable": true,
+          "log_sha256": "8d263375fa1f20c2c73d03f588d81a1d39b2abacfe593cc1dc25d0f1c91a04cb",
+          "passed": true
+        },
+        {
+          "gate": "test_recipes",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_recipes']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 71.12555489991792,
+          "source_stable": true,
+          "log_sha256": "f57df8a9abc3c612378f1a56e9cc265f414c9c4a04bdbaec94928c986faea831",
+          "passed": true
+        },
+        {
+          "gate": "test_reports_g22",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_reports_g22']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 32.41944929980673,
+          "source_stable": true,
+          "log_sha256": "cd416bef6ddfbbcd3faa18e356e8ee04673b7aa6875fdcf166664e2cdb0e3a95",
+          "passed": true
+        },
+        {
+          "gate": "test_rivals_g21",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_rivals_g21']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 35.489606000017375,
+          "source_stable": true,
+          "log_sha256": "cd72eebb07a74c78f10062371f526e0e8570c29c9c683c85c2bed95574156623",
+          "passed": true
+        },
+        {
+          "gate": "test_rooms_w5g",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_rooms_w5g']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 82.69284329982474,
+          "source_stable": true,
+          "log_sha256": "277b87555445d1f702e3362a5793dea09668b88887423255ec434aec4fac6b6b",
+          "passed": true
+        },
+        {
+          "gate": "test_selection_w5q",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_selection_w5q']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 108.68102269992232,
+          "source_stable": true,
+          "log_sha256": "2057174db49f778297ea4f850496324b8c4214205da36919769417fd527141ed",
+          "passed": true
+        },
+        {
+          "gate": "test_submaps",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_submaps']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 101.16651790007018,
+          "source_stable": true,
+          "log_sha256": "37a1e214d931586fd8900c9ad7df97f5510a0da13370ae5dc2fac1fee09ea94b",
+          "passed": true
+        },
+        {
+          "gate": "test_supplies",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_supplies']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 75.75522299995646,
+          "source_stable": true,
+          "log_sha256": "b943eedb5f5b739a02a29de44d58c3941a875a31d6e35e470c7f9a92a8a22254",
+          "passed": true
+        },
+        {
+          "gate": "test_texts",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_texts']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 59.25893340003677,
+          "source_stable": true,
+          "log_sha256": "b33468eb9fff0db31a90ace7f883614ebb734ecef8a16ee1d76cc32bbb4eba64",
+          "passed": true
+        },
+        {
+          "gate": "test_typography",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_typography']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 38.65075450018048,
+          "source_stable": true,
+          "log_sha256": "81300cfb2af89c15a63ee1971e2dd6ea6f83078468083ad9dcc2115e7ea0069b",
+          "passed": true
+        },
+        {
+          "gate": "test_venom_treatment",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_venom_treatment']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 15.302193999988958,
+          "source_stable": true,
+          "log_sha256": "55c22a8e77f460e343c8743971481ba91c36f213ead9d3730f84409375922167",
+          "passed": true
+        },
+        {
+          "gate": "test_visual",
+          "command": [
+            "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+            "-X",
+            "utf8",
+            "-I",
+            "-B",
+            "-c",
+            "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_visual']));sys.exit(not r.wasSuccessful())"
+          ],
+          "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+          "exit_code": 0,
+          "error": null,
+          "seconds": 32.144536999985576,
+          "source_stable": true,
+          "log_sha256": "92a14621dfefa287f3f6fd957d48f96707889496c5d9735a7771bd7764de6091",
+          "passed": true
+        }
+      ],
+      "seconds": 1101.9816301001702,
+      "tests": 136,
+      "passed": false,
+      "source_stable": true,
+      "log_sha256": "13810c78d4871eb535950323f082b0ac06e8c93478f695e3a8b96cd5f235416b"
+    },
+    "resolution": {
+      "gate": "worker-affected",
+      "command": [
+        "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+        "-X",
+        "utf8",
+        "-I",
+        "-B",
+        "-c",
+        "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['test_authoring','test_bridge']));sys.exit(not r.wasSuccessful())"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "seconds": 56.32530299993232,
+      "source_stable": true,
+      "log_sha256": "471406752ae5ec806fd7a9df1c9850012bf7865738ebd04b51bffcdf1a536d05",
+      "passed": true,
+      "tests": 12
+    }
+  },
+  {
+    "gate": "worker-dependency-control",
+    "applicable_result": true,
+    "original_passed": true,
+    "original": {
+      "gate": "worker-dependency-control",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-c",
+        "import sys,unittest;sys.path.insert(0,'worker');r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromName('test_bridge.BridgeTests.test_dependency_absence_structured'));sys.exit(not r.wasSuccessful())"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 0.6114399000070989,
+      "source_stable": true,
+      "log_sha256": "e1b9379c7410f6951e6a8df7b51377c3610fce1665254f39ec24922d9add4216",
+      "passed": true
+    },
+    "resolution": null
+  }
+]

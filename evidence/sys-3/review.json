@@ -1,0 +1,30 @@
+{
+  "writer": "root only",
+  "helper": "read-only inspection and review; no source or save writes",
+  "runtime_content_editor_revision": "c0c0c83349384d0afc2d78f77b764e3906f0dd53",
+  "reviewed": [
+    "Exact material role allocation, saved keyword tier resolution and stale selection rejection",
+    "Captured job and dose settings, consumption transaction, completion rollback and restore validation",
+    "Current selector successors, fixed historical placements and retained finite treatment stock",
+    "Final report claims against source, packaged receipts and ordinary journey results"
+  ],
+  "findings": [
+    {
+      "status": "fixed before frozen run",
+      "finding": "Same live dose across independently serialized cache addresses could split identity.",
+      "resolution": "Validate live ownership by serialized surface/submap address, with active address overriding only that address. Reject duplicate physical dose before writes; valid same-address aliases remain. Focused regression added."
+    },
+    {
+      "status": "fixed after full run; complete affected modules passed",
+      "finding": "Six current catalogue/preview test files retain stale expectations.",
+      "resolution": "Exact inverse-reconstructable plan preserves old fixtures, fixed geometry, membership order, weights, caps and repeatability. Positive vessel evidence moves from optional stock to an existing explicit four-vessel room."
+    },
+    {
+      "status": "report and feature guide clarified",
+      "finding": "Control prose omitted the water-source submenu and ordinary RNG disclosure named combat only.",
+      "resolution": "Report specifies water-source selection and both combat and AI deterministic seeds. The feature guide receives the same submenu clarification."
+    }
+  ],
+  "limits": "Source and retained-evidence review, not an independent full suite execution or a global-balance assessment. Full final run and complete affected rechecks are recorded separately.",
+  "final_recheck": "17 focused tests; 11 worker passes and one intentional skip; separate dependency-absence control passes."
+}

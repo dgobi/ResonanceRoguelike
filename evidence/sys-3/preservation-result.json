@@ -1,0 +1,54 @@
+{
+  "checked_utc": "2026-11-06T05:25:24.990755+00:00",
+  "owner_files": 278,
+  "owner_hashes_equal": true,
+  "owner_files_still_untracked": true,
+  "personal_saves": {
+    "roguelike/saves/slot_0/meta.json": {
+      "sha256": "21d09ab8d1825db3779047363d20946d0f8d7d5f13a4986a31c2fc7a7fba5f8f",
+      "modified_ns": 1776034091135202900
+    },
+    "roguelike/saves/slot_0/player.json": {
+      "sha256": "f966aba3b967b07fa806b3ad06bb99b85d61f6c35b334c3e8802e11c2b589160",
+      "modified_ns": 1776034091134701300
+    },
+    "roguelike/saves/slot_0/world.json": {
+      "sha256": "464d8c45e2fadb703c3aec420e64dbf5c43841ed029a40d476c2e290bedc03ed",
+      "modified_ns": 1776034091133704600
+    },
+    "roguelike/saves/slot_0/chunks/120_59.pkl": {
+      "sha256": "ec05d4b02d3419b20d1f96e8c3792729992118fb8deaa1cae52da2a7e02a3024",
+      "modified_ns": 1776034090686086500
+    },
+    "roguelike/saves/slot_0/chunks/64_78.pkl": {
+      "sha256": "b98f7e11fe5c1d828f2be28303913f3ab40ed106560ba86e2f328d563e281601",
+      "modified_ns": 1776034090591444100
+    },
+    "roguelike/saves/slot_0/chunks/64_79.pkl": {
+      "sha256": "8559a6984670720fde46cca829fdea624ef2df0f20094aab3d9b01ccbb62432f",
+      "modified_ns": 1776034090687091900
+    },
+    "roguelike/saves/slot_0/chunks/sub_120_59_0.pkl": {
+      "sha256": "afee18337c2fb66e72d23c25f6cb0d44e88d87acf5f0b104a725ece304ba4b27",
+      "modified_ns": 1776034001105896800
+    }
+  },
+  "personal_hashes_and_mtimes_equal": true,
+  "personal_campaign_loaded": false,
+  "consumed_inputs": 1263,
+  "all_inputs_tracked": true,
+  "input_owner_sets_disjoint": true,
+  "protected_source_paths": [
+    "roguelike/data/buildings/commercial/apothecary_c.json",
+    "roguelike/data/loot_pools/alchemist_preparation.json",
+    "roguelike/data/loot_pools/alchemist_reagents.json",
+    "roguelike/data/items/consumables/bile_coating.json",
+    "roguelike/data/items/consumables/briar_binding_oil.json",
+    "roguelike/data/items/consumables/hungering_oil.json",
+    "roguelike/data/recipes/resonant_bone_tincture.json",
+    "roguelike/data/recipes/hungering_oil.json",
+    "roguelike/data/items/consumables/resonant_bone_tincture.json"
+  ],
+  "protected_source_unchanged_from_reviewed_baseline": true,
+  "wiki_changed_paths": []
+}
