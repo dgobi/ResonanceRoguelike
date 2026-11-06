@@ -1,0 +1,644 @@
+{
+  "producer": "capture_sys_2_legacy.py",
+  "setup": "Real baseline constructors, activation/charged phases and F5; disposable fixture; null/zero fuel legacy instances explicitly staged.",
+  "records": [
+    {
+      "active": true,
+      "source_revision": "884b9c7cd03ae3168702839a04b82ba55b1397da",
+      "archive": "legacy-active.zip",
+      "sha256": "b60b8add12adbc1d3b51ae9e7f2535e289d4b16c88c74769f51ad56a21722985",
+      "turn": 481,
+      "inventory": [
+        {
+          "item_id": "tallow_torch",
+          "item_state_version": 1,
+          "name": "Tallow Torch",
+          "tile": "tallow_torch",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_light",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": 600,
+          "turns_lit": 138,
+          "light_data": {
+            "radius": 8,
+            "color": [
+              255,
+              180,
+              60
+            ],
+            "falloff": 1.8,
+            "flicker": true
+          },
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "tallow_torch",
+          "item_state_version": 1,
+          "name": "Tallow Torch",
+          "tile": "tallow_torch",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_light",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": 600,
+          "turns_lit": 49,
+          "light_data": {
+            "radius": 8,
+            "color": [
+              255,
+              180,
+              60
+            ],
+            "falloff": 1.8,
+            "flicker": true
+          },
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "oil_lantern",
+          "item_state_version": 1,
+          "name": "Oil Lantern",
+          "tile": "oil_lantern",
+          "weight": 0.6,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_light",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": 1800,
+          "turns_lit": 321,
+          "light_data": {
+            "radius": 10,
+            "color": [
+              220,
+              200,
+              120
+            ],
+            "falloff": 1.5,
+            "flicker": false
+          },
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "A small iron vessel with a wick. Burns cleaner than a torch and longer. The light it produces is steadier and somehow less reassuring.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 2
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "tallow_torch",
+          "item_state_version": 1,
+          "name": "Tallow Torch",
+          "tile": "tallow_torch",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_light",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 23,
+          "light_data": {
+            "radius": 8,
+            "color": [
+              255,
+              180,
+              60
+            ],
+            "falloff": 1.8,
+            "flicker": true
+          },
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "tallow_torch",
+          "item_state_version": 1,
+          "name": "Tallow Torch",
+          "tile": "tallow_torch",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_light",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": 0,
+          "turns_lit": 600,
+          "light_data": {
+            "radius": 8,
+            "color": [
+              255,
+              180,
+              60
+            ],
+            "falloff": 1.8,
+            "flicker": true
+          },
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        }
+      ],
+      "floor": {
+        "item_id": "oil_lantern",
+        "item_state_version": 1,
+        "name": "Oil Lantern",
+        "tile": "oil_lantern",
+        "weight": 0.6,
+        "stackable": false,
+        "count": 1,
+        "on_use": "equip_light",
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": 1800,
+        "turns_lit": 777,
+        "light_data": {
+          "radius": 10,
+          "color": [
+            220,
+            200,
+            120
+          ],
+          "falloff": 1.5,
+          "flicker": false
+        },
+        "liquid": null,
+        "liquid_volume": 0.0,
+        "qualities": {},
+        "description": "A small iron vessel with a wick. Burns cleaner than a torch and longer. The light it produces is steadier and somehow less reassuring.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "waxy",
+            "tier": 1
+          },
+          {
+            "tag": "fuel",
+            "tier": 2
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      }
+    },
+    {
+      "active": false,
+      "source_revision": "884b9c7cd03ae3168702839a04b82ba55b1397da",
+      "archive": "legacy-inactive.zip",
+      "sha256": "327bff0f5de521a218e72bd38e4e219a09cd9746d98b74c68254f260dacfd9cb",
+      "turn": 482,
+      "inventory": [
+        {
+          "item_id": "tallow_torch",
+          "item_state_version": 1,
+          "name": "Tallow Torch",
+          "tile": "tallow_torch",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_light",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": 600,
+          "turns_lit": 138,
+          "light_data": {
+            "radius": 8,
+            "color": [
+              255,
+              180,
+              60
+            ],
+            "falloff": 1.8,
+            "flicker": true
+          },
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "tallow_torch",
+          "item_state_version": 1,
+          "name": "Tallow Torch",
+          "tile": "tallow_torch",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_light",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": 600,
+          "turns_lit": 49,
+          "light_data": {
+            "radius": 8,
+            "color": [
+              255,
+              180,
+              60
+            ],
+            "falloff": 1.8,
+            "flicker": true
+          },
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "oil_lantern",
+          "item_state_version": 1,
+          "name": "Oil Lantern",
+          "tile": "oil_lantern",
+          "weight": 0.6,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_light",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": 1800,
+          "turns_lit": 321,
+          "light_data": {
+            "radius": 10,
+            "color": [
+              220,
+              200,
+              120
+            ],
+            "falloff": 1.5,
+            "flicker": false
+          },
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "A small iron vessel with a wick. Burns cleaner than a torch and longer. The light it produces is steadier and somehow less reassuring.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 2
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "tallow_torch",
+          "item_state_version": 1,
+          "name": "Tallow Torch",
+          "tile": "tallow_torch",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_light",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 23,
+          "light_data": {
+            "radius": 8,
+            "color": [
+              255,
+              180,
+              60
+            ],
+            "falloff": 1.8,
+            "flicker": true
+          },
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "tallow_torch",
+          "item_state_version": 1,
+          "name": "Tallow Torch",
+          "tile": "tallow_torch",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_light",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": 0,
+          "turns_lit": 600,
+          "light_data": {
+            "radius": 8,
+            "color": [
+              255,
+              180,
+              60
+            ],
+            "falloff": 1.8,
+            "flicker": true
+          },
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        }
+      ],
+      "floor": {
+        "item_id": "oil_lantern",
+        "item_state_version": 1,
+        "name": "Oil Lantern",
+        "tile": "oil_lantern",
+        "weight": 0.6,
+        "stackable": false,
+        "count": 1,
+        "on_use": "equip_light",
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": 1800,
+        "turns_lit": 777,
+        "light_data": {
+          "radius": 10,
+          "color": [
+            220,
+            200,
+            120
+          ],
+          "falloff": 1.5,
+          "flicker": false
+        },
+        "liquid": null,
+        "liquid_volume": 0.0,
+        "qualities": {},
+        "description": "A small iron vessel with a wick. Burns cleaner than a torch and longer. The light it produces is steadier and somehow less reassuring.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "waxy",
+            "tier": 1
+          },
+          {
+            "tag": "fuel",
+            "tier": 2
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      }
+    }
+  ]
+}
