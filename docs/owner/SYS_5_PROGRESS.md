@@ -50,6 +50,10 @@ full rerun. Exact receipts are in `evidence/sys-5/verification-summary.json`,
 `verification-recheck.json` and `validation-recheck-plan.json`; completion and
 usage are in `docs/owner/SYS_5.md` and `roguelike/docs/LOCAL_SCAVENGING.md`.
 
-Remaining: publish the verified evidence and named checkpoints, commit the
-publication receipt, push the completion checkpoint, independently read final
-remote main and every annotated tag object/target, then stop at SYS-5.
+M1–M7 outcome complete. Verified payload `30e27977e869e0ae76fdc50eaf11904610c65ac7` and
+all seven scoped checkpoints matched independent Git transport/API readback.
+`evidence/sys-5/publication.json` records those exact objects/targets before this
+completion receipt commit. `checkpoint/sys-5-complete-20261106-a` identifies the
+final delivery; the lead response reports independently verified final main and
+completion tag identities. Owner files/saves and wiki remain preserved. Stop at
+SYS-5; no next package is commissioned.

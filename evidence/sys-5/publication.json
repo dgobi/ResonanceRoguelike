@@ -1,0 +1,138 @@
+{
+  "passed": true,
+  "phase": "Verified implementation and evidence publication; a completion receipt commit follows this verified payload.",
+  "verified_utc": "2026-11-06 19:15:01 UTC",
+  "origin": "https://github.com/dgobi/ResonanceRoguelike.git",
+  "starting_main": "aea1d565097982a699230dcc7e4210b8106fbbe1",
+  "verified_main": "30e27977e869e0ae76fdc50eaf11904610c65ac7",
+  "implementation_inputs_revision": "25159337712158762f5d6b19b1bd4363465f8997",
+  "push": {
+    "atomic": true,
+    "force": false,
+    "scope": "main and seven explicitly scoped SYS-5 annotated checkpoints"
+  },
+  "transport": {
+    "command": "git ls-remote origin refs/heads/main refs/tags/checkpoint/sys-5-*",
+    "refs": {
+      "refs/heads/main": "30e27977e869e0ae76fdc50eaf11904610c65ac7",
+      "refs/tags/checkpoint/sys-5-m1-20261106-a": "510bc72ab3fd73b35690847487694d64a578bb27",
+      "refs/tags/checkpoint/sys-5-m1-20261106-a^{}": "758ba7baeecec4c1da8adbdc385d086e9dea0550",
+      "refs/tags/checkpoint/sys-5-m4-core-20261106-a": "226b3ee415285415dcce5b2e5d288c8a3e8e54b0",
+      "refs/tags/checkpoint/sys-5-m4-core-20261106-a^{}": "909c8d6fea521d829eb4e7c24eadf4fc0b309db6",
+      "refs/tags/checkpoint/sys-5-m5-20261106-a": "9511a638342f93790bf8c7b98d3bb7d12e092802",
+      "refs/tags/checkpoint/sys-5-m5-20261106-a^{}": "24c729a9f19073c0e1c78f144367384a458710e6",
+      "refs/tags/checkpoint/sys-5-m6-20261106-a": "89e3e0378c2b5979483e99d5af888caefbc4126b",
+      "refs/tags/checkpoint/sys-5-m6-20261106-a^{}": "591cacc207e1271c67ae93a53ce4f4ae4665f3b3",
+      "refs/tags/checkpoint/sys-5-m7-repair-20261106-a": "e5b6c8f3b0be606ac7efe3859be7443a5c112214",
+      "refs/tags/checkpoint/sys-5-m7-repair-20261106-a^{}": "25159337712158762f5d6b19b1bd4363465f8997",
+      "refs/tags/checkpoint/sys-5-start-20261106-a": "27c6d19106cc76476f3fd46977bebcb9c510983c",
+      "refs/tags/checkpoint/sys-5-start-20261106-a^{}": "aea1d565097982a699230dcc7e4210b8106fbbe1",
+      "refs/tags/checkpoint/sys-5-verified-20261106-a": "1df73969919e32bff555ede921edc0bea6f49664",
+      "refs/tags/checkpoint/sys-5-verified-20261106-a^{}": "30e27977e869e0ae76fdc50eaf11904610c65ac7"
+    }
+  },
+  "independent_api": {
+    "refs": [
+      {
+        "ref": "refs/heads/main",
+        "sha": "30e27977e869e0ae76fdc50eaf11904610c65ac7",
+        "type": "commit",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/ref/heads/main"
+      },
+      {
+        "ref": "refs/tags/checkpoint/sys-5-m1-20261106-a",
+        "sha": "510bc72ab3fd73b35690847487694d64a578bb27",
+        "type": "tag",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/ref/tags/checkpoint/sys-5-m1-20261106-a"
+      },
+      {
+        "ref": "refs/tags/checkpoint/sys-5-m4-core-20261106-a",
+        "sha": "226b3ee415285415dcce5b2e5d288c8a3e8e54b0",
+        "type": "tag",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/ref/tags/checkpoint/sys-5-m4-core-20261106-a"
+      },
+      {
+        "ref": "refs/tags/checkpoint/sys-5-m5-20261106-a",
+        "sha": "9511a638342f93790bf8c7b98d3bb7d12e092802",
+        "type": "tag",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/ref/tags/checkpoint/sys-5-m5-20261106-a"
+      },
+      {
+        "ref": "refs/tags/checkpoint/sys-5-m6-20261106-a",
+        "sha": "89e3e0378c2b5979483e99d5af888caefbc4126b",
+        "type": "tag",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/ref/tags/checkpoint/sys-5-m6-20261106-a"
+      },
+      {
+        "ref": "refs/tags/checkpoint/sys-5-m7-repair-20261106-a",
+        "sha": "e5b6c8f3b0be606ac7efe3859be7443a5c112214",
+        "type": "tag",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/ref/tags/checkpoint/sys-5-m7-repair-20261106-a"
+      },
+      {
+        "ref": "refs/tags/checkpoint/sys-5-start-20261106-a",
+        "sha": "27c6d19106cc76476f3fd46977bebcb9c510983c",
+        "type": "tag",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/ref/tags/checkpoint/sys-5-start-20261106-a"
+      },
+      {
+        "ref": "refs/tags/checkpoint/sys-5-verified-20261106-a",
+        "sha": "1df73969919e32bff555ede921edc0bea6f49664",
+        "type": "tag",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/ref/tags/checkpoint/sys-5-verified-20261106-a"
+      }
+    ],
+    "tags": [
+      {
+        "name": "checkpoint/sys-5-m1-20261106-a",
+        "object": "510bc72ab3fd73b35690847487694d64a578bb27",
+        "target": "758ba7baeecec4c1da8adbdc385d086e9dea0550",
+        "target_type": "commit",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/510bc72ab3fd73b35690847487694d64a578bb27"
+      },
+      {
+        "name": "checkpoint/sys-5-m4-core-20261106-a",
+        "object": "226b3ee415285415dcce5b2e5d288c8a3e8e54b0",
+        "target": "909c8d6fea521d829eb4e7c24eadf4fc0b309db6",
+        "target_type": "commit",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/226b3ee415285415dcce5b2e5d288c8a3e8e54b0"
+      },
+      {
+        "name": "checkpoint/sys-5-m5-20261106-a",
+        "object": "9511a638342f93790bf8c7b98d3bb7d12e092802",
+        "target": "24c729a9f19073c0e1c78f144367384a458710e6",
+        "target_type": "commit",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/9511a638342f93790bf8c7b98d3bb7d12e092802"
+      },
+      {
+        "name": "checkpoint/sys-5-m6-20261106-a",
+        "object": "89e3e0378c2b5979483e99d5af888caefbc4126b",
+        "target": "591cacc207e1271c67ae93a53ce4f4ae4665f3b3",
+        "target_type": "commit",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/89e3e0378c2b5979483e99d5af888caefbc4126b"
+      },
+      {
+        "name": "checkpoint/sys-5-m7-repair-20261106-a",
+        "object": "e5b6c8f3b0be606ac7efe3859be7443a5c112214",
+        "target": "25159337712158762f5d6b19b1bd4363465f8997",
+        "target_type": "commit",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/e5b6c8f3b0be606ac7efe3859be7443a5c112214"
+      },
+      {
+        "name": "checkpoint/sys-5-start-20261106-a",
+        "object": "27c6d19106cc76476f3fd46977bebcb9c510983c",
+        "target": "aea1d565097982a699230dcc7e4210b8106fbbe1",
+        "target_type": "commit",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/27c6d19106cc76476f3fd46977bebcb9c510983c"
+      },
+      {
+        "name": "checkpoint/sys-5-verified-20261106-a",
+        "object": "1df73969919e32bff555ede921edc0bea6f49664",
+        "target": "30e27977e869e0ae76fdc50eaf11904610c65ac7",
+        "target_type": "commit",
+        "url": "https://api.github.com/repos/dgobi/ResonanceRoguelike/git/tags/1df73969919e32bff555ede921edc0bea6f49664"
+      }
+    ]
+  },
+  "interpretation": "Git transport main/tag objects/peeled commits and independent GitHub Git-data API refs/tag commit targets all match local expectations. The receipt deliberately records the verified payload before its own completion commit. Final main and completion-tag identity are independently read again after that follow-up push and reported in the lead delivery."
+}

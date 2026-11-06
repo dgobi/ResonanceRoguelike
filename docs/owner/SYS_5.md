@@ -169,4 +169,14 @@ were edited. See [verification summary](../../evidence/sys-5/verification-summar
 [preservation](../../evidence/sys-5/preservation.json), and
 [read-only reviews](../../evidence/sys-5/review.json).
 
-Publication and independent remote readback follow this verified evidence commit.
+Verified implementation/evidence publication: `30e27977e869e0ae76fdc50eaf11904610c65ac7`.
+Main and all seven checkpoint tag objects/peeled commits matched both Git
+transport and the independent GitHub Git-data API. Exact identities and readback
+URLs are in the [publication receipt](../../evidence/sys-5/publication.json).
+
+That receipt precedes its own completion commit. The annotated
+[`checkpoint/sys-5-complete-20261106-a`](https://github.com/dgobi/ResonanceRoguelike/tree/checkpoint/sys-5-complete-20261106-a)
+identifies the final documentation/receipt delivery; the lead's final response
+reports its independently read main revision and tag object/commit target. All
+consumed implementation inputs remain identical to the verified repair boundary.
+SYS-5 ends here; no later package or wiki maintenance is included.
