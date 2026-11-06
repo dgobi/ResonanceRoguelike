@@ -38,7 +38,20 @@ No branches, worktrees, desktop control, personal-save loads, SYS-5 or wiki work
   partial inspection never claims a compiled catalogue or successful capture.
   Complete repair preflight: 20 engine tests + 30 worker tests pass. Rebuilt
   packaged authoring passes. A fresh complete final cycle follows this repair.
-- Next: commit repaired inputs, freeze and run all applicable unfiltered gates
-  under .baseline/sys-4/final-b, archive/report, push scoped commits and required
-  checkpoints, independently verify remote main plus annotated objects/peeled
-  revisions. No blocker, owner testing or new permission needed.
+- Final repaired implementation committed: 4f1e41ebc3ca85cc0ac1b476693198b957d24fa3.
+  Fresh full run active: .baseline/sys-4/final-b. Frozen 1284 files,
+  manifest e2e291d71dac3b949c787708cb875a93624f087a4cea19b47807721749b60e6a. Do not edit consumed sources during this run.
+- Full final-b completed on 4f1e41e: production 3,704/3,704; focused 691/691;
+  frontend/host/static/build/package/lifecycle, all native flows and ordinary play
+  passed. Worker cohort: 141 tests, one furnished-room rejection failure and one
+  intentional dependency-control skip. Separate dependency control passed.
+- Isolated final repair: authored_rooms.authoring_validate skips placement preview
+  for diagnostic snapshots without a compiled catalogue. The failing existing
+  test passes unchanged. Only this consumed source file differs from final-b;
+  an inverse byte/hash witness will enforce that boundary. No test expectation,
+  gameplay rule, content, editor bridge or package binary changed in this step.
+- Next: commit the guard, run the complete 28-module worker cohort plus full SYS-4/
+  G20 modules, ordinary journey, packaged SYS-4 and dependency control. Retain
+  applicable full final-b gates using the exact one-file scope; do not label this
+  a clean full rerun. Then archive/report, publish main/checkpoints and read back
+  remote main and annotated objects/peeled revisions. No new permission needed.

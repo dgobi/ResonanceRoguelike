@@ -138,7 +138,9 @@ def authoring_validate(raw,data,path,data_root):
                 if CreatureFactory(data).spawn(record.get('creature_id'),0,0,random.Random(0)) is None: raise ValueError('Factory returned no actor')
             except (ValueError,KeyError,TypeError,AttributeError) as error:
                 diagnostics.append(issue(path,'ROOM_FACTORY',f+'.creature_id',f'Saved creature cannot be constructed: {error}'))
-    if (not any(d['severity']=='error' for d in diagnostics)
+    # Diagnostic snapshots cannot place scenes without a compiled catalogue.
+    if (hasattr(data, 'structure_catalog')
+            and not any(d['severity']=='error' for d in diagnostics)
             and any(isinstance(r,dict) and (r.get('type',r.get('kind')) in ('decor','screen') or 'access_profile' in r) for r in raw.get('special_tiles',[]))):
         # Admission for saved assignment candidates uses the same staged native
         # construction/access checks as the editor and lazy submap consumer.
