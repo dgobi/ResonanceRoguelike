@@ -21,6 +21,7 @@ SCHEMA = {"$schema":"https://json-schema.org/draft/2020-12/schema", "type":"obje
     "id":{"type":"string","readOnly":True}, "description":{"type":"string","x-control":"multiline"}}, "additionalProperties":True}
 FIELDS = {"id", "layers", "legend", "width", "height", "player_start", "exit_direction", "exit_x", "exit_y", "special_tiles"}
 RECORD_FIELDS = {"creature":{"x","y","creature_id"}, "item":{"x","y","item_id","text_id"}, "container":{"x","y","decor_id","loot_pools","access_profile"}, "decor":{"x","y","decor_id"}, "screen":{"x","y","access_profile"}}
+RECORD_FIELDS['remains']={'x','y','creature_id'}
 
 
 from generation.authored_rooms import (matches, staging_path, discover_paths, source_index, locations, capability, issue, catalog, authoring_validate)

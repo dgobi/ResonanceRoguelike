@@ -201,6 +201,17 @@ class Validator:
                                'Choose supported static scenery/light or campfire; use the container tool for containers.')
             for key in set(row)-{'type','kind','x','y','decor_id','record_id','source','source_xy'}:
                 self.issue('DECOR_FIELD',field+'.'+key,'Unsupported direct decor field.', 'Use x, y and decor_id only.')
+        elif kind == 'remains':
+            if self.route != 'authored_submap' or parent is not None:
+                self.issue('REMAINS_ROUTE',field,'Remains require a direct authored_submap special.',
+                           'Use one top-level source carcass in an authored underground layout.')
+            if self.data is not None:
+                from engine.flesh_resources import resolve_source
+                try: resolve_source(self.data, row.get('creature_id'))
+                except (ValueError, TypeError, KeyError) as error:
+                    self.issue('REMAINS_SOURCE',field+'.creature_id',str(error),'Choose a uniquely resolved non-ephemeral flesh harvest source.')
+            for key in set(row)-{'type','kind','x','y','creature_id','record_id','source','source_xy'}:
+                self.issue('REMAINS_FIELD',field+'.'+key,'Unsupported remains field.', 'Only coordinates and source creature_id are authored.')
         elif kind == 'creature':
             if self.route != 'authored_submap' or parent is not None:
                 self.issue('CREATURE_ROUTE',field,'Creatures require a direct authored_submap special.',

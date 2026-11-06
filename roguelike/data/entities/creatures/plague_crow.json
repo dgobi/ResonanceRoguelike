@@ -73,6 +73,7 @@
         "yields": [
           {
             "item_id": "crow_meat",
+            "flesh": true,
             "quantity_min": 1,
             "quantity_max": 2
           },
@@ -93,6 +94,7 @@
         "yields": [
           {
             "item_id": "crow_meat",
+            "flesh": true,
             "quantity_min": 2,
             "quantity_max": 3
           },

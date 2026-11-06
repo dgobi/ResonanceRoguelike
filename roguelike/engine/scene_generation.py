@@ -115,6 +115,18 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
         first_plan = len(plans)
         if kind == 'item':
             plans.append(('item', x, y, item(spec.get('item_id', ''), x, y, source, spec.get('text_id', ''))))
+        elif kind == 'remains':
+            from engine.flesh_resources import create_corpse
+            from generation.access import enterable
+            if (not enterable(local_map,(x,y),data) or (x,y) in blocked
+                    or (x,y) == tuple(authored_arrival)
+                    or str(local_map.tiles[x,y]['terrain']) in ('stairs_up','stairs_down')):
+                raise GenerationError(f'{source}: remains need an unobstructed floor away from arrival/stairs')
+            from engine.held_light import map_items
+            owned=list(map_items(local_map))+[p[3] for p in plans if p[0]=='item']
+            owned += [i for p in plans if p[0]=='container' for i in p[3][1]]
+            plans.append(('item',x,y,create_corpse(data,item_factory,spec['creature_id'],x,y,authored=True,owned=owned)))
+            observation['creature_id'] = spec['creature_id']
         elif kind == 'decor':
             from generation.authored_decor import admission
             decor = spec['decor_id']
@@ -178,7 +190,8 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
             observation['creature_definition'] = dict(id=creature_id, sha256=digest(data.entities[creature_id]))
         observation['objects'] = [p[3] for p in plans[first_plan:] if p[0] in ('item','container')]
     has_access = any(s['kind']=='screen' or 'access_profile' in s for _,s in resolved)
-    if has_access or (route and any(s['kind'] == 'decor' for _, s in resolved)):
+    has_remains = any(s['kind']=='remains' for _,s in resolved)
+    if has_access or has_remains or (route and any(s['kind'] == 'decor' for _, s in resolved)):
         # Evaluate the complete final layers before any ownership API touches the
         # candidate. Factories have already succeeded; no scene is published yet.
         from engine.access_objects import trial_map, validate_map
@@ -186,6 +199,8 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
         try:
             apply_plans(trial, plans)
             validate_map(trial)
+            from engine.flesh_resources import validate_map as validate_flesh
+            validate_flesh(trial)
             if has_access:
                 _optional_screens(trial,data,resolved)
         except (ValueError,TypeError,KeyError) as error:
@@ -197,7 +212,7 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
             raise GenerationError(f'{anchors}: final furnishing/access failure: {failed}')
     # Publish the fully constructed new-host layers without running factories or
     # placement a second time. Existing unrelated owners retain their identity.
-    if has_access:
+    if has_access or has_remains:
         for xy,entry in local_map.container_state.items():trial.container_state[xy]=entry
         for xy,row in getattr(local_map,'access_objects',{}).items():trial.access_objects[xy]=row
         for layer in ('tiles','decor','container_state','floor_objects','access_objects','access_manifest'):
@@ -218,7 +233,8 @@ def apply_plans(local_map, plans):
     from generation.decor_utils import place_decor
     for kind, x, y, value in plans:
         if kind == 'item':
-            place_floor_object(local_map, x, y, value)
+            if not place_floor_object(local_map, x, y, value):
+                raise ValueError('Floor object placement refused a staged output')
         elif kind == 'decor':
             place_decor(local_map, x, y, value)
         elif kind == 'container':

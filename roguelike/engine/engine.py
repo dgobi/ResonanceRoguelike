@@ -5681,6 +5681,9 @@ class Engine:
             from engine.local_rivals import visible
             observed = killer is self.player or visible(self, entity)
         entity._death_finalized = True
+        if getattr(getattr(entity,'ai',None),'scavenging_config',None) is not None:
+            from engine.enemy_scavenging import retire
+            retire(entity.ai,'death')
         target_id = creature_id(entity)
 
         if observed:
@@ -5721,13 +5724,12 @@ class Engine:
         _ephemeral = creature_def.get("ephemeral", False)
         if not _ephemeral:
             from generation.floor_object_utils import place_floor_object as _pfo_corpse
-            from engine.harvesting import decay_turns
-            _decay = decay_turns(creature_def)
-            _corpse_item = self.item_factory.create("corpse", entity.x, entity.y)
+            from engine.flesh_resources import create_corpse
+            from engine.held_light import map_items
+            _corpse_item = create_corpse(self.data, self.item_factory, target_id,
+                                         entity.x, entity.y, name=entity.name,
+                                         owned=list(map_items(self.local_map))+list(self.player.inventory.items)+self.entities)
             if _corpse_item:
-                _corpse_item.name = f"remains of {entity.name}"
-                _corpse_item.source_creature = target_id
-                _corpse_item.decay_timer = _decay
                 _pfo_corpse(self.local_map, entity.x, entity.y, _corpse_item)
 
         # Bog wraith death — remove from aura state immediately

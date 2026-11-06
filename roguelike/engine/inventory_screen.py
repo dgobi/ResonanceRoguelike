@@ -332,6 +332,10 @@ class InventoryScreen:
             if key == pygame.K_d and not is_hdr:
                 self._drop_item(row_item, inv, engine)
                 return True
+            if key == pygame.K_p and not is_hdr:
+                from engine.flesh_resources import offer_place
+                offer_place(engine,row_item)
+                return True
 
         return True
 
@@ -377,8 +381,10 @@ class InventoryScreen:
         # Set context strip hint
         ui = getattr(engine, "ui", None)
         if ui:
+            from engine.flesh_resources import eligible
+            portion_hint = '   P place 1' if eligible(self._selected_item()) else ''
             ui.set_context_prompt(
-                "^/v navigate   E use/equip   D drop   I/ESC close",
+                "^/v navigate   E use/equip   D drop" + portion_hint + "   I/ESC close",
                 _SLATE_MID,
             )
 
@@ -728,6 +734,9 @@ class InventoryScreen:
 
         # Description
         desc = getattr(item, "description", "") or item_def.get("description", "")
+        from engine.flesh_resources import description as flesh_description
+        flesh_note=flesh_description(item)
+        if flesh_note:desc += ' '+flesh_note+' P: place one portion here (1 turn).'
         if hasattr(item,'coating_dose'):
             from engine.coating_doses import label as dose_label
             weapon=engine.player.equipment.slots.get('weapon')

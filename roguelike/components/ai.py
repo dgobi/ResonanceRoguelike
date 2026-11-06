@@ -602,6 +602,12 @@ def _player_concealed(player, local_map, engine):
 
 
 def _creature_can_see_player(entity, player, local_map, ambient_light: float = 1.0, engine=None) -> bool:
+    return creature_can_see_point(entity, player.x, player.y, local_map, ambient_light,
+                                  engine=engine, concealed=_player_concealed(player, local_map, engine))
+
+
+def creature_can_see_point(entity, target_x, target_y, local_map, ambient_light: float = 1.0,
+                           engine=None, *, concealed=False) -> bool:
     """
     True if the creature can see the player.
     Checks sight_radius, ambient light / darkvision, and Bresenham LOS
@@ -610,8 +616,8 @@ def _creature_can_see_player(entity, player, local_map, ambient_light: float = 1
     dead_calm weather adds creature_alert_radius_bonus to effective sight range.
     """
     import math
-    dx   = player.x - entity.x
-    dy   = player.y - entity.y
+    dx   = target_x - entity.x
+    dy   = target_y - entity.y
     dist = math.sqrt(dx * dx + dy * dy)
 
     perception = getattr(entity, "perception", None)
@@ -628,9 +634,9 @@ def _creature_can_see_player(entity, player, local_map, ambient_light: float = 1
     if engine is not None:
         from engine.illumination import scene_light
         field = scene_light(engine, local_map, fallback_ambient=ambient_light)
-        if not local_map.in_bounds(player.x, player.y):
+        if not local_map.in_bounds(target_x, target_y):
             return False
-        ambient_light = 1.0 if field.lit[player.x, player.y] else 0.0
+        ambient_light = 1.0 if field.lit[target_x, target_y] else 0.0
         transparency = field.transparency
 
     # Darkvision: creatures without it have sharply reduced range in darkness
@@ -639,13 +645,13 @@ def _creature_can_see_player(entity, player, local_map, ambient_light: float = 1
             return False
 
     # Concealment: tall grass reduces effective sight by 2 tiles
-    if _player_concealed(player, local_map, engine):
+    if concealed:
         if dist > max(1, sight - 2):
             return False
 
     # Bresenham LOS — walk the line, check every intermediate tile
     x0, y0   = entity.x, entity.y
-    x1, y1   = player.x, player.y
+    x1, y1   = target_x, target_y
     dx_abs   = abs(x1 - x0)
     dy_abs   = abs(y1 - y0)
     sx       = 1 if x0 < x1 else -1

@@ -147,6 +147,8 @@ def take_turn(ai, actor, engine, ambient):
     ai.opportunities += 1
     before = ai.territory['phase']
     refresh(ai, engine, actor, ambient)
+    from engine import enemy_scavenging as scavenging
+    scavenging.refresh(ai,engine,actor,ambient)
     t = ai.territory
     action, reason, result = 'wait', 'guarding', None
     if t['owner'] != owner(engine):
@@ -159,10 +161,12 @@ def take_turn(ai, actor, engine, ambient):
             if row['key'] not in seen_keys:
                 row['lost'] = True
         if t['phase'] in ('return','blocked'):
+            scavenging.retire(ai,'territorial_return')
             action, reason, result = _return(ai, actor, engine, observed, route)
         else:
             if (t['phase'] == 'guard' and (actor.x,actor.y) != tuple(t['anchor'])
-                    and not (ai.responses and ai.responses['interest'])):
+                    and not (ai.responses and ai.responses['interest'])
+                    and not (ai.scavenging_state and ai.scavenging_state['current'])):
                 # A declared fallback holds until route conditions change.
                 if t['resting'] != [actor.x,actor.y] or route != t['route']:
                     ai.cancel(actor,'displaced_or_post_changed')
@@ -186,11 +190,13 @@ def take_turn(ai, actor, engine, ambient):
             from engine.enemy_components import choose
             reaction = choose(ai, engine, actor, observed, ambient)
             if reaction:
+                scavenging.retire(ai,'higher_priority')
                 action,reason,result = reaction
                 if t['phase']=='engaged':
                     t['pursuit_left'] = max(0,t['pursuit_left']-1)
                     if not t['pursuit_left']: ai.cancel(actor,'pursuit_exhausted')
             elif t['phase'] == 'engaged':
+                scavenging.retire(ai,'host_commitment')
                 target = ai.resolve_target(engine,actor)
                 if target is not None:
                     t['route'] = route
@@ -204,6 +210,7 @@ def take_turn(ai, actor, engine, ambient):
                 if interest and distance(t['anchor'],interest['x'],interest['y']) > ai.profile['defended_radius']:
                     clear_interest(ai);interest=None
                 if interest:
+                    scavenging.retire(ai,'anonymous_sound')
                     if t['phase'] != 'investigate':
                         t.update(phase='investigate',investigation_left=8,failures=0)
                     sx,sy = interest['x'],interest['y']
@@ -221,6 +228,9 @@ def take_turn(ai, actor, engine, ambient):
                         ai.cancel(actor,'sound_resolved')
                 elif t['phase'] == 'investigate':
                     ai.cancel(actor,'sound_expired')
+                else:
+                    food_action=scavenging.choose(ai,engine,actor,ambient)
+                    if food_action:action,reason,result=food_action
             # A newly committed return may begin on the next opportunity only.
             if t['phase'] in ('return','blocked'):
                 clear_interest(ai)

@@ -572,7 +572,8 @@ class InteractionCursor:
         labels: list[str] = []
         for it in items:
             if getattr(it, "source_creature", None):
-                labels.append("Butcher")
+                state=getattr(it,'flesh_resource',{})
+                labels.append("Butcher — flesh stripped" if state.get('state')=='stripped' else "Butcher")
             else:
                 labels.append(getattr(it, "name", "?"))
         labels.append("Take all")

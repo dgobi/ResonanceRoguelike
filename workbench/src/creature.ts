@@ -1,5 +1,5 @@
 import { syntax } from "./draft";
-import { valueEdit } from "./layout";
+import { valueEdit, removeValue } from "./layout";
 
 export function creatureModel(text: string): {model: Record<string, unknown> | null; reason: string} {
   if (syntax(text).diagnostics.length) return {model: null, reason: "Correct JSON in Source to resume creature controls. Draft retained."};
@@ -48,6 +48,17 @@ export function responseValue(text:string,id:string,value:boolean|{field:string;
 
 export function maneuverValue(text:string,id:string,value:boolean|{field:string;value:number},registry:Record<string,Record<string,number>>):string {
   return attachmentValue(text,'enemy_maneuvers',1,id,value,registry);
+}
+
+export function scavengingValue(text:string,value:boolean|{field:string;value:number},defaults:Record<string,number>):string {
+  const {model,reason}=creatureModel(text);if(!model)throw new Error(reason);
+  const current=model.enemy_scavenging as Record<string,number>|undefined;
+  if(typeof value==='boolean'){
+    if(value===!!current)return text;
+    return value?valueEdit(text,['enemy_scavenging'],defaults):removeValue(text,['enemy_scavenging']);
+  }
+  if(!current||!['approach_opportunities','feed_opportunities'].includes(value.field))throw new Error('Enable the supported scavenging attachment first.');
+  return current[value.field]===value.value?text:valueEdit(text,['enemy_scavenging',value.field],value.value);
 }
 
 export function responseVersion(text:string,version:number,versions:Record<string,string[]>):string {

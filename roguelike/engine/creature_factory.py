@@ -41,6 +41,7 @@ class CreatureFactory:
         *, saved_composite_profile: dict | None = None,
         saved_response_config: dict | None = None,
         saved_maneuver_config: dict | None = None,
+        saved_scavenging_config: dict | None = None,
     ) -> Actor | None:
         """
         Create a fully assembled Actor for the given creature id.
@@ -56,12 +57,14 @@ class CreatureFactory:
         profile = None
         responses = None
         maneuvers = None
+        scavenging = None
         if saved_composite_profile is not None:
             from engine.ai_profiles import validate_binding, saved_profile
             validate_binding(defn)
             profile = saved_profile(saved_composite_profile)
             responses = saved_response_config
             maneuvers = saved_maneuver_config
+            scavenging = saved_scavenging_config
             if profile['recipe'] == 'protective_escort':
                 from engine.ai_profiles import validate_escort_alignment
                 validate_escort_alignment(defn.get('perception'))
@@ -71,7 +74,9 @@ class CreatureFactory:
             responses = configuration(defn.get('enemy_responses'), profile, defn.get('perception'))
             from engine.enemy_maneuvers import configuration
             maneuvers = configuration(defn.get('enemy_maneuvers'), profile, defn.get('perception'))
-        elif 'ai_profile' in defn or 'enemy_responses' in defn or 'enemy_maneuvers' in defn:
+            from engine.enemy_scavenging import configuration
+            scavenging = configuration(defn.get('enemy_scavenging'),profile,defn.get('perception'))
+        elif any(k in defn for k in ('ai_profile','enemy_responses','enemy_maneuvers','enemy_scavenging')):
             raise ValueError(f"Creature {creature_id!r}: ai_profile requires registered ai_type composite")
 
         actor = Actor(
@@ -111,7 +116,7 @@ class CreatureFactory:
         ai_class   = AI_TYPES.get(ai_type, WanderingAI)
         wander_r   = defn.get("wander_radius", 8)
         if profile is not None:
-            actor.ai = CompositeAI(wander_radius=wander_r, profile=profile, responses=responses, maneuvers=maneuvers)
+            actor.ai = CompositeAI(wander_radius=wander_r, profile=profile, responses=responses, maneuvers=maneuvers, scavenging=scavenging)
         else:
             actor.ai = ai_class(wander_radius=wander_r)
         actor.ai.set_home(x, y)

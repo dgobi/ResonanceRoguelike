@@ -46,8 +46,10 @@ export function CreatureHarvest(p:{document:ContentProps;values:Record<string,un
                   <label>Saved output item<ScalarControl schema={{type:"string","x-reference":"harvest_items"}} value={output.item_id} references={d.family.references} label={`Harvest item ${i+1}.${j+1}`} onChange={value=>edit(["butcher_yield","tiers",i,"yields",j,"item_id"],value)}/></label>
                   {scalar(output,"quantity_min",["butcher_yield","tiers",i,"yields",j],`Minimum quantity ${i+1}.${j+1}`,rules.max_tier)}
                   {scalar(output,"quantity_max",["butcher_yield","tiers",i,"yields",j],`Maximum quantity ${i+1}.${j+1}`,rules.max_tier)}
+                  <label><input type="checkbox" aria-label={`Flesh output ${i+1}.${j+1}`} checked={output.flesh===true} onChange={e=>edit(["butcher_yield","tiers",i,"yields",j,"flesh"],e.target.checked)}/>Flesh removed by scavenging</label>
+                  <small>Requires a saved loose item with flesh tier 1. Mark this output consistently in every tier. Fresh carcasses capture this designation; existing carcasses retain theirs.</small>
                   {moves(["butcher_yield","tiers",i,"yields"],j,(tier.yields as unknown[]).length,`harvest output ${i+1}.${j+1}`)}
-                  {metadata(output,["item_id","quantity_min","quantity_max"])}
+                  {metadata(output,["item_id","quantity_min","quantity_max","flesh"])}
                 </fieldset>)}
                 <button disabled={Array.isArray(tier.yields)&&tier.yields.length>=rules.max_rows} onClick={()=>row(["butcher_yield","tiers",i,"yields"],"add",-1,{item_id:""})}>Add output to tier {i+1}</button>
               </>}

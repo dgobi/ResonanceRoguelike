@@ -158,6 +158,8 @@ class ChunkCache:
 
     @staticmethod
     def _cached(local_map, entities):
+        from engine.flesh_resources import validate_map as validate_flesh
+        validate_flesh(local_map)
         from engine.access_objects import validate_map
         validate_map(local_map)
         return CachedChunk(local_map, [_serialize_entity(e) for e in entities if not _is_player(e)])
@@ -169,6 +171,8 @@ class ChunkCache:
             raise SaveFormatError(f'Missing or invalid active scene record: {path.name}')
         from engine.stock_prose import refresh_map
         refresh_map(cached.local_map)
+        from engine.flesh_resources import validate_map as validate_flesh
+        validate_flesh(cached.local_map)
         from engine.vessels import validate_map
         validate_map(cached.local_map)
         from engine.held_light import prepare_map
@@ -244,6 +248,8 @@ class ChunkCache:
                 raise SaveFormatError(f'Invalid scene: {name}')
             _validate_entities(cached.entities, data, cached.local_map)
             _claim_individuals(cached.entities, identities)
+            from engine.flesh_resources import validate_map as validate_flesh
+            validate_flesh(cached.local_map)
             from engine.vessels import validate_map
             validate_map(cached.local_map)
             from engine.held_light import prepare_map
@@ -334,6 +340,10 @@ class SaveManager:
             address = SceneAddress.from_player(player_data, world_data)
             _validate_pending_arrivals(player_data, world_data)
             payloads = self.cache.snapshot(address, engine.local_map, engine.entities, engine.data)
+            from engine.flesh_resources import claim as claim_flesh, validate_map as validate_flesh
+            flesh_ids=set()
+            for row in player_data['inventory']['items']: claim_flesh(row,flesh_ids)
+            for raw in payloads.values(): validate_flesh(pickle.loads(raw).local_map,flesh_ids)
             from engine.vessels import claim, validate_map
             vessel_ids=set()
             for row in player_data['inventory']['items']: claim(row,vessel_ids)
@@ -370,11 +380,15 @@ class SaveManager:
         # All scenes belong to the checkpoint: validate even inactive owners
         # before installing any player/world/cache reference.
         identities = set()
+        from engine.flesh_resources import claim as claim_flesh, validate_map as validate_flesh
+        flesh_ids=set()
+        for row in player_data['inventory']['items']: claim_flesh(row,flesh_ids)
         from engine.vessels import claim, validate_map
         vessel_ids=set()
         for row in player_data['inventory']['items']: claim(row,vessel_ids)
         for scene in sorted((path / 'chunks').glob('*.pkl')):
             cached = cold_cache._read(scene)
+            validate_flesh(cached.local_map,flesh_ids)
             validate_map(cached.local_map,vessel_ids)
             _validate_entities(cached.entities, engine.data, cached.local_map)
             _validate_escort_scene(cached.entities, scene.stem, world_data)
@@ -1115,6 +1129,7 @@ def _serialize_entity(entity: "Actor") -> dict:
     return {
         "type":            "actor",
         **({"composite": ai.snapshot()} if type(ai).__name__ == 'CompositeAI' else {}),
+        **({'scavenging_version':1} if getattr(ai,'scavenging_config',None) is not None else {}),
         **({"individual_id": entity._individual_id} if getattr(entity, '_individual_id', None) is not None else {}),
         **({"local_target": copy.deepcopy(ai.local_target)} if getattr(ai, 'local_target', None) is not None else {}),
         "id":              creature_id,
@@ -1178,7 +1193,13 @@ def _validate_escort_scene(rows, scene_name, world_data):
     """Escort/module bindings match the actual cache before staged installation."""
     for row in rows:
         c = row.get('composite', {})
-        if 'maneuvers' in c:
+        if 'scavenging' in c:
+            binding = c['scavenging']['state']['owner']
+            for other_name in ('responses','maneuvers'):
+                other=c.get(other_name,{}).get('state',{}).get('owner')
+                if binding is not None and other is not None and binding!=other:
+                    raise SaveFormatError('scavenging: incompatible local attachment owners')
+        elif 'maneuvers' in c:
             binding = c['maneuvers']['state']['owner']
             other = c.get('responses',{}).get('state',{}).get('owner')
             if other is not None and binding is not None and other != binding:
@@ -1266,6 +1287,9 @@ def _deserialize_entities(
                 tile = "corpse",
                 name = d["name"],
             )
+            # Historical dead actor presentation is inert, separate from its
+            # native floor corpse. Preserve deadness over repeated roundtrips.
+            corpse.is_alive = False
             restored.append(corpse)
             continue
 
@@ -1274,7 +1298,8 @@ def _deserialize_entities(
         actor = factory.spawn(creature_id, d["x"], d["y"],
                               saved_composite_profile=d['composite']['profile'] if d.get('ai_type') == 'CompositeAI' else None,
                               saved_response_config=d.get('composite',{}).get('responses',{}).get('config'),
-                              saved_maneuver_config=d.get('composite',{}).get('maneuvers',{}).get('config'))
+                              saved_maneuver_config=d.get('composite',{}).get('maneuvers',{}).get('config'),
+                              saved_scavenging_config=d.get('composite',{}).get('scavenging',{}).get('config'))
 
         if actor is None:
             raise SaveFormatError(f"Cannot reconstruct creature {creature_id!r}")
@@ -1333,6 +1358,8 @@ def _deserialize_entities(
                 actor.ai.responses = copy.deepcopy(d['composite']['responses']['state'])
             if 'maneuvers' in d['composite']:
                 actor.ai.maneuvers = copy.deepcopy(d['composite']['maneuvers']['state'])
+            if 'scavenging' in d['composite']:
+                actor.ai.scavenging_state = copy.deepcopy(d['composite']['scavenging']['state'])
         restored.append(actor)
 
     return restored

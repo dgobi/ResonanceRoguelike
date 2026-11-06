@@ -123,6 +123,11 @@ def effective_profile(raw):
         if raw['enemy_maneuvers'] is None:
             raise ValueError('enemy_maneuvers: omit an absent attachment')
         configuration(raw['enemy_maneuvers'], result, raw.get('perception'))
+    if 'enemy_scavenging' in raw:
+        from engine.enemy_scavenging import configuration
+        if raw['enemy_scavenging'] is None:
+            raise ValueError('enemy_scavenging: omit an absent attachment')
+        configuration(raw['enemy_scavenging'], result, raw.get('perception'))
     return result
 
 
@@ -164,6 +169,8 @@ def depart(engine):
 
 def validate_saved(row, local_map=None):
     _validate_recipe_saved(row, local_map)
+    from engine.enemy_scavenging import validate_saved as validate_scavenging
+    validate_scavenging(row,local_map)
     composite = row.get('composite')
     if isinstance(composite, dict) and 'responses' in composite:
         from engine.enemy_responses import validate_saved as validate_responses
@@ -183,7 +190,7 @@ def _validate_recipe_saved(row, local_map=None):
     if isinstance(row.get('id'), str) and (row['id'].casefold() == 'player' or row['id'] in ABILITY_REGISTRY):
         raise ValueError('composite: saved binding cannot acquire player or ID-bound special behavior')
     if (not isinstance(composite, dict) or not {'profile','state'} <= set(composite)
-            or set(composite)-{'profile','state','responses','maneuvers'}):
+            or set(composite)-{'profile','state','responses','maneuvers','scavenging'}):
         raise ValueError('composite: profile and tactical state required')
     p = saved_profile(composite['profile'])
     s = composite['state']

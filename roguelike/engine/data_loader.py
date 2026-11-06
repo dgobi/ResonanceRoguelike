@@ -118,6 +118,8 @@ class DataLoader:
             # Loaded-catalogue provenance, retained for safe harvest references.
             # Never reread working definitions during a running game.
             self.item_definition_sources = {}
+        if subdir == 'entities':
+            self.entity_definition_sources = {}
         exclude = exclude or set()
         base = self.root / subdir
 
@@ -143,6 +145,8 @@ class DataLoader:
                     result[entry["id"]] = entry
                     if subdir == "items":
                         self.item_definition_sources.setdefault(entry["id"], []).append(path.relative_to(self.root).as_posix())
+                    if subdir == 'entities':
+                        self.entity_definition_sources.setdefault(entry['id'], []).append(path.relative_to(self.root).as_posix())
             except Exception as e:
                 print(f"Warning: failed to load {path}: {e}")
 

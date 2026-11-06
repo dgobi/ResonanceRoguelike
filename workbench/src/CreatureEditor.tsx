@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { creatureModel, creatureValue, responseValue, responseVersion, maneuverValue } from "./creature";
+import { creatureModel, creatureValue, responseValue, responseVersion, maneuverValue, scavengingValue } from "./creature";
 import { request, asFailure, type Inspection } from "./protocol";
 import type { ContentProps } from "./ContentEditor";
 import { CreatureHarvest } from "./CreatureHarvest";
@@ -69,6 +69,15 @@ export function CreatureEditor(p: ContentProps) {
         <small>AI choice is available only for an ordinary new-ID variant. Speed supports at most two actions per turn.</small>
       </fieldset>
       {composite&&<label>Registered behaviour recipe<select aria-label="Behaviour recipe" disabled={!!reason||!p.variant||!cap.composite_variant} value={recipe} onChange={e=>edit('ai_profile.recipe',e.target.value)}><option value="strike_and_withdraw">Strike and withdraw</option><option value="observation_averse">Observation-averse pursuit</option><option value="venom_strike_and_withdraw">Venom strike and withdraw</option><option value="patient_venom_hunt">Patient venom hunt</option><option value="territorial_guard">Fixed territorial post</option><option value="protective_escort">Protective escort</option></select><small>Changing recipe requires a new ID. Selection installs the game's legal recipe defaults in one undoable edit.</small></label>}
+      {composite&&cap.scavenging_defaults&&<fieldset className="item-properties" disabled={!!reason||!(cap.scavenging_editable||(p.variant&&cap.composite_variant))}><legend>Local scavenging</legend>
+        <p>Ordinary melee hosts: {cap.scavenging_hosts?.join(', ')}. Sight discovers exposed flesh on the active scene floor. Hostile pursuit, required defence, alarms and sound take priority. Territorial acquisition stays within the defended domain.</p>
+        <label><input aria-label="Enable scavenging" type="checkbox" checked={!!values.enemy_scavenging} disabled={!values.enemy_scavenging&&!cap.scavenging_hosts?.includes(recipe)} onChange={e=>p.onEdit(s=>scavengingValue(s,e.target.checked,cap.scavenging_defaults!), 'Scavenging attachment')}/>Scavenge exposed flesh</label>
+        {!!values.enemy_scavenging&&(['approach_opportunities','feed_opportunities'] as const).map(key=>{
+          const label=key==='approach_opportunities'?'Scavenging approach opportunities':'Scavenging feeding opportunities',bounds=cap.scavenging_bounds?.[key]||[1,8];
+          return <label key={key}>{label}<input aria-label={label} type="number" min={bounds[0]} max={bounds[1]} step={1} value={Number(get('enemy_scavenging.'+key,cap.scavenging_defaults?.[key]))} onChange={e=>{if(e.target.value!=='')p.onEdit(s=>scavengingValue(s,{field:key,value:Number(e.target.value)},cap.scavenging_defaults!),label);}}/><small>{bounds.join('–')} normal decisions. Feeding spends each whole decision.</small></label>;
+        })}
+        <p>Each completion consumes one real loose portion or strips declared corpse flesh once. Other harvest outputs and decay remain. Saved actors retain captured tuning and valid partial work; leaving the scene cancels the attempt.</p>
+      </fieldset>}
       {composite&&cap.response_defaults&&<fieldset className="item-properties" disabled={!!reason||!(cap.response_editable||(p.variant&&cap.composite_variant))}><legend>Enemy response components</legend>
         <p>Independent alarms require an explicit non-player faction hostile to player. First attachment requires a new ID. Saved actors retain their effective components.</p>
         <label>Alarm compatibility<select aria-label="Alarm compatibility" value={Number(get('enemy_responses.version',2))} onChange={e=>p.onEdit(s=>responseVersion(s,Number(e.target.value),cap.response_versions!), 'Alarm compatibility')}>

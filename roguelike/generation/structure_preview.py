@@ -89,7 +89,7 @@ def direct_access(m,data,receipts,spawn):
         m.visible[:]=True
         for receipt in receipts:
             kind=receipt['kind']
-            if kind not in ('item','container','decor','screen'): continue
+            if kind not in ('item','container','decor','screen','remains'): continue
             xy=tuple(receipt['xy']); approaches=[]; owned=receipt_owned(receipt,m)
             if kind in ('container','decor','screen'):
                 for point in sorted(reached):

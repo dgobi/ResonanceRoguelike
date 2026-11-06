@@ -12,6 +12,7 @@ TEMPLATE = "roguelike/docs/examples/g17_authored_creature_room.json"
 ROOT = "roguelike/data/layouts/"
 PRODUCTION_ROUTE = "authored_submap"
 RECORD_FIELDS = {'creature': {'x', 'creature_id', 'y'}, 'item': {'x', 'item_id', 'text_id', 'y'}, 'container': {'x', 'loot_pools', 'y', 'decor_id','access_profile'}, 'decor': {'x', 'y', 'decor_id'}, 'screen': {'x','y','access_profile'}}
+RECORD_FIELDS['remains']={'x','y','creature_id'}
 
 def matches(path):
     return path == TEMPLATE or (PurePosixPath(path).parent.as_posix() == ROOT.rstrip("/") and path.endswith(".json"))
@@ -79,6 +80,13 @@ def catalog(data, data_root):
                 except (ValueError,KeyError,TypeError): supported=False
             rows.append(dict(id=identifier,name=str(entry["definition"].get("name",entry["definition"].get("title",identifier))),path=entry["path"],paths=[e["path"] for e in entries],resolved=supported,readable=readable))
         choices[key]=rows
+    from engine.flesh_resources import resolve_source
+    choices['remains']=[]
+    for row in choices['creatures']:
+        try:
+            resolve_source(data,row['id'])
+            if row['resolved']:choices['remains'].append(row)
+        except (ValueError,TypeError,KeyError):pass
     # Decor is a list registry, not recursive object-file discovery.
     decor_rows=json.loads((data_root/"decoratives.json").read_text(encoding="utf-8"))
     from generation.authored_decor import admission
@@ -141,7 +149,7 @@ def authoring_validate(raw,data,path,data_root):
     # Diagnostic snapshots cannot place scenes without a compiled catalogue.
     if (hasattr(data, 'structure_catalog')
             and not any(d['severity']=='error' for d in diagnostics)
-            and any(isinstance(r,dict) and (r.get('type',r.get('kind')) in ('decor','screen') or 'access_profile' in r) for r in raw.get('special_tiles',[]))):
+            and any(isinstance(r,dict) and (r.get('type',r.get('kind')) in ('decor','screen','remains') or 'access_profile' in r) for r in raw.get('special_tiles',[]))):
         # Admission for saved assignment candidates uses the same staged native
         # construction/access checks as the editor and lazy submap consumer.
         from generation.structure_preview import preview

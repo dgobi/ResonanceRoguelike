@@ -225,10 +225,12 @@ class LookMode:
             if getattr(_fi, "source_creature", None):
                 _fname = f"Remains of {_fname.replace('remains of ', '')}"
             _fw = getattr(_fi, "weight", 0.0)
+            from engine.flesh_resources import description as flesh_description
+            _flesh_note=flesh_description(_fi)
             things.append({
                 "type":        "floor_object",
                 "name":        _fname,
-                "description": f"{_fname[0].upper()}{_fname[1:]}. {_fw:.1f}kg." if _fw > 0 else f"{_fname[0].upper()}{_fname[1:]}.",
+                "description": (f"{_fname[0].upper()}{_fname[1:]}. {_fw:.1f}kg." if _fw > 0 else f"{_fname[0].upper()}{_fname[1:]}.") + (' '+_flesh_note if _flesh_note else ''),
                 "entity":      _fi,
                 "tile":        getattr(_fi, "tile", "generic_item"),
             })

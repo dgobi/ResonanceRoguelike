@@ -8,7 +8,7 @@ from engine.spatial import melee_contact, melee_attack_legal
 
 
 class CompositeAI(AI):
-    def __init__(self, wander_radius=8, *, profile, responses=None, maneuvers=None):
+    def __init__(self, wander_radius=8, *, profile, responses=None, maneuvers=None, scavenging=None):
         super().__init__(wander_radius=wander_radius)
         from engine.ai_profiles import saved_profile
         self.profile = saved_profile(profile)
@@ -16,6 +16,8 @@ class CompositeAI(AI):
         initialize(self, responses)
         from engine.enemy_maneuvers import initialize
         initialize(self, maneuvers)
+        from engine.enemy_scavenging import initialize
+        initialize(self, scavenging)
         self.phase = 'idle'
         self.target = None
         self.withdraw_left = self.hold_left = self.approach_left = self.no_progress = 0
@@ -44,6 +46,8 @@ class CompositeAI(AI):
             result['responses'] = dict(config=copy.deepcopy(self.response_config), state=copy.deepcopy(self.responses))
         if self.maneuver_config is not None:
             result['maneuvers'] = dict(config=copy.deepcopy(self.maneuver_config), state=copy.deepcopy(self.maneuvers))
+        if self.scavenging_config is not None:
+            result['scavenging'] = dict(config=copy.deepcopy(self.scavenging_config), state=copy.deepcopy(self.scavenging_state))
         return result
 
     def _host_snapshot(self):
@@ -66,6 +70,8 @@ class CompositeAI(AI):
         return result
 
     def cancel(self, actor, reason, *, keep_sound=False):
+        from engine.enemy_scavenging import retire
+        retire(self,reason)
         from engine.enemy_responses import cancel
         cancel(self)
         from engine.enemy_maneuvers import cancel
@@ -170,6 +176,8 @@ class CompositeAI(AI):
         refresh(self, engine, actor, ambient_light)
         from engine.enemy_maneuvers import refresh
         refresh(self, engine, actor, ambient_light)
+        from engine.enemy_scavenging import refresh
+        refresh(self, engine, actor, ambient_light)
         if self.profile['recipe'] == 'protective_escort':
             from components.protective_escort import refresh
             return refresh(self, engine, actor, ambient_light)
@@ -255,6 +263,8 @@ class CompositeAI(AI):
         from engine.local_rivals import living
         if (engine is None or player is not engine.player or local_map is not engine.local_map
                 or not active(engine, actor) or not living(actor) or disrupted(actor, local_map)):
+            from engine.enemy_scavenging import retire
+            retire(self,'action_denied')
             from engine.enemy_responses import cancel
             cancel(self)
             from engine.enemy_maneuvers import cancel
@@ -314,8 +324,12 @@ class CompositeAI(AI):
         from engine.enemy_components import choose
         reaction = choose(self, engine, actor, observed, ambient_light)
         if reaction:
+            from engine.enemy_scavenging import retire
+            retire(self,'higher_priority')
             action, reason, result = reaction
         elif self.target is not None:
+            from engine.enemy_scavenging import retire
+            retire(self,'host_commitment')
             clear_interest(self)
             action, reason, result = self._engage(engine, actor, target, observed, patient=patient, gated=gated, ambient_light=ambient_light)
         else:
@@ -333,9 +347,15 @@ class CompositeAI(AI):
                         result = _monster_attack_result(actor, contacts[0], engine, defensive=True)
                         action, reason = 'melee', 'abandoned_cornered_defensive'
             elif interest:
+                from engine.enemy_scavenging import retire
+                retire(self,'anonymous_sound')
                 self.state = AIState.INVESTIGATING
                 investigate(self, actor, local_map, entities)
                 action, reason = 'investigate', 'anonymous_sound'
+            else:
+                from engine.enemy_scavenging import choose as scavenge
+                food_action = scavenge(self,engine,actor,ambient_light)
+                if food_action: action,reason,result = food_action
         if before != 'return' and self.phase == 'return' and action == 'move' and reason == 'approach':
             self._tell(engine, actor, 'creeps closer', current_vision=True)
         if result and result.target_dead:

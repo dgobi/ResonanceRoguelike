@@ -22,6 +22,8 @@ def inspect(engine):
                              response_state=copy.deepcopy(a.ai.responses),
                              response_trace=copy.deepcopy(a.ai.response_trace),
                              enemy_maneuvers=copy.deepcopy(a.ai.maneuver_config),
+                             enemy_scavenging=copy.deepcopy(a.ai.scavenging_config),
+                             scavenging_state=copy.deepcopy(a.ai.scavenging_state),
                              maneuver_state=copy.deepcopy(a.ai.maneuvers),
                              maneuver_trace=copy.deepcopy(a.ai.maneuver_trace),
                              component_windows=windows(a.ai,engine,a),

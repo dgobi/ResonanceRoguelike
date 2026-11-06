@@ -32,6 +32,8 @@ class Item(Entity):
 
     def __setstate__(self, values):
         self.__dict__.update(values)
+        from engine.flesh_resources import validate as validate_flesh
+        validate_flesh(self)
         from engine.vessels import legacy
         legacy(self)
         if 'held_light' in values:

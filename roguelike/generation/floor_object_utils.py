@@ -47,6 +47,12 @@ def clear_floor_objects(local_map: "LocalMap", lx: int, ly: int) -> None:
     local_map.floor_objects.pop((lx, ly), None)
 
 
+def restore_floor_objects(local_map, snapshot):
+    """Rollback an interrupted single-threaded physical-resource transaction."""
+    local_map.floor_objects.clear()
+    local_map.floor_objects.update({xy: list(rows) for xy, rows in snapshot.items()})
+
+
 # ------------------------------------------------------------------ #
 #  Container API
 # ------------------------------------------------------------------ #

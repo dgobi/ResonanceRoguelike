@@ -41,6 +41,7 @@ def profile_errors(creature, resolve_item=None):
     if not isinstance(tiers, list) or len(tiers) > MAX_ROWS:
         bad(".tiers", f"Expected an ordered list of at most {MAX_ROWS} records (or omission).")
         return errors
+    flesh_designations = {}
     for i, tier in enumerate(tiers):
         field = f".tiers[{i}]"
         if not isinstance(tier, dict):
@@ -62,10 +63,23 @@ def profile_errors(creature, resolve_item=None):
             if valid_lo and valid_hi and lo > hi:
                 bad(where, "Effective minimum exceeds maximum (omitted quantities default to 0 / 1).")
             identifier = row.get("item_id")
+            if 'flesh' in row and type(row['flesh']) is not bool:
+                bad(where + '.flesh', 'Flesh designation must be an explicit boolean.')
+            if isinstance(identifier, str):
+                flesh = row.get('flesh', False)
+                if identifier in flesh_designations and flesh_designations[identifier] != flesh:
+                    bad(where + '.flesh', 'The same output must retain its flesh designation in every tier.')
+                flesh_designations[identifier] = flesh
             if not isinstance(identifier, str) or not identifier:
                 bad(where + ".item_id", "Choose a uniquely resolved saved factory-valid item.")
             elif resolve_item:
-                try: resolve_item(identifier)
+                try:
+                    output = resolve_item(identifier)
+                    if row.get('flesh') is True:
+                        from engine.flesh_resources import validate
+                        captured = validate(output)
+                        if not captured or captured['kind'] != 'portion':
+                            raise ValueError('Designated flesh must resolve to a supported loose-flesh item.')
                 except Exception as error: bad(where + ".item_id", str(error))
         if total > MAX_OUTPUTS:
             bad(field + ".yields", f"Effective maxima permit {total} physical outputs; limit is {MAX_OUTPUTS}.")
@@ -78,6 +92,8 @@ def validate_output(item, identifier):
     if not isinstance(item, Item) or item.item_id != identifier:
         raise ValueError(f"Factory did not construct item {identifier!r}.")
     validate_fields(snapshot(item, ITEM_STATE), ITEM_STATE, "harvest output " + identifier)
+    from engine.flesh_resources import validate
+    validate(item)
     return item
 
 
@@ -149,6 +165,15 @@ def butcher(engine, x, y, corpse=None, *, scene=None, address=None):
             or not any(item is corpse for item in present) or (corpse.x, corpse.y) != (x, y)):
         return refuse("Those exact remains are no longer here.")
     creature = engine.data.entities.get(corpse.source_creature, {})
+    from engine.flesh_resources import validate as validate_flesh, floor_owned
+    try: resource = validate_flesh(corpse)
+    except (ValueError, TypeError, KeyError): return refuse('These remains have invalid captured state.')
+    if resource:
+        # A stripped corpse is no longer food, but it retains the exact owner
+        # checks and its complete captured harvest contract.
+        if resource['kind'] != 'corpse' or not floor_owned(engine,corpse,(x,y)):
+            return refuse('Those exact remains are no longer available.')
+        creature = dict(creature, butcher_yield=resource['recipe'])
     errors = profile_errors(creature)
     if errors: return refuse("Cannot harvest invalid remains: " + "; ".join(f"{f}: {m}" for f, m in errors))
     profile = creature.get("butcher_yield")
@@ -160,6 +185,8 @@ def butcher(engine, x, y, corpse=None, *, scene=None, address=None):
     if best is None:
         engine.log.add("Thy equipped tool is insufficient for this task.", MSG_DEFAULT)
         return True
+    if resource and resource['state'] == 'stripped':
+        best = dict(best, yields=[row for row in best.get('yields', []) if not row.get('flesh', False)])
     # Freshness is physical: a factory must not give us a pre-existing object.
     preexisting = [item for rows in engine.local_map.floor_objects.values() for item in rows]
     preexisting += list(getattr(engine.player.inventory, "items", [])) + list(engine.entities)

@@ -1,4 +1,9 @@
 {
+  "flesh": {
+    "display": "flesh",
+    "color": "COMBAT_OUTGOING",
+    "description": "Tier 1: fresh physical portions can be eaten by scavengers when exposed on the floor. Containers protect their contents."
+  },
   "cutting": {
     "display": "cutting",
     "color": "COMBAT_OUTGOING",

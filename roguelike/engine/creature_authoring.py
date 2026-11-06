@@ -88,6 +88,7 @@ def indexes_for(data_root):
 def capability(raw, path, pointer=""):
     from engine.enemy_responses import REGISTRY as RESPONSE_DEFAULTS, BOUNDS as RESPONSE_BOUNDS, RECIPES as RESPONSE_RECIPES
     from engine.enemy_maneuvers import REGISTRY as MANEUVER_DEFAULTS, BOUNDS as MANEUVER_BOUNDS
+    from engine.enemy_scavenging import DEFAULTS as SCAVENGING_DEFAULTS, BOUNDS as SCAVENGING_BOUNDS, HOSTS
     from engine.enemy_components import RECIPES as ENEMY_RECIPES
     raw = raw if isinstance(raw, dict) else {}
     identifier = raw.get("id"); player = isinstance(identifier, str) and identifier.casefold() == "player"
@@ -117,6 +118,9 @@ def capability(raw, path, pointer=""):
                 maneuver_defaults=MANEUVER_DEFAULTS, maneuver_bounds=MANEUVER_BOUNDS,
                 maneuver_recipes=list(ENEMY_RECIPES),
                 maneuver_editable=editable and composite_source(raw) and 'enemy_maneuvers' in raw,
+                scavenging_defaults=SCAVENGING_DEFAULTS, scavenging_bounds=SCAVENGING_BOUNDS,
+                scavenging_hosts=list(HOSTS),
+                scavenging_editable=editable and composite_source(raw) and 'enemy_scavenging' in raw,
                 profile_recipe_bounds={'protective_escort': ESCORT_BOUNDS},
                 harvest_editable=harvest, harvest_rules=RULES,
                 harvest_reason="Complete native harvest profile; original non-ephemeral Actor authority." if harvest else "Harvest is protected: the original must be a supported non-ephemeral Actor with absent or supported native profile.",
@@ -156,7 +160,7 @@ def harvest_metadata_allowed(original, candidate):
         for tier in tiers if isinstance(tiers, list) else []:
             rows = tier.get("yields", []) if isinstance(tier, dict) and outputs else [tier]
             for row in rows if isinstance(rows, list) else []:
-                value = metadata(row, ("item_id", "quantity_min", "quantity_max") if outputs else ("min_cutting_tier", "yields"))
+                value = metadata(row, ("item_id", "quantity_min", "quantity_max", "flesh") if outputs else ("min_cutting_tier", "yields"))
                 if value: yield json.dumps(value, sort_keys=True, separators=(",", ":"))
     return all(not (Counter(signatures(after, level)) - Counter(signatures(before, level))) for level in (False, True))
 
@@ -184,6 +188,9 @@ def authorize_candidate(original, candidate, source_path, target_path, *, data=N
     profile = (new_composite or cap['profile_editable']) and composite
     response_authority = new_composite or cap['response_editable'] and profile
     maneuver_authority = new_composite or cap['maneuver_editable'] and profile
+    scavenging_authority = new_composite or cap['scavenging_editable'] and profile
+    if 'enemy_scavenging' in candidate and not scavenging_authority:
+        issue('SCAVENGING_ID', 'First scavenging attachment requires an eligible new-ID ordinary melee composite variant. Enrolled variants may tune or remove it.')
     if 'enemy_maneuvers' in candidate and not maneuver_authority:
         issue('ENEMY_MANEUVER_ID', 'First movement attachment requires an eligible new-ID composite variant. Enrolled same-recipe variants may tune/add/remove modules for fresh actors.')
     if 'enemy_responses' in candidate and not response_authority:
@@ -201,6 +208,8 @@ def authorize_candidate(original, candidate, source_path, target_path, *, data=N
         original_fields.pop('enemy_responses', None); candidate_fields.pop('enemy_responses', None)
     if maneuver_authority:
         original_fields.pop('enemy_maneuvers', None); candidate_fields.pop('enemy_maneuvers', None)
+    if scavenging_authority:
+        original_fields.pop('enemy_scavenging', None); candidate_fields.pop('enemy_scavenging', None)
     if not same_json(unchanged_data(original_fields, variant=variant and cap["duplicable"], harvest=cap["harvest_editable"], relationships=relationships, profile=profile, local_flags=new_composite), unchanged_data(candidate_fields, variant=variant and cap["duplicable"], harvest=cap["harvest_editable"], relationships=relationships, profile=profile, local_flags=new_composite)):
         issue("READ_ONLY_FIELD", "Only supported common fields and originally entitled harvest fields may change; identity, tile, ephemeral, components and special settings remain exact. AI may change only for an ordinary new variant.")
     if cap["harvest_editable"] and not harvest_metadata_allowed(original, candidate):
@@ -290,7 +299,7 @@ def validate_definition(raw, data, path, indexes):
     if ai == 'composite':
         try: effective_profile(raw)
         except (ValueError, TypeError) as error: issue('CREATURE_PROFILE', 'ai_profile', str(error))
-    elif 'ai_profile' in raw or 'enemy_responses' in raw or 'enemy_maneuvers' in raw:
+    elif any(k in raw for k in ('ai_profile','enemy_responses','enemy_maneuvers','enemy_scavenging')):
         issue('CREATURE_PROFILE', 'ai_profile', 'ai_profile is supported only with the registered composite AI route.')
     speed = raw.get("speed", 1.0)
     if type(speed) not in (int, float) or not math.isfinite(speed) or not 0.01 <= speed <= 2:
@@ -351,7 +360,8 @@ def factory_preview(raw, data):
                     ai_class=type(actor.ai).__name__, wander_radius=actor.ai.wander_radius, inventory=actor.inventory,
                     **({'effective_ai_profile': actor.ai.profile,
                         'effective_enemy_responses': actor.ai.response_config,
-                        'effective_enemy_maneuvers': actor.ai.maneuver_config} if hasattr(actor.ai, 'profile') else {})),
+                        'effective_enemy_maneuvers': actor.ai.maneuver_config,
+                        'effective_enemy_scavenging': actor.ai.scavenging_config} if hasattr(actor.ai, 'profile') else {})),
                 definition_values={k: raw.get(k, default) for k, default in (("description", ""), ("damage_dice", "1d4"), ("damage_bonus", 0), ("attack_verb", "strikes at thee"), ("speed", 1), ("pursuit_timeout", 20))},
                 comparisons=[dict(field="name → Actor.name", declared=raw.get("name"), instance=actor.name), dict(field="base_hp → Fighter.max_hp / hp", declared=raw.get("base_hp"), instance=f.max_hp), dict(field="armour_value → natural armour", declared=raw.get("armour_value", 0), instance=f.effective_av)],
                 definition_semantic_sha256=hashlib.sha256(json.dumps(raw, sort_keys=True, separators=(",", ":")).encode()).hexdigest(),

@@ -73,6 +73,8 @@ class ItemFactory:
         item.consumed_on_use = defn.get("consumed_on_use", True)
         from engine.coating_doses import capture as capture_dose
         capture_dose(item, defn)
+        from engine.flesh_resources import capture as capture_flesh
+        capture_flesh(item, defn)
 
         if 'vessel' in defn:
             item.vessel = create(defn['vessel'])

@@ -1,10 +1,21 @@
 import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
-import { creatureModel, creatureValue, responseValue, responseVersion, maneuverValue } from "./creature";
+import { creatureModel, creatureValue, responseValue, responseVersion, maneuverValue, scavengingValue } from "./creature";
 import { CanvasHistory } from "./layout";
 import { sourceDiff } from "./draft";
 
 describe("ordinary creature exact draft", () => {
+  it('captures scavenging tuning with no-op and exact undo while retaining unrelated fields',()=>{
+    const source='{"id":"new_eater","metadata":{"retain":true}}',defaults={version:1,approach_opportunities:8,feed_opportunities:3};
+    const enabled=scavengingValue(source,true,defaults),tuned=scavengingValue(enabled,{field:'feed_opportunities',value:5},defaults);
+    expect(scavengingValue(enabled,true,defaults)).toBe(enabled);
+    expect(scavengingValue(tuned,{field:'feed_opportunities',value:5},defaults)).toBe(tuned);
+    expect(JSON.parse(tuned).enemy_scavenging.feed_opportunities).toBe(5);
+    expect(JSON.parse(tuned).metadata).toEqual({retain:true});
+    const history=new CanvasHistory();history.record(enabled,tuned,'Feeding work');expect(history.undo(tuned)).toBe(enabled);
+    expect(JSON.parse(scavengingValue(enabled,false,defaults))).toEqual(JSON.parse(source));
+    expect(()=>scavengingValue(enabled,{field:'hunger',value:1},defaults)).toThrow();
+  });
   it('keeps movement and legacy alarm contracts independent through tune/remove/undo',()=>{
     const original='{"id":"sample","tile":"existing","metadata":{"keep":true},"enemy_responses":{"version":1,"modules":[]}}';
     const registry={seek_lateral_approach:{opportunity_budget:8,expiry_phases:16},regroup_when_wounded:{wounded_percent:50,rearm_percent:75}};

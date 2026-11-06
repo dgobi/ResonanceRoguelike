@@ -7,7 +7,7 @@ import {RoomGeometry,ItemFields,DecorFields,DecorSummary,AccessFields} from "./R
 import {
   containerEditable,
   creatureEditable, addCreature, editCreature, removeCreature,
-  addRecord,deleteRecord,recordKind,
+  addRecord,deleteRecord,recordKind,editRemains,
   diagnosticCell,
   editContainer,
   layoutModel,
@@ -63,10 +63,10 @@ export function LayoutEditor(p: LayoutProps) {
     [decor, setDecor] = useState("");
   const [runtimeCell, setRuntimeCell] = useState<Cell | null>(null);
   const [placing, setPlacing] = useState(false), [creatureId, setCreatureId] = useState("");
-  const [placementKind,setPlacementKind]=useState<"creature"|"item"|"container"|"decor"|"screen">(p.authoredSubmap?"creature":"item"),[itemId,setItemId]=useState(""),[containerId,setContainerId]=useState("crate");
+  const [placementKind,setPlacementKind]=useState<"creature"|"item"|"container"|"decor"|"screen"|"remains">(p.authoredSubmap?"creature":"item"),[itemId,setItemId]=useState(""),[containerId,setContainerId]=useState("crate");
   const [accessProfile,setAccessProfile]=useState('');
   const accessHost=placementKind==='screen'||placementKind==='container'&&p.catalog?.decor[containerId]?.access_host==='container';
-  const placementId=placementKind==="creature"?creatureId:placementKind==="item"?itemId:placementKind==="decor"?decor:placementKind==='screen'?accessProfile:containerId;
+  const placementId=(placementKind==="creature"||placementKind==="remains")?creatureId:placementKind==="item"?itemId:placementKind==="decor"?decor:placementKind==='screen'?accessProfile:containerId;
   const [overlay,setOverlay]=useState("");
   const [orientation,setOrientation]=useState(0);
   const [lastFocus, setLastFocus] = useState(p.focus);
@@ -271,9 +271,9 @@ export function LayoutEditor(p: LayoutProps) {
             </button>
           </div>
           {<div className="layout-toolbar">
-            <label>Record kind<select aria-label="Placement kind" value={placementKind} onChange={e=>{setPlacementKind(e.target.value as typeof placementKind);setPlacing(false);}}>{(p.authoredSubmap?["creature","item","container","decor","screen"]:["item","container","screen"]).map(k=><option key={k}>{k}</option>)}</select></label>
-            {placementKind==="creature"?<label>Existing creature<select aria-label="Placement creature" value={creatureId} disabled={!!disabled} onChange={e=>setCreatureId(e.target.value)}>
-              <option value="">Choose creature…</option>{p.catalog?.creatures?.map(c=><option key={c.id} value={c.id} disabled={c.resolved===false}>{c.id} · {c.name} · {c.path}{c.resolved===false?" · ambiguous / unsupported":""}</option>)}
+            <label>Record kind<select aria-label="Placement kind" value={placementKind} onChange={e=>{setPlacementKind(e.target.value as typeof placementKind);setPlacing(false);}}>{(p.authoredSubmap?["creature","item","container","decor","screen","remains"]:["item","container","screen"]).map(k=><option key={k}>{k}</option>)}</select></label>
+            {(placementKind==="creature"||placementKind==="remains")?<label>{placementKind==="remains"?"Remains source":"Existing creature"}<select aria-label={placementKind==="remains"?"Placement remains":"Placement creature"} value={creatureId} disabled={!!disabled} onChange={e=>setCreatureId(e.target.value)}>
+              <option value="">Choose creature…</option>{(placementKind==="remains"?p.catalog?.remains:p.catalog?.creatures)?.map(c=><option key={c.id} value={c.id} disabled={c.resolved===false}>{c.id} · {c.name} · {c.path}{c.resolved===false?" · ambiguous / unsupported":""}</option>)}
             </select></label>:placementKind==="item"?<label>Existing item<select aria-label="Placement item" value={itemId} disabled={!!disabled} onChange={e=>setItemId(e.target.value)}><option value="">Choose item…</option>{p.catalog?.items?.map(c=><option key={c.id} value={c.id} disabled={!c.resolved}>{c.id} · {c.name} · {c.path}{c.readable?" · readable":""}{!c.resolved?" · ambiguous / unsupported":""}</option>)}</select></label>:placementKind==="decor"?<label>Saved decor<select aria-label="Placement decor" value={decor} disabled={!!disabled} onChange={e=>{setDecor(e.target.value);setPlacing(false);}}><option value="">Choose furnishing…</option>{Object.entries(p.catalog?.decor??{}).map(([id,r])=><option key={id} value={id}>{id} · {r.name}{!r.supported?" · unavailable":""}</option>)}</select></label>:placementKind==="container"?<label>Container decor<select aria-label="Placement container" value={containerId} disabled={!!disabled} onChange={e=>setContainerId(e.target.value)}>{Object.entries(p.catalog?.decor??{}).filter(([,r])=>r.container).map(([id,r])=><option key={id} value={id} disabled={r.resolved===false}>{id} · {r.path}{r.resolved===false?" · ambiguous":""}</option>)}</select></label>:null}
             {accessHost&&<label>Saved fastening profile<select aria-label="Placement fastening profile" value={accessProfile} onChange={e=>{setAccessProfile(e.target.value);setPlacing(false);}}><option value="">Choose saved fastening…</option>{p.catalog?.access_profiles?.filter(v=>placementKind==='screen'?v.host_screen:v.host_container).map(v=><option key={v.id} value={v.id}>{v.id} · {v.name}</option>)}</select></label>}
             <button disabled={!!disabled || !placementId || accessHost&&!accessProfile || placementKind==="decor" && !p.catalog?.decor[decor]?.supported} className={placing ? "active" : ""} onClick={()=>{setPlacing(!placing);setTool("select");setLayer("specials");setVisible(v=>({...v,specials:true}));}}>{placing ? "Cancel placement" : `Place ${placementKind}`}</button>
@@ -458,7 +458,7 @@ export function LayoutEditor(p: LayoutProps) {
                     <small>Declared draft references. Apply container edit before opening a changed selection.</small>
                   </div>}
                   {<div className="source-links">{[["creature",s.creature_id,p.catalog.creatures],["item",s.item_id,p.catalog.items],["text",s.text_id,p.catalog.texts]].map(([family,id,choices])=>{const row=(choices as Catalog["items"])?.find(r=>r.id===id&&r.resolved!==false);return typeof id==="string"&&<button key={String(family)} disabled={!row||p.previewBusy} onClick={()=>p.onLinked?.(String(family),id,row?.path,{text:p.draft,index:specialIndex})}>Open linked {String(family)} {id}{!row?" · missing / ambiguous":""}</button>;})}</div>}
-                  {p.authoredSubmap && creatureEditable(s) ? <CreatureFields key={`${specialIndex}:${JSON.stringify(s)}`} record={s} catalog={p.catalog} disabled={!!disabled}
+                  {p.authoredSubmap && recordKind(s)==="remains" ? <CreatureFields remains record={s} catalog={p.catalog} disabled={!!disabled} onApply={value=>p.onEdit(source=>editRemains(source,specialIndex,value),"Move / edit remains")} onDelete={()=>{p.onEdit(source=>deleteRecord(source,specialIndex),"Delete remains");setSpecialIndex(null);}}/> : p.authoredSubmap && creatureEditable(s) ? <CreatureFields key={`${specialIndex}:${JSON.stringify(s)}`} record={s} catalog={p.catalog} disabled={!!disabled}
                     onApply={value=>p.onEdit(source=>editCreature(source,specialIndex,value),"Move / edit creature")}
                     onDelete={()=>{p.onEdit(source=>removeCreature(source,specialIndex),"Delete creature");setSpecialIndex(null);}} /> : recordKind(s)==="item" ? <ItemFields key={`${specialIndex}:${JSON.stringify(s)}`} record={s} catalog={p.catalog} disabled={!!disabled} surfaceDraft={!p.authoredSubmap?p.draft:undefined} index={specialIndex} onEdit={p.onEdit} onDelete={()=>{p.onEdit(source=>deleteRecord(source,specialIndex),"Delete item");setSpecialIndex(null);}}/> : p.authoredSubmap && recordKind(s)==="decor" ? <DecorFields key={`${specialIndex}:${JSON.stringify(s)}`} record={s} catalog={p.catalog} disabled={!!disabled} index={specialIndex} onEdit={p.onEdit} onDelete={()=>{p.onEdit(source=>deleteRecord(source,specialIndex),"Delete decor");setSpecialIndex(null);}}/> : containerEditable(s) ? (
                     <ContainerFields
@@ -584,20 +584,21 @@ export function LayoutEditor(p: LayoutProps) {
   );
 }
 
-function CreatureFields({record, catalog, disabled, onApply, onDelete}: {
-  record: Special; catalog: Catalog; disabled: boolean;
+function CreatureFields({record, catalog, disabled, onApply, onDelete, remains=false}: {
+  record: Special; catalog: Catalog; disabled: boolean; remains?:boolean;
   onApply: (v:{x:number;y:number;creature_id:string})=>void; onDelete:()=>void;
 }) {
   const [x,setX]=useState(String(record.x)), [y,setY]=useState(String(record.y)), [id,setId]=useState(String(record.creature_id || ""));
-  return <fieldset className="container-fields" disabled={disabled}><legend>Direct creature · source coordinates</legend>
-    <label>Creature ID<select aria-label="Marker creature ID" value={id} onChange={e=>setId(e.target.value)}>
-      {!catalog.creatures?.some(c=>c.id===id) && <option value={id}>{id} · unresolved</option>}
-      {catalog.creatures?.map(c=><option key={c.id} value={c.id} disabled={c.resolved===false}>{c.id} · {c.path}{c.resolved===false?" · ambiguous / unsupported":""}</option>)}
+  const choices=remains?catalog.remains:catalog.creatures, label=remains?"remains":"creature";
+  return <fieldset className="container-fields" disabled={disabled}><legend>Direct {label} · source coordinates</legend>
+    <label>Creature ID<select aria-label={remains?"Marker remains source":"Marker creature ID"} value={id} onChange={e=>setId(e.target.value)}>
+      {!choices?.some(c=>c.id===id) && <option value={id}>{id} · unresolved</option>}
+      {choices?.map(c=><option key={c.id} value={c.id} disabled={c.resolved===false}>{c.id} · {c.path}{c.resolved===false?" · ambiguous / unsupported":""}</option>)}
     </select></label>
-    <div className="coordinate-fields"><label>Source X<input aria-label="Creature source X" type="number" step="1" value={x} onChange={e=>setX(e.target.value)}/></label>
-    <label>Source Y<input aria-label="Creature source Y" type="number" step="1" value={y} onChange={e=>setY(e.target.value)}/></label></div>
-    <button disabled={!x || !y || !Number.isInteger(Number(x)) || !Number.isInteger(Number(y)) || !catalog.creatures?.some(c=>c.id===id&&c.resolved!==false)} onClick={()=>onApply({x:Number(x),y:Number(y),creature_id:id})}>Apply creature edit</button>
-    <button onClick={onDelete}>Delete creature</button><small>Initial occupancy is checked by production validation. Invalid placements stay in the draft.</small>
+    <div className="coordinate-fields"><label>Source X<input aria-label={remains?"Remains source X":"Creature source X"} type="number" step="1" value={x} onChange={e=>setX(e.target.value)}/></label>
+    <label>Source Y<input aria-label={remains?"Remains source Y":"Creature source Y"} type="number" step="1" value={y} onChange={e=>setY(e.target.value)}/></label></div>
+    <button disabled={!x || !y || !Number.isInteger(Number(x)) || !Number.isInteger(Number(y)) || !choices?.some(c=>c.id===id&&c.resolved!==false)} onClick={()=>onApply({x:Number(x),y:Number(y),creature_id:id})}>Apply {label} edit</button>
+    <button onClick={onDelete}>Delete {label}</button><small>Initial occupancy is checked by production validation. Invalid placements stay in the draft.</small>
   </fieldset>;
 }
 

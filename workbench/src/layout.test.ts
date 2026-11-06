@@ -10,6 +10,7 @@ import {
   lineCells,
   rectangle,
   diagnosticCell,
+  addRecord,editRemains,deleteRecord,
 } from "./layout";
 import { sourceDiff } from "./draft";
 import { fitCamera, screenToCell, zoomAt, TILE } from "./coordinates";
@@ -18,6 +19,16 @@ const original = readFileSync(
   "utf8",
 );
 describe("native-layer visual authoring", () => {
+  it('authors one source carcass and preserves source history without saved payload controls',()=>{
+    const source='{"id":"room","layers":["...","..."],"legend":{".":"floor"},"metadata":{"keep":1}}';
+    const placed=addRecord(source,[1,1],'remains','plague_crow');
+    expect(JSON.parse(placed).special_tiles).toEqual([{type:'remains',x:1,y:1,creature_id:'plague_crow'}]);
+    const moved=editRemains(placed,0,{x:2,y:1,creature_id:'heath_stalker'});
+    const history=new CanvasHistory();history.record(placed,moved,'Move remains');expect(history.undo(moved)).toBe(placed);
+    expect(editRemains(moved,0,{x:2,y:1,creature_id:'heath_stalker'})).toBe(moved);
+    expect(()=>editRemains(moved,0,{x:3,y:1,creature_id:'heath_stalker'})).toThrow();
+    expect(JSON.parse(deleteRecord(moved,0)).metadata).toEqual({keep:1});
+  });
   it("rich real source no-op, three-layer edits and exact unrelated spans", () => {
     const enriched = valueEdit(original, ["unknown_metadata"], {
       nested: [

@@ -7,6 +7,7 @@
   "weight": 0.5,
   "stackable": true,
   "keywords": [
+    {"tag": "flesh", "tier": 1},
     {
       "tag": "edible",
       "tier": 1

@@ -14,6 +14,7 @@ export type Catalog = {
   >;
   loot_pools: string[];
   creatures?: ReferenceChoice[];
+  remains?: ReferenceChoice[];
   items?: ReferenceChoice[];
   texts?: ReferenceChoice[];
   pools?: ReferenceChoice[];
@@ -156,11 +157,18 @@ export function removeValue(source:string,path:(string|number)[]):string {
   return source.slice(0,start+bom)+source.slice(end+bom);
 }
 export const recordKind=(s:Special)=>String(s.type??s.kind);
-export const directEditable=(s:Special)=>["item","container","creature","decor","screen"].includes(recordKind(s)) && !(s.type && s.kind && s.type!==s.kind);
-export function addRecord(source:string,cell:Cell,kind:"item"|"container"|"creature"|"decor"|"screen",id:string,profile?:string):string {
+export const directEditable=(s:Special)=>["item","container","creature","decor","screen","remains"].includes(recordKind(s)) && !(s.type && s.kind && s.type!==s.kind);
+export function addRecord(source:string,cell:Cell,kind:"item"|"container"|"creature"|"decor"|"screen"|"remains",id:string,profile?:string):string {
   const {model,reason}=layoutModel(source);if(!model)throw Error(reason);
   if(cell[0]<0||cell[1]<0||cell[0]>=model.width||cell[1]>=model.height)throw Error("Choose a source cell within the room.");
-  return appendValue(source,["special_tiles"],{type:kind,x:cell[0],y:cell[1],...({item:{item_id:id},creature:{creature_id:id},container:{decor_id:id,loot_pools:[],...(profile?{access_profile:profile}:{})},decor:{decor_id:id},screen:{access_profile:id}}[kind])});
+  return appendValue(source,["special_tiles"],{type:kind,x:cell[0],y:cell[1],...({item:{item_id:id},creature:{creature_id:id},remains:{creature_id:id},container:{decor_id:id,loot_pools:[],...(profile?{access_profile:profile}:{})},decor:{decor_id:id},screen:{access_profile:id}}[kind])});
+}
+export function editRemains(source:string,index:number,update:{x:number;y:number;creature_id:string}):string {
+  const {model,reason}=layoutModel(source);if(!model)throw Error(reason);
+  const row=model.special_tiles?.[index];if(!row||recordKind(row)!=='remains'||!directEditable(row))throw Error('Select direct remains.');
+  if(![update.x,update.y].every(Number.isInteger)||update.x<0||update.y<0||update.x>=model.width||update.y>=model.height)throw Error('Use integer source coordinates within the room.');
+  for(const [key,value] of Object.entries(update))if(row[key]!==value)source=valueEdit(source,['special_tiles',index,key],value);
+  return source;
 }
 export function editDecor(source:string,index:number,update:{x:number;y:number;decor_id:string}):string {
   const {model,reason}=layoutModel(source);if(!model)throw Error(reason);
