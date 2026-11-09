@@ -1,3 +1,5 @@
 # The compiled product has an exact byte identity in source-manifest.json.
 # Preserve its generated UTF-8/LF bytes under every checkout newline setting.
 Resonance_Owner_Wiki.html -text
+# Exact distributed patch/example bytes are bound to practice receipts.
+examples/guide1/** -text

@@ -1,0 +1,455 @@
+{
+  "schema_version": 1,
+  "validator_version": "1.0",
+  "checked_at_utc": "2026-11-09T23:23:02.654438+00:00",
+  "html": "G:\\GameDev\\RoguelikeProject\\Resonance_Wiki_Maintenance\\Resonance_Owner_Wiki.html",
+  "html_sha256": "a666831ed92693d19866fa1e6d083252737f30fc982ab7995a10487af483efd1",
+  "html_bytes": 14443339,
+  "repository": "G:\\GameDev\\RoguelikeProject",
+  "repository_head": "c166ec650b98156d53b8ea72e715c028d27db905",
+  "expected_count_assertions": {
+    "markdown": null,
+    "game_json": null
+  },
+  "checks": {
+    "html_ids": {
+      "unique": 2318,
+      "duplicate_ids": {}
+    },
+    "internal_hrefs": {
+      "checked": 1146,
+      "external_hyperlinks_permitted": 1266
+    },
+    "articles": {
+      "guide": 58,
+      "source": 144,
+      "data": 19
+    },
+    "json_scripts": {
+      "checked": 1,
+      "parsed": 1
+    },
+    "json_code_blocks": {
+      "total": 644,
+      "complete_parsed": 604,
+      "insertion_fragments_syntax_checked": 36,
+      "historical_abbreviations_skipped": 3
+    },
+    "source_coverage": {
+      "expected": 144,
+      "observed": 144,
+      "missing": [],
+      "unexpected": []
+    },
+    "source_hashes": {
+      "matched": 144
+    },
+    "game_json_coverage": {
+      "expected": 461,
+      "observed": 461,
+      "missing": [],
+      "unexpected": []
+    },
+    "repository_example_coverage": {
+      "expected": 22,
+      "observed": 22,
+      "missing": [],
+      "unexpected": []
+    },
+    "repository_data_comparison": {
+      "matched": 483,
+      "wiki_examples_not_in_repo": 24,
+      "catalog_records": 507
+    },
+    "search_coverage": {
+      "expected": 709,
+      "observed": 709,
+      "missing": [],
+      "unexpected": []
+    },
+    "search_index": {
+      "records": 709,
+      "catalog_json_copies_matched": 507
+    },
+    "runtime_assets": {
+      "references_checked": 15,
+      "embedded_references": 15,
+      "fragment_references": 0,
+      "css_blocks_and_style_attributes_checked": 1,
+      "embedded_svgs_inspected": 1,
+      "inline_executable_scripts": 1
+    }
+  },
+  "errors": [],
+  "skips": [
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 2646,
+      "page": "first-change"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 3181,
+      "page": "items-equipment"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 3191,
+      "page": "items-equipment"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 3307,
+      "page": "combat-balance"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 3641,
+      "page": "crafting-processing"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 3789,
+      "page": "texts-loot-scenes"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 3854,
+      "page": "texts-loot-scenes"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 3932,
+      "page": "survival-progression"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 4672,
+      "page": "structure-reference"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 5875,
+      "page": "sprites-and-atlases"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 5884,
+      "page": "sprites-and-atlases"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 6190,
+      "page": "terrain-decor-and-variation"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 13662,
+      "page": "source-docs-owner-tuning-existing-features-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 23326,
+      "page": "source-roguelike-docs-decoratives-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 23337,
+      "page": "source-roguelike-docs-decoratives-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 23368,
+      "page": "source-roguelike-docs-decoratives-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 23542,
+      "page": "source-roguelike-docs-enemy-response-components-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 23757,
+      "page": "source-roguelike-docs-enemy-response-components-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 24910,
+      "page": "source-roguelike-docs-layout-authoring-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 24914,
+      "page": "source-roguelike-docs-layout-authoring-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 24918,
+      "page": "source-roguelike-docs-layout-authoring-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 24922,
+      "page": "source-roguelike-docs-layout-authoring-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 24926,
+      "page": "source-roguelike-docs-layout-authoring-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 25238,
+      "page": "source-roguelike-docs-local-scavenging-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 29921,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 29952,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 29955,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 29967,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 30006,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 30014,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Preserved historical illustration contains an unquoted ellipsis; it is not complete JSON.",
+      "line": 30025,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 30037,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 30043,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Preserved historical illustration contains an unquoted ellipsis; it is not complete JSON.",
+      "line": 30052,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 30079,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 32649,
+      "page": "source-roguelike-docs-text-authoring-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Preserved historical illustration contains an unquoted ellipsis; it is not complete JSON.",
+      "line": 32836,
+      "page": "source-roguelike-docs-wfc-authoring-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 32853,
+      "page": "source-roguelike-docs-wfc-authoring-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Preserved source sequence of individually valid JSON records, not one standalone file.",
+      "line": 33102,
+      "page": "source-roguelike-docs-working-ruins-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 33230,
+      "page": "source-roguelike-docs-owner-b1-format-md"
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/g9_country_network.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/guide1/data/buildings/residential/guide1_cottage.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/guide1/data/entities/creatures/guide1_watcher.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/guide1/data/items/consumables/guide1_note_carrier.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/guide1/data/items/consumables/guide1_ration.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/guide1/data/items/tools/guide1_cancel.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/guide1/data/items/tools/guide1_exchange.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/guide1/data/items/tools/guide1_inspect.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/guide1/data/items/tools/guide1_survey.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/guide1/data/items/weapons/guide1_blade.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/guide1/data/layouts/guide1_encounter.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/guide1/data/layouts/guide1_workroom.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/guide1/data/loot_pools/guide1_supplies.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/guide1/data/perks/guide1_cadence.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/guide1/data/perks/guide1_survey.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/guide1/data/recipes/guide1_meal.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/guide1/data/texts/guide1_note.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/guide1/draft-targets.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/guide1/patch-baseline.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/guide1/policies/authored_submap_selection.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/guide1/policies/authored_submap_selection_rare.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/guide1/policies/settlement_profiles.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/guide1/policies/typography.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/owner_cottage_a.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    }
+  ],
+  "limitations": [
+    "Static checks do not execute JavaScript, simulate browser layout, verify clipboard/download behavior, or test gameplay.",
+    "External ordinary hyperlinks are permitted and are not fetched or checked for availability.",
+    "Source coverage checks one rendered source article, pinned path, revision and displayed source hash per tracked Markdown file; they do not independently re-render Markdown or compare every rendered word.",
+    "Runtime asset checking covers declared HTML resources, CSS url()/@import, and embedded SVG references. It is not a JavaScript interpreter or a proof against dynamically constructed network requests.",
+    "Unbraced JSON documentation entries are syntax-checked after temporary braces are added. Abbreviated historical examples containing an unquoted ellipsis are reported separately, not treated as machine payloads."
+  ],
+  "status": "pass",
+  "error_count": 0
+}

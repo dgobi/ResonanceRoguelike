@@ -1,0 +1,9 @@
+{
+  "source_revision": "c166ec650b98156d53b8ea72e715c028d27db905",
+  "engine_canonical_sha256": "f5d1c6e94713d1da9e8b7f8427cc33b8f16acdd550c5abb7b38f958e1b5b86ad",
+  "solution_sha256": "9426b8d9158caa4b2b2e45fb0d5e4adf826a77561cfca2b2ed60bbbdc58cd96a",
+  "affected_paths": [
+    "roguelike/engine/engine.py",
+    "roguelike/engine/guide1_practice.py"
+  ]
+}

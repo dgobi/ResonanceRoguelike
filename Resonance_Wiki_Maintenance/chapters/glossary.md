@@ -1,6 +1,6 @@
 # Project glossary
 
-Use these definitions when a guide distinguishes something that looks similar on screen but has a different owner in the game. Dimensions and version labels below describe this wiki's pinned G8 revision.
+Use these definitions when a guide distinguishes something that looks similar on screen but has a different owner in the game. Dimensions and version labels below describe this handbook's reviewed SYS-5 revision (generation format 7).
 
 ## Places and coordinates
 
@@ -59,6 +59,21 @@ Use these definitions when a guide distinguishes something that looks similar on
 | **Cap / budget** | A cap limits accepted counts. A budget limits attempted work; exhausting it can leave feasibility unresolved. The units depend on the specific control. | [Settlement tuning](#settlement-tuning) |
 | **Turn / frame / hit** | Turns advance simulation through game actions; frames update display and are not turns. Hit-based charges age on qualifying contact, rather than elapsed turns or frames. Read each effect's timing rule. | [Combat and effects](#combat-balance) |
 
+## Reading small programs
+
+| Term | Plain meaning and lesson example | Continue with |
+|---|---|---|
+| **Consumer** | Code that reads a value and makes it matter. A JSON `nutrition` field has an effect only because the food-use code reads it. | [Follow a value](#L01) |
+| **Factory** | Code that builds an instance from a reusable definition. `ItemFactory.create(id)` produces a physical object; it does not put that object in a room or inventory. | [Create an item](#L02) |
+| **Function / return value** | A named operation and the answer it gives its caller. `parse_exchange(raw)` checks a configuration and returns usable values; a returned result is separate from changing the game. | [New primitive](#L10) |
+| **Hook / handler** | A hook is a named event such as `ON_TURN`. A handler is a function registered to respond when it fires. Registration is not acquisition: the perk must be owned and its handler attached. | [Event response](#L11) |
+| **Invariant** | A rule that must stay true across operations. One physical ingredient must not be spent twice; inspecting survey work must not advance its clock. An assertion checks such a rule during an example. | [Persistent work](#L12) |
+| **Schema** | The allowed structure and meaning of data: required keys, types, bounds and compatible versions. Valid JSON syntax alone does not establish a valid survey save. | [Validation](#L12) |
+| **Snapshot** | A record of state at one moment, used for saving or comparison. A detached copy matters: if the record shares the live dictionary, later edits can silently change both. | [Cold continuation](#L12) |
+| **Idempotence** | Repeating an operation has the same effect as doing it once. Rebuilding hooks must leave one cadence listener, not one extra listener on every rebuild. | [Lifecycle](#L11) |
+| **State machine** | Named states with allowed transitions. Survey work goes idle → working → ready → idle; collection changes the completed count. | [Survey example](#L12) |
+| **Serialization / validation** | Serialization turns owned state into saveable data. Validation checks it before replacing live state; deserialization reconstructs usable objects from it. | [Saves](#saves-and-state) |
+
 ## Source anchors
 
-Definitions consolidate the current [world planner](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/world_plan.py), [placement contract](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/placement.py), [current effect ownership](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/docs/owner/WORLD_AND_STATE.md) and [G6 lifecycle contract](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/docs/owner/WORLDGEN_G6.md).
+Definitions consolidate the current [world planner](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/generation/world_plan.py), [placement contract](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/generation/placement.py), [current effect ownership](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/docs/owner/WORLD_AND_STATE.md) and [G6 lifecycle contract](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/docs/owner/WORLDGEN_G6.md).

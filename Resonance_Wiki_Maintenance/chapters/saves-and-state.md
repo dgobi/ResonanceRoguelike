@@ -61,7 +61,7 @@ Active/hot map processing and disruption zones can age while those maps remain r
 
 ## Source basis
 
-[SaveManager and scene cache](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/save_manager.py) · [checkpoint store](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/checkpoints.py) · [component serialization](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/save_components.py) · [critical-fix record](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/docs/owner/CRITICAL_FIXES_VERIFICATION.md) · [current engine travel](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/engine.py).
+[SaveManager and scene cache](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/save_manager.py) · [checkpoint store](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/checkpoints.py) · [component serialization](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/save_components.py) · [critical-fix record](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/docs/owner/CRITICAL_FIXES_VERIFICATION.md) · [current engine travel](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/engine.py).
 
 ## Resolved compound ownership
 

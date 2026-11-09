@@ -1,0 +1,11 @@
+{
+  "id": "authored_submap_selection",
+  "version": 1,
+  "enabled": true,
+  "target_type": "barrow",
+  "authored_chance": 0.25,
+  "candidates": [
+    {"layout_id": "guide1_workroom", "weight": 3},
+    {"layout_id": "guide1_encounter", "weight": 1}
+  ]
+}

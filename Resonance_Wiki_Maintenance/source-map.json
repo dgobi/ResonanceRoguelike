@@ -1,0 +1,302 @@
+{
+  "schema": 1,
+  "reviewed_revision": "c166ec650b98156d53b8ea72e715c028d27db905",
+  "topics": [
+    {
+      "pages": [
+        "learning-path",
+        "L01",
+        "L02",
+        "L14",
+        "items-equipment"
+      ],
+      "paths": [
+        "roguelike/engine/item_factory.py",
+        "roguelike/engine/item_system.py",
+        "roguelike/entities/item.py",
+        "roguelike/engine/inventory_screen.py",
+        "roguelike/components/inventory.py",
+        "roguelike/data/items/"
+      ],
+      "symbols": [
+        "ItemFactory.create",
+        "ItemSystem.use",
+        "last_use_committed"
+      ],
+      "checks": [
+        "practice.py L01",
+        "practice.py L02",
+        "practice.py L14"
+      ],
+      "receipt": "evidence/guide-1/final-practice/practice.json"
+    },
+    {
+      "pages": [
+        "L03",
+        "texts-loot-scenes"
+      ],
+      "paths": [
+        "roguelike/engine/text_reader.py",
+        "roguelike/engine/language_system.py",
+        "roguelike/data/texts/",
+        "roguelike/data/deep_tongue.json"
+      ],
+      "symbols": [
+        "TextReader",
+        "taught_texts"
+      ],
+      "checks": [
+        "practice.py L03"
+      ],
+      "receipt": "evidence/guide-1/final-practice/L03/receipt.json"
+    },
+    {
+      "pages": [
+        "L04",
+        "crafting-processing"
+      ],
+      "paths": [
+        "roguelike/engine/crafting.py",
+        "roguelike/rendering/craft_screen.py",
+        "roguelike/data/recipes/",
+        "roguelike/engine/engine.py"
+      ],
+      "symbols": [
+        "CraftScreen",
+        "processing_layer"
+      ],
+      "checks": [
+        "practice.py L04"
+      ],
+      "receipt": "evidence/guide-1/final-practice/L04/receipt.json"
+    },
+    {
+      "pages": [
+        "L05",
+        "creatures-ai"
+      ],
+      "paths": [
+        "roguelike/engine/creature_factory.py",
+        "roguelike/engine/ai_system.py",
+        "roguelike/components/ai.py",
+        "roguelike/data/entities/",
+        "roguelike/engine/ai_profiles.py",
+        "roguelike/data/zones/",
+        "roguelike/components/composite_ai.py",
+        "roguelike/components/territorial.py",
+        "roguelike/components/protective_escort.py",
+        "roguelike/components/observation_averse.py",
+        "roguelike/engine/enemy_components.py",
+        "roguelike/engine/enemy_responses.py",
+        "roguelike/engine/enemy_maneuvers.py",
+        "roguelike/engine/enemy_scavenging.py"
+      ],
+      "symbols": [
+        "CreatureFactory.spawn",
+        "AI_TYPES"
+      ],
+      "checks": [
+        "practice.py L05"
+      ],
+      "receipt": "evidence/guide-1/final-practice/L05/receipt.json"
+    },
+    {
+      "pages": [
+        "L06",
+        "L07",
+        "L13",
+        "structure-reference",
+        "entrances-submaps",
+        "first-building",
+        "world-generation",
+        "settlement-tuning",
+        "settlement-layouts",
+        "rural-sites",
+        "compounds",
+        "generation-troubleshooting"
+      ],
+      "paths": [
+        "roguelike/generation/",
+        "roguelike/world/",
+        "roguelike/data/layouts/",
+        "roguelike/data/buildings/",
+        "roguelike/data/generation/",
+        "roguelike/data/entrances/",
+        "tools/structure_authoring.py"
+      ],
+      "symbols": [
+        "generate_world",
+        "layout_id",
+        "planned_scene",
+        "structure_contract"
+      ],
+      "checks": [
+        "practice.py L06",
+        "practice.py L07",
+        "practice.py L13",
+        "verify_edition.py --evidence <output>"
+      ],
+      "receipt": "evidence/guide-1/final-practice/L07/receipt.json"
+    },
+    {
+      "pages": [
+        "L08",
+        "display-ui-and-palette",
+        "sprites-and-atlases",
+        "terrain-decor-and-variation"
+      ],
+      "paths": [
+        "roguelike/rendering/",
+        "roguelike/engine/typography.py",
+        "roguelike/engine/display_config.py",
+        "roguelike/engine/illumination.py",
+        "roguelike/data/display/",
+        "roguelike/data/sprites/",
+        "roguelike/data/terrain.json",
+        "roguelike/data/decoratives.json",
+        "roguelike/assets/"
+      ],
+      "symbols": [
+        "DisplayConfig.init",
+        "SpriteRegistry",
+        "ROLES"
+      ],
+      "checks": [
+        "practice.py L08"
+      ],
+      "receipt": "evidence/guide-1/final-practice/L08/receipt.json"
+    },
+    {
+      "pages": [
+        "L09",
+        "combat-balance"
+      ],
+      "paths": [
+        "roguelike/engine/movesets.py",
+        "roguelike/engine/combat.py",
+        "roguelike/engine/effect_lifecycle.py",
+        "roguelike/components/fighter.py",
+        "roguelike/data/items/weapons/"
+      ],
+      "symbols": [
+        "Engine._try_moveset_action",
+        "execute_moveset",
+        "resolve_attack"
+      ],
+      "checks": [
+        "practice.py L09"
+      ],
+      "receipt": "evidence/guide-1/final-practice/L09/receipt.json"
+    },
+    {
+      "pages": [
+        "L10",
+        "L11",
+        "L12",
+        "practice-solutions",
+        "controls",
+        "survival-progression",
+        "saves-and-state"
+      ],
+      "paths": [
+        "roguelike/engine/engine.py",
+        "roguelike/engine/item_system.py",
+        "roguelike/engine/hooks.py",
+        "roguelike/engine/save_manager.py",
+        "roguelike/engine/save_components.py",
+        "roguelike/components/perks.py",
+        "roguelike/rendering/perk_screen.py",
+        "roguelike/engine/effect_lifecycle.py",
+        "roguelike/engine/vessels.py",
+        "roguelike/room_test.py",
+        "roguelike/data/perks/"
+      ],
+      "symbols": [
+        "Engine._handle_key",
+        "Engine._rebuild_hook_registry",
+        "SaveManager",
+        "validate_components",
+        "ON_TURN"
+      ],
+      "checks": [
+        "practice.py L10",
+        "practice.py L11",
+        "practice.py L12",
+        "test_practice_guard.py"
+      ],
+      "receipt": "evidence/guide-1/final-practice/practice.json"
+    },
+    {
+      "pages": [
+        "authoring-reference",
+        "workbench-internals",
+        "L02",
+        "L07",
+        "L08",
+        "layout-painter"
+      ],
+      "paths": [
+        "roguelike/engine/access_authoring.py",
+        "roguelike/engine/assignment_authoring.py",
+        "roguelike/engine/building_authoring.py",
+        "roguelike/engine/content_authoring.py",
+        "roguelike/engine/creature_authoring.py",
+        "roguelike/engine/equipment_authoring.py",
+        "roguelike/engine/item_authoring.py",
+        "roguelike/engine/light_authoring.py",
+        "roguelike/engine/pool_authoring.py",
+        "roguelike/engine/recipe_authoring.py",
+        "roguelike/engine/room_authoring.py",
+        "roguelike/engine/selection_authoring.py",
+        "roguelike/engine/text_authoring.py",
+        "roguelike/engine/typography_authoring.py",
+        "tools/structure_authoring.py",
+        "workbench/"
+      ],
+      "symbols": [
+        "authoring_registry",
+        "captured Test room",
+        "Reset capture"
+      ],
+      "checks": [
+        "node Resonance_Wiki_Maintenance/verify_workbench.mjs",
+        "node scripts/run-typography.mjs",
+        "node Resonance_Wiki_Maintenance/verify_room_capture.mjs"
+      ],
+      "receipt": "evidence/guide-1/workbench/index.json"
+    },
+    {
+      "pages": [
+        "system-atlas",
+        "task-index",
+        "source-evidence",
+        "code-and-documentation-map",
+        "content-workflow",
+        "weather-and-atmosphere",
+        "world-names-and-biomes",
+        "debug-tools",
+        "verification",
+        "troubleshooting",
+        "glossary",
+        "wfc-ground"
+      ],
+      "paths": [
+        "roguelike/",
+        "tools/",
+        "docs/",
+        "README.md",
+        "AGENTS.md"
+      ],
+      "symbols": [
+        "DataLoader",
+        "WorldMap",
+        "CONSOLE_COMMANDS"
+      ],
+      "checks": [
+        "verify_edition.py --evidence <output>"
+      ],
+      "receipt": "evidence/guide-1/final-edition/edition.json"
+    }
+  ],
+  "limits": "Paths are deliberately conservative impact hints, not proof that prose is correct. Prefixes include new files. A source review and relevant behavior checks are required before repinning. Historical records remain dated."
+}

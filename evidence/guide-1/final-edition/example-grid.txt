@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "assets": 109,
+  "diagnostics": 269,
+  "output": "G:\\GameDev\\RoguelikeProject\\evidence\\guide-1\\final-edition\\example-grid.json",
+  "previews": 4,
+  "registration": false,
+  "status": null
+}

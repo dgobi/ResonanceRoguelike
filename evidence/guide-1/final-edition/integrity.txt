@@ -1,0 +1,74 @@
+{
+  "status": "pass",
+  "errors": 0,
+  "report": "G:\\GameDev\\RoguelikeProject\\evidence\\guide-1\\final-edition\\integrity.json",
+  "checks": {
+    "html_ids": {
+      "unique": 2318,
+      "duplicate_ids": {}
+    },
+    "internal_hrefs": {
+      "checked": 1146,
+      "external_hyperlinks_permitted": 1266
+    },
+    "articles": {
+      "guide": 58,
+      "source": 144,
+      "data": 19
+    },
+    "json_scripts": {
+      "checked": 1,
+      "parsed": 1
+    },
+    "json_code_blocks": {
+      "total": 644,
+      "complete_parsed": 604,
+      "insertion_fragments_syntax_checked": 36,
+      "historical_abbreviations_skipped": 3
+    },
+    "source_coverage": {
+      "expected": 144,
+      "observed": 144,
+      "missing": [],
+      "unexpected": []
+    },
+    "source_hashes": {
+      "matched": 144
+    },
+    "game_json_coverage": {
+      "expected": 461,
+      "observed": 461,
+      "missing": [],
+      "unexpected": []
+    },
+    "repository_example_coverage": {
+      "expected": 22,
+      "observed": 22,
+      "missing": [],
+      "unexpected": []
+    },
+    "repository_data_comparison": {
+      "matched": 483,
+      "wiki_examples_not_in_repo": 24,
+      "catalog_records": 507
+    },
+    "search_coverage": {
+      "expected": 709,
+      "observed": 709,
+      "missing": [],
+      "unexpected": []
+    },
+    "search_index": {
+      "records": 709,
+      "catalog_json_copies_matched": 507
+    },
+    "runtime_assets": {
+      "references_checked": 15,
+      "embedded_references": 15,
+      "fragment_references": 0,
+      "css_blocks_and_style_attributes_checked": 1,
+      "embedded_svgs_inspected": 1,
+      "inline_executable_scripts": 1
+    }
+  }
+}

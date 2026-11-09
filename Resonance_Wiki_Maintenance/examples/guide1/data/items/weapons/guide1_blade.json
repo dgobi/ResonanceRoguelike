@@ -1,0 +1,44 @@
+{
+  "id": "guide1_blade",
+  "name": "Practice Blade",
+  "category": "weapon",
+  "slot": "weapon",
+  "damage_dice": "1d2",
+  "damage_bonus": 0,
+  "on_use": "equip_toggle",
+  "essence": "Severance",
+  "essence_strength": 0,
+  "weight": 1.8,
+  "description": "A narrow blade of dull grey metal, the edge ground at an angle that catches nothing. The bindings of the hollow yield before it.",
+  "color_fg": [
+    68,
+    99,
+    116
+  ],
+  "sprite": "crude_blade",
+  "crit_chance": 0.06,
+  "consumed_on_use": false,
+  "keywords": [
+    {
+      "tag": "cutting",
+      "tier": 3
+    }
+  ],
+  "movesets": [
+    {
+      "id": "guide1_opening",
+      "name": "Practice Opening",
+      "key": "Q",
+      "turn_cost": 1,
+      "cooldown": 4,
+      "range": 1,
+      "damage_mult": 1,
+      "effects": {
+        "ignore_armour": true,
+        "ignore_dodge": true
+      },
+      "callout": "OPENING"
+    }
+  ],
+  "type": "weapon"
+}

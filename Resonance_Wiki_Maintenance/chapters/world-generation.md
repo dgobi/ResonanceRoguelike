@@ -64,10 +64,10 @@ The installed catalog includes settlement assets, the spent bell, single-site al
 
 ## Sources and implementation anchors
 
-- [World planner and current settings validation](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/world_plan.py)
-- [Complete planned scene creation](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/planned_scene.py)
-- [G6 delivered scope and boundaries](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/docs/owner/WORLDGEN_G6.md)
-- [Current geometry settings](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/generation/g3_config.json)
+- [World planner and current settings validation](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/generation/world_plan.py)
+- [Complete planned scene creation](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/generation/planned_scene.py)
+- [G6 delivered scope and boundaries](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/docs/owner/WORLDGEN_G6.md)
+- [Current geometry settings](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/data/generation/g3_config.json)
 
 ## Optional country connections
 

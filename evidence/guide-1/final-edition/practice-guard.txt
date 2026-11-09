@@ -1,0 +1,10 @@
+test_conflict_preserves_every_path (__main__.Recovery.test_conflict_preserves_every_path) ... ok
+test_corrupt_backup_preflight_changes_nothing (__main__.Recovery.test_corrupt_backup_preflight_changes_nothing) ... ok
+test_exact_restore_and_new_path_absence (__main__.Recovery.test_exact_restore_and_new_path_absence) ... ok
+test_incompatible_source_changes_nothing (__main__.Recovery.test_incompatible_source_changes_nothing) ... ok
+test_redirected_ancestor_refused (__main__.Recovery.test_redirected_ancestor_refused) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.811s
+
+OK

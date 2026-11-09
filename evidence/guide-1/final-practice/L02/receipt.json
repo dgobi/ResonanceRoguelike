@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "lesson": "L02",
+  "evidence_kind": "production input handlers in bounded room fixture",
+  "events": 24,
+  "observations": [
+    {
+      "label": "ordinary floor pickup",
+      "turn": 481,
+      "item": "guide1_ration"
+    },
+    {
+      "label": "food through inventory input",
+      "turn": 482,
+      "nutrition": 320,
+      "hunger_before": 0.7,
+      "hunger_after": 0.38099999999999995,
+      "consumed_exact_object": true,
+      "paid_phases": 1
+    },
+    {
+      "label": "food consumption cold restore",
+      "turn": 482,
+      "same_process_equal": true,
+      "cold": {
+        "pid": 25556,
+        "state_equal": true,
+        "continuation": null
+      }
+    },
+    {
+      "label": "unknown handler rejected",
+      "turn": 482,
+      "time_and_resources_unchanged": true
+    }
+  ],
+  "solution_sha256": "0b894f55b77880205b09aa45fb2cf1ccc009cb54d60453fc6919db06e3a55c79",
+  "limits": [
+    "Initial resources/needs may be staged as labelled; this is not natural world discovery.",
+    "Screenshot uses the original renderer; automation cannot establish human learning."
+  ]
+}

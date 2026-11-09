@@ -1,0 +1,38 @@
+{
+  "reviewed_revision": "c166ec650b98156d53b8ea72e715c028d27db905",
+  "potentially_affected": [],
+  "note": "Impact hints only. No files changed and no new revision approved."
+}
+warning: in the working copy of 'Resonance_Wiki_Maintenance/.gitattributes', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/code-and-documentation-map.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/combat-balance.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/compounds.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/content-workflow.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/controls.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/crafting-processing.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/creatures-ai.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/debug-tools.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/display-ui-and-palette.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/entrances-submaps.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/first-building.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/first-change.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/generation-troubleshooting.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/getting-started.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/glossary.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/layout-painter.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/rural-sites.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/saves-and-state.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/settlement-layouts.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/settlement-tuning.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/sprites-and-atlases.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/structure-reference.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/survival-progression.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/terrain-decor-and-variation.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/texts-loot-scenes.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/troubleshooting.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/verification.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/weather-and-atmosphere.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/wfc-ground.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/world-generation.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/chapters/world-names-and-biomes.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Resonance_Wiki_Maintenance/theme.css', LF will be replaced by CRLF the next time Git touches it

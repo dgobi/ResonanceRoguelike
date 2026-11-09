@@ -1,0 +1,11 @@
+{
+  "id": "guide1_survey",
+  "name": "practice survey tool",
+  "description": "GUIDE-1 Python lesson; not a production item.",
+  "tile": "generic_item",
+  "category": "tool",
+  "weight": 0.1,
+  "stackable": false,
+  "on_use": "guide_survey",
+  "consumed_on_use": false
+}

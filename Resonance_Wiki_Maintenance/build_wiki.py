@@ -83,8 +83,9 @@ class CleanHTML(HTMLParser):
         if self.skip:return
         if tag=='img':
             url=attrs.get('src','');alt=attrs.get('alt','Source figure');parts=urlsplit(url)
-            if not parts.scheme and self.page.get('source'):
-                file=(self.repo/self.page['source'].parent/unquote(parts.path)).resolve()
+            if not parts.scheme and (self.page.get('source') or self.page.get('file')):
+                base = self.repo/self.page['source'].parent if self.page.get('source') else ROOT/Path(self.page['file']).parent
+                file=(base/unquote(parts.path)).resolve()
                 if file.is_relative_to(self.repo.resolve()) and file.is_file() and file.suffix.lower() in ('.png','.jpg','.jpeg','.svg','.gif','.webp'):
                     mime=mimetypes.guess_type(file.name)[0] or 'image/png'
                     data=base64.b64encode(file.read_bytes()).decode()
@@ -130,7 +131,7 @@ def classify(path,config):
     if path=='README.md':return 'Current entry point','source','Repository entry point at the reviewed source revision. The wiki provides a consolidated owner workflow.'
     if path.endswith('WORLDGEN_'+config['milestone']+'.md'):return config['milestone']+' delivery record','source','Reviewed delivery and verification scope. Consult the current edition evidence for newly executed checks.'
     if path.endswith('TUNING_EXISTING_FEATURES.md'):
-        return 'Current / caveats','archive','Useful current tuning guide with retained caveats. In particular, the claimed equipped-light crafting heat source does not work through normal offhand light equip in this revision; read the current crafting chapter.'
+        return 'Current / caveats','archive','Retained tuning guide with mixed-era sections. SYS-2 now supports active owned offhand burning; the current crafting chapter explains stationary-fire limits.'
     if path.endswith('STRUCTURE_AUTHORING.md'):
         return 'Current + history','archive','This guide contains current instructions and retained historical sections. Use the current milestone sections and consolidated wiki chapters for supported workflows.'
     if '/evidence/' in '/'+path or '_VERIFICATION' in path or re.search(r'WORLDGEN_G[1-9]\.md$',path):
@@ -164,11 +165,26 @@ def collect(repo,config):
     for item in config['chapters']:
         path=ROOT/item['file'];text=path.read_text(encoding='utf-8')
         text=text.replace('<!-- DEBUG_COMMAND_TABLE -->',debug_table(repo))
+        def practice_excerpt(match):
+            relative = match.group(1)
+            source = (ROOT / 'examples/guide1' / relative).resolve()
+            if not source.is_relative_to((ROOT / 'examples/guide1').resolve()) or not source.is_file():
+                raise ValueError('Missing or external practice source: ' + relative)
+            language = 'python' if source.suffix == '.py' else 'json' if source.suffix == '.json' else 'text'
+            return '\nComplete runnable file: `examples/guide1/' + relative + '`\n\n```' + language + '\n' + source.read_text(encoding='utf-8') + '\n```\n'
+        text=re.sub(r'<!-- PRACTICE_FILE: ([^>]+) -->',practice_excerpt,text)
         page={**item,'text':text,'title':item.get('title') or title_of(text,path.stem),'kind':'guide','source':None}
         pages.append(page)
     docs=[p for p in source_files if p.lower().endswith('.md')]
     for p in docs:
-        text=(repo/p).read_text(encoding='utf-8-sig');status,cls,note=classify(p,config)
+        raw=(repo/p).read_bytes();status,cls,note=classify(p,config)
+        try:text=raw.decode('utf-8-sig')
+        except UnicodeDecodeError:
+            # Three retained source manuals mix UTF-8 with isolated Windows
+            # punctuation bytes. Preserve their raw capture; label presentation.
+            text=raw.decode('utf-8-sig',errors='surrogateescape')
+            text=''.join(bytes([ord(c)-0xdc00]).decode('cp1252') if 0xdc80<=ord(c)<=0xdcff else c for c in text)
+            note+=' Display decoding: UTF-8 with isolated Windows-1252 bytes; exact original bytes remain identified in the source manifest.'
         page={'id':'source-'+short_id(p),'title':title_of(text,Path(p).name),'group':'Source library','kind':'source','source':Path(p),'text':text,'status':status,'class':cls,'note':note}
         pages.append(page);links[p]=page['id']
     groups=defaultdict(list)
@@ -177,7 +193,7 @@ def collect(repo,config):
             cat=data_category(rel);groups[cat].append((repo/rel,rel,False))
         elif rel.startswith('roguelike/docs/examples/') and rel.lower().endswith('.json'):
             groups['examples'].append((repo/rel,rel,False))
-    for path in sorted((ROOT/'examples').glob('*.json')):groups['examples'].append((path,'wiki/examples/'+path.name,True))
+    for path in sorted((ROOT/'examples').rglob('*.json')):groups['examples'].append((path,'wiki/examples/'+path.relative_to(ROOT/'examples').as_posix(),True))
     for cat,files in groups.items():
         title={'terrain-and-sprites':'Terrain, decor & sprite registries','world-settings':'World, language & system settings','loot_pools':'Container loot pools','generation':'Generation policies','wfc':'WFC palettes','examples':'Complete authoring examples','creatures':'Creature definitions'}.get(cat,cat.replace('_',' ').title())
         pid='catalog-'+short_id(cat)
@@ -228,17 +244,17 @@ def catalogue_index(pages):
 def home_html(config,pages,docs,records):
     count=sum(p['kind']=='guide' for p in pages)
     shipped=sum(r['path'].startswith('roguelike/data/') for r in records)
-    cards=[('01 / FIRST STEPS','Start working on the game','Set up the interpreter, run a disposable world and make one verifiable change.','getting-started'),('02 / WORLD AUTHORING','Build a place','Create a complete cottage, give it usable access and make it appear in new town plans.','first-building'),('03 / CONTENT','Add something worth finding','Items, creatures, recipes, readable texts, loot and progression—with the actual data routes.','content-workflow'),('04 / COMPOSITION','Shape the wider world','Town roles, roads, country-road sites, selection weights and the limits of existing plans.','world-generation'),('05 / PRESENTATION','Give it a visual identity','Sprite atlases, functional terrain and decor, palette, fonts and interface settings.','sprites-and-atlases'),('06 / REFERENCE','Find the exact definition','All shipped data and the original guide archive, organised for offline use.','catalogues')]
+    cards=[('01 / LEARN','Start creating','Choose a short route, run an independent practice fixture, and learn to explain your change.','learning-path'),('02 / DO','I want to…','Add an ability, new town, useful item or persistent field. Find the actual integration steps.','task-index'),('03 / UNDERSTAND','How Resonance works','Follow definition, construction, activation, state, time, persistence and feedback.','system-atlas'),('04 / LOOK UP','Look something up','Current authoring contracts, field limits, glossary, diagnosis and complete offline definitions.','authoring-reference')]
     art='<svg class="hero-art" viewBox="0 0 340 240" fill="none" aria-hidden="true"><g stroke="#83b79b" stroke-width="1"><path d="M25 225C-10 159 76 160 70 105S157 85 155 41 264 5 310 55 289 132 337 154"/><path d="M45 240C3 172 98 177 94 112S173 105 180 52 260 30 291 67 264 143 331 176"/><path d="M75 246C27 188 121 185 119 125S196 119 202 70 251 61 265 82 244 156 326 198"/><path d="M105 240C60 207 146 196 145 143S214 136 225 97 245 106 237 128 279 194 328 217"/><path d="M2 137C41 137 21 92 64 66S109 59 104 19M134 240C94 214 170 207 173 169S214 158 234 184 280 235 320 236"/><circle cx="224" cy="101" r="6" fill="#d0b485" stroke="none"/><path d="M224 79V89M224 113V123M202 101H212M236 101H246" stroke="#d0b485"/></g></svg>'
-    out=[f'<div class="hero">{art}<div class="eyebrow">An owner’s field guide</div><h1>A world to shape.<br><span>A place to begin.</span></h1><p>The working handbook for Resonance. Find the right file, understand what the game actually reads, and check the result—from a small balance edit to a new place on a country road.</p><div class="edition">{esc(config["milestone"])} edition · {esc(config["date_label"])} · Offline & self-contained</div></div>',
-    f'<div class="metrics"><div class="metric"><b>{count}</b><span>current guide chapters</span></div><div class="metric"><b>{len(docs)}</b><span>original source documents</span></div><div class="metric"><b>{shipped}</b><span>shipped JSON files</span></div></div>',
+    out=[f'<div class="hero">{art}<div class="eyebrow">The Resonance Creator’s Handbook</div><h1>Make your next<br><span>idea playable.</span></h1><p>The working handbook for Resonance. Find the right file, understand what the game actually reads, and check the result—from a small balance edit to a new place on a country road.</p><div class="edition">{esc(config["milestone"])} edition · {esc(config["date_label"])} · Offline & self-contained</div></div>',
+
     '<div class="section-label">What would you like to work on?</div><div class="cards">']
     for no,title,desc,pid in cards:out.append(f'<a class="card" href="#{pid}"><span class="card-no">{no} <span class="arrow">↗</span></span><h3>{title}</h3><p>{desc}</p></a>')
     out+=['</div><div class="section-label">Keep close at hand</div><div class="quick-links"><a href="#controls">Controls</a><a href="#debug-tools">Debug console</a><a href="#saves-and-state">Save & load</a><a href="#verification">Verification</a><a href="#troubleshooting">Troubleshooting</a><a href="#glossary">Glossary</a></div>',
     '<h2 id="home--a-guide-you-can-trace">A guide you can trace</h2><p>The current chapters reconcile the loaders, factories, planners and runtime code at the revision shown below. Original documents are retained separately with visible status labels. Data catalogues preserve the actual files; the guides explain which fields the game uses.</p>',
     '<div class="callout"><strong>Two useful things to know first.</strong> The shipped debug mode makes F5 a teleport and F9 a state dump. Changed world-generation settings apply to new plans; an existing saved world does not automatically acquire them. See <a href="#saves-and-state">save and world behavior</a>.</div>',
     '<h2 id="home--using-the-handbook">Using the handbook</h2><p>Choose a chapter from the left, or press <kbd>/</kbd> or <kbd>Ctrl</kbd> + <kbd>K</kbd> to search everything. Search results identify current guides, data and original sources. Code blocks have copy buttons; the top bar adjusts reading size, copies the current link and prints the current chapter. The text remains available without JavaScript.</p>',
-    f'<p class="small muted">Edition {esc(config["edition"])} · Source <a href="{REPOSITORY}/commit/{config["commit"]}"><code>{config["commit"]}</code></a><br>For the checks performed and limits of this edition, read <a href="#coverage">Coverage & audit</a>. For later feature pushes, follow <a href="#maintenance">Updating the handbook</a>.</p>']
+    f'<p class="small muted">Edition {esc(config["edition"])} · Source <a href="{REPOSITORY}/commit/{config["commit"]}"><code>{config["commit"]}</code></a><br>For the checks performed and limits of this edition, read <a href="#coverage">Coverage & audit</a>. For separately commissioned or manual upkeep, follow <a href="#maintenance">Updating the handbook</a>.</p>']
     return ''.join(out)
 
 def coverage_html(config,pages,docs,records,repo):
@@ -250,7 +266,7 @@ def coverage_html(config,pages,docs,records,repo):
 
 Edition {config['edition']} / {config['milestone']}, reviewed {config['date_label']} against `{config['commit']}`.
 
-The handbook contains {len(guides)} guide chapters ({words:,} words), {len(docs)} authoritative source documents, {shipped} shipped JSON definitions and {examples} repository examples. Wiki chapters are authoring inputs, never duplicated as original game documents. Source and catalogue links use the immutable reviewed source revision.
+The handbook contains {len(guides)} guide chapters ({words:,} words), {len(docs)} retained source documents, {shipped} shipped JSON definitions and {examples} repository examples. Wiki chapters are authoring inputs, never duplicated as original game documents. Source and catalogue links use the immutable reviewed source revision.
 
 ## Evidence for this edition
 
@@ -262,7 +278,7 @@ The handbook contains {len(guides)} guide chapters ({words:,} words), {len(docs)
     return text
 
 def render_document(repo,config,pages,linkmap,records,docs,md,report,output):
-    extra=[{'id':'home','title':'The owner’s field guide','group':'Start here','kind':'guide','body':home_html(config,pages,docs,records)},
+    extra=[{'id':'home','title':'Resonance Creator’s Handbook','group':'Start here','kind':'guide','body':home_html(config,pages,docs,records)},
            {'id':'catalogues','title':'Browse the data','group':'Reference & upkeep','kind':'guide','body':catalogue_index(pages)},
            {'id':'source-library','title':'Original source library','group':'Reference & upkeep','kind':'guide','body':source_index(pages,repo,config['commit'])},
            {'id':'coverage','title':'Coverage & audit','group':'Reference & upkeep','kind':'guide','text':coverage_html(config,pages,docs,records,repo)}]
@@ -323,11 +339,11 @@ def render_document(repo,config,pages,linkmap,records,docs,md,report,output):
     css=(ROOT/'theme.css').read_text(encoding='utf-8');js=(ROOT/'reader.js').read_text(encoding='utf-8');search_json=json.dumps(index,ensure_ascii=False).replace('<','\\u003c').replace('>','\\u003e').replace('&','\\u0026')
     logo='<svg class="brand-mark" width="34" height="43" viewBox="0 0 34 43" fill="none" aria-hidden="true"><path d="M17 2V41M5 11L17 4L29 11M5 31L17 38L29 31M7 14L25 29M27 14L9 29" stroke="currentColor" stroke-width="1.2"/><circle cx="17" cy="21" r="5" stroke="currentColor"/><circle cx="17" cy="4" r="2" fill="currentColor"/></svg>'
     shell=f'''<!doctype html>
-<html lang="en" data-source-revision="{esc(config['commit'][:12])}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="dark"><meta name="description" content="The comprehensive offline owner handbook for Resonance Roguelike, audited against {esc(config['milestone'])}."><title>Resonance · Owner’s field guide</title><style>{css}</style></head><body>
+<html lang="en" data-theme="light" data-source-revision="{esc(config['commit'][:12])}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="description" content="The comprehensive offline owner handbook for Resonance Roguelike, audited against {esc(config['milestone'])}."><title>Resonance · Creator’s Handbook</title><style>{css}</style></head><body>
 <a class="skip" href="#main">Skip to content</a>
-<aside class="sidebar" aria-label="Handbook navigation"><a href="#home" class="brand">{logo}<span><strong>RESONANCE</strong><small>The owner’s field guide</small></span></a><button class="nav-search" data-search-open type="button"><span aria-hidden="true">⌕</span> Search the handbook <kbd>/</kbd></button><nav class="nav-scroll">{''.join(nav)}</nav><div class="nav-foot"><span class="revision-dot"></span>{esc(config['milestone'])} · Edition {esc(config['edition'])}<br><a href="#coverage">{config['commit'][:12]} · {esc(config['date_label'])}</a><br><a href="#maintenance">Keep this handbook current ↗</a></div></aside>
+<aside class="sidebar" aria-label="Handbook navigation"><a href="#home" class="brand">{logo}<span><strong>RESONANCE</strong><small>Resonance Creator’s Handbook</small></span></a><button class="nav-search" data-search-open type="button"><span aria-hidden="true">⌕</span> Search the handbook <kbd>/</kbd></button><nav class="nav-scroll">{''.join(nav)}</nav><div class="nav-foot"><span class="revision-dot"></span>{esc(config['milestone'])} · Edition {esc(config['edition'])}<br><a href="#coverage">{config['commit'][:12]} · {esc(config['date_label'])}</a><br><a href="#maintenance">Keep this handbook current ↗</a></div></aside>
 <div class="mobile-shade" id="mobile-shade"></div>
-<header class="topbar"><button class="menu-button" id="menu-toggle" type="button" aria-label="Toggle chapter navigation" aria-expanded="false">☰</button><div class="crumb"><span id="breadcrumb">Start here</span> <span aria-hidden="true"> / </span><span id="current-title">The owner’s field guide</span></div><div class="top-actions"><span class="top-chip">LOCAL EDITION</span><button type="button" class="quiet-button icon-button" data-font="-1" aria-label="Decrease reading size">A−</button><button type="button" class="quiet-button icon-button" data-font="1" aria-label="Increase reading size">A+</button><button type="button" class="quiet-button" id="copy-link" aria-label="Copy link to this page">Link</button><button type="button" class="quiet-button print-button" id="print-page">Print</button><button class="quiet-button" data-search-open type="button" aria-label="Search handbook">⌕</button></div></header>
+<header class="topbar"><button class="menu-button" id="menu-toggle" type="button" aria-label="Toggle chapter navigation" aria-expanded="false">☰</button><div class="crumb"><span id="breadcrumb">Start here</span> <span aria-hidden="true"> / </span><span id="current-title">Resonance Creator’s Handbook</span></div><div class="top-actions"><button type="button" class="quiet-button" id="theme-toggle" aria-label="Toggle light or dark theme">Theme</button><button type="button" class="quiet-button icon-button" data-font="-1" aria-label="Decrease reading size">A−</button><button type="button" class="quiet-button icon-button" data-font="1" aria-label="Increase reading size">A+</button><button type="button" class="quiet-button" id="copy-link" aria-label="Copy link to this page">Link</button><button type="button" class="quiet-button print-button" id="print-page">Print</button><button class="quiet-button" data-search-open type="button" aria-label="Search handbook">⌕</button></div></header>
 <div id="reading-progress" class="reading-progress" aria-hidden="true"></div>
 <noscript><div class="notice">JavaScript is disabled. All chapters remain readable below; use your browser’s Find command and the navigation links.</div></noscript>
 <main class="main" id="main">{whole}</main>

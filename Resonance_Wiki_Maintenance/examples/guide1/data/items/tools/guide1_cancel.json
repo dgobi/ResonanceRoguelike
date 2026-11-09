@@ -1,0 +1,11 @@
+{
+  "id": "guide1_cancel",
+  "name": "practice cancel marker",
+  "description": "GUIDE-1 Python lesson; not a production item.",
+  "tile": "generic_item",
+  "category": "tool",
+  "weight": 0.1,
+  "stackable": false,
+  "on_use": "guide_cancel",
+  "consumed_on_use": false
+}

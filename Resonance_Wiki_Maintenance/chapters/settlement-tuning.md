@@ -69,8 +69,8 @@ The default repeat multiplier is `0.2`, valid in `(0,1]`. For settlements, the G
 | Role | Current IDs in both ordinary settlement forms |
 |---|---|
 | Residential | `house_small_a`, `house_small_b`, `house_two_room_a`, `house_hearth_a` |
-| Commercial | `market_stall_a`, `shop_a`, `apothecary_a`, `workshop_a` |
-| Support | `storehouse_a`, `tool_shed_a`, `shrine_a` |
+| Commercial | `market_stall_a`, `shop_a`, `apothecary_d`, `workshop_e` |
+| Support | `storehouse_a`, `tool_shed_c`, `shrine_a` |
 | Civic, grid only | `bell_tower_a` |
 | Featured landmark | `roadside_shrine_a`, `hunter_cabin`, `shepherds_hut_a`, `waymarker_shelter_a` |
 
@@ -99,10 +99,10 @@ A null cell inside a layout preserves terrain while still belonging to the reser
 
 ## Sources
 
-- [Geometry schema and fitter](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/world_plan.py)
-- [Current installed selection profiles](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/generation/settlement_profiles.json)
-- [Selection weighting, caps and required search](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/settlement_selection.py)
-- [G6 correction to required-transform search](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/docs/owner/WORLDGEN_G6.md)
+- [Geometry schema and fitter](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/generation/world_plan.py)
+- [Current installed selection profiles](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/data/generation/settlement_profiles.json)
+- [Selection weighting, caps and required search](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/generation/settlement_selection.py)
+- [G6 correction to required-transform search](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/docs/owner/WORLDGEN_G6.md)
 
 ## Preview and tune the country network
 

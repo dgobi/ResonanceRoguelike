@@ -2,7 +2,7 @@
 
 Most everyday authoring begins in `roguelike/data/`. The working route is **definition → loader → runtime consumer → acquisition or placement → a fresh instance → verification**. Creating a JSON file completes only the definition step. For example, a new food item can load correctly while remaining absent from every loot pool, recipe and authored building.
 
-This chapter and its linked recipes describe commit `4d7a7892e1afffb8d872ed4a8fd442984d14e7d5`. Paths in this chapter start at the repository root. The original manuals remain useful for design history, but some examples in them use older field names.
+This chapter and its linked recipes describe commit `c166ec650b98156d53b8ea72e715c028d27db905`. Paths in this chapter start at the repository root. The original manuals remain useful for design history, but some examples in them use older field names.
 
 ## Choose the right edit
 
@@ -76,7 +76,7 @@ That is a substantial focused suite, including generation tests; it is not a new
 | New recipe appears but cannot be made | Correct tags/tiers and distinct ingredient instances? Ambient conditions actually supplied? `known: true`? |
 | Text shows an unexpected physical object | Distinguish the readable item's `item_id` from the document's `text_id`, and check the route's mapping behavior |
 | A previously generated container still has old contents | Container contents were rolled once and persisted; editing its pool does not reroll it |
-| New creature has ordinary wandering behavior | `ai_type` must name one of the four implemented classes; special abilities may depend on exact creature IDs |
+| New creature has ordinary wandering behavior | use a supported legacy class or a validated composite profile; legacy special abilities may depend on exact creature IDs |
 | Game uses an older copy of your data | An old `baseline.py --resume` session is a copied historical game, not live production code; use the current disposable launcher |
 
 ## Definition changes versus saved state
@@ -89,11 +89,11 @@ After testing, record what you changed, how you obtained fresh content, which au
 
 ## Source bindings
 
-- [Current data loader](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/data_loader.py)
-- [Current item factory](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/item_factory.py)
-- [Save component reconstruction](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/save_components.py)
-- [Owner tuning guide](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/docs/owner/TUNING_EXISTING_FEATURES.md)
-- [Regression driver](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/tools/critical_fix_regressions/verify_fixes.py)
+- [Current data loader](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/data_loader.py)
+- [Current item factory](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/item_factory.py)
+- [Save component reconstruction](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/save_components.py)
+- [Owner tuning guide](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/docs/owner/TUNING_EXISTING_FEATURES.md)
+- [Regression driver](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/tools/critical_fix_regressions/verify_fixes.py)
 
 ## Network policy authoring
 

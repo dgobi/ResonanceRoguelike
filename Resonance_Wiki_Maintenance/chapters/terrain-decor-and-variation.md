@@ -12,7 +12,7 @@ Choose a terrain definition when a cell's ground or structural behavior changes.
 
 Rendering draws terrain, then decorative overlays, then processing/floor objects, then entities. Decorative sprites use transparency so terrain can remain visible beneath them. `LocalMap` and its decorative dictionary are carried by the scene cache/checkpoint system. The old guide's claim that decorative overlays disappear on every chunk unload is obsolete.
 
-Sources: [LocalMap](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/world/local_map.py), [renderer layer composition](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/rendering/renderer.py), [scene cache and checkpoint serialization](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/save_manager.py).
+Sources: [LocalMap](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/world/local_map.py), [renderer layer composition](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/rendering/renderer.py), [scene cache and checkpoint serialization](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/save_manager.py).
 
 ## Add a simple floor terrain
 
@@ -67,16 +67,15 @@ This recipe introduces a new terrain ID while initially reusing known-good art. 
 | `drinkable`, `drink_hydration` | Flag and authored survival points | Drinking normalizes hydration using the configured thirst maximum. Do not treat this as litres. |
 | `secondary_effect` | Implemented effect name | Dispatched by `_apply_terrain_effect`; an arbitrary new string does not implement new behavior. |
 | `interactable` | Handler name | Routed to an existing `_interactable_<name>` method. |
-| `light_emit` | Radius in tiles in the current light/FOV consumers | Consumers cast to integer; it is not a normalized 0–1 brightness slider. |
-| `light_mode` | `"steady"` or `"pulse"` | Selects radius behavior in terrain light-map accumulation. |
+| `light_emit` | Integer radius 1–40 tiles; zero is off | It is not a normalized brightness slider. The retained terrain `campfire_lit: 0.7` is a specific five-tile legacy adapter; other fractional values are unsupported. |
+| `light_mode` | `"steady"` or `"pulse"` | Pulse supplies a small fixed cosmetic brightness oscillation; it does not animate gameplay reach. |
 | `light_color` | RGB array, 0–255 channels | Used by terrain light-map contribution. Default full-colour map drawing has additional limitations described below. |
-| `light_pulse_min`, `light_pulse_max` | Radius endpoints in tiles | Used in pulse mode. |
-| `light_pulse_rate` | Cycles per second | The pulse calculation uses elapsed real time. |
+| `light_pulse_min`, `light_pulse_max`, `light_pulse_rate` | Retained declarations | Not consumed by the current shared-illumination path. |
 | `visual_fx` | One supported string | Different emitter and brightness routes read this from different data owners; see below. |
 
 Read the actual existing definition and consumer together before copying specialized fields. `terrain.json` contains retained entries that now have an active decorative counterpart, including campfires and some plants; the presence of an entry does not prove that generation still places it as terrain.
 
-Sources: [terrain definitions](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/terrain.json), [Engine harvesting, interaction, movement, FOV, and light consumers](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/engine.py), [AI terrain path costs](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/components/ai.py).
+Sources: [terrain definitions](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/data/terrain.json), [Engine harvesting, interaction, movement, FOV, and light consumers](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/engine.py), [AI terrain path costs](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/components/ai.py).
 
 ## Add a decorative overlay
 
@@ -115,16 +114,16 @@ The placement helper checks bounds; it does not validate the ID, create containe
 | Field | Supported use and caution |
 |---|---|
 | `blocks_movement` | Read by Engine movement/placement checks. Check the behavior of other actors separately; this is not a rewrite of the terrain walkability mask. |
-| `blocks_sight` | Present in definitions and structural semantic fingerprints, but no runtime FOV consumer was found. Do not rely on it to create a visual barrier. |
+| `blocks_sight` | Consumed by shared illumination obstruction; verify the complete scene's sight and light paths. |
 | `interactable` | Named Engine handler; decor is checked before terrain at that coordinate. |
 | `container` | Used with container-aware placement. A barrel graphic alone is not a container inventory; use the supported container special/placement route. |
 | `harvestable`, `harvest_item`, `depleted_id` | Decorative harvest route. Notice `depleted_id`, whereas terrain uses `depleted_tile`. |
 | `resonance_emit` | Read by the resonance system; use the resonance chapter for accumulation and timing. |
 | `warmth_radius` | Used by warmth and processing eligibility; campfire behavior includes ID-specific routes. |
-| `light_emit` | Can extend FOV from a visible decorative source. Unlike terrain, there is no matching general decorative coloured-light accumulation loop in `_update_light_map`. |
+| `light_emit`, `light_color` | Finite obstructed illumination from decorative sources, including their RGB contribution; source visibility to the player is not a prerequisite. |
 | `visual_fx` | Flame/smoke particle selection and limited brightness behavior. |
 
-Sources: [decorative definitions](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/decoratives.json), [placement helper](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/decor_utils.py), [debug placement](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/debug.py).
+Sources: [decorative definitions](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/data/decoratives.json), [placement helper](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/generation/decor_utils.py), [debug placement](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/debug.py).
 
 ## Variation: appearance versus generated terrain
 
@@ -136,7 +135,7 @@ There are two different mechanisms in `roguelike/rendering/decor.py`.
 
 Plant variants have additional handling: IDs in `PLANT_DECOR_IDS` can become decorative overlays over grass when selected from an allowed ground token and there is no existing decorative. Directly passing a plant ID to `set_tile()` is not equivalent to placing a plant overlay, because the original token is checked against `_PLANT_VALID_TERRAIN`. Use the established generation route or `place_decor()` when deliberately placing one.
 
-Source: [visual and functional variation](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/rendering/decor.py), [terrain setting](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/world/local_map.py).
+Source: [visual and functional variation](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/rendering/decor.py), [terrain setting](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/world/local_map.py).
 
 ## Connected tiles and autotiling
 
@@ -144,7 +143,7 @@ The renderer selects suffixes from a four-neighbor mask: north = 1, east = 2, so
 
 Register the needed suffixes in `sprite_map.json` and keep a valid base sprite as fallback. Adding an arbitrary `autotile` JSON property will do nothing. Inspect the connection predicates before extending a naming family, because related terrain types and map edges affect connectivity. Water treats out-of-bounds differently from the wall-style default; roads treat it as connecting.
 
-Source: [autotile selection and connection predicates](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/rendering/renderer.py).
+Source: [autotile selection and connection predicates](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/rendering/renderer.py).
 
 ## Particles, brightness effects, and light are separate
 

@@ -1,5 +1,7 @@
 # Make a small, verifiable change
 
+For isolated learning, use [Start creating](#learning-path) and its complete GUIDE-1 examples. The older authoring recipes below describe intentional production content edits; do not install them merely to run a lesson.
+
 Start by changing one existing weapon. This exercise demonstrates the workflow you will reuse for larger edits, without requiring a new sprite, new handler or new registration route.
 
 ## Goal: increase Severance Blade's flat damage
@@ -58,4 +60,4 @@ For a new item, follow the content chapter. For a new building, complete both th
 
 ## Source basis
 
-[Shipped Severance Blade](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/items/weapons/severance_blade.json) · [combat](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/combat.py) · [item factory](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/item_factory.py) · [debug commands](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/debug.py).
+[Shipped Severance Blade](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/data/items/weapons/severance_blade.json) · [combat](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/combat.py) · [item factory](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/item_factory.py) · [debug commands](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/debug.py).

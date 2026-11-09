@@ -11,7 +11,7 @@ import subprocess
 def main():
     p=argparse.ArgumentParser();p.add_argument('--evidence',type=Path,required=True);p.add_argument('--worker',choices=['chromium','firefox']);a=p.parse_args()
     root=Path(__file__).resolve().parent;html=root/'Resonance_Owner_Wiki.html'
-    dev=(Path(os.environ['LOCALAPPDATA'])/'ResonanceAuthoring').resolve()
+    dev=(Path(os.environ['LOCALAPPDATA'])/'ResonanceAuthoring/GUIDE-1').resolve()
     # Match the established editor harness: resolve packaged-Windows path
     # redirection before Firefox's native side-by-side DLL loader starts.
     sys.path.insert(0,str(dev/'python'));os.environ['PLAYWRIGHT_BROWSERS_PATH']=str((dev/'browsers').resolve())
@@ -19,7 +19,7 @@ def main():
         a.evidence.mkdir(parents=True,exist_ok=True);runs=[];commands=[]
         for name in ('chromium','firefox'):
             command=[sys.executable,'-X','utf8',str(Path(__file__).resolve()),'--worker',name,'--evidence',str(a.evidence.resolve())]
-            r=subprocess.run(command,capture_output=True,text=True,encoding='utf-8',timeout=120)
+            r=subprocess.run(command,capture_output=True,text=True,encoding='utf-8',timeout=180)
             (a.evidence/(name+'-log.txt')).write_text(r.stdout+r.stderr,encoding='utf-8');assert r.returncode==0,r.stdout+r.stderr
             worker=json.loads((a.evidence/('reader-'+name+'.json')).read_text());runs.extend(worker['runs']);commands.append(dict(argv=command,exit_code=r.returncode))
         (a.evidence/'reader.json').write_text(json.dumps(dict(passed=True,html_sha256=hashlib.sha256(html.read_bytes()).hexdigest(),runs=runs,commands=commands,limits=worker['limits']),indent=2)+'\n',encoding='utf-8')
@@ -28,14 +28,15 @@ def main():
     a.evidence.mkdir(parents=True,exist_ok=True);rows=[]
     with sync_playwright() as pw:
         for name in (a.worker,):
-            browser=getattr(pw,name).launch(headless=True);page=browser.new_page(viewport=dict(width=1440,height=1000));errors=[]
+            browser=getattr(pw,name).launch(headless=True);context=browser.new_context(offline=True,viewport=dict(width=1440,height=1000));page=context.new_page();errors=[];network=[]
             page.on('pageerror',lambda e:errors.append(str(e)))
+            page.on('request',lambda r:network.append(r.url) if r.url.startswith(('http:','https:')) else None)
             page.goto(html.as_uri());page.locator('article.active').wait_for()
             links=page.locator('a[href^="#"]').evaluate_all('(xs)=>xs.map(x=>x.getAttribute("href").slice(1)).filter(Boolean)')
             missing=page.evaluate('(ids)=>ids.filter(id=>!document.getElementById(decodeURIComponent(id)))',links)
             assert not missing,missing
             downloads=[]
-            for filename in ('deep_tongue.json','owner_cottage_a.json','g7_travellers_court.json','g9_country_network.json'):
+            for filename in ('deep_tongue.json','owner_cottage_a.json','g7_travellers_court.json','g9_country_network.json','guide1_ration.json','guide1_workroom.json'):
                 record=page.locator('.data-record').filter(has=page.locator('button[data-filename="'+filename+'"]')).first
                 record_id=record.get_attribute('id');page.goto(html.as_uri()+'#'+record_id)
                 record.evaluate('(e)=>e.open=true')
@@ -62,8 +63,11 @@ def main():
             page.screenshot(path=str(a.evidence/(name+'-mobile.png')),full_page=True,animations='disabled')
             page.screenshot(path=str(a.evidence/(name+'-mobile-viewport.png')),animations='disabled')
             assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'), 'mobile document overflows viewport'
+            from reader_guide_checks import exercise
+            guide=exercise(browser,page,html,a.evidence,name)
             assert not errors,errors
-            rows.append(dict(browser=name,version=browser.version,internal_links=len(links),missing=missing,search_results=count,copy_button=copy_result,selected_fallback_characters=selection,navigation=True,mobile_menu=True,script_errors=errors,downloads=downloads))
+            assert not network,network
+            rows.append(dict(browser=name,version=browser.version,internal_links=len(links),missing=missing,search_results=count,copy_button=copy_result,selected_fallback_characters=selection,navigation=True,mobile_menu=True,script_errors=errors,external_requests=network,downloads=downloads,guide=guide))
             browser.close()
     result=dict(passed=True,html_sha256=hashlib.sha256(html.read_bytes()).hexdigest(),runs=rows,limits='Headless local-file Chromium and Firefox, two viewport sizes; automated navigation/search/copy control checks and retained screenshots. No manual assistive-technology audit or OS clipboard readback.')
     (a.evidence/('reader-'+a.worker+'.json')).write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8');print(json.dumps(result,indent=2))

@@ -1,6 +1,6 @@
 # Sprites, atlases, and asset registration
 
-Use this chapter when you want to change how an existing tile looks, add artwork for a new item or creature, or introduce another sprite sheet. All paths below are relative to the repository root unless explicitly described as game-relative. The audited revision is `4d7a7892e1afffb8d872ed4a8fd442984d14e7d5`.
+Use this chapter when you want to change how an existing tile looks, add artwork for a new item or creature, or introduce another sprite sheet. All paths below are relative to the repository root unless explicitly described as game-relative. The audited revision is `c166ec650b98156d53b8ea72e715c028d27db905`.
 
 ## The current artwork pipeline
 
@@ -20,7 +20,7 @@ A sprite's appearance and an object's behavior have separate owners:
 
 `SpriteRegistry.get()` returns the original colour artwork. `get_tinted()` multiplies the artwork by a tint, which is useful for white-on-transparent art. Switching the global tint flag changes the whole renderer; it is not a per-sheet art-style setting. In the default full-colour world view, editing `tiles.json.color_fg` does not recolour the pixels in your PNG.
 
-Sources: [sprite registry](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/rendering/sprite_registry.py), [display configuration](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/display_config.py), [renderer](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/rendering/renderer.py).
+Sources: [sprite registry](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/rendering/sprite_registry.py), [display configuration](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/display_config.py), [renderer](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/rendering/renderer.py).
 
 ## Replace the appearance of an existing object
 
@@ -107,24 +107,26 @@ row    = index // source_columns
 
 For the 16-column creatures sheet, index 35 means column 3, row 2. The printed index equals the column only on a single-row sheet. The first script defaults to 12-pixel cells and the second to 16; supply both dimensions explicitly. Pillow is required by these optional reference generators and is not listed in `requirements-baseline.txt`.
 
-Sources: [paginated reference generator](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/Sprite%20Reference%20Generator/sprite_ref.py), [coordinate-grid generator](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/Sprite%20Reference%20Generator/sprite_ref_2.py).
+Sources: [paginated reference generator](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/Sprite%20Reference%20Generator/sprite_ref.py), [coordinate-grid generator](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/Sprite%20Reference%20Generator/sprite_ref_2.py).
 
 ## Registered sheets at this revision
 
-The image dimensions below were read from the PNGs and the registry was loaded with Pygame under SDL's dummy video driver. This checks asset geometry and loading; it does not certify the composition of every rendered screen.
+Dimensions and mapping counts below were reconciled with the current PNGs/registry. Earlier dummy-Pygame asset probes are historical; current L08 captures verify the actual reader, not every sprite composition.
 
 | Sheet ID | PNG dimensions | Declared cell | Usable grid / note | Mapping count |
 |---|---|---|---|---:|
-| `terrain` | 384 × 384 | 16 × 16 | 24 columns × 24 rows | 236 |
+| `terrain` | 384 × 384 | 16 × 16 | 24 columns × 24 rows | 238 |
 | `objects` | 384 × 384 | 16 × 16 | 24 × 24 | 9 |
 | `creatures` | 256 × 320 | 16 × 16 | 16 × 20 | 17 |
 | `pixel` | 3200 × 16 | 16 × 16 | 200 × 1; loaded but no current mapping uses it | 0 |
 | `hexany_creatures` | 5120 × 16 | 16 × 16 | 320 × 1; loaded but no current mapping uses it | 0 |
 | `urizen` | 123600 × 12 | 16 × 16 | **Mismatch:** image is shorter than one declared cell | 1 |
 
-There are 263 registered sprite keys. The `wall_pillar` key is the sole Urizen mapping and crops a 16 × 16 rectangle from that 12-pixel-high image. Treat it as an existing asset-registration discrepancy, not a template for new artwork. Correcting the registration requires choosing the intended geometry and rechecking affected coordinates; this handbook does not silently change the game.
+| `amber_insect` | 32 × 16 | 16 × 16 | 2 × 1 | 1 |
 
-Source: [current sprite map](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/sprites/sprite_map.json).
+There are 266 registered sprite keys. The `wall_pillar` key is the sole Urizen mapping and crops a 16 × 16 rectangle from that 12-pixel-high image. Treat it as an existing asset-registration discrepancy, not a template for new artwork. Correcting the registration requires choosing the intended geometry and rechecking affected coordinates; this handbook does not silently change the game.
+
+Source: [current sprite map](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/data/sprites/sprite_map.json).
 
 ## Live remapping and its limit
 
@@ -136,7 +138,7 @@ floor terrain 20 1
 
 This changes the in-memory mapping. It does **not** save the change to JSON. After finding a useful coordinate, record it in `sprite_map.json` yourself. The registry has a `save_map()` method, but the F12 handler does not call it. Do not mistake a successful live preview for a persisted edit.
 
-Source: [F12 handler and remap execution](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/debug.py).
+Source: [F12 handler and remap execution](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/debug.py).
 
 ## Troubleshooting artwork
 
@@ -152,4 +154,4 @@ Source: [F12 handler and remap execution](https://github.com/dgobi/ResonanceRogu
 
 `TileRegistry` accepts either a one-character `ascii` string or an integer Unicode codepoint in `char`. Keep the complete colour fields shown above. Three existing vine ASCII records (`vine_growth`, `vine_eyestalk`, `vine_spore_vent`) sit outside the wrapper at this revision and are excluded by the loader. Their existence in the file is not proof that they are registered.
 
-Source: [tile registry](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/rendering/tile_registry.py).
+Source: [tile registry](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/rendering/tile_registry.py).

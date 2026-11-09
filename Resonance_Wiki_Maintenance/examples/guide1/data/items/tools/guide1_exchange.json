@@ -1,0 +1,16 @@
+{
+  "id": "guide1_exchange",
+  "name": "practice exchanger",
+  "description": "GUIDE-1 Python lesson; not a production item.",
+  "tile": "generic_item",
+  "category": "tool",
+  "weight": 0.1,
+  "stackable": false,
+  "on_use": "guide_exchange",
+  "consumed_on_use": false,
+  "guide_exchange": {
+    "version": 1,
+    "heal": 3,
+    "thirst_cost": 0.1
+  }
+}

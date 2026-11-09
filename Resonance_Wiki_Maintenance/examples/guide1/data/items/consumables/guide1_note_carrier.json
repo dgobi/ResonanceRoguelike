@@ -1,0 +1,12 @@
+{
+  "id": "guide1_note_carrier",
+  "name": "practice note",
+  "description": "A plain readable carrier.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.01,
+  "stackable": false,
+  "on_use": "read",
+  "text_id": "guide1_note",
+  "consumed_on_use": false
+}

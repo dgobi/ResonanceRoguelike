@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "lesson": "L09",
+  "evidence_kind": "production input handlers in bounded room fixture",
+  "events": 9,
+  "observations": [
+    {
+      "label": "technique hit and cooldown rejection",
+      "turn": 482,
+      "damage": 1,
+      "accepted_phases": 1,
+      "rejected_phases": 0
+    },
+    {
+      "label": "no-target rejection and guaranteed dodge control",
+      "turn": 483,
+      "no_target_phases": 0,
+      "dodge_phases": 1,
+      "setup": "target repositioned, fixture dodge=1, ignore_dodge disabled; real resolver unchanged"
+    }
+  ],
+  "solution_sha256": "0b894f55b77880205b09aa45fb2cf1ccc009cb54d60453fc6919db06e3a55c79",
+  "limits": [
+    "Initial resources/needs may be staged as labelled; this is not natural world discovery.",
+    "Screenshot uses the original renderer; automation cannot establish human learning."
+  ]
+}

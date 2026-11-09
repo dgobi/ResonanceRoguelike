@@ -1,0 +1,85 @@
+{
+  "assignment": {
+    "chunk": [
+      0,
+      5
+    ],
+    "id": "submap_0_5_0",
+    "layout": "guide1_workroom"
+  },
+  "placement": {
+    "id": "settlement-0-cross-market-lot-42-44-W-0-building",
+    "asset": "guide1_cottage",
+    "context": "grid",
+    "rotation": 90,
+    "mirror": false,
+    "origin": [
+      4204,
+      306
+    ],
+    "footprint": [
+      4204,
+      306,
+      4211,
+      315
+    ],
+    "clearance": [
+      4203,
+      305,
+      4212,
+      316
+    ],
+    "approach": [
+      4200,
+      310,
+      4205,
+      311
+    ],
+    "road": "settlement-0-street-north-south-0",
+    "join": [
+      4200,
+      310
+    ],
+    "entrances": [
+      {
+        "id": "main",
+        "x": 4204,
+        "y": 310,
+        "normal": "W",
+        "width": 1,
+        "role": "main",
+        "required": true
+      }
+    ],
+    "targets": [
+      {
+        "x": 4206,
+        "y": 310,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 4206,
+        "y": 308,
+        "kind": "item",
+        "required": true
+      },
+      {
+        "x": 4208,
+        "y": 310,
+        "kind": "readable",
+        "required": true
+      },
+      {
+        "x": 4206,
+        "y": 312,
+        "kind": "container",
+        "required": true
+      }
+    ],
+    "required": true,
+    "dependency": "guide1_cottage",
+    "role": "residential",
+    "frontage_entrance": "main"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "commit": "f76aac1976a1c9b68adb00ed859398bbd60d6ee2",
+  "documentation_delivery_revision": "f76aac1976a1c9b68adb00ed859398bbd60d6ee2",
+  "repaired_legacy_links": [],
+  "unavailable_legacy_links": [],
+  "embedded_source_images": [
+    "evidence\\worldgen-g7\\views\\g7-homestead_workyard-production.png",
+    "evidence\\worldgen-g7\\views\\g7-wayside_shrine_court-production.png",
+    "docs\\owner\\images\\seed20261020_town0_and_road_seam.png"
+  ],
+  "article_count": 112,
+  "data_files": 373,
+  "source_documents": 58,
+  "fragment_fallbacks": [
+    {
+      "target": "source-roguelike-docs-components-md--ai",
+      "fallback": "source-roguelike-docs-components-md"
+    },
+    {
+      "target": "source-roguelike-docs-generation-md--entrance-generation",
+      "fallback": "source-roguelike-docs-generation-md"
+    },
+    {
+      "target": "source-roguelike-docs-components-md--ai",
+      "fallback": "source-roguelike-docs-components-md"
+    },
+    {
+      "target": "source-roguelike-docs-generation-md--entrance-generation",
+      "fallback": "source-roguelike-docs-generation-md"
+    },
+    {
+      "target": "source-roguelike-docs-systems-md--message-log",
+      "fallback": "source-roguelike-docs-systems-md"
+    },
+    {
+      "target": "source-roguelike-docs-components-md--ai",
+      "fallback": "source-roguelike-docs-components-md"
+    },
+    {
+      "target": "source-roguelike-docs-systems-md--message-log",
+      "fallback": "source-roguelike-docs-systems-md"
+    },
+    {
+      "target": "source-roguelike-docs-components-md--ai",
+      "fallback": "source-roguelike-docs-components-md"
+    }
+  ],
+  "guide_chapters": 33,
+  "search_records": 468,
+  "output_bytes": 5568113,
+  "output_sha256": "14add9715e8a37c1644a141e27b25490b7df587edb21bfaa5cdd7a1b6a222259"
+}

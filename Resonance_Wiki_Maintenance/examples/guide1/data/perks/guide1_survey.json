@@ -1,0 +1,13 @@
+{
+  "id": "guide1_survey",
+  "name": "Practice survey",
+  "category": "The Witnessing",
+  "description": "GUIDE-1 instructional mechanism only.",
+  "cost": 1,
+  "hooks": [
+    {
+      "event": "ON_TURN",
+      "handler": "guide_survey_turn"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "L01": "items/consumables/guide1_ration.json",
+  "L02": "items/consumables/guide1_ration.json",
+  "L03": "texts/guide1_note.json",
+  "L04": "recipes/guide1_meal.json",
+  "L05": "entities/creatures/guide1_watcher.json",
+  "L06": "layouts/guide1_encounter.json",
+  "L07": "generation/authored_submap_selection.json",
+  "L08": "display/typography.json",
+  "L09": "items/weapons/guide1_blade.json",
+  "L13": "layouts/guide1_encounter.json",
+  "L14": "items/consumables/guide1_ration.json"
+}

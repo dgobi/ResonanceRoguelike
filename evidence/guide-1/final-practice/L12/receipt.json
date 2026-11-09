@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "lesson": "L12",
+  "evidence_kind": "production input handlers in bounded room fixture",
+  "events": 111,
+  "observations": [
+    {
+      "label": "working survey cold continuation",
+      "turn": 481,
+      "same_process_equal": true,
+      "cold": {
+        "pid": 11772,
+        "state_equal": true,
+        "continuation": {
+          "survey": {
+            "version": 1,
+            "phase": "idle",
+            "left": 0,
+            "anchor": null,
+            "completed": 1
+          }
+        }
+      }
+    },
+    {
+      "label": "ordinary stairs leave and reenter",
+      "turn": 489,
+      "scene_owned": true
+    },
+    {
+      "label": "collected history across scene and cold restore",
+      "turn": 489,
+      "same_process_equal": true,
+      "cold": {
+        "pid": 22396,
+        "state_equal": true,
+        "continuation": {
+          "survey": {
+            "version": 1,
+            "phase": "idle",
+            "left": 0,
+            "anchor": null,
+            "completed": 1
+          }
+        }
+      }
+    },
+    {
+      "label": "subsystem transitions and validation",
+      "turn": 489,
+      "phases": 3,
+      "first_tick": 1,
+      "cancellation": "movement or explicit free cancel, zero cancel phases",
+      "absent": "actual isolated checkpoint load then idle default",
+      "malformed": "production preflight and actual isolated checksum-valid checkpoint load refused before replacement"
+    }
+  ],
+  "solution_sha256": "0b894f55b77880205b09aa45fb2cf1ccc009cb54d60453fc6919db06e3a55c79",
+  "limits": [
+    "Initial resources/needs may be staged as labelled; this is not natural world discovery.",
+    "Screenshot uses the original renderer; automation cannot establish human learning."
+  ]
+}

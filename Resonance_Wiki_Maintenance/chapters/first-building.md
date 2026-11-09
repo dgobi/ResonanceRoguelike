@@ -1,5 +1,7 @@
 # Make your first randomly placed building
 
+For isolated learning, use [Start creating](#learning-path) and its complete GUIDE-1 examples. The older authoring recipes below describe intentional production content edits; do not install them merely to run a lesson.
+
 This workflow creates a small cottage, validates its actual contents and access, registers it for new town plans, and gives you an optional disposable world in which to inspect it. **Previewing a draft does not install it. Installing a file does not, by itself, make it eligible for modern town selection.** Both the layout and the selection entry are required.
 
 The complete `owner_cottage_a.json` example below was created for this wiki and originally checked against G6 and revalidated against this G8 edition: all eight permitted transforms, followed by production grid and roadside previews. The example remains outside the game's installed catalog.
@@ -199,10 +201,10 @@ For a house with a separate service entrance, start from `roguelike/docs/example
 
 ## Sources
 
-- [CLI behavior and output contract](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/tools/structure_authoring.py)
-- [Placement validation and transformations](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/placement.py)
-- [Role registration and selection validation](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/settlement_selection.py)
-- [Complete existing authoring recipes](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/docs/STRUCTURE_AUTHORING.md)
+- [CLI behavior and output contract](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/tools/structure_authoring.py)
+- [Placement validation and transformations](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/generation/placement.py)
+- [Role registration and selection validation](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/generation/settlement_selection.py)
+- [Complete existing authoring recipes](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/docs/STRUCTURE_AUTHORING.md)
 
 ## G7 composition integration
 

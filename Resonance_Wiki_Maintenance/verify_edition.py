@@ -10,13 +10,15 @@ import sys
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--evidence',type=Path,required=True);a=p.parse_args();out=a.evidence.resolve();out.mkdir(parents=True,exist_ok=True)
-    root=Path(__file__).resolve().parent;repo=root.parent;html=root/'Resonance_Owner_Wiki.html';env=dict(os.environ);dev=Path(os.environ['LOCALAPPDATA'])/'ResonanceAuthoring/python';env['PYTHONPATH']=str(dev)+os.pathsep+env.get('PYTHONPATH','');rows=[]
+    root=Path(__file__).resolve().parent;repo=root.parent;html=root/'Resonance_Owner_Wiki.html';env=dict(os.environ);dev=Path(os.environ['LOCALAPPDATA'])/'ResonanceAuthoring/GUIDE-1/python';env['PYTHONPATH']=str(dev)+os.pathsep+env.get('PYTHONPATH','');rows=[]
     def run(name,args):
         command=[sys.executable,'-X','utf8',*map(str,args)];r=subprocess.run(command,cwd=repo,env=env,capture_output=True,text=True,encoding='utf-8',timeout=180)
         (out/(name+'.txt')).write_text(r.stdout+r.stderr,encoding='utf-8');rows.append(dict(name=name,argv=command,exit_code=r.returncode,timeout_seconds=180));assert r.returncode==0,r.stdout+r.stderr
     try:
-        run('dependencies',['-c','import sys,importlib.metadata,json; print(json.dumps(dict(python=sys.version,interpreter=sys.executable,dependencies={n:importlib.metadata.version(n) for n in ("mistune","playwright","pygame","tcod","numpy")})))'])
+        run('dependencies',['-c','import sys,importlib.metadata as m,json,pathlib; pins=dict(line.split("==") for line in pathlib.Path(sys.argv[1]).read_text().splitlines() if line and not line.startswith("#")); actual={n:m.version(n) for n in ("mistune","playwright","pygame","tcod","numpy")}; assert all(actual[n]==v for n,v in pins.items()),(pins,actual); print(json.dumps(dict(python=sys.version,interpreter=sys.executable,dependencies=actual,documentation_pins=pins,documentation_directory=str(m.distribution("playwright").locate_file("")))))',root/'requirements-docs.txt'])
         run('contract',[root/'test_wiki_inputs.py','-v'])
+        run('practice-guard',[root/'test_practice_guard.py','-v'])
+        run('topic-drift',[root/'check_topics.py','--repo',repo])
         example=root/'examples/owner_cottage_a.json'
         for name,options in [('direct',['--route','ordinary_building','--orientations']),('grid',['--planned','--context','grid']),('roadside',['--planned','--context','roadside'])]:
             run('example-'+name,[repo/'tools/structure_authoring.py',example,'--category','residential',*options,'--output',out/('example-'+name+'.json')])

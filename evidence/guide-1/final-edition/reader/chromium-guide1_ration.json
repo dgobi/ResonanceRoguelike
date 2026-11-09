@@ -1,0 +1,22 @@
+{
+  "id": "guide1_ration",
+  "name": "practice ration",
+  "description": "GUIDE-1 practice only: a measured meal.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.3,
+  "stackable": true,
+  "on_use": "eat",
+  "nutrition": 320,
+  "eat_message": "Practice ration: measured nourishment.",
+  "keywords": [
+    {
+      "tag": "edible",
+      "tier": 2
+    },
+    {
+      "tag": "vital",
+      "tier": 1
+    }
+  ]
+}

@@ -1,0 +1,453 @@
+{
+  "passed": true,
+  "lesson": "L13",
+  "evidence_kind": "production input handlers in bounded room fixture",
+  "events": 120,
+  "observations": [
+    {
+      "label": "ordinary floor pickup",
+      "turn": 481,
+      "item": "guide1_note_carrier"
+    },
+    {
+      "label": "carrier opened ordinary reader",
+      "turn": 482,
+      "text_id": "guide1_note",
+      "not_consumed": true,
+      "paid_phases": 1
+    },
+    {
+      "label": "readable carrier cold restore",
+      "turn": 482,
+      "same_process_equal": true,
+      "cold": {
+        "pid": 35956,
+        "state_equal": true,
+        "continuation": null
+      }
+    },
+    {
+      "label": "authored guard approach and retreat",
+      "turn": 498,
+      "before": {
+        "profile": {
+          "version": 5,
+          "recipe": "territorial_guard",
+          "capability": "melee",
+          "trigger": "hit",
+          "retreat_distance": 2,
+          "hold_opportunities": 1,
+          "withdrawal_budget": 6,
+          "cornered": "defensive_melee",
+          "scene_scope": "active_scene",
+          "engagement": "strike_and_withdraw",
+          "defended_radius": 4,
+          "excursion_radius": 6,
+          "pursuit_budget": 32,
+          "pursuit_timeout": 12
+        },
+        "state": {
+          "phase": "idle",
+          "target": null,
+          "withdraw_left": 0,
+          "hold_left": 0,
+          "approach_left": 0,
+          "no_progress": 0,
+          "best_distance": null,
+          "suppressed": null,
+          "route_blocked": false,
+          "opportunities": 2,
+          "territory": {
+            "anchor": [
+              44,
+              19
+            ],
+            "owner": "0,0/room-test-instance",
+            "phase": "guard",
+            "pursuit_left": 0,
+            "return_left": 0,
+            "failures": 0,
+            "retry": 0,
+            "resting": null,
+            "retired": [],
+            "route": null,
+            "reason": null,
+            "defence": false,
+            "investigation_left": 0,
+            "return_told": false
+          }
+        }
+      },
+      "engaged": {
+        "profile": {
+          "version": 5,
+          "recipe": "territorial_guard",
+          "capability": "melee",
+          "trigger": "hit",
+          "retreat_distance": 2,
+          "hold_opportunities": 1,
+          "withdrawal_budget": 6,
+          "cornered": "defensive_melee",
+          "scene_scope": "active_scene",
+          "engagement": "strike_and_withdraw",
+          "defended_radius": 4,
+          "excursion_radius": 6,
+          "pursuit_budget": 32,
+          "pursuit_timeout": 12
+        },
+        "state": {
+          "phase": "approach",
+          "target": {
+            "role": "player",
+            "id": null,
+            "owner": "0,0/room-test-instance",
+            "x": 41,
+            "y": 21,
+            "seen": 488,
+            "deadline": 500,
+            "provenance": "sight"
+          },
+          "withdraw_left": 0,
+          "hold_left": 0,
+          "approach_left": 30,
+          "no_progress": 0,
+          "best_distance": 1,
+          "suppressed": null,
+          "route_blocked": false,
+          "opportunities": 8,
+          "territory": {
+            "anchor": [
+              44,
+              19
+            ],
+            "owner": "0,0/room-test-instance",
+            "phase": "engaged",
+            "pursuit_left": 30,
+            "return_left": 0,
+            "failures": 0,
+            "retry": 0,
+            "resting": null,
+            "retired": [],
+            "route": "ee10e08a6c071aacb1d0a13d63694a4952b41621ddb5ddede91cdac0170b513f",
+            "reason": null,
+            "defence": false,
+            "investigation_left": 0,
+            "return_told": false
+          }
+        }
+      },
+      "after": {
+        "profile": {
+          "version": 5,
+          "recipe": "territorial_guard",
+          "capability": "melee",
+          "trigger": "hit",
+          "retreat_distance": 2,
+          "hold_opportunities": 1,
+          "withdrawal_budget": 6,
+          "cornered": "defensive_melee",
+          "scene_scope": "active_scene",
+          "engagement": "strike_and_withdraw",
+          "defended_radius": 4,
+          "excursion_radius": 6,
+          "pursuit_budget": 32,
+          "pursuit_timeout": 12
+        },
+        "state": {
+          "phase": "idle",
+          "target": null,
+          "withdraw_left": 0,
+          "hold_left": 0,
+          "approach_left": 0,
+          "no_progress": 0,
+          "best_distance": null,
+          "suppressed": null,
+          "route_blocked": false,
+          "opportunities": 18,
+          "territory": {
+            "anchor": [
+              44,
+              19
+            ],
+            "owner": "0,0/room-test-instance",
+            "phase": "guard",
+            "pursuit_left": 0,
+            "return_left": 0,
+            "failures": 0,
+            "retry": 0,
+            "resting": [
+              44,
+              19
+            ],
+            "retired": [
+              {
+                "key": "player",
+                "x": 37,
+                "y": 23,
+                "route": "10015b5a84eac25434afe6e9909d52dd438d31ffdfbfd5cdbe1efa7593ac7feb",
+                "lost": false
+              }
+            ],
+            "route": "0dbf9742263b064c886776c681fae9a40af74f6888ec956d7c591c9abd159e15",
+            "reason": "observed_beyond_excursion",
+            "defence": false,
+            "investigation_left": 0,
+            "return_told": true
+          }
+        }
+      },
+      "position": [
+        44,
+        19
+      ],
+      "hp": 24,
+      "trace": [
+        {
+          "opportunity": 3,
+          "turn": 483,
+          "phase_before": "guard",
+          "phase": "guard",
+          "engagement": "idle",
+          "action": "wait",
+          "reason": "guarding",
+          "result": null
+        },
+        {
+          "opportunity": 4,
+          "turn": 484,
+          "phase_before": "guard",
+          "phase": "guard",
+          "engagement": "idle",
+          "action": "wait",
+          "reason": "guarding",
+          "result": null
+        },
+        {
+          "opportunity": 5,
+          "turn": 485,
+          "phase_before": "guard",
+          "phase": "guard",
+          "engagement": "idle",
+          "action": "wait",
+          "reason": "guarding",
+          "result": null
+        },
+        {
+          "opportunity": 6,
+          "turn": 486,
+          "phase_before": "guard",
+          "phase": "guard",
+          "engagement": "idle",
+          "action": "wait",
+          "reason": "guarding",
+          "result": null
+        },
+        {
+          "opportunity": 7,
+          "turn": 487,
+          "phase_before": "guard",
+          "phase": "engaged",
+          "engagement": "approach",
+          "action": "move",
+          "reason": "approach",
+          "result": null
+        },
+        {
+          "opportunity": 8,
+          "turn": 488,
+          "phase_before": "engaged",
+          "phase": "engaged",
+          "engagement": "approach",
+          "action": "move",
+          "reason": "approach",
+          "result": null
+        },
+        {
+          "opportunity": 9,
+          "turn": 489,
+          "phase_before": "engaged",
+          "phase": "engaged",
+          "engagement": "approach",
+          "action": "move",
+          "reason": "approach",
+          "result": null
+        },
+        {
+          "opportunity": 10,
+          "turn": 490,
+          "phase_before": "engaged",
+          "phase": "engaged",
+          "engagement": "approach",
+          "action": "move",
+          "reason": "approach",
+          "result": null
+        },
+        {
+          "opportunity": 11,
+          "turn": 491,
+          "phase_before": "engaged",
+          "phase": "engaged",
+          "engagement": "approach",
+          "action": "move",
+          "reason": "approach",
+          "result": null
+        },
+        {
+          "opportunity": 12,
+          "turn": 492,
+          "phase_before": "engaged",
+          "phase": "engaged",
+          "engagement": "approach",
+          "action": "move",
+          "reason": "approach",
+          "result": null
+        },
+        {
+          "opportunity": 13,
+          "turn": 493,
+          "phase_before": "engaged",
+          "phase": "engaged",
+          "engagement": "approach",
+          "action": "move",
+          "reason": "approach",
+          "result": null
+        },
+        {
+          "opportunity": 14,
+          "turn": 494,
+          "phase_before": "return",
+          "phase": "return",
+          "engagement": "idle",
+          "action": "move",
+          "reason": "returning_to_post",
+          "result": null
+        },
+        {
+          "opportunity": 15,
+          "turn": 495,
+          "phase_before": "return",
+          "phase": "return",
+          "engagement": "idle",
+          "action": "move",
+          "reason": "returning_to_post",
+          "result": null
+        },
+        {
+          "opportunity": 16,
+          "turn": 496,
+          "phase_before": "return",
+          "phase": "return",
+          "engagement": "idle",
+          "action": "move",
+          "reason": "returning_to_post",
+          "result": null
+        },
+        {
+          "opportunity": 17,
+          "turn": 497,
+          "phase_before": "return",
+          "phase": "return",
+          "engagement": "idle",
+          "action": "move",
+          "reason": "returning_to_post",
+          "result": null
+        },
+        {
+          "opportunity": 18,
+          "turn": 498,
+          "phase_before": "return",
+          "phase": "guard",
+          "engagement": "idle",
+          "action": "move",
+          "reason": "returning_to_post",
+          "result": null
+        }
+      ]
+    },
+    {
+      "label": "saved guard profile",
+      "turn": 498,
+      "same_process_equal": true,
+      "cold": {
+        "pid": 39696,
+        "state_equal": true,
+        "continuation": null
+      }
+    },
+    {
+      "label": "ordinary stairs leave and reenter",
+      "turn": 499,
+      "scene_owned": true
+    },
+    {
+      "label": "depleted place remains owned",
+      "turn": 499,
+      "same_process_equal": true,
+      "cold": {
+        "pid": 21068,
+        "state_equal": true,
+        "continuation": null
+      }
+    },
+    {
+      "label": "placement cancellation",
+      "turn": 501,
+      "materials_and_time_unchanged": true
+    },
+    {
+      "label": "passive work committed",
+      "turn": 502,
+      "first_phase_already_paid": true,
+      "remaining": 2
+    },
+    {
+      "label": "unfinished preparation",
+      "turn": 502,
+      "same_process_equal": true,
+      "cold": {
+        "pid": 8068,
+        "state_equal": true,
+        "continuation": {
+          "preparation": {
+            "remaining_paid_phases": 2,
+            "output": "guide1_ration",
+            "exact_output_acquired_and_consumed": true,
+            "hunger_before": 0.7,
+            "hunger_after": 0.38099999999999995,
+            "use_paid_phases": 1
+          }
+        }
+      }
+    },
+    {
+      "label": "ordinary floor pickup",
+      "turn": 505,
+      "item": "guide1_ration"
+    },
+    {
+      "label": "owned meal completed, acquired and eaten",
+      "turn": 506,
+      "remaining_paid_phases": 2,
+      "output": "guide1_ration",
+      "exact_output_acquired_and_consumed": true,
+      "hunger_before": 0.7,
+      "hunger_after": 0.38099999999999995,
+      "use_paid_phases": 1
+    },
+    {
+      "label": "expedition reward and later consequence",
+      "turn": 510,
+      "same_process_equal": true,
+      "cold": {
+        "pid": 25092,
+        "state_equal": true,
+        "continuation": null
+      }
+    }
+  ],
+  "solution_sha256": "0b894f55b77880205b09aa45fb2cf1ccc009cb54d60453fc6919db06e3a55c79",
+  "limits": [
+    "Initial resources/needs may be staged as labelled; this is not natural world discovery.",
+    "Screenshot uses the original renderer; automation cannot establish human learning."
+  ]
+}

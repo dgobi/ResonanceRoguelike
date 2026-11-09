@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "lesson": "L10",
+  "evidence_kind": "production input handlers in bounded room fixture",
+  "events": 37,
+  "observations": [
+    {
+      "label": "new primitive through original Engine.run",
+      "turn": 481,
+      "hp_recovered": 3,
+      "thirst_cost": 0.1,
+      "paid_phases": 1,
+      "consumed": false,
+      "same_id_sibling_untouched": true
+    },
+    {
+      "label": "resource, stale-object and malformed-definition rejection",
+      "turn": 481,
+      "unchanged": true
+    },
+    {
+      "label": "new primitive reusable tool restore",
+      "turn": 481,
+      "same_process_equal": true,
+      "cold": {
+        "pid": 35100,
+        "state_equal": true,
+        "continuation": null
+      }
+    }
+  ],
+  "solution_sha256": "0b894f55b77880205b09aa45fb2cf1ccc009cb54d60453fc6919db06e3a55c79",
+  "limits": [
+    "Initial resources/needs may be staged as labelled; this is not natural world discovery.",
+    "Screenshot uses the original renderer; automation cannot establish human learning."
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "lesson": "L07",
+  "evidence_kind": "production input handlers in bounded room fixture",
+  "events": 1,
+  "observations": [
+    {
+      "label": "ordinary world selection and construction",
+      "turn": 480,
+      "seed": 20261109,
+      "authored_assignments": 177,
+      "surface_placements": 16,
+      "orientations": 8,
+      "underground_entry": true,
+      "surface_content_constructed": true,
+      "policy": {
+        "id": "authored_submap_selection",
+        "version": 1,
+        "enabled": true,
+        "target_type": "barrow",
+        "authored_chance": 0.25,
+        "candidates": [
+          {
+            "layout_id": "guide1_workroom",
+            "weight": 3
+          },
+          {
+            "layout_id": "guide1_encounter",
+            "weight": 1
+          }
+        ]
+      },
+      "counts": {
+        "guide1_encounter": 56,
+        "guide1_workroom": 121
+      },
+      "staging": "Disposable policy and residential-only practice membership; player staged at selected entrance."
+    }
+  ],
+  "solution_sha256": "0b894f55b77880205b09aa45fb2cf1ccc009cb54d60453fc6919db06e3a55c79",
+  "limits": [
+    "Initial resources/needs may be staged as labelled; this is not natural world discovery.",
+    "Screenshot uses the original renderer; automation cannot establish human learning."
+  ]
+}

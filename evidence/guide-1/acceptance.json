@@ -1,0 +1,160 @@
+{
+  "schema": 1,
+  "commission": "GUIDE-1",
+  "passed": true,
+  "scope": "Pre-publication acceptance; archive and Git/remote readback are subsequent delivery steps.",
+  "source_revision": "c166ec650b98156d53b8ea72e715c028d27db905",
+  "checkpoint": "checkpoint/guide-1-before-20261109",
+  "platform": "Windows; Python 3.11.0; headless SDL and app-local native Workbench",
+  "html_sha256": "a666831ed92693d19866fa1e6d083252737f30fc982ab7995a10487af483efd1",
+  "lesson_runs": 14,
+  "browsers": [
+    {
+      "name": "chromium",
+      "version": "141.0.7390.37"
+    },
+    {
+      "name": "firefox",
+      "version": "142.0.1"
+    }
+  ],
+  "serial_commands": 15,
+  "criteria": [
+    {
+      "criterion": "Current baseline",
+      "passed": true,
+      "evidence": "source-manifest.json; GUIDE_1_PROGRESS.md",
+      "observed": "Actual source equals commissioned SYS-5 baseline; historical/proposed sources labeled."
+    },
+    {
+      "criterion": "Comprehensive coverage",
+      "passed": true,
+      "evidence": "chapters/system-atlas.md; chapters/authoring-reference.md",
+      "observed": "All nineteen commissioned domains and eleven families have explanation and routes; existing detailed chapters retained/reconciled."
+    },
+    {
+      "criterion": "Task navigation",
+      "passed": true,
+      "evidence": "final-edition/reader/reader.json",
+      "observed": "Four entry routes; required intent searches prioritize current guides."
+    },
+    {
+      "criterion": "Complete learning route",
+      "passed": true,
+      "evidence": "chapters/L01.md through L14.md; final-practice/practice.json",
+      "observed": "Fourteen full lessons, hints/answers, variations, faults, independent tasks and restart guidance."
+    },
+    {
+      "criterion": "Genuine code teaching",
+      "passed": true,
+      "evidence": "final-practice/L10/receipt.json; L11/receipt.json; L12/receipt.json",
+      "observed": "Full new primitive, real hook lifecycle and unfamiliar persisted subsystem with installation/recovery."
+    },
+    {
+      "criterion": "Workbench accuracy",
+      "passed": true,
+      "evidence": "workbench/index.json",
+      "observed": "Actual packaged authoring, typography and captured-room UI checks; obsolete exploratory assertions disclosed."
+    },
+    {
+      "criterion": "Definition to play",
+      "passed": true,
+      "evidence": "final-practice/L02/receipt.json through L07/receipt.json",
+      "observed": "Item, passive recipe/output use, guard approach/retreat, owned room and real generated selection/construction."
+    },
+    {
+      "criterion": "Controlled scope disclosed",
+      "passed": true,
+      "evidence": "chapters/source-evidence.md; final-practice",
+      "observed": "Supplies, needs, target/entrance staging and deterministic boundary controls labeled; no full campaign claim."
+    },
+    {
+      "criterion": "Time and ownership",
+      "passed": true,
+      "evidence": "final-practice/L04/receipt.json; L09/receipt.json through L12/receipt.json",
+      "observed": "Free rejection/cancel, exact physical consumption, accepted/missed timing, no render tick and hook deduplication."
+    },
+    {
+      "criterion": "Persistence",
+      "passed": true,
+      "evidence": "final-practice/L04/receipt.json; L06/receipt.json; L11/receipt.json through L13/receipt.json",
+      "observed": "New interpreter equality/continued jobs/hooks; actual checksum-valid malformed/absent save cases; scene leave/reentry."
+    },
+    {
+      "criterion": "Practice isolation",
+      "passed": true,
+      "evidence": "final-edition/practice-guard.txt; practice.py; final-practice logs",
+      "observed": "No production module/data installed; no tracked production code/data diff; explicit new save roots before construction; exact conflict-checked patch recovery."
+    },
+    {
+      "criterion": "Offline reader",
+      "passed": true,
+      "evidence": "final-edition/reader/reader.json",
+      "observed": "Chromium/Firefox direct and moved file reading/search/navigation/images/answers/downloads offline."
+    },
+    {
+      "criterion": "Durable optional progress",
+      "passed": true,
+      "evidence": "examples/guide1/notes.txt; final-edition/reader/reader.json",
+      "observed": "Plain external notes copied and byte-checked; blocked browser storage does not break reading/search/theme. No browser-only course progress."
+    },
+    {
+      "criterion": "Readability and access",
+      "passed": true,
+      "evidence": "review.md; final-edition/reader/",
+      "observed": "Desktop/light/dark/narrow/keyboard/expanded print inspected; 200% CSS viewport/device-pixel equivalent, not native chrome zoom or screen-reader certification."
+    },
+    {
+      "criterion": "Source and maintenance",
+      "passed": true,
+      "evidence": "source-map.json; final-edition/topic-drift.txt; final-edition/contract.txt",
+      "observed": "Source/authoring/product binding; Workbench and lesson helpers included; conservative impact hints, no prose auto-approval."
+    },
+    {
+      "criterion": "Rebuildability",
+      "passed": true,
+      "evidence": "final-edition/dependencies.txt; final-edition/edition.json; README.txt",
+      "observed": "Clean external pinned packages/browser binaries installed; documented serial gate passed; repeated builds identical."
+    },
+    {
+      "criterion": "Learning claims",
+      "passed": true,
+      "evidence": "review.md; chapters/source-evidence.md",
+      "observed": "Automation establishes bounded scenario behavior and documentation consistency, not comprehension/retention."
+    }
+  ],
+  "world_variations": [
+    {
+      "seed": 20261109,
+      "counts": {
+        "guide1_encounter": 56,
+        "guide1_workroom": 121
+      },
+      "receipt": "evidence/guide-1/final-practice/variations/20261109/L07/receipt.json"
+    },
+    {
+      "seed": 20261110,
+      "counts": {
+        "guide1_encounter": 49,
+        "guide1_workroom": 140
+      },
+      "receipt": "evidence/guide-1/final-practice/variations/20261110/L07/receipt.json"
+    },
+    {
+      "seed": 20261111,
+      "counts": {
+        "guide1_encounter": 41,
+        "guide1_workroom": 150
+      },
+      "receipt": "evidence/guide-1/final-practice/variations/20261111/L07/receipt.json"
+    }
+  ],
+  "preservation": {
+    "production_tracked_changes": [],
+    "practice_module_installed": false,
+    "practice_data_installed": false,
+    "personal_campaigns": "Not opened or used; checks use explicit newly allocated fixture roots. No claim of a campaign-byte comparison because personal campaigns were not inspected.",
+    "unrelated_owner_work": "Existing untracked art and proposal excluded from staging; preserved."
+  },
+  "publication": "Authorized scoped commit/push and exact remote main readback follow packaging; final delivery supplies the resulting revision."
+}

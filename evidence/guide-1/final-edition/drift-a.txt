@@ -1,0 +1,11 @@
+{
+  "clean": true,
+  "source_revision": "c166ec650b98156d53b8ea72e715c028d27db905",
+  "documentation_head": "c166ec650b98156d53b8ea72e715c028d27db905",
+  "products": {
+    "Resonance_Owner_Wiki.html": {
+      "sha256": "a666831ed92693d19866fa1e6d083252737f30fc982ab7995a10487af483efd1",
+      "bytes": 14443339
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "guide1_cadence",
+  "name": "Practice cadence",
+  "category": "The Witnessing",
+  "description": "GUIDE-1 instructional mechanism only.",
+  "cost": 1,
+  "hooks": [
+    {
+      "event": "ON_TURN",
+      "handler": "guide_cadence_turn"
+    }
+  ]
+}

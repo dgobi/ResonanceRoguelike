@@ -1,5 +1,7 @@
 # Texts, loot, containers and small scenes
 
+For isolated learning, use [Start creating](#learning-path) and its complete GUIDE-1 examples. The older authoring recipes below describe intentional production content edits; do not install them merely to run a lesson.
+
 These systems share IDs, but use different formats and consumers. Keep three things separate: **the physical item**, **the readable text**, and **the rule that places it**. The item may be `letter`, the text may be `letter_a`, and the placement may come from a container, a structure special, or a procedural text table.
 
 ## Tutorial: add a readable letter
@@ -25,7 +27,7 @@ Create `roguelike/data/texts/world/letters/owner_road_letter.json`:
 }
 ```
 
-Use `pages[].text`; the historical example built from `pages[].lines` is not the current reader's ordinary format. Keep pages reasonably short. The current panel measures page zero when sizing the reader, and long-page clipping is a known limitation; adding extra prose does not create a scrolling text area automatically.
+Use `pages[].text`; the historical example built from `pages[].lines` is not the current reader's ordinary format. Paragraphs and line breaks are preserved. The bounded reader scrolls long pages with Up/Down, Page Up/Down and Home/End; Left/Right changes pages. Verify the last line, all pages, damage spans and close controls. Workbench creates new-ID text variants rather than editing existing text identity, because recovered spans and taught-text state refer to that identity. Bind the new text to a new carrier or deliberate placement reference. [L03](#L03) supplies an isolated complete example.
 
 ### 2. Add the item-type mapping
 
@@ -141,10 +143,10 @@ To add a scene, create a new object entry with a description and `floor_objects`
 
 ## Source bindings
 
-- [Text reader and damage-marker parser](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/text_reader.py)
-- [Read action and one-time teaching](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/item_system.py)
-- [Language selection and validation](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/language_system.py)
-- [Found-text placement](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/local_gen.py)
-- [General loot resolver](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/loot_table.py)
-- [Container pool roller](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/loot_roller.py)
-- [Scene population and deferred record handling](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/scene_generation.py)
+- [Text reader and damage-marker parser](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/text_reader.py)
+- [Read action and one-time teaching](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/item_system.py)
+- [Language selection and validation](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/language_system.py)
+- [Found-text placement](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/generation/local_gen.py)
+- [General loot resolver](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/loot_table.py)
+- [Container pool roller](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/loot_roller.py)
+- [Scene population and deferred record handling](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/scene_generation.py)

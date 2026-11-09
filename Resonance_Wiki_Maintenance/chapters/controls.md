@@ -32,14 +32,14 @@ Avoid relying on vi keys for general movement. `H` and `L` open screens before m
 | Crafting | `C`; `C` or Escape closes | Up/down select; Enter begins/continues the recipe workflow; the details view can expose component choices. |
 | Perks | `K` | Review and purchase with the implemented point interface. See the perk chapter for unsupported prerequisites. |
 | Lexicon | `L` | Inspect learned words. |
-| Text reader | Use/examine a readable object | Left/right or Page Up/Down changes pages; Escape/Enter closes. |
+| Text reader | Use/examine a readable object | Left/right changes pages; Up/Down, Page Up/Down and Home/End scroll the current page; Escape/Enter closes. |
 | World/processing placement | Opened by the relevant item/recipe | Movement keys aim, Enter confirms, Escape cancels. Materials are consumed after valid confirmation. |
 
 Inventory is weight-based. Items with the same definition ID remain separate instances. Dropping equipment clears its equipment/light references; picking it back up does not automatically equip or light it. Take-all can move the items that fit and leave the rest. There is no general container-deposit UI introduced by the current transfer system.
 
 ## What advances time?
 
-Movement, successful ordinary attacks, waiting and physical actions advance the simulation according to their route. Movement may accumulate extra terrain cost; sprint and salve can earn skipped enemy phases. Inventory navigation and opening screens are free. Selecting use/equip on a non-header ordinarily advances a turn even when the item is not consumed; failed or no-op uses can also spend that turn. Opening wight confirmation or pellet targeting is free, and their resolution/cancellation follows its own contract. Transfer and placement failures use their specific success guards.
+Movement, committed attacks, waiting and physical actions advance the simulation according to their route. Movement may accumulate extra terrain cost; sprint and salve can earn skipped enemy phases. Inventory navigation and opening screens are free. Accepted reading/equipment uses may commit a phase without consuming the item. Rejected/no-op inventory uses with no commitment spend no phase. Consumption, action commitment and time are distinct outputs. Opening wight confirmation or pellet targeting is free; final confirmation owns commitment and cancellation is free. Transfer and placement use their specific success guards. [L10](#L10) demonstrates all three decisions with a new primitive.
 
 Player-duration preparations include their application action. Hit-count effects consume on connecting contacts rather than elapsed turns. Actor suppression/disruption and map zones have their own clocks. Read the combat/effect chapter before changing those durations.
 
@@ -58,4 +58,4 @@ The current debug travel route recommended for inspection is Enter on the debug 
 
 ## Source basis
 
-[Input and turn dispatch](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/engine.py) · [inventory](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/inventory_screen.py) · [crafting UI](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/rendering/craft_screen.py) · [text reader](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/text_reader.py) · [C ownership contract](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/docs/owner/C_STATE.md).
+[Input and turn dispatch](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/engine.py) · [inventory](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/inventory_screen.py) · [crafting UI](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/rendering/craft_screen.py) · [text reader](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/text_reader.py) · [C ownership contract](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/docs/owner/C_STATE.md).

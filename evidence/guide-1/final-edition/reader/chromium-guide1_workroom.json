@@ -1,0 +1,58 @@
+{
+  "id": "guide1_workroom",
+  "width": 13,
+  "height": 9,
+  "layers": [
+    "#############",
+    "#...........#",
+    "#...........#",
+    "#...........#",
+    "#.....~.....#",
+    "#...........#",
+    "#.<.........#",
+    "#...........#",
+    "#############"
+  ],
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "<": "stairs_up",
+    "~": "shallow_water"
+  },
+  "player_start": {
+    "x": 3,
+    "y": 6
+  },
+  "special_tiles": [
+    {
+      "type": "item",
+      "x": 3,
+      "y": 6,
+      "item_id": "guide1_ration"
+    },
+    {
+      "type": "item",
+      "x": 3,
+      "y": 6,
+      "item_id": "guide1_note_carrier"
+    },
+    {
+      "type": "item",
+      "x": 4,
+      "y": 6,
+      "item_id": "raw_meat_common"
+    },
+    {
+      "type": "decor",
+      "x": 6,
+      "y": 6,
+      "decor_id": "campfire_lit"
+    },
+    {
+      "type": "item",
+      "x": 5,
+      "y": 5,
+      "item_id": "clay_pot"
+    }
+  ]
+}

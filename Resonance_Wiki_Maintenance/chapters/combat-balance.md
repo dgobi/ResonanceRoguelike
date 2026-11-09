@@ -73,11 +73,11 @@ To strengthen Severing Cut, change its existing `damage_mult` from `1.2` to `1.3
 | `screen_shake` | Presentation feedback |
 | `place_pool` | Places the referenced decor on a kill |
 | `pool_turns` | Read into the result, but not used to expire the placed pool |
-| `free_move_on_kill` | Sets a pending flag; current movement does not consume it to grant a free move |
+| `free_move_on_kill` | On a successful killing action, supplies the current Press/free-movement route; verify the next eligible movement and cleanup |
 | `ignore_armour_layers` | Present in a shipped action but not consumed by the current moveset executor |
 | `on_kill_only` | Not a universal condition wrapping all effects; only specific engine branches enforce a kill condition |
 
-The final four rows are authoring boundaries, not recommended working features. Adjusting those declarations cannot implement the missing behavior.
+`pool_turns`, `ignore_armour_layers` and a generic interpretation of `on_kill_only` are authoring boundaries. Adjusting an unconsumed declaration cannot implement the missing behavior. [L09](#L09) distinguishes parsed effects, used effects and targeting limits.
 
 ## Body definitions and armour
 
@@ -93,8 +93,8 @@ The focused suite includes `test_combat_routes.py` and effect/persistence covera
 
 ## Source bindings
 
-- [Combat resolver and essence formula](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/combat.py)
-- [Moveset declaration consumer](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/movesets.py)
-- [Attack callers and post-hit effects](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/engine.py)
-- [Single-pool fighter](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/components/fighter.py)
-- [Working weapon definition](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/items/weapons/severance_blade.json)
+- [Combat resolver and essence formula](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/combat.py)
+- [Moveset declaration consumer](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/movesets.py)
+- [Attack callers and post-hit effects](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/engine.py)
+- [Single-pool fighter](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/components/fighter.py)
+- [Working weapon definition](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/data/items/weapons/severance_blade.json)

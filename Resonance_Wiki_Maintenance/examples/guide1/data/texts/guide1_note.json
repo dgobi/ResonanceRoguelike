@@ -1,0 +1,11 @@
+{
+  "id": "guide1_note",
+  "title": "A note beside the hearth",
+  "type": "note",
+  "condition": "intact",
+  "pages": [
+    {
+      "text": "The watcher stays near its post. Take the raw meat to the fire, then return for the meal. The stairs remain your way out."
+    }
+  ]
+}

@@ -33,7 +33,7 @@ Strict JSON uses double quotes, no comments and no trailing commas. Duplicate ke
 & $ResonancePython -X utf8 tools/structure_authoring.py --check-editor-catalog
 ```
 
-The catalogue describes 64 structure assets in this snapshot. Its route capability descriptions include legacy ordinary-building behavior; use the current World & structures chapters for modern planned transforms and profile selection.
+Read the emitted catalogue's asset count; GUIDE-1's reviewed source contains 109 assets, not the old G9 count of 64. Its route capability descriptions include legacy ordinary-building behavior; use the current World & structures chapters for modern planned transforms and profile selection.
 
 The editor's catalog is generated from data and includes byte-sensitive source identity. During the wiki audit, a fresh Linux checkout reported it stale even though all compared asset contracts and semantic catalogue sections matched. Refreshing it is a legitimate generation step when data has changed:
 
@@ -86,7 +86,7 @@ The standing project workflow is autonomous headless processes and app-local eve
 
 ## Source basis
 
-[Focused runner](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/tools/critical_fix_regressions/verify_fixes.py) · [structure CLI](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/tools/structure_authoring.py) · [G9 authoring](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/tools/verify_g9_authoring.py) · [G9 diagnostic](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/tools/worldgen_g9_diagnostic.py) · [release coordinator](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/tools/verify_g9_release.py).
+[Focused runner](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/tools/critical_fix_regressions/verify_fixes.py) · [structure CLI](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/tools/structure_authoring.py) · [G9 authoring](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/tools/verify_g9_authoring.py) · [G9 diagnostic](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/tools/worldgen_g9_diagnostic.py) · [release coordinator](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/tools/verify_g9_release.py).
 
 ## G7 composition integration
 

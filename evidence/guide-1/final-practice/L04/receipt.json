@@ -1,0 +1,58 @@
+{
+  "passed": true,
+  "lesson": "L04",
+  "evidence_kind": "production input handlers in bounded room fixture",
+  "events": 36,
+  "observations": [
+    {
+      "label": "placement cancellation",
+      "turn": 482,
+      "materials_and_time_unchanged": true
+    },
+    {
+      "label": "passive work committed",
+      "turn": 483,
+      "first_phase_already_paid": true,
+      "remaining": 2
+    },
+    {
+      "label": "unfinished preparation",
+      "turn": 483,
+      "same_process_equal": true,
+      "cold": {
+        "pid": 42808,
+        "state_equal": true,
+        "continuation": {
+          "preparation": {
+            "remaining_paid_phases": 2,
+            "output": "guide1_ration",
+            "exact_output_acquired_and_consumed": true,
+            "hunger_before": 0.7,
+            "hunger_after": 0.38099999999999995,
+            "use_paid_phases": 1
+          }
+        }
+      }
+    },
+    {
+      "label": "ordinary floor pickup",
+      "turn": 486,
+      "item": "guide1_ration"
+    },
+    {
+      "label": "owned meal completed, acquired and eaten",
+      "turn": 487,
+      "remaining_paid_phases": 2,
+      "output": "guide1_ration",
+      "exact_output_acquired_and_consumed": true,
+      "hunger_before": 0.7,
+      "hunger_after": 0.38099999999999995,
+      "use_paid_phases": 1
+    }
+  ],
+  "solution_sha256": "0b894f55b77880205b09aa45fb2cf1ccc009cb54d60453fc6919db06e3a55c79",
+  "limits": [
+    "Initial resources/needs may be staged as labelled; this is not natural world discovery.",
+    "Screenshot uses the original renderer; automation cannot establish human learning."
+  ]
+}

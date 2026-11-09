@@ -16,14 +16,14 @@ The game opens in a resizable 1280 × 720 Pygame window. Its default world art i
 | Overmap sidebar | `OVERMAP_SIDEBAR_W = 320` | Screen pixels. |
 | Debug tools | `DEBUG_MODE = True` | Enables debug overlay and changes some key routing, including F5/F9. Consult the controls chapter. |
 | Initial window size | `Engine.run()` literal `(1280, 720)` | There is no JSON window-size preference demonstrated in this path. |
-| Window caption | `Engine.run()` literal `"Roguelike"` | The `TITLE` constant is not used by this call. |
+| Window caption | `Engine.run()` uses the session label | Captured practice can identify its own session; do not infer caption from an unused `TITLE` constant. |
 | Frame cap | `Engine.run()` calls `clock.tick(60)` | Editing the unused `FPS = 20` constant does not change this cap. |
 
 `config.py` contains repeated assignments. Python uses the last one. Changing the earlier `RENDER_MODE = "ascii"` while leaving the later sprite assignment intact has no effect.
 
 There are font discovery, font-switching, and display serialization methods in `DisplayConfig`, but the current Engine has no exposed general options menu using them, and the save route does not persist these display preferences. Do not follow old prose promising an in-game font menu or persistent zoom setting. `FONT_TYPE` is retained metadata; the glyph lookup currently uses the TCOD character map rather than dispatching to a distinct CP437 implementation.
 
-Sources: [config](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/config.py), [display configuration](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/display_config.py), [window and input implementation](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/engine.py).
+Sources: [config](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/config.py), [display configuration](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/display_config.py), [window and input implementation](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/engine.py).
 
 ## Make map art larger or smaller
 
@@ -35,7 +35,7 @@ Different registered sprite sizes are not automatically normalized to one common
 
 ## Make UI text larger
 
-The actual sizes are in `DisplayConfig.init()`:
+`DisplayConfig.init()` calls `engine/typography.py:initialize`. Font resources are selected by `data/display/typography.json`; nominal sizes are code-owned in `typography.ROLES`. Workbench's typography editor chooses role resources, not arbitrary font sizes. [L08](#L08) changes ordinary prose to a bundled bold face and checks the actual reader.
 
 | Attribute | Font | Size argument in pixels |
 |---|---|---:|
@@ -53,14 +53,14 @@ The actual sizes are in `DisplayConfig.init()`:
 | Critical callout | Junicode bold | 18 |
 | Level-up callout | Junicode bold | 21 |
 
-1. Change only the needed size or font path.
+1. For a supported resource change, edit the role profile through Workbench; a nominal-size change is a separate code/layout task in `typography.ROLES`.
 2. Restart so every UI component gets the new font objects.
 3. Inspect long inventory names, equipment columns, the craft requirements area, long found-text pages, examination popups, and the bottom status bar.
 4. Check both your ordinary window size and a smaller window you actually use. Larger fonts can exceed fixed-height regions even when individual glyphs look good.
 
-Use `font.get_linesize()` or measured text dimensions in code rather than assuming the point/size argument equals the rendered line height. The retained `UI-TEXT-HEIGHT` issue remains outside the completed combat/generation arcs; these instructions do not imply that every existing screen is robust to arbitrary font increases.
+Use `font.get_linesize()` or measured text dimensions rather than assuming the size argument equals rendered line height. The current text reader has bounded scrolling, superseding the old page-zero clipping advice. This does not establish that every other screen handles arbitrary font increases or long labels; verify the affected context.
 
-Source: [font initialization and helper methods](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/display_config.py), [documented deferred UI boundary](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/docs/owner/D_STATE.md).
+Source: [font initialization and helper methods](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/display_config.py), [documented deferred UI boundary](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/docs/owner/D_STATE.md).
 
 ## Colour ownership
 
@@ -84,7 +84,7 @@ ASCII rendering uses the tile registry's dark colour fields. Sprite rendering ha
 
 Treat these as current implementation limits when adjusting darkness or introducing coloured light. A new `light_color` field alone is not proof of a visibly coloured pool in the default world renderer.
 
-Source: [palette](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/palette.py), [map, decorative, and sprite draw paths](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/rendering/renderer.py).
+Source: [palette](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/palette.py), [map, decorative, and sprite draw paths](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/rendering/renderer.py).
 
 ## Add or change a panel frame
 
@@ -114,7 +114,7 @@ engine.ui_registry.draw_panel(
 
 At `border_scale=2`, the source's 15-pixel corner region becomes 30 screen pixels. Use the current implementation and the actual screen's layout instead of copying the old UI guide's 12-pixel-border assumption. `pygame.Rect.inflate(-18, -18)` removes 18 pixels from the total width/height—9 on each side—not 18 per side. When you need an inset of `pad` on all sides, use `inflate(-2 * pad, -2 * pad)` or construct the interior explicitly.
 
-Source: [panel loader and drawing implementation](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/rendering/ui_registry.py), [inventory's current layout](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/inventory_screen.py).
+Source: [panel loader and drawing implementation](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/rendering/ui_registry.py), [inventory's current layout](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/inventory_screen.py).
 
 ## Principles to preserve when changing UI code
 
@@ -124,4 +124,4 @@ Use separate draw calls for equipment badges and item names, and measure/truncat
 
 For verification, use app-local or headless component rendering where available, then inspect the resulting images. A dummy-driver render checks drawing and layout only; it does not prove the live OS event loop or every resize path. `tools/render_baseline_screens.py` is a historical component-render utility that creates a copied baseline game through `baseline.prepare`; it should not be presented as the current preferred main-checkout workflow without adapting its harness.
 
-Sources: [historical UI rules](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/docs/UI_RULES.md), [historical component-render utility](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/tools/render_baseline_screens.py), [repository working rules](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/AGENTS.md).
+Sources: [historical UI rules](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/docs/UI_RULES.md), [historical component-render utility](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/tools/render_baseline_screens.py), [repository working rules](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/AGENTS.md).

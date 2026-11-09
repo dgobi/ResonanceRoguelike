@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "lesson": "L08",
+  "evidence_kind": "production input handlers in bounded room fixture",
+  "events": 20,
+  "observations": [
+    {
+      "label": "ordinary floor pickup",
+      "turn": 481,
+      "item": "guide1_note_carrier"
+    },
+    {
+      "label": "carrier opened ordinary reader",
+      "turn": 482,
+      "text_id": "guide1_note",
+      "not_consumed": true,
+      "paid_phases": 1
+    },
+    {
+      "label": "readable carrier cold restore",
+      "turn": 482,
+      "same_process_equal": true,
+      "cold": {
+        "pid": 10592,
+        "state_equal": true,
+        "continuation": null
+      }
+    },
+    {
+      "label": "actual reader with changed typography",
+      "turn": 482,
+      "role": "font_ui_normal",
+      "resource": "Junicode-Bold.ttf",
+      "screenshot": "reading.png",
+      "nominal_size_retained": true
+    }
+  ],
+  "solution_sha256": "0b894f55b77880205b09aa45fb2cf1ccc009cb54d60453fc6919db06e3a55c79",
+  "limits": [
+    "Initial resources/needs may be staged as labelled; this is not natural world discovery.",
+    "Screenshot uses the original renderer; automation cannot establish human learning."
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "max_shortcuts": 2,
+  "max_added_fraction": 0.25,
+  "min_saved_steps": 500,
+  "min_relative_improvement": 0.25,
+  "candidate_pair_limit": 8,
+  "search_expansion_limit": 8192,
+  "world_expansion_budget": 32768
+}

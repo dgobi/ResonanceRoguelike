@@ -85,7 +85,7 @@ These are distinct from ordinary play. The long journey uses disclosed controls 
 | Older wording | Current instruction |
 |---|---|
 | “No new rotations or rural POIs” in the legacy middle of `STRUCTURE_AUTHORING.md` | Read as G2 history. G6 supports explicit planned transforms and independent roadside sites. |
-| Register modern pools in `g3_config.json` | Current version-2 geometry uses separate `settlement_profiles.json`; extra sites use `poi_profiles.json`. |
+| Register modern pools in `g3_config.json` | Current version-4 `g3_config.json` uses separate version-1 `settlement_profiles.json`; extra sites use version-2 `poi_profiles.json`. |
 | A `grid` array and `entities` list define a generic layout | The supported structure contract uses `layers`, `legend` and supported `special_tiles`. |
 | `body` creates a corpse; top-level `stairs_up` places stairs | Physical body semantics remain deferred; actual stair terrain/fallback and links are separate. |
 | Laboratory is 60 × 35 | Current laboratory is 60 × 16. |
@@ -97,10 +97,10 @@ The original documents remain valuable history and design context. A current tut
 
 ## Sources
 
-- [Consumed dependencies and pending-placement errors](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/placement.py)
-- [Scene adapters](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/scene_adapters.py)
-- [Compiler diagnostics](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/structure_contract.py)
-- [G6 source-bound recorded verification and limits](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/docs/owner/WORLDGEN_G6.md)
+- [Consumed dependencies and pending-placement errors](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/generation/placement.py)
+- [Scene adapters](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/generation/scene_adapters.py)
+- [Compiler diagnostics](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/generation/structure_contract.py)
+- [G6 source-bound recorded verification and limits](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/docs/owner/WORLDGEN_G6.md)
 
 ## G7 composition integration
 

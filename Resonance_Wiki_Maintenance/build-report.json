@@ -1,22 +1,37 @@
 {
-  "commit": "f76aac1976a1c9b68adb00ed859398bbd60d6ee2",
-  "documentation_delivery_revision": "f76aac1976a1c9b68adb00ed859398bbd60d6ee2",
+  "commit": "c166ec650b98156d53b8ea72e715c028d27db905",
+  "documentation_delivery_revision": "c166ec650b98156d53b8ea72e715c028d27db905",
   "repaired_legacy_links": [],
   "unavailable_legacy_links": [],
   "embedded_source_images": [
+    "Resonance_Wiki_Maintenance\\illustrations\\guide1\\item-published.png",
+    "Resonance_Wiki_Maintenance\\illustrations\\guide1\\reading.png",
+    "Resonance_Wiki_Maintenance\\illustrations\\guide1\\exchange.png",
     "evidence\\worldgen-g7\\views\\g7-homestead_workyard-production.png",
     "evidence\\worldgen-g7\\views\\g7-wayside_shrine_court-production.png",
-    "docs\\owner\\images\\seed20261020_town0_and_road_seam.png"
+    "docs\\owner\\images\\seed20261020_town0_and_road_seam.png",
+    "workbench\\docs\\w0-ready.png",
+    "workbench\\docs\\w1-applied.png",
+    "workbench\\docs\\w1-review.png",
+    "workbench\\docs\\w1-conflict.png",
+    "workbench\\docs\\images\\w3b\\item-factory.png",
+    "workbench\\docs\\images\\w3c\\recipe-probe.png",
+    "workbench\\docs\\images\\w3c\\recipe-requirements.png",
+    "workbench\\docs\\images\\w3c\\recipe-minimum-window.png"
   ],
-  "article_count": 112,
-  "data_files": 373,
-  "source_documents": 58,
+  "article_count": 221,
+  "data_files": 507,
+  "source_documents": 144,
   "fragment_fallbacks": [
     {
       "target": "source-roguelike-docs-components-md--ai",
       "fallback": "source-roguelike-docs-components-md"
     },
     {
+      "target": "source-roguelike-docs-systems-md--text-reader--text_readerpy",
+      "fallback": "source-roguelike-docs-systems-md"
+    },
+    {
       "target": "source-roguelike-docs-generation-md--entrance-generation",
       "fallback": "source-roguelike-docs-generation-md"
     },
@@ -43,10 +58,22 @@
     {
       "target": "source-roguelike-docs-components-md--ai",
       "fallback": "source-roguelike-docs-components-md"
+    },
+    {
+      "target": "source-workbench-readme-md--recover-unfinished-item-recipe-and-text-drafts",
+      "fallback": "source-workbench-readme-md"
+    },
+    {
+      "target": "source-workbench-readme-md--place-a-creature-in-an-authored-underground-room",
+      "fallback": "source-workbench-readme-md"
+    },
+    {
+      "target": "source-workbench-readme-md--recover-unfinished-item-recipe-and-text-drafts",
+      "fallback": "source-workbench-readme-md"
     }
   ],
-  "guide_chapters": 33,
-  "search_records": 468,
-  "output_bytes": 5568113,
-  "output_sha256": "14add9715e8a37c1644a141e27b25490b7df587edb21bfaa5cdd7a1b6a222259"
+  "guide_chapters": 54,
+  "search_records": 709,
+  "output_bytes": 14443339,
+  "output_sha256": "a666831ed92693d19866fa1e6d083252737f30fc982ab7995a10487af483efd1"
 }

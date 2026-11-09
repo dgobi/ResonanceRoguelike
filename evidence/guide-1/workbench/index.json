@@ -1,0 +1,79 @@
+{
+  "passed": true,
+  "source_revision": "c166ec650b98156d53b8ea72e715c028d27db905",
+  "platform": "Windows, packaged Tauri/WebView2, app-local CDP, separate fixture roots",
+  "checks": [
+    {
+      "route": "receipt",
+      "receipt": "receipt.json",
+      "sha256": "d3fc80d8808de74630bf32fbc9bfb68d9c6d252ca17a3f0fa3726f3c1d6b069b",
+      "package_sha256": "3a3fc5fcf25991e564002c7f6f90c9d4ea246bae1d9a0b9a71b9904005246867",
+      "checks": [
+        "Current held light is admitted; obsolete read-only assertion not used",
+        "Food variant through actual form/source/binding/factory/validate/review/publish/reopen controls",
+        "Unique saved item bound by a separately validated published room",
+        "No normal data or personal campaign path selected; all writes inside fresh payload"
+      ],
+      "passed": true,
+      "errors": []
+    },
+    {
+      "route": "typography",
+      "receipt": "typography.json",
+      "sha256": "20ed1644bd6cc23ec98dd3be002d45d4414ee7c4b7460d02f8949160e70af24b",
+      "package_sha256": "3a3fc5fcf25991e564002c7f6f90c9d4ea246bae1d9a0b9a71b9904005246867",
+      "checks": [
+        "selected font-byte and external profile changes revoke actual displayed preview through the shared disk sweep, retaining exact accepted draft",
+        "changed selected font bytes consume a real publication review without a content write; fresh validation restores authority",
+        "three actual native processes retain selected faces then exact invalid JSON; fresh review required",
+        "normal one-file publication and verified reopen match candidate bytes; independent recovery is unchanged",
+        "fresh production font initialization loads published roles; invalid present profile falls back completely without writes",
+        "no variant control and forged variant intent refused by host; actual candidate specimen and reader"
+      ],
+      "passed": true,
+      "errors": []
+    },
+    {
+      "route": "room-capture",
+      "receipt": "room-capture.json",
+      "sha256": "4fd6c21878a45c39bb40300607015c3df16e98acc0dae4d83f8fdfa3f9860496",
+      "package_sha256": "3a3fc5fcf25991e564002c7f6f90c9d4ea246bae1d9a0b9a71b9904005246867",
+      "checks": [
+        "save ordinary creature variant and authored room through supported controls",
+        "launch saved room in captured pinned runtime and wait for real rendered frame",
+        "normal app-local keys: look, acquire/read exact letter, container transfer, actual AI turns, stairs",
+        "normal F5/F9 and genuine fresh-process bootstrap load in explicit test root",
+        "dirty target refused; reset captured bytes despite later unsaved room draft",
+        "publish same-ID revision during gameplay; frozen test retains old code/data/fonts/sprites",
+        "normal game quit and host Stop leave captured reset available and editor usable",
+        "fresh captured validation refuses missing assets, path escape, ambiguous room and invalid saved dependency without losing prior test",
+        "refused: missing required sprite",
+        "refused: external sprite reference",
+        "refused: ambiguous room identity",
+        "refused: invalid saved readable dependency",
+        "refused: conflicting source",
+        "cancel capture, reject duplicate launch, reap unexpected exit and retire game on project replacement",
+        "abrupt packaged host termination kills owned game; next capture cleans only abandoned payload of this installation"
+      ],
+      "passed": true,
+      "errors": []
+    }
+  ],
+  "exploratory_failures": [
+    {
+      "harness": "run-items.mjs",
+      "reason": "Historical assertion expected tallow torch read-only; current SYS-2 source/UI allows editing. Focused current workflow passed.",
+      "scope": "No production edit; discarded fixture."
+    },
+    {
+      "harness": "run-room-tests.mjs",
+      "reason": "Fresh reset intentionally creates new vessel UUID; historical full-item comparison expected old UUID. Pinned GUIDE-1 wrapper requires changed fresh UUID, all other item fields equal; cold-load UUID comparisons unchanged.",
+      "repair": "verify_room_capture.mjs",
+      "log": "room-tests.log"
+    }
+  ],
+  "limits": [
+    "Observed selected actual controls and captured sessions, not every Workbench combination.",
+    "No desktop input control or personal campaigns. Native fixtures may be retained in ignored workbench/.artifacts; these are bounded test payloads, not development checkouts."
+  ]
+}

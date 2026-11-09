@@ -1,0 +1,14 @@
+{
+  "id": "guide1_supplies",
+  "description": "One guaranteed practice ration; controlled route proof.",
+  "roll_count": [
+    1,
+    1
+  ],
+  "items": [
+    {
+      "item_id": "guide1_ration",
+      "weight": 1
+    }
+  ]
+}

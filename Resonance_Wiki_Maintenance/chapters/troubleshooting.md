@@ -17,13 +17,13 @@ Start with the symptom and the source path. The most common distinctions are a d
 | Existing town ignores changed weights | Saved plan identity | Generate a new disposable world. Do not delete individual cached maps to bypass plan ownership. |
 | Scene entry fails after structure edits | Saved plan dependency/geometry mismatch | Retain the error and source revision; use matching old data or a fresh test world. |
 | Editor says catalogue is stale | Generated catalogue identity | Refresh with the actual CLI, inspect the changed `catalog.js`, then recheck. Byte/line-ending identity can matter. |
-| A lit torch does not satisfy recipe heat | Crafting ambient-source route | Current ambient collection checks the `light` slot while normal light equip uses `offhand`; use an actual nearby lit campfire for the documented working heat source. |
+| A lit torch does not satisfy recipe heat | Exact active offhand ownership, fuel and tier | SYS-2 consumes active owned held lights; passive work separately requires stationary fire. |
 | Recipe says ingredients missing | Per-unit allocation, keyword tier, ambient sources | One item instance cannot pay two required component units just because it carries both tags. |
 | Perk text promises prerequisites or special behavior | UI checks and hook implementation | Current prerequisite/conflict metadata is not a general purchase gate; descriptive effects need an implemented consumer. |
 | F5/F9 does the wrong thing | `DEBUG_MODE` | In the shipped mode these are teleport/dump, not save/load. |
 | Progress disappears after quitting | Was an explicit checkpoint published? | Travel cache is not a full checkpoint. Save through nondebug F5 before quitting. |
 | Old campaign is refused | Save format, plan version, required references | Preserve the error and complete slot. Do not turn malformed saved data into a new game by deleting selected fields. |
-| Long text is cut off | Known UI-TEXT-HEIGHT limitation | Split authored prose into deliberate pages where appropriate; a general text-layout repair remains separate. |
+| Long text seems cut off | Current page scroll and page selection | Up/Down, Page Up/Down and Home/End scroll; Left/Right changes pages. Other screen-specific long-label layouts still need their own check. |
 
 ## Distinguish errors from warnings
 
@@ -37,13 +37,13 @@ Keep the failing candidate and evidence. Reducing the candidate is useful if it 
 
 ## Current limits with practical consequences
 
-The current source does not provide a generic ranged-combat system from a larger moveset `range`, a general recipe-discovery mechanic from `known: false`, full background simulation, exact replay of all gameplay RNG, personal-save migration or automatic checkpoint pruning. Specific weapon declarations such as free movement on kill and pool lifetime also remain incomplete. See the relevant chapter before treating a data field as an available feature.
+The current source does not provide a generic ranged-combat system from a larger moveset `range`, a general recipe-discovery mechanic from `known: false`, full background simulation, exact replay of all gameplay RNG, personal-save migration or automatic checkpoint pruning. `pool_turns` remains an unconsumed declaration; successful Press/free-move-on-kill now has a real movement route. See the relevant chapter before treating a data field as an available feature.
 
 This handbook records these limits so you can make edits that the current game can use. It does not silently choose new creative rules or implement the missing systems.
 
 ## Source basis
 
-[Data loader](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/data_loader.py) · [current structure guide](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/docs/STRUCTURE_AUTHORING.md) · [craft ambient sources](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/rendering/craft_screen.py) · [perk screen](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/rendering/perk_screen.py) · [next-arc history](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/docs/owner/NEXT_ARC.md).
+[Data loader](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/data_loader.py) · [current structure guide](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/docs/STRUCTURE_AUTHORING.md) · [craft ambient sources](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/rendering/craft_screen.py) · [perk screen](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/rendering/perk_screen.py) · [next-arc history](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/docs/owner/NEXT_ARC.md).
 
 ## G8 lot and common checks
 

@@ -60,7 +60,7 @@ The authored-submap route does not consume an ordinary `decor_layer` or `legend_
 
 ## Safely change the existing laboratory
 
-Import `roguelike/data/layouts/starting_lab.json` into the painter's authored-submap route. Keep its ID when intentionally editing the existing starting laboratory, and preserve a usable arrival, route to the real up-stair and required readable items. Export a draft outside the installed tree and preview it:
+The starting laboratories are protected by Workbench identity/path rules. Ordinary learning should use the independent [L06 room](#L06), not overwrite a protected starting experience. For an explicitly intended manual production change, import `roguelike/data/layouts/starting_lab.json` into the painter's authored-submap route, preserve its ID, usable arrival, real up-stair and required readable items, and preview an external draft:
 
 ```powershell
 & $ResonancePython -X utf8 tools/structure_authoring.py authoring/starting_lab.json --route authored_submap --output evidence/authoring/lab-draft.json
@@ -72,16 +72,16 @@ After deliberate installation, restart and use a new disposable session. Loading
 
 ## Add a different authored level
 
-Saving `roguelike/data/layouts/my_level.json` registers the definition but does not select it. A new `SubMap` must have `layout_id: "my_level"`, along with the correct identity, parent/link and generation metadata. The current starting laboratory assignment is in `generation/world_gen.py`; actual layout generation is in `generation/local_gen.py`. There is not a general JSON pool for scheduling arbitrary new authored submaps in the current owner workflow.
+Saving `roguelike/data/layouts/my_level.json` registers a definition but does not select it. The fixed `data/generation/authored_submap_selection.json` policy supplies enabled type assignments, chances and weighted room candidates through the current Workbench assignment family. World creation records selected `layout_id` metadata; local generation constructs that room lazily. New arbitrary submap types, entrance mappings or new constructor behavior still require code.
 
-This integration is a code task when no existing selection point refers to your layout. It needs a controlled first-entry/return-travel and persistence check. The old statement “no code changes are needed to add new layouts” is only true when an already implemented route is deliberately made to reference the new definition.
+[L07](#L07) shows complete room enrollment and generated-world evidence. A newly generated world uses the updated assignment policy. An assigned but unvisited submap can read the current same-ID room on first construction; an already generated scene restores its owned saved state. Planned surface buildings have a different captured-dependency contract and may refuse stale definitions. Test arrival, ordinary exit/return and cold save/load at the intended lifetime.
 
 Do not use “delete all saves” as an authoring step. A uniquely named disposable session supplies fresh generation without changing a personal campaign.
 
 ## Sources
 
-- [Submap type to entrance mapping and protected placement](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/region_gen.py)
-- [Authored submap consumer](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/local_gen.py)
-- [Starting laboratory source](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/layouts/starting_lab.json)
-- [World creation and `layout_id` assignment](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/world_gen.py)
-- [Separate edge-stamping API](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/layout_stamper.py)
+- [Submap type to entrance mapping and protected placement](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/generation/region_gen.py)
+- [Authored submap consumer](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/generation/local_gen.py)
+- [Starting laboratory source](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/data/layouts/starting_lab.json)
+- [World creation and `layout_id` assignment](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/generation/world_gen.py)
+- [Separate edge-stamping API](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/generation/layout_stamper.py)

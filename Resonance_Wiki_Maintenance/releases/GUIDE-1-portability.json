@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "archive_sha256": "53435584e9a7322a19dd2247e190f17e5ee102f4a6bdd581f4ba9d27476c0a95",
+  "all_extracted_members_verified": 313,
+  "moved_path_with_spaces": true,
+  "offline_browser_open_search": true,
+  "bundled_launcher_L01_with_explicit_repo": true,
+  "source_revision": "c166ec650b98156d53b8ea72e715c028d27db905",
+  "temporary_bundle_and_practice_cleaned": true,
+  "limits": "Portable handbook artifact only; game source/assets and supported Python dependencies remain in the explicitly selected existing checkout."
+}

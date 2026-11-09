@@ -1,0 +1,189 @@
+save ordinary creature variant and authored room through supported controls
+launch saved room in captured pinned runtime and wait for real rendered frame
+normal app-local keys: look, acquire/read exact letter, container transfer, actual AI turns, stairs
+normal F5/F9 and genuine fresh-process bootstrap load in explicit test root
+dirty target refused; reset captured bytes despite later unsaved room draft
+{"output":"G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\native-1794264782352","failure":"AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n... Skipped lines\n\n  [\n    {\n      _temp_av_bonus: 0,\n      _temp_av_hits: 0,\n      burn_turns: 1800,\n...\n        contents: null,\n+       id: '98a1887e5f9343a9ae12ce83157509b5',\n-       id: '0d58be960e3946408034de38cb97f56c',\n        water_ml: 0\n      },\n      weight: 0.6\n    }\n  ]\n\n    at file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-room-tests.mjs:93:387"}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+... Skipped lines
+
+  [
+    {
+      _temp_av_bonus: 0,
+      _temp_av_hits: 0,
+      burn_turns: 1800,
+...
+        contents: null,
++       id: '98a1887e5f9343a9ae12ce83157509b5',
+-       id: '0d58be960e3946408034de38cb97f56c',
+        water_ml: 0
+      },
+      weight: 0.6
+    }
+  ]
+
+    at file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-room-tests.mjs:93:387 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: [
+    {
+      item_id: 'oil_lantern',
+      item_state_version: 1,
+      name: 'Oil Lantern',
+      tile: 'oil_lantern',
+      weight: 0.6,
+      stackable: false,
+      count: 1,
+      on_use: 'equip_light',
+      text_id: '',
+      nutrition: null,
+      hydration: null,
+      heal_amount: null,
+      eat_message: null,
+      drink_message: null,
+      burn_turns: 1800,
+      turns_lit: 0,
+      light_data: {
+        radius: 10,
+        color: [ 220, 200, 120 ],
+        falloff: 1.5,
+        flicker: false
+      },
+      liquid: null,
+      liquid_volume: 0,
+      qualities: {},
+      description: 'A small iron vessel with a wick. Burns cleaner than a torch and longer. The light it produces is steadier and somehow less reassuring.',
+      harvest_from: null,
+      keywords: [ { tag: 'waxy', tier: 1 }, { tag: 'fuel', tier: 2 } ],
+      decay_timer: null,
+      source_creature: null,
+      temporary_essence: [],
+      consumed_on_use: false,
+      _temp_av_bonus: 0,
+      _temp_av_hits: 0,
+      held_light: { version: 1, radius: 6 }
+    },
+    {
+      item_id: 'clay_pot',
+      item_state_version: 1,
+      name: 'clay pot',
+      tile: 'generic_item',
+      weight: 0.6,
+      stackable: false,
+      count: 1,
+      on_use: null,
+      text_id: '',
+      nutrition: null,
+      hydration: null,
+      heal_amount: null,
+      eat_message: null,
+      drink_message: null,
+      burn_turns: null,
+      turns_lit: 0,
+      light_data: null,
+      liquid: null,
+      liquid_volume: 0,
+      qualities: {},
+      description: 'A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.',
+      harvest_from: null,
+      keywords: [ { tag: 'vessel', tier: 1 }, { tag: 'heatproof', tier: 1 } ],
+      decay_timer: null,
+      source_creature: null,
+      temporary_essence: [],
+      consumed_on_use: false,
+      _temp_av_bonus: 0,
+      _temp_av_hits: 0,
+      vessel: {
+        config: { version: 1, capacity_ml: 500, contents: 'water' },
+        id: '98a1887e5f9343a9ae12ce83157509b5',
+        water_ml: 0,
+        contents: null
+      }
+    }
+  ],
+  expected: [
+    {
+      item_id: 'oil_lantern',
+      item_state_version: 1,
+      name: 'Oil Lantern',
+      tile: 'oil_lantern',
+      weight: 0.6,
+      stackable: false,
+      count: 1,
+      on_use: 'equip_light',
+      text_id: '',
+      nutrition: null,
+      hydration: null,
+      heal_amount: null,
+      eat_message: null,
+      drink_message: null,
+      burn_turns: 1800,
+      turns_lit: 0,
+      light_data: {
+        radius: 10,
+        color: [ 220, 200, 120 ],
+        falloff: 1.5,
+        flicker: false
+      },
+      liquid: null,
+      liquid_volume: 0,
+      qualities: {},
+      description: 'A small iron vessel with a wick. Burns cleaner than a torch and longer. The light it produces is steadier and somehow less reassuring.',
+      harvest_from: null,
+      keywords: [ { tag: 'waxy', tier: 1 }, { tag: 'fuel', tier: 2 } ],
+      decay_timer: null,
+      source_creature: null,
+      temporary_essence: [],
+      consumed_on_use: false,
+      _temp_av_bonus: 0,
+      _temp_av_hits: 0,
+      held_light: { version: 1, radius: 6 }
+    },
+    {
+      item_id: 'clay_pot',
+      item_state_version: 1,
+      name: 'clay pot',
+      tile: 'generic_item',
+      weight: 0.6,
+      stackable: false,
+      count: 1,
+      on_use: null,
+      text_id: '',
+      nutrition: null,
+      hydration: null,
+      heal_amount: null,
+      eat_message: null,
+      drink_message: null,
+      burn_turns: null,
+      turns_lit: 0,
+      light_data: null,
+      liquid: null,
+      liquid_volume: 0,
+      qualities: {},
+      description: 'A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.',
+      harvest_from: null,
+      keywords: [ { tag: 'vessel', tier: 1 }, { tag: 'heatproof', tier: 1 } ],
+      decay_timer: null,
+      source_creature: null,
+      temporary_essence: [],
+      consumed_on_use: false,
+      _temp_av_bonus: 0,
+      _temp_av_hits: 0,
+      vessel: {
+        config: { version: 1, capacity_ml: 500, contents: 'water' },
+        id: '0d58be960e3946408034de38cb97f56c',
+        water_ml: 0,
+        contents: null
+      }
+    }
+  ],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.15.0

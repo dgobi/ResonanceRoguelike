@@ -261,6 +261,14 @@ def validate(args):
                 pass
         without_strings = re.sub(r'"(?:\\.|[^"\\])*"', '""', raw)
         article = node.closest("article")
+        if article is not None and article.attrs.get('data-kind')=='source' and len(raw.splitlines())>1:
+            try:
+                for line in raw.splitlines():
+                    if line.strip():strict_json(line)
+            except ValueError:pass
+            else:
+                report['skips'].append(dict(check='standalone_json_document',reason='Preserved source sequence of individually valid JSON records, not one standalone file.',**location(node)))
+                continue
         if "..." in without_strings and article is not None and article.attrs.get("data-kind") == "source":
             ellipses += 1
             report["skips"].append({"check": "standalone_json_document", "reason": "Preserved historical illustration contains an unquoted ellipsis; it is not complete JSON.", **location(node)})

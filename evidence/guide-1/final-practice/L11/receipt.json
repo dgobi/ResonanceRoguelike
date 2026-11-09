@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "lesson": "L11",
+  "evidence_kind": "production input handlers in bounded room fixture",
+  "events": 18,
+  "observations": [
+    {
+      "label": "real purchase, dispatch and effect consumption",
+      "turn": 483,
+      "paid": 3,
+      "duplicate_handlers": 0
+    },
+    {
+      "label": "cadence cold restore and continuation",
+      "turn": 483,
+      "same_process_equal": true,
+      "cold": {
+        "pid": 35540,
+        "state_equal": true,
+        "continuation": {
+          "paid": 4
+        }
+      }
+    },
+    {
+      "label": "removal detaches handler and preserves history",
+      "turn": 484,
+      "paid": 3
+    }
+  ],
+  "solution_sha256": "0b894f55b77880205b09aa45fb2cf1ccc009cb54d60453fc6919db06e3a55c79",
+  "limits": [
+    "Initial resources/needs may be staged as labelled; this is not natural world discovery.",
+    "Screenshot uses the original renderer; automation cannot establish human learning."
+  ]
+}

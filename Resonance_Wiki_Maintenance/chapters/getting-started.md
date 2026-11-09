@@ -1,6 +1,6 @@
 # Set up and run the game
 
-This handbook documents **Resonance Roguelike**, the Python, Pygame and tcod game in `dgobi/ResonanceRoguelike`. Its verified source snapshot is `main` at `4d7a7892e1afffb8d872ed4a8fd442984d14e7d5`, the reviewed G7 delivery. It is independent of the Godot Project Volumnia project.
+This handbook documents **Resonance Roguelike**, the Python, Pygame and tcod game in `dgobi/ResonanceRoguelike`. Its verified source snapshot is `main` at `c166ec650b98156d53b8ea72e715c028d27db905`, the reviewed SYS-5 delivery. It is independent of the Godot Project Volumnia project.
 
 ## Find the two roots
 
@@ -40,7 +40,7 @@ $ResonancePython = (Resolve-Path '.venv\Scripts\python.exe').Path
 & $ResonancePython -m pip check
 ```
 
-Use the requirements file belonging to the same checkout. The wiki's focused checks also ran under Linux / CPython 3.12.14 with the declared package pins; that is a bounded verification result, not a replacement for the project's recorded Windows target.
+Use the requirements file belonging to the same checkout. The historical edition-1.0 checks used Linux / CPython 3.12.14. GUIDE-1 was executed on the supported Windows / Python 3.11 runtime; do not treat the old Linux report as a new run.
 
 ## Start a fresh world for authoring
 
@@ -60,7 +60,7 @@ For an automated startup check with no desktop interaction:
 
 This initializes the actual game, prints the seed, plan mode, start coordinates, submap and save root, and exits before the interactive loop. A good result includes `"plan_mode": "shared-v1"`. It tests startup; it does not prove that every new building was selected, that controls work physically on your machine, or that a complete playthrough succeeds.
 
-For the audited source and seed `20261023`, this check started at world chunk `[73,99]`, in `sub_73_99_0`. Do not follow old hardcoded directions to `(0,64)` for this world.
+The earlier G9 audit for seed `20261023` recorded world chunk `[73,99]`, in `sub_73_99_0`; read the current run's coordinates rather than treating that historical output as a fresh observation. Do not follow old hardcoded directions to `(0,64)` for this world.
 
 ## Launch an ordinary campaign
 
@@ -99,4 +99,4 @@ Before editing, establish whether the file already contains your own unfinished 
 
 ## Source basis
 
-[README](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/README.md) · [requirements](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/requirements-baseline.txt) · [current launcher](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/tools/play_disposable.py) · [bootstrap](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/main.py) · [collaboration rules](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/AGENTS.md).
+[README](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/README.md) · [requirements](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/requirements-baseline.txt) · [current launcher](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/tools/play_disposable.py) · [bootstrap](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/main.py) · [collaboration rules](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/AGENTS.md).

@@ -49,10 +49,14 @@ Every top-level special has integer source `x` and `y` inside the grid. Use exis
 | Scene | `{"x":2,"y":3,"type":"scene","scene_id":"interrupted_meal"}` | Expands the scene's supported `floor_objects` item rows. It is not a general entity scene graph. |
 | Empty | `{"x":2,"y":3,"type":"empty"}` | Places nothing; useful as a weighted outcome. |
 | Weighted | An enclosing position plus `spawn_table` | Chooses one supported item/container/scene/empty outcome. One level only. |
+| Creature | Direct authored-room `creature_id` record | One actor through `CreatureFactory`; not weighted/nested and not a general surface actor special. See the complete L06 example. |
+| Remains | Direct authored-room remains record | Admitted non-ephemeral flesh source with captured finite identity/yields; validate through the room contract. |
+| Decor | Direct authored-room decor record | Admitted static/light/campfire decor; the room does not inherit ordinary `decor_layer` semantics. |
+| Secured coffer / screen | Supported container or screen with access-profile reference | Buildings and rooms can use the admitted host routes; profile must support that host. Saved work captures requirements and progress. |
 
 If a container omits `decor_id` or `loot_pools`, compiled defaults are `crate` and `[]`. This preserves the raw source rather than rewriting it. An empty pool or zero-roll range can intentionally yield no contents. To promise a useful populated container, choose pools and counts that actually produce items, and check the realized preview.
 
-Top-level `body` and `stele` records retain explicitly deferred physical semantics. Authored submap stele text metadata is retained, but these records are not a general mechanism to create corpses or functional steles. Arbitrary creature specials and the old guide's `inscription` kind are not accepted alternatives. Use supported physical item records or implement the missing route deliberately.
+Top-level legacy `body` and `stele` records retain deferred physical semantics. Authored submap stele text metadata is retained; those legacy records are distinct from the current admitted remains special. The old `inscription` kind is not an accepted alternative. Route-specific creature/decor/remains/access records must pass the current compiler, not merely use a plausible type name. See [room and access families](#authoring-reference) and [L06](#L06).
 
 ### Weighted contents
 
@@ -110,9 +114,9 @@ Unknown coordinate-bearing metadata cannot be safely guessed. A nontrivial trans
 
 ## Sources
 
-- [Shared structure compiler and route capabilities](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/structure_contract.py)
-- [Placement validator, frontage and transforms](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/placement.py)
-- [Final complete-scene access checks](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/planned_scene.py)
+- [Shared structure compiler and route capabilities](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/generation/structure_contract.py)
+- [Placement validator, frontage and transforms](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/generation/placement.py)
+- [Final complete-scene access checks](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/generation/planned_scene.py)
 
 ## G7 composition integration
 

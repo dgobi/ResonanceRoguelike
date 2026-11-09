@@ -1,5 +1,7 @@
 # Crafting, ingredients and processing
 
+For isolated learning, use [Start creating](#learning-path) and its complete GUIDE-1 examples. The older authoring recipes below describe intentional production content edits; do not install them merely to run a lesson.
+
 Recipes live in `roguelike/data/recipes/`. The crafting screen reads them automatically through `DataLoader.recipes`; a new recipe does not need a central registration list. It still needs valid ingredients, an implemented result route and an available `known` state.
 
 ## Understand the three result routes
@@ -65,20 +67,19 @@ Use `requires_single_item.tags` when one item must meet several tag requirements
 
 ### Reusable tools
 
-`consumed_on_use: false` on an item makes it reusable as a crafting input. The keyword, tier and exact-instance matching rules still apply. The item being called a “tool” is not what prevents consumption.
+`consumed_on_use: false` protects an object from automatic material selection. It does not make every use of that object nonconsuming: an affirmative component choice can spend a protected item. A `tools` requirement allocates distinct retained physical objects; material and tool roles cannot silently share one instance. The conjunction route has no protected-item chooser. See [L04](#L04) for the isolated preparation exercise and exact commitment boundary.
 
-Reusable inventory items also provide their keywords as ambient sources. This is why a reusable `clay_pot` can satisfy a `vessel` ambient requirement. Ambient conditions do not consume a physical item. A component requirement may use an ambient source for a shortfall, but the planner prefers a complete solution using the maximum available physical allocation; if you intend an exclusively nonconsuming condition, express it in `requires_ambient`.
+Inventory keywords are not a general ambient-source registry. A clay pot is a physical tool/vessel, not free ambient capacity merely because it is reusable. Express retained equipment with the supported tool requirement and verify its distinct allocation.
 
 ## Ambient sources in this revision
 
 | Source | What the craft screen supplies |
 |---|---|
-| `campfire_lit` decor within three tiles, including diagonals | `burning`, tier two |
-| Reusable inventory item | Its keyword tag/tier pairs |
-| Item in `equipment.slots['light']` with `provides_burning` | Burning tier from that declaration |
-| Normally lit torch in `offhand` | **Not found by that light-slot lookup** |
+| `campfire_lit` within its `warmth_radius` (default three) | `burning` tier two and `stationary_fire` |
+| Exact active owned offhand light with fuel and `provides_burning` | Its declared burning tier |
+| Unlit, depleted, detached or merely carried light | No active held burning source |
 
-The last row is a current implementation gap. Both the item-light code and the craft screen were checked. Use a campfire when verifying heat-dependent recipes. A `provides_burning` flag on a normal offhand torch does not bridge the mismatch.
+SYS-2 repaired the old offhand/light-slot mismatch. Passive processing still requires a stationary fire: a valid held burning source alone cannot become a floor cooking workstation. Check active ownership, fuel, tier and stationary-fire requirements separately.
 
 The world ambient check is currently a specific nearby-campfire rule, not a generic heating-workstation registry. A new decor object with a plausible `burning` field does not automatically become a source.
 
@@ -118,16 +119,16 @@ The focused suite contains specific crafting, action-route and effect-persistenc
 |---|---|
 | Recipe absent | Malformed/duplicate ID; stale process; `_deprecated`; category collapsed |
 | Recipe present but locked | `known: false`; required tag/tier; distinct-instance requirement; ambient source |
-| Torch lit but heat requirement fails | Current `light`/`offhand` mismatch |
+| Torch lit but heat requirement fails | Exact offhand ownership, remaining fuel, burning tier; passive work also needs stationary fire |
 | Placement rejected near a campfire | Cooking must target the lit-fire tile |
 | Output never appears in inventory | Processing results are placed on the owning map |
 | Old job duration unchanged | The saved job owns its remaining turns |
 
 ## Source bindings
 
-- [Matching and exact-instance commit](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/crafting.py)
-- [Craft screen, ambient sources and result routing](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/rendering/craft_screen.py)
-- [Placement and processing completion](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/engine.py)
-- [Cooking template](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/recipes/cook_meat.json)
-- [Single-item template](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/recipes/dry_bitter_herb.json)
-- [Current B2 state reconstruction record](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/docs/owner/B2_STATE.md)
+- [Matching and exact-instance commit](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/crafting.py)
+- [Craft screen, ambient sources and result routing](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/rendering/craft_screen.py)
+- [Placement and processing completion](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/engine.py)
+- [Cooking template](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/data/recipes/cook_meat.json)
+- [Single-item template](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/data/recipes/dry_bitter_herb.json)
+- [Current B2 state reconstruction record](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/docs/owner/B2_STATE.md)

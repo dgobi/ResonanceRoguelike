@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 import subprocess
 
-TEXT={'.py','.js','.css','.json','.md','.html','.txt','.hex'}
+TEXT={'.py','.js','.mjs','.ts','.tsx','.rs','.toml','.lock','.css','.json','.md','.html','.txt','.hex','.patch'}
 CANONICAL_RULE='Text CRLF/CR to LF only; preserve BOM and trailing newline; binary exact; raw capture retained separately'
 
 
@@ -53,15 +53,15 @@ def reviewed_inputs(repo,config):
 
 
 def authoring_inputs(root,config):
-    names={'wiki-config.json','wiki_inputs.py','build_wiki.py','validate_wiki.py','theme.css','reader.js','requirements-docs.txt','README.txt','verify_reader.py','verify_edition.py','test_wiki_inputs.py',config['reviewed_evidence']}
+    names={'wiki-config.json','source-map.json','wiki_inputs.py','build_wiki.py','validate_wiki.py','theme.css','reader.js','requirements-docs.txt','README.txt','verify_reader.py','verify_edition.py','test_wiki_inputs.py',config['reviewed_evidence']}
     # Bind all current/future project-owned verification helpers, including tests.
     # Products and historical audits are deliberately not inputs to themselves.
-    names.update(p.name for p in root.iterdir() if p.is_file() and p.suffix in ('.py','.js','.css'))
+    names.update(p.name for p in root.iterdir() if p.is_file() and p.suffix in ('.py','.js','.mjs','.css'))
     # Checkout policy is an authoring input; its removal/change invalidates the binding.
     if (root/'.gitattributes').is_file():names.add('.gitattributes')
     names.update(item['file'] for item in config['chapters'])
-    for folder in ('chapters','examples','illustrations'):
-        names.update(p.relative_to(root).as_posix() for p in (root/folder).rglob('*') if p.is_file())
+    for folder in ('chapters','examples','illustrations','templates'):
+        names.update(p.relative_to(root).as_posix() for p in (root/folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts)
     result={}
     for name in sorted(names):
         p=(root/name).resolve()

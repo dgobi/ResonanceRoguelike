@@ -1,5 +1,7 @@
 # Creatures, AI and population
 
+For isolated learning, use [Start creating](#learning-path) and its complete GUIDE-1 examples. The older authoring recipes below describe intentional production content edits; do not install them merely to run a lesson.
+
 Use `roguelike/data/entities/creatures/` for creature definitions. A creature's identity, appearance, basic combat data and existing AI selection can be authored here. Its spawn route, special abilities and some town population rules live elsewhere.
 
 ## Safest first edit: tune a shipped creature
@@ -85,7 +87,7 @@ Town population uses `DISTRICT_CREATURES` and `DISTRICT_DENSITY` in `generation/
 
 | Field | Current role |
 |---|---|
-| `ai_type` | One of `wandering`, `ambush`, `fleeing`, `circling`; an unknown value currently falls back to wandering |
+| `ai_type` | Legacy `wandering`, `ambush`, `fleeing`, `circling`, or current validated `composite`; do not rely on legacy fallback as validation |
 | `wander_radius` | Passed to the chosen AI class and tied to its home position |
 | `perception.sight_radius` | Detection distance used by perception |
 | `perception.hearing_radius` | Hearing distance |
@@ -96,7 +98,7 @@ Town population uses `DISTRICT_CREATURES` and `DISTRICT_DENSITY` in `generation/
 | `can_cross_chunks` | Permission considered by the implemented boundary-pursuit logic |
 | `can_swim` | Used in the zone spawning restriction for terrain marked not creature-passable; do not assume it supplies a complete new swimming AI |
 
-The nested historical `ai.alert_memory` block is not passed by `CreatureFactory.spawn`. New AI class names require implementation and registration in `AI_TYPES`. A creature-specific ability can depend on an exact definition ID; copying the source creature's descriptive data to another ID does not reproduce that Python behavior.
+The nested historical `ai.alert_memory` block is not a replacement for the current profile. Composite creatures use validated behavior profiles, senses and admitted abilities/attachments; [L05](#L05) gives a complete local territorial example. Effective profile and decision state have explicit saved identity. `can_use_stairs` and `can_cross_chunks` remain separate authored boundaries. New AI class names require implementation/registration. A legacy special ability can depend on an exact creature ID; cloning descriptive data does not transfer it. Use admitted attachments or implement the new dispatch deliberately.
 
 Global concealment/pursuit controls in `data/ai_config.json` are a separate layer. Change them only when deliberately tuning those behaviors across creatures.
 
@@ -104,7 +106,7 @@ Global concealment/pursuit controls in `data/ai_config.json` are a separate laye
 
 A creature may declare `butcher_yield` containing `decay_turns` and a `tiers` array. Each tier uses `min_cutting_tier` and `yields` entries with `item_id`, `quantity_min`, `quantity_max`. Use `briar_lurker.json` as a full example.
 
-The current interaction finds the corpse's source creature ID, checks the highest `cutting` keyword tier among the equipped weapon and offhand, selects the highest qualifying tier, and rolls each yield range. Yield IDs must already exist in the item registry. Results are placed at the corpse tile and the corpse is removed.
+SYS-5 captures finite remains identity and yield recipe at creation; current source changes do not rewrite an owned corpse's recipe. Scavenging can strip flesh while leaving non-flesh yields. Butchery checks exact current floor ownership and equipped cutting, stages outputs, and commits corpse removal only with the supported result transaction. Stale ownership rejects free; insufficient cutting is a paid attempt. Work and phase ownership matter across active/hot scenes and saves. The older source-creature lookup remains an explicit legacy route, not a reason to flatten every remains record into today's definition.
 
 The Bone Reader perk allows all yield tiers to qualify, but the selected tier's quantities are still rolled between minimum and maximum. Its description's “always maximum yield” is stronger than the current consumer. Do not balance a recipe around a guaranteed maximum merely because the perk text says so.
 
@@ -116,10 +118,10 @@ Check default HP/armour with a new spawn, its exact AI class, collision and dete
 
 ## Source bindings
 
-- [Creature factory and zone loop](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/creature_factory.py)
-- [AI behavior and pursuit](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/components/ai.py)
-- [AI speed scheduling](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/ai_system.py)
-- [Town population tables and consumer](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/town_gen.py)
-- [Planned-scene population restrictions](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/planned_scene.py)
-- [Working creature and butchery declaration](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/entities/creatures/briar_lurker.json)
-- [Butchery and corpse-decay consumers](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/engine.py)
+- [Creature factory and zone loop](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/creature_factory.py)
+- [AI behavior and pursuit](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/components/ai.py)
+- [AI speed scheduling](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/ai_system.py)
+- [Town population tables and consumer](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/generation/town_gen.py)
+- [Planned-scene population restrictions](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/generation/planned_scene.py)
+- [Working creature and butchery declaration](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/data/entities/creatures/briar_lurker.json)
+- [Butchery and corpse-decay consumers](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/engine.py)

@@ -1,5 +1,7 @@
 # Items, equipment and preparations
 
+For isolated learning, use [Start creating](#learning-path) and its complete GUIDE-1 examples. The older authoring recipes below describe intentional production content edits; do not install them merely to run a lesson.
+
 An item definition supplies defaults; `ItemFactory` creates a physical instance; `ItemSystem` dispatches its `on_use` to an implemented Python handler. The item's route into play is a separate choice. Most manual changes belong under `roguelike/data/items/`.
 
 ## First tutorial: add a trail ration
@@ -66,14 +68,14 @@ Expect `Trail Ration`, `0.2`, `300` after the loader's ordinary startup messages
 | `eat_message`, `drink_message` | Optional messages for those handlers |
 | `keywords` | Array of `{"tag": "...", "tier": n}` for crafting and other specific consumers |
 | `qualities` | Copied tool-quality data; use the shape of a working example and verify its consumer |
-| `consumed_on_use` | Whether the instance is consumed **as a crafting ingredient**; defaults to true |
+| `consumed_on_use` | False protects from automatic material selection; an explicit protected component choice can still consume it |
 | `burn_turns` | Torch/lantern fuel default, with a working `equip_light` handler |
 | `light` | Light configuration object copied into the item |
 | `liquid`, `liquid_volume` | Saved liquid-instance data; does not by itself implement a new liquid action |
 
-`consumed_on_use: false` does not make an edible item inexhaustible. Eating consumption follows the item's use-handler result. The field's principal role is reusable crafting tools.
+`consumed_on_use: false` does not make an edible item inexhaustible. Eating consumption follows the item's use-handler result. Retained crafting tools use the distinct `tools` role; do not assume all ingredient uses of a protected object retain it.
 
-Do not infer behavior from every field present in a shipped file. For example, the torch also has `light_radius`, but the light-source constructor reads the nested `light.radius`. A decorative `sprite` field is not a substitute for confirming a working tile mapping.
+Do not infer behavior from every field present in a shipped file. Fresh held-light reach comes from `light_radius`, captured as `held_light: {version: 1, radius: N}`. The nested `light` object supplies visual properties, not authoritative reach. A decorative `sprite` field is not a substitute for confirming a working tile mapping.
 
 ## Equipment: use `slot`, not `equip_slot`
 
@@ -98,7 +100,7 @@ These are fields within the existing item, not a complete standalone item file. 
 
 ## Light sources
 
-Use `roguelike/data/items/tools/tallow_torch.json` or `oil_lantern.json`. A light needs `on_use: "equip_light"`, `burn_turns`, and a nested `light` object:
+Use `roguelike/data/items/tools/tallow_torch.json` or `oil_lantern.json`. A light needs `on_use: "equip_light"`, `burn_turns`, top-level `light_radius` for mechanical reach, and a nested `light` object for visuals. The following excerpt supplies visuals only; its radius is not authoritative reach:
 
 ```json
 "light": {
@@ -111,7 +113,7 @@ Use `roguelike/data/items/tools/tallow_torch.json` or `oil_lantern.json`. A ligh
 
 Toggling the same light off releases its offhand slot. Fuel use and the link to the exact item instance are stateful; verify that equipping, dropping, transferring and loading do not leave a detached light behind after a related implementation change.
 
-**Current crafting limitation:** the craft screen looks for `provides_burning` in the `light` equipment slot, while normal lighting equips the torch in `offhand`. A normally held lit torch is therefore not a dependable burning source for recipes in this revision. A nearby lit campfire supplies burning tier two and is the demonstrated authoring route. Changing `provides_burning` on the torch does not resolve the slot mismatch.
+**Current light ownership:** the exact active offhand object, its captured reach, fuel and visual data survive save/load. Active fueled held lights can supply their declared `provides_burning` tier. Passive processing still requires stationary fire; carrying a torch does not replace that requirement. See [L08](#L08) and the [system atlas](#system-atlas) for shared illumination and [L12](#L12) for the vessel state-owner comparison.
 
 ## Existing item-use behaviors
 
@@ -147,9 +149,9 @@ After changing a preparation, test a newly used instance. Already active effects
 
 ## Source bindings
 
-- [Item creation defaults](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/item_factory.py)
-- [Item-use and armour consumers](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/item_system.py)
-- [Equipment slots and identity](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/components/equipment.py)
-- [Inventory ownership and weight](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/components/inventory.py)
-- [Crafting ambient source lookup](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/rendering/craft_screen.py)
-- [Food template](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/items/consumables/crow_jerky.json)
+- [Item creation defaults](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/item_factory.py)
+- [Item-use and armour consumers](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/engine/item_system.py)
+- [Equipment slots and identity](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/components/equipment.py)
+- [Inventory ownership and weight](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/components/inventory.py)
+- [Crafting ambient source lookup](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/rendering/craft_screen.py)
+- [Food template](https://github.com/dgobi/ResonanceRoguelike/blob/c166ec650b98156d53b8ea72e715c028d27db905/roguelike/data/items/consumables/crow_jerky.json)

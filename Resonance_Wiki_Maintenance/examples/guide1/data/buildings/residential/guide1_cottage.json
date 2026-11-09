@@ -1,0 +1,100 @@
+{
+  "id": "guide1_cottage",
+  "category": "residential",
+  "description": "GUIDE-1 controlled surface building.",
+  "width": 9,
+  "height": 7,
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "+": "door_closed"
+  },
+  "layers": [
+    "#########",
+    "#.......#",
+    "#.......#",
+    "#.......#",
+    "#.......#",
+    "#.......#",
+    "####+####"
+  ],
+  "special_tiles": [
+    {
+      "x": 2,
+      "y": 4,
+      "type": "item",
+      "item_id": "guide1_ration"
+    },
+    {
+      "x": 4,
+      "y": 2,
+      "type": "item",
+      "item_id": "guide1_note_carrier",
+      "text_id": "guide1_note"
+    },
+    {
+      "x": 6,
+      "y": 4,
+      "type": "container",
+      "decor_id": "crate",
+      "loot_pools": [
+        "guide1_supplies"
+      ]
+    }
+  ],
+  "placement": {
+    "version": 1,
+    "contexts": [
+      "grid",
+      "roadside"
+    ],
+    "weight": 1,
+    "rotations": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "mirror_x": true,
+    "buffer": 1,
+    "approach": 2,
+    "road_relation": "frontage",
+    "entrances": [
+      {
+        "id": "main",
+        "x": 4,
+        "y": 6,
+        "normal": "S",
+        "width": 1,
+        "role": "main",
+        "required": true
+      }
+    ],
+    "targets": [
+      {
+        "x": 4,
+        "y": 4,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 2,
+        "y": 4,
+        "kind": "item",
+        "required": true
+      },
+      {
+        "x": 4,
+        "y": 2,
+        "kind": "readable",
+        "required": true
+      },
+      {
+        "x": 6,
+        "y": 4,
+        "kind": "container",
+        "required": true
+      }
+    ]
+  }
+}

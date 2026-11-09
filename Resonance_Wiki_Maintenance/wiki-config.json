@@ -1,12 +1,138 @@
 {
-  "edition": "1.3",
-  "milestone": "G9",
-  "date": "2026-10-24",
-  "date_label": "24 October 2026",
-  "timezone": "America/Edmonton",
-  "commit": "f76aac1976a1c9b68adb00ed859398bbd60d6ee2",
+  "edition": "2.0",
+  "milestone": "GUIDE-1",
+  "date": "2026-11-09",
+  "date_label": "9 November 2026",
+  "timezone": "America/Winnipeg",
+  "commit": "c166ec650b98156d53b8ea72e715c028d27db905",
   "repository": "https://github.com/dgobi/ResonanceRoguelike",
   "chapters": [
+    {
+      "id": "learning-path",
+      "file": "chapters/learning-path.md",
+      "group": "Start creating",
+      "nav_title": "Start creating"
+    },
+    {
+      "id": "task-index",
+      "file": "chapters/task-index.md",
+      "group": "Find a route",
+      "nav_title": "I want to…"
+    },
+    {
+      "id": "system-atlas",
+      "file": "chapters/system-atlas.md",
+      "group": "Find a route",
+      "nav_title": "How the game works"
+    },
+    {
+      "id": "authoring-reference",
+      "file": "chapters/authoring-reference.md",
+      "group": "Find a route",
+      "nav_title": "Look it up"
+    },
+    {
+      "id": "workbench-internals",
+      "file": "chapters/workbench-internals.md",
+      "group": "Find a route",
+      "nav_title": "How Workbench works"
+    },
+    {
+      "id": "L01",
+      "file": "chapters/L01.md",
+      "group": "Learn by making",
+      "nav_title": "L01 · Tune food"
+    },
+    {
+      "id": "L02",
+      "file": "chapters/L02.md",
+      "group": "Learn by making",
+      "nav_title": "L02 · Make an item reachable"
+    },
+    {
+      "id": "L03",
+      "file": "chapters/L03.md",
+      "group": "Learn by making",
+      "nav_title": "L03 · Write a readable clue"
+    },
+    {
+      "id": "L04",
+      "file": "chapters/L04.md",
+      "group": "Learn by making",
+      "nav_title": "L04 · Prepare something useful"
+    },
+    {
+      "id": "L05",
+      "file": "chapters/L05.md",
+      "group": "Learn by making",
+      "nav_title": "L05 · Create a creature"
+    },
+    {
+      "id": "L06",
+      "file": "chapters/L06.md",
+      "group": "Learn by making",
+      "nav_title": "L06 · Build a meaningful place"
+    },
+    {
+      "id": "L07",
+      "file": "chapters/L07.md",
+      "group": "Learn by making",
+      "nav_title": "L07 · Enroll a room and building"
+    },
+    {
+      "id": "L08",
+      "file": "chapters/L08.md",
+      "group": "Learn by making",
+      "nav_title": "L08 · Make appearance readable"
+    },
+    {
+      "id": "L09",
+      "file": "chapters/L09.md",
+      "group": "Code & systems",
+      "nav_title": "L09 · Author a weapon technique"
+    },
+    {
+      "id": "L10",
+      "file": "chapters/L10.md",
+      "group": "Code & systems",
+      "nav_title": "L10 · Implement a new primitive"
+    },
+    {
+      "id": "L11",
+      "file": "chapters/L11.md",
+      "group": "Code & systems",
+      "nav_title": "L11 · Respond to an event"
+    },
+    {
+      "id": "L12",
+      "file": "chapters/L12.md",
+      "group": "Code & systems",
+      "nav_title": "L12 · Persist a new subsystem"
+    },
+    {
+      "id": "L13",
+      "file": "chapters/L13.md",
+      "group": "Code & systems",
+      "nav_title": "L13 · Integrate a small expedition"
+    },
+    {
+      "id": "L14",
+      "file": "chapters/L14.md",
+      "group": "Code & systems",
+      "nav_title": "L14 · Diagnose and keep your work"
+    },
+    {
+      "id": "practice-solutions",
+      "file": "chapters/practice-solutions.md",
+      "group": "Code & systems",
+      "nav_title": "Complete code & recovery"
+    },
+    {
+      "id": "source-evidence",
+      "file": "chapters/source-evidence.md",
+      "group": "Reference & upkeep",
+      "nav_title": "Source & evidence"
+    },
     {
       "id": "getting-started",
       "file": "chapters/getting-started.md",
@@ -207,6 +333,10 @@
     }
   ],
   "group_order": [
+    "Start creating",
+    "Find a route",
+    "Learn by making",
+    "Code & systems",
     "Start here",
     "Create & tune content",
     "World & structures",
@@ -221,7 +351,10 @@
     "docs/",
     "README.md",
     "AGENTS.md",
-    "layout_painter.html"
+    "layout_painter.html",
+    "workbench/",
+    "requirements-baseline.txt",
+    "Sprite Reference Generator/"
   ],
   "reviewed_evidence": "edition-evidence.json"
 }

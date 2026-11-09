@@ -1,0 +1,11 @@
+{
+  "id": "guide1_inspect",
+  "name": "practice inspection lens",
+  "description": "GUIDE-1 Python lesson; not a production item.",
+  "tile": "generic_item",
+  "category": "tool",
+  "weight": 0.1,
+  "stackable": false,
+  "on_use": "guide_inspect",
+  "consumed_on_use": false
+}
