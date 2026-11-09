@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "commission": "GUIDE-1",
+  "content_commit": "f2fc3c6157ce90790d84aa5ab41391d8cc881f49",
+  "remote_main_readback": "f2fc3c6157ce90790d84aa5ab41391d8cc881f49",
+  "remote": "https://github.com/dgobi/ResonanceRoguelike.git",
+  "checked_utc": "2026-11-09T23:28:56.112510+00:00",
+  "source_revision": "c166ec650b98156d53b8ea72e715c028d27db905",
+  "archive": "Resonance_Wiki_Maintenance/releases/Resonance_Creators_Handbook_GUIDE-1.zip",
+  "archive_sha256": "53435584e9a7322a19dd2247e190f17e5ee102f4a6bdd581f4ba9d27476c0a95",
+  "post_commit_source_product_drift": "clean",
+  "publication_note": "The handbook content commit was pushed and read back exactly. This completion record is a subsequent scoped documentation commit; its final main readback is reported at delivery.",
+  "scope_preserved": [
+    "production main",
+    "production game/Workbench code and data",
+    "personal campaigns",
+    "pre-existing untracked art and proposal"
+  ],
+  "incomplete_scope": []
+}
